@@ -473,7 +473,7 @@ namespace StudentUnion0105.Controllers
                 return RedirectToAction("LanguageIndex", new { Id = Id });
             }
             SuObjectVM SuObject = new SuObjectVM();
-            SuObject.Id = Id;
+            SuObject.ObjectId = Id;
             ViewBag.Id = Id.ToString();
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
@@ -494,7 +494,7 @@ namespace StudentUnion0105.Controllers
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
-                ClassificationLanguage.ClassificationId = test3.SuObject.Id;
+                ClassificationLanguage.ClassificationId = test3.SuObject.ObjectId;
                 ClassificationLanguage.LanguageId = test3.SuObject.LanguageId;
 
                 var NewClassification = _classificationLanguage.AddClassificationLanguage(ClassificationLanguage);
@@ -570,7 +570,20 @@ namespace StudentUnion0105.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult LanguageDelete(int Id)
+        {
+           var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
+            return View(ClassifationLanguage);
+        }
 
+        [HttpPost]
+        public IActionResult LanguageDelete(SuClassificationLanguageModel suClassificationLanguageModel)
+        {
+            var ClassificationId = suClassificationLanguageModel.ClassificationId;
+            _classificationLanguage.DeleteClassificationLanguage(suClassificationLanguageModel.Id);
+            return RedirectToAction("LanguageIndex", new { Id = ClassificationId });
+        }
     }
 
 
