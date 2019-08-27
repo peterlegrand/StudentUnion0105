@@ -53,13 +53,21 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from c in _classificationVMRepository.GetAllClassifications()
-                         join l in _classificationVMRepository.GetAllClassificationLanguages()
-                         on c.Id equals l.ClassificationId
-                         where l.LanguageId == DefaultLanguageID
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
+            var test1 =  (
+
+                from l in _classificationLanguage.GetAllClassificationLanguages()
+                
+                where l.LanguageId == DefaultLanguageID
+                select new SuObjectVM
+
+                //from c in _classificationVMRepository.GetAllClassifications()
+                //join l in _classificationVMRepository.GetAllClassificationLanguages()
+                //on c.Id equals l.Classification.Id
+                //where l.LanguageId == DefaultLanguageID
+                //select new SuObjectVM
+
+                {
+                    Id = l.ClassificationId
                              ,
                              Name = l.ClassificationName
                          }).ToList();
@@ -272,6 +280,7 @@ namespace StudentUnion0105.Controllers
                       on c.Id equals l.ClassificationLevelId
                                        where c.ClassificationId == Id
                                        && l.LanguageId == DefaultLanguageID
+                                       orderby c.Sequence
                                        select new SuObjectVM
                                        {
                                            Id = c.Id
@@ -343,12 +352,19 @@ namespace StudentUnion0105.Controllers
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
-                var TestForNull = (from c in _classificationLevel.GetAllClassificationLevels()
-                                   join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                   on c.Id equals l.ClassificationLevelId
-                                   where c.ClassificationId == NewLevel.SuObject.ObjectId
-                                   && l.LanguageId == DefaultLanguageID
-                                   select c.Sequence).Count();
+
+                var TestForNull = (
+                    
+                    from  l in _classificationLevel.GetAllClassificationLevels()
+                                   where l.Id == NewLevel.SuObject.ObjectId
+                                   select l.Sequence).Count();
+
+                //from c in _classificationLevel.GetAllClassificationLevels()
+                //join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+                //on c.Id equals l.ClassificationLevelId
+                //where c.ClassificationId == NewLevel.SuObject.ObjectId
+                //&& l.LanguageId == DefaultLanguageID
+                //select c.Sequence).Count();
 
                 int MaxLevelSequence;
 
@@ -356,12 +372,17 @@ namespace StudentUnion0105.Controllers
                 { MaxLevelSequence = 1; }
                 else
                 {
-                    MaxLevelSequence = (from c in _classificationLevel.GetAllClassificationLevels()
-                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                        on c.Id equals l.ClassificationLevelId
+                    MaxLevelSequence = (
+                        
+                        from c in _classificationLevel.GetAllClassificationLevels()
                                         where c.ClassificationId == NewLevel.SuObject.ObjectId
-                                        && l.LanguageId == DefaultLanguageID
                                         select c.Sequence).Max();
+                    //from c in _classificationLevel.GetAllClassificationLevels()
+                    //join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+                    //on c.Id equals l.ClassificationLevelId
+                    //where c.ClassificationId == NewLevel.SuObject.ObjectId
+                    //&& l.LanguageId == DefaultLanguageID
+                    //select c.Sequence).Max();
                     MaxLevelSequence++;
                 }
 
@@ -372,7 +393,7 @@ namespace StudentUnion0105.Controllers
                     //https://stackoverflow.com/questions/812630/how-can-i-reorder-rows-in-sql-database
 
                     List<IdAndSequence> ExistingLevels = (from c in _classificationLevel.GetAllClassificationLevels()
-                                                                       where c.Id == NewLevel.SuObject.ObjectId
+                                                                       where c.ClassificationId == NewLevel.SuObject.ObjectId
                                                                        && c.Sequence >= NewLevel.SuObject.Sequence
                                                                        select new IdAndSequence
                                                                        {
@@ -386,8 +407,10 @@ namespace StudentUnion0105.Controllers
                     while (x < ExistingLevels.Count())
                     {
                         SuClassificationLevelModel u = new SuClassificationLevelModel();
-                        u.Sequence = ExistingLevels[x].Sequence++;
-                        u.Id = ExistingLevels[x].Id;
+                            u = _classificationLevel.GetClassificationLevel(ExistingLevels[x].Id);
+                        
+
+                        u.Sequence = ++ExistingLevels[x].Sequence;
 
                         //SuDbContext.Entry(u).State = Microsoft.EntityFrameworkCore.EntityState.
 
@@ -423,7 +446,7 @@ namespace StudentUnion0105.Controllers
                 }
             
 
-            return RedirectToAction("LevelIndex", new { Id = NewLevel.SuObject.ToString() });
+            return RedirectToAction("LevelIndex", new { Id = NewLevel.SuObject.ObjectId.ToString() });
 
         }
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Models
 {
@@ -21,6 +19,6 @@ namespace StudentUnion0105.Models
         public DateTime CreatedDate { get; set; }
 
         public virtual SuClassificationModel Classification { get; set; }
-        public virtual ICollection<SuClassificationLevelLanguageModel> ClassificationLevelsLanguages { get; set; }
+        public virtual ICollection<SuClassificationLevelLanguageModel> ClassificationLevelLanguages { get; set; }
     }
 }
