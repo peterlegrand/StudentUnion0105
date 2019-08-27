@@ -574,15 +574,27 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
            var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
-            return View(ClassifationLanguage);
+            var a = new SuObjectVM();
+            a.Id = ClassifationLanguage.Id;
+            a.Name = ClassifationLanguage.ClassificationName;
+            a.MenuName = ClassifationLanguage.ClassificationMenuName;
+            a.MouseOver = ClassifationLanguage.ClassificationMouseOver;
+            a.LanguageId = ClassifationLanguage.LanguageId;
+            a.ObjectId = ClassifationLanguage.ClassificationId;
+            return View(a);
         }
 
         [HttpPost]
-        public IActionResult LanguageDelete(SuClassificationLanguageModel suClassificationLanguageModel)
+        public IActionResult LanguageDelete(SuObjectVM a)
         {
-            var ClassificationId = suClassificationLanguageModel.ClassificationId;
-            _classificationLanguage.DeleteClassificationLanguage(suClassificationLanguageModel.Id);
-            return RedirectToAction("LanguageIndex", new { Id = ClassificationId });
+            if (ModelState.IsValid)
+            {
+                
+                _classificationLanguage.DeleteClassificationLanguage(a.Id);
+                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+            }
+                return RedirectToAction("LanguageIndex");
+            
         }
     }
 

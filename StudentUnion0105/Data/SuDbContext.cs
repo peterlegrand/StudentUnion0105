@@ -19,7 +19,10 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationLanguageModel> dbClassificationLanguage { get; set; }
         public DbSet<SuClassificationLevelModel> dbClassificationLevel { get; set; }
         public DbSet<SuClassificationLevelLanguageModel> dbClassificationLevelLanguage { get; set; }
+        public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
+        public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage  { get; set; }
         public DbSet<SuLanguageModel> dbLanguage { get; set; }
+
         public DbSet<SuClaim> dbClaim { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
