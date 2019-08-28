@@ -21,6 +21,16 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationLevelLanguageModel> dbClassificationLevelLanguage { get; set; }
         public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
         public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage  { get; set; }
+        public DbSet<SuContentTypeLanguageModel> dbContentTypeLanguage { get; set; }
+        public DbSet<SuOrganizationLanguageModel> dbOrganizationLanguage { get; set; }
+        public DbSet<SuOrganizationModel> dbOrganization { get; set; }
+        public DbSet<SuOrganizationStatusModel> dbOrganizationStatus { get; set; }
+        public DbSet<SuOrganizationTypeLanguageModel> dbOrganizationTypeLanguage { get; set; }
+        public DbSet<SuOrganizationTypeModel> dbOrganizationType { get; set; }
+        public DbSet<SuProjectLanguageModel> dbProjectLanguage { get; set; }
+        public DbSet<SuProjectModel> dbProject { get; set; }
+        public DbSet<SuProjectStatusModel> dbProjectStatus { get; set; }
+        public DbSet<SuContentTypeModel> dbContentType { get; set; }
         public DbSet<SuLanguageModel> dbLanguage { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
@@ -28,6 +38,7 @@ namespace StudentUnion0105.Data
         {
             base.OnModelCreating(modelBuilder);
 
+        
             //        var cascadeFKs = modelBuilder.Model.GetEntityTypes()
             //.SelectMany(t => t.GetForeignKeys())
             //.Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);

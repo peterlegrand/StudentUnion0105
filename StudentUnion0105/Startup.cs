@@ -53,6 +53,16 @@ namespace StudentUnion0105
             services.AddTransient<IClassificationLanguageRepository, SQLClassificationLanguageRepository>();
             services.AddTransient<IClassificationLevelRepository, SQLClassificationLevelRepository>();
             services.AddTransient<IClassificationLevelLanguageRepository, SQLClassificationLevelLanguageRepository>();
+            services.AddTransient<IContentTypeLanguageRepository, SQLContentTypeLanguageRepository>();
+            services.AddTransient<IContentTypeRepository, SQLContentTypeRepository>();
+            services.AddTransient<IOrganizationLanguageRepository, SQLOrganizationLanguageRepository>();
+            services.AddTransient<IOrganizationRepository, SQLOrganizationRepository>();
+            services.AddTransient<IOrganizationStatusRepository, SQLOrganizationStatusRepository>();
+            services.AddTransient<IOrganizationTypeLanguageRepository, SQLOrganizationTypeLanguageRepository>();
+            services.AddTransient<IOrganizationTypeRepository, SQLOrganizationTypeRepository>();
+            services.AddTransient<IProjectLanguageRepository, SQLProjectLanguageRepository>();
+            services.AddTransient<IProjectRepository, SQLProjectRepository>();
+            services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
             services.AddTransient<ILanguageRepository, SQLLanguageRepository>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/login");
             services.AddMvc(options => {

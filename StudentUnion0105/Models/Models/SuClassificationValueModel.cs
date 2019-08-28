@@ -20,8 +20,5 @@ namespace StudentUnion0105.Models
         public virtual SuClassificationLevelModel ClassificationLevel { get; set; }
         public virtual ICollection<SuClassificationValueLanguageModel> ClassificationValueLanguages { get; set; }
     }
-    //        public virtual SuClassificationModel Classification { get; set; }
-
-    //      public int ClassificationId { get; set; }
-
+ 
 }

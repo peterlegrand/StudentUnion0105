@@ -73,7 +73,7 @@ namespace StudentUnion0105.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.Mo(
+            migrationBuilder.CreateIndex(
                 name: "IX_dbClassificationValue_ClassificationId",
                 table: "dbClassificationValue",
                 column: "ClassificationId");
