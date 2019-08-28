@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190827102449_newcontrollerstructureandvaluesWithMore7")]
+    partial class newcontrollerstructureandvaluesWithMore7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -517,7 +519,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationValueModel", "ClassificationValue")
                         .WithMany("ClassificationValueLanguages")
                         .HasForeignKey("ClassificationValueId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
                         .WithMany()

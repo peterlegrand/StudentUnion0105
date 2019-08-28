@@ -44,7 +44,7 @@
                     </ul>
                     <ul class="navbar-nav ml-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ClassificationViewModel" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Classification" asp-action="Index">Home</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-0">
@@ -65,15 +65,16 @@
                                         @{var show2 = new StudentUnion0105.Classes.ShowMenu();
                                             if (await show2.ShowMenuBasedOnClaim(User, "Menu", "Classification", userManager, roleManager))
                                             {
-                                                <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Classifications</a>
+                                                <a asp-controller="Classification" asp-action="Index" class="dropdown-item">Classifications</a>
                                             }
                                         }
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Pages</a>
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Content types</a>                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Processes</a>
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Organizations</a>
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Projects</a>
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Terms</a>
-                                        <a asp-controller="ClassificationViewModel" asp-action="Index" class="dropdown-item">Settings</a>
+                                        <a asp-controller="Pages" asp-action="Index" class="dropdown-item">Pages</a>
+                                        <a asp-controller="ContentTyp" asp-action="Index" class="dropdown-item">Content types</a>                                        
+                                        <a asp-controller="Process" asp-action="Index" class="dropdown-item">Processes</a>
+                                        <a asp-controller="Organization" asp-action="Index" class="dropdown-item">Organizations</a>
+                                        <a asp-controller="Project" asp-action="Index" class="dropdown-item">Projects</a>
+                                        <a asp-controller="Term" asp-action="Index" class="dropdown-item">Terms</a>
+                                        <a asp-controller="Setting" asp-action="Index" class="dropdown-item">Settings</a>
                                     </div>
                                 }
                             </div>

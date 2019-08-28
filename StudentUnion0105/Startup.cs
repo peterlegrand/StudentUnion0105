@@ -84,9 +84,6 @@ namespace StudentUnion0105
             {
 
                 routes.MapRoute(
-                    name: "ClassificationsSubFolder",
-                    template: "Classifications/{controller}/{action}/{id}"); 
-                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

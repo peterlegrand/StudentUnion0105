@@ -27,6 +27,56 @@ namespace StudentUnion0105.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //        var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+            //.SelectMany(t => t.GetForeignKeys())
+            //.Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            //        foreach (var fk in cascadeFKs)
+            //            fk.DeleteBehavior = DeleteBehavior.Restrict;
+
+            //        base.OnModelCreating(modelBuilder);
+
+            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            //}
+
+            modelBuilder.Entity<SuClassificationModel>()
+                .HasOne(u => u.ClassificationStatus)
+                .WithMany(u => u.Classifications) //.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(u => u.ClassificationStatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SuClassificationLevelModel>()
+                .HasOne(u => u.Classification)
+                .WithMany(u => u.ClassificationLevels) //.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(u => u.ClassificationId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SuClassificationLevelLanguageModel>()
+                .HasOne(u => u.ClassificationLevel)
+                .WithMany(u => u.ClassificationLevelLanguages) //.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(u => u.ClassificationLevelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<SuClassificationValueModel>()
+                .HasOne(u => u.ClassificationLevel)
+                .WithMany(u => u.ClassificationValues)//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(u => u.ClassificationLevelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SuClassificationValueLanguageModel>()
+                .HasOne(u => u.ClassificationValue)
+                .WithMany(u => u.ClassificationValueLanguages)//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+            .HasForeignKey(u => u.ClassificationValueId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<SuClassificationLanguageModel>()
+                .HasOne(u => u.Classification)
+                .WithMany(u => u.ClassificationLanguages)
+                .HasForeignKey(u => u.ClassificationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<SuClaim>().HasData(
                 new SuClaim
                 {

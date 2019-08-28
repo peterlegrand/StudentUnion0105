@@ -20,6 +20,10 @@ namespace StudentUnion0105.Models
         public string ClassificationValueHeaderName { get; set; }
         public string ClassificationValueHeaderDescription { get; set; }
         public string ClassificationValueTopicName { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid ModifierId { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual SuClassificationValueModel ClassificationValue { get; set; }
         public virtual SuLanguageModel Language { get; set; }

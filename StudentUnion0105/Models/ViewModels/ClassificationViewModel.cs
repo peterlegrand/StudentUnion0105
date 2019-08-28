@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.ViewModels
 {
-    public class ClassificationViewModel
+    public class Classification
     {
         public SuClassificationModel suClassification { get; set; }
 

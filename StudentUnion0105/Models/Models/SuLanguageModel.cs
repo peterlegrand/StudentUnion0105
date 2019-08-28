@@ -15,5 +15,11 @@ namespace StudentUnion0105.Models
 
         public virtual ICollection<SuClassificationLanguageModel> ClassificationLanguages { get; set; }
         public virtual ICollection<SuClassificationLevelLanguageModel> ClassificationLevelLanguages { get; set; }
+        public virtual ICollection<SuClassificationValueLanguageModel> ClassificationValueLanguages { get; set; }
+        public virtual ICollection<SuContentTypeLanguageModel> ContentTypeLanguages { get; set; }
+        public virtual ICollection<SuOrganizationLanguageModel> OrganizationLanguages { get; set; }
+        public virtual ICollection<SuOrganizationTypeLanguageModel> OrganizationTypeLanguages { get; set; }
+        public virtual ICollection<SuProjectLanguageModel> ProjectLanguages { get; set; }
+
     }
 }

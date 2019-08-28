@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190827093700_newcontrollerstructureandvalues")]
+    partial class newcontrollerstructureandvalues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,6 +344,8 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClassificationId");
+
                     b.Property<int>("ClassificationLevelId");
 
                     b.Property<DateTimeOffset>("DateFrom");
@@ -351,6 +355,8 @@ namespace StudentUnion0105.Migrations
                     b.Property<int>("ParentValueId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassificationId");
 
                     b.HasIndex("ClassificationLevelId");
 
@@ -501,7 +507,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationModel", "Classification")
                         .WithMany("ClassificationLevels")
                         .HasForeignKey("ClassificationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationModel", b =>
@@ -517,7 +523,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationValueModel", "ClassificationValue")
                         .WithMany("ClassificationValueLanguages")
                         .HasForeignKey("ClassificationValueId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
                         .WithMany()
@@ -527,10 +533,15 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationValueModel", b =>
                 {
+                    b.HasOne("StudentUnion0105.Models.SuClassificationModel", "Classification")
+                        .WithMany()
+                        .HasForeignKey("ClassificationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("StudentUnion0105.Models.SuClassificationLevelModel", "ClassificationLevel")
-                        .WithMany("ClassificationValues")
+                        .WithMany()
                         .HasForeignKey("ClassificationLevelId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
