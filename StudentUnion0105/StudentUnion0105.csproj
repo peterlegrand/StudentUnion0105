@@ -5,6 +5,35 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190827141636_test.cs" />
+    <Compile Remove="Migrations\20190827141636_test.Designer.cs" />
+    <Compile Remove="Migrations\20190827142013_test2.cs" />
+    <Compile Remove="Migrations\20190827142013_test2.Designer.cs" />
+    <Compile Remove="Migrations\20190828042226_test3.cs" />
+    <Compile Remove="Migrations\20190828042226_test3.Designer.cs" />
+    <Compile Remove="Migrations\20190828055844_withalotmoretables.cs" />
+    <Compile Remove="Migrations\20190828055844_withalotmoretables.Designer.cs" />
+    <Compile Remove="Migrations\20190828063140_withalotmoretables1.cs" />
+    <Compile Remove="Migrations\20190828063140_withalotmoretables1.Designer.cs" />
+    <Compile Remove="Migrations\20190828063240_withalotmoretables2.cs" />
+    <Compile Remove="Migrations\20190828063240_withalotmoretables2.Designer.cs" />
+    <Compile Remove="Migrations\20190828063920_withalotmoretables3.cs" />
+    <Compile Remove="Migrations\20190828063920_withalotmoretables3.Designer.cs" />
+    <Compile Remove="Migrations\20190828065019_withalotmoretables4.cs" />
+    <Compile Remove="Migrations\20190828065019_withalotmoretables4.Designer.cs" />
+    <Compile Remove="Migrations\20190828065615_withalotmoretables5.cs" />
+    <Compile Remove="Migrations\20190828065615_withalotmoretables5.Designer.cs" />
+    <Compile Remove="Migrations\20190828065738_withalotmoretables6.cs" />
+    <Compile Remove="Migrations\20190828065738_withalotmoretables6.Designer.cs" />
+    <Compile Remove="Migrations\20190828071710_newfk2.cs" />
+    <Compile Remove="Migrations\20190828071710_newfk2.Designer.cs" />
+    <Compile Remove="Migrations\20190828075339_testforfk2.cs" />
+    <Compile Remove="Migrations\20190828075339_testforfk2.Designer.cs" />
+    <Compile Remove="Migrations\20190828075534_testforfk3.cs" />
+    <Compile Remove="Migrations\20190828075534_testforfk3.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

@@ -31,7 +31,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationId",
                 principalTable: "dbClassification",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

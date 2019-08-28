@@ -10,8 +10,8 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20190827142013_test2")]
-    partial class test2
+    [Migration("20190828073115_testforfk")]
+    partial class testforfk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,7 +186,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("ClassificationName");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -211,7 +219,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("ClassificationLevelName");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -327,7 +343,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("ClassificationValueTopicName");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -346,17 +370,77 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ClassificationLevelId");
 
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
                     b.Property<DateTimeOffset>("DateFrom");
 
                     b.Property<DateTimeOffset>("DateTo");
 
-                    b.Property<int>("ParentValueId");
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<int?>("ParentValueId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClassificationLevelId");
 
                     b.ToTable("dbClassificationValue");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContentTypeId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentTypeId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("dbContentTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbContentType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuLanguageModel", b =>
@@ -372,6 +456,204 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrganizationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("dbOrganizationLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<int>("OrganizationStatusId");
+
+                    b.Property<int>("OrganizationTypeId");
+
+                    b.Property<int>("ParentOrganizationId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationStatusId");
+
+                    b.HasIndex("OrganizationTypeId");
+
+                    b.ToTable("dbOrganization");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationStatusModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OrganizationStatusName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbOrganizationStatus");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OrganizationTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("OrganizationTypeId");
+
+                    b.ToTable("dbOrganizationTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbOrganizationType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("ProjectId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("dbProjectLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProjectModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<int>("ParentProjectId");
+
+                    b.Property<int>("ProjectStatusId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectStatusId");
+
+                    b.ToTable("dbProject");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProjectStatusModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ProjectStatusName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbProjectStatus");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuUser", b =>
@@ -477,7 +759,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationModel", "Classification")
                         .WithMany("ClassificationLanguages")
                         .HasForeignKey("ClassificationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
                         .WithMany("ClassificationLanguages")
@@ -490,7 +772,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationLevelModel", "ClassificationLevel")
                         .WithMany("ClassificationLevelLanguages")
                         .HasForeignKey("ClassificationLevelId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
                         .WithMany("ClassificationLevelLanguages")
@@ -511,7 +793,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationStatusModel", "ClassificationStatus")
                         .WithMany("Classifications")
                         .HasForeignKey("ClassificationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationValueLanguageModel", b =>
@@ -522,7 +804,7 @@ namespace StudentUnion0105.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
-                        .WithMany()
+                        .WithMany("ClassificationValueLanguages")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -533,6 +815,79 @@ namespace StudentUnion0105.Migrations
                         .WithMany("ClassificationValues")
                         .HasForeignKey("ClassificationLevelId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuContentTypeModel", "ContentType")
+                        .WithMany("ContentTypeLanguages")
+                        .HasForeignKey("ContentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany("ContentTypeLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany("OrganizationLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationModel", "Organization")
+                        .WithMany("OrganizationLanguages")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationStatusModel", "OrganizationStatus")
+                        .WithMany("Organization")
+                        .HasForeignKey("OrganizationStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationTypeModel", "OrganizationType")
+                        .WithMany("Organizations")
+                        .HasForeignKey("OrganizationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany("OrganizationTypeLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationTypeModel", "OrganizationType")
+                        .WithMany("OrganizationTypeLanguages")
+                        .HasForeignKey("OrganizationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany("ProjectLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProjectModel", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProjectModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuProjectStatusModel", "ProjectStatus")
+                        .WithMany("Projects")
+                        .HasForeignKey("ProjectStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -60,7 +60,7 @@ namespace StudentUnion0105.Migrations
                 column: "RoleId",
                 principalTable: "AspNetRoles",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -68,7 +68,7 @@ namespace StudentUnion0105.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserLogins_AspNetUsers_UserId",
@@ -76,7 +76,7 @@ namespace StudentUnion0105.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
@@ -84,7 +84,7 @@ namespace StudentUnion0105.Migrations
                 column: "RoleId",
                 principalTable: "AspNetRoles",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
@@ -92,7 +92,7 @@ namespace StudentUnion0105.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserTokens_AspNetUsers_UserId",
@@ -100,7 +100,7 @@ namespace StudentUnion0105.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassification_dbClassificationStatus_ClassificationStatusId",
@@ -108,7 +108,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationStatusId",
                 principalTable: "dbClassificationStatus",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLanguage_dbClassification_ClassificationId",
@@ -116,7 +116,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationId",
                 principalTable: "dbClassification",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLanguage_dbLanguage_LanguageId",
@@ -124,7 +124,7 @@ namespace StudentUnion0105.Migrations
                 column: "LanguageId",
                 principalTable: "dbLanguage",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLevelLanguage_dbClassificationLevel_ClassificationLevelId",
@@ -132,7 +132,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationLevelId",
                 principalTable: "dbClassificationLevel",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLevelLanguage_dbLanguage_LanguageId",
@@ -140,7 +140,7 @@ namespace StudentUnion0105.Migrations
                 column: "LanguageId",
                 principalTable: "dbLanguage",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationValueLanguage_dbLanguage_LanguageId",
@@ -148,7 +148,7 @@ namespace StudentUnion0105.Migrations
                 column: "LanguageId",
                 principalTable: "dbLanguage",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -380,7 +380,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("ModifierId");
 
-                    b.Property<int>("ParentValueId");
+                    b.Property<int?>("ParentValueId");
 
                     b.HasKey("Id");
 
@@ -419,7 +419,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("SuContentTypeLanguageModel");
+                    b.ToTable("dbContentTypeLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeModel", b =>
@@ -438,7 +438,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuContentTypeModel");
+                    b.ToTable("dbContentType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuLanguageModel", b =>
@@ -486,7 +486,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("SuOrganizationLanguageModel");
+                    b.ToTable("dbOrganizationLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationModel", b =>
@@ -515,7 +515,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("OrganizationTypeId");
 
-                    b.ToTable("SuOrganizationModel");
+                    b.ToTable("dbOrganization");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationStatusModel", b =>
@@ -528,7 +528,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuOrganizationStatusModel");
+                    b.ToTable("dbOrganizationStatus");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
@@ -561,7 +561,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("OrganizationTypeId");
 
-                    b.ToTable("SuOrganizationTypeLanguageModel");
+                    b.ToTable("dbOrganizationTypeLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeModel", b =>
@@ -580,7 +580,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuOrganizationTypeModel");
+                    b.ToTable("dbOrganizationType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
@@ -613,7 +613,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("SuProjectLanguageModel");
+                    b.ToTable("dbProjectLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectModel", b =>
@@ -638,7 +638,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("ProjectStatusId");
 
-                    b.ToTable("SuProjectModel");
+                    b.ToTable("dbProject");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectStatusModel", b =>
@@ -651,7 +651,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuProjectStatusModel");
+                    b.ToTable("dbProjectStatus");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuUser", b =>
@@ -812,6 +812,7 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuClassificationLevelModel", "ClassificationLevel")
                         .WithMany("ClassificationValues")
                         .HasForeignKey("ClassificationLevelId")
+                        .HasConstraintName("FKClassificationValuestoLevel")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

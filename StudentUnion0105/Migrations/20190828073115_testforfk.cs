@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentUnion0105.Migrations
 {
-    public partial class test3 : Migration
+    public partial class testforfk : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,12 @@ namespace StudentUnion0105.Migrations
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
+            migrationBuilder.AlterColumn<int>(
+                name: "ParentValueId",
+                table: "dbClassificationValue",
+                nullable: true,
+                oldClrType: typeof(int));
+
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreatedDate",
                 table: "dbClassificationValue",
@@ -117,7 +123,7 @@ namespace StudentUnion0105.Migrations
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateTable(
-                name: "SuContentTypeModel",
+                name: "dbContentType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -129,11 +135,11 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuContentTypeModel", x => x.Id);
+                    table.PrimaryKey("PK_dbContentType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuOrganizationStatusModel",
+                name: "dbOrganizationStatus",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -142,11 +148,11 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuOrganizationStatusModel", x => x.Id);
+                    table.PrimaryKey("PK_dbOrganizationStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuOrganizationTypeModel",
+                name: "dbOrganizationType",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -158,11 +164,11 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuOrganizationTypeModel", x => x.Id);
+                    table.PrimaryKey("PK_dbOrganizationType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuProjectStatusModel",
+                name: "dbProjectStatus",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -171,11 +177,11 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuProjectStatusModel", x => x.Id);
+                    table.PrimaryKey("PK_dbProjectStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuContentTypeLanguageModel",
+                name: "dbContentTypeLanguage",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -192,23 +198,23 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuContentTypeLanguageModel", x => x.Id);
+                    table.PrimaryKey("PK_dbContentTypeLanguage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuContentTypeLanguageModel_SuContentTypeModel_ContentTypeId",
+                        name: "FK_dbContentTypeLanguage_dbContentType_ContentTypeId",
                         column: x => x.ContentTypeId,
-                        principalTable: "SuContentTypeModel",
+                        principalTable: "dbContentType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuContentTypeLanguageModel_dbLanguage_LanguageId",
+                        name: "FK_dbContentTypeLanguage_dbLanguage_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "dbLanguage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuOrganizationModel",
+                name: "dbOrganization",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -223,23 +229,23 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuOrganizationModel", x => x.Id);
+                    table.PrimaryKey("PK_dbOrganization", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationModel_SuOrganizationStatusModel_OrganizationStatusId",
+                        name: "FK_dbOrganization_dbOrganizationStatus_OrganizationStatusId",
                         column: x => x.OrganizationStatusId,
-                        principalTable: "SuOrganizationStatusModel",
+                        principalTable: "dbOrganizationStatus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationModel_SuOrganizationTypeModel_OrganizationTypeId",
+                        name: "FK_dbOrganization_dbOrganizationType_OrganizationTypeId",
                         column: x => x.OrganizationTypeId,
-                        principalTable: "SuOrganizationTypeModel",
+                        principalTable: "dbOrganizationType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuOrganizationTypeLanguageModel",
+                name: "dbOrganizationTypeLanguage",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -256,23 +262,23 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuOrganizationTypeLanguageModel", x => x.Id);
+                    table.PrimaryKey("PK_dbOrganizationTypeLanguage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationTypeLanguageModel_dbLanguage_LanguageId",
+                        name: "FK_dbOrganizationTypeLanguage_dbLanguage_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "dbLanguage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationTypeLanguageModel_SuOrganizationTypeModel_OrganizationTypeId",
+                        name: "FK_dbOrganizationTypeLanguage_dbOrganizationType_OrganizationTypeId",
                         column: x => x.OrganizationTypeId,
-                        principalTable: "SuOrganizationTypeModel",
+                        principalTable: "dbOrganizationType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuProjectModel",
+                name: "dbProject",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -286,17 +292,17 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuProjectModel", x => x.Id);
+                    table.PrimaryKey("PK_dbProject", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuProjectModel_SuProjectStatusModel_ProjectStatusId",
+                        name: "FK_dbProject_dbProjectStatus_ProjectStatusId",
                         column: x => x.ProjectStatusId,
-                        principalTable: "SuProjectStatusModel",
+                        principalTable: "dbProjectStatus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuOrganizationLanguageModel",
+                name: "dbOrganizationLanguage",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -313,23 +319,23 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuOrganizationLanguageModel", x => x.Id);
+                    table.PrimaryKey("PK_dbOrganizationLanguage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationLanguageModel_dbLanguage_LanguageId",
+                        name: "FK_dbOrganizationLanguage_dbLanguage_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "dbLanguage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuOrganizationLanguageModel_SuOrganizationModel_OrganizationId",
+                        name: "FK_dbOrganizationLanguage_dbOrganization_OrganizationId",
                         column: x => x.OrganizationId,
-                        principalTable: "SuOrganizationModel",
+                        principalTable: "dbOrganization",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuProjectLanguageModel",
+                name: "dbProjectLanguage",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -346,75 +352,75 @@ namespace StudentUnion0105.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuProjectLanguageModel", x => x.Id);
+                    table.PrimaryKey("PK_dbProjectLanguage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuProjectLanguageModel_dbLanguage_LanguageId",
+                        name: "FK_dbProjectLanguage_dbLanguage_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "dbLanguage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuProjectLanguageModel_SuProjectModel_ProjectId",
+                        name: "FK_dbProjectLanguage_dbProject_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "SuProjectModel",
+                        principalTable: "dbProject",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuContentTypeLanguageModel_ContentTypeId",
-                table: "SuContentTypeLanguageModel",
+                name: "IX_dbContentTypeLanguage_ContentTypeId",
+                table: "dbContentTypeLanguage",
                 column: "ContentTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuContentTypeLanguageModel_LanguageId",
-                table: "SuContentTypeLanguageModel",
+                name: "IX_dbContentTypeLanguage_LanguageId",
+                table: "dbContentTypeLanguage",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationLanguageModel_LanguageId",
-                table: "SuOrganizationLanguageModel",
-                column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationLanguageModel_OrganizationId",
-                table: "SuOrganizationLanguageModel",
-                column: "OrganizationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationModel_OrganizationStatusId",
-                table: "SuOrganizationModel",
+                name: "IX_dbOrganization_OrganizationStatusId",
+                table: "dbOrganization",
                 column: "OrganizationStatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationModel_OrganizationTypeId",
-                table: "SuOrganizationModel",
+                name: "IX_dbOrganization_OrganizationTypeId",
+                table: "dbOrganization",
                 column: "OrganizationTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationTypeLanguageModel_LanguageId",
-                table: "SuOrganizationTypeLanguageModel",
+                name: "IX_dbOrganizationLanguage_LanguageId",
+                table: "dbOrganizationLanguage",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuOrganizationTypeLanguageModel_OrganizationTypeId",
-                table: "SuOrganizationTypeLanguageModel",
+                name: "IX_dbOrganizationLanguage_OrganizationId",
+                table: "dbOrganizationLanguage",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbOrganizationTypeLanguage_LanguageId",
+                table: "dbOrganizationTypeLanguage",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbOrganizationTypeLanguage_OrganizationTypeId",
+                table: "dbOrganizationTypeLanguage",
                 column: "OrganizationTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuProjectLanguageModel_LanguageId",
-                table: "SuProjectLanguageModel",
-                column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SuProjectLanguageModel_ProjectId",
-                table: "SuProjectLanguageModel",
-                column: "ProjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SuProjectModel_ProjectStatusId",
-                table: "SuProjectModel",
+                name: "IX_dbProject_ProjectStatusId",
+                table: "dbProject",
                 column: "ProjectStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbProjectLanguage_LanguageId",
+                table: "dbProjectLanguage",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbProjectLanguage_ProjectId",
+                table: "dbProjectLanguage",
+                column: "ProjectId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassification_dbClassificationStatus_ClassificationStatusId",
@@ -456,34 +462,34 @@ namespace StudentUnion0105.Migrations
                 table: "dbClassificationLevelLanguage");
 
             migrationBuilder.DropTable(
-                name: "SuContentTypeLanguageModel");
+                name: "dbContentTypeLanguage");
 
             migrationBuilder.DropTable(
-                name: "SuOrganizationLanguageModel");
+                name: "dbOrganizationLanguage");
 
             migrationBuilder.DropTable(
-                name: "SuOrganizationTypeLanguageModel");
+                name: "dbOrganizationTypeLanguage");
 
             migrationBuilder.DropTable(
-                name: "SuProjectLanguageModel");
+                name: "dbProjectLanguage");
 
             migrationBuilder.DropTable(
-                name: "SuContentTypeModel");
+                name: "dbContentType");
 
             migrationBuilder.DropTable(
-                name: "SuOrganizationModel");
+                name: "dbOrganization");
 
             migrationBuilder.DropTable(
-                name: "SuProjectModel");
+                name: "dbProject");
 
             migrationBuilder.DropTable(
-                name: "SuOrganizationStatusModel");
+                name: "dbOrganizationStatus");
 
             migrationBuilder.DropTable(
-                name: "SuOrganizationTypeModel");
+                name: "dbOrganizationType");
 
             migrationBuilder.DropTable(
-                name: "SuProjectStatusModel");
+                name: "dbProjectStatus");
 
             migrationBuilder.DropColumn(
                 name: "CreatedDate",
@@ -548,6 +554,13 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.DropColumn(
                 name: "ModifierId",
                 table: "dbClassificationLanguage");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "ParentValueId",
+                table: "dbClassificationValue",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldNullable: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassification_dbClassificationStatus_ClassificationStatusId",
@@ -555,7 +568,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationStatusId",
                 principalTable: "dbClassificationStatus",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLanguage_dbClassification_ClassificationId",
@@ -563,7 +576,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationId",
                 principalTable: "dbClassification",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_dbClassificationLevelLanguage_dbClassificationLevel_ClassificationLevelId",
@@ -571,7 +584,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationLevelId",
                 principalTable: "dbClassificationLevel",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

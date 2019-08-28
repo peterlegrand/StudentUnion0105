@@ -10,7 +10,7 @@ namespace StudentUnion0105.SQLRepositories
 {
     public class SQLOrganizationTypeLanguageRepository : IOrganizationTypeLanguageRepository
     {
-        private readonly SuDbContext context;
+        private readonly SuDbContext Context;
 
         public SQLOrganizationTypeLanguageRepository(SuDbContext context)
         {
@@ -19,18 +19,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuOrganizationTypeLanguageModel AddOrganizationTypeLanguage(SuOrganizationTypeLanguageModel suOrganizationTypeLanguage)
         {
-            context.dbOrganizationTypeLanguage.Add(suOrganizationTypeLanguage);
-            context.SaveChanges();
+            Context.dbOrganizationTypeLanguage.Add(suOrganizationTypeLanguage);
+            Context.SaveChanges();
             return suOrganizationTypeLanguage;
         }
 
         public SuOrganizationTypeLanguageModel DeleteOrganizationTypeLanguage(int Id)
         {
-            var suOrganizationTypeLanguage = context.dbOrganizationTypeLanguage.Find(Id);
+            var suOrganizationTypeLanguage = Context.dbOrganizationTypeLanguage.Find(Id);
             if (suOrganizationTypeLanguage != null)
             {
-                context.dbOrganizationTypeLanguage.Remove(suOrganizationTypeLanguage);
-                context.SaveChanges();
+                Context.dbOrganizationTypeLanguage.Remove(suOrganizationTypeLanguage);
+                Context.SaveChanges();
 
             }
             return suOrganizationTypeLanguage;
@@ -38,19 +38,19 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuOrganizationTypeLanguageModel> GetAllOrganizationTypeLanguages()
         {
-            return context.dbOrganizationTypeLanguage;
+            return Context.dbOrganizationTypeLanguage;
         }
 
         public SuOrganizationTypeLanguageModel GetOrganizationTypeLanguage(int Id)
         {
-            return context.dbOrganizationTypeLanguage.Find(Id);
+            return Context.dbOrganizationTypeLanguage.Find(Id);
         }
 
         public SuOrganizationTypeLanguageModel UpdateOrganizationTypeLanguage(SuOrganizationTypeLanguageModel suOrganizationTypeLanguageChanges)
         {
-            var changedOrganizationTypeLanguage = context.dbOrganizationTypeLanguage.Attach(suOrganizationTypeLanguageChanges);
+            var changedOrganizationTypeLanguage = Context.dbOrganizationTypeLanguage.Attach(suOrganizationTypeLanguageChanges);
             changedOrganizationTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            context.SaveChanges();
+            Context.SaveChanges();
             return suOrganizationTypeLanguageChanges;
         }
     }

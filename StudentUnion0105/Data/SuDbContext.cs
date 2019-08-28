@@ -38,7 +38,15 @@ namespace StudentUnion0105.Data
         {
             base.OnModelCreating(modelBuilder);
 
-        
+            modelBuilder.Entity<SuClassificationLevelModel>()
+                .HasMany(b => b.ClassificationValues)
+                .WithOne(a => a.ClassificationLevel)
+                .HasConstraintName("FKClassificationValuestoLevel")//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(b => b.ClassificationLevelId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict)
+                ;
+
             //        var cascadeFKs = modelBuilder.Model.GetEntityTypes()
             //.SelectMany(t => t.GetForeignKeys())
             //.Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
@@ -70,11 +78,12 @@ namespace StudentUnion0105.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
 
-            modelBuilder.Entity<SuClassificationValueModel>()
-                .HasOne(u => u.ClassificationLevel)
-                .WithMany(u => u.ClassificationValues)//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
-                .HasForeignKey(u => u.ClassificationLevelId)
-                .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<SuClassificationValueModel>()
+            //    .HasOne(u => u.ClassificationLevel)
+            //    .WithMany(u => u.ClassificationValues)//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+            //    .HasForeignKey(u => u.ClassificationLevelId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SuClassificationValueLanguageModel>()
                 .HasOne(u => u.ClassificationValue)

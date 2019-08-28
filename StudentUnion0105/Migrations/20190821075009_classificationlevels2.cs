@@ -38,7 +38,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationId",
                 principalTable: "dbClassification",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SuClassificationLevelLanguageModel_dbClassificationLevel_ClassificationLevelId",
@@ -46,7 +46,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationLevelId",
                 principalTable: "dbClassificationLevel",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -83,7 +83,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationLevelId",
                 principalTable: "SuClassificationLevelModel",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_SuClassificationLevelModel_dbClassification_ClassificationId",
@@ -91,7 +91,7 @@ namespace StudentUnion0105.Migrations
                 column: "ClassificationId",
                 principalTable: "dbClassification",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

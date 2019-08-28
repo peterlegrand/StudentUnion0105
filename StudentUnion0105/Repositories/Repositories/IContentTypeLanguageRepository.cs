@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    interface IContentTypeLanguageRepository
+    public interface IContentTypeLanguageRepository
     {
         SuContentTypeLanguageModel GetContentTypeLanguage(int Id);
         IEnumerable<SuContentTypeLanguageModel> GetAllContentTypeLanguages();

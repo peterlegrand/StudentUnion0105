@@ -34,7 +34,7 @@ namespace StudentUnion0105.Migrations
                         column: x => x.ClassificationId,
                         principalTable: "dbClassification",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,13 +57,13 @@ namespace StudentUnion0105.Migrations
                         column: x => x.ClassificationLevelId,
                         principalTable: "SuClassificationLevelModel",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SuClassificationLevelLanguageModel_dbLanguage_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "dbLanguage",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

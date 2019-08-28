@@ -60,12 +60,7 @@ namespace StudentUnion0105.Controllers
                 where l.LanguageId == DefaultLanguageID
                 select new SuObjectVM
 
-                //from c in _classificationVMRepository.GetAllClassifications()
-                //join l in _classificationVMRepository.GetAllClassificationLanguages()
-                //on c.Id equals l.Classification.Id
-                //where l.LanguageId == DefaultLanguageID
-                //select new SuObjectVM
-
+               
                 {
                     Id = l.ClassificationId
                              ,
