@@ -24,6 +24,7 @@ namespace StudentUnion0105.ViewModels
         public bool InDropDown { get; set; }
         public int LanguageId { get; set; }
         public int Sequence { get; set; }
+        public string Description { get; set; }
 
         //public SuClassificationStatusModel StatusList { get; set; }
     }

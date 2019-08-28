@@ -24,9 +24,9 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly ILanguageRepository _language;
-        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
-        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
-        private readonly IClassificationLevelRepository _classificationLevel;
+//        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
+//        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
+//        private readonly IClassificationLevelRepository _classificationLevel;
 
         public ClassificationController(UserManager<SuUser> userManager
                                                 , IClassificationVMRepository classificationVMRepository
@@ -34,9 +34,10 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationRepository classification
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
-                                                , IClassificationLevelVMRepository classificationLevelVMRepository
-                                                , IClassificationLevelLanguageRepository classificationLevelLanguage
-                                                , IClassificationLevelRepository classificationLevel)
+                //                                , IClassificationLevelVMRepository classificationLevelVMRepository
+              //                                  , IClassificationLevelLanguageRepository classificationLevelLanguage
+            //                                    , IClassificationLevelRepository classificationLevel
+            )
         {
             this.userManager = userManager;
             _classificationVMRepository = classificationVMRepository;

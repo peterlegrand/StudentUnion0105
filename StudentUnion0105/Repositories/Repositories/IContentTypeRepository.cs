@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    interface IContentTypeRepository
+    public interface IContentTypeRepository
     {
         SuContentTypeModel GetContentType(int Id);
         IEnumerable<SuContentTypeModel> GetAllContentTypes();
