@@ -83,6 +83,59 @@ namespace StudentUnion0105.Controllers
 
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var test1 = (from s in _contentType.GetAllContentTypes()
+                         join t in _contentTypeLanguage.GetAllContentTypeLanguages()
+                         on s.Id equals t.ContentTypeId
+                         where t.LanguageId == DefaultLanguageID && s.Id == Id
+                         select new SuObjectVM
+                         {
+                             Id = s.Id
+                            , Name = t.Name
+                            , ObjectLanguageId = t.Id
+                            , Description = t.Description
+                            , MouseOver = t.MouseOver
+                         }).First();
+
+            return View(test1);
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SuObjectVM test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ContentType = _contentType.GetContentType(test3.Id);
+                var CurrentUser = await userManager.GetUserAsync(User);
+
+                ContentType.ModifiedDate = DateTime.Now;
+                ContentType.ModifierId = new Guid(CurrentUser.Id);
+                _contentType.UpdateContentType(ContentType);
+
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.ObjectLanguageId);
+                ContentTypeLanguage.Name = test3.Name;
+                ContentTypeLanguage.Description= test3.Description;
+                ContentTypeLanguage.MouseOver = test3.MouseOver;
+                ContentTypeLanguage.ModifiedDate = DateTime.Now;
+                ContentTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
+                _contentTypeLanguage.UpdateContentTypeLanguage(ContentTypeLanguage);
+
+            }
+            return RedirectToAction("Index");
+
+
+
+        }
+
+
         public IActionResult LanguageIndex(int Id)
         {
 
@@ -104,6 +157,115 @@ namespace StudentUnion0105.Controllers
             return View(ContentLanguage);
         }
 
+        [HttpGet]
+        public IActionResult LanguageCreate(int Id)
+        {
+            List<int> LanguagesAlready = new List<int>();
+            LanguagesAlready = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
+                                where c.ContentTypeId == Id
+                                select c.LanguageId).ToList();
+
+
+            var SuLanguage = (from l in _language.GetAllLanguages()
+                              where !LanguagesAlready.Contains(l.Id)
+                              && l.Active 
+                              select new SelectListItem
+                              {
+                                  Value = l.Id.ToString()
+                              ,
+                                  Text = l.LanguageName
+                              }).ToList();
+
+            if (SuLanguage.Count() == 0)
+            {
+                return RedirectToAction("LanguageIndex", new { Id = Id });
+            }
+            SuObjectVM SuObject = new SuObjectVM();
+            SuObject.ObjectId = Id;
+            ViewBag.Id = Id.ToString();
+            var ContentTypeAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = SuObject
+                ,
+                SomeKindINumSelectListItem = SuLanguage
+            };
+            return View(ContentTypeAndStatus);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ContentTypeLanguage = new SuContentTypeLanguageModel();
+                ContentTypeLanguage.Name = test3.SuObject.Name;
+                ContentTypeLanguage.Description = test3.SuObject.Description;
+                ContentTypeLanguage.MouseOver = test3.SuObject.MouseOver;
+                ContentTypeLanguage.ContentTypeId = test3.SuObject.ObjectId;
+                ContentTypeLanguage.LanguageId = test3.SuObject.LanguageId;
+
+                var NewContentTypeLanguage = _contentTypeLanguage.AddContentTypeLanguage(ContentTypeLanguage);
+
+
+            }
+            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+
+
+        }
+
+        [HttpGet]
+        public IActionResult LanguageEdit(int Id)
+        {
+            var test1 = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
+                         join l in _language.GetAllLanguages()
+                         on c.LanguageId equals l.Id
+                         where c.Id == Id
+                         select new SuObjectVM
+                         {
+                             Id = c.Id
+                            ,
+                             Name = c.Name
+                            ,
+                             Description = c.Description
+                            ,
+                             MouseOver = c.MouseOver
+                            ,
+                             Language = l.LanguageName
+                            ,
+                             ObjectId = c.ContentTypeId
+
+                         }).First();
+
+            var ContentTypeAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = test1 //, a = ContentTypeList
+            };
+            return View(test1);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult LanguageEdit(SuObjectVM test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.Id);
+                ContentTypeLanguage.Name = test3.Name;
+                ContentTypeLanguage.Description = test3.Description;
+                ContentTypeLanguage.MouseOver = test3.MouseOver;
+                _contentTypeLanguage.UpdateContentTypeLanguage(ContentTypeLanguage);
+
+
+            }
+            //            return  RedirectToRoute("EditRole" + "/"+test3.ContentType.ContentTypeId.ToString() );
+
+            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
+
+
+
+        }
 
     }
 }

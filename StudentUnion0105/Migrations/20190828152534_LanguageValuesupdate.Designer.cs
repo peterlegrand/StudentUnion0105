@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190828152534_LanguageValuesupdate")]
+    partial class LanguageValuesupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,14 +43,6 @@ namespace StudentUnion0105.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ba132183-517c-4b70-a13b-9e99301b4963",
-                            ConcurrencyStamp = "22160578-5d22-4a1d-8911-c8544ae53ee0",
-                            Name = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,18 +313,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbClassificationStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClassificationStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClassificationStatusName = "Inactive"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationValueLanguageModel", b =>
@@ -829,7 +811,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 39,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "nl",
                             ISO6392 = "nld",
@@ -847,7 +829,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 41,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "en",
                             ISO6392 = "eng",
@@ -1891,7 +1873,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 157,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "th",
                             ISO6392 = "tha",
@@ -2215,18 +2197,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbOrganizationStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrganizationStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrganizationStatusName = "Inactive"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
@@ -2350,21 +2320,9 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbProjectStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ProjectStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ProjectStatusName = "Inactive"
-                        });
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuSettingModel", b =>
+            modelBuilder.Entity("StudentUnion0105.Models.SuSetting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2392,7 +2350,7 @@ namespace StudentUnion0105.Migrations
                             Id = 1,
                             DateTimeValue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GuidValue = new Guid("00000000-0000-0000-0000-000000000000"),
-                            IntValue = 41,
+                            IntValue = 1,
                             SettingName = "Dedault language"
                         });
                 });
@@ -2448,23 +2406,6 @@ namespace StudentUnion0105.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c74d33b0-ccdd-4f71-bef8-be4d4329c0dc",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc2190d4-e2c2-489d-aeb6-a7041d9b3c95",
-                            DefaultLangauge = 41,
-                            Email = "eplegrand@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "EPLEGRAND@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENz3TKYdkSJi2eMWVeD3pglKKn//AllniYlKqPYFvar4NYg6l6QBeLCeLhGuBRL4VQ==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "eplegrand@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

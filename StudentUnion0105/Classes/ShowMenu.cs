@@ -7,6 +7,7 @@ using StudentUnion0105.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace StudentUnion0105.Classes
@@ -22,6 +23,8 @@ namespace StudentUnion0105.Classes
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
+            if (!User.Identity.IsAuthenticated)
+            { return false; }
             var roles = await userManager.GetRolesAsync(CurrentUser);
             foreach (var rolename in roles)
             {

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    public interface IProjectStatusRepository
+    interface ISettingRepository
     {
-        SuProjectStatusModel GetSuProjectStatus(int Id);
-        IEnumerable<SuProjectStatusModel> GetAllProjectStatus();
+        SuSettingModel GetSetting(int Id);
+        IEnumerable<SuSettingModel> GetAllSettings();
+
     }
 }

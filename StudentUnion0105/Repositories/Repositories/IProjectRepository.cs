@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    interface IProjectRepository
+    public interface IProjectRepository
     {
         SuProjectModel GetProject(int Id);
         IEnumerable<SuProjectModel> GetAllProjects();

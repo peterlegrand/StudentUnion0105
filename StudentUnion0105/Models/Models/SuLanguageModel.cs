@@ -12,6 +12,11 @@ namespace StudentUnion0105.Models
         [Required]
         [MaxLength(50, ErrorMessage = "Cannot exceed 50 characters")]
         public string LanguageName { get; set; }
+        public string ForeignName { get; set; }
+
+        public string ISO6391 { get; set; }
+        public string ISO6392 { get; set; }
+        public bool Active { get; set; }
 
         public virtual ICollection<SuClassificationLanguageModel> ClassificationLanguages { get; set; }
         public virtual ICollection<SuClassificationLevelLanguageModel> ClassificationLevelLanguages { get; set; }

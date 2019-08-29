@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190829023007_AddMoreSeedData")]
+    partial class AddMoreSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,14 +43,6 @@ namespace StudentUnion0105.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ba132183-517c-4b70-a13b-9e99301b4963",
-                            ConcurrencyStamp = "22160578-5d22-4a1d-8911-c8544ae53ee0",
-                            Name = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -829,7 +823,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 39,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "nl",
                             ISO6392 = "nld",
@@ -847,7 +841,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 41,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "en",
                             ISO6392 = "eng",
@@ -1891,7 +1885,7 @@ namespace StudentUnion0105.Migrations
                         new
                         {
                             Id = 157,
-                            Active = true,
+                            Active = false,
                             ForeignName = "",
                             ISO6391 = "th",
                             ISO6392 = "tha",
@@ -2448,23 +2442,6 @@ namespace StudentUnion0105.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c74d33b0-ccdd-4f71-bef8-be4d4329c0dc",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc2190d4-e2c2-489d-aeb6-a7041d9b3c95",
-                            DefaultLangauge = 41,
-                            Email = "eplegrand@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "EPLEGRAND@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENz3TKYdkSJi2eMWVeD3pglKKn//AllniYlKqPYFvar4NYg6l6QBeLCeLhGuBRL4VQ==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "eplegrand@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

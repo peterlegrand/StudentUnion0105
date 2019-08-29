@@ -32,6 +32,28 @@
     <Compile Remove="Migrations\20190828075339_testforfk2.Designer.cs" />
     <Compile Remove="Migrations\20190828075534_testforfk3.cs" />
     <Compile Remove="Migrations\20190828075534_testforfk3.Designer.cs" />
+    <Compile Remove="Migrations\20190828143522_LanguagemorefieldsValues.cs" />
+    <Compile Remove="Migrations\20190828143522_LanguagemorefieldsValues.Designer.cs" />
+    <Compile Remove="Migrations\20190828144117_LanguagemorefieldsValues2.cs" />
+    <Compile Remove="Migrations\20190828144117_LanguagemorefieldsValues2.Designer.cs" />
+    <Compile Remove="Migrations\20190828144314_LanguagemorefieldsValues3.cs" />
+    <Compile Remove="Migrations\20190828144314_LanguagemorefieldsValues3.Designer.cs" />
+    <Compile Remove="Migrations\20190828145215_LanguagemorefieldsValues9.cs" />
+    <Compile Remove="Migrations\20190828145215_LanguagemorefieldsValues9.Designer.cs" />
+    <Compile Remove="Migrations\20190828145319_LanguagemorefieldsValues10.cs" />
+    <Compile Remove="Migrations\20190828145319_LanguagemorefieldsValues10.Designer.cs" />
+    <Compile Remove="Migrations\20190828145416_LanguagemorefieldsValues11.cs" />
+    <Compile Remove="Migrations\20190828145416_LanguagemorefieldsValues11.Designer.cs" />
+    <Compile Remove="Migrations\20190828150138_LanguageValues3.cs" />
+    <Compile Remove="Migrations\20190828150138_LanguageValues3.Designer.cs" />
+    <Compile Remove="Migrations\20190828150540_LanguageValues6.cs" />
+    <Compile Remove="Migrations\20190828150540_LanguageValues6.Designer.cs" />
+    <Compile Remove="Migrations\20190828150952_LanguageValues7.cs" />
+    <Compile Remove="Migrations\20190828150952_LanguageValues7.Designer.cs" />
+    <Compile Remove="Migrations\20190828151902_LanguageValues8.cs" />
+    <Compile Remove="Migrations\20190828151902_LanguageValues8.Designer.cs" />
+    <Compile Remove="Migrations\20190828152159_LanguageValues9.cs" />
+    <Compile Remove="Migrations\20190828152159_LanguageValues9.Designer.cs" />
   </ItemGroup>
 
 
