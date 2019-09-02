@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -60,6 +61,11 @@ namespace StudentUnion0105
             services.AddTransient<IOrganizationStatusRepository, SQLOrganizationStatusRepository>();
             services.AddTransient<IOrganizationTypeLanguageRepository, SQLOrganizationTypeLanguageRepository>();
             services.AddTransient<IOrganizationTypeRepository, SQLOrganizationTypeRepository>();
+            services.AddTransient<IPageLanguageRepository, SQLPageLanguageRepository>();
+            services.AddTransient<IPageRepository, SQLPageRepository>();
+            services.AddTransient<IPageStatusRepository, SQLPageStatusRepository>();
+            services.AddTransient<IPageTypeLanguageRepository, SQLPageTypeLanguageRepository>();
+            services.AddTransient<IPageTypeRepository, SQLPageTypeRepository>();
             services.AddTransient<IProjectLanguageRepository, SQLProjectLanguageRepository>();
             services.AddTransient<IProjectRepository, SQLProjectRepository>();
             services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
@@ -73,7 +79,7 @@ namespace StudentUnion0105
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +92,7 @@ namespace StudentUnion0105
                 app.UseHsts();
             }
 
+            ApplicationDbInitializer.SeedUsers(userManager);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

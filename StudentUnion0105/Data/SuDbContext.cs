@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Models;
+using StudentUnion0105.SPModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,11 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Data
 {
+
     public class SuDbContext : IdentityDbContext<SuUser>
     {
+
+
         public SuDbContext(DbContextOptions<SuDbContext> options) : base(options)
         {
 
@@ -34,11 +38,27 @@ namespace StudentUnion0105.Data
         public DbSet<SuContentTypeModel> dbContentType { get; set; }
         public DbSet<SuLanguageModel> dbLanguage { get; set; }
         public DbSet<SuSettingModel> dbSetting { get; set; }
+        public DbSet<SuPageLanguageModel> dbPageLanguage { get; set; }
+        public DbSet<SuPageModel> dbPage { get; set; }
+        public DbSet<SuPageStatusModel> dbPageStatus { get; set; }
+        public DbSet<SuPageTypeLanguageModel> dbPageTypeLanguage { get; set; }
+        public DbSet<SuPageTypeModel> dbPageType { get; set; }
+
+
+        public DbSet<SuGetOrganizationStructure> dbGetOrganizationStructure { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SuGetOrganizationStructure>()
+                .HasKey(o => new { o.Id1, o.Id2, o.Id3});
+
+
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
 
             modelBuilder.Entity<SuClassificationLevelModel>()
                 .HasMany(b => b.ClassificationValues)
@@ -122,16 +142,25 @@ namespace StudentUnion0105.Data
                 new SuProjectStatusModel { Id = 1, ProjectStatusName = "Active" },
                 new SuProjectStatusModel { Id = 2, ProjectStatusName = "Inactive" }
                 );
+            modelBuilder.Entity<SuPageStatusModel>().HasData(
+                new SuPageStatusModel { Id = 1, PageStatusName = "Active" },
+                new SuPageStatusModel { Id = 2, PageStatusName = "Inactive" }
+                );
 
-            modelBuilder.Entity<SuUser>().HasData(new SuUser
-            {
-                UserName = "eplegrand@gmail.com",
-                NormalizedUserName = "EPLEGRAND@GMAIL.COM",
-                Email="eplegrand@gmail.com",
-                DefaultLangauge=41,
-                PasswordHash= "AQAAAAEAACcQAAAAENz3TKYdkSJi2eMWVeD3pglKKn//AllniYlKqPYFvar4NYg6l6QBeLCeLhGuBRL4VQ=="
-            });
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin",NormalizedName="ADMIN" });
+            //modelBuilder.Entity<SuUser>().HasData(new SuUser
+            //{
+            //    UserName = "eplegrand@gmail.com",
+            //    NormalizedUserName = "EPLEGRAND@GMAIL.COM",
+            //    Email = "eplegrand@gmail.com",
+            //    DefaultLangauge = 41,
+            //    PasswordHash = "AQAAAAEAACcQAAAAENz3TKYdkSJi2eMWVeD3pglKKn//AllniYlKqPYFvar4NYg6l6QBeLCeLhGuBRL4VQ=="
+            //});
+
+
+
+
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" });
 
             modelBuilder.Entity<SuLanguageModel>().HasData(
 new SuLanguageModel { Id = 1, LanguageName = "Abkhazian", ForeignName = "", Active = false, ISO6391 = "ab", ISO6392 = "abk" },

@@ -13,5 +13,7 @@ namespace StudentUnion0105.ViewModels
         public SuObjectVM SuObject {get;set;}
         //public List<SuClassificationStatusModel> Status { get; set; }
         public IEnumerable<SelectListItem> SomeKindINumSelectListItem { get; set; }
+        public IEnumerable<SelectListItem> ProbablyTypeListItem { get; set; }
+
     }
 }

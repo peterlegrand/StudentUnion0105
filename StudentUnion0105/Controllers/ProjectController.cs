@@ -228,7 +228,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel test3)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
         {
             if (ModelState.IsValid)
             {

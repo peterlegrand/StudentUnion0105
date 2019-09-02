@@ -14,6 +14,7 @@ namespace StudentUnion0105.ViewModels
         public string MouseOver { get; set; }
         public int ObjectLanguageId { get; set; }
         public int Status { get; set; }
+        public int Type { get; set; }
         public bool HasDropDown  { get; set; }
         public string Language { get; set; }
         public int ObjectId { get; set; }
@@ -25,7 +26,9 @@ namespace StudentUnion0105.ViewModels
         public int LanguageId { get; set; }
         public int Sequence { get; set; }
         public string Description { get; set; }
-
+        public int? NullId { get; set; }
+        public string Title { get; set; }
+        public string Description2 { get; set; }
         //public SuClassificationStatusModel StatusList { get; set; }
     }
 }

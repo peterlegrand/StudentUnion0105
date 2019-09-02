@@ -49,7 +49,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var ContentType = new SuObjectVM();
             return View(ContentType);
@@ -71,7 +71,7 @@ namespace StudentUnion0105.Controllers
                 var ContentTypeLanguage = new SuContentTypeLanguageModel();
 
                 ContentTypeLanguage.Name = FromForm.Name;
-                ContentTypeLanguage.Description = FromForm.MenuName;
+                ContentTypeLanguage.Description = FromForm.Description;
                 ContentTypeLanguage.MouseOver = FromForm.MouseOver;
                 ContentTypeLanguage.ContentTypeId = NewContentType.Id;
                 ContentTypeLanguage.LanguageId = DefaultLanguageID;
@@ -193,7 +193,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel test3)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
         {
             if (ModelState.IsValid)
             {
@@ -266,6 +266,31 @@ namespace StudentUnion0105.Controllers
 
 
         }
+        [HttpGet]
+        public IActionResult LanguageDelete(int Id)
+        {
+            var ContentTypeLanguage = _contentTypeLanguage.DeleteContentTypeLanguage(Id);
+            var a = new SuObjectVM();
+            a.Id = ContentTypeLanguage.Id;
+            a.Name = ContentTypeLanguage.Name;
+            a.Description = ContentTypeLanguage.Description;
+            a.MouseOver = ContentTypeLanguage.MouseOver;
+            a.LanguageId = ContentTypeLanguage.LanguageId;
+            a.ObjectId = ContentTypeLanguage.ContentTypeId;
+            return View(a);
+        }
 
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectVM a)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _contentTypeLanguage.DeleteContentTypeLanguage(a.Id);
+                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+            }
+            return RedirectToAction("Index");
+
+        }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model List<StudentUnion0105.SPModel.SuGetOrganizationStructure>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1 class="font-weight-bold">
+    <img src="~/Images/Icons/Project.png" height="60" width="60" /> Projects
+</h1>
+<div class="table-responsive">
+    <table>
+
+        <thead>
+            <tr><th>ID</th></tr>
+        </thead>
+        @foreach (var x in Model)
+
+        {
+    <tr>
+
+        <td>@x.Id1</td>
+
+        <td>@x.Name1</td>
+
+        <td>@x.Id2</td>
+
+        <td>@x.Name2</td>
+
+        <td>@x.Id3</td>
+
+        <td>@x.Name3</td>
+
+        <td></td>
+    </tr>
+        }
+    </table>
+</div>
+<a asp-controller="Project" asp-action="Create"><img src="~/Images/Icons/Project.png" title="New project" height="20" width="20" /> Create new project</a>

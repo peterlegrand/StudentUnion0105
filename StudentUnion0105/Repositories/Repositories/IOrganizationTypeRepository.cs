@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    interface IOrganizationTypeRepository
+    public interface IOrganizationTypeRepository
     {
         SuOrganizationTypeModel GetOrganizationType(int Id);
         IEnumerable<SuOrganizationTypeModel> GetAllOrganizationTypes();

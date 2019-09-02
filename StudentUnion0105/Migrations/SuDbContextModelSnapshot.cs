@@ -45,9 +45,17 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ba132183-517c-4b70-a13b-9e99301b4963",
-                            ConcurrencyStamp = "22160578-5d22-4a1d-8911-c8544ae53ee0",
-                            Name = "Admin"
+                            Id = "4def7b04-7f47-4e98-9e79-4fa3eef00070",
+                            ConcurrencyStamp = "3ca333dd-e202-449b-88ad-f1cc1a9c230d",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "e812274f-fc2c-433a-8bb3-f3e76beb0fc0",
+                            ConcurrencyStamp = "ce0a877a-3f2e-4e9b-814f-c8e2e99042f0",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -2193,13 +2201,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("OrganizationTypeId");
 
-                    b.Property<int>("ParentOrganizationId");
+                    b.Property<int?>("ParentOrganizationId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationStatusId");
 
                     b.HasIndex("OrganizationTypeId");
+
+                    b.HasIndex("ParentOrganizationId");
 
                     b.ToTable("dbOrganization");
                 });
@@ -2279,6 +2289,147 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbOrganizationType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PageDescription");
+
+                    b.Property<int>("PageId");
+
+                    b.Property<string>("PageTitle");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("PageId");
+
+                    b.ToTable("dbPageLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<int>("PageStatusId");
+
+                    b.Property<int>("PageTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PageStatusId");
+
+                    b.HasIndex("PageTypeId");
+
+                    b.ToTable("dbPage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageStatusModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PageStatusName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbPageStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PageStatusName = "Active"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PageStatusName = "Inactive"
+                        });
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageTypeLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("PageTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("PageTypeId");
+
+                    b.ToTable("dbPageTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbPageType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
@@ -2448,23 +2599,25 @@ namespace StudentUnion0105.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "c74d33b0-ccdd-4f71-bef8-be4d4329c0dc",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc2190d4-e2c2-489d-aeb6-a7041d9b3c95",
-                            DefaultLangauge = 41,
-                            Email = "eplegrand@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "EPLEGRAND@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENz3TKYdkSJi2eMWVeD3pglKKn//AllniYlKqPYFvar4NYg6l6QBeLCeLhGuBRL4VQ==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "eplegrand@gmail.com"
-                        });
+            modelBuilder.Entity("StudentUnion0105.SPModel.SuGetOrganizationStructure", b =>
+                {
+                    b.Property<int>("Id1");
+
+                    b.Property<int>("Id2");
+
+                    b.Property<int>("Id3");
+
+                    b.Property<string>("Name1");
+
+                    b.Property<string>("Name2");
+
+                    b.Property<string>("Name3");
+
+                    b.HasKey("Id1", "Id2", "Id3");
+
+                    b.ToTable("dbGetOrganizationStructure");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -2613,6 +2766,10 @@ namespace StudentUnion0105.Migrations
                         .WithMany("Organizations")
                         .HasForeignKey("OrganizationTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationModel", "ParentOrganization")
+                        .WithMany("ChildOrganizations")
+                        .HasForeignKey("ParentOrganizationId");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
@@ -2625,6 +2782,45 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuOrganizationTypeModel", "OrganizationType")
                         .WithMany("OrganizationTypeLanguages")
                         .HasForeignKey("OrganizationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuPageModel", "Page")
+                        .WithMany("PageLanguages")
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuPageStatusModel", "PageStatus")
+                        .WithMany("Organization")
+                        .HasForeignKey("PageStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuPageTypeModel", "PageType")
+                        .WithMany("Pages")
+                        .HasForeignKey("PageTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuPageTypeModel", "PageType")
+                        .WithMany("PageTypeLanguages")
+                        .HasForeignKey("PageTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
