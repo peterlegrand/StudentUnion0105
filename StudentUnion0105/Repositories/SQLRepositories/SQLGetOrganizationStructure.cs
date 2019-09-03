@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    //public class SQLGetOrganizationStructure : IGetOrganizationStructureRepository
-    //{
-    //    private readonly SuDbContext context;
+    public class SQLGetOrganizationStructure : IGetOrganizationStructureRepository
+    {
+        private readonly SuDbContext context;
 
-    //    public SQLGetOrganizationStructure(SuDbContext context)
-    //    {
-    //        this.context = context;
-    //    }
-    //    public IEnumerable<SuGetOrganizationStructure> GetOrganizationStructure(int Id)
-    //    {
-    //        var a = context.dbGetOrganizationStructure.FromSql("d");
+        public SQLGetOrganizationStructure(SuDbContext context)
+        {
+            this.context = context;
+        }
+        public IEnumerable<SuGetOrganizationStructure> GetOrganizationStructure(int Id)
+        {
+            var a = context.dbGetOrganizationStructure.FromSql("OrgStructure {0}", Id);
 
-    //        return a;
-    //    }
-    //}
+            return a;
+        }
+    }
 }

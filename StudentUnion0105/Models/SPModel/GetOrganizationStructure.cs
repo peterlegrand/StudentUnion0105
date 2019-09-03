@@ -8,15 +8,12 @@ namespace StudentUnion0105.SPModel
 {
     public class SuGetOrganizationStructure
     {
+        public int ParentId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Level { get; set; }
         [Key]
-        public int Id1 { get; set; }
-        public string Name1 { get; set; }
-        [Key]
-        public int Id2 { get; set; }
-        public string Name2 { get; set; }
-        [Key]
-        public int Id3 { get; set; }
-        public string Name3 { get; set; }
+        public string Path { get; set; }
 
     }
 }

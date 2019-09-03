@@ -53,18 +53,16 @@ namespace StudentUnion0105.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SuGetOrganizationStructure>()
-                .HasKey(o => new { o.Id1, o.Id2, o.Id3});
 
 
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
 
-            modelBuilder.Entity<SuClassificationLevelModel>()
+            modelBuilder.Entity<SuClassificationModel>()
                 .HasMany(b => b.ClassificationValues)
-                .WithOne(a => a.ClassificationLevel)
-                .HasConstraintName("FKClassificationValuestoLevel")//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
-                .HasForeignKey(b => b.ClassificationLevelId)
+                .WithOne(a => a.Classification)
+                .HasConstraintName("FKClassificationValues")//.Metadata.DeleteBehavior = DeleteBehavior.Restrict;
+                .HasForeignKey(b => b.ClassificationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict)
                 ;
@@ -159,8 +157,6 @@ namespace StudentUnion0105.Data
 
 
 
-
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" });
 
             modelBuilder.Entity<SuLanguageModel>().HasData(
 new SuLanguageModel { Id = 1, LanguageName = "Abkhazian", ForeignName = "", Active = false, ISO6391 = "ab", ISO6392 = "abk" },

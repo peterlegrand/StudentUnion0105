@@ -11,7 +11,7 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
 //        [Display(Name="SuClassificationLevelModel")]
-        public virtual int ClassificationLevelId { get; set; }
+        public virtual int ClassificationId { get; set; }
         public int? ParentValueId { get; set; }
         public DateTimeOffset DateFrom { get; set; }
         public DateTimeOffset DateTo { get; set; }
@@ -20,8 +20,8 @@ namespace StudentUnion0105.Models
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        [ForeignKey("ClassificationLevelId")]
-        public virtual SuClassificationLevelModel ClassificationLevel { get; set; }
+        [ForeignKey("ClassificationId")]
+        public virtual SuClassificationModel Classification { get; set; }
         public virtual ICollection<SuClassificationValueLanguageModel> ClassificationValueLanguages { get; set; }
     }
  

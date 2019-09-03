@@ -70,6 +70,7 @@ namespace StudentUnion0105
             services.AddTransient<IProjectRepository, SQLProjectRepository>();
             services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
             services.AddTransient<ILanguageRepository, SQLLanguageRepository>();
+            services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/login");
             services.AddMvc(options => {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
