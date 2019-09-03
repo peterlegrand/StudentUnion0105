@@ -95,7 +95,8 @@ namespace StudentUnion0105.Migrations
                                     	FROM dbProject AS p
                                     	JOIN dbProjectLanguage AS l
                                     		ON p.Id = l.ProjectId
-                                    	WHERE p.ParentProjectId IS NULL
+                                    	WHERE (p.ParentProjectId IS NULL 
+                                            OR p.ParentProjectId = 0) 
                                     		AND l.LanguageId = @Language
                                     	UNION ALL
                                     	SELECT p.ParentProjectId

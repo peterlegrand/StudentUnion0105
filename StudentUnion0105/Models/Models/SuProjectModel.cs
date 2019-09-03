@@ -8,7 +8,7 @@ namespace StudentUnion0105.Models
     public class SuProjectModel
     {
         public int Id { get; set; }
-        public int ParentProjectId { get; set; }
+        public int? ParentProjectId { get; set; }
         public int ProjectStatusId { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

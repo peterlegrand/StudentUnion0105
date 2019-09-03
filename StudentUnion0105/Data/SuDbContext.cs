@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static StudentUnion0105.SPModel.GetProjectStructure;
 
 namespace StudentUnion0105.Data
 {
@@ -46,6 +47,7 @@ namespace StudentUnion0105.Data
 
 
         public DbSet<SuGetOrganizationStructure> dbGetOrganizationStructure { get; set; }
+        public DbSet<SuGetProjectStructure> dbGetProjectStructure { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
 

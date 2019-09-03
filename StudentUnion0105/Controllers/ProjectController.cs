@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -18,20 +20,44 @@ namespace StudentUnion0105.Controllers
         private readonly IProjectRepository _Project;
         private readonly ILanguageRepository _language;
         private readonly IProjectStatusRepository _projectStatus;
+        private readonly SuDbContext _context;
 
         public ProjectController(UserManager<SuUser> userManager
             , IProjectLanguageRepository ProjectLanguage
             , IProjectRepository Project
             , ILanguageRepository language
-            , IProjectStatusRepository projectStatus)
+            , IProjectStatusRepository projectStatus
+            , SuDbContext context)
         {
             this.userManager = userManager;
             _ProjectLanguage = ProjectLanguage;
             _Project = Project;
             _language = language;
             _projectStatus = projectStatus;
+            _context = context;
         }
+
         public async Task<IActionResult> Index()
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var a = _context.dbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
+
+            //if (a.Count != 0)
+            //{
+            int maxLevel = 0;
+            foreach (var Org in a)
+            {
+                if (Org.Level > maxLevel)
+                {
+                    maxLevel = Org.Level;
+                }
+            }
+
+            var c = new ProjStructureWithDepth { MaxLevel = maxLevel, ProjStructure = a };
+            return View(c);
+        }
+        public async Task<IActionResult> Indexw()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
@@ -52,10 +78,12 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var ParentProject = _Project.GetProject(Id);
+
             var ProjectList = new List<SelectListItem>();
 
             foreach (var ProjectFromDb in _projectStatus.GetAllProjectStatus())
@@ -66,7 +94,13 @@ namespace StudentUnion0105.Controllers
                     Value = ProjectFromDb.Id.ToString()
                 });
             }
-            var ProjectAndStatus = new SuObjectAndStatusViewModel { SomeKindINumSelectListItem = ProjectList };
+
+            SuObjectVM Parent = new SuObjectVM()
+            {
+                NullId = ParentProject == null ? 0 : ParentProject.Id
+            };
+            
+            var ProjectAndStatus = new SuObjectAndStatusViewModel { SuObject = Parent, SomeKindINumSelectListItem = ProjectList };
             return View(ProjectAndStatus);
         }
 
@@ -79,6 +113,8 @@ namespace StudentUnion0105.Controllers
                 Project.ModifiedDate = DateTime.Now;
                 Project.CreatedDate = DateTime.Now;
                 Project.ProjectStatusId = FromForm.SuObject.Status;
+                if (FromForm.SuObject.NullId != 0)
+                { Project.ParentProjectId = FromForm.SuObject.NullId; }
                 var NewProject = _Project.AddProject(Project);
 
 
@@ -117,6 +153,7 @@ namespace StudentUnion0105.Controllers
                             , ObjectLanguageId = t.Id
                             , Description = t.Description
                             , MouseOver = t.MouseOver
+
                          }).First();
 
             var ProjectList = new List<SelectListItem>();

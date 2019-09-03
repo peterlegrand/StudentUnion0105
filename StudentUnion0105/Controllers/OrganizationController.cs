@@ -142,7 +142,6 @@ var StatusList = new List<SelectListItem>();
                 });
             }
 
-            //wwwwwwwwwwwwwwwwwwwwwwwwww
             var test1 = (from o in _organizationType.GetAllOrganizationTypes()
                          join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on o.Id equals l.OrganizationTypeId
