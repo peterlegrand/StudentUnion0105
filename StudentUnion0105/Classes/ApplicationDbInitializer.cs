@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using System;
@@ -8,26 +9,31 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Classes
 {
-    public static class ApplicationDbInitializer
+    public class ApplicationDbInitializer
     {
-        public static void SeedUsers(UserManager<SuUser> userManager)
+        private readonly UserManager<SuUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+
+        public ApplicationDbInitializer(UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            if (userManager.FindByEmailAsync("eplegrand@gmail.com").Result == null)
-            {
-                SuUser user = new SuUser
-                {
-                    UserName = "eplegrand@gmail.com",
-                    Email = "eplegrand@gmail.com",
-                    DefaultLangauge = 41
-                };
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+        //public ApplicationDbInitializer(UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
+        //{
 
-                IdentityResult result = userManager.CreateAsync(user, "Pipo!9165").Result;
+        //}
 
-                if (result.Succeeded)
-                {
-                    userManager.AddToRoleAsync(user, "Admin").Wait();
-                }
-            }
+        public  async void SeedUsers()
+        {
+            //using (IServiceScope serviceScope = ServiceProviderServiceExtensions.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var userManager = serviceScope.ServiceProvider.GetService<UserManager<SuUser>>();
+            //    var RoleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+            //}
+           
+
         }
     }
+    
 }

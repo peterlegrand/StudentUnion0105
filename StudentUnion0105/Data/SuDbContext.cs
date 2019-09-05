@@ -59,6 +59,7 @@ namespace StudentUnion0105.Data
 
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Super admin", NormalizedName = "Super admin".ToUpper() });
 
             modelBuilder.Entity<SuClassificationModel>()
                 .HasMany(b => b.ClassificationValues)
@@ -120,10 +121,16 @@ namespace StudentUnion0105.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SuClaim>().HasData(
-                new SuClaim { Id = 1, ClaimGroup = "Classification", Claim = "Classification" },
-                new SuClaim { Id = 3, ClaimGroup = "Classification", Claim = "ClassificationPage" },
-                new SuClaim { Id = 4, ClaimGroup = "Administration", Claim = "Roles" },
-                new SuClaim { Id = 2, ClaimGroup = "Classification", Claim = "ClassificationLevel" }
+                new SuClaim { Id = 1, ClaimGroup = "Classification", Claim = "Classification", ClaimType="Menu" },
+                new SuClaim { Id = 2, ClaimGroup = "Classification", Claim = "ClassificationPage", ClaimType = "Menu" },
+                new SuClaim { Id = 3, ClaimGroup = "Administration", Claim = "Role", ClaimType = "Menu" },
+                new SuClaim { Id = 4, ClaimGroup = "Classification", Claim = "ClassificationLevel", ClaimType = "Menu" },
+                new SuClaim { Id = 5, ClaimGroup = "Type", Claim = "ContentType", ClaimType = "Menu" },
+                new SuClaim { Id = 6, ClaimGroup = "Type", Claim = "OrganizationType", ClaimType = "Menu" },
+                new SuClaim { Id = 7, ClaimGroup = "Type", Claim = "PageType", ClaimType = "Menu" },
+                new SuClaim { Id = 8, ClaimGroup = "Page", Claim = "Page", ClaimType = "Menu" },
+                new SuClaim { Id = 9, ClaimGroup = "Project", Claim = "Project", ClaimType = "Menu" },
+                new SuClaim { Id = 10, ClaimGroup = "Type", Claim = "Type", ClaimType = "Menu" }
                 );
 
             modelBuilder.Entity<SuSettingModel>().HasData(

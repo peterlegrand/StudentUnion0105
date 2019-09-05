@@ -43,7 +43,8 @@ namespace StudentUnion0105.Controllers
                 {
                     Id = l.ContentTypeId
                              ,
-                    Name = l.Name
+                    Name = l.Name,
+                    Description = l.Description
                 }).ToList();
             return View(ContentTypes);
         }

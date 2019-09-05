@@ -15,5 +15,6 @@ namespace StudentUnion0105.ViewModels
         public IEnumerable<SelectListItem> SomeKindINumSelectListItem { get; set; }
         public IEnumerable<SelectListItem> ProbablyTypeListItem { get; set; }
 
+//        public string Description { get; set; }
     }
 }

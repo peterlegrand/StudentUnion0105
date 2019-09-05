@@ -56,6 +56,8 @@
     <Compile Remove="Migrations\20190828152159_LanguageValues9.Designer.cs" />
     <Compile Remove="Migrations\20190902092933_manynewtables.cs" />
     <Compile Remove="Migrations\20190902092933_manynewtables.Designer.cs" />
+    <Compile Remove="Migrations\20190904083250_freshmigration5.cs" />
+    <Compile Remove="Migrations\20190904083250_freshmigration5.Designer.cs" />
   </ItemGroup>
 
 

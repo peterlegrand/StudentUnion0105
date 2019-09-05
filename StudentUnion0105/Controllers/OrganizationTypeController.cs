@@ -71,7 +71,7 @@ namespace StudentUnion0105.Controllers
                 var OrganizationTypeLanguage = new SuOrganizationTypeLanguageModel();
 
                 OrganizationTypeLanguage.Name = FromForm.Name;
-                OrganizationTypeLanguage.Description = FromForm.MenuName;
+                OrganizationTypeLanguage.Description = FromForm.Description;
                 OrganizationTypeLanguage.MouseOver = FromForm.MouseOver;
                 OrganizationTypeLanguage.OrganizationTypeId = NewOrganizationType.Id;
                 OrganizationTypeLanguage.LanguageId = DefaultLanguageID;

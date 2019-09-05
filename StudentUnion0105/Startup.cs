@@ -44,7 +44,10 @@ namespace StudentUnion0105
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Classification", policy => policy.RequireClaim("Menu", "Classification"));
-                options.AddPolicy("Roles", policy => policy.RequireClaim("Menu", "Roles"));
+                options.AddPolicy("Role", policy => policy.RequireClaim("Menu", "Role"));
+                options.AddPolicy("Type", policy => policy.RequireClaim("Menu", "Type"));
+                options.AddPolicy("Project", policy => policy.RequireClaim("Menu", "Project"));
+                options.AddPolicy("Page", policy => policy.RequireClaim("Menu", "Page"));
             });
             services.AddTransient<IClassificationRepository, SQLClassificationRepository>();
             services.AddTransient<IClassificationVMRepository, SQLClassificationVMRepository>();
@@ -81,7 +84,7 @@ namespace StudentUnion0105
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -94,7 +97,6 @@ namespace StudentUnion0105
                 app.UseHsts();
             }
 
-            ApplicationDbInitializer.SeedUsers(userManager);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

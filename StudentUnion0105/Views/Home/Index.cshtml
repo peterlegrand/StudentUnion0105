@@ -2,7 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        @*<h1 class="display-4">Welcome</h1>*@
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <textarea class="ckeditor" id="ckElement" name="ckElement" cols="35" rows="20"></textarea>
+
+        <script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['ckElement']) {
+                    CKEDITOR.instances['ckElement'].destroy();
+                }
+                CKEDITOR.replace('ckElement', {
+                    fullPage: true, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['ckElement'].getData()
+                    console.log(ckValue);
+                });
+            });
+        </script>
+
+
+    </div>

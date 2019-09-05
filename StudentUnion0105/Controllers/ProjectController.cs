@@ -175,11 +175,11 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel test3)
         {
             if (ModelState.IsValid)
             {
-                var Project = _Project.GetProject(test3.Id);
+                var Project = _Project.GetProject(test3.SuObject.Id);
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 Project.ModifiedDate = DateTime.Now;
@@ -187,10 +187,10 @@ namespace StudentUnion0105.Controllers
                 _Project.UpdateProject(Project);
 
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
-                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(test3.ObjectLanguageId);
-                ProjectLanguage.Name = test3.Name;
-                ProjectLanguage.Description = test3.Description;
-                ProjectLanguage.MouseOver = test3.MouseOver;
+                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(test3.SuObject.ObjectLanguageId);
+                ProjectLanguage.Name = test3.SuObject.Name;
+                ProjectLanguage.Description = test3.SuObject.Description;
+                ProjectLanguage.MouseOver = test3.SuObject.MouseOver;
                 ProjectLanguage.ModifiedDate = DateTime.Now;
                 ProjectLanguage.ModifierId = new Guid(CurrentUser.Id);
                 _ProjectLanguage.UpdateProjectLanguage(ProjectLanguage);

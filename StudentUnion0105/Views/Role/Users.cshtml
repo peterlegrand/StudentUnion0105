@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{var roleId = ViewBag.Id;
+}
+@model List<AddUsersToRoleViewModel>
+
+<h1><img src="~/Images/Icons/User.png" height="60" width="60" /> Manage Users to roles</h1>
+<form method="post">
+    <table class="table table-bordered">
+
+        <thead class="thead-dark">
+            <tr><th>Selected</th><th>Role ID</th><th>User name</th></tr>
+        </thead>
+        @if (Model.Any())
+        {
+            //            @foreach (var x in Model)
+            @for (int i = 0; i < Model.Count; i++)
+
+            {
+                <tr>
+                    @*<td><div class="form-check m-1"><input asp-for="@x.IsSelected" class="form-check-input" /> </div></td>
+                        <td>@x.ClaimType</td>
+                        <td>@x.ClaimValue</td>
+                        <td>@x.RoleID</td>*@
+                    <td><div class="form-check m-1"><input asp-for="@Model[i].IsSelected" class="form-check-input" /> </div></td>
+                    <td><input type="hidden" asp-for="@Model[i].RoleId" />@Model[i].RoleId</td>
+                    <td><input type="hidden" asp-for="@Model[i].UserName" />@Model[i].UserName</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No rights in this role</td>
+            </tr>
+        }
+        @*<tr>
+                <td>
+                    <a asp-action="AddRightsToRole" asp-route-roleId="@Model.Id" asp-controller="Administration" class="btn btn-primary">Add Rights</a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Remove users</a>
+                </td>
+            </tr>*@
+    </table>
+    <input value=" Update" type="submit" class="btn btn-primary" />
+    <a asp-action="Edit" asp-controller="Role" asp-route-roleId="@roleId">Cancel</a>
+
+</form>

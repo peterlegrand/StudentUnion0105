@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IdentityRole>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Roles";
+}
+    <h1 class="font-weight-bold"><img src="~/Images/Icons/Role.png" height="60" width="60" /> Roles</h1>
+@if (Model.Any())
+{
+<div class="table-responsive">
+
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead class="thead-dark">
+            <tr><th>ID</th><th>Name</th><th></th><th></th></tr>
+        </thead>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Name</td>
+                <td style="width: 22px">
+
+                    <a asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a>
+                </td>
+                <td style="width: 22px">
+                    <a asp-controller="Role" asp-action="Delete" asp-route-id="@role.Id"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+    }
+    else
+    {
+    <div class="card">
+        <div class="card-header">
+            No roles created yet.
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+        </div>
+    </div>
+    }
+    <div class="card-body">
+        <a asp-controller="Role" asp-action="Create">
+            <img src="~/Images/Icons/Role.png" title="Edit" height="20" width="20" /> Create role
+        </a>
+    </div>

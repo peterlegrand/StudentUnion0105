@@ -45,10 +45,17 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ef3d2a98-d41e-4995-a5b3-a5c9c2566351",
-                            ConcurrencyStamp = "39f2f3d9-99e7-4aad-b795-f62d89d18ba5",
+                            Id = "7bb5b2dd-f06d-42c2-8fd1-42116c0a7f98",
+                            ConcurrencyStamp = "320080ec-d468-47d2-83e8-b394a94959b4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "505ce9cc-922e-4348-9781-6fbd7cc528de",
+                            ConcurrencyStamp = "c751525d-402b-4fde-baed-79699905558d",
+                            Name = "Super admin",
+                            NormalizedName = "SUPER ADMIN"
                         });
                 });
 
@@ -148,6 +155,8 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("ClaimGroup");
 
+                    b.Property<string>("ClaimType");
+
                     b.HasKey("Id");
 
                     b.ToTable("dbClaim");
@@ -157,25 +166,71 @@ namespace StudentUnion0105.Migrations
                         {
                             Id = 1,
                             Claim = "Classification",
-                            ClaimGroup = "Classification"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Claim = "ClassificationPage",
-                            ClaimGroup = "Classification"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Claim = "Roles",
-                            ClaimGroup = "Administration"
+                            ClaimGroup = "Classification",
+                            ClaimType = "Menu"
                         },
                         new
                         {
                             Id = 2,
+                            Claim = "ClassificationPage",
+                            ClaimGroup = "Classification",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Claim = "Role",
+                            ClaimGroup = "Administration",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 4,
                             Claim = "ClassificationLevel",
-                            ClaimGroup = "Classification"
+                            ClaimGroup = "Classification",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Claim = "ContentType",
+                            ClaimGroup = "Type",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Claim = "OrganizationType",
+                            ClaimGroup = "Type",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Claim = "PageType",
+                            ClaimGroup = "Type",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Claim = "Page",
+                            ClaimGroup = "Page",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Claim = "Project",
+                            ClaimGroup = "Project",
+                            ClaimType = "Menu"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Claim = "Type",
+                            ClaimGroup = "Type",
+                            ClaimType = "Menu"
                         });
                 });
 
@@ -184,6 +239,8 @@ namespace StudentUnion0105.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClassificationDescription");
 
                     b.Property<int>("ClassificationId");
 
@@ -217,6 +274,8 @@ namespace StudentUnion0105.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClassificationLevelDescription");
 
                     b.Property<int>("ClassificationLevelId");
 

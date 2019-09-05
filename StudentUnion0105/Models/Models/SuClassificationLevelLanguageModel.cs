@@ -12,6 +12,7 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         public string ClassificationLevelName { get; set; }
         public string ClassificationLevelMenuName { get; set; }
+        public string ClassificationLevelDescription { get; set; }
         public string ClassificationLevelMouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

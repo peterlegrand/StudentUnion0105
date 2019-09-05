@@ -16,7 +16,11 @@
     },
     {
       "library": "jquery-validation-unobtrusive@3.2.11",
-      "destination": "wwwroot/lib/jquery/" 
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "ckeditor@4.12.1",
+      "destination": "wwwroot/lib/ckeditor/"
     }
   ]
 }

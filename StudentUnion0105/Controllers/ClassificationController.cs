@@ -74,6 +74,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            
             var test1 = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
                          on s.Id equals t.ClassificationId
@@ -92,9 +93,13 @@ namespace StudentUnion0105.Controllers
                             ,
                              MenuName = t.ClassificationMenuName
                             ,
+                             Description= t.ClassificationDescription
+                            ,
                              MouseOver = t.ClassificationMouseOver
                          }).First();
             var ClassificationList = new List<SelectListItem>();
+            //string a;
+            //a = test1.Description;
 
             foreach (var ClassificationFromDb in _classificationStatus.GetAllClassificationStatus())
             {
@@ -104,7 +109,7 @@ namespace StudentUnion0105.Controllers
                     Value = ClassificationFromDb.Id.ToString()
                 });
             }
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = ClassificationList };
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
             return View(ClassificationAndStatus);
 
 
@@ -126,6 +131,8 @@ namespace StudentUnion0105.Controllers
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.ObjectLanguageId);
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+//                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
 
@@ -203,8 +210,8 @@ namespace StudentUnion0105.Controllers
                                           ,
                                               MenuName = c.ClassificationMenuName
                                           ,
-                                              MouseOver = c.ClassificationMouseOver
-                                          ,
+                                              MouseOver = c.ClassificationMouseOver,
+                                           
                                               ObjectId = c.ClassificationId
                                           }).ToList();
             ViewBag.Id = Id;
@@ -226,6 +233,7 @@ namespace StudentUnion0105.Controllers
                              Name = c.ClassificationName
                             ,
                              MenuName = c.ClassificationMenuName
+                             , Description = c.ClassificationDescription
                             ,
                              MouseOver = c.ClassificationMouseOver
                             ,
@@ -252,6 +260,8 @@ namespace StudentUnion0105.Controllers
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.Id);
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription= test3.SuObject.Description;
+
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
 
@@ -278,6 +288,7 @@ namespace StudentUnion0105.Controllers
 
             var SuLanguage = (from l in _language.GetAllLanguages()
                               where !LanguagesAlready.Contains(l.Id)
+                              && l.Active == true
                               select new SelectListItem
                               {
                                   Value = l.Id.ToString()
@@ -309,6 +320,7 @@ namespace StudentUnion0105.Controllers
                 var ClassificationLanguage = new SuClassificationLanguageModel();
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 ClassificationLanguage.ClassificationId = test3.SuObject.ObjectId;
                 ClassificationLanguage.LanguageId = test3.SuObject.LanguageId;

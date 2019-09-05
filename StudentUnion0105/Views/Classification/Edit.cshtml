@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Edit classification";
 }
-<h1><img src="~/Images/Icons/Classifications.png"  height="60" width="60"   /> Edit classification</h1>
+<h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> Edit classification</h1>
 <form class="mt-3" method="post">
 
     <div class="form-group row">
@@ -29,6 +29,20 @@
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.MenuName" class="form-control" />
             <span asp-validation-for="@Model.SuObject.MenuName" class="text-danger"></span>
+        </div>
+    </div>
+    @*<div class="form-group row">
+            <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.SuObject.Description" class="form-control" />
+                <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
+            </div>
+        </div>*@
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor" id="descriptionx" name="SuObject.Description"></textarea>
+            <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
@@ -63,4 +77,17 @@
         </div>
     </div>
 </form>
-    
+<script>
+    $(document).ready(function () {
+        if (CKEDITOR.instances['descriptionx']) {
+            CKEDITOR.instances['descriptionx'].destroy();
+        }
+        CKEDITOR.replace('descriptionx', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['descriptionx'].getData()
+            console.log(ckValue);
+        });
+    });
+</script>

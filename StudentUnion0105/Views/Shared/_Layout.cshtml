@@ -26,6 +26,10 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
+
 </head>
 <body>
     <header>
@@ -50,16 +54,16 @@
                     <ul class="navbar-nav ml-0">
                         <li class="nav-item">
                             <div class="dropdown">
-                                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
                                 {
                                     <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Admin
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         @{var show = new StudentUnion0105.Classes.ShowMenu();
-                                            if (await show.ShowMenuBasedOnClaim(User, "Menu", "Roles", userManager, roleManager))
+                                            if (await show.ShowMenuBasedOnClaim(User, "Menu", "Role", userManager, roleManager))
                                             {
-                                                <a asp-controller="Administration" asp-action="RoleList" class="dropdown-item">Roles</a>
+                                                <a asp-controller="Role" asp-action="Index" class="dropdown-item">Roles</a>
                                             }
                                         }
                                         @{var show2 = new StudentUnion0105.Classes.ShowMenu();
@@ -105,11 +109,25 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div>
+        <div class="container-fluid">
+            @*<div id="mySidebar" class="Susidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>*@
+            <div id="main">
+                <button class="btn-link btn-sm bt openbtn" onclick="openNav()">&#9776; Toggle Sidebar</button>
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+
+        </div>
+
     </div>
 
     <footer class="border-top footer text-muted">
@@ -141,3 +159,14 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+@*<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+</script>*@

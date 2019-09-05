@@ -69,27 +69,18 @@ namespace StudentUnion0105.Controllers
                          where c.Id == Id
                          select new SuObjectVM
                          {
-                             ObjectId = c.Id
-                            ,
-                             Alphabetically = c.Alphabetically
-                            ,
-                             CanLink = c.CanLink
-                            ,
-                             DateLevel = c.DateLevel
-                            ,
-                             InDropDown = c.InDropDown
-                            ,
-                             OnTheFly = c.OnTheFly
-                            ,
-                             Sequence = c.Sequence
-                            ,
-                             ObjectLanguageId = l.Id
-                            ,
-                             MenuName = l.ClassificationLevelMenuName
-                            ,
-                             MouseOver = l.ClassificationLevelMouseOver
-                            ,
-                             Name = l.ClassificationLevelName
+                             Id = c.Id
+                            , Alphabetically = c.Alphabetically
+                            , CanLink = c.CanLink
+                            , DateLevel = c.DateLevel
+                            , InDropDown = c.InDropDown
+                            , Description  = l.ClassificationLevelDescription
+                            , OnTheFly = c.OnTheFly
+                            , Sequence = c.Sequence
+                            , ObjectLanguageId = l.Id
+                            , MenuName = l.ClassificationLevelMenuName
+                            , MouseOver = l.ClassificationLevelMouseOver
+                            , Name = l.ClassificationLevelName
                          }).First();
 
             var suObjectAndStatusView = new SuObjectAndStatusViewModel
@@ -107,17 +98,25 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.Id);
-                ClassificationLanguage.ClassificationName = test3.SuObject.Name;
-                ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
-                _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
+                var ClassificationLevel = _classificationLevel.GetClassificationLevel(test3.SuObject.Id);
+                ClassificationLevel.Alphabetically = test3.SuObject.Alphabetically;
+                ClassificationLevel.CanLink = test3.SuObject.CanLink;
+                ClassificationLevel.DateLevel = test3.SuObject.DateLevel;
+                ClassificationLevel.InDropDown = test3.SuObject.InDropDown;
+                ClassificationLevel.OnTheFly = test3.SuObject.OnTheFly;
+                _classificationLevel.UpdateClassificationLevel(ClassificationLevel);
+
+                var ClassificationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(test3.SuObject.ObjectLanguageId);
+                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
+                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
+                _classificationLevelLanguage.UpdateClassificationLevelLanguage(ClassificationLevelLanguage);
 
 
             }
             //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
 
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("Index", new { Id = test3.SuObject.Id.ToString() });
 
 
 
@@ -267,6 +266,7 @@ namespace StudentUnion0105.Controllers
 
                 ClassificationLevelLanguage.ClassificationLevelName = NewLevel.SuObject.Name;
                 ClassificationLevelLanguage.ClassificationLevelMenuName = NewLevel.SuObject.MenuName;
+                ClassificationLevelLanguage.ClassificationLevelDescription = NewLevel.SuObject.Description;
                 ClassificationLevelLanguage.ClassificationLevelMouseOver = NewLevel.SuObject.MouseOver;
                 ClassificationLevelLanguage.ClassificationLevelId = NewClassificationLevel.Id;
                 ClassificationLevelLanguage.LanguageId = DefaultLanguageID;
@@ -278,7 +278,147 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = NewLevel.SuObject.ObjectId.ToString() });
 
         }
+        public IActionResult LanguageIndex(int Id)
+        {
+
+            var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+                                          join l in _language.GetAllLanguages()
+                         on c.LanguageId equals l.Id
+                                          where c.ClassificationLevelId == Id
+                                          select new SuObjectVM
+                                          {
+                                              Id = c.Id
+                                          , Name = c.ClassificationLevelName
+                                          , Language = l.LanguageName
+                                          , MenuName = c.ClassificationLevelMenuName
+                                          , MouseOver = c.ClassificationLevelMouseOver
+                                          ,
+                                              ObjectId = c.ClassificationLevelId
+                                          }).ToList();
+            ViewBag.Id = Id;
+
+            return View(ClassificationLanguage);
+        }
+
+        [HttpGet]
+        public IActionResult LanguageEdit(int Id)
+        {
+            var test1 = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+                         join l in _language.GetAllLanguages()
+                         on c.LanguageId equals l.Id
+                         where c.Id == Id
+                         select new SuObjectVM
+                         {
+                             Id = c.Id
+                            ,
+                             Name = c.ClassificationLevelName
+                            ,
+                             MenuName = c.ClassificationLevelMenuName
+                             ,
+                             Description = c.ClassificationLevelDescription
+                            ,
+                             MouseOver = c.ClassificationLevelMouseOver
+                            ,
+                             Language = l.LanguageName
+                            ,
+                             ObjectId = c.ClassificationLevelId
+
+                         }).First();
+
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = test1 //, a = ClassificationList
+            };
+            return View(ClassificationAndStatus);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult LanguageEdit(SuObjectAndStatusViewModel test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ClassificationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(test3.SuObject.Id);
+                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
+                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
+
+                ClassificationLevelLanguage.ClassificationLevelMouseOver = test3.SuObject.MouseOver;
+                _classificationLevelLanguage.UpdateClassificationLevelLanguage(ClassificationLevelLanguage);
+
+
+            }
+            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
+
+            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+
+
+        }
+
+        [HttpGet]
+        public IActionResult LanguageCreate(int Id)
+        {
+            List<int> LanguagesAlready = new List<int>();
+            LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+                                where c.ClassificationLevelId == Id
+                                select c.LanguageId).ToList();
+
+
+            var SuLanguage = (from l in _language.GetAllLanguages()
+                              where !LanguagesAlready.Contains(l.Id)
+                              && l.Active == true
+                              select new SelectListItem
+                              {
+                                  Value = l.Id.ToString()
+                              ,
+                                  Text = l.LanguageName
+                              }).ToList();
+
+            if (SuLanguage.Count() == 0)
+            {
+                return RedirectToAction("LanguageIndex", new { Id = Id });
+            }
+            SuObjectVM SuObject = new SuObjectVM();
+            SuObject.ObjectId = Id;
+            ViewBag.Id = Id.ToString();
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = SuObject
+                ,
+                SomeKindINumSelectListItem = SuLanguage
+            };
+            return View(ClassificationAndStatus);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ClassificationLevelLanguage = new SuClassificationLevelLanguageModel();
+                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
+                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
+                ClassificationLevelLanguage.ClassificationLevelMouseOver = test3.SuObject.MouseOver;
+                ClassificationLevelLanguage.ClassificationLevelId = test3.SuObject.ObjectId;
+                ClassificationLevelLanguage.LanguageId = test3.SuObject.LanguageId;
+
+                var NewClassificationLevel = _classificationLevelLanguage.AddClassificationLevelLanguage(ClassificationLevelLanguage);
+
+
+            }
+            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+
+
+        }
+
+
 
     }
+
+
 
 }
