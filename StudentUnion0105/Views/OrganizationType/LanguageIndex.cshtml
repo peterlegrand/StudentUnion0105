@@ -20,12 +20,12 @@
             <td style="width: 44px">@x.Id</td>
             <td>@x.Language</td>
             <td>@x.Name</td>
-            <td>@x.Description</td>
-            <td>@x.MouseOver</td>
-            <td>@x.ObjectId</td>
+            <td>@Html.Raw(@x.Description)</td>
+            <td>@x.MouseOver </td>
+            <td>@x.ObjectId </td>
             @*PETER TODO Hide the object ID somehow would be nice*@
 
-            <td style="width: 22px"><a asp-controller="OrganizationType" asp-action="LanguageEdit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
+<td style="width: 22px"><a asp-controller="OrganizationType" asp-action="LanguageEdit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
             <td style="width: 22px"><a asp-controller="OrganizationType" asp-action="LanguageDelete" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
         </tr>
     }
