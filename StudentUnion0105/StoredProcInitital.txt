@@ -638,5 +638,298 @@ VALUES(13, 41, 'Csa','Csa: Mediterranean hot summer climates','Csa','Csa','Csa: 
 , 'Csa','Csa: Mediterranean hot summer climates','Csa','Csa: Mediterranean hot summer climates','Csa'
 , @CurrentUser, @CurrentUser, getdate(), getdate());
 
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(14, 41, 'Csb','Csb: Mediterranean warm/cool summer climates','Csb','Csb','Csb: Mediterranean warm/cool summer climates'
+, 'Csb','Csb: Mediterranean warm/cool summer climates','Csb','Csb: Mediterranean warm/cool summer climates','Csb'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(15, 41, 'Csc','Csc: Mediterranean cold summer climates','Csc','Csc','Csc: Mediterranean cold summer climates'
+, 'Csc','Csc: Mediterranean cold summer climates','Csc','Csc: Mediterranean cold summer climates','Csc'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(16, 41, 'Cfa','Cfa: Humid subtropical climates','Cfa','Cfa','Cfa: Humid subtropical climates'
+, 'Cfa','Cfa: Humid subtropical climates','Cfa','Cfa: Humid subtropical climates','Cfa'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(17, 41, 'Cfb','Cfb: Oceanic climate','Cfb','Cfb','Cfb: Oceanic climate'
+, 'Cfb','Cfb: Oceanic climate','Cfb','Cfb: Oceanic climate','Cfb'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(18, 41, 'Cfc','Cfc: Subpolar oceanic climate','Cfc','Cfc','Cfc: Subpolar oceanic climate'
+, 'Cfc','Cfc: Subpolar oceanic climate','Cfc','Cfc: Subpolar oceanic climate','Cfc'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(19, 41, 'Cwa','Cwa: Dry-winter humid subtropical climate','Cwa','Cwa','Cwa: Dry-winter humid subtropical climate'
+, 'Cwa','Cwa: Dry-winter humid subtropical climate','Cwa','Cwa: Dry-winter humid subtropical climate','Cwa'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(20, 41, 'Cwb','Cwb: Dry-winter subtropical highland climate','Cwb','Cwb','Cwb: Dry-winter subtropical highland climate'
+, 'Cwb','Cwb: Dry-winter subtropical highland climate','Cwb','Cwb: Dry-winter subtropical highland climate','Cwb'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,3, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(21, 41, 'Cwc','Cwc: Dry-winter subpolar oceanic climate','Cwc','Cwc','Cwc: Dry-winter subpolar oceanic climate'
+, 'Cwc','Cwc: Dry-winter subpolar oceanic climate','Cwc','Cwc: Dry-winter subpolar oceanic climate','Cwc'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(22, 41, 'Dfa/Dwa/Dsa','Dfa/Dwa/Dsa: Hot summer continental climates','Dfa/Dwa/Dsa','Dfa/Dwa/Dsa','Dfa/Dwa/Dsa: Hot summer continental climates'
+, 'Dfa/Dwa/Dsa','Dfa/Dwa/Dsa: Hot summer continental climates','Dfa/Dwa/Dsa','Dfa/Dwa/Dsa: Hot summer continental climates','Dfa/Dwa/Dsa'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(23, 41, 'Dfb/Dwb/Dsb','Dfb/Dwb/Dsb: Warm summer continental or hemiboreal climates','Dfb/Dwb/Dsb','Dfb/Dwb/Dsb','Dfb/Dwb/Dsb: Warm summer continental or hemiboreal climates'
+, 'Dfb/Dwb/Dsb','Dfb/Dwb/Dsb: Warm summer continental or hemiboreal climates','Dfb/Dwb/Dsb','Dfb/Dwb/Dsb: Warm summer continental or hemiboreal climates','Dfb/Dwb/Dsb'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(24, 41, 'Dfc/Dwc/Dsc','Dfc/Dwc/Dsc: Subarctic or boreal climates','Dfc/Dwc/Dsc','Dfc/Dwc/Dsc','Dfc/Dwc/Dsc: Subarctic or boreal climates'
+, 'Dfc/Dwc/Dsc','Dfc/Dwc/Dsc: Subarctic or boreal climates','Dfc/Dwc/Dsc','Dfc/Dwc/Dsc: Subarctic or boreal climates','Dfc/Dwc/Dsc'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(25, 41, 'Dfd/Dwd/Dsd','Dfd/Dwd/Dsd: Subarctic or boreal climates with severe winters','Dfd/Dwd/Dsd','Dfd/Dwd/Dsd','Dfd/Dwd/Dsd: Subarctic or boreal climates with severe winters'
+, 'Dfd/Dwd/Dsd','Dfd/Dwd/Dsd: Subarctic or boreal climates with severe winters','Dfd/Dwd/Dsd','Dfd/Dwd/Dsd: Subarctic or boreal climates with severe winters','Dfd/Dwd/Dsd'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(26, 41, 'ET','ET: Tundra climate','ET','ET','ET: Tundra climate'
+, 'ET','ET: Tundra climate','ET','ET: Tundra climate','ET'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
+
+INSERT INTO dbClassificationValue (ClassificationId, ParentValueId, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(1,4, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
+	, LanguageId
+	, ClassificationValueName
+	, ClassificationValueDescription
+	, ClassificationValueDropDownName
+	, ClassificationValueMenuName
+	, ClassificationValueMouseOver
+	, ClassificationValuePageName
+	, ClassificationValuePageDescription
+	, ClassificationValueHeaderName
+	, ClassificationValueHeaderDescription
+	, ClassificationValueTopicName
+	, CreatorId, ModifierId, CreatedDate, ModifiedDate) 
+VALUES(27, 41, 'EF','EF: Ice cap climate','EF','EF','EF: Ice cap climate'
+, 'EF','EF: Ice cap climate','EF','EF: Ice cap climate','EF'
+, @CurrentUser, @CurrentUser, getdate(), getdate());
+
 
 GO
