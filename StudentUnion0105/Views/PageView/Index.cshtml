@@ -1,0 +1,18 @@
+﻿@model SuPageViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@foreach (var x in Model.PageSections)
+{
+    <div> @x.PageSectionTitle</div>
+    <div> @Html.Raw(x.PageSectionDescription)</div>
+
+    foreach (var y in Model.ContentViews[0])
+    {<div>@y.Title</div>
+    <div> @Html.Raw(y.Description)</div>
+}
+}

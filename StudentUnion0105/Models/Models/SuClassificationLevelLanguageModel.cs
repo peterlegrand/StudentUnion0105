@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +19,10 @@ namespace StudentUnion0105.Models
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        [ForeignKey("ClassificationLevelId")]
 
         public virtual SuClassificationLevelModel ClassificationLevel { get; set; }
+        [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
     }
 }

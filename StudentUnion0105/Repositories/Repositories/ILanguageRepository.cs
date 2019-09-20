@@ -8,7 +8,7 @@ namespace StudentUnion0105.Repositories
 {
     public interface ILanguageRepository
     {
-        SuLanguageModel GetSuLanguage(int ID);
+        SuLanguageModel GetLanguage(int ID);
         IEnumerable<SuLanguageModel> GetAllLanguages();
 
         SuLanguageModel UpdateLanguage(SuLanguageModel suLanguageChanges);

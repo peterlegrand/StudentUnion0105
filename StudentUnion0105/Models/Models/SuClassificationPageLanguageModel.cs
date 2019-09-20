@@ -1,6 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +29,9 @@ namespace StudentUnion0105.Models
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        [ForeignKey("ClassificationPageId")]
         public virtual SuClassificationPageModel ClassificationPage { get; set; }
+        [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
 
 

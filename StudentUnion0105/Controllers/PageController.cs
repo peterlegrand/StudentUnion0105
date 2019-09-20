@@ -19,6 +19,7 @@ namespace StudentUnion0105.Controllers
         private readonly IPageLanguageRepository _PageLanguage;
         private readonly IPageRepository _Page;
         private readonly ILanguageRepository _language;
+        private readonly IPageLanguageRepository _pageLanguage;
         private readonly IPageStatusRepository _PageStatus;
         private readonly IPageTypeRepository _PageType;
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
@@ -29,6 +30,7 @@ namespace StudentUnion0105.Controllers
             , IPageLanguageRepository PageLanguage
             , IPageRepository Page
             , ILanguageRepository language
+            , IPageLanguageRepository pageLanguage
             , IPageStatusRepository PageStatus
             , IPageTypeRepository PageType
             , IPageTypeLanguageRepository PageTypeLanguage
@@ -39,6 +41,7 @@ namespace StudentUnion0105.Controllers
             _PageLanguage = PageLanguage;
             _Page = Page;
             _language = language;
+            _pageLanguage = pageLanguage;
             _PageStatus = PageStatus;
             _PageType = PageType;
             _PageTypeLanguage = PageTypeLanguage;
@@ -163,8 +166,8 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.PageTitle = FromForm.SuObject.Title;
-                PageLanguage.PageDescription = FromForm.SuObject.Description2;
+                PageLanguage.PageTitle = FromForm.SuObject.PageName;
+                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = NewPage.Id;
                 PageLanguage.LanguageId = DefaultLanguageID;
                 _PageLanguage.AddPageLanguage(PageLanguage);
@@ -181,7 +184,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _Page.GetAllPages()
+            var PageDetails = (from s in _Page.GetAllPages()
                          join t in _PageLanguage.GetAllPageLanguages()
                          on s.Id equals t.PageId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -199,9 +202,9 @@ namespace StudentUnion0105.Controllers
                             ,
                              MouseOver = t.MouseOver
                              ,
-                             Title = t.PageTitle
+                             PageDescription= t.PageDescription
                              ,
-                             Description2 = t.PageDescription
+                             PageName = t.PageTitle
                          }).First();
 
             var PageList = new List<SelectListItem>();
@@ -214,20 +217,43 @@ namespace StudentUnion0105.Controllers
                     Value = PageFromDb.Id.ToString()
                 });
             }
-            var PageAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = PageList };
-            return View(PageAndStatus);
 
+            //wwwwwwwwwwwwwwwwwwwwwwwwww
+            var TypeList = (from o in _PageType.GetAllPageTypes()
+                         join l in _PageTypeLanguage.GetAllPageTypeLanguages()
+                         on o.Id equals l.PageTypeId
+                         where l.LanguageId == DefaultLanguageID
+                         select new SuObjectVM
+                         {
+                             Id = o.Id
+                            ,
+                             Name = l.Name
+                         }).ToList();
+
+            var TypeListItem = new List<SelectListItem>();
+            foreach (var TypeFromDb in TypeList)
+            {
+                TypeListItem.Add(new SelectListItem
+                {
+                    Text = TypeFromDb.Name,
+                    Value = TypeFromDb.Id.ToString()
+                });
+            }
+            //wwwwwwwwwwwwwwwwwwwwwwww
+
+            var PageAndStatus = new SuObjectAndStatusViewModel { SuObject = PageDetails, SomeKindINumSelectListItem = PageList, ProbablyTypeListItem = TypeListItem };
+            return View(PageAndStatus);
 
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var Page = _Page.GetPage(test3.Id);
+                var Page = _Page.GetPage(FromForm.SuObject.Id);
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 Page.ModifiedDate = DateTime.Now;
@@ -235,12 +261,12 @@ namespace StudentUnion0105.Controllers
                 _Page.UpdatePage(Page);
 
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
-                var PageLanguage = _PageLanguage.GetPageLanguage(test3.ObjectLanguageId);
-                PageLanguage.Name = test3.Name;
-                PageLanguage.Description = test3.Description;
-                PageLanguage.MouseOver = test3.MouseOver;
-                PageLanguage.PageTitle = test3.Title;
-                PageLanguage.PageDescription = test3.Description2;
+                var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.SuObject.ObjectLanguageId);
+                PageLanguage.Name = FromForm.SuObject.Name;
+                PageLanguage.Description = FromForm.SuObject.Description;
+                PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                PageLanguage.PageTitle= FromForm.SuObject.PageName;
+                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
                 PageLanguage.ModifierId = new Guid(CurrentUser.Id);
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
@@ -319,24 +345,24 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 var PageLanguage = new SuPageLanguageModel();
-                PageLanguage.Name = test3.SuObject.Name;
-                PageLanguage.Description = test3.SuObject.Description;
-                PageLanguage.MouseOver = test3.SuObject.MouseOver;
-                PageLanguage.PageTitle = test3.SuObject.Title;
-                PageLanguage.PageDescription = test3.SuObject.Description2;
-                PageLanguage.PageId = test3.SuObject.ObjectId;
-                PageLanguage.LanguageId = test3.SuObject.LanguageId;
+                PageLanguage.Name = FromForm.SuObject.Name;
+                PageLanguage.Description = FromForm.SuObject.Description;
+                PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                PageLanguage.PageTitle = FromForm.SuObject.PageName;
+                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
+                PageLanguage.PageId = FromForm.SuObject.ObjectId;
+                PageLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
                 var NewPageLanguage = _PageLanguage.AddPageLanguage(PageLanguage);
 
 
             }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
 
@@ -361,9 +387,9 @@ namespace StudentUnion0105.Controllers
                             ,
                              Language = l.LanguageName
 ,
-                             Title = c.PageTitle
+                             PageName = c.PageTitle
 ,
-                             Description2 = c.PageDescription
+                             PageDescription = c.PageDescription
                             ,
                              ObjectId = c.PageId
 
@@ -379,22 +405,26 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectVM test3)
+        public IActionResult LanguageEdit(SuObjectVM FromForm)
         {
             if (ModelState.IsValid)
             {
-                var PageLanguage = _PageLanguage.GetPageLanguage(test3.Id);
-                PageLanguage.Name = test3.Name;
-                PageLanguage.Description = test3.Description;
-                PageLanguage.MouseOver = test3.MouseOver;
+                var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.Id);
+                PageLanguage.Name = FromForm.Name;
+                PageLanguage.Description = FromForm.Description;
+                PageLanguage.PageTitle= FromForm.PageName;
+                PageLanguage.PageDescription = FromForm.PageDescription;
+                PageLanguage.MouseOver = FromForm.MouseOver;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Page.PageId.ToString() );
+            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Page.PageId.ToString() );
 
-            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectId.ToString() });
         }
+
+        
 
     }
 }

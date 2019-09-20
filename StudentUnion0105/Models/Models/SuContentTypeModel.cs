@@ -14,6 +14,7 @@ namespace StudentUnion0105.Models
         public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<SuContentTypeLanguageModel> ContentTypeLanguages { get; set; }
+        public virtual ICollection<SuContentModel> Contents { get; set; }
 
     }
 }

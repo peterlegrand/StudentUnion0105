@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7bb5b2dd-f06d-42c2-8fd1-42116c0a7f98",
-                            ConcurrencyStamp = "320080ec-d468-47d2-83e8-b394a94959b4",
+                            Id = "837a7cf5-3ff3-453f-a275-7c1e681e2319",
+                            ConcurrencyStamp = "d5ab44ac-b1e4-4378-859c-895ec381c659",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "505ce9cc-922e-4348-9781-6fbd7cc528de",
-                            ConcurrencyStamp = "c751525d-402b-4fde-baed-79699905558d",
+                            Id = "1e650115-c208-408a-9b29-cd962c457b98",
+                            ConcurrencyStamp = "a3fd9efc-79e2-4992-a645-cfbc0d718b5c",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -160,78 +160,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbClaim");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Claim = "Classification",
-                            ClaimGroup = "Classification",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Claim = "ClassificationPage",
-                            ClaimGroup = "Classification",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Claim = "Role",
-                            ClaimGroup = "Administration",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Claim = "ClassificationLevel",
-                            ClaimGroup = "Classification",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Claim = "ContentType",
-                            ClaimGroup = "Type",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Claim = "OrganizationType",
-                            ClaimGroup = "Type",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Claim = "PageType",
-                            ClaimGroup = "Type",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Claim = "Page",
-                            ClaimGroup = "Page",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Claim = "Project",
-                            ClaimGroup = "Project",
-                            ClaimType = "Menu"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Claim = "Type",
-                            ClaimGroup = "Type",
-                            ClaimType = "Menu"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationLanguageModel", b =>
@@ -320,7 +248,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("CreatorId");
 
-                    b.Property<bool>("DateLevel");
+                    b.Property<int>("DateLevel");
 
                     b.Property<bool>("InDropDown");
 
@@ -351,7 +279,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("CreatorId");
 
-                    b.Property<int>("DefailClassificationPageId");
+                    b.Property<int>("DefaultClassificationPageId");
 
                     b.Property<int>("DropDownSequence");
 
@@ -379,18 +307,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbClassificationStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClassificationStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClassificationStatusName = "Inactive"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationValueLanguageModel", b =>
@@ -452,9 +368,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("CreatorId");
 
-                    b.Property<DateTimeOffset>("DateFrom");
+                    b.Property<DateTimeOffset?>("DateFrom");
 
-                    b.Property<DateTimeOffset>("DateTo");
+                    b.Property<DateTimeOffset?>("DateTo");
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -467,6 +383,85 @@ namespace StudentUnion0105.Migrations
                     b.HasIndex("ClassificationId");
 
                     b.ToTable("dbClassificationValue");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentClassificationValueModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassificationValueId");
+
+                    b.Property<int>("ContentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassificationValueId");
+
+                    b.HasIndex("ContentId");
+
+                    b.ToTable("dbContentClassificationValue");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContentStatusId");
+
+                    b.Property<int>("ContentTypeId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid?>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid?>("ModifierId");
+
+                    b.Property<int>("OrganizationId");
+
+                    b.Property<int?>("ProjectId");
+
+                    b.Property<int>("SecurityLevel");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContentStatusId");
+
+                    b.HasIndex("ContentTypeId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("SecurityLevel");
+
+                    b.ToTable("dbContent");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentStatusModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentStatusName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbContentStatus");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeLanguageModel", b =>
@@ -521,6 +516,19 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbContentType");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuLanguageList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbLanguageList");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuLanguageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -542,1664 +550,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbLanguage");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ab",
-                            ISO6392 = "abk",
-                            LanguageName = "Abkhazian"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "aa",
-                            ISO6392 = "aar",
-                            LanguageName = "Afar"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "af",
-                            ISO6392 = "afr",
-                            LanguageName = "Afrikaans"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ak",
-                            ISO6392 = "aka",
-                            LanguageName = "Akan"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sq",
-                            ISO6392 = "sqi",
-                            LanguageName = "Albanian"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "am",
-                            ISO6392 = "amh",
-                            LanguageName = "Amharic"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ar",
-                            ISO6392 = "ara",
-                            LanguageName = "Arabic"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "an",
-                            ISO6392 = "arg",
-                            LanguageName = "Aragonese"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "hy",
-                            ISO6392 = "hye",
-                            LanguageName = "Armenian"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "as",
-                            ISO6392 = "asm",
-                            LanguageName = "Assamese"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "av",
-                            ISO6392 = "ava",
-                            LanguageName = "Avaric"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ae",
-                            ISO6392 = "ave",
-                            LanguageName = "Avestan"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ay",
-                            ISO6392 = "aym",
-                            LanguageName = "Aymara"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "az",
-                            ISO6392 = "aze",
-                            LanguageName = "Azerbaijani"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bm",
-                            ISO6392 = "bam",
-                            LanguageName = "Bambara"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ba",
-                            ISO6392 = "bak",
-                            LanguageName = "Bashkir"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "eu",
-                            ISO6392 = "eus",
-                            LanguageName = "Basque"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "be",
-                            ISO6392 = "bel",
-                            LanguageName = "Belarusian"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bn",
-                            ISO6392 = "ben",
-                            LanguageName = "Bengali"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bh",
-                            ISO6392 = "bih",
-                            LanguageName = "Bihari languages"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bi",
-                            ISO6392 = "bis",
-                            LanguageName = "Bislama"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bs",
-                            ISO6392 = "bos",
-                            LanguageName = "Bosnian"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "br",
-                            ISO6392 = "bre",
-                            LanguageName = "Breton"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bg",
-                            ISO6392 = "bul",
-                            LanguageName = "Bulgarian"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "my",
-                            ISO6392 = "mya",
-                            LanguageName = "Burmese"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ca",
-                            ISO6392 = "cat",
-                            LanguageName = "Catalan, Valencian"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ch",
-                            ISO6392 = "cha",
-                            LanguageName = "Chamorro"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ce",
-                            ISO6392 = "che",
-                            LanguageName = "Chechen"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ny",
-                            ISO6392 = "nya",
-                            LanguageName = "Chichewa, Chewa, Nyanja"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "zh",
-                            ISO6392 = "zho",
-                            LanguageName = "Chinese"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "cv",
-                            ISO6392 = "chv",
-                            LanguageName = "Chuvash"
-                        },
-                        new
-                        {
-                            Id = 32,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kw",
-                            ISO6392 = "cor",
-                            LanguageName = "Cornish"
-                        },
-                        new
-                        {
-                            Id = 33,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "co",
-                            ISO6392 = "cos",
-                            LanguageName = "Corsican"
-                        },
-                        new
-                        {
-                            Id = 34,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "cr",
-                            ISO6392 = "cre",
-                            LanguageName = "Cree"
-                        },
-                        new
-                        {
-                            Id = 35,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "hr",
-                            ISO6392 = "hrv",
-                            LanguageName = "Croatian"
-                        },
-                        new
-                        {
-                            Id = 36,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "cs",
-                            ISO6392 = "ces",
-                            LanguageName = "Czech"
-                        },
-                        new
-                        {
-                            Id = 37,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "da",
-                            ISO6392 = "dan",
-                            LanguageName = "Danish"
-                        },
-                        new
-                        {
-                            Id = 38,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "dv",
-                            ISO6392 = "div",
-                            LanguageName = "Divehi, Dhivehi, Maldivian"
-                        },
-                        new
-                        {
-                            Id = 39,
-                            Active = true,
-                            ForeignName = "",
-                            ISO6391 = "nl",
-                            ISO6392 = "nld",
-                            LanguageName = "Dutch, Flemish"
-                        },
-                        new
-                        {
-                            Id = 40,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "dz",
-                            ISO6392 = "dzo",
-                            LanguageName = "Dzongkha"
-                        },
-                        new
-                        {
-                            Id = 41,
-                            Active = true,
-                            ForeignName = "",
-                            ISO6391 = "en",
-                            ISO6392 = "eng",
-                            LanguageName = "English"
-                        },
-                        new
-                        {
-                            Id = 42,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "eo",
-                            ISO6392 = "epo",
-                            LanguageName = "Esperanto"
-                        },
-                        new
-                        {
-                            Id = 43,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "et",
-                            ISO6392 = "est",
-                            LanguageName = "Estonian"
-                        },
-                        new
-                        {
-                            Id = 44,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ee",
-                            ISO6392 = "ewe",
-                            LanguageName = "Ewe"
-                        },
-                        new
-                        {
-                            Id = 45,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fo",
-                            ISO6392 = "fao",
-                            LanguageName = "Faroese"
-                        },
-                        new
-                        {
-                            Id = 46,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fj",
-                            ISO6392 = "fij",
-                            LanguageName = "Fijian"
-                        },
-                        new
-                        {
-                            Id = 47,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fi",
-                            ISO6392 = "fin",
-                            LanguageName = "Finnish"
-                        },
-                        new
-                        {
-                            Id = 48,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fr",
-                            ISO6392 = "fra",
-                            LanguageName = "French"
-                        },
-                        new
-                        {
-                            Id = 49,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ff",
-                            ISO6392 = "ful",
-                            LanguageName = "Fulah"
-                        },
-                        new
-                        {
-                            Id = 50,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "gl",
-                            ISO6392 = "glg",
-                            LanguageName = "Galician"
-                        },
-                        new
-                        {
-                            Id = 51,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ka",
-                            ISO6392 = "kat",
-                            LanguageName = "Georgian"
-                        },
-                        new
-                        {
-                            Id = 52,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "de",
-                            ISO6392 = "deu",
-                            LanguageName = "German"
-                        },
-                        new
-                        {
-                            Id = 53,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "el",
-                            ISO6392 = "ell",
-                            LanguageName = "Greek, Modern (1453-)"
-                        },
-                        new
-                        {
-                            Id = 54,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "gn",
-                            ISO6392 = "grn",
-                            LanguageName = "Guarani"
-                        },
-                        new
-                        {
-                            Id = 55,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "gu",
-                            ISO6392 = "guj",
-                            LanguageName = "Gujarati"
-                        },
-                        new
-                        {
-                            Id = 56,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ht",
-                            ISO6392 = "hat",
-                            LanguageName = "Haitian, Haitian Creole"
-                        },
-                        new
-                        {
-                            Id = 57,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ha",
-                            ISO6392 = "hau",
-                            LanguageName = "Hausa"
-                        },
-                        new
-                        {
-                            Id = 58,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "he",
-                            ISO6392 = "heb",
-                            LanguageName = "Hebrew"
-                        },
-                        new
-                        {
-                            Id = 59,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "hz",
-                            ISO6392 = "her",
-                            LanguageName = "Herero"
-                        },
-                        new
-                        {
-                            Id = 60,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "hi",
-                            ISO6392 = "hin",
-                            LanguageName = "Hindi"
-                        },
-                        new
-                        {
-                            Id = 61,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ho",
-                            ISO6392 = "hmo",
-                            LanguageName = "Hiri Motu"
-                        },
-                        new
-                        {
-                            Id = 62,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "hu",
-                            ISO6392 = "hun",
-                            LanguageName = "Hungarian"
-                        },
-                        new
-                        {
-                            Id = 63,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ia",
-                            ISO6392 = "ina",
-                            LanguageName = "Interlingua"
-                        },
-                        new
-                        {
-                            Id = 64,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "id",
-                            ISO6392 = "ind",
-                            LanguageName = "Indonesian"
-                        },
-                        new
-                        {
-                            Id = 65,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ie",
-                            ISO6392 = "ile",
-                            LanguageName = "Interlingue, Occidental"
-                        },
-                        new
-                        {
-                            Id = 66,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ga",
-                            ISO6392 = "gle",
-                            LanguageName = "Irish"
-                        },
-                        new
-                        {
-                            Id = 67,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ig",
-                            ISO6392 = "ibo",
-                            LanguageName = "Igbo"
-                        },
-                        new
-                        {
-                            Id = 68,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ik",
-                            ISO6392 = "ipk",
-                            LanguageName = "Inupiaq"
-                        },
-                        new
-                        {
-                            Id = 69,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "io",
-                            ISO6392 = "ido",
-                            LanguageName = "Ido"
-                        },
-                        new
-                        {
-                            Id = 70,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "is",
-                            ISO6392 = "isl",
-                            LanguageName = "Icelandic"
-                        },
-                        new
-                        {
-                            Id = 71,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "it",
-                            ISO6392 = "ita",
-                            LanguageName = "Italian"
-                        },
-                        new
-                        {
-                            Id = 72,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "iu",
-                            ISO6392 = "iku",
-                            LanguageName = "Inuktitut"
-                        },
-                        new
-                        {
-                            Id = 73,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ja",
-                            ISO6392 = "jpn",
-                            LanguageName = "Japanese"
-                        },
-                        new
-                        {
-                            Id = 74,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "jv",
-                            ISO6392 = "jav",
-                            LanguageName = "Javanese"
-                        },
-                        new
-                        {
-                            Id = 75,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kl",
-                            ISO6392 = "kal",
-                            LanguageName = "Kalaallisut, Greenlandic"
-                        },
-                        new
-                        {
-                            Id = 76,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kn",
-                            ISO6392 = "kan",
-                            LanguageName = "Kannada"
-                        },
-                        new
-                        {
-                            Id = 77,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kr",
-                            ISO6392 = "kau",
-                            LanguageName = "Kanuri"
-                        },
-                        new
-                        {
-                            Id = 78,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ks",
-                            ISO6392 = "kas",
-                            LanguageName = "Kashmiri"
-                        },
-                        new
-                        {
-                            Id = 79,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kk",
-                            ISO6392 = "kaz",
-                            LanguageName = "Kazakh"
-                        },
-                        new
-                        {
-                            Id = 80,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "km",
-                            ISO6392 = "khm",
-                            LanguageName = "Central Khmer"
-                        },
-                        new
-                        {
-                            Id = 81,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ki",
-                            ISO6392 = "kik",
-                            LanguageName = "Kikuyu, Gikuyu"
-                        },
-                        new
-                        {
-                            Id = 82,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "rw",
-                            ISO6392 = "kin",
-                            LanguageName = "Kinyarwanda"
-                        },
-                        new
-                        {
-                            Id = 83,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ky",
-                            ISO6392 = "kir",
-                            LanguageName = "Kirghiz, Kyrgyz"
-                        },
-                        new
-                        {
-                            Id = 84,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kv",
-                            ISO6392 = "kom",
-                            LanguageName = "Komi"
-                        },
-                        new
-                        {
-                            Id = 85,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kg",
-                            ISO6392 = "kon",
-                            LanguageName = "Kongo"
-                        },
-                        new
-                        {
-                            Id = 86,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ko",
-                            ISO6392 = "kor",
-                            LanguageName = "Korean"
-                        },
-                        new
-                        {
-                            Id = 87,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ku",
-                            ISO6392 = "kur",
-                            LanguageName = "Kurdish"
-                        },
-                        new
-                        {
-                            Id = 88,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "kj",
-                            ISO6392 = "kua",
-                            LanguageName = "Kuanyama, Kwanyama"
-                        },
-                        new
-                        {
-                            Id = 89,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "la",
-                            ISO6392 = "lat",
-                            LanguageName = "Latin"
-                        },
-                        new
-                        {
-                            Id = 90,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lb",
-                            ISO6392 = "ltz",
-                            LanguageName = "Luxembourgish, Letzeburgesch"
-                        },
-                        new
-                        {
-                            Id = 91,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lg",
-                            ISO6392 = "lug",
-                            LanguageName = "Ganda"
-                        },
-                        new
-                        {
-                            Id = 92,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "li",
-                            ISO6392 = "lim",
-                            LanguageName = "Limburgan, Limburger, Limburgish"
-                        },
-                        new
-                        {
-                            Id = 93,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ln",
-                            ISO6392 = "lin",
-                            LanguageName = "Lingala"
-                        },
-                        new
-                        {
-                            Id = 94,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lo",
-                            ISO6392 = "lao",
-                            LanguageName = "Lao"
-                        },
-                        new
-                        {
-                            Id = 95,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lt",
-                            ISO6392 = "lit",
-                            LanguageName = "Lithuanian"
-                        },
-                        new
-                        {
-                            Id = 96,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lu",
-                            ISO6392 = "lub",
-                            LanguageName = "Luba-Katanga"
-                        },
-                        new
-                        {
-                            Id = 97,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "lv",
-                            ISO6392 = "lav",
-                            LanguageName = "Latvian"
-                        },
-                        new
-                        {
-                            Id = 98,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "gv",
-                            ISO6392 = "glv",
-                            LanguageName = "Manx"
-                        },
-                        new
-                        {
-                            Id = 99,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mk",
-                            ISO6392 = "mkd",
-                            LanguageName = "Macedonian"
-                        },
-                        new
-                        {
-                            Id = 100,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mg",
-                            ISO6392 = "mlg",
-                            LanguageName = "Malagasy"
-                        },
-                        new
-                        {
-                            Id = 101,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ms",
-                            ISO6392 = "msa",
-                            LanguageName = "Malay"
-                        },
-                        new
-                        {
-                            Id = 102,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ml",
-                            ISO6392 = "mal",
-                            LanguageName = "Malayalam"
-                        },
-                        new
-                        {
-                            Id = 103,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mt",
-                            ISO6392 = "mlt",
-                            LanguageName = "Maltese"
-                        },
-                        new
-                        {
-                            Id = 104,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mi",
-                            ISO6392 = "mri",
-                            LanguageName = "Maori"
-                        },
-                        new
-                        {
-                            Id = 105,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mr",
-                            ISO6392 = "mar",
-                            LanguageName = "Marathi"
-                        },
-                        new
-                        {
-                            Id = 106,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mh",
-                            ISO6392 = "mah",
-                            LanguageName = "Marshallese"
-                        },
-                        new
-                        {
-                            Id = 107,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "mn",
-                            ISO6392 = "mon",
-                            LanguageName = "Mongolian"
-                        },
-                        new
-                        {
-                            Id = 108,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "na",
-                            ISO6392 = "nau",
-                            LanguageName = "Nauru"
-                        },
-                        new
-                        {
-                            Id = 109,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "nv",
-                            ISO6392 = "nav",
-                            LanguageName = "Navajo, Navaho"
-                        },
-                        new
-                        {
-                            Id = 110,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "nd",
-                            ISO6392 = "nde",
-                            LanguageName = "North Ndebele"
-                        },
-                        new
-                        {
-                            Id = 111,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ne",
-                            ISO6392 = "nep",
-                            LanguageName = "Nepali"
-                        },
-                        new
-                        {
-                            Id = 112,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ng",
-                            ISO6392 = "ndo",
-                            LanguageName = "Ndonga"
-                        },
-                        new
-                        {
-                            Id = 113,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "nb",
-                            ISO6392 = "nob",
-                            LanguageName = "Norwegian Bokmål"
-                        },
-                        new
-                        {
-                            Id = 114,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "nn",
-                            ISO6392 = "nno",
-                            LanguageName = "Norwegian Nynorsk"
-                        },
-                        new
-                        {
-                            Id = 115,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "no",
-                            ISO6392 = "nor",
-                            LanguageName = "Norwegian"
-                        },
-                        new
-                        {
-                            Id = 116,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ii",
-                            ISO6392 = "iii",
-                            LanguageName = "Sichuan Yi, Nuosu"
-                        },
-                        new
-                        {
-                            Id = 117,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "nr",
-                            ISO6392 = "nbl",
-                            LanguageName = "South Ndebele"
-                        },
-                        new
-                        {
-                            Id = 118,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "oc",
-                            ISO6392 = "oci",
-                            LanguageName = "Occitan"
-                        },
-                        new
-                        {
-                            Id = 119,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "oj",
-                            ISO6392 = "oji",
-                            LanguageName = "Ojibwa"
-                        },
-                        new
-                        {
-                            Id = 120,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "cu",
-                            ISO6392 = "chu",
-                            LanguageName = "Old Slavonic, Old Bulgarian"
-                        },
-                        new
-                        {
-                            Id = 121,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "om",
-                            ISO6392 = "orm",
-                            LanguageName = "Oromo"
-                        },
-                        new
-                        {
-                            Id = 122,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "or",
-                            ISO6392 = "ori",
-                            LanguageName = "Oriya"
-                        },
-                        new
-                        {
-                            Id = 123,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "os",
-                            ISO6392 = "oss",
-                            LanguageName = "Ossetian, Ossetic"
-                        },
-                        new
-                        {
-                            Id = 124,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "pa",
-                            ISO6392 = "pan",
-                            LanguageName = "Punjabi, Panjabi"
-                        },
-                        new
-                        {
-                            Id = 125,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "pi",
-                            ISO6392 = "pli",
-                            LanguageName = "Pali"
-                        },
-                        new
-                        {
-                            Id = 126,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fa",
-                            ISO6392 = "fas",
-                            LanguageName = "Persian"
-                        },
-                        new
-                        {
-                            Id = 127,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "pl",
-                            ISO6392 = "pol",
-                            LanguageName = "Polish"
-                        },
-                        new
-                        {
-                            Id = 128,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ps",
-                            ISO6392 = "pus",
-                            LanguageName = "Pashto, Pushto"
-                        },
-                        new
-                        {
-                            Id = 129,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "pt",
-                            ISO6392 = "por",
-                            LanguageName = "Portuguese"
-                        },
-                        new
-                        {
-                            Id = 130,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "qu",
-                            ISO6392 = "que",
-                            LanguageName = "Quechua"
-                        },
-                        new
-                        {
-                            Id = 131,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "rm",
-                            ISO6392 = "roh",
-                            LanguageName = "Romansh"
-                        },
-                        new
-                        {
-                            Id = 132,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "rn",
-                            ISO6392 = "run",
-                            LanguageName = "Rundi"
-                        },
-                        new
-                        {
-                            Id = 133,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ro",
-                            ISO6392 = "ron",
-                            LanguageName = "Romanian, Moldavian, Moldovan"
-                        },
-                        new
-                        {
-                            Id = 134,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ru",
-                            ISO6392 = "rus",
-                            LanguageName = "Russian"
-                        },
-                        new
-                        {
-                            Id = 135,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sa",
-                            ISO6392 = "san",
-                            LanguageName = "Sanskrit"
-                        },
-                        new
-                        {
-                            Id = 136,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sc",
-                            ISO6392 = "srd",
-                            LanguageName = "Sardinian"
-                        },
-                        new
-                        {
-                            Id = 137,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sd",
-                            ISO6392 = "snd",
-                            LanguageName = "Sindhi"
-                        },
-                        new
-                        {
-                            Id = 138,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "se",
-                            ISO6392 = "sme",
-                            LanguageName = "Northern Sami"
-                        },
-                        new
-                        {
-                            Id = 139,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sm",
-                            ISO6392 = "smo",
-                            LanguageName = "Samoan"
-                        },
-                        new
-                        {
-                            Id = 140,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sg",
-                            ISO6392 = "sag",
-                            LanguageName = "Sango"
-                        },
-                        new
-                        {
-                            Id = 141,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sr",
-                            ISO6392 = "srp",
-                            LanguageName = "Serbian"
-                        },
-                        new
-                        {
-                            Id = 142,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "gd",
-                            ISO6392 = "gla",
-                            LanguageName = "Gaelic, Scottish Gaelic"
-                        },
-                        new
-                        {
-                            Id = 143,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sn",
-                            ISO6392 = "sna",
-                            LanguageName = "Shona"
-                        },
-                        new
-                        {
-                            Id = 144,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "si",
-                            ISO6392 = "sin",
-                            LanguageName = "Sinhala, Sinhalese"
-                        },
-                        new
-                        {
-                            Id = 145,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sk",
-                            ISO6392 = "slk",
-                            LanguageName = "Slovak"
-                        },
-                        new
-                        {
-                            Id = 146,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sl",
-                            ISO6392 = "slv",
-                            LanguageName = "Slovenian"
-                        },
-                        new
-                        {
-                            Id = 147,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "so",
-                            ISO6392 = "som",
-                            LanguageName = "Somali"
-                        },
-                        new
-                        {
-                            Id = 148,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "st",
-                            ISO6392 = "sot",
-                            LanguageName = "Southern Sotho"
-                        },
-                        new
-                        {
-                            Id = 149,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "es",
-                            ISO6392 = "spa",
-                            LanguageName = "Spanish, Castilian"
-                        },
-                        new
-                        {
-                            Id = 150,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "su",
-                            ISO6392 = "sun",
-                            LanguageName = "Sundanese"
-                        },
-                        new
-                        {
-                            Id = 151,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sw",
-                            ISO6392 = "swa",
-                            LanguageName = "Swahili"
-                        },
-                        new
-                        {
-                            Id = 152,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ss",
-                            ISO6392 = "ssw",
-                            LanguageName = "Swati"
-                        },
-                        new
-                        {
-                            Id = 153,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "sv",
-                            ISO6392 = "swe",
-                            LanguageName = "Swedish"
-                        },
-                        new
-                        {
-                            Id = 154,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ta",
-                            ISO6392 = "tam",
-                            LanguageName = "Tamil"
-                        },
-                        new
-                        {
-                            Id = 155,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "te",
-                            ISO6392 = "tel",
-                            LanguageName = "Telugu"
-                        },
-                        new
-                        {
-                            Id = 156,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tg",
-                            ISO6392 = "tgk",
-                            LanguageName = "Tajik"
-                        },
-                        new
-                        {
-                            Id = 157,
-                            Active = true,
-                            ForeignName = "",
-                            ISO6391 = "th",
-                            ISO6392 = "tha",
-                            LanguageName = "Thai"
-                        },
-                        new
-                        {
-                            Id = 158,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ti",
-                            ISO6392 = "tir",
-                            LanguageName = "Tigrinya"
-                        },
-                        new
-                        {
-                            Id = 159,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "bo",
-                            ISO6392 = "bod",
-                            LanguageName = "Tibetan"
-                        },
-                        new
-                        {
-                            Id = 160,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tk",
-                            ISO6392 = "tuk",
-                            LanguageName = "Turkmen"
-                        },
-                        new
-                        {
-                            Id = 161,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tl",
-                            ISO6392 = "tgl",
-                            LanguageName = "Tagalog"
-                        },
-                        new
-                        {
-                            Id = 162,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tn",
-                            ISO6392 = "tsn",
-                            LanguageName = "Tswana"
-                        },
-                        new
-                        {
-                            Id = 163,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "to",
-                            ISO6392 = "ton",
-                            LanguageName = "Tonga (Tonga Islands)"
-                        },
-                        new
-                        {
-                            Id = 164,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tr",
-                            ISO6392 = "tur",
-                            LanguageName = "Turkish"
-                        },
-                        new
-                        {
-                            Id = 165,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ts",
-                            ISO6392 = "tso",
-                            LanguageName = "Tsonga"
-                        },
-                        new
-                        {
-                            Id = 166,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tt",
-                            ISO6392 = "tat",
-                            LanguageName = "Tatar"
-                        },
-                        new
-                        {
-                            Id = 167,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "tw",
-                            ISO6392 = "twi",
-                            LanguageName = "Twi"
-                        },
-                        new
-                        {
-                            Id = 168,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ty",
-                            ISO6392 = "tah",
-                            LanguageName = "Tahitian"
-                        },
-                        new
-                        {
-                            Id = 169,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ug",
-                            ISO6392 = "uig",
-                            LanguageName = "Uighur, Uyghur"
-                        },
-                        new
-                        {
-                            Id = 170,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "uk",
-                            ISO6392 = "ukr",
-                            LanguageName = "Ukrainian"
-                        },
-                        new
-                        {
-                            Id = 171,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ur",
-                            ISO6392 = "urd",
-                            LanguageName = "Urdu"
-                        },
-                        new
-                        {
-                            Id = 172,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "uz",
-                            ISO6392 = "uzb",
-                            LanguageName = "Uzbek"
-                        },
-                        new
-                        {
-                            Id = 173,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "ve",
-                            ISO6392 = "ven",
-                            LanguageName = "Venda"
-                        },
-                        new
-                        {
-                            Id = 174,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "vi",
-                            ISO6392 = "vie",
-                            LanguageName = "Vietnamese"
-                        },
-                        new
-                        {
-                            Id = 175,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "vo",
-                            ISO6392 = "vol",
-                            LanguageName = "Volapük"
-                        },
-                        new
-                        {
-                            Id = 176,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "wa",
-                            ISO6392 = "wln",
-                            LanguageName = "Walloon"
-                        },
-                        new
-                        {
-                            Id = 177,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "cy",
-                            ISO6392 = "cym",
-                            LanguageName = "Welsh"
-                        },
-                        new
-                        {
-                            Id = 178,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "wo",
-                            ISO6392 = "wol",
-                            LanguageName = "Wolof"
-                        },
-                        new
-                        {
-                            Id = 179,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "fy",
-                            ISO6392 = "fry",
-                            LanguageName = "Western Frisian"
-                        },
-                        new
-                        {
-                            Id = 180,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "xh",
-                            ISO6392 = "xho",
-                            LanguageName = "Xhosa"
-                        },
-                        new
-                        {
-                            Id = 181,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "yi",
-                            ISO6392 = "yid",
-                            LanguageName = "Yiddish"
-                        },
-                        new
-                        {
-                            Id = 182,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "yo",
-                            ISO6392 = "yor",
-                            LanguageName = "Yoruba"
-                        },
-                        new
-                        {
-                            Id = 183,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "za",
-                            ISO6392 = "zha",
-                            LanguageName = "Zhuang, Chuang"
-                        },
-                        new
-                        {
-                            Id = 184,
-                            Active = false,
-                            ForeignName = "",
-                            ISO6391 = "zu",
-                            ISO6392 = "zul",
-                            LanguageName = "Zulu"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationLanguageModel", b =>
@@ -2277,18 +627,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbOrganizationStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrganizationStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrganizationStatusName = "Inactive"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
@@ -2423,8 +761,6 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("ModifierId");
 
-                    b.Property<int?>("PageLanguageId");
-
                     b.Property<string>("PageSectionDescription");
 
                     b.Property<int>("PageSectionId");
@@ -2439,11 +775,11 @@ namespace StudentUnion0105.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PageLanguageId");
+                    b.HasIndex("LanguageId");
 
                     b.HasIndex("PageSectionId");
 
-                    b.ToTable("SuPageSectionLanguageModel");
+                    b.ToTable("dbPageSectionLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionModel", b =>
@@ -2452,7 +788,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContentTypeId");
+                    b.Property<int?>("ContentTypeId");
 
                     b.Property<bool>("HasPaging");
 
@@ -2484,7 +820,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("PageSectionTypeId");
 
-                    b.ToTable("SuPageSectionModel");
+                    b.ToTable("dbPageSection");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionTypeLanguageModel", b =>
@@ -2519,7 +855,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("PageTypeId");
 
-                    b.ToTable("SuPageSectionTypeLanguageModel");
+                    b.ToTable("dbPageSectionTypeLanguage");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionTypeModel", b =>
@@ -2532,13 +868,52 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("CreatorId");
 
+                    b.Property<bool>("IndexSection");
+
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SuPageSectionTypeModel");
+                    b.ToTable("dbPageSectionType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionsViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ContentTypeId");
+
+                    b.Property<bool>("HasPaging");
+
+                    b.Property<bool>("IndexSection");
+
+                    b.Property<int>("MaxContent");
+
+                    b.Property<int>("OneTwoColumns");
+
+                    b.Property<int>("PageId");
+
+                    b.Property<string>("PageSectionDescription");
+
+                    b.Property<string>("PageSectionTitle");
+
+                    b.Property<bool>("ShowContentTypeDescription");
+
+                    b.Property<bool>("ShowContentTypeTitle");
+
+                    b.Property<bool>("ShowSectionTitle");
+
+                    b.Property<bool>("ShowSectionTitleDescription");
+
+                    b.Property<int>("SortById");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbPageSectionsViewModel");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageStatusModel", b =>
@@ -2552,18 +927,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbPageStatus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PageStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PageStatusName = "Inactive"
-                        });
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageTypeLanguageModel", b =>
@@ -2687,18 +1050,32 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbProjectStatus");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ProjectStatusName = "Active"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ProjectStatusName = "Inactive"
-                        });
+            modelBuilder.Entity("StudentUnion0105.Models.SuSecurityLevelList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbSecurityLevelList");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuSecurityLevelModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbSecurityLevel");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuSettingModel", b =>
@@ -2707,11 +1084,11 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateTimeValue");
+                    b.Property<DateTime?>("DateTimeValue");
 
-                    b.Property<Guid>("GuidValue");
+                    b.Property<Guid?>("GuidValue");
 
-                    b.Property<int>("IntValue");
+                    b.Property<int?>("IntValue");
 
                     b.Property<string>("SettingDescription");
 
@@ -2722,16 +1099,32 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbSetting");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateTimeValue = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GuidValue = new Guid("00000000-0000-0000-0000-000000000000"),
-                            IntValue = 41,
-                            SettingName = "Dedault language"
-                        });
+            modelBuilder.Entity("StudentUnion0105.Models.SuStatusList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbStatusList");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuTypeList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbTypeList");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuUser", b =>
@@ -2787,6 +1180,19 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuValueList", b =>
+                {
+                    b.Property<int>("ClassificationValueId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClassificationValueName");
+
+                    b.HasKey("ClassificationValueId");
+
+                    b.ToTable("dbValueList");
+                });
+
             modelBuilder.Entity("StudentUnion0105.SPModel.GetProjectStructure+SuGetProjectStructure", b =>
                 {
                     b.Property<string>("Path")
@@ -2803,6 +1209,26 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Path");
 
                     b.ToTable("dbGetProjectStructure");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.SPModel.SuGetClassificationValueStructure", b =>
+                {
+                    b.Property<string>("Path")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClassificationId");
+
+                    b.Property<string>("ClassificationValueName");
+
+                    b.Property<int>("Id");
+
+                    b.Property<int>("Level");
+
+                    b.Property<int>("ParentId");
+
+                    b.HasKey("Path");
+
+                    b.ToTable("dbGetClassificationValueStructure");
                 });
 
             modelBuilder.Entity("StudentUnion0105.SPModel.SuGetOrganizationStructure", b =>
@@ -2932,6 +1358,51 @@ namespace StudentUnion0105.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentClassificationValueModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuClassificationValueModel", "ClassificationValue")
+                        .WithMany()
+                        .HasForeignKey("ClassificationValueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuContentModel", "Content")
+                        .WithMany("ContentClassificationValues")
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuContentModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuContentStatusModel", "ContentStatus")
+                        .WithMany("Contents")
+                        .HasForeignKey("ContentStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuContentTypeModel", "ContentType")
+                        .WithMany("Contents")
+                        .HasForeignKey("ContentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuOrganizationModel", "Organizaton")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProjectModel", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("StudentUnion0105.Models.SuSecurityLevelModel", "SecurityLevelObject")
+                        .WithMany("Contents")
+                        .HasForeignKey("SecurityLevel")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeLanguageModel", b =>
                 {
                     b.HasOne("StudentUnion0105.Models.SuContentTypeModel", "ContentType")
@@ -3018,7 +1489,8 @@ namespace StudentUnion0105.Migrations
                 {
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "PageLanguage")
                         .WithMany()
-                        .HasForeignKey("PageLanguageId");
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("StudentUnion0105.Models.SuPageSectionModel", "PageSection")
                         .WithMany("PageSectionLanguages")
@@ -3030,8 +1502,7 @@ namespace StudentUnion0105.Migrations
                 {
                     b.HasOne("StudentUnion0105.Models.SuContentTypeModel", "ContentType")
                         .WithMany()
-                        .HasForeignKey("ContentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContentTypeId");
 
                     b.HasOne("StudentUnion0105.Models.SuPageModel", "Page")
                         .WithMany("PageSections")

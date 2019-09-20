@@ -26,7 +26,7 @@ namespace StudentUnion0105.SQLRepositories
 
         }
 
-        public SuLanguageModel GetSuLanguage(int ID)
+        public SuLanguageModel GetLanguage(int ID)
         {
             return context.dbLanguage.Find(ID);
         }

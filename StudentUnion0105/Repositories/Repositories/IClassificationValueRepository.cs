@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Repositories
 {
-    interface IClassificationValueRepository
+    public interface IClassificationValueRepository
     {
         SuClassificationValueModel GetClassificationValue(int Id);
         IEnumerable<SuClassificationValueModel> GetAllClassifcationValues();

@@ -1,0 +1,55 @@
+﻿@model ValueStructureWithDepth
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewBag.Title = "Classification value";
+}
+<h1 class="font-weight-bold">
+    <img src="~/Images/Icons/values.png" height="60" width="60" /> Values
+</h1>
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-hover">
+
+        <thead class="thead-dark">
+            <tr>
+                @{var a = Model.MaxLevel + 1;
+                    var b = a * 10;
+                    <th colspan="@a" style="width: @b px">ID</th>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                }
+            </tr>
+        </thead>
+        @foreach (var x in Model.ValueStructure)
+
+        {
+            var z = Model.MaxLevel - x.Level + 1;
+            int y = 0;
+
+            <tr>
+                @while (y < x.Level)
+                {
+                    <td style="width:10px"></td>
+                    y++;
+                }
+
+                <td style="width:10px" colspan="@z">@x.Id</td>
+                <td>@x.ClassificationValueName</td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Edit" asp-route-Id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"  asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
+                @if (Model.MaxConfigLevel > x.Level)
+                {
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/Add.png" title="Add values" height="20" width="20" /></a></td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="0" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/values.png" title="New value" height="20" width="20" /> Create new value</a>

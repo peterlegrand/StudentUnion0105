@@ -1,0 +1,158 @@
+﻿@model PageSectionAndStatusViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewBag.Title = "Edit page section";
+}
+<h1><img src="~/Images/Icons/Section.png" title="Levels" height="60" width="60" /> Create page section</h1>
+<form method="post" >
+    <div class="row invisible">
+        <div class="form-group col-md-3  invisible">
+            <label asp-for="@Model.SuObject.ObjectId" class=" col-form-label invisible"></label>
+        </div><div class="col-md-1 invisible">
+            <input asp-for="@Model.SuObject.ObjectId" class="form-control form-control-sm invisible" />
+            <span asp-validation-for="@Model.SuObject.ObjectId" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3 invisible">
+            <label asp-for="@Model.SuObject.ObjectLanguageId" class="col-form-label invisible"></label>
+        </div><div class="col-md-1 invisible">
+            <input asp-for="@Model.SuObject.ObjectLanguageId" class="form-control form-control-sm invisible" />
+            <span asp-validation-for="@Model.SuObject.ObjectLanguageId" class="text-danger"></span>
+
+        </div>
+        <div class="form-group col-md-3 invisible">
+            <label asp-for="@Model.SuObject.Id" class=" col-form-label invisible"></label>
+        </div><div class="col-md-1 invisible">
+            <input asp-for="@Model.SuObject.Id" class="form-control form-control-sm invisible" />
+            <span asp-validation-for="@Model.SuObject.Id" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label col-form-label-sm"></label>
+        <div class="col-sm-4">
+            <input asp-for="@Model.SuObject.Name" class="form-control form-control-sm" />
+            <span asp-validation-for="@Model.SuObject.Name" class="text-danger"></span>
+        </div>
+
+        <label asp-for="@Model.SuObject.PageSectionTitle" class="col-sm-2 col-form-label col-form-label-sm"></label>
+        <div class="col-sm-4">
+            <input asp-for="@Model.SuObject.PageSectionTitle" class="form-control form-control-sm" />
+            <span asp-validation-for="@Model.SuObject.PageSectionTitle" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label col-form-label-sm"></label>
+        <div class="col-sm-4">
+            <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor " id="description" name="SuObject.Description"></textarea>
+            <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
+        </div>
+
+        <label asp-for="@Model.SuObject.PageSectionTitleDescription" class="col-sm-2 col-form-label col-form-label-sm"></label>
+        <div class="col-sm-4">
+            <textarea asp-for="@Model.SuObject.PageSectionTitleDescription" class="form-control ckeditor" id="description2" name="SuObject.PageSectionTitleDescription"></textarea>
+            <span asp-validation-for="@Model.SuObject.PageSectionTitleDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-6">
+            <div class="row">
+                <label asp-for="@Model.SuObject.MouseOver" class="col-form-label col-4 col-form-label-sm"></label>
+                <div class="col-8">
+                    <input asp-for="@Model.SuObject.MouseOver" class="form-control form-control-sm" />
+                    <span asp-validation-for="@Model.SuObject.MouseOver" class="text-danger"></span>
+                </div>
+                <label asp-for="@Model.SuObject.ContentTypeId" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8 ">
+
+                    @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+                    @Html.DropDownListFor(x => x.SuObject.ContentTypeId, Model.ProbablyTypeListItem2)
+                    <span asp-validation-for="@Model.SuObject.ContentTypeId" class="text-danger"></span>
+
+                </div>
+                <label asp-for="@Model.SuObject.Sequence" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8 small ">
+
+
+                    @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+                    @Html.DropDownListFor(x => x.SuObject.Sequence, Model.SomeKindINumSelectListItem)
+                    <span asp-validation-for="@Model.SuObject.Sequence" class="text-danger"></span>
+
+                </div>
+                <label asp-for="@Model.SuObject.Type" class="col-sm-4 col-form-label col-form-label-sm"></label>
+                <div class="col-sm-8 ">
+
+                    @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+                    @Html.DropDownListFor(x => x.SuObject.Type, Model.ProbablyTypeListItem)
+                    <span asp-validation-for="@Model.SuObject.Type" class="text-danger"></span>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <label asp-for="@Model.SuObject.ShowSectionTitle" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input asp-for="@Model.SuObject.ShowSectionTitle" class="form-check" />
+                    <span asp-validation-for="@Model.SuObject.ShowSectionTitle" class="text-danger"></span>
+                </div>
+                <label asp-for="@Model.SuObject.ShowSectionDescription" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input asp-for="@Model.SuObject.ShowSectionDescription" class="form-check" />
+                    <span asp-validation-for="@Model.SuObject.ShowSectionDescription" class="text-danger"></span>
+                </div>
+                <label asp-for="@Model.SuObject.ShowContentTypeTitle" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input asp-for="@Model.SuObject.ShowContentTypeTitle" class="form-check" />
+                    <span asp-validation-for="@Model.SuObject.ShowContentTypeTitle" class="text-danger"></span>
+                </div>
+                <label asp-for="@Model.SuObject.ShowContentTypeTitleDescription" class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input asp-for="@Model.SuObject.ShowContentTypeTitleDescription" class="form-check" />
+                    <span asp-validation-for="@Model.SuObject.ShowContentTypeTitleDescription" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">Add</button>
+            <a asp-action="Index" asp-controller="PageSection" class="btn btn-primary btn-light">Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+<script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description']) {
+                    CKEDITOR.instances['description'].destroy();
+                }
+                CKEDITOR.replace('description', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description'].getData()
+                    console.log(ckValue);
+                });
+            });
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description2']) {
+                    CKEDITOR.instances['description2'].destroy();
+                }
+                CKEDITOR.replace('description2', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description2'].getData()
+                    console.log(ckValue);
+                });
+            });
+</script>

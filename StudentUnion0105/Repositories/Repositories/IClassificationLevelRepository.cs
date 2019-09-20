@@ -10,9 +10,11 @@ namespace StudentUnion0105.Repositories
     {
         SuClassificationLevelModel GetClassificationLevel(int Id);
         IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels();
+//        IEnumerable<SuClassificationLevelModel> GetAllClassificationLevelsOfClass(int Id);
         SuClassificationLevelModel AddClassificationLevel(SuClassificationLevelModel suClassificationLevel);
         SuClassificationLevelModel UpdateClassificationLevel(SuClassificationLevelModel suClassificationLevelChanges);
         SuClassificationLevelModel DeleteClassificationLevel(int Id);
+
 
     }
 }

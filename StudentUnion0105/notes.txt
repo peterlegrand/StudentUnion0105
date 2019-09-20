@@ -32,7 +32,52 @@ AS
 
 	SELECT ISNULL(ParentId,0) ParentId
 	, Id, Name, Level, Path
-	FROM StructureOrg ORDER BY Path
+	FROM StructureOrg ORDER BY Path;
+
+	-- SECOND SP
+
+	ALTER PROCEDURE ClassificationValueStructure (@Language Int, @ClassificationId int)
+AS 
+WITH StructureClassificationValue (ParentId
+	, Id
+	, ClassificationId
+	, ClassificationValueName
+	, Level
+	, Path)
+AS
+(
+	SELECT c.ParentValueId
+		, c.Id
+		, c.ClassificationId
+		, l.ClassificationValueName
+		, 0 AS level
+		, CAST(c.Id AS VARCHAR(255)) AS Path
+	FROM dbClassificationValue AS c
+	JOIN dbClassificationValueLanguage AS l
+		ON c.Id = l.ClassificationValueId
+	WHERE c.ParentValueId IS NULL
+		AND l.LanguageId = @Language
+		AND c.ClassificationId = @ClassificationId
+	UNION ALL
+	SELECT c.ParentValueId
+		, c.Id
+		, c.ClassificationId
+		, l.ClassificationValueName
+		, level + 1
+		, CAST(s.Path + '.' + CAST(c.Id AS VARCHAR(255)) AS VARCHAR(255))
+	FROM dbClassificationValue AS c
+	JOIN dbClassificationValueLanguage AS l
+		ON c.Id = l.ClassificationValueId
+	JOIN StructureClassificationValue s
+		ON s.Id = c.ParentValueId
+	WHERE l.LanguageId = @Language
+		AND c.ClassificationId = @ClassificationId
+	)
+
+	SELECT ISNULL(ParentId,0) ParentId, ClassificationId,
+	 Id, ClassificationValueName, Level, Path
+	FROM StructureClassificationValue ORDER BY Path;
+	
 	
 
 

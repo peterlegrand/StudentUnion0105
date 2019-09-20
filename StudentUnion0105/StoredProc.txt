@@ -1,0 +1,765 @@
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ClassificationAndLanguageUpdate]    Script Date: 9/20/2019 3:12:15 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE 
+	[dbo].[ClassificationAndLanguageUpdate] 
+	 @Id int											--0
+	, @ClassificationStatusId int						--1
+	, @DefaultClassificationPageId int					--2
+	, @HasDropDown bit									--3
+	, @DropDownSequence  int							--4
+	, @ClassificationLanguageId  int					--5
+	, @LanguageId  int									--6
+	, @ClassificationName nvarchar(max)					--7
+	, @ClassificationDescription nvarchar(max)					--7
+	, @ClassificationMenuName nvarchar(max)				--8
+	, @ClassificationMouseOver nvarchar(max)			--9
+	, @ModifiedDate datetime2(7)						--18
+AS	
+BEGIN TRANSACTION
+UPDATE 
+	dbClassification
+SET 
+	dbClassification.ClassificationStatusId = @ClassificationStatusId
+	, dbClassification.DefailClassificationPageId = iif(@DefaultClassificationPageId=0,null,@DefaultClassificationPageId)
+	, dbClassification.HasDropDown = @HasDropDown
+	, dbClassification.DropDownSequence = @DropDownSequence
+	, dbClassification.ModifiedDate = @ModifiedDate
+WHERE 
+	dbClassification.Id = @Id
+
+UPDATE 
+	dbClassificationLanguage
+SET
+	 dbClassificationLanguage.ClassificationName  = @ClassificationName
+	, dbClassificationLanguage.ClassificationDescription = @ClassificationDescription
+	, dbClassificationLanguage.ClassificationMenuName = @ClassificationMenuName 
+	, dbClassificationLanguage.ClassificationMouseOver = @ClassificationMouseOver
+	, dbClassificationLanguage.ModifiedDate = @ModifiedDate
+WHERE 
+ Id = @ClassificationLanguageId
+
+COMMIT TRANSACTION
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ClassificationValueStructure]    Script Date: 9/20/2019 3:12:27 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ClassificationValueStructure] (@Language Int, @ClassificationId Int )
+                                        AS 
+                                        WITH StructureClassValue (ClassificationId
+												, ParentId, Id, ClassificationValueName, Level, Path)
+                                        AS
+                                        (
+                                    	    SELECT 
+												v.ClassificationId
+												, v.ParentValueId
+                                        		, v.Id
+                                        		, l.ClassificationValueName
+                                        		, 0 AS level
+                                        		, CAST(v.Id AS VARCHAR(255)) AS Path
+                                        	FROM dbClassificationValue AS v
+                                        	JOIN dbClassificationValueLanguage AS l
+                                        		ON v.Id = l.ClassificationValueId
+                                        	WHERE v.ParentValueId IS NULL
+                                        		AND l.LanguageId = @Language
+                                        		AND v.ClassificationId = @ClassificationId
+                                        	UNION ALL
+                                        	SELECT v.ClassificationId
+												, v.ParentValueId
+                                        		, v.Id
+                                        		, l.ClassificationValueName
+                                        		, level + 1
+                                        		, CAST(s.Path + '.' + CAST(v.Id AS VARCHAR(255)) AS VARCHAR(255))
+                                        	FROM dbClassificationValue AS v
+                                        	JOIN dbClassificationValueLanguage AS l
+                                        		ON v.Id = l.ClassificationValueId
+                                        	JOIN StructureClassValue s
+                                        		ON s.Id = v.ParentValueId
+                                        	WHERE l.LanguageId = @Language
+                                        	AND v.ClassificationId = @ClassificationId
+                                        	)
+
+                                        	SELECT ClassificationId
+												, ISNULL(ParentId,0) ParentId
+                                        	, Id, ClassificationValueName, Level, Path
+                                        	FROM StructureClassValue 
+											ORDER BY Path
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ClassificationValueStructureValues]    Script Date: 9/20/2019 3:12:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ClassificationValueStructureValues] (@Language Int, @ClassificationId Int )
+                                        AS 
+                                        WITH StructureClassValue (ClassificationId
+												, ParentId, Id, ClassificationValueName, Level, Path)
+                                        AS
+                                        (
+                                    	    SELECT 
+												v.ClassificationId
+												, v.ParentValueId
+                                        		, v.Id
+                                        		, l.ClassificationValueName
+                                        		, 0 AS level
+                                        		, CAST(v.Id AS VARCHAR(255)) AS Path
+                                        	FROM dbClassificationValue AS v
+                                        	JOIN dbClassificationValueLanguage AS l
+                                        		ON v.Id = l.ClassificationValueId
+                                        	WHERE v.ParentValueId IS NULL
+                                        		AND l.LanguageId = @Language
+                                        		AND v.ClassificationId = @ClassificationId
+                                        	UNION ALL
+                                        	SELECT v.ClassificationId
+												, v.ParentValueId
+                                        		, v.Id
+                                        		, l.ClassificationValueName
+                                        		, level + 1
+                                        		, CAST(s.Path + '.' + CAST(v.Id AS VARCHAR(255)) AS VARCHAR(255))
+                                        	FROM dbClassificationValue AS v
+                                        	JOIN dbClassificationValueLanguage AS l
+                                        		ON v.Id = l.ClassificationValueId
+                                        	JOIN StructureClassValue s
+                                        		ON s.Id = v.ParentValueId
+                                        	WHERE l.LanguageId = @Language
+                                        	AND v.ClassificationId = @ClassificationId
+                                        	)
+
+                                        	SELECT Id ClassificationValueId
+                                        	, ClassificationValueName
+                                        	FROM StructureClassValue 
+											ORDER BY Path
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ContentCreate]    Script Date: 9/20/2019 3:12:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ContentCreate] 
+ @ContentTypeId int
+, @ContentStatusId int
+, @LangaugeId int
+, @Title nvarchar(max)
+, @Description nvarchar(max)
+, @SecurityLevel int
+, @OrganizationId int
+, @ProjectId int
+, @new_identity INT = NULL OUTPUT
+AS
+INSERT dbContent
+	(ContentTypeId
+	, ContentStatusId
+	, LanguageId
+	, Title
+	, Description
+	, SecurityLevel
+	, OrganizationId
+	, ProjectId
+	, CreatedDate
+	, ModifiedDate)
+VALUES (
+	@ContentTypeId
+	, @ContentStatusId
+	, @LangaugeId
+	, @Title
+	, @Description
+	, @SecurityLevel
+	, @OrganizationId
+	, iif(@ProjectId=0,null,@ProjectId)
+	, GETDATE()
+	, getdate()
+)
+SET @new_identity = SCOPE_IDENTITY();
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ContentCreate]    Script Date: 9/20/2019 3:12:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ContentCreate] 
+ @ContentTypeId int
+, @ContentStatusId int
+, @LangaugeId int
+, @Title nvarchar(max)
+, @Description nvarchar(max)
+, @SecurityLevel int
+, @OrganizationId int
+, @ProjectId int
+, @new_identity INT = NULL OUTPUT
+AS
+INSERT dbContent
+	(ContentTypeId
+	, ContentStatusId
+	, LanguageId
+	, Title
+	, Description
+	, SecurityLevel
+	, OrganizationId
+	, ProjectId
+	, CreatedDate
+	, ModifiedDate)
+VALUES (
+	@ContentTypeId
+	, @ContentStatusId
+	, @LangaugeId
+	, @Title
+	, @Description
+	, @SecurityLevel
+	, @OrganizationId
+	, iif(@ProjectId=0,null,@ProjectId)
+	, GETDATE()
+	, getdate()
+)
+SET @new_identity = SCOPE_IDENTITY();
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ContentInsert]    Script Date: 9/20/2019 3:13:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE 
+	[dbo].[ContentInsert] 
+	  @ContentTypeId int											--0
+	, @ContentStatusId int						--1
+	, @LanguageId int					--2
+	, @Title nvarchar(max)
+	, @Description nvarchar(max)
+	, @SecurityLevel int
+	, @OrganizationId int
+	, @ProjectId int--3
+AS	
+BEGIN TRANSACTION
+INSERT
+	dbContent 
+		(
+		ContentTypeId
+		, ContentStatusId
+		, LanguageId
+		, Title
+		, Description
+		, SecurityLevel
+		, OrganizationId
+		, ProjectId
+		, ModifiedDate
+		, CreatedDate
+		)
+	OUTPUT Inserted.Id
+		VALUES
+		(
+	  @ContentTypeId 
+	, @ContentStatusId 
+	, @LanguageId 
+	, @Title 
+	, @Description 
+	, @SecurityLevel 
+	, @OrganizationId
+	, @ProjectId 
+	, Getdate()
+	, Getdate())
+	COMMIT TRANSACTION
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ContentUpdate]    Script Date: 9/20/2019 3:13:25 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ContentUpdate] 
+@Id int
+, @ContentTypeId int
+, @ContentStatusId int
+, @LangaugeId int
+, @Title nvarchar(max)
+, @Description nvarchar(max)
+, @SecurityLevel int
+, @OrganizationId int
+, @ProjectId int
+
+AS
+UPDATE dbContent 
+SET 
+	ContentTypeId = @ContentTypeId
+	, ContentStatusId = @ContentStatusId
+	, LanguageId = @LangaugeId
+	, Title = @Title
+	, Description = @Description
+	, SecurityLevel = @SecurityLevel
+	, OrganizationId = @OrganizationId
+	, ProjectId = iif(@ProjectId=0,null,@ProjectId)
+WHERE Id = @Id
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ContentValueCreate]    Script Date: 9/20/2019 3:13:32 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ContentValueCreate] 
+ @ContentId int
+, @ClassificationValueId int
+AS
+INSERT dbContentClassificationValue
+	(ContentId
+	, ClassificationValueId
+	)
+VALUES (
+	@ContentId
+	, @ClassificationValueId
+)
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetContentStatus]    Script Date: 9/20/2019 3:13:40 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[GetContentStatus]
+AS 
+SELECT 
+	dbContentStatus.Id
+	, ISNULL(dbContentStatus.ContentStatusName,'') Name
+FROM dbContentStatus
+ORDER BY dbContentStatus.ContentStatusName
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetContentType]    Script Date: 9/20/2019 3:13:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[GetContentType] (@Language Int)
+AS 
+SELECT 
+	dbContentTypeLanguage.ContentTypeId Id
+	, ISNULL(dbContentTypeLanguage.Name,'') Name
+FROM dbContentType
+JOIN dbContentTypeLanguage
+	ON dbContentType.Id = dbContentTypeLanguage.ContentTypeId
+WHERE dbContentTypeLanguage.LanguageId = @Language
+ORDER BY dbContentTypeLanguage.Name
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetLanguage]    Script Date: 9/20/2019 3:13:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[GetLanguage]
+AS 
+SELECT 
+	dbLanguage.Id
+	, ISNULL(dbLanguage.LanguageName,'') Name
+FROM dbLanguage
+ORDER BY dbLanguage.LanguageName
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetLanguage]    Script Date: 9/20/2019 3:13:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[GetLanguage]
+AS 
+SELECT 
+	dbLanguage.Id
+	, ISNULL(dbLanguage.LanguageName,'') Name
+FROM dbLanguage
+ORDER BY dbLanguage.LanguageName
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetSecurityLevel]    Script Date: 9/20/2019 3:14:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[GetSecurityLevel] 
+AS 
+SELECT 
+	dbSecurityLevel.Id Id
+	, ISNULL(dbsecuritylevel.Name,'') Name
+FROM dbSecurityLevel
+ORDER BY dbSecurityLevel.Id
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[OrgStructure]    Script Date: 9/20/2019 3:14:22 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[OrgStructure] (@Language Int )
+                                    AS 
+                                    WITH StructureOrg (ParentId, Id, Name, Level, Path)
+                                    AS
+                                    (
+                                    	SELECT o.ParentOrganizationId
+                                    		, o.Id
+                                    		, l.Name
+                                    		, 0 AS level
+                                    		, CAST(o.Id AS VARCHAR(255)) AS Path
+                                    	FROM dbOrganization AS o
+                                    	JOIN dbOrganizationLanguage AS l
+                                    		ON o.Id = l.OrganizationId
+                                    	WHERE o.ParentOrganizationId IS NULL
+                                    		AND l.LanguageId = @Language
+                                    	UNION ALL
+                                    	SELECT o.ParentOrganizationId
+                                    		, o.Id
+                                    		, l.Name
+                                    		, level + 1
+                                    		, CAST(s.Path + '.' + CAST(o.Id AS VARCHAR(255)) AS VARCHAR(255))
+                                    	FROM dbOrganization AS o
+                                    	JOIN dbOrganizationLanguage AS l
+                                    		ON o.Id = l.OrganizationId
+                                    	JOIN StructureOrg s
+                                    		ON s.Id = o.ParentOrganizationId
+                                    	WHERE l.LanguageId = @Language
+                                    	)
+
+                                    	SELECT ISNULL(ParentId,0) ParentId
+                                    	, Id, Name, Level, Path
+                                    	FROM StructureOrg ORDER BY Path
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[PageSectionUpdate]    Script Date: 9/20/2019 3:14:30 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE 
+	[dbo].[PageSectionUpdate] 
+	 @Id int											--0
+	, @NewSequence int									--1
+	, @ContentTypeId int								--2
+	, @HasPaging bit									--3
+	, @MaxContent  int									--4
+	, @OneTwoColumns  int								--5
+	, @PageSectionTypeId  int							--6
+	, @ShowContentTypeTitle bit							--7
+	, @ShowContentTypeDescription bit					--8
+	, @ShowSectionTitle bit								--9
+	, @ShowSectionTitleDescription bit					--10
+	, @SortById bit										--11
+	, @LanguageId int									--12
+	, @PageSectionName nvarchar(max)					--13
+	, @PageSectionDescription nvarchar(max)				--14
+	, @PageSectionTitleName nvarchar(max)				--15
+	, @PageSectionTitleDescription nvarchar(max)		--16
+	, @PageSectionMouseOver nvarchar(max)				--17
+	, @ModifiedDate datetime2(7)						--18
+	, @PageSectionLanguageId int						--19
+	, @PageId int										--20
+	
+
+AS
+DECLARE @OldSequence int; 
+SELECT @OldSequence = Sequence FROM dbPageSection WHERE Id = @Id;
+BEGIN TRANSACTION
+IF @OldSequence < @NewSequence
+UPDATE 
+	s 
+SET Sequence = Sequence - 1
+FROM dbPageSection s 
+WHERE Sequence <= @NewSequence
+	AND Sequence > @OldSequence
+	AND PageId = @PageId;
+ELSE
+UPDATE s
+	
+SET Sequence= Sequence + 1
+FROM dbPageSection  s WHERE Sequence >= @NewSequence
+	AND Sequence < @OldSequence
+	AND PageId = @PageId;
+
+
+UPDATE 
+	dbPageSection
+SET 
+	dbPageSection.ContentTypeId = iif(@ContentTypeId=0,null,@ContentTypeId)
+	, dbPageSection.HasPaging = @HasPaging
+	, dbPageSection.MaxContent = @MaxContent
+	, dbPageSection.OneTwoColumns = @OneTwoColumns
+	, dbPageSection.PageSectionTypeId =@PageSectionTypeId
+	, dbPageSection.Sequence =@NewSequence
+	, dbPageSection.ShowContentTypeDescription = @ShowContentTypeDescription
+	, dbPageSection.ShowContentTypeTitle = @ShowContentTypeTitle
+	, dbPageSection.ShowSectionTitle = @ShowSectionTitle
+	, dbPageSection.ShowSectionTitleDescription = @ShowSectionTitleDescription
+	, dbPageSection.SortById = @SortById
+WHERE 
+	dbPageSection.Id = @Id
+
+UPDATE 
+	dbPageSectionLanguage
+SET
+	 PageSectionName  = @PageSectionName 
+	, PageSectionDescription = @PageSectionDescription 
+	, PageSectionTitle = @PageSectionTitleName 
+	, PageSectionTitleDescription = @PageSectionTitleDescription 
+	, PageSectionMouseOver = @PageSectionMouseOver 
+	, ModifiedDate = @ModifiedDate
+WHERE 
+ Id = @PageSectionLanguageId 
+
+COMMIT TRANSACTION
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ProjStructure]    Script Date: 9/20/2019 3:14:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[ProjStructure] (@Language Int )
+                                    AS 
+                                    WITH StructureProj (ParentId, Id, Name, Level, Path)
+                                    AS
+                                    (
+                                    	SELECT p.ParentProjectId
+                                    		, p.Id
+                                    		, l.Name
+                                    		, 0 AS level
+                                    		, CAST(p.Id AS VARCHAR(255)) AS Path
+                                    	FROM dbProject AS p
+                                    	JOIN dbProjectLanguage AS l
+                                    		ON p.Id = l.ProjectId
+                                    	WHERE (p.ParentProjectId IS NULL 
+                                            OR p.ParentProjectId = 0) 
+                                    		AND l.LanguageId = @Language
+                                    	UNION ALL
+                                    	SELECT p.ParentProjectId
+                                    		, p.Id
+                                    		, l.Name
+                                    		, level + 1
+                                    		, CAST(s.Path + '.' + CAST(p.Id AS VARCHAR(255)) AS VARCHAR(255))
+                                    	FROM dbProject AS p
+                                    	JOIN dbProjectLanguage AS l
+                                    		ON p.Id = l.ProjectId
+                                    	JOIN StructureProj s
+                                    		ON s.Id = p.ParentProjectId
+                                    	WHERE l.LanguageId = @Language
+                                    	)
+
+                                    	SELECT ISNULL(ParentId,0) ParentId
+                                    	, Id, Name, Level, Path
+                                    	FROM StructureProj ORDER BY Path
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ShowContent]    Script Date: 9/20/2019 3:14:46 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE 
+[dbo].[ShowContent] 
+  @ContentTypeId int
+AS
+IF @ContentTypeId IS NULL 
+BEGIN
+SELECT dbContent.Id
+	, dbContent.Title
+	, dbContent.Description
+	, dbContent.ContentStatusId
+	, dbContent.ContentTypeId
+	, dbContent.CreatedDate
+	, dbContent.CreatorId
+	, dbContent.LanguageId
+	, dbContent.ModifiedDate
+	, dbContent.ModifierId
+	, dbContent.OrganizationId
+	, dbContent.ProjectId
+	, dbContent.SecurityLevel
+FROM dbContent
+END
+ELSE
+BEGIN
+SELECT dbContent.Id
+	, dbContent.Title
+	, dbContent.Description
+	, dbContent.ContentStatusId
+	, dbContent.ContentTypeId
+	, dbContent.CreatedDate
+	, dbContent.CreatorId
+	, dbContent.LanguageId
+	, dbContent.ModifiedDate
+	, dbContent.ModifierId
+	, dbContent.OrganizationId
+	, dbContent.ProjectId
+	, dbContent.SecurityLevel
+FROM dbContent
+WHERE dbContent.ContentTypeId = @ContentTypeId
+END
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ShowPage]    Script Date: 9/20/2019 3:15:00 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE 
+[dbo].[ShowPage] 
+@Id int
+, @LanguageId int
+AS
+SELECT dbPage.Id
+, dbPageLanguage.PageTitle
+, dbPageLanguage.PageDescription
+FROM dbpage 
+JOIN dbPageLanguage
+	ON dbPage.Id = dbPageLanguage.PageId
+
+WHERE dbPage.Id = @Id
+	AND dbPageLanguage.LanguageId = @LanguageId
+GO
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[ShowPageSection]    Script Date: 9/20/2019 3:15:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE 
+[dbo].[ShowPageSection] 
+@Id int
+, @LanguageId int
+AS
+SELECT 
+	dbPageSection.Id
+	, dbPageSection.PageId
+	, dbPageSection.ShowSectionTitle
+	, dbPageSection.ShowSectionTitleDescription
+	, dbPageSection.ShowContentTypeTitle
+	, dbPageSection.ShowContentTypeDescription
+	, dbPageSection.OneTwoColumns
+	, dbPageSection.ContentTypeId
+	, dbPageSection.SortById
+	, dbPageSection.MaxContent
+	, dbPageSection.HasPaging
+	, dbPageSectionLanguage.PageSectionTitle
+	, dbPageSectionLanguage.PageSectionDescription
+	, dbPageSectionType.IndexSection
+FROM dbPageSection 
+JOIN dbPageSectionLanguage
+	ON dbPageSection.Id = dbPageSectionLanguage.PageSectionId
+JOIN dbPageSectionType
+	ON dbPageSection.PageSectionTypeId = dbPageSectionType.Id
+WHERE dbPageSection.PageId = @Id
+	AND dbPageSectionLanguage.LanguageId = @LanguageId
+ORDER BY dbPageSection.Sequence
+GO
+

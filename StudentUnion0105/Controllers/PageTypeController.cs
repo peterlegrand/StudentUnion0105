@@ -71,7 +71,7 @@ namespace StudentUnion0105.Controllers
                 var PageTypeLanguage = new SuPageTypeLanguageModel();
 
                 PageTypeLanguage.Name = FromForm.Name;
-                PageTypeLanguage.Description = FromForm.MenuName;
+                PageTypeLanguage.Description = FromForm.Description;
                 PageTypeLanguage.MouseOver = FromForm.MouseOver;
                 PageTypeLanguage.PageTypeId = NewPageType.Id;
                 PageTypeLanguage.LanguageId = DefaultLanguageID;
@@ -143,7 +143,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            var PageLanguage = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
+            var OrganizationLanguage = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
                                    join l in _language.GetAllLanguages()
                   on c.LanguageId equals l.Id
                                    where c.PageTypeId == Id
@@ -163,7 +163,7 @@ namespace StudentUnion0105.Controllers
                                    }).ToList();
             ViewBag.Id = Id;
 
-            return View(PageLanguage);
+            return View(OrganizationLanguage);
         }
 
         [HttpGet]

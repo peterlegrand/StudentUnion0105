@@ -175,11 +175,11 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var Project = _Project.GetProject(test3.SuObject.Id);
+                var Project = _Project.GetProject(FromForm.SuObject.Id);
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 Project.ModifiedDate = DateTime.Now;
@@ -187,10 +187,10 @@ namespace StudentUnion0105.Controllers
                 _Project.UpdateProject(Project);
 
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
-                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(test3.SuObject.ObjectLanguageId);
-                ProjectLanguage.Name = test3.SuObject.Name;
-                ProjectLanguage.Description = test3.SuObject.Description;
-                ProjectLanguage.MouseOver = test3.SuObject.MouseOver;
+                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(FromForm.SuObject.ObjectLanguageId);
+                ProjectLanguage.Name = FromForm.SuObject.Name;
+                ProjectLanguage.Description = FromForm.SuObject.Description;
+                ProjectLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ProjectLanguage.ModifiedDate = DateTime.Now;
                 ProjectLanguage.ModifierId = new Guid(CurrentUser.Id);
                 _ProjectLanguage.UpdateProjectLanguage(ProjectLanguage);
@@ -265,22 +265,22 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 var ProjectLanguage = new SuProjectLanguageModel();
-                ProjectLanguage.Name = test3.SuObject.Name;
-                ProjectLanguage.Description = test3.SuObject.Description;
-                ProjectLanguage.MouseOver = test3.SuObject.MouseOver;
-                ProjectLanguage.ProjectId = test3.SuObject.ObjectId;
-                ProjectLanguage.LanguageId = test3.SuObject.LanguageId;
+                ProjectLanguage.Name = FromForm.SuObject.Name;
+                ProjectLanguage.Description = FromForm.SuObject.Description;
+                ProjectLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                ProjectLanguage.ProjectId = FromForm.SuObject.ObjectId;
+                ProjectLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
                 var NewProjectLanguage = _ProjectLanguage.AddProjectLanguage(ProjectLanguage);
 
 
             }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
 
@@ -319,21 +319,21 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectVM test3)
+        public IActionResult LanguageEdit(SuObjectVM FromForm)
         {
             if (ModelState.IsValid)
             {
-                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(test3.Id);
-                ProjectLanguage.Name = test3.Name;
-                ProjectLanguage.Description = test3.Description;
-                ProjectLanguage.MouseOver = test3.MouseOver;
+                var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(FromForm.Id);
+                ProjectLanguage.Name = FromForm.Name;
+                ProjectLanguage.Description = FromForm.Description;
+                ProjectLanguage.MouseOver = FromForm.MouseOver;
                 _ProjectLanguage.UpdateProjectLanguage(ProjectLanguage);
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Project.ProjectId.ToString() );
+            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Project.ProjectId.ToString() );
 
-            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectId.ToString() });
         }
 
     }

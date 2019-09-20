@@ -10,22 +10,22 @@ namespace StudentUnion0105.SQLRepositories
 {
     public class SQLClassificationStatusRepository : IClassificationStatusRepository
     {
-        private readonly SuDbContext context;
+        private readonly SuDbContext _context;
 
         public SQLClassificationStatusRepository(SuDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         public IEnumerable<SuClassificationStatusModel> GetAllClassificationStatus()
         {
-            return context.dbClassificationStatus;
+            return _context.dbClassificationStatus;
             
         }
 
         public SuClassificationStatusModel GetSuClassificationStatus(int Id)
         {
-            return  context.dbClassificationStatus.Find(Id);
+            return  _context.dbClassificationStatus.Find(Id);
         }
     }
 }

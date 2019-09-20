@@ -52,6 +52,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+//            ViewBag.CID = 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
             var test1 =  (
@@ -109,7 +110,9 @@ namespace StudentUnion0105.Controllers
                     Value = ClassificationFromDb.Id.ToString()
                 });
             }
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel {
+                SuObject = test1,
+                SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
             return View(ClassificationAndStatus);
 
 

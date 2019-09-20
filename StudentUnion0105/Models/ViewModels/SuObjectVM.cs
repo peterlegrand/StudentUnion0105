@@ -25,7 +25,7 @@ namespace StudentUnion0105.ViewModels
         public int ObjectId { get; set; }
         [Display(Name = "Date level")]
 
-        public bool DateLevel { get; set; }
+        public int DateLevel { get; set; }
         [Display(Name = "On the fly")]
         public bool OnTheFly { get; set; }
         public bool Alphabetically { get; set; }
@@ -40,6 +40,18 @@ namespace StudentUnion0105.ViewModels
         public int? NullId { get; set; }
         public string Title { get; set; }
         public string Description2 { get; set; }
+
+        public string DropDownName { get; set; }
+        public string PageName { get; set; }
+        public string PageDescription { get; set; }
+        public string HeaderName { get; set; }
+        public string HeaderDescription { get; set; }
+        public string TopicName { get; set; }
+        public DateTimeOffset? DateFrom { get; set; }
+        public DateTimeOffset? DateTo { get; set; }
         //public SuClassificationStatusModel StatusList { get; set; }
+        public int Level { get; set; }
+        public bool IndexSection { get; set; }
+
     }
 }

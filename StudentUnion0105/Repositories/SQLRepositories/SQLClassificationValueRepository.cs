@@ -1,5 +1,6 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
+using StudentUnion0105.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    public class SQLClassificationValueRepository
+    public class SQLClassificationValueRepository : IClassificationValueRepository
     {
         private readonly SuDbContext context;
 
@@ -15,42 +16,42 @@ namespace StudentUnion0105.SQLRepositories
         {
             this.context = context;
         }
-        public SuClassificationValueLanguageModel AddClassificationValueLanguage(SuClassificationValueLanguageModel suClassificationValueLanguage)
+        public SuClassificationValueModel AddClassificationValue(SuClassificationValueModel suClassificationValue)
         {
-            context.dbClassificationValueLanguage.Add(suClassificationValueLanguage);
+            context.dbClassificationValue.Add(suClassificationValue);
             context.SaveChanges();
-            return suClassificationValueLanguage;
+            return suClassificationValue;
         }
 
-        public SuClassificationValueLanguageModel DeleteClassificationValueLanguage(int Id)
+        public SuClassificationValueModel DeleteClassificationValue(int Id)
         {
-            var suClassificationValueLanguage = context.dbClassificationValueLanguage.Find(Id);
-            if (suClassificationValueLanguage != null)
+            var suClassificationValue = context.dbClassificationValue.Find(Id);
+            if (suClassificationValue != null)
             {
-                context.dbClassificationValueLanguage.Remove(suClassificationValueLanguage);
+                context.dbClassificationValue.Remove(suClassificationValue);
                 context.SaveChanges();
 
             }
-            return suClassificationValueLanguage;
+            return suClassificationValue;
         }
 
-        public IEnumerable<SuClassificationValueLanguageModel> GetAllClassifcationValueLanguages()
+        public IEnumerable<SuClassificationValueModel> GetAllClassifcationValues()
         {
-            return context.dbClassificationValueLanguage;
+            return context.dbClassificationValue;
 
         }
 
-        public SuClassificationValueLanguageModel GetClassificationValueLanguage(int Id)
+        public SuClassificationValueModel GetClassificationValue(int Id)
         {
-            return context.dbClassificationValueLanguage.Find(Id);
+            return context.dbClassificationValue.Find(Id);
         }
 
-        public SuClassificationValueLanguageModel UpdateClassificationValueLanguage(SuClassificationValueLanguageModel suClassificationValueLanguageChanges)
+        public SuClassificationValueModel UpdateClassificationValue(SuClassificationValueModel suClassificationValueChanges)
         {
-            var changedClassificationValueLanguage = context.dbClassificationValueLanguage.Attach(suClassificationValueLanguageChanges);
-            changedClassificationValueLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            var changedClassificationValue = context.dbClassificationValue.Attach(suClassificationValueChanges);
+            changedClassificationValue.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
-            return suClassificationValueLanguageChanges;
+            return suClassificationValueChanges;
 
         }
     }

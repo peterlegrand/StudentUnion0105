@@ -1,0 +1,222 @@
+﻿@inject SignInManager<SuUser> signInManager
+@inject UserManager<SuUser> userManager
+@inject RoleManager<IdentityRole> roleManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <title>@ViewData["Title"] - Student Union 1.5</title>
+
+    <environment include="Development">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    @*<script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>*@
+    <!-- Syncfusion Essential JS 2 Styles -->
+    @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />*@
+
+    <!-- Syncfusion Essential JS 2 Scripts -->
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+</head>
+<body>
+    @*<ejs-menu id="menu" items="ViewBag.menuItems"></ejs-menu>*@
+    <header>
+        <div class="container">
+            <div class="row">
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
+                {
+                    <div class="text-left border-dark">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img src="~/Images/Icons/Classifications.png" title="Classifications" height="20" width="20" />
+                                </td>
+                                <td>
+                                    <img src="~/Images/Icons/Add.png" title="Add" height="20" width="20" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="~/Images/Icons/ContentType.png" title="Content type" height="20" width="20" />
+                                </td>
+                                <td>
+                                    <img src="~/Images/Icons/Add.png" height="20" title="Add content type" width="20" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="~/Images/Icons/languages.jpg" title="Language" height="20" width="20" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+
+                <div class="col-sm-9">
+
+                    One of three columns
+                </div>
+                <div class="col-sm-2">
+                    One of three columns
+                </div>
+            </div>
+        </div>
+
+        <@*nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Union 1.5</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav ml-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Classification" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-0">
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropdown-toggle" type="button" id="dropdownMenu2Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2Button">
+                                    <a asp-controller="Content" asp-action="Create" class="dropdown-item">Content</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
+                                {
+                                    <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Admin
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @{var show = new StudentUnion0105.Classes.ShowMenu();
+                                            if (await show.ShowMenuBasedOnClaim(User, "Menu", "Role", userManager, roleManager))
+                                            {
+                                                <a asp-controller="Role" asp-action="Index" class="dropdown-item">Roles</a>
+                                            }
+                                        }
+                                        @{var show2 = new StudentUnion0105.Classes.ShowMenu();
+                                            if (await show2.ShowMenuBasedOnClaim(User, "Menu", "Classification", userManager, roleManager))
+                                            {
+                                                <a asp-controller="Classification" asp-action="Index" class="dropdown-item">Classifications</a>
+                                            }
+                                        }
+                                        <a asp-controller="ContentType" asp-action="Index" class="dropdown-item">Content types</a>
+                                        <a asp-controller="OrganizationType" asp-action="Index" class="dropdown-item">Organization types</a>
+                                        <a asp-controller="PageSectionType" asp-action="Index" class="dropdown-item">Page section types</a>
+                                        <a asp-controller="Process" asp-action="Index" class="dropdown-item">Processes</a>
+                                        <a asp-controller="Organization" asp-action="Index" class="dropdown-item">Organizations</a>
+                                        <a asp-controller="Page" asp-action="Index" class="dropdown-item">Pages</a>
+                                        <a asp-controller="Project" asp-action="Index" class="dropdown-item">Projects</a>
+                                        <a asp-controller="Term" asp-action="Index" class="dropdown-item">Terms</a>
+                                        <a asp-controller="Setting" asp-action="Index" class="dropdown-item">Settings</a>
+                                    </div>
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="Logout" asp-controller="User">
+                                    <button type="submit" class="nav-link btn btn-link py-0">Logout @User.Identity.Name</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+    </header>
+    <div>
+        @*<div class="container-fluid">*@
+        @*<div id="mySidebar" class="Susidebar">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>*@
+        @*<div id="main">
+                <button class="btn-link btn-sm bt openbtn" onclick="openNav()">&#9776; Toggle Sidebar</button>
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+
+                </main>
+            </div>*@
+
+        @*</div>*@
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - StudentUnion0105 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+
+    @RenderSection("Scripts", required: false)
+    <!-- Syncfusion Essential JS 2 ScriptManager -->
+    @*<ejs-scripts></ejs-scripts>*@
+</body>
+</html>
+@*<script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>*@

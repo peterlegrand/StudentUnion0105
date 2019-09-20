@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentUnion0105.Models;
 
+
 namespace StudentUnion0105.Controllers
 {
+    [AllowAnonymous]
     public class SetupWizardController : Controller
     {
         private readonly UserManager<SuUser> userManager;
@@ -23,8 +26,8 @@ namespace StudentUnion0105.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
-            if (userManager.FindByEmailAsync("eplegrand@gmail.com").Result == null)
+            var x = await userManager.FindByEmailAsync("eplegrand@gmail.com");
+            if ( x == null)
             {
                 SuUser user1 = new SuUser()
                 {

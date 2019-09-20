@@ -13,8 +13,8 @@ namespace StudentUnion0105.Models
 //        [Display(Name="SuClassificationLevelModel")]
         public virtual int ClassificationId { get; set; }
         public int? ParentValueId { get; set; }
-        public DateTimeOffset DateFrom { get; set; }
-        public DateTimeOffset DateTo { get; set; }
+        public DateTimeOffset? DateFrom { get; set; }
+        public DateTimeOffset? DateTo { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

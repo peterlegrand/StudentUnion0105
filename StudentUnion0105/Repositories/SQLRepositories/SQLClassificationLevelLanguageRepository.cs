@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StudentUnion0105.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -39,7 +40,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationLevelLanguageModel> GetAllClassificationLevelLanguages()
         {
-            return context.dbClassificationLevelLanguage;
+            return context.dbClassificationLevelLanguage;//.AsNoTracking();
         }
 
         public SuClassificationLevelLanguageModel GetClassificationLevelLanguage(int Id)

@@ -10,125 +10,290 @@
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <title>@ViewData["Title"] - Student Union 1.5</title>
 
-    @*@{
-            var user = await userManager.GetUserAsync(User);
-            var t = user.Email;
-        }
-        @t;
-    *@
-    <environment include="Development">
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
-
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Union 1.5</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav ml-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Classification" asp-action="Index">Home</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-0">
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
-                                {
-                                    <button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Admin
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        @{var show = new StudentUnion0105.Classes.ShowMenu();
-                                            if (await show.ShowMenuBasedOnClaim(User, "Menu", "Role", userManager, roleManager))
-                                            {
-                                                <a asp-controller="Role" asp-action="Index" class="dropdown-item">Roles</a>
-                                            }
-                                        }
-                                        @{var show2 = new StudentUnion0105.Classes.ShowMenu();
-                                            if (await show2.ShowMenuBasedOnClaim(User, "Menu", "Classification", userManager, roleManager))
-                                            {
-                                                <a asp-controller="Classification" asp-action="Index" class="dropdown-item">Classifications</a>
-                                            }
-                                        }
-                                        <a asp-controller="ContentType" asp-action="Index" class="dropdown-item">Content types</a>
-                                        <a asp-controller="OrganizationType" asp-action="Index" class="dropdown-item">Organization types</a>
-                                        <a asp-controller="PageType" asp-action="Index" class="dropdown-item">Page types</a>
-                                        <a asp-controller="Process" asp-action="Index" class="dropdown-item">Processes</a>
-                                        <a asp-controller="Organization" asp-action="Index" class="dropdown-item">Organizations</a>
-                                        <a asp-controller="Page" asp-action="Index" class="dropdown-item">Pages</a>
-                                        <a asp-controller="Project" asp-action="Index" class="dropdown-item">Projects</a>
-                                        <a asp-controller="Term" asp-action="Index" class="dropdown-item">Terms</a>
-                                        <a asp-controller="Setting" asp-action="Index" class="dropdown-item">Settings</a>
-                                    </div>
-                                }
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <form method="post" asp-action="Logout" asp-controller="User">
-                                    <button type="submit" class="nav-link btn btn-link py-0">Logout @User.Identity.Name</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <h1>Student Union 1.5</h1>
+
     </header>
-    <div>
-        <div class="container-fluid">
-            @*<div id="mySidebar" class="Susidebar">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">About</a>
-                <a href="#">Services</a>
-                <a href="#">Clients</a>
-                <a href="#">Contact</a>
-            </div>*@
-            <div id="main">
-                <button class="btn-link btn-sm bt openbtn" onclick="openNav()">&#9776; Toggle Sidebar</button>
-                <partial name="_CookieConsentPartial" />
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
+    <div class="container">
+        <div class="row">
+            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
+            {
+                <div class="border-dark col-sm-2">
+                    <table>
+                        <tr>
+                            <td>
+                                <a asp-controller="Classification" asp-action="Index">
+                                    <img src="~/Images/Icons/Classifications.png" title="Classifications" height="20" width="20" /> Classification
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Classification" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" title="Add" height="20" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="ContentType" asp-action="Index">
+                                    <img src="~/Images/Icons/ContentType.png" title="Content type" height="20" width="20" /> Content type
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="ContentType" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add content type" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Organization" asp-action="Index">
+                                    <img src="~/Images/Icons/Organization.png" title="Organization" height="20" width="20" /> Organization
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Organization" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add organization" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="OrganizationType" asp-action="Index">
+                                    <img src="~/Images/Icons/OrganizationTYpe.png" title="Organization type" height="20" width="20" /> Organization type
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="OrganizationType" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add organization type" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Page" asp-action="Index">
+                                    <img src="~/Images/Icons/pages.jpg" title="Page" height="20" width="20" /> Pages
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Page" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add page" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="PageType" asp-action="Index">
+                                    <img src="~/Images/Icons/pageType.jpg" title="Page type" height="20" width="20" /> Page types
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="PageType" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add page type" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Project" asp-action="Index">
+                                    <img src="~/Images/Icons/Project.png" title="Project" height="20" width="20" /> Projects
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Project" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add project" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="PageSectionType" asp-action="Index">
+                                    <img src="~/Images/Icons/sectionType.png" title="Section type" height="20" width="20" /> Section types
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="PageSectionType" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add section type" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="User" asp-action="Index">
+
+                                    <img src="~/Images/Icons/User.png" title="User" height="20" width="20" /> Users
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="User" asp-action="Create">
+
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add user" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Role" asp-action="Index">
+                                    <img src="~/Images/Icons/Role.png" title="Role" height="20" width="20" /> Roles
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Role" asp-action="Create">
+                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add role" width="20" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Language" asp-action="Index">
+                                    <img src="~/Images/Icons/languages.jpg" title="Language" height="20" width="20" /> Languages
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a asp-controller="Settings" asp-action="Index">
+                                    <img src="~/Images/Icons/Settings.png" title="Settings" height="20" width="20" /> Settings
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+
+            <div class="col-sm-9">
+
+                @RenderBody()
             </div>
+            <div class="col-sm-1">
+                <table>
+                    <tr>
+                        <td>
+                            <a asp-controller="Classification" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" title="Add content" height="20" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Classification" asp-action="Index">
+                                <img src="~/Images/Icons/content.png" title="Content" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="ContentType" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add content type" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="ContentType" asp-action="Index">
+                                <img src="~/Images/Icons/calendar.png" title="Calendar" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="Organization" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add organization" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Organization" asp-action="Index">
+                                <img src="~/Images/Icons/Chat.png" title="Chat" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <td>
+                            <a asp-controller="OrganizationType" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add organization type" width="20" />
+                            </a>
+                        </td>
+                        <a asp-controller="OrganizationType" asp-action="Index">
+                            <img src="~/Images/Icons/conference.png" title="Conference" height="20" width="20" />
+                        </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="PageType" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add page type" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="PageType" asp-action="Index">
+                                <img src="~/Images/Icons/favorites.png" title="Favorites" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="Project" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add project" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Project" asp-action="Index">
+                                <img src="~/Images/Icons/game.png" title="Game" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="SectionType" asp-action="Create">
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add section type" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="SectionType" asp-action="Index">
+                                <img src="~/Images/Icons/process.png" title="Process" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a asp-controller="User" asp-action="Create">
 
+                                <img src="~/Images/Icons/plus2.png" height="20" title="Add user" width="20" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="User" asp-action="Index">
+
+                                <img src="~/Images/Icons/Todo.png" title="To do" height="20" width="20" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-
     </div>
+    <ul class="navbar-nav ml-auto">
+        @if (signInManager.IsSignedIn(User))
+        {
+            <li class="nav-item">
+                <form method="post" asp-action="Logout" asp-controller="User">
+                    <button type="submit" class="nav-link btn btn-link py-0">Logout @User.Identity.Name</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+            </li>
+        }
+    </ul>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -140,33 +305,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-@*<script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
-</script>*@

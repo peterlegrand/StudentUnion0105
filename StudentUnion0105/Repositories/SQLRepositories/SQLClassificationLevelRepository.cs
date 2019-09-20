@@ -45,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
             public IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels()
             {
-                return context.dbClassificationLevel.AsNoTracking();
+            return context.dbClassificationLevel;//.AsNoTracking();
             }
 
             public SuClassificationLevelModel GetClassificationLevel(int Id)

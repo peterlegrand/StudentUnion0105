@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using Syncfusion.Licensing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,6 +58,8 @@ namespace StudentUnion0105
             services.AddTransient<IClassificationLanguageRepository, SQLClassificationLanguageRepository>();
             services.AddTransient<IClassificationLevelRepository, SQLClassificationLevelRepository>();
             services.AddTransient<IClassificationLevelLanguageRepository, SQLClassificationLevelLanguageRepository>();
+            services.AddTransient<IClassificationValueRepository, SQLClassificationValueRepository>();
+            services.AddTransient<IClassificationValueLanguageRepository, SQLClassificationValueLanguageRepository>();
             services.AddTransient<IContentTypeLanguageRepository, SQLContentTypeLanguageRepository>();
             services.AddTransient<IContentTypeRepository, SQLContentTypeRepository>();
             services.AddTransient<IOrganizationLanguageRepository, SQLOrganizationLanguageRepository>();
@@ -65,13 +68,22 @@ namespace StudentUnion0105
             services.AddTransient<IOrganizationTypeLanguageRepository, SQLOrganizationTypeLanguageRepository>();
             services.AddTransient<IOrganizationTypeRepository, SQLOrganizationTypeRepository>();
             services.AddTransient<IPageLanguageRepository, SQLPageLanguageRepository>();
+            //services.AddScoped<IPageSectionLanguageRepository, SQLPageSectionLanguageRepository>();
+            services.AddTransient<IPageSectionLanguageRepository, SQLPageSectionLanguageRepository>();
+            services.AddTransient<IPageSectionTypeLanguageRepository, SQLPageSectionTypeLanguageRepository>();
             services.AddTransient<IPageRepository, SQLPageRepository>();
+            services.AddTransient<IPageSectionRepository, SQLPageSectionRepository>();
+            services.AddTransient<IPageSectionTypeRepository, SQLPageSectionTypeRepository>();
             services.AddTransient<IPageStatusRepository, SQLPageStatusRepository>();
             services.AddTransient<IPageTypeLanguageRepository, SQLPageTypeLanguageRepository>();
             services.AddTransient<IPageTypeRepository, SQLPageTypeRepository>();
             services.AddTransient<IProjectLanguageRepository, SQLProjectLanguageRepository>();
             services.AddTransient<IProjectRepository, SQLProjectRepository>();
             services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
+            services.AddTransient<IContentRepository, SQLContentRepository>();
+            services.AddTransient<IContentClassificationValueRepository, SQLContentClassificationValueRepository>();
+            services.AddTransient<IContentStatusRepository, SQLContentStatusRepository>();
+            services.AddTransient<ISecurityLevelRepository, SQLSecurityLevelRepository>();
             services.AddTransient<ILanguageRepository, SQLLanguageRepository>();
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
@@ -86,7 +98,8 @@ namespace StudentUnion0105
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            if (env.IsDevelopment())
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MDAxQDMxMzcyZTMyMmUzME4wa1lJMzBiUUJJTklORnpaZVFIL1RBa3UrUE1PLzAvZWcvNUQ0dUdaekU9");
+if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

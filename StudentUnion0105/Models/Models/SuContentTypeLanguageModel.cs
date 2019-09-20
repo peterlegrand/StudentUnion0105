@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,9 @@ namespace StudentUnion0105.Models
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        [ForeignKey("ContentTypeId")]
         public virtual SuContentTypeModel ContentType { get; set; }
+        [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
 
     }

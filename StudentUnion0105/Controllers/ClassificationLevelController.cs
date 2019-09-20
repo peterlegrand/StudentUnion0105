@@ -15,21 +15,19 @@ namespace StudentUnion0105.Controllers
     public class ClassificationLevelController : Controller
     {
         private readonly UserManager<SuUser> userManager;
-        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly IClassificationLevelRepository _classificationLevel;
         private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
         private readonly ILanguageRepository _language;
 
         public ClassificationLevelController(UserManager<SuUser> userManager
-            , IClassificationLevelVMRepository classificationLevelVMRepository
             , IClassificationLanguageRepository classificationLanguage
             , IClassificationLevelRepository classificationLevel
             , IClassificationLevelLanguageRepository classificationLevelLanguage
-            , ILanguageRepository language)
+            , ILanguageRepository language
+            )
         {
             this.userManager = userManager;
-            _classificationLevelVMRepository = classificationLevelVMRepository;
             _classificationLanguage = classificationLanguage;
             _classificationLevel = classificationLevel;
             _classificationLevelLanguage = classificationLevelLanguage;
@@ -41,8 +39,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
 
-            var ClassificationLevel = (from c in _classificationLevelVMRepository.GetAllClassificationLevels()
-                                       join l in _classificationLevelVMRepository.GetAllClassificationLevelLanguages()
+            var ClassificationLevel = (from c in  _classificationLevel.GetAllClassificationLevels()
+                                       join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                       on c.Id equals l.ClassificationLevelId
                                        where c.ClassificationId == Id
                                        && l.LanguageId == DefaultLanguageID
@@ -63,8 +61,8 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            var Level = (from c in _classificationLevelVMRepository.GetAllClassificationLevels()
-                         join l in _classificationLevelVMRepository.GetAllClassificationLevelLanguages()
+            var Level = (from c in _classificationLevel.GetAllClassificationLevels()
+                         join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                          on c.Id equals l.ClassificationLevelId
                          where c.Id == Id
                          select new SuObjectVM
@@ -130,8 +128,8 @@ namespace StudentUnion0105.Controllers
             SuObjectVM SuObject = new SuObjectVM();
             SuObject.ObjectId = Id;
 
-            List<SelectListItem> ExistingLevels = (from c in _classificationLevelVMRepository.GetAllClassificationLevels()
-                                                   join l in _classificationLevelVMRepository.GetAllClassificationLevelLanguages()
+            List<SelectListItem> ExistingLevels = (from c in _classificationLevel.GetAllClassificationLevels()
+                                                   join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                                    on c.Id equals l.ClassificationLevelId
                                                    where c.ClassificationId == Id
                                                    && l.LanguageId == DefaultLanguageID
@@ -142,8 +140,8 @@ namespace StudentUnion0105.Controllers
                                                    ,
                                                        Text = l.ClassificationLevelName
                                                    }).ToList();
-            var TestForNull = (from c in _classificationLevelVMRepository.GetAllClassificationLevels()
-                               join l in _classificationLevelVMRepository.GetAllClassificationLevelLanguages()
+            var TestForNull = (from c in _classificationLevel.GetAllClassificationLevels()
+                               join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                on c.Id equals l.ClassificationLevelId
                                where c.Id == Id
                                && l.LanguageId == DefaultLanguageID
@@ -155,8 +153,8 @@ namespace StudentUnion0105.Controllers
             { MaxLevelSequence = 1; }
             else
             {
-                MaxLevelSequence = (from c in _classificationLevelVMRepository.GetAllClassificationLevels()
-                                    join l in _classificationLevelVMRepository.GetAllClassificationLevelLanguages()
+                MaxLevelSequence = (from c in _classificationLevel.GetAllClassificationLevels()
+                                    join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                     on c.Id equals l.ClassificationLevelId
                                     where c.Id == Id
                                     && l.LanguageId == DefaultLanguageID
@@ -187,13 +185,6 @@ namespace StudentUnion0105.Controllers
                     where l.Id == NewLevel.SuObject.ObjectId
                     select l.Sequence).Count();
 
-                //from c in _classificationLevel.GetAllClassificationLevels()
-                //join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                //on c.Id equals l.ClassificationLevelId
-                //where c.ClassificationId == NewLevel.SuObject.ObjectId
-                //&& l.LanguageId == DefaultLanguageID
-                //select c.Sequence).Count();
-
                 int MaxLevelSequence;
 
                 if (TestForNull == 0)
@@ -205,12 +196,6 @@ namespace StudentUnion0105.Controllers
                         from c in _classificationLevel.GetAllClassificationLevels()
                         where c.ClassificationId == NewLevel.SuObject.ObjectId
                         select c.Sequence).Max();
-                    //from c in _classificationLevel.GetAllClassificationLevels()
-                    //join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                    //on c.Id equals l.ClassificationLevelId
-                    //where c.ClassificationId == NewLevel.SuObject.ObjectId
-                    //&& l.LanguageId == DefaultLanguageID
-                    //select c.Sequence).Max();
                     MaxLevelSequence++;
                 }
 
@@ -240,9 +225,6 @@ namespace StudentUnion0105.Controllers
 
                         u.Sequence = ++ExistingLevels[x].Sequence;
 
-                        //SuDbContext.Entry(u).State = Microsoft.EntityFrameworkCore.EntityState.
-
-                        //Microsoft.EntityFrameworkCore.EntityState.
                         _classificationLevel.UpdateClassificationLevel(u);
                         x++;
 
