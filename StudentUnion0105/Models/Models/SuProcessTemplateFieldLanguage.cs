@@ -12,7 +12,7 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         public string ProcessTemplateFieldName { get; set; }
         public string ProcessTemplateFieldDescription { get; set; }
-        public string SuProcessTemplateFieldMouseOver { get; set; }
+        public string ProcessTemplateFieldMouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

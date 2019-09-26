@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190925074717_processtemplates2")]
+    partial class processtemplates2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a67d9932-13b9-41cb-91a0-99fc50fb2c98",
-                            ConcurrencyStamp = "dd2f63a7-6712-4fc6-b4e4-102de9a8052c",
+                            Id = "16892f9f-a9f0-4b22-abfe-af2533de960e",
+                            ConcurrencyStamp = "3e12192f-31b2-465d-a0fe-84963471a924",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a5c1bfed-38e9-4457-9538-f6e15ba55562",
-                            ConcurrencyStamp = "8606dabf-4a0b-4ce4-af4d-1c09c01077fa",
+                            Id = "444a0f6b-2f3f-4c2d-a10c-4780dc853450",
+                            ConcurrencyStamp = "e4ea6913-ca83-4dff-ab85-16ce4b4aa30a",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1001,9 +1003,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateFieldId");
 
-                    b.Property<string>("ProcessTemplateFieldMouseOver");
-
                     b.Property<string>("ProcessTemplateFieldName");
+
+                    b.Property<string>("SuProcessTemplateFieldMouseOver");
 
                     b.HasKey("Id");
 
@@ -1164,9 +1166,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateGroupId");
 
-                    b.Property<string>("ProcessTemplateGroupMouseOver");
-
                     b.Property<string>("ProcessTemplateGroupName");
+
+                    b.Property<string>("SuProcessTemplateGroupMouseOver");
 
                     b.HasKey("Id");
 

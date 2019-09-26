@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190925033741_processtemplates")]
+    partial class processtemplates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a67d9932-13b9-41cb-91a0-99fc50fb2c98",
-                            ConcurrencyStamp = "dd2f63a7-6712-4fc6-b4e4-102de9a8052c",
+                            Id = "97f07be5-c035-4839-80af-7e0d3cf4d095",
+                            ConcurrencyStamp = "2503a8c4-23ab-4cae-8db4-9a620fa939d6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a5c1bfed-38e9-4457-9538-f6e15ba55562",
-                            ConcurrencyStamp = "8606dabf-4a0b-4ce4-af4d-1c09c01077fa",
+                            Id = "7ea67e24-a691-4894-a27b-f38d37b7aab5",
+                            ConcurrencyStamp = "d3d78e06-acbe-428f-9408-4a6a75af2663",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1001,9 +1003,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateFieldId");
 
-                    b.Property<string>("ProcessTemplateFieldMouseOver");
-
                     b.Property<string>("ProcessTemplateFieldName");
+
+                    b.Property<string>("SuProcessTemplateFieldMouseOver");
 
                     b.HasKey("Id");
 
@@ -1164,9 +1166,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateGroupId");
 
-                    b.Property<string>("ProcessTemplateGroupMouseOver");
-
                     b.Property<string>("ProcessTemplateGroupName");
+
+                    b.Property<string>("SuProcessTemplateGroupMouseOver");
 
                     b.HasKey("Id");
 
@@ -1214,9 +1216,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateId");
 
-                    b.Property<string>("ProcessTemplateMouseOver");
-
                     b.Property<string>("ProcessTemplateName");
+
+                    b.Property<string>("SuProcessTemplateMouseOver");
 
                     b.HasKey("Id");
 
@@ -1225,7 +1227,7 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -1239,7 +1241,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateGroupId");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("dbProcessTemplate");
                 });

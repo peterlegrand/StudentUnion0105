@@ -5,6 +5,10 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\Peter\Desktop\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Migrations\20190827141636_test.cs" />
     <Compile Remove="Migrations\20190827141636_test.Designer.cs" />

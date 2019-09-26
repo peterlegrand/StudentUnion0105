@@ -68,7 +68,6 @@ namespace StudentUnion0105
             services.AddTransient<IOrganizationTypeLanguageRepository, SQLOrganizationTypeLanguageRepository>();
             services.AddTransient<IOrganizationTypeRepository, SQLOrganizationTypeRepository>();
             services.AddTransient<IPageLanguageRepository, SQLPageLanguageRepository>();
-            //services.AddScoped<IPageSectionLanguageRepository, SQLPageSectionLanguageRepository>();
             services.AddTransient<IPageSectionLanguageRepository, SQLPageSectionLanguageRepository>();
             services.AddTransient<IPageSectionTypeLanguageRepository, SQLPageSectionTypeLanguageRepository>();
             services.AddTransient<IPageRepository, SQLPageRepository>();
@@ -79,6 +78,19 @@ namespace StudentUnion0105
             services.AddTransient<IPageTypeRepository, SQLPageTypeRepository>();
             services.AddTransient<IProjectLanguageRepository, SQLProjectLanguageRepository>();
             services.AddTransient<IProjectRepository, SQLProjectRepository>();
+            services.AddTransient<IProcessTemplateFieldLanguageRepository, SQLProcessTemplateFieldLanguageRepository>();
+            services.AddTransient<IProcessTemplateFieldRepository, SQLProcessTemplateFieldRepository>();
+            services.AddTransient<IProcessTemplateFieldTypeLanguageRepository, SQLProcessTemplateFieldTypeLanguageRepository>();
+            services.AddTransient<IProcessTemplateFieldTypeRepository, SQLProcessTemplateFieldTypeRepository>();
+            services.AddTransient<IProcessTemplateFlowConditionLanguageRepository, SQLProcessTemplateFlowConditionLanguageRepository>();
+            services.AddTransient<IProcessTemplateFlowConditionRepository, SQLProcessTemplateFlowConditionRepository>();
+            services.AddTransient<IProcessTemplateGroupLanguageRepository, SQLProcessTemplateGroupLanguageRepository>();
+            services.AddTransient<IProcessTemplateGroupRepository, SQLProcessTemplateGroupRepository>();
+            services.AddTransient<IProcessTemplateLanguageRepository, SQLProcessTemplateLanguageRepository>();
+            services.AddTransient<IProcessTemplateRepository, SQLProcessTemplateRepository>();
+            services.AddTransient<IProcessTemplateStepFieldRepository, SQLProcessTemplateStepFieldRepository>();
+            services.AddTransient<IProcessTemplateStepLanguageRepository, SQLProcessTemplateStepLanguageRepository>();
+            services.AddTransient<IProcessTemplateStepRepository, SQLProcessTemplateStepRepository>();
             services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
             services.AddTransient<IContentRepository, SQLContentRepository>();
             services.AddTransient<IContentClassificationValueRepository, SQLContentClassificationValueRepository>();

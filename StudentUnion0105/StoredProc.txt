@@ -29,7 +29,7 @@ UPDATE
 	dbClassification
 SET 
 	dbClassification.ClassificationStatusId = @ClassificationStatusId
-	, dbClassification.DefailClassificationPageId = iif(@DefaultClassificationPageId=0,null,@DefaultClassificationPageId)
+	, dbClassification.DefaultClassificationPageId = iif(@DefaultClassificationPageId=0,null,@DefaultClassificationPageId)
 	, dbClassification.HasDropDown = @HasDropDown
 	, dbClassification.DropDownSequence = @DropDownSequence
 	, dbClassification.ModifiedDate = @ModifiedDate
@@ -763,3 +763,4 @@ WHERE dbPageSection.PageId = @Id
 ORDER BY dbPageSection.Sequence
 GO
 
+	

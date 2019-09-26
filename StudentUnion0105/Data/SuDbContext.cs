@@ -52,6 +52,20 @@ namespace StudentUnion0105.Data
         public DbSet<SuContentModel> dbContent { get; set; }
         public DbSet<SuContentClassificationValueModel> dbContentClassificationValue { get; set; }
         public DbSet<SuContentStatusModel> dbContentStatus { get; set; }
+        public DbSet<SuProcessTemplateFieldLanguageModel> dbProcessTemplateFieldLanguage { get; set; }
+        public DbSet<SuProcessTemplateFieldModel> dbProcessTemplateField { get; set; }
+        public DbSet<SuProcessTemplateFieldTypeLanguageModel> dbProcessTemplateFieldTypeLanguage { get; set; }
+        public DbSet<SuProcessTemplateFieldTypeModel> dbProcessTemplateFieldType { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionLanguageModel> dbProcessTemplateFlowConditionLanguage { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionModel> dbProcessTemplateFlowCondition { get; set; }
+        public DbSet<SuProcessTemplateFlowModel> dbProcessTemplateFlow { get; set; }
+        public DbSet<SuProcessTemplateGroupLanguageModel> dbProcessTemplateGroupLanguage { get; set; }
+        public DbSet<SuProcessTemplateGroupModel> dbProcessTemplateGroup { get; set; }
+        public DbSet<SuProcessTemplateLanguageModel> dbProcessTemplateLanguage { get; set; }
+        public DbSet<SuProcessTemplateModel> dbProcessTemplate { get; set; }
+        public DbSet<SuProcessTemplateStepFieldModel> dbProcessTemplateStepField { get; set; }
+        public DbSet<SuProcessTemplateStepLanguageModel> dbProcessTemplateStepLanguage { get; set; }
+        public DbSet<SuProcessTemplateStepModel> dbProcessTemplateStep { get; set; }
         public DbSet<SuSecurityLevelModel> dbSecurityLevel { get; set; }
         public DbSet<SuStatusList> dbStatusList { get; set; }
         public DbSet<SuSecurityLevelList> dbSecurityLevelList { get; set; }
