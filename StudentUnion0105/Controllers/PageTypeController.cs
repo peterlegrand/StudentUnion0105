@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -144,23 +144,23 @@ namespace StudentUnion0105.Controllers
         {
 
             var OrganizationLanguage = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
-                                   join l in _language.GetAllLanguages()
-                  on c.LanguageId equals l.Id
-                                   where c.PageTypeId == Id
-                                   select new SuObjectVM
-                                   {
-                                       Id = c.Id
-                                   ,
-                                       Name = c.Name
-                                   ,
-                                       Language = l.LanguageName
-                                   ,
-                                       Description = c.Description
-                                   ,
-                                       MouseOver = c.MouseOver
-                                   ,
-                                       ObjectId = c.PageTypeId
-                                   }).ToList();
+                                        join l in _language.GetAllLanguages()
+                       on c.LanguageId equals l.Id
+                                        where c.PageTypeId == Id
+                                        select new SuObjectVM
+                                        {
+                                            Id = c.Id
+                                        ,
+                                            Name = c.Name
+                                        ,
+                                            Language = l.LanguageName
+                                        ,
+                                            Description = c.Description
+                                        ,
+                                            MouseOver = c.MouseOver
+                                        ,
+                                            ObjectId = c.PageTypeId
+                                        }).ToList();
             ViewBag.Id = Id;
 
             return View(OrganizationLanguage);

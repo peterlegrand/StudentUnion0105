@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentUnion0105.Models;
+using StudentUnion0105.Repositories;
+using StudentUnion0105.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using StudentUnion0105.Models;
-using StudentUnion0105.ViewModels;
-using StudentUnion0105.Repositories;
-using StudentUnion0105.Repositories.Repositories;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using StudentUnion0105.Models.ViewModels;
-using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Controllers
 {
@@ -24,9 +20,9 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly ILanguageRepository _language;
-//        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
-//        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
-//        private readonly IClassificationLevelRepository _classificationLevel;
+        //        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
+        //        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
+        //        private readonly IClassificationLevelRepository _classificationLevel;
 
         public ClassificationController(UserManager<SuUser> userManager
                                                 , IClassificationVMRepository classificationVMRepository
@@ -34,8 +30,8 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationRepository classification
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
-                //                                , IClassificationLevelVMRepository classificationLevelVMRepository
-              //                                  , IClassificationLevelLanguageRepository classificationLevelLanguage
+            //                                , IClassificationLevelVMRepository classificationLevelVMRepository
+            //                                  , IClassificationLevelLanguageRepository classificationLevelLanguage
             //                                    , IClassificationLevelRepository classificationLevel
             )
         {
@@ -52,22 +48,22 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-//            ViewBag.CID = 
+            //            ViewBag.CID = 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 =  (
+            var test1 = (
 
                 from l in _classificationLanguage.GetAllClassificationLanguages()
-                
+
                 where l.LanguageId == DefaultLanguageID
                 select new SuObjectVM
 
-               
+
                 {
                     Id = l.ClassificationId
                              ,
-                             Name = l.ClassificationName
-                         }).ToList();
+                    Name = l.ClassificationName
+                }).ToList();
             return View(test1);
         }
         [HttpGet]
@@ -75,7 +71,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            
+
             var test1 = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
                          on s.Id equals t.ClassificationId
@@ -94,7 +90,7 @@ namespace StudentUnion0105.Controllers
                             ,
                              MenuName = t.ClassificationMenuName
                             ,
-                             Description= t.ClassificationDescription
+                             Description = t.ClassificationDescription
                             ,
                              MouseOver = t.ClassificationMouseOver
                          }).First();
@@ -110,9 +106,11 @@ namespace StudentUnion0105.Controllers
                     Value = ClassificationFromDb.Id.ToString()
                 });
             }
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel {
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            {
                 SuObject = test1,
-                SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
+                SomeKindINumSelectListItem = ClassificationList
+            }; //, Description = a};
             return View(ClassificationAndStatus);
 
 
@@ -135,7 +133,7 @@ namespace StudentUnion0105.Controllers
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
                 ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
-//                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+                //                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
 
@@ -214,7 +212,7 @@ namespace StudentUnion0105.Controllers
                                               MenuName = c.ClassificationMenuName
                                           ,
                                               MouseOver = c.ClassificationMouseOver,
-                                           
+
                                               ObjectId = c.ClassificationId
                                           }).ToList();
             ViewBag.Id = Id;
@@ -236,7 +234,8 @@ namespace StudentUnion0105.Controllers
                              Name = c.ClassificationName
                             ,
                              MenuName = c.ClassificationMenuName
-                             , Description = c.ClassificationDescription
+                             ,
+                             Description = c.ClassificationDescription
                             ,
                              MouseOver = c.ClassificationMouseOver
                             ,
@@ -263,7 +262,7 @@ namespace StudentUnion0105.Controllers
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.Id);
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationDescription= test3.SuObject.Description;
+                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
 
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
@@ -341,7 +340,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
-           var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
+            var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
             var a = new SuObjectVM();
             a.Id = ClassifationLanguage.Id;
             a.Name = ClassifationLanguage.ClassificationName;
@@ -357,12 +356,12 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 _classificationLanguage.DeleteClassificationLanguage(a.Id);
                 return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
             }
-                return RedirectToAction("LanguageIndex");
-            
+            return RedirectToAction("LanguageIndex");
+
         }
     }
 

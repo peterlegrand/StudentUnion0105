@@ -27,6 +27,6 @@ namespace StudentUnion0105.Models
         [ForeignKey("ClassificationId")]
         public virtual SuClassificationModel Classification { get; set; }
         public virtual ICollection<SuClassificationLevelLanguageModel> ClassificationLevelLanguages { get; set; }
-        
+
     }
 }

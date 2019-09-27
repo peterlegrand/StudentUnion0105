@@ -1,20 +1,13 @@
-using System;
-using Syncfusion.Licensing;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -100,10 +93,11 @@ namespace StudentUnion0105
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/login");
-            services.AddMvc(options => {
+            services.AddMvc(options =>
+            {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
- }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }
 
@@ -111,7 +105,7 @@ namespace StudentUnion0105
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MDAxQDMxMzcyZTMyMmUzME4wa1lJMzBiUUJJTklORnpaZVFIL1RBa3UrUE1PLzAvZWcvNUQ0dUdaekU9");
-if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

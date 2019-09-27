@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -29,7 +26,7 @@ namespace StudentUnion0105.Controllers
         {
             var Language = _language.GetLanguage(Id);
 
-          return View(Language);
+            return View(Language);
 
 
         }

@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationModel DeleteClassification(int Id)
         {
-           var suClassification =  context.dbClassification.Find(Id);
-            if(suClassification != null)
+            var suClassification = context.dbClassification.Find(Id);
+            if (suClassification != null)
             {
                 context.dbClassification.Remove(suClassification);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuClassificationModel> GetAllClassifcations()
         {
             return context.dbClassification;
-            
+
         }
 
         public SuClassificationModel GetClassification(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationModel UpdateClassification(SuClassificationModel suClassificationChanges)
         {
-           var changedClassification = context.dbClassification.Attach(suClassificationChanges);
+            var changedClassification = context.dbClassification.Attach(suClassificationChanges);
             changedClassification.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suClassificationChanges;

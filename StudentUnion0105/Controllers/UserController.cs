@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentUnion0105.IdentityViewModels;
 using StudentUnion0105.Models;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {

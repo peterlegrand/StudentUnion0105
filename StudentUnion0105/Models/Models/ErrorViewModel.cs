@@ -1,5 +1,3 @@
-using System;
-
 namespace StudentUnion0105.Models
 {
     public class ErrorViewModel

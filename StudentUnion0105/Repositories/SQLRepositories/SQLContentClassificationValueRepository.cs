@@ -3,8 +3,6 @@ using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -26,8 +24,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuContentClassificationValueModel DeleteContentClassificationValue(int Id)
         {
-           var SuContentClassificationValue =  context.dbContentClassificationValue.Find(Id);
-            if(SuContentClassificationValue != null)
+            var SuContentClassificationValue = context.dbContentClassificationValue.Find(Id);
+            if (SuContentClassificationValue != null)
             {
                 context.dbContentClassificationValue.Remove(SuContentClassificationValue);
                 context.SaveChanges();
@@ -36,12 +34,12 @@ namespace StudentUnion0105.SQLRepositories
             return SuContentClassificationValue;
         }
 
-        
+
 
         public IEnumerable<SuContentClassificationValueModel> GetAllContentClassificationValues()
         {
             return context.dbContentClassificationValue;
-            
+
         }
 
         public SuContentClassificationValueModel GetContentClassificationValue(int Id)
@@ -51,16 +49,16 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuContentClassificationValueModel UpdateContentClassificationValue(SuContentClassificationValueModel suContentClassificationValueChanges)
         {
-           var changedContentClassificationValue = context.dbContentClassificationValue.Attach(suContentClassificationValueChanges);
+            var changedContentClassificationValue = context.dbContentClassificationValue.Attach(suContentClassificationValueChanges);
             changedContentClassificationValue.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suContentClassificationValueChanges;
 
         }
 
-       
 
-        
+
+
         IEnumerable<SuContentClassificationValueModel> IContentClassificationValueRepository.GetAllClassifcationClassificationValues()
         {
             throw new NotImplementedException();

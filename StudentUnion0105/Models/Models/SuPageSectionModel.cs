@@ -1,17 +1,13 @@
-﻿using StudentUnion0105.Data;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Models
 {
     public class SuPageSectionModel
     {
-       
-   
+
+
 
         public int Id { get; set; }
         public int PageId { get; set; }

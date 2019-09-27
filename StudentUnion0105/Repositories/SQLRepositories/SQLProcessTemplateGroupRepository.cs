@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateGroupModel DeleteProcessTemplateGroup(int Id)
         {
-           var suProcessTemplateGroup =  context.dbProcessTemplateGroup.Find(Id);
-            if(suProcessTemplateGroup != null)
+            var suProcessTemplateGroup = context.dbProcessTemplateGroup.Find(Id);
+            if (suProcessTemplateGroup != null)
             {
                 context.dbProcessTemplateGroup.Remove(suProcessTemplateGroup);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuProcessTemplateGroupModel> GetAllProcessTemplateGroups()
         {
             return context.dbProcessTemplateGroup;
-            
+
         }
 
         public SuProcessTemplateGroupModel GetProcessTemplateGroup(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateGroupModel UpdateProcessTemplateGroup(SuProcessTemplateGroupModel suProcessTemplateGroupChanges)
         {
-           var changedProcessTemplateGroup = context.dbProcessTemplateGroup.Attach(suProcessTemplateGroupChanges);
+            var changedProcessTemplateGroup = context.dbProcessTemplateGroup.Attach(suProcessTemplateGroupChanges);
             changedProcessTemplateGroup.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateGroupChanges;

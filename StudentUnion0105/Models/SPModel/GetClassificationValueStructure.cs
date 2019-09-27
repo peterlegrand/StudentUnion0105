@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StudentUnion0105.SPModel
 {
@@ -10,7 +6,7 @@ namespace StudentUnion0105.SPModel
     {
         public int ParentId { get; set; }
         public int Id { get; set; }
-        public int 	ClassificationId  { get; set; }
+        public int ClassificationId { get; set; }
         public string ClassificationValueName { get; set; }
         public int Level { get; set; }
         [Key]

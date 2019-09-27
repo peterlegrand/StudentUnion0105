@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentUnion0105.Models;
 using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -39,7 +38,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
 
-            var ClassificationLevel = (from c in  _classificationLevel.GetAllClassificationLevels()
+            var ClassificationLevel = (from c in _classificationLevel.GetAllClassificationLevels()
                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                       on c.Id equals l.ClassificationLevelId
                                        where c.ClassificationId == Id
@@ -68,17 +67,28 @@ namespace StudentUnion0105.Controllers
                          select new SuObjectVM
                          {
                              Id = c.Id
-                            , Alphabetically = c.Alphabetically
-                            , CanLink = c.CanLink
-                            , DateLevel = c.DateLevel
-                            , InDropDown = c.InDropDown
-                            , Description  = l.ClassificationLevelDescription
-                            , OnTheFly = c.OnTheFly
-                            , Sequence = c.Sequence
-                            , ObjectLanguageId = l.Id
-                            , MenuName = l.ClassificationLevelMenuName
-                            , MouseOver = l.ClassificationLevelMouseOver
-                            , Name = l.ClassificationLevelName
+                            ,
+                             Alphabetically = c.Alphabetically
+                            ,
+                             CanLink = c.CanLink
+                            ,
+                             DateLevel = c.DateLevel
+                            ,
+                             InDropDown = c.InDropDown
+                            ,
+                             Description = l.ClassificationLevelDescription
+                            ,
+                             OnTheFly = c.OnTheFly
+                            ,
+                             Sequence = c.Sequence
+                            ,
+                             ObjectLanguageId = l.Id
+                            ,
+                             MenuName = l.ClassificationLevelMenuName
+                            ,
+                             MouseOver = l.ClassificationLevelMouseOver
+                            ,
+                             Name = l.ClassificationLevelName
                          }).First();
 
             var suObjectAndStatusView = new SuObjectAndStatusViewModel
@@ -270,10 +280,14 @@ namespace StudentUnion0105.Controllers
                                           select new SuObjectVM
                                           {
                                               Id = c.Id
-                                          , Name = c.ClassificationLevelName
-                                          , Language = l.LanguageName
-                                          , MenuName = c.ClassificationLevelMenuName
-                                          , MouseOver = c.ClassificationLevelMouseOver
+                                          ,
+                                              Name = c.ClassificationLevelName
+                                          ,
+                                              Language = l.LanguageName
+                                          ,
+                                              MenuName = c.ClassificationLevelMenuName
+                                          ,
+                                              MouseOver = c.ClassificationLevelMouseOver
                                           ,
                                               ObjectId = c.ClassificationLevelId
                                           }).ToList();

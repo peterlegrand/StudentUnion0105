@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldLanguageModel DeleteProcessTemplateFieldLanguage(int Id)
         {
-           var suProcessTemplateFieldLanguage =  context.dbProcessTemplateFieldLanguage.Find(Id);
-            if(suProcessTemplateFieldLanguage != null)
+            var suProcessTemplateFieldLanguage = context.dbProcessTemplateFieldLanguage.Find(Id);
+            if (suProcessTemplateFieldLanguage != null)
             {
                 context.dbProcessTemplateFieldLanguage.Remove(suProcessTemplateFieldLanguage);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuProcessTemplateFieldLanguageModel> GetAllProcessTemplateFieldLanguages()
         {
             return context.dbProcessTemplateFieldLanguage;
-            
+
         }
 
         public SuProcessTemplateFieldLanguageModel GetProcessTemplateFieldLanguage(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldLanguageModel UpdateProcessTemplateFieldLanguage(SuProcessTemplateFieldLanguageModel suProcessTemplateFieldLanguageChanges)
         {
-           var changedProcessTemplateFieldLanguage = context.dbProcessTemplateFieldLanguage.Attach(suProcessTemplateFieldLanguageChanges);
+            var changedProcessTemplateFieldLanguage = context.dbProcessTemplateFieldLanguage.Attach(suProcessTemplateFieldLanguageChanges);
             changedProcessTemplateFieldLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFieldLanguageChanges;

@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -20,12 +17,12 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuSecurityLevelModel> GetAllSecurityLevel()
         {
             return context.dbSecurityLevel;
-            
+
         }
 
         public SuSecurityLevelModel GetSuSecurityLevel(int Id)
         {
-            return  context.dbSecurityLevel.Find(Id);
+            return context.dbSecurityLevel.Find(Id);
         }
     }
 }

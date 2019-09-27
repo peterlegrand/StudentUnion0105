@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace StudentUnion0105.Migrations
 {
@@ -279,7 +279,7 @@ namespace StudentUnion0105.Migrations
                 name: "dbProjectStatus",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false) ,
+                    Id = table.Column<int>(nullable: false),
                     ProjectStatusName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -292,7 +292,7 @@ namespace StudentUnion0105.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
-                        
+
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

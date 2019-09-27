@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Models
 {
@@ -23,7 +20,7 @@ namespace StudentUnion0105.Models
         public virtual SuProjectModel Project { get; set; }
         [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
-        
+
 
     }
 }

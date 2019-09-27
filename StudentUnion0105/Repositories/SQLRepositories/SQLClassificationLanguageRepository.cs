@@ -1,14 +1,11 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    public class SQLClassificationLanguageRepository: IClassificationLanguageRepository
+    public class SQLClassificationLanguageRepository : IClassificationLanguageRepository
     {
         private readonly SuDbContext context;
 
@@ -27,7 +24,7 @@ namespace StudentUnion0105.SQLRepositories
         public SuClassificationLanguageModel DeleteClassificationLanguage(int Id)
         {
             var suClassificationLanguage = context.dbClassificationLanguage.Find(Id);
-            if(suClassificationLanguage != null)
+            if (suClassificationLanguage != null)
             {
                 context.dbClassificationLanguage.Remove(suClassificationLanguage);
                 context.SaveChanges();

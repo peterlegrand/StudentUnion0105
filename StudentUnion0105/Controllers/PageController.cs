@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -64,7 +63,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
             var Pages = (
 
-                from l in  _PageLanguage.GetAllPageLanguages()
+                from l in _PageLanguage.GetAllPageLanguages()
 
                 where l.LanguageId == DefaultLanguageID
                 select new SuObjectVM
@@ -185,27 +184,27 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
             var PageDetails = (from s in _Page.GetAllPages()
-                         join t in _PageLanguage.GetAllPageLanguages()
-                         on s.Id equals t.PageId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             Status = s.PageStatusId
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                             ,
-                             PageDescription= t.PageDescription
-                             ,
-                             PageName = t.PageTitle
-                         }).First();
+                               join t in _PageLanguage.GetAllPageLanguages()
+                               on s.Id equals t.PageId
+                               where t.LanguageId == DefaultLanguageID && s.Id == Id
+                               select new SuObjectVM
+                               {
+                                   Id = s.Id
+                                  ,
+                                   Name = t.Name
+                                  ,
+                                   Status = s.PageStatusId
+                                  ,
+                                   ObjectLanguageId = t.Id
+                                  ,
+                                   Description = t.Description
+                                  ,
+                                   MouseOver = t.MouseOver
+                                   ,
+                                   PageDescription = t.PageDescription
+                                   ,
+                                   PageName = t.PageTitle
+                               }).First();
 
             var PageList = new List<SelectListItem>();
 
@@ -220,15 +219,15 @@ namespace StudentUnion0105.Controllers
 
             //wwwwwwwwwwwwwwwwwwwwwwwwww
             var TypeList = (from o in _PageType.GetAllPageTypes()
-                         join l in _PageTypeLanguage.GetAllPageTypeLanguages()
-                         on o.Id equals l.PageTypeId
-                         where l.LanguageId == DefaultLanguageID
-                         select new SuObjectVM
-                         {
-                             Id = o.Id
-                            ,
-                             Name = l.Name
-                         }).ToList();
+                            join l in _PageTypeLanguage.GetAllPageTypeLanguages()
+                            on o.Id equals l.PageTypeId
+                            where l.LanguageId == DefaultLanguageID
+                            select new SuObjectVM
+                            {
+                                Id = o.Id
+                               ,
+                                Name = l.Name
+                            }).ToList();
 
             var TypeListItem = new List<SelectListItem>();
             foreach (var TypeFromDb in TypeList)
@@ -265,7 +264,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.PageTitle= FromForm.SuObject.PageName;
+                PageLanguage.PageTitle = FromForm.SuObject.PageName;
                 PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
                 PageLanguage.ModifierId = new Guid(CurrentUser.Id);
@@ -412,7 +411,7 @@ namespace StudentUnion0105.Controllers
                 var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.Id);
                 PageLanguage.Name = FromForm.Name;
                 PageLanguage.Description = FromForm.Description;
-                PageLanguage.PageTitle= FromForm.PageName;
+                PageLanguage.PageTitle = FromForm.PageName;
                 PageLanguage.PageDescription = FromForm.PageDescription;
                 PageLanguage.MouseOver = FromForm.MouseOver;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
@@ -424,7 +423,7 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectId.ToString() });
         }
 
-        
+
 
     }
 }

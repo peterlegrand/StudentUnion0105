@@ -1,67 +1,63 @@
-﻿using Microsoft.EntityFrameworkCore;
-using StudentUnion0105.Data;
+﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
     public class SQLClassificationLevelRepository : IClassificationLevelRepository
     {
-            private readonly SuDbContext context;
+        private readonly SuDbContext context;
 
-         
-            public SQLClassificationLevelRepository(SuDbContext context)
-            {
 
-                this.context = context;
+        public SQLClassificationLevelRepository(SuDbContext context)
+        {
+
+            this.context = context;
             //PETER CURRENT ISSUE
-      //      this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            }
+            //      this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        }
 
-            public SuClassificationLevelModel AddClassificationLevel(SuClassificationLevelModel suClassificationLevel)
+        public SuClassificationLevelModel AddClassificationLevel(SuClassificationLevelModel suClassificationLevel)
+        {
+            context.dbClassificationLevel.Add(suClassificationLevel);
+            context.SaveChanges();
+            //            context.dbClassificationLevel.
+            return suClassificationLevel;
+        }
+
+        public SuClassificationLevelModel DeleteClassificationLevel(int Id)
+        {
+            var suClassificationLevel = context.dbClassificationLevel.Find(Id);
+            if (suClassificationLevel != null)
             {
-                context.dbClassificationLevel.Add(suClassificationLevel);
+                context.dbClassificationLevel.Remove(suClassificationLevel);
                 context.SaveChanges();
-//            context.dbClassificationLevel.
-                return suClassificationLevel;
-            }
-
-            public SuClassificationLevelModel DeleteClassificationLevel(int Id)
-            {
-                var suClassificationLevel = context.dbClassificationLevel.Find(Id);
-                if (suClassificationLevel != null)
-                {
-                    context.dbClassificationLevel.Remove(suClassificationLevel);
-                    context.SaveChanges();
-
-                }
-                return suClassificationLevel;
 
             }
+            return suClassificationLevel;
 
-            public IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels()
-            {
+        }
+
+        public IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels()
+        {
             return context.dbClassificationLevel;//.AsNoTracking();
-            }
+        }
 
-            public SuClassificationLevelModel GetClassificationLevel(int Id)
-            {
-                return context.dbClassificationLevel.Find(Id);
-            }
+        public SuClassificationLevelModel GetClassificationLevel(int Id)
+        {
+            return context.dbClassificationLevel.Find(Id);
+        }
 
-            public SuClassificationLevelModel UpdateClassificationLevel(SuClassificationLevelModel suClassificationLevelChanges)
-            {
-                var suClassificationLevel = context.dbClassificationLevel.Attach(suClassificationLevelChanges);
-                suClassificationLevel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-          
-                 context.SaveChanges();
-                return suClassificationLevelChanges;
-            
-            }
+        public SuClassificationLevelModel UpdateClassificationLevel(SuClassificationLevelModel suClassificationLevelChanges)
+        {
+            var suClassificationLevel = context.dbClassificationLevel.Attach(suClassificationLevelChanges);
+            suClassificationLevel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            context.SaveChanges();
+            return suClassificationLevelChanges;
+
         }
     }
+}
 

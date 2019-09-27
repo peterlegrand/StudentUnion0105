@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -97,10 +97,14 @@ namespace StudentUnion0105.Controllers
                          select new SuObjectVM
                          {
                              Id = s.Id
-                            , Name = t.Name
-                            , ObjectLanguageId = t.Id
-                            , Description = t.Description
-                            , MouseOver = t.MouseOver
+                            ,
+                             Name = t.Name
+                            ,
+                             ObjectLanguageId = t.Id
+                            ,
+                             Description = t.Description
+                            ,
+                             MouseOver = t.MouseOver
                          }).First();
 
             return View(test1);
@@ -123,7 +127,7 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
                 var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.ObjectLanguageId);
                 ContentTypeLanguage.Name = test3.Name;
-                ContentTypeLanguage.Description= test3.Description;
+                ContentTypeLanguage.Description = test3.Description;
                 ContentTypeLanguage.MouseOver = test3.MouseOver;
                 ContentTypeLanguage.ModifiedDate = DateTime.Now;
                 ContentTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
@@ -141,18 +145,23 @@ namespace StudentUnion0105.Controllers
         {
 
             var ContentLanguage = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-                                          join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                                          where c.ContentTypeId == Id
-                                          select new SuObjectVM
-                                          {
-                                              Id = c.Id
-                                          ,   Name = c.Name
-                                          ,   Language = l.LanguageName
-                                          ,   Description = c.Description
-                                          ,   MouseOver = c.MouseOver
-                                          ,   ObjectId = c.ContentTypeId
-                                          }).ToList();
+                                   join l in _language.GetAllLanguages()
+                  on c.LanguageId equals l.Id
+                                   where c.ContentTypeId == Id
+                                   select new SuObjectVM
+                                   {
+                                       Id = c.Id
+                                   ,
+                                       Name = c.Name
+                                   ,
+                                       Language = l.LanguageName
+                                   ,
+                                       Description = c.Description
+                                   ,
+                                       MouseOver = c.MouseOver
+                                   ,
+                                       ObjectId = c.ContentTypeId
+                                   }).ToList();
             ViewBag.Id = Id;
 
             return View(ContentLanguage);
@@ -169,7 +178,7 @@ namespace StudentUnion0105.Controllers
 
             var SuLanguage = (from l in _language.GetAllLanguages()
                               where !LanguagesAlready.Contains(l.Id)
-                              && l.Active 
+                              && l.Active
                               select new SelectListItem
                               {
                                   Value = l.Id.ToString()

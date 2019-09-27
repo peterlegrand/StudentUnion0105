@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Models
 {
@@ -18,6 +15,6 @@ namespace StudentUnion0105.Models
 
         [ForeignKey("ProjectStatusId")]
         public virtual SuProjectStatusModel ProjectStatus { get; set; }
-        
+
     }
 }

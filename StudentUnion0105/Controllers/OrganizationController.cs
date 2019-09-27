@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
-using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -24,7 +23,7 @@ namespace StudentUnion0105.Controllers
         private readonly IOrganizationTypeRepository _organizationType;
         private readonly IOrganizationTypeLanguageRepository _organizationTypeLanguage;
         private readonly SuDbContext _context;
-              private readonly IGetOrganizationStructureRepository _organizationStructure;
+        private readonly IGetOrganizationStructureRepository _organizationStructure;
 
         public OrganizationController(UserManager<SuUser> userManager
             , IOrganizationLanguageRepository OrganizationLanguage
@@ -44,7 +43,7 @@ namespace StudentUnion0105.Controllers
             _organizationType = organizationType;
             _organizationTypeLanguage = organizationTypeLanguage;
             _context = context;
-                        _organizationStructure = OrganizationStructure;
+            _organizationStructure = OrganizationStructure;
         }
 
         //PETER probably can be deleted
@@ -68,61 +67,61 @@ namespace StudentUnion0105.Controllers
             var c = new OrgStructureWithDepth { MaxLevel = maxLevel, OrgStructure = a };
             return View(c);
         }
-//        public async Task<IActionResult> Index()
-//        {
-//            var CurrentUser = await userManager.GetUserAsync(User);
-//            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+        //        public async Task<IActionResult> Index()
+        //        {
+        //            var CurrentUser = await userManager.GetUserAsync(User);
+        //            var DefaultLanguageID = CurrentUser.DefaultLangauge;
 
-//            var a1 = (from o in _Organization.GetAllOrganizations()
-//                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
-//                      on o.Id equals l.OrganizationId
-//                      where l.LanguageId == DefaultLanguageID
-//                      && o.ParentOrganizationId == null
-//                      select new SuObjectVM()
-//                      {
-//                          Id = o.Id
-//                           ,
-//                          Name = l.Name
-//                      });
-//            var a2 = (from o in _Organization.GetAllOrganizations()
-//                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
-//                      on o.Id equals l.OrganizationId
-//                      where l.LanguageId == DefaultLanguageID
-//                      && o.ParentOrganizationId != null
-//                      select new SuObjectVM()
-//                      {
-//                          Id = o.Id
-//                           ,
-//                          Name = l.Name
+        //            var a1 = (from o in _Organization.GetAllOrganizations()
+        //                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
+        //                      on o.Id equals l.OrganizationId
+        //                      where l.LanguageId == DefaultLanguageID
+        //                      && o.ParentOrganizationId == null
+        //                      select new SuObjectVM()
+        //                      {
+        //                          Id = o.Id
+        //                           ,
+        //                          Name = l.Name
+        //                      });
+        //            var a2 = (from o in _Organization.GetAllOrganizations()
+        //                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
+        //                      on o.Id equals l.OrganizationId
+        //                      where l.LanguageId == DefaultLanguageID
+        //                      && o.ParentOrganizationId != null
+        //                      select new SuObjectVM()
+        //                      {
+        //                          Id = o.Id
+        //                           ,
+        //                          Name = l.Name
 
-//,
-//                          NullId = o.ParentOrganizationId
+        //,
+        //                          NullId = o.ParentOrganizationId
 
-//                      }).ToList();
+        //                      }).ToList();
 
-//            ObjectsOf5LevelsViewModel a = new ObjectsOf5LevelsViewModel { SuObject1 = a1, SuObject2 = a2, SuObject3 = a2, SuObject4 = a2, SuObject5 = a2 };
+        //            ObjectsOf5LevelsViewModel a = new ObjectsOf5LevelsViewModel { SuObject1 = a1, SuObject2 = a2, SuObject3 = a2, SuObject4 = a2, SuObject5 = a2 };
 
-//            return View(a);
-//        }
-//        public async Task<IActionResult> Index2()
-//        {
-//            var CurrentUser = await userManager.GetUserAsync(User);
-//            var DefaultLanguageID = CurrentUser.DefaultLangauge;
-//            var Organizations = (
+        //            return View(a);
+        //        }
+        //        public async Task<IActionResult> Index2()
+        //        {
+        //            var CurrentUser = await userManager.GetUserAsync(User);
+        //            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+        //            var Organizations = (
 
-//                from l in _OrganizationLanguage.GetAllOrganizationLanguages()
+        //                from l in _OrganizationLanguage.GetAllOrganizationLanguages()
 
-//                where l.LanguageId == DefaultLanguageID
-//                select new SuObjectVM
+        //                where l.LanguageId == DefaultLanguageID
+        //                select new SuObjectVM
 
 
-//                {
-//                    Id = l.OrganizationId
-//                             ,
-//                    Name = l.Name
-//                }).ToList();
-//            return View(Organizations);
-//        }
+        //                {
+        //                    Id = l.OrganizationId
+        //                             ,
+        //                    Name = l.Name
+        //                }).ToList();
+        //            return View(Organizations);
+        //        }
 
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
@@ -131,7 +130,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
             var ParentOrganization = _Organization.GetOrganization(Id);
 
-var StatusList = new List<SelectListItem>();
+            var StatusList = new List<SelectListItem>();
 
             foreach (var StatusFromDb in _OrganizationStatus.GetAllOrganizationStatus())
             {
@@ -145,7 +144,7 @@ var StatusList = new List<SelectListItem>();
             var test1 = (from o in _organizationType.GetAllOrganizationTypes()
                          join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on o.Id equals l.OrganizationTypeId
-                         where l.LanguageId == DefaultLanguageID 
+                         where l.LanguageId == DefaultLanguageID
                          select new SuObjectVM
                          {
                              Id = o.Id
@@ -166,9 +165,9 @@ var StatusList = new List<SelectListItem>();
 
             SuObjectVM Parent = new SuObjectVM()
             {
-                NullId = ParentOrganization == null ? 0:ParentOrganization.Id
+                NullId = ParentOrganization == null ? 0 : ParentOrganization.Id
             };
-            var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject=  Parent , SomeKindINumSelectListItem = StatusList, ProbablyTypeListItem = TypeList };
+            var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject = Parent, SomeKindINumSelectListItem = StatusList, ProbablyTypeListItem = TypeList };
             return View(OrganizationAndStatus);
         }
 
@@ -182,7 +181,7 @@ var StatusList = new List<SelectListItem>();
                 Organization.CreatedDate = DateTime.Now;
                 Organization.OrganizationStatusId = FromForm.SuObject.Status;
                 Organization.OrganizationTypeId = FromForm.SuObject.Type;
-                if(FromForm.SuObject.NullId != 0)
+                if (FromForm.SuObject.NullId != 0)
                 { Organization.ParentOrganizationId = FromForm.SuObject.NullId; }
                 var NewOrganization = _Organization.AddOrganization(Organization);
 

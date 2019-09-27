@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateLanguageModel DeleteProcessTemplateLanguage(int Id)
         {
-           var suProcessTemplateLanguage =  context.dbProcessTemplateLanguage.Find(Id);
-            if(suProcessTemplateLanguage != null)
+            var suProcessTemplateLanguage = context.dbProcessTemplateLanguage.Find(Id);
+            if (suProcessTemplateLanguage != null)
             {
                 context.dbProcessTemplateLanguage.Remove(suProcessTemplateLanguage);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuProcessTemplateLanguageModel> GetAllProcessTemplateLanguages()
         {
             return context.dbProcessTemplateLanguage;
-            
+
         }
 
         public SuProcessTemplateLanguageModel GetProcessTemplateLanguage(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateLanguageModel UpdateProcessTemplateLanguage(SuProcessTemplateLanguageModel suProcessTemplateLanguageChanges)
         {
-           var changedProcessTemplateLanguage = context.dbProcessTemplateLanguage.Attach(suProcessTemplateLanguageChanges);
+            var changedProcessTemplateLanguage = context.dbProcessTemplateLanguage.Attach(suProcessTemplateLanguageChanges);
             changedProcessTemplateLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateLanguageChanges;

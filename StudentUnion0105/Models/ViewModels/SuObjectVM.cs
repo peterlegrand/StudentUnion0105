@@ -1,9 +1,5 @@
-﻿using StudentUnion0105.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.ViewModels
 {
@@ -11,7 +7,7 @@ namespace StudentUnion0105.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [Display(Name ="Menu name")]
+        [Display(Name = "Menu name")]
         public string MenuName { get; set; }
         [Display(Name = "Mouse over")]
         public string MouseOver { get; set; }
@@ -20,7 +16,7 @@ namespace StudentUnion0105.ViewModels
         public int Type { get; set; }
         [Display(Name = "Has dropdown")]
 
-        public bool HasDropDown  { get; set; }
+        public bool HasDropDown { get; set; }
         public string Language { get; set; }
         public int ObjectId { get; set; }
         [Display(Name = "Date level")]

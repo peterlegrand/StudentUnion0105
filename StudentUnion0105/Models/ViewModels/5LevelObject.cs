@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace StudentUnion0105.ViewModels
 {
@@ -9,7 +6,7 @@ namespace StudentUnion0105.ViewModels
     {
         public IEnumerable<SuObjectVM> SuObject1 { get; set; }
 
-        public IEnumerable<SuObjectVM>  SuObject2 { get; set; }
+        public IEnumerable<SuObjectVM> SuObject2 { get; set; }
 
         public IEnumerable<SuObjectVM> SuObject3 { get; set; }
 

@@ -2,10 +2,7 @@
 using StudentUnion0105.Data;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.SPModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +7,10 @@ using StudentUnion0105.Models;
 using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -55,17 +55,17 @@ namespace StudentUnion0105.Controllers
             var pageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
                       on c.Id equals l.PageSectionId
-                                       where c.PageId == Id
-                                       && l.LanguageId == DefaultLanguageID
-                                       orderby c.Sequence
-                                       select new SuObjectVM
-                                       {
-                                           Id = c.Id
-                                       ,
-                                           Name = l.PageSectionName
-                                       ,
-                                           ObjectId = c.PageId
-                                       }).ToList();
+                               where c.PageId == Id
+                               && l.LanguageId == DefaultLanguageID
+                               orderby c.Sequence
+                               select new SuObjectVM
+                               {
+                                   Id = c.Id
+                               ,
+                                   Name = l.PageSectionName
+                               ,
+                                   ObjectId = c.PageId
+                               }).ToList();
             ViewBag.ObjectId = Id.ToString();
             //PETER TODO add a classification label so you know to which classification the levels belong.
             return View(pageSection);
@@ -78,45 +78,52 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
             var PageSection = (from c in _pageSection.GetAllPageSections()
-                         join l in _pageSectionLanguage.GetAllPageSectionLanguages()
-                         on c.Id equals l.PageSectionId
-                         where c.Id == Id && l.LanguageId == DefaultLanguageID
-                         orderby c.Sequence
-                         select new SuObjectVMPageSection
-                         {
-                             Id = c.PageId
-                             , ObjectId = c.Id
-                             ,
-                             LanguageId = l.LanguageId
-                             ,
-                             ObjectLanguageId = l.Id
-                             ,
-                             Type = c.PageSectionTypeId
-                             ,
-                             ShowSectionTitle = c.ShowSectionTitle
-                             ,
-                             ShowSectionDescription = c.ShowSectionTitleDescription
-                             ,
-                             ShowContentTypeTitle = c.ShowContentTypeTitle
-                             ,
-                             ShowContentTypeTitleDescription = c.ShowContentTypeDescription
-                             ,
-                             OneTwoColumns = c.OneTwoColumns
-                             ,
-                             ContentTypeId = c.ContentTypeId
-                             ,
-                             SortById = c.SortById
-                             ,
-                             MaxContent = c.MaxContent
-                             ,
-                             HasPaging = c.HasPaging
-                             , Sequence = c.Sequence
-                             , Name = l.PageSectionName
-                             , Description = l.PageSectionDescription
-                             , PageSectionTitle = l.PageSectionTitle
-                             , PageSectionTitleDescription = l.PageSectionTitleDescription
-                             , MouseOver = l.PageSectionMouseOver
-                         }).First();
+                               join l in _pageSectionLanguage.GetAllPageSectionLanguages()
+                               on c.Id equals l.PageSectionId
+                               where c.Id == Id && l.LanguageId == DefaultLanguageID
+                               orderby c.Sequence
+                               select new SuObjectVMPageSection
+                               {
+                                   Id = c.PageId
+                                   ,
+                                   ObjectId = c.Id
+                                   ,
+                                   LanguageId = l.LanguageId
+                                   ,
+                                   ObjectLanguageId = l.Id
+                                   ,
+                                   Type = c.PageSectionTypeId
+                                   ,
+                                   ShowSectionTitle = c.ShowSectionTitle
+                                   ,
+                                   ShowSectionDescription = c.ShowSectionTitleDescription
+                                   ,
+                                   ShowContentTypeTitle = c.ShowContentTypeTitle
+                                   ,
+                                   ShowContentTypeTitleDescription = c.ShowContentTypeDescription
+                                   ,
+                                   OneTwoColumns = c.OneTwoColumns
+                                   ,
+                                   ContentTypeId = c.ContentTypeId
+                                   ,
+                                   SortById = c.SortById
+                                   ,
+                                   MaxContent = c.MaxContent
+                                   ,
+                                   HasPaging = c.HasPaging
+                                   ,
+                                   Sequence = c.Sequence
+                                   ,
+                                   Name = l.PageSectionName
+                                   ,
+                                   Description = l.PageSectionDescription
+                                   ,
+                                   PageSectionTitle = l.PageSectionTitle
+                                   ,
+                                   PageSectionTitleDescription = l.PageSectionTitleDescription
+                                   ,
+                                   MouseOver = l.PageSectionMouseOver
+                               }).First();
 
             //Existing levels
             List<SelectListItem> ExistingLevels = (from c in _pageSection.GetAllPageSections()
@@ -224,11 +231,11 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PageSectionAndStatusViewModel UpdatedPageSection)
         {
-            
-                if (ModelState.IsValid)
-                {
-                    var CurrentUser = await userManager.GetUserAsync(User);
-                    var DefaultLanguageID = CurrentUser.DefaultLangauge;
+
+            if (ModelState.IsValid)
+            {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
                 var a = _context.Database.ExecuteSqlCommand("PageSectionUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
                     "@p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20",
                     parameters: new[] { UpdatedPageSection.SuObject.ObjectId.ToString()           //0
@@ -270,67 +277,67 @@ namespace StudentUnion0105.Controllers
                 ////////
                 ///
 
-//                if (oldValue < UpdatedPageSection.SuObject.Sequence)
-//                {
-//                    int x = 0;
-//                    while (x < AllSections.Count())
-////                        foreach (var x in AllSections)
-//                    {
-//                        SuPageSectionModel p = new SuPageSectionModel();
-//                        p = _pageSection.GetPageSection(AllSections[1].Id);
+                //                if (oldValue < UpdatedPageSection.SuObject.Sequence)
+                //                {
+                //                    int x = 0;
+                //                    while (x < AllSections.Count())
+                ////                        foreach (var x in AllSections)
+                //                    {
+                //                        SuPageSectionModel p = new SuPageSectionModel();
+                //                        p = _pageSection.GetPageSection(AllSections[1].Id);
 
-////                        if (x.PageId == UpdatedPageSection.SuObject.Id && x.Sequence > oldValue.Sequence && x.Sequence <= UpdatedPageSection.SuObject.Sequence)
-//                            if ( p.Sequence > oldValue && p.Sequence <= UpdatedPageSection.SuObject.Sequence)
-//                            {
-//                                p.Sequence--;
-//                             _pageSection.UpdatePageSection(p);
-                            
-//                        }
-//                        x++;
-//                    }
-//                }
-//                else
-//                {
-//                    int x = 0;
-//                    while (x < AllSections.Count())
-//                    {
-//                        SuPageSectionModel p = new SuPageSectionModel();
-//                        if (p.Sequence < oldValue && p.Sequence >= UpdatedPageSection.SuObject.Sequence)
-//                        {
-//                            p.Sequence++;
-//                            _pageSection.UpdatePageSection(p);
-//                        }
-//                        x++;
-//                    }
-//                }
+                ////                        if (x.PageId == UpdatedPageSection.SuObject.Id && x.Sequence > oldValue.Sequence && x.Sequence <= UpdatedPageSection.SuObject.Sequence)
+                //                            if ( p.Sequence > oldValue && p.Sequence <= UpdatedPageSection.SuObject.Sequence)
+                //                            {
+                //                                p.Sequence--;
+                //                             _pageSection.UpdatePageSection(p);
 
-//                    var PageSection = new SuPageSectionModel();
-//                    PageSection.Sequence = UpdatedPageSection.SuObject.Sequence;
-//                PageSection.Id = UpdatedPageSection.SuObject.ObjectId;
-//                PageSection.PageId = UpdatedPageSection.SuObject.Id;
-//                PageSection.PageSectionTypeId = UpdatedPageSection.SuObject.Type;
-//                    PageSection.ShowSectionTitle = UpdatedPageSection.SuObject.ShowSectionTitle;
-//                    PageSection.ShowSectionTitleDescription = UpdatedPageSection.SuObject.ShowSectionDescription;
-//                    PageSection.ShowContentTypeTitle = UpdatedPageSection.SuObject.ShowContentTypeTitle;
-//                    PageSection.ShowContentTypeDescription = UpdatedPageSection.SuObject.ShowContentTypeTitleDescription;
-//                    PageSection.OneTwoColumns = UpdatedPageSection.SuObject.OneTwoColumns;
-//                    if (UpdatedPageSection.SuObject.ContentTypeId != 0)
-//                        PageSection.ContentTypeId = UpdatedPageSection.SuObject.ContentTypeId;
-//                    PageSection.SortById = UpdatedPageSection.SuObject.SortById;
-//                    PageSection.MaxContent = UpdatedPageSection.SuObject.MaxContent;
-//                    PageSection.HasPaging = UpdatedPageSection.SuObject.HasPaging;
+                //                        }
+                //                        x++;
+                //                    }
+                //                }
+                //                else
+                //                {
+                //                    int x = 0;
+                //                    while (x < AllSections.Count())
+                //                    {
+                //                        SuPageSectionModel p = new SuPageSectionModel();
+                //                        if (p.Sequence < oldValue && p.Sequence >= UpdatedPageSection.SuObject.Sequence)
+                //                        {
+                //                            p.Sequence++;
+                //                            _pageSection.UpdatePageSection(p);
+                //                        }
+                //                        x++;
+                //                    }
+                //                }
 
-//                    var NewPageSection = _pageSection.UpdatePageSection(PageSection);
+                //                    var PageSection = new SuPageSectionModel();
+                //                    PageSection.Sequence = UpdatedPageSection.SuObject.Sequence;
+                //                PageSection.Id = UpdatedPageSection.SuObject.ObjectId;
+                //                PageSection.PageId = UpdatedPageSection.SuObject.Id;
+                //                PageSection.PageSectionTypeId = UpdatedPageSection.SuObject.Type;
+                //                    PageSection.ShowSectionTitle = UpdatedPageSection.SuObject.ShowSectionTitle;
+                //                    PageSection.ShowSectionTitleDescription = UpdatedPageSection.SuObject.ShowSectionDescription;
+                //                    PageSection.ShowContentTypeTitle = UpdatedPageSection.SuObject.ShowContentTypeTitle;
+                //                    PageSection.ShowContentTypeDescription = UpdatedPageSection.SuObject.ShowContentTypeTitleDescription;
+                //                    PageSection.OneTwoColumns = UpdatedPageSection.SuObject.OneTwoColumns;
+                //                    if (UpdatedPageSection.SuObject.ContentTypeId != 0)
+                //                        PageSection.ContentTypeId = UpdatedPageSection.SuObject.ContentTypeId;
+                //                    PageSection.SortById = UpdatedPageSection.SuObject.SortById;
+                //                    PageSection.MaxContent = UpdatedPageSection.SuObject.MaxContent;
+                //                    PageSection.HasPaging = UpdatedPageSection.SuObject.HasPaging;
 
-//                    var PageSectionLanguage = new SuPageSectionLanguageModel();
+                //                    var NewPageSection = _pageSection.UpdatePageSection(PageSection);
 
-//                    PageSectionLanguage.PageSectionName = UpdatedPageSection.SuObject.Name;
-//                    PageSectionLanguage.PageSectionDescription = UpdatedPageSection.SuObject.Description;
-//                    PageSectionLanguage.PageSectionTitle = UpdatedPageSection.SuObject.PageSectionTitle;
-//                    PageSectionLanguage.PageSectionTitleDescription = UpdatedPageSection.SuObject.PageSectionTitleDescription;
-//                    PageSectionLanguage.PageSectionMouseOver = UpdatedPageSection.SuObject.MouseOver;
-//                    PageSectionLanguage.Id= UpdatedPageSection.SuObject.ObjectLanguageId;
-//                    _pageSectionLanguage.UpdatePageSectionLanguage(PageSectionLanguage);
+                //                    var PageSectionLanguage = new SuPageSectionLanguageModel();
+
+                //                    PageSectionLanguage.PageSectionName = UpdatedPageSection.SuObject.Name;
+                //                    PageSectionLanguage.PageSectionDescription = UpdatedPageSection.SuObject.Description;
+                //                    PageSectionLanguage.PageSectionTitle = UpdatedPageSection.SuObject.PageSectionTitle;
+                //                    PageSectionLanguage.PageSectionTitleDescription = UpdatedPageSection.SuObject.PageSectionTitleDescription;
+                //                    PageSectionLanguage.PageSectionMouseOver = UpdatedPageSection.SuObject.MouseOver;
+                //                    PageSectionLanguage.Id= UpdatedPageSection.SuObject.ObjectLanguageId;
+                //                    _pageSectionLanguage.UpdatePageSectionLanguage(PageSectionLanguage);
 
 
             }
@@ -414,15 +421,15 @@ namespace StudentUnion0105.Controllers
 
             //ContentType
             var ContentTypes = (from o in _contentType.GetAllContentTypes()
-                         join l in _contentTypeLanguage.GetAllContentTypeLanguages()
-                         on o.Id equals l.ContentTypeId
-                         where l.LanguageId == DefaultLanguageID
-                         select new SuObjectVM
-                         {
-                             Id = o.Id
-                            ,
-                             Name = l.Name
-                         }).ToList();
+                                join l in _contentTypeLanguage.GetAllContentTypeLanguages()
+                                on o.Id equals l.ContentTypeId
+                                where l.LanguageId == DefaultLanguageID
+                                select new SuObjectVM
+                                {
+                                    Id = o.Id
+                                   ,
+                                    Name = l.Name
+                                }).ToList();
 
             var ContentTypeList = new List<SelectListItem>();
             ContentTypeList.Add(new SelectListItem { Value = "0", Text = "No type" });
@@ -511,8 +518,8 @@ namespace StudentUnion0105.Controllers
                 PageSection.ShowContentTypeTitle = NewLevel.SuObject.ShowContentTypeTitle;
                 PageSection.ShowContentTypeDescription = NewLevel.SuObject.ShowContentTypeTitleDescription;
                 PageSection.OneTwoColumns = NewLevel.SuObject.OneTwoColumns;
-                if(NewLevel.SuObject.ContentTypeId!=0)
-                PageSection.ContentTypeId = NewLevel.SuObject.ContentTypeId;
+                if (NewLevel.SuObject.ContentTypeId != 0)
+                    PageSection.ContentTypeId = NewLevel.SuObject.ContentTypeId;
                 PageSection.SortById = NewLevel.SuObject.SortById;
                 PageSection.MaxContent = NewLevel.SuObject.MaxContent;
                 PageSection.HasPaging = NewLevel.SuObject.HasPaging;
@@ -523,7 +530,7 @@ namespace StudentUnion0105.Controllers
 
                 PageSectionLanguage.PageSectionName = NewLevel.SuObject.Name;
                 PageSectionLanguage.PageSectionDescription = NewLevel.SuObject.Description;
-                PageSectionLanguage.PageSectionTitle= NewLevel.SuObject.PageSectionTitle;
+                PageSectionLanguage.PageSectionTitle = NewLevel.SuObject.PageSectionTitle;
                 PageSectionLanguage.PageSectionTitleDescription = NewLevel.SuObject.PageSectionTitleDescription;
                 PageSectionLanguage.PageSectionMouseOver = NewLevel.SuObject.MouseOver;
                 PageSectionLanguage.PageSectionId = NewPageSection.Id;

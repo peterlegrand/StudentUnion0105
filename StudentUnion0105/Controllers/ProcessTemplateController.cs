@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +6,9 @@ using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -78,8 +77,8 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            
-            var ProcessTemplateAndGroup = new SuObjectAndStatusViewModel {  SomeKindINumSelectListItem = ProcessTemplateGroupList };
+
+            var ProcessTemplateAndGroup = new SuObjectAndStatusViewModel { SomeKindINumSelectListItem = ProcessTemplateGroupList };
             return View(ProcessTemplateAndGroup);
         }
 

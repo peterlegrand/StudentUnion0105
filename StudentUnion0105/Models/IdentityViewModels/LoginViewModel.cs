@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StudentUnion0105.IdentityViewModels
 {
@@ -14,7 +10,7 @@ namespace StudentUnion0105.IdentityViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Display(Name ="Remember me")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
 
     }

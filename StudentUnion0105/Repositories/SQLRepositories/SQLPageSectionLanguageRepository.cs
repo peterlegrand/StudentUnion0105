@@ -2,14 +2,12 @@
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    public class SQLPageSectionLanguageRepository: IPageSectionLanguageRepository
+    public class SQLPageSectionLanguageRepository : IPageSectionLanguageRepository
     {
         private readonly SuDbContext context;
 
@@ -18,11 +16,11 @@ namespace StudentUnion0105.SQLRepositories
             this.context = context;
         }
 
-       
 
-      
 
-       
+
+
+
 
         public IEnumerable<SuPageSectionLanguageModel> GetAllPageSectionLanguages()
         {
@@ -34,14 +32,15 @@ namespace StudentUnion0105.SQLRepositories
             return context.dbPageSectionLanguage.Find(Id);
         }
 
-      
+
 
 
         public SuPageSectionLanguageModel AddPageSectionLanguage(SuPageSectionLanguageModel suPageSectionLanguage)
         {
             context.dbPageSectionLanguage.Add(suPageSectionLanguage);
             context.SaveChanges();
-            return suPageSectionLanguage;       }
+            return suPageSectionLanguage;
+        }
 
         public SuPageSectionLanguageModel UpdatePageSectionLanguage(SuPageSectionLanguageModel suPageSectionLanguageChanges)
         {

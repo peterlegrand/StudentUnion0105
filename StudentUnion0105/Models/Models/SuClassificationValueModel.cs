@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Models
 {
     public class SuClassificationValueModel
     {
         public int Id { get; set; }
-//        [Display(Name="SuClassificationLevelModel")]
+        //        [Display(Name="SuClassificationLevelModel")]
         public virtual int ClassificationId { get; set; }
         public int? ParentValueId { get; set; }
         public DateTimeOffset? DateFrom { get; set; }
@@ -24,5 +21,5 @@ namespace StudentUnion0105.Models
         public virtual SuClassificationModel Classification { get; set; }
         public virtual ICollection<SuClassificationValueLanguageModel> ClassificationValueLanguages { get; set; }
     }
- 
+
 }

@@ -5,9 +5,7 @@ using StudentUnion0105.IdentityViewModels;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -84,8 +82,8 @@ namespace StudentUnion0105.Controllers
                 }
 
             }
-//if(Model.Users.Count()>1)
-//            Model.Users.Sort();
+            //if(Model.Users.Count()>1)
+            //            Model.Users.Sort();
             var ClaimList = await roleManager.GetClaimsAsync(role);
             //            Claim Claim1 = new Claim();
             if (ClaimList.Count > 0)
@@ -185,7 +183,7 @@ namespace StudentUnion0105.Controllers
                 bool CheckedUser = u.IsSelected;
 
                 bool HaveUser = false;
-                SuUser AssignedUser = new  SuUser();
+                SuUser AssignedUser = new SuUser();
 
                 foreach (var x in AssignedUsers)
                 {
@@ -194,7 +192,7 @@ namespace StudentUnion0105.Controllers
                         HaveUser = true;
                         AssignedUser = x;
                     }
-                   
+
 
                 }
                 if (CheckedUser && !HaveUser)

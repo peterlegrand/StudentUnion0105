@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -72,7 +72,7 @@ namespace StudentUnion0105.Controllers
                 var ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel();
 
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupName = FromForm.Name;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription= FromForm.Description;
+                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = FromForm.Description;
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver = FromForm.MouseOver;
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupId = NewProcessTemplateGroup.Id;
                 ProcessTemplateGroupLanguage.LanguageId = DefaultLanguageID;

@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldModel DeleteProcessTemplateField(int Id)
         {
-           var suProcessTemplateField =  context.dbProcessTemplateField.Find(Id);
-            if(suProcessTemplateField != null)
+            var suProcessTemplateField = context.dbProcessTemplateField.Find(Id);
+            if (suProcessTemplateField != null)
             {
                 context.dbProcessTemplateField.Remove(suProcessTemplateField);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuProcessTemplateFieldModel> GetAllProcessTemplateFields()
         {
             return context.dbProcessTemplateField;
-            
+
         }
 
         public SuProcessTemplateFieldModel GetProcessTemplateField(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldModel UpdateProcessTemplateField(SuProcessTemplateFieldModel suProcessTemplateFieldChanges)
         {
-           var changedProcessTemplateField = context.dbProcessTemplateField.Attach(suProcessTemplateFieldChanges);
+            var changedProcessTemplateField = context.dbProcessTemplateField.Attach(suProcessTemplateFieldChanges);
             changedProcessTemplateField.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFieldChanges;

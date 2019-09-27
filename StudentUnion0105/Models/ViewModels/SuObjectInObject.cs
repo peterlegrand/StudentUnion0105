@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StudentUnion0105.ViewModels
+﻿namespace StudentUnion0105.ViewModels
 {
     public class SuObjectInObject
     {

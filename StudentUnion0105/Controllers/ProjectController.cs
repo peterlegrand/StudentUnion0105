@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +6,10 @@ using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
@@ -99,7 +99,7 @@ namespace StudentUnion0105.Controllers
             {
                 NullId = ParentProject == null ? 0 : ParentProject.Id
             };
-            
+
             var ProjectAndStatus = new SuObjectAndStatusViewModel { SuObject = Parent, SomeKindINumSelectListItem = ProjectList };
             return View(ProjectAndStatus);
         }
@@ -148,11 +148,16 @@ namespace StudentUnion0105.Controllers
                          select new SuObjectVM
                          {
                              Id = s.Id
-                            , Name = t.Name
-                            , Status = s.ProjectStatusId
-                            , ObjectLanguageId = t.Id
-                            , Description = t.Description
-                            , MouseOver = t.MouseOver
+                            ,
+                             Name = t.Name
+                            ,
+                             Status = s.ProjectStatusId
+                            ,
+                             ObjectLanguageId = t.Id
+                            ,
+                             Description = t.Description
+                            ,
+                             MouseOver = t.MouseOver
 
                          }).First();
 

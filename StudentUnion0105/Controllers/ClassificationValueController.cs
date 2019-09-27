@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -6,10 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using StudentUnion0105.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace StudentUnion0105.Controllers
 {
@@ -53,7 +53,7 @@ namespace StudentUnion0105.Controllers
                 }
             }
 
-            var a = _context.dbGetClassificationValueStructure.FromSql($"ClassificationValueStructure {DefaultLanguageID}, {Id}").ToList(); 
+            var a = _context.dbGetClassificationValueStructure.FromSql($"ClassificationValueStructure {DefaultLanguageID}, {Id}").ToList();
 
             //if (a.Count != 0)
             //{
@@ -325,7 +325,7 @@ namespace StudentUnion0105.Controllers
             SuObject.ObjectId = Id;
             //------
             var xyz = _classificationValue.GetClassificationValue(Id);
-           // ClassificationValue.NullId = xyz.ParentValueId;
+            // ClassificationValue.NullId = xyz.ParentValueId;
             int Level = 1;
             var x = new SuClassificationValueModel();
             int? Parent = xyz.ParentValueId;
@@ -360,7 +360,7 @@ namespace StudentUnion0105.Controllers
                 SuObject = SuObject
                 ,
                 SomeKindINumSelectListItem = SuLanguage
-                
+
             };
 
             ViewBag.ShowInDropDown = test1.InDropDown;

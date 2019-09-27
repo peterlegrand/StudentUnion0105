@@ -1,11 +1,7 @@
 ﻿using StudentUnion0105.Data;
-using System;
+using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using StudentUnion0105.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace StudentUnion0105.SQLRepositories
 {

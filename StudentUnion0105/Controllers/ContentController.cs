@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
-using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace StudentUnion0105.Controllers
@@ -230,7 +228,7 @@ namespace StudentUnion0105.Controllers
                 new SqlParameter("@ContentId", parameters[8].Value),
                 new SqlParameter("@ClassificationValueId", x.Value)
                         };
-            var c = _context.Database.ExecuteSqlCommand("ContentValueCreate @ContentId, @ClassificationValueId", parameters2);
+                        var c = _context.Database.ExecuteSqlCommand("ContentValueCreate @ContentId, @ClassificationValueId", parameters2);
 
                     }
                 }

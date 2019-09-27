@@ -1,10 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.SQLRepositories
 {
@@ -25,8 +22,8 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldTypeLanguageModel DeleteProcessTemplateFieldTypeLanguage(int Id)
         {
-           var suProcessTemplateFieldTypeLanguage =  context.dbProcessTemplateFieldTypeLanguage.Find(Id);
-            if(suProcessTemplateFieldTypeLanguage != null)
+            var suProcessTemplateFieldTypeLanguage = context.dbProcessTemplateFieldTypeLanguage.Find(Id);
+            if (suProcessTemplateFieldTypeLanguage != null)
             {
                 context.dbProcessTemplateFieldTypeLanguage.Remove(suProcessTemplateFieldTypeLanguage);
                 context.SaveChanges();
@@ -38,7 +35,7 @@ namespace StudentUnion0105.SQLRepositories
         public IEnumerable<SuProcessTemplateFieldTypeLanguageModel> GetAllProcessTemplateFieldTypeLanguages()
         {
             return context.dbProcessTemplateFieldTypeLanguage;
-            
+
         }
 
         public SuProcessTemplateFieldTypeLanguageModel GetProcessTemplateFieldTypeLanguage(int Id)
@@ -48,7 +45,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuProcessTemplateFieldTypeLanguageModel UpdateProcessTemplateFieldTypeLanguage(SuProcessTemplateFieldTypeLanguageModel suProcessTemplateFieldTypeLanguageChanges)
         {
-           var changedProcessTemplateFieldTypeLanguage = context.dbProcessTemplateFieldTypeLanguage.Attach(suProcessTemplateFieldTypeLanguageChanges);
+            var changedProcessTemplateFieldTypeLanguage = context.dbProcessTemplateFieldTypeLanguage.Attach(suProcessTemplateFieldTypeLanguageChanges);
             changedProcessTemplateFieldTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFieldTypeLanguageChanges;
