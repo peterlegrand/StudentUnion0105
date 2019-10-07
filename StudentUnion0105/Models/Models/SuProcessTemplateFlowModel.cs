@@ -9,6 +9,7 @@ namespace StudentUnion0105.Models
         public int ProcessTemplateId { get; set; }
         public int ProcessTemplateFromStepId { get; set; }
         public int ProcessTemplateToStepId { get; set; }
+        public string ConditionRelation { get; set; }
         [ForeignKey("ProcessTemplateId")]
         public virtual SuProcessTemplateModel ProcessTemplate { get; set; }
         public virtual ICollection<SuProcessTemplateFlowLanguageModel> ProcessTemplateFlowLanguages { get; set; }

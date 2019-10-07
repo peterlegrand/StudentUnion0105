@@ -75,7 +75,6 @@ namespace StudentUnion0105
             services.AddTransient<IProcessTemplateFieldRepository, SQLProcessTemplateFieldRepository>();
             services.AddTransient<IProcessTemplateFieldTypeLanguageRepository, SQLProcessTemplateFieldTypeLanguageRepository>();
             services.AddTransient<IProcessTemplateFieldTypeRepository, SQLProcessTemplateFieldTypeRepository>();
-            services.AddTransient<IProcessTemplateFlowConditionTypeLanguageRepository, SQLProcessTemplateFlowConditionTypeLanguageRepository>();
             services.AddTransient<IProcessTemplateFlowConditionTypeRepository, SQLProcessTemplateFlowConditionTypeRepository>();
             services.AddTransient<IProcessTemplateFlowConditionLanguageRepository, SQLProcessTemplateFlowConditionLanguageRepository>();
             services.AddTransient<IProcessTemplateFlowConditionRepository, SQLProcessTemplateFlowConditionRepository>();

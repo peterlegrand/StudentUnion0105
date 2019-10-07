@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191007133331_extra2")]
+    partial class extra2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1223c7e9-e75c-4e9a-8b94-255a72734059",
-                            ConcurrencyStamp = "db7801dd-ef18-4d6e-bf9e-08ecd9923d1f",
+                            Id = "a35c5aef-5c34-4633-a5bd-5aa43967b743",
+                            ConcurrencyStamp = "2b093fd8-c1ed-476d-a08e-e8a9af4911d6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "09c120ff-66ef-4f70-b67d-ff6a886f64fc",
-                            ConcurrencyStamp = "6d297fbb-93c1-4f6d-8091-5fc645942f7d",
+                            Id = "d3f834fe-fcaf-43c7-ba10-f9970c897ff5",
+                            ConcurrencyStamp = "10e3601d-ac06-44c0-9932-1d2c8f05728e",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1189,8 +1191,6 @@ namespace StudentUnion0105.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ComparisonOperatorId");
-
-                    b.Property<string>("ConditionCharacter");
 
                     b.Property<int>("ProcessTemplateConditionTypeId");
 

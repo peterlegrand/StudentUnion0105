@@ -52,7 +52,6 @@ namespace StudentUnion0105.Data
         public DbSet<SuProcessTemplateFieldModel> dbProcessTemplateField { get; set; }
         public DbSet<SuProcessTemplateFieldTypeLanguageModel> dbProcessTemplateFieldTypeLanguage { get; set; }
         public DbSet<SuProcessTemplateFieldTypeModel> dbProcessTemplateFieldType { get; set; }
-        public DbSet<SuProcessTemplateFlowConditionTypeLanguageModel> dbProcessTemplateFlowConditionTypeLanguage { get; set; }
         public DbSet<SuProcessTemplateFlowConditionTypeModel> dbProcessTemplateFlowConditionType { get; set; }
         public DbSet<SuProcessTemplateFlowConditionLanguageModel> dbProcessTemplateFlowConditionLanguage { get; set; }
         public DbSet<SuProcessTemplateFlowConditionModel> dbProcessTemplateFlowCondition { get; set; }

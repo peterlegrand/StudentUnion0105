@@ -541,4 +541,16 @@ INSERT dbProcessTemplateStepFieldStatus (Id, StatusName) VALUES (2, 'Disabled');
 INSERT dbProcessTemplateStepFieldStatus (Id, StatusName) VALUES (3, 'Editable'); 
 INSERT dbProcessTemplateStepFieldStatus (Id, StatusName) VALUES (4, 'Mandatory'); 
 
-SET IDENTITY_INSERT dbCountry OFF
+SET IDENTITY_INSERT dbProcessTemplateStepFieldStatus OFF
+SET IDENTITY_INSERT dbProcessTemplateFlowConditionType ON
+
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (1, 'Field', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (2, 'Creator', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (3, 'Security level creator', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (4, 'Role creator', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (5, 'Manager creator', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (6, 'Organization creator', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (7, 'Field - Project parent', getdate(), getdate()); 
+INSERT dbProcessTemplateFlowConditionType (Id, ConditionTypeName, CreatedDate, ModifiedDate) VALUES (8, 'Field - Organization parent', getdate(), getdate()); 
+
+SET IDENTITY_INSERT dbProcessTemplateFlowConditionType OFF

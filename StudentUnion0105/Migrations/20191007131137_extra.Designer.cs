@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191007131137_extra")]
+    partial class extra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1223c7e9-e75c-4e9a-8b94-255a72734059",
-                            ConcurrencyStamp = "db7801dd-ef18-4d6e-bf9e-08ecd9923d1f",
+                            Id = "1eed3044-3ab1-41b1-92c7-d1069d1b7ab0",
+                            ConcurrencyStamp = "8123f92e-c0d1-434f-9d58-d447df230e6b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "09c120ff-66ef-4f70-b67d-ff6a886f64fc",
-                            ConcurrencyStamp = "6d297fbb-93c1-4f6d-8091-5fc645942f7d",
+                            Id = "122785d8-5c84-4c11-b5de-0281d8b38bca",
+                            ConcurrencyStamp = "99d17113-a069-45f5-b66d-f0e873895e56",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1188,13 +1190,9 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ComparisonOperatorId");
-
-                    b.Property<string>("ConditionCharacter");
-
                     b.Property<int>("ProcessTemplateConditionTypeId");
 
-                    b.Property<int?>("ProcessTemplateFieldId");
+                    b.Property<int>("ProcessTemplateFieldId");
 
                     b.Property<DateTime>("ProcessTemplateFlowConditionDate");
 
@@ -1213,13 +1211,44 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbProcessTemplateFlowCondition");
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateFlowConditionTypeModel", b =>
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateFlowConditionTypeLanguageModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ConditionTypeName");
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<Guid?>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("FlowConditionTypeId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid?>("ModifierId");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlowConditionTypeId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("dbProcessTemplateFlowConditionTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateFlowConditionTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedDate");
 
@@ -2116,6 +2145,19 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuProcessTemplateFlowModel", "ProcessTemplateFlow")
                         .WithMany("ProcessTemplateFlowCondition")
                         .HasForeignKey("ProcessTemplateFlowId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateFlowConditionTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateFlowConditionTypeModel", "FlowConditionType")
+                        .WithMany("ProcessTemplateFlowConditionTypeLanguages")
+                        .HasForeignKey("FlowConditionTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
