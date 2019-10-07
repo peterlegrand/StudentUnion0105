@@ -25,20 +25,6 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.MenuName" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.MenuName" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.MenuName" class="text-danger"></span>
-        </div>
-    </div>
-    @*<div class="form-group row">
-            <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.Description" class="form-control" />
-                <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
-            </div>
-        </div>*@
-    <div class="form-group row">
         <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor" id="descriptionx" name="SuObject.Description"></textarea>
@@ -53,27 +39,19 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Status" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.NotNullId" class="col-sm-2 col-form-label">Group</label>
         <div class="col-sm-10 ">
 
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(x => x.SuObject.Status, Model.SomeKindINumSelectListItem)
-            <span asp-validation-for="@Model.SuObject.Status" class="text-danger"></span>
+            @Html.DropDownListFor(x => x.SuObject.NotNullId, Model.SomeKindINumSelectListItem)
+            <span asp-validation-for="@Model.SuObject.NotNullId" class="text-danger"></span>
 
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.SuObject.HasDropDown" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.HasDropDown" class="form-check" />
-            <span asp-validation-for="@Model.SuObject.HasDropDown" class="text-danger"></span>
         </div>
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary btn-dark">Update</button>
-            <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">Cancel</a>
+            <a asp-action="Index" asp-controller="ProcessTemplate" class="btn btn-primary btn-light">Cancel</a>
         </div>
     </div>
 </form>

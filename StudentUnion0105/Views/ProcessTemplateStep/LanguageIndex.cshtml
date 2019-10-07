@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}@{
+    ViewBag.Title = "Page section languages";
+}
+@model List<SuObjectVM>
+
+    <h1 class="font-weight-bold"><img src="~/Images/Icons/languages.jpg" title="Languages" height="60" width="60" /> Process template Step languages</h1>
+<table class="table table-bordered table-sm table-hover">
+
+    <thead class="thead-dark">
+        <tr><th>ID</th><th>Language</th><th>Name</th><th>Menu name</th><th>Mouse over name</th><th></th><th></th><th></th></tr>
+    </thead>
+    @foreach (var x in Model)
+
+    {
+<tr>
+    <td style="width: 44px">@x.Id</td>
+    <td>@x.Language</td>
+    <td>@x.Name</td>
+    <td>@x.MenuName</td>
+    <td>@x.MouseOver</td>
+    <td>@x.ObjectId</td>
+    @*PETER TODO Hide the object ID somehow would be nice*@
+
+    <td style="width: 22px"><a asp-controller="ProcessTemplateStep" asp-action="LanguageEdit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
+    <td style="width: 22px"><a asp-controller="ProcessTemplateStep" asp-action="LanguageDelete" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
+</tr>
+    }
+</table>
+<a asp-controller="ProcessTemplateStep" asp-action="LanguageCreate" asp-route-id=@ViewBag.Id asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/languages.jpg" title="Create language" height="20" width="20" /> Create language</a>
+<a asp-controller="ProcessTemplateStep" asp-action="Index"><img src="~/Images/Icons/Step.png" title="Process Steps" height="20" width="20" /> Process Steps</a>

@@ -97,14 +97,25 @@ namespace StudentUnion0105.Controllers
             , "ContentValueCreate.sql"
             ,"GetContentStatus.sql"
             , "GetContentType.sql"
+            , "GetDataType.sql"
             , "GetLanguage.sql"
+            , "GetMasterList.sql"
+            , "GetProcessTemplateGroup.sql"
             , "GetSecurityLevel.sql"
             , "OrgStructure.sql"
             , "PageSectionUpdate.sql"
-            ,"ProjStructure.sql"
+            , "ProcessTemplateFieldCreate.sql"
+            , "ProcessTemplateFieldSelect.sql"
+            , "ProcessTemplateFieldUpdate.sql"
+            , "ProcessTemplateFlowCreate.sql"
+            , "ProcessTemplateFlowUpdate.sql"
+            , "ProcessTemplateStepCreate.sql"
+            , "ProcessTemplateStepFieldUpdate.sql"
+            , "ProcessTemplateStepUpdate.sql"
+            , "ProjStructure.sql"
             , "ShowContent.sql"
             , "ShowPage.sql"
-            ,"ShowPageSection.sql"};
+            , "ShowPageSection.sql"};
 
             foreach (string StoredProcedure in StoredProcedures)
             {
@@ -115,7 +126,18 @@ namespace StudentUnion0105.Controllers
                 }
             }
 
+            string[] MasterDataScripts;
+            MasterDataScripts = new string[]{ "MasterData.sql"
+};
 
+            foreach (string MasterDataScript in MasterDataScripts)
+            {
+                using (StreamReader sr = new StreamReader("MasterDataScripts\\" + MasterDataScript, System.Text.Encoding.UTF8))
+                {
+                    string line = sr.ReadToEnd();
+                    _context.Database.ExecuteSqlCommand(line);
+                }
+            }
             return View();
         }
         public IActionResult DemoData()

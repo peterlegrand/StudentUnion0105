@@ -34,7 +34,9 @@ namespace StudentUnion0105.ViewModels
         public int Sequence { get; set; }
         public string Description { get; set; }
         public int? NullId { get; set; }
+        public int? NullId2 { get; set; }
         public int NotNullId { get; set; }
+        public int NotNullId2 { get; set; }
         public string Title { get; set; }
         public string Description2 { get; set; }
 

@@ -41,18 +41,11 @@
             <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group row">
-        <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.MenuName" disabled class="form-control" />
-            <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
-        </div>
-    </div>
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary btn-dark">Delete</button>
-            <a asp-action="LanguageIndex" asp-controller="Classification" class="btn btn-primary btn-light">Cancel</a>
+            <a asp-action="LanguageIndex" asp-controller="ProcessTemplate" class="btn btn-primary btn-light">Cancel</a>
         </div>
     </div>
 </form>

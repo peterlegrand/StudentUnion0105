@@ -1,0 +1,80 @@
+﻿@model PageSectionAndStatusViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewBag.Title = "Edit step field settings";
+}
+<h1><img src="~/Images/Icons/Step.jpg" title="Levels" height="60" width="60" /> Edit step field settings</h1>
+<form class="mt-3" method="post">
+
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.SuObject.Id" class="form-control" />
+            <span asp-validation-for="@Model.SuObject.Id" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.NotNullId2" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.SuObject.NotNullId2" class="form-control" />
+            <span asp-validation-for="@Model.SuObject.NotNullId2" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.SuObject.Name" class="form-control" />
+            <span asp-validation-for="@Model.SuObject.Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.SuObject.Description" class="form-control" />
+            <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
+        </div>
+    </div>
+    <label asp-for="@Model.SuObject.Status" class="col-4 col-form-label col-form-label-sm"></label>
+    <div class="col-8 ">
+
+        @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+        @Html.DropDownListFor(x => x.SuObject.Status, Model.ProbablyTypeListItem)
+        <span asp-validation-for="@Model.SuObject.Status" class="text-danger"></span>
+
+    </div>
+    <label asp-for="@Model.SuObject.Sequence" class="col-4 col-form-label col-form-label-sm"></label>
+    <div class="col-8 ">
+
+        @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+        @Html.DropDownListFor(x => x.SuObject.Sequence, Model.SomeKindINumSelectListItem)
+        <span asp-validation-for="@Model.SuObject.Sequence" class="text-danger"></span>
+
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">Save</button>
+            <a asp-action="Index" asp-controller="ProcessTemplateField" class="btn btn-primary btn-light">Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+<script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description']) {
+                    CKEDITOR.instances['description'].destroy();
+                }
+                CKEDITOR.replace('description', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description'].getData()
+                    console.log(ckValue);
+                });
+            });
+</script>

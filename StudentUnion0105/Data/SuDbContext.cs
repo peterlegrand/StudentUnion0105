@@ -34,6 +34,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuProjectStatusModel> dbProjectStatus { get; set; }
         public DbSet<SuContentTypeModel> dbContentType { get; set; }
         public DbSet<SuLanguageModel> dbLanguage { get; set; }
+        public DbSet<SuCountryModel> dbCountry { get; set; }
         public DbSet<SuSettingModel> dbSetting { get; set; }
         public DbSet<SuPageLanguageModel> dbPageLanguage { get; set; }
         public DbSet<SuPageModel> dbPage { get; set; }
@@ -51,16 +52,22 @@ namespace StudentUnion0105.Data
         public DbSet<SuProcessTemplateFieldModel> dbProcessTemplateField { get; set; }
         public DbSet<SuProcessTemplateFieldTypeLanguageModel> dbProcessTemplateFieldTypeLanguage { get; set; }
         public DbSet<SuProcessTemplateFieldTypeModel> dbProcessTemplateFieldType { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionTypeLanguageModel> dbProcessTemplateFlowConditionTypeLanguage { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionTypeModel> dbProcessTemplateFlowConditionType { get; set; }
         public DbSet<SuProcessTemplateFlowConditionLanguageModel> dbProcessTemplateFlowConditionLanguage { get; set; }
         public DbSet<SuProcessTemplateFlowConditionModel> dbProcessTemplateFlowCondition { get; set; }
         public DbSet<SuProcessTemplateFlowModel> dbProcessTemplateFlow { get; set; }
+        public DbSet<SuProcessTemplateFlowLanguageModel> dbProcessTemplateFlowLanguage { get; set; }
         public DbSet<SuProcessTemplateGroupLanguageModel> dbProcessTemplateGroupLanguage { get; set; }
         public DbSet<SuProcessTemplateGroupModel> dbProcessTemplateGroup { get; set; }
         public DbSet<SuProcessTemplateLanguageModel> dbProcessTemplateLanguage { get; set; }
         public DbSet<SuProcessTemplateModel> dbProcessTemplate { get; set; }
         public DbSet<SuProcessTemplateStepFieldModel> dbProcessTemplateStepField { get; set; }
+        public DbSet<SuProcessTemplateStepFieldStatusModel> dbProcessTemplateStepFieldStatus { get; set; }
         public DbSet<SuProcessTemplateStepLanguageModel> dbProcessTemplateStepLanguage { get; set; }
         public DbSet<SuProcessTemplateStepModel> dbProcessTemplateStep { get; set; }
+        public DbSet<SuMasterListModel> dbMasterList { get; set; }
+        public DbSet<SuDataTypeModel> dbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> dbSecurityLevel { get; set; }
         public DbSet<SuStatusList> dbStatusList { get; set; }
         public DbSet<SuSecurityLevelList> dbSecurityLevelList { get; set; }

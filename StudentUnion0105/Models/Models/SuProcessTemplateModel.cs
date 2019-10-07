@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
@@ -6,9 +7,12 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         public int ProcessTemplateGroupId { get; set; }
-        public Guid CreatorId { get; set; }
-        public Guid ModifierId { get; set; }
+        public Guid? CreatorId { get; set; }
+        public Guid? ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        [ForeignKey("ProcessTemplateGroupId")]
+        public virtual SuProcessTemplateGroupModel ProcessTemplateGroup { get; set; }
     }
 }

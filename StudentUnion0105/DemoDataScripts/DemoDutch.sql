@@ -751,3 +751,137 @@ ClassificationValueId
 VALUES(39, 39, 'Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol','Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.' 
 , 'Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol' 
 , @CurrentUser, @CurrentUser, getdate(), getdate());
+
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
+VALUES(1, 39, 'Goedkeuring', 'Inhoud goedkeuring', 'Goedkeuring',getdate(), getdate());
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
+VALUES(2, 39, 'Opdracht', 'Opdracht', 'Opdracht',getdate(), getdate());
+
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
+VALUES (1, 39, 'Kennis goedkeuring', 'Kennis goedkeuring' , 'Kennis goedkeuring' , getdate(), getdate())
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
+VALUES (2, 39, 'Ervaring goedkeuring', 'Ervaring goedkeuring' , 'Ervaring goedkeuring' , getdate(), getdate())
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
+VALUES (3, 39, 'Onderzoek opdracht', 'Onderzoek opdracht' , 'Onderzoek opdracht' , getdate(), getdate())
+
+
+
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (1, 39, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (2, 39, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (3, 39, 'Land','Land','Land',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (4, 39, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (5, 39, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (6, 39, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() )
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, ProcessTemplateFieldName
+	, ProcessTemplateFieldDescription
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
+VALUES (7, 39, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() )
+
+	
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (1, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (2, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (3, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+
+VALUES (4, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (5, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (6, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (7, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+INSERT INTO dbProcessTemplateStepLanguage (StepId
+	, LanguageId
+	, ProcessTemplateStepName
+	, ProcessTemplateStepDescription
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+VALUES (8, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() )
+
+
+
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(1,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(2,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(3,39,'Informeren','Informeren','Informeren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(4,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(5,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(6,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(7,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(8,39,'Aanmaken','Aanmaken','AanmakenInformeren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(9,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(10,39,'Informeren','Informeren','Informeren',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
+VALUES(11,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())

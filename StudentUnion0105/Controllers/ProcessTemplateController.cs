@@ -20,14 +20,16 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateGroupRepository _processTemplateGroup;
         private readonly IProcessTemplateGroupLanguageRepository _processTemplateGroupLanguage;
         private readonly SuDbContext _context;
+        private readonly ILanguageRepository _language;
 
         public ProcessTemplateController(UserManager<SuUser> userManager
                 , IProcessTemplateLanguageRepository ProcessTemplateLanguage
                 , IProcessTemplateRepository ProcessTemplate
                 , IProcessTemplateGroupRepository processTemplateGroup
                 , IProcessTemplateGroupLanguageRepository processTemplateGroupLanguage
-            , SuDbContext context
-                )
+                , SuDbContext context
+                , ILanguageRepository language
+            )
         {
             this.userManager = userManager;
             _processTemplateLanguage = ProcessTemplateLanguage;
@@ -35,6 +37,7 @@ namespace StudentUnion0105.Controllers
             _processTemplateGroup = processTemplateGroup;
             _processTemplateGroupLanguage = processTemplateGroupLanguage;
             _context = context;
+            _language = language;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -110,6 +113,233 @@ namespace StudentUnion0105.Controllers
 
 
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLangauge;
 
+            var ProcessTemplateToForm = (from s in _processTemplate.GetAllProcessTemplates()
+                         join t in _processTemplateLanguage.GetAllProcessTemplateLanguages()
+                         on s.Id equals t.ProcessTemplateId
+                         where t.LanguageId == DefaultLanguageID && s.Id == Id
+                         select new SuObjectVM
+                         {
+                             Id = s.Id
+                            ,
+                             Name = t.ProcessTemplateName
+                            ,
+                             NotNullId = s.ProcessTemplateGroupId
+                            ,
+                             ObjectLanguageId = t.Id
+                            ,
+                             Description = t.ProcessTemplateDescription
+                            ,
+                             MouseOver = t.ProcessTemplateMouseOver
+                         }).First();
+            var ClassificationList = new List<SelectListItem>();
+            //string a;
+            //a = test1.Description;
+            var ProcessTemplateGroupList = new List<SelectListItem>();
+            var ProcessTemplateGroupFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
+
+            foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
+            {
+                ProcessTemplateGroupList.Add(new SelectListItem
+                {
+                    Text = ProcessTemplateGroup.Name,
+                    Value = ProcessTemplateGroup.Id.ToString()
+                });
+            }
+
+                var ProcessTemplateAndGroup = new SuObjectAndStatusViewModel { SuObject= ProcessTemplateToForm, SomeKindINumSelectListItem = ProcessTemplateGroupList };
+                return View(ProcessTemplateAndGroup);
+
+            }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel FromForm)
+        {
+            if (ModelState.IsValid)
+            {
+                var ProcessTemplate = _processTemplate.GetProcessTemplate(FromForm.SuObject.Id);
+                ProcessTemplate.ProcessTemplateGroupId = FromForm.SuObject.NotNullId;
+                _processTemplate.UpdateProcessTemplate(ProcessTemplate);
+
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(FromForm.SuObject.ObjectLanguageId);
+                ProcessTemplateLanguage.ProcessTemplateName = FromForm.SuObject.Name;
+                ProcessTemplateLanguage.ProcessTemplateDescription = FromForm.SuObject.Description;
+                ProcessTemplateLanguage.ProcessTemplateMouseOver = FromForm.SuObject.MouseOver;
+                _processTemplateLanguage.UpdateProcessTemplateLanguage(ProcessTemplateLanguage);
+
+            }
+            return RedirectToAction("Index");
+
+        }
+        public IActionResult LanguageIndex(int Id)
+        {
+
+            var ProcessTemplateLanguage = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()
+                                          join l in _language.GetAllLanguages()
+                         on c.LanguageId equals l.Id
+                                          where c.ProcessTemplateId == Id
+                                          select new SuObjectVM
+                                          {
+                                              Id = c.Id
+                                          ,
+                                              Name = c.ProcessTemplateName
+                                          ,
+                                              Language = l.LanguageName
+                                          ,
+                                              MouseOver = c.ProcessTemplateMouseOver,
+
+                                              ObjectId = c.ProcessTemplateId
+                                          }).ToList();
+            ViewBag.Id = Id;
+
+            return View(ProcessTemplateLanguage);
+        }
+
+        [HttpGet]
+        public IActionResult LanguageEdit(int Id)
+        {
+            var test1 = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()
+                         join l in _language.GetAllLanguages()
+                         on c.LanguageId equals l.Id
+                         where c.Id == Id
+                         select new SuObjectVM
+                         {
+                             Id = c.Id
+                            ,
+                             Name = c.ProcessTemplateName
+                            ,
+                             Description = c.ProcessTemplateDescription
+                            ,
+                             MouseOver = c.ProcessTemplateMouseOver
+                            ,
+                             Language = l.LanguageName
+                            ,
+                             ObjectId = c.ProcessTemplateId
+
+                         }).First();
+
+            var ProcessTemplateAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = test1 //, a = ProcessTemplateList
+            };
+            return View(ProcessTemplateAndStatus);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult LanguageEdit(SuObjectAndStatusViewModel test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(test3.SuObject.Id);
+                ProcessTemplateLanguage.ProcessTemplateName = test3.SuObject.Name;
+                ProcessTemplateLanguage.ProcessTemplateDescription = test3.SuObject.Description;
+
+                ProcessTemplateLanguage.ProcessTemplateMouseOver = test3.SuObject.MouseOver;
+                _processTemplateLanguage.UpdateProcessTemplateLanguage(ProcessTemplateLanguage);
+
+
+            }
+            //            return  RedirectToRoute("EditRole" + "/"+test3.ProcessTemplate.ProcessTemplateId.ToString() );
+
+            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+
+
+        }
+
+
+
+        [HttpGet]
+        public IActionResult LanguageCreate(int Id)
+        {
+            List<int> LanguagesAlready = new List<int>();
+            LanguagesAlready = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()
+                                where c.ProcessTemplateId == Id
+                                select c.LanguageId).ToList();
+
+
+            var SuLanguage = (from l in _language.GetAllLanguages()
+                              where !LanguagesAlready.Contains(l.Id)
+                              && l.Active == true
+                              select new SelectListItem
+                              {
+                                  Value = l.Id.ToString()
+                              ,
+                                  Text = l.LanguageName
+                              }).ToList();
+
+            if (SuLanguage.Count() == 0)
+            {
+                return RedirectToAction("LanguageIndex", new { Id = Id });
+            }
+            SuObjectVM SuObject = new SuObjectVM();
+            SuObject.ObjectId = Id;
+            ViewBag.Id = Id.ToString();
+            var ProcessTemplateAndStatus = new SuObjectAndStatusViewModel
+            {
+                SuObject = SuObject
+                ,
+                SomeKindINumSelectListItem = SuLanguage
+            };
+            return View(ProcessTemplateAndStatus);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        {
+            if (ModelState.IsValid)
+            {
+                var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
+                ProcessTemplateLanguage.ProcessTemplateName = test3.SuObject.Name;
+                ProcessTemplateLanguage.ProcessTemplateDescription = test3.SuObject.Description;
+                ProcessTemplateLanguage.ProcessTemplateMouseOver = test3.SuObject.MouseOver;
+                ProcessTemplateLanguage.ProcessTemplateId = test3.SuObject.ObjectId;
+                ProcessTemplateLanguage.LanguageId = test3.SuObject.LanguageId;
+
+                var NewProcessTemplate = _processTemplateLanguage.AddProcessTemplateLanguage(ProcessTemplateLanguage);
+
+
+            }
+            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+
+
+        }
+
+        [HttpGet]
+        public IActionResult LanguageDelete(int Id)
+        {
+            var ClassifationLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(Id);
+            var a = new SuObjectVM();
+            a.Id = ClassifationLanguage.Id;
+            a.Name = ClassifationLanguage.ProcessTemplateName;
+            a.MouseOver = ClassifationLanguage.ProcessTemplateMouseOver;
+            a.LanguageId = ClassifationLanguage.LanguageId;
+            a.ObjectId = ClassifationLanguage.ProcessTemplateId;
+            return View(a);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectVM a)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _processTemplateLanguage.DeleteProcessTemplateLanguage(a.Id);
+                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+            }
+            return RedirectToAction("LanguageIndex");
+
+        }
     }
 }

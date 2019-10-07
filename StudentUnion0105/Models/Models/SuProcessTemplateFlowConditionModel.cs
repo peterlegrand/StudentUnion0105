@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
@@ -11,6 +13,11 @@ namespace StudentUnion0105.Models
         public string ProcessTemplateFlowConditionString { get; set; }
         public int ProcessTemplateFlowConditionInt { get; set; }
         public DateTime ProcessTemplateFlowConditionDate { get; set; }
+        [ForeignKey("ProcessTemplateFlowId")]
+        public virtual SuProcessTemplateFlowModel ProcessTemplateFlow { get; set; }
+        [ForeignKey("ProcessTemplateConditionTypeId")]
+        public virtual SuProcessTemplateFlowConditionTypeModel ProcessTemplateFlowConditionType { get; set; }
+        public virtual ICollection<SuProcessTemplateFlowConditionLanguageModel> ProcessTemplateFlowConditionLanguages { get; set; }
 
     }
 }
