@@ -100,6 +100,7 @@ namespace StudentUnion0105.Controllers
             , "GetDataType.sql"
             , "GetLanguage.sql"
             , "GetMasterList.sql"
+            , "GetProcessTemplateFlowConditionType.sql"
             , "GetProcessTemplateGroup.sql"
             , "GetSecurityLevel.sql"
             , "OrgStructure.sql"

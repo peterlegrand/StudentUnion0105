@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191007140543_extra4")]
+    partial class extra4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a424360a-e4e0-4284-95e2-ba4611970104",
-                            ConcurrencyStamp = "a6917896-4bcf-440e-807f-2ec97209c7dd",
+                            Id = "8557923d-3194-49ed-a368-167803eb68b7",
+                            ConcurrencyStamp = "3c8dc1c2-f953-4754-b22e-e347da91a44c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "dbd0e9a6-419f-4a19-ac5e-1e241264934e",
-                            ConcurrencyStamp = "6beda58c-d236-4d70-8096-c05883c9f70a",
+                            Id = "d4f3cf26-bd0b-4fa1-94cb-9cc801d5e6cc",
+                            ConcurrencyStamp = "6af14f71-ed68-4669-80d7-692766f3d466",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1188,7 +1190,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ComparisonOperator");
+                    b.Property<int>("ComparisonOperatorId");
 
                     b.Property<string>("ConditionCharacter");
 

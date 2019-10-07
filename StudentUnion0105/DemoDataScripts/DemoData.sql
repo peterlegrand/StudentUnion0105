@@ -1179,3 +1179,16 @@ INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description
 VALUES(10,41,'Informing','Informing','Informing',getdate(),getdate())
 INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
 VALUES(11,41,'Completed','Completed','Completed',getdate(),getdate())
+
+
+INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId, ComparisonOperator, ProcessTemplateFlowConditionInt, ConditionCharacter)
+VALUES (1, 3, 'GE',10,'A'); 
+INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId, ConditionCharacter)
+VALUES (2, 5,'A'); 
+
+
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
+VALUES (1,41,'Student creator','Student creator with security 10 or higher','Student creator',getdate(),getdate())
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
+VALUES (2,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate())
+

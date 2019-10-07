@@ -11,10 +11,10 @@ namespace StudentUnion0105.Models
         public int ProcessTemplateFlowId { get; set; }
         public int ProcessTemplateConditionTypeId { get; set; }
         public int? ProcessTemplateFieldId { get; set; }
-        public int ComparisonOperatorId { get; set; }
+        public string ComparisonOperator { get; set; }
         public string ProcessTemplateFlowConditionString { get; set; }
-        public int ProcessTemplateFlowConditionInt { get; set; }
-        public DateTime ProcessTemplateFlowConditionDate { get; set; }
+        public int? ProcessTemplateFlowConditionInt { get; set; }
+        public DateTime? ProcessTemplateFlowConditionDate { get; set; }
         [ForeignKey("ProcessTemplateFlowId")]
         public virtual SuProcessTemplateFlowModel ProcessTemplateFlow { get; set; }
         [ForeignKey("ProcessTemplateConditionTypeId")]

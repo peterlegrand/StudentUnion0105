@@ -885,3 +885,9 @@ INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description
 VALUES(10,39,'Informeren','Informeren','Informeren',getdate(),getdate())
 INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
 VALUES(11,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
+
+
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
+VALUES (1,39,'Gemaakt door leerling','Gemaakt door student leerling met security 10 of hoger','Gemaakt door leerling',getdate(),getdate())
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
+VALUES (2,39,'Goedkeuring door leraar','Goedkeuring door leraar','Goedkeuring door leraar',getdate(),getdate())
