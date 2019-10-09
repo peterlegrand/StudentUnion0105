@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
@@ -6,10 +7,14 @@ namespace StudentUnion0105.Models
     public class SuPageSectionTypeLanguageModel
     {
         public int Id { get; set; }
+        [Display(Name = "Page section type id")]
         public int PageSectionTypeId { get; set; }
+        [Display(Name = "Language id")]
         public int LanguageId { get; set; }
+        [MaxLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [MaxLength(50)]
         public string MouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

@@ -935,28 +935,28 @@ VALUES(39, 41, 'Vertisol','Vertisol – inverted soils. They are clay-rich and t
 , 'Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol' 
 , @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbProcessTemplateGroup (Sequence, ModifiedDate, CreatedDate)
-VALUES(1, getdate(), getdate());
-INSERT INTO dbProcessTemplateGroup (Sequence, ModifiedDate, CreatedDate)
-VALUES(1, getdate(), getdate());
-INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
-VALUES(1, 41, 'Approval', 'Content approval', 'Approval',getdate(), getdate());
-INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
-VALUES(2, 41, 'Assignment', 'Assignment', 'Assignment',getdate(), getdate());
+INSERT INTO dbProcessTemplateGroup (Sequence, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbProcessTemplateGroup (Sequence, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, 41, 'Approval', 'Content approval', 'Approval',getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(2, 41, 'Assignment', 'Assignment', 'Assignment',getdate(), getdate(), @CurrentUser, @CurrentUser);
 
-INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate) 
-VALUES (1, getdate(), getdate())
-INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate) 
-VALUES (1, getdate(), getdate())
-INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate) 
-VALUES (2, getdate(), getdate())
+INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplate (ProcessTemplateGroupId, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, getdate(), getdate(), @CurrentUser, @CurrentUser)
 
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (1, 41, 'Knowledge approval', 'Knowledge approval' , 'Knowledge approval' , getdate(), getdate())
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (2, 41, 'Experience approval', 'Experience approval' , 'Experience approval' , getdate(), getdate())
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (3, 41, 'Research assignment', 'Research assignment' , 'Research assignment' , getdate(), getdate())
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 41, 'Knowledge approval', 'Knowledge approval' , 'Knowledge approval' , getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 41, 'Experience approval', 'Experience approval' , 'Experience approval' , getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 41, 'Research assignment', 'Research assignment' , 'Research assignment' , getdate(), getdate(), @CurrentUser, @CurrentUser)
 
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (1, 1, 0 )
@@ -979,44 +979,44 @@ INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (1, 41, 'Knowledge topic','Knowledge topic','Knowledge topic',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 41, 'Knowledge topic','Knowledge topic','Knowledge topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (2, 41, 'Area of interest','Area of interest','Area of interest',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 41, 'Area of interest','Area of interest','Area of interest',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (3, 41, 'Country','Country','Country',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 41, 'Country','Country','Country',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (4, 41, 'Experience topic','Experience topic','Experience topic',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (4, 41, 'Experience topic','Experience topic','Experience topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (5, 41, 'No of days','No of days','No of days',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (5, 41, 'No of days','No of days','No of days',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (6, 41, 'Research topic','Research topic','Research topic',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (6, 41, 'Research topic','Research topic','Research topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (7, 41, 'Sample size','Sample size','Sample size',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (7, 41, 'Sample size','Sample size','Sample size',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 
  
@@ -1044,52 +1044,52 @@ INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (1, 41, 'Create','Create','Create',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 41, 'Create','Create','Create',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (2, 41, 'Approve','Approve','Approve',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (3, 41, 'Inform','Inform','Inform',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 41, 'Inform','Inform','Inform',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
 
-VALUES (4, 41, 'Create','Create','Create',getdate(),getdate() )
+VALUES (4, 41, 'Create','Create','Create',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (5, 41, 'Approve','Approve','Approve',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (5, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (6, 41, 'Create','Create','Create',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (6, 41, 'Create','Create','Create',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (7, 41, 'Approve','Approve','Approve',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (7, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (8, 41, 'Inform','Inform','Inform',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (8, 41, 'Inform','Inform','Inform',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
 VALUES (1,1,1,1);
@@ -1157,28 +1157,28 @@ VALUES (3,7,8);
 INSERT INTO dbProcessTemplateFlow (ProcessTemplateId, ProcessTemplateFromStepId, ProcessTemplateToStepId)
 VALUES (3,8,0);
 
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(1,41,'Creating','Creating','Creating',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(2,41,'Approving','Approving','Approving',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(3,41,'Informing','Informing','Informing',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(4,41,'Completed','Completed','Completed',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(5,41,'Creating','Creating','Creating',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(6,41,'Approving','Approving','Approving',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(7,41,'Completed','Completed','Completed',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(8,41,'Creating','Creating','CreatingInforming',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(9,41,'Approving','Approving','Approving',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(10,41,'Informing','Informing','Informing',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(11,41,'Completed','Completed','Completed',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1,41,'Creating','Creating','Creating',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(2,41,'Approving','Approving','Approving',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(3,41,'Informing','Informing','Informing',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(4,41,'Completed','Completed','Completed',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(5,41,'Creating','Creating','Creating',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(6,41,'Approving','Approving','Approving',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(7,41,'Completed','Completed','Completed',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(8,41,'Creating','Creating','CreatingInforming',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(9,41,'Approving','Approving','Approving',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(10,41,'Informing','Informing','Informing',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(11,41,'Completed','Completed','Completed',getdate(),getdate(), @CurrentUser, @CurrentUser)
 
 
 INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId, ComparisonOperator, ProcessTemplateFlowConditionInt, ConditionCharacter)
@@ -1187,8 +1187,8 @@ INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateCon
 VALUES (2, 5,'A'); 
 
 
-INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
-VALUES (1,41,'Student creator','Student creator with security 10 or higher','Student creator',getdate(),getdate())
-INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
-VALUES (2,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate())
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (1,41,'Student creator','Student creator with security 10 or higher','Student creator',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (2,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate(), @CurrentUser, @CurrentUser)
 

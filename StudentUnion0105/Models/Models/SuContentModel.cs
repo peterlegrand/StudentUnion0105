@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
@@ -7,13 +8,22 @@ namespace StudentUnion0105.Models
     public class SuContentModel
     {
         public int Id { get; set; }
+        [Display(Name = "Content type id")]
         public int ContentTypeId { get; set; }
+        [Display(Name = "Content status id")]
         public int ContentStatusId { get; set; }
+        [Display(Name = "Content language id")]
         public int LanguageId { get; set; }
+        [Display(Name = "Content title")]
+        [MaxLength(50)]
         public string Title { get; set; }
+        [Display(Name = "Content description")]
         public string Description { get; set; }
+        [Display(Name = "content security level")]
         public int SecurityLevel { get; set; }
+        [Display(Name = "Content organization id")]
         public int OrganizationId { get; set; }
+        [Display(Name = "Content project id")]
         public int? ProjectId { get; set; }
         public Guid? CreatorId { get; set; }
         public Guid? ModifierId { get; set; }

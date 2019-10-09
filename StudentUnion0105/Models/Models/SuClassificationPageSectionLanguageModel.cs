@@ -1,5 +1,6 @@
 ﻿using StudentUnion0105.Data;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
@@ -14,12 +15,23 @@ namespace StudentUnion0105.Models
         }
 
         public int Id { get; set; }
+        [Display(Name = "Classification page section Id")]
         public int PageSectionId { get; set; }
         public int LanguageId { get; set; }
+        [Display(Name = "Page section name")]
+        [MaxLength(50)]
+
         public string ClassificationPageSectionName { get; set; }
+        [Display(Name = "Page section description")]
         public string ClassificationPageSectionDescription { get; set; }
+        [Display(Name = "Page section title")]
+        [MaxLength(50)]
+
         public string ClassificationPageSectionTitle { get; set; }
+        [Display(Name = "Page Section title description")]
         public string ClassificationPageSectionTitleDescription { get; set; }
+        [Display(Name = "Page section mouse over")]
+        [MaxLength(50)]
         public string ClassificationPageSectionMouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

@@ -97,6 +97,7 @@ namespace StudentUnion0105
             services.AddTransient<IDataTypeRepository, SQLDataTypeRepository>();
             services.AddTransient<ILanguageRepository, SQLLanguageRepository>();
             services.AddTransient<ICountryRepository, SQLCountryRepository>();
+            services.AddTransient<ISettingRepository, SQLSettingRepository>();
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/login");

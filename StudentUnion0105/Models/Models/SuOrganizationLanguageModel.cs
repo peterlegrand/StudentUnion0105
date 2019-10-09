@@ -6,10 +6,14 @@ namespace StudentUnion0105.Models
     public class SuOrganizationLanguageModel
     {
         public int Id { get; set; }
+        [Display(Name = "Organization id")]
         public int OrganizationId { get; set; }
+        [Display(Name = "Language id")]
         public int LanguageId { get; set; }
+        [MaxLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [MaxLength(50)]
         public string MouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

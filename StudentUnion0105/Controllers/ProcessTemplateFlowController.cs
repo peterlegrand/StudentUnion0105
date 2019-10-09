@@ -62,6 +62,7 @@ namespace StudentUnion0105.Controllers
                                             Description = p.ProcessTemplateFromStepId == 0 ? "Start" : ""
 ,
                                             Description2 = p.ProcessTemplateToStepId == 0 ? "End" : ""
+                                            
 
                                         }).ToList();
             ViewBag.ObjectId = Id.ToString();
@@ -97,6 +98,8 @@ namespace StudentUnion0105.Controllers
                                    , MouseOver = l.MouseOver
                                    , NotNullId = f.ProcessTemplateFromStepId
                                    , NotNullId2 = f.ProcessTemplateToStepId
+                                   ,
+                                   HeaderDescription = f.ConditionRelation
                                }).First();
 
             //Existing levels
@@ -139,7 +142,8 @@ namespace StudentUnion0105.Controllers
                                         , DefaultLanguageID.ToString()
                                         ,UpdatedFlow.SuObject.Name    //1
                                         ,UpdatedFlow.SuObject.Description    //1
-                                        ,UpdatedFlow.SuObject.MouseOver    //1
+                                        ,UpdatedFlow.SuObject.MouseOver   
+                                        , UpdatedFlow.SuObject.HeaderDescription//1
                     });
 
 

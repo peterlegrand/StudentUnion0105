@@ -7,9 +7,13 @@ namespace StudentUnion0105.Models
     public class SuClassificationModel
     {
         public int Id { get; set; }
+        [Display(Name = "Classification status Id")]
         public int ClassificationStatusId { get; set; }
+        [Display(Name = "Default classification page id")]
         public int DefaultClassificationPageId { get; set; }
+        [Display(Name = "Has dropdown")]
         public bool HasDropDown { get; set; }
+        [Display(Name = "Drop down sequence")]
         public int DropDownSequence { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

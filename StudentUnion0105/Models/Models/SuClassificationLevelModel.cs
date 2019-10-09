@@ -14,10 +14,14 @@ namespace StudentUnion0105.Models
         //2 is date range
         //3 is date time
         //4 is date time range
+        [Display(Name = "Date level")]
         public int DateLevel { get; set; }
+        [Display(Name = "On the fly")]
         public bool OnTheFly { get; set; }
         public bool Alphabetically { get; set; }
+        [Display(Name = "Can link")]
         public bool CanLink { get; set; }
+        [Display(Name = "In dropdown")]
         public bool InDropDown { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

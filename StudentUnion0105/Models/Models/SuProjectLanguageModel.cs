@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
@@ -6,10 +7,14 @@ namespace StudentUnion0105.Models
     public class SuProjectLanguageModel
     {
         public int Id { get; set; }
+        [Display(Name = "Project id")]
         public int ProjectId { get; set; }
+        [Display(Name = "Language id")]
         public int LanguageId { get; set; }
+        [MaxLength(50)]
         public string Name { get; set; }
         public string Description { get; set; }
+        [MaxLength(50)]
         public string MouseOver { get; set; }
         public Guid? CreatorId { get; set; }
         public Guid? ModifierId { get; set; }

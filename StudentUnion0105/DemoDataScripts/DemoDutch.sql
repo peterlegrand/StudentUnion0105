@@ -752,17 +752,17 @@ VALUES(39, 39, 'Vertisol','Vertisol – inverted soils. They are clay-rich and t
 , 'Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol' 
 , @CurrentUser, @CurrentUser, getdate(), getdate());
 
-INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
-VALUES(1, 39, 'Goedkeuring', 'Inhoud goedkeuring', 'Goedkeuring',getdate(), getdate());
-INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate)
-VALUES(2, 39, 'Opdracht', 'Opdracht', 'Opdracht',getdate(), getdate());
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, 39, 'Goedkeuring', 'Inhoud goedkeuring', 'Goedkeuring',getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbProcessTemplateGroupLanguage (ProcessTemplateGroupId, LanguageId, ProcessTemplateGroupName, ProcessTemplateGroupDescription, ProcessTemplateGroupMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(2, 39, 'Opdracht', 'Opdracht', 'Opdracht',getdate(), getdate(), @CurrentUser, @CurrentUser);
 
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (1, 39, 'Kennis goedkeuring', 'Kennis goedkeuring' , 'Kennis goedkeuring' , getdate(), getdate())
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (2, 39, 'Ervaring goedkeuring', 'Ervaring goedkeuring' , 'Ervaring goedkeuring' , getdate(), getdate())
-INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate) 
-VALUES (3, 39, 'Onderzoek opdracht', 'Onderzoek opdracht' , 'Onderzoek opdracht' , getdate(), getdate())
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 39, 'Kennis goedkeuring', 'Kennis goedkeuring' , 'Kennis goedkeuring' , getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 39, 'Ervaring goedkeuring', 'Ervaring goedkeuring' , 'Ervaring goedkeuring' , getdate(), getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, ProcessTemplateName, ProcessTemplateDescription, ProcessTemplateMouseOver,  ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 39, 'Onderzoek opdracht', 'Onderzoek opdracht' , 'Onderzoek opdracht' , getdate(), getdate(), @CurrentUser, @CurrentUser)
 
 
 
@@ -770,124 +770,124 @@ INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (1, 39, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 39, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (2, 39, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 39, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (3, 39, 'Land','Land','Land',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 39, 'Land','Land','Land',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (4, 39, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (4, 39, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (5, 39, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (5, 39, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (6, 39, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (6, 39, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, ProcessTemplateFieldName
 	, ProcessTemplateFieldDescription
-	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate) 
-VALUES (7, 39, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() )
+	, ProcessTemplateFieldMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (7, 39, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 	
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (1, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (2, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (3, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
 
-VALUES (4, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+VALUES (4, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (5, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (5, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (6, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (6, 39, 'Maak nieuw','Maak nieuw','Maak nieuw',getdate(),getdate(), @CurrentUser, @CurrentUser )
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (7, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (7, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, LanguageId
 	, ProcessTemplateStepName
 	, ProcessTemplateStepDescription
-	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate) 
-VALUES (8, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() )
+	, ProcessTemplateStepMouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (8, 39, 'Informeren','Informeren','Informeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 
 
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(1,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(2,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(3,39,'Informeren','Informeren','Informeren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(4,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(5,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(6,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(7,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(8,39,'Aanmaken','Aanmaken','AanmakenInformeren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(9,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(10,39,'Informeren','Informeren','Informeren',getdate(),getdate())
-INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate)
-VALUES(11,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate())
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(2,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(3,39,'Informeren','Informeren','Informeren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(4,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(5,39,'Aanmaken','Aanmaken','Aanmaken',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(6,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(7,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(8,39,'Aanmaken','Aanmaken','AanmakenInformeren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(9,39,'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(10,39,'Informeren','Informeren','Informeren',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(11,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate(), @CurrentUser, @CurrentUser)
 
 
-INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
-VALUES (1,39,'Gemaakt door leerling','Gemaakt door student leerling met security 10 of hoger','Gemaakt door leerling',getdate(),getdate())
-INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate)
-VALUES (2,39,'Goedkeuring door leraar','Goedkeuring door leraar','Goedkeuring door leraar',getdate(),getdate())
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (1,39,'Gemaakt door leerling','Gemaakt door student leerling met security 10 of hoger','Gemaakt door leerling',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (2,39,'Goedkeuring door leraar','Goedkeuring door leraar','Goedkeuring door leraar',getdate(),getdate(), @CurrentUser, @CurrentUser)

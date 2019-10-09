@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -122,17 +123,21 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                Guid guid = new Guid(CurrentUser.Id);
+
                 var Classification = _classification.GetClassification(test3.SuObject.Id);
                 Classification.HasDropDown = test3.SuObject.HasDropDown;
                 Classification.ClassificationStatusId = test3.SuObject.Status;
+                Classification.ModifierId = guid;
                 _classification.UpdateClassification(Classification);
 
-                var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.ObjectLanguageId);
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
                 ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+                ClassificationLanguage.ModifierId = guid;
                 //                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
@@ -169,14 +174,19 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                Guid guid = new Guid(CurrentUser.Id);
+
                 var Classification = new SuClassificationModel();
                 Classification.HasDropDown = test3.SuObject.HasDropDown;
                 Classification.ClassificationStatusId = test3.SuObject.Status;
+                Classification.CreatorId = guid;
+                Classification.ModifierId = guid;
                 var NewClassification = _classification.AddClassification(Classification);
 
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+
                 var ClassificationLanguage = new SuClassificationLanguageModel();
 
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
@@ -184,6 +194,8 @@ namespace StudentUnion0105.Controllers
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 ClassificationLanguage.ClassificationId = NewClassification.Id;
                 ClassificationLanguage.LanguageId = DefaultLanguageID;
+                ClassificationLanguage.CreatorId = guid;
+                ClassificationLanguage.ModifierId = guid;
                 _classificationLanguage.AddClassificationLanguage(ClassificationLanguage);
 
             }
@@ -255,14 +267,19 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageEdit(SuObjectAndStatusViewModel test3)
         {
             if (ModelState.IsValid)
             {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                Guid guid = new Guid(CurrentUser.Id);
+
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.Id);
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
                 ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+                ClassificationLanguage.ModifierId = guid;
 
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
@@ -315,10 +332,13 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel test3)
         {
             if (ModelState.IsValid)
             {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                Guid guid = new Guid(CurrentUser.Id);
                 var ClassificationLanguage = new SuClassificationLanguageModel();
                 ClassificationLanguage.ClassificationName = test3.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
@@ -326,6 +346,8 @@ namespace StudentUnion0105.Controllers
                 ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
                 ClassificationLanguage.ClassificationId = test3.SuObject.ObjectId;
                 ClassificationLanguage.LanguageId = test3.SuObject.LanguageId;
+                ClassificationLanguage.ModifierId = guid;
+                ClassificationLanguage.CreatorId = guid;
 
                 var NewClassification = _classificationLanguage.AddClassificationLanguage(ClassificationLanguage);
 

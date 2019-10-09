@@ -6,19 +6,19 @@ namespace StudentUnion0105.Models
 {
     public class SuPageSectionModel
     {
-
-
-
         public int Id { get; set; }
+        [Display(Name = "Page Id")]
         public int PageId { get; set; }
         public int Sequence { get; set; }
         [Display(Name = "Type")]
         public int PageSectionTypeId { get; set; }
-        [Display(Name = "Show title")]
+        [Display(Name = "Show section title")]
+        [MaxLength(50)]
         public bool ShowSectionTitle { get; set; }
-        [Display(Name = "Show description")]
+        [Display(Name = "Show section description")]
         public bool ShowSectionTitleDescription { get; set; }
         [Display(Name = "Show content type title")]
+        [MaxLength(50)]
         public bool ShowContentTypeTitle { get; set; }
         [Display(Name = "Show content type description")]
         public bool ShowContentTypeDescription { get; set; }

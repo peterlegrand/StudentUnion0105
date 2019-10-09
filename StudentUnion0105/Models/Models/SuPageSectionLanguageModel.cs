@@ -11,14 +11,17 @@ namespace StudentUnion0105.Models
         public int PageSectionId { get; set; }
         public int LanguageId { get; set; }
         [Display(Name = "Name")]
+        [MaxLength(50)]
         public string PageSectionName { get; set; }
         [Display(Name = "Description")]
         public string PageSectionDescription { get; set; }
         [Display(Name = "Title")]
+        [MaxLength(50)]
         public string PageSectionTitle { get; set; }
         [Display(Name = "Title description")]
         public string PageSectionTitleDescription { get; set; }
         [Display(Name = "Mouse over")]
+        [MaxLength(50)]
         public string PageSectionMouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

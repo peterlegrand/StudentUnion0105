@@ -7,7 +7,9 @@ namespace StudentUnion0105.Models
     public class SuPageModel
     {
         public int Id { get; set; }
+        [Display(Name = "Page status id")]
         public int PageStatusId { get; set; }
+        [Display(Name = "Page type id")]
         public int PageTypeId { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

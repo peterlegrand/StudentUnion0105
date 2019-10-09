@@ -1,6 +1,7 @@
 ﻿using StudentUnion0105.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
@@ -15,11 +16,17 @@ namespace StudentUnion0105.Models
         }
 
         public int Id { get; set; }
+        [Display(Name = "Classification id")]
         public int ClassificationId { get; set; }
+        [Display(Name = "Classification page status id")]
         public int ClassificationPageStatusId { get; set; }
+        [Display(Name = "Show classification title")]
         public bool ShowClassificationTitle { get; set; }
+        [Display(Name = "Show classification title description")]
         public bool ShowClassificationTitleDescriptipn { get; set; }
+        [Display(Name = "Show classification page title")]
         public bool ShowClassificationPageTitle { get; set; }
+        [Display(Name = "Show classification page title description")]
         public bool ShowClassificationPageTitleDescription { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
