@@ -168,10 +168,11 @@ namespace StudentUnion0105.Controllers
                                         , FromForm.Field.Name
                                         , FromForm.Field.Description
                                         , FromForm.Field.MouseOver
+                                        , CurrentUser.Id
 
                     });
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
+            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
 
             return RedirectToAction("Index", new { Id = FromForm.Field.Id.ToString() });
 
@@ -248,6 +249,7 @@ namespace StudentUnion0105.Controllers
                                            , FromForm.Field.Name
                                            , FromForm.Field.Description
                                            , FromForm.Field.MouseOver
+                                           , CurrentUser.Id
 
 
                     });
@@ -330,7 +332,7 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
+            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
 
             return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
@@ -374,22 +376,22 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 var ProcessTemplateFieldLanguage = new SuProcessTemplateFieldLanguageModel();
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldName = test3.SuObject.Name;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldDescription = test3.SuObject.Description;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldMouseOver = test3.SuObject.MouseOver;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldId = test3.SuObject.ObjectId;
-                ProcessTemplateFieldLanguage.LanguageId = test3.SuObject.LanguageId;
+                ProcessTemplateFieldLanguage.ProcessTemplateFieldName = FromForm.SuObject.Name;
+                ProcessTemplateFieldLanguage.ProcessTemplateFieldDescription = FromForm.SuObject.Description;
+                ProcessTemplateFieldLanguage.ProcessTemplateFieldMouseOver = FromForm.SuObject.MouseOver;
+                ProcessTemplateFieldLanguage.ProcessTemplateFieldId = FromForm.SuObject.ObjectId;
+                ProcessTemplateFieldLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
                 var NewProcessTemplateField = _processTemplateFieldLanguage.AddProcessTemplateFieldLanguage(ProcessTemplateFieldLanguage);
 
 
             }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
 

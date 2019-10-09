@@ -100,6 +100,12 @@ namespace StudentUnion0105
             services.AddTransient<ISettingRepository, SQLSettingRepository>();
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
+
+            services.AddTransient<IUIScreenRepository, SQLUIScreenRepository>();
+            services.AddTransient<IUITermLanguageRepository, SQLUITermLanguageRepository>();
+            services.AddTransient<IUITermRepository, SQLUITermRepository>();
+            services.AddTransient<IUITermScreenRepository, SQLUITermScreenRepository>();
+
             services.ConfigureApplicationCookie(options => options.LoginPath = "/User/login");
             services.AddMvc(options =>
             {

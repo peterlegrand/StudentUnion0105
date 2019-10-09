@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191009102320_NewMigration")]
+    partial class NewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "264cf283-d9d0-473e-b928-5d68c51a1e56",
-                            ConcurrencyStamp = "1d9fafc4-6bcd-430f-afd5-9bb198e21c0d",
+                            Id = "ef498e6e-5deb-4cf5-8f13-989252542be3",
+                            ConcurrencyStamp = "669a6594-fdf5-4a1c-8a25-7b09309bdf36",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a055b720-c298-41b8-8f49-3ccfcfe12bae",
-                            ConcurrencyStamp = "b003e6de-86b3-454e-8401-9b1ecc79b773",
+                            Id = "364d9c0a-45f6-49fb-a22d-70ddcc7cfa30",
+                            ConcurrencyStamp = "ff2eed93-a578-4276-8605-b79253447e56",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1684,78 +1686,6 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbTypeList");
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuUIScreenModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Action");
-
-                    b.Property<string>("Controller");
-
-                    b.Property<string>("Description");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dbScreen");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuUITermLanguageModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Customization");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<int>("TermId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("TermId");
-
-                    b.ToTable("dbTermLanguage");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuUITermModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dbTerm");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuUITermScreenModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ScreenId");
-
-                    b.Property<int>("TermId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScreenId");
-
-                    b.HasIndex("TermId");
-
-                    b.ToTable("dbTermScreen");
-                });
-
             modelBuilder.Entity("StudentUnion0105.Models.SuUser", b =>
                 {
                     b.Property<string>("Id")
@@ -2348,32 +2278,6 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuProjectStatusModel", "ProjectStatus")
                         .WithMany("Projects")
                         .HasForeignKey("ProjectStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuUITermLanguageModel", b =>
-                {
-                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StudentUnion0105.Models.SuUITermModel", "Term")
-                        .WithMany("TermLanguages")
-                        .HasForeignKey("TermId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuUITermScreenModel", b =>
-                {
-                    b.HasOne("StudentUnion0105.Models.SuUIScreenModel", "Screen")
-                        .WithMany("TermScreen")
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StudentUnion0105.Models.SuUITermModel", "Term")
-                        .WithMany()
-                        .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

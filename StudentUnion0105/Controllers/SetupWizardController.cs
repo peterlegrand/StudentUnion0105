@@ -109,8 +109,8 @@ namespace StudentUnion0105.Controllers
             , "ProcessTemplateFieldCreate.sql"
             , "ProcessTemplateFieldSelect.sql"
             , "ProcessTemplateFieldUpdate.sql"
-            , "ProcessTemplateFlowConditionCreate"
-            , "ProcessTemplateFlowConditionUpdate"
+            , "ProcessTemplateFlowConditionCreate.sql"
+            , "ProcessTemplateFlowConditionUpdate.sql"
             , "ProcessTemplateFlowCreate.sql"
             , "ProcessTemplateFlowUpdate.sql"
             , "ProcessTemplateStepCreate.sql"
@@ -119,7 +119,8 @@ namespace StudentUnion0105.Controllers
             , "ProjStructure.sql"
             , "ShowContent.sql"
             , "ShowPage.sql"
-            , "ShowPageSection.sql"};
+            , "ShowPageSection.sql"
+            , "UITermLanguageSelect.sql"};
 
             foreach (string StoredProcedure in StoredProcedures)
             {

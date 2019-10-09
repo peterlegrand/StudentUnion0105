@@ -28,7 +28,7 @@ namespace StudentUnion0105.Models
         public bool ShowContentTypeTitle { get; set; }
         [Display(Name = "Show content type title description")]
         public bool ShowContentTypeDescription { get; set; }
-        [Display(Name = "One two columns)]
+        [Display(Name = "One two columns")]
         public int OneTwoColumns { get; set; }
         [Display(Name = "Content type id")]
         public int? ContentTypeId { get; set; }

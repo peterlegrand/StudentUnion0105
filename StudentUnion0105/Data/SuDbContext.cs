@@ -74,6 +74,11 @@ namespace StudentUnion0105.Data
         public DbSet<SuTypeList> dbTypeList { get; set; }
         public DbSet<SuValueList> dbValueList { get; set; }
 
+        public DbSet<SuUIScreenModel> dbScreen { get; set; }
+        public DbSet<SuUITermLanguageModel> dbTermLanguage { get; set; }
+        public DbSet<SuUITermModel> dbTerm { get; set; }
+        public DbSet<SuUITermScreenModel> dbTermScreen { get; set; }
+
 
         public DbSet<SuGetOrganizationStructure> dbGetOrganizationStructure { get; set; }
         public DbSet<SuGetClassificationValueStructure> dbGetClassificationValueStructure { get; set; }

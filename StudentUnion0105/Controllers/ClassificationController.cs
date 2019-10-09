@@ -119,27 +119,27 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> Edit(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
                 Guid guid = new Guid(CurrentUser.Id);
 
-                var Classification = _classification.GetClassification(test3.SuObject.Id);
-                Classification.HasDropDown = test3.SuObject.HasDropDown;
-                Classification.ClassificationStatusId = test3.SuObject.Status;
+                var Classification = _classification.GetClassification(FromForm.SuObject.Id);
+                Classification.HasDropDown = FromForm.SuObject.HasDropDown;
+                Classification.ClassificationStatusId = FromForm.SuObject.Status;
                 Classification.ModifierId = guid;
                 _classification.UpdateClassification(Classification);
 
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
-                var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.ObjectLanguageId);
-                ClassificationLanguage.ClassificationName = test3.SuObject.Name;
-                ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+                var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(FromForm.SuObject.ObjectLanguageId);
+                ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;
+                ClassificationLanguage.ClassificationMenuName = FromForm.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription = FromForm.SuObject.Description;
                 ClassificationLanguage.ModifierId = guid;
-                //                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
-                ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
+                //                ClassificationLanguage.ClassificationDescription = FromForm.SuObject.Description;
+                ClassificationLanguage.ClassificationMouseOver = FromForm.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
 
             }
@@ -170,7 +170,7 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> Create(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -179,8 +179,8 @@ namespace StudentUnion0105.Controllers
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var Classification = new SuClassificationModel();
-                Classification.HasDropDown = test3.SuObject.HasDropDown;
-                Classification.ClassificationStatusId = test3.SuObject.Status;
+                Classification.HasDropDown = FromForm.SuObject.HasDropDown;
+                Classification.ClassificationStatusId = FromForm.SuObject.Status;
                 Classification.CreatorId = guid;
                 Classification.ModifierId = guid;
                 var NewClassification = _classification.AddClassification(Classification);
@@ -189,9 +189,9 @@ namespace StudentUnion0105.Controllers
 
                 var ClassificationLanguage = new SuClassificationLanguageModel();
 
-                ClassificationLanguage.ClassificationName = test3.SuObject.Name;
-                ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
+                ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;
+                ClassificationLanguage.ClassificationMenuName = FromForm.SuObject.MenuName;
+                ClassificationLanguage.ClassificationMouseOver = FromForm.SuObject.MouseOver;
                 ClassificationLanguage.ClassificationId = NewClassification.Id;
                 ClassificationLanguage.LanguageId = DefaultLanguageID;
                 ClassificationLanguage.CreatorId = guid;
@@ -267,7 +267,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageEdit(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageEdit(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -275,20 +275,20 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
                 Guid guid = new Guid(CurrentUser.Id);
 
-                var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(test3.SuObject.Id);
-                ClassificationLanguage.ClassificationName = test3.SuObject.Name;
-                ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
+                var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(FromForm.SuObject.Id);
+                ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;
+                ClassificationLanguage.ClassificationMenuName = FromForm.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription = FromForm.SuObject.Description;
                 ClassificationLanguage.ModifierId = guid;
 
-                ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
+                ClassificationLanguage.ClassificationMouseOver = FromForm.SuObject.MouseOver;
                 _classificationLanguage.UpdateClassificationLanguage(ClassificationLanguage);
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
+            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
 
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
 
@@ -332,7 +332,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -340,12 +340,12 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLangauge;
                 Guid guid = new Guid(CurrentUser.Id);
                 var ClassificationLanguage = new SuClassificationLanguageModel();
-                ClassificationLanguage.ClassificationName = test3.SuObject.Name;
-                ClassificationLanguage.ClassificationMenuName = test3.SuObject.MenuName;
-                ClassificationLanguage.ClassificationDescription = test3.SuObject.Description;
-                ClassificationLanguage.ClassificationMouseOver = test3.SuObject.MouseOver;
-                ClassificationLanguage.ClassificationId = test3.SuObject.ObjectId;
-                ClassificationLanguage.LanguageId = test3.SuObject.LanguageId;
+                ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;
+                ClassificationLanguage.ClassificationMenuName = FromForm.SuObject.MenuName;
+                ClassificationLanguage.ClassificationDescription = FromForm.SuObject.Description;
+                ClassificationLanguage.ClassificationMouseOver = FromForm.SuObject.MouseOver;
+                ClassificationLanguage.ClassificationId = FromForm.SuObject.ObjectId;
+                ClassificationLanguage.LanguageId = FromForm.SuObject.LanguageId;
                 ClassificationLanguage.ModifierId = guid;
                 ClassificationLanguage.CreatorId = guid;
 
@@ -353,7 +353,7 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
 
