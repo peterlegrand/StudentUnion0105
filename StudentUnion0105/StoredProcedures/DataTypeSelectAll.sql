@@ -1,4 +1,4 @@
-CREATE PROCEDURE [GetDataTypes] 
+CREATE PROCEDURE [DataTypeSelectAll] 
 AS  
 SELECT  
 dbDataType.Id Id 

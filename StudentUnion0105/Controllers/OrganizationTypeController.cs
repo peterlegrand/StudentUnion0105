@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _OrganizationType.GetAllOrganizationTypes()
+            var ToForm = (from s in _OrganizationType.GetAllOrganizationTypes()
                          join t in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on s.Id equals t.OrganizationTypeId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -106,7 +106,7 @@ namespace StudentUnion0105.Controllers
                              MouseOver = t.MouseOver
                          }).First();
 
-            return View(test1);
+            return View(ToForm);
 
 
         }
@@ -226,7 +226,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
+            var ToForm = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -248,9 +248,9 @@ namespace StudentUnion0105.Controllers
 
             var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = OrganizationTypeList
+                SuObject = ToForm //, a = OrganizationTypeList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }

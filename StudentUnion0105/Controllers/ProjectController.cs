@@ -141,7 +141,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _Project.GetAllProjects()
+            var ToForm = (from s in _Project.GetAllProjects()
                          join t in _ProjectLanguage.GetAllProjectLanguages()
                          on s.Id equals t.ProjectId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -171,7 +171,7 @@ namespace StudentUnion0105.Controllers
                     Value = ProjectFromDb.Id.ToString()
                 });
             }
-            var ProjectAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = ProjectList };
+            var ProjectAndStatus = new SuObjectAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = ProjectList };
             return View(ProjectAndStatus);
 
 
@@ -294,7 +294,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _ProjectLanguage.GetAllProjectLanguages()
+            var ToForm = (from c in _ProjectLanguage.GetAllProjectLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -316,9 +316,9 @@ namespace StudentUnion0105.Controllers
 
             var ProjectAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ProjectList
+                SuObject = ToForm //, a = ProjectList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }

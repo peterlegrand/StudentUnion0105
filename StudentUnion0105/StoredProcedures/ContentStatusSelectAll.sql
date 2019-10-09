@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetContentStatus] 
+CREATE PROCEDURE [dbo].[ContentStatusSelectAll] 
 AS  
 SELECT  
 dbContentStatus.Id 

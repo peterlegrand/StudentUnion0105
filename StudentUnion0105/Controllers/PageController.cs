@@ -115,7 +115,7 @@ namespace StudentUnion0105.Controllers
             }
 
             //wwwwwwwwwwwwwwwwwwwwwwwwww
-            var test1 = (from o in _PageType.GetAllPageTypes()
+            var ToForm = (from o in _PageType.GetAllPageTypes()
                          join l in _PageTypeLanguage.GetAllPageTypeLanguages()
                          on o.Id equals l.PageTypeId
                          where l.LanguageId == DefaultLanguageID
@@ -127,7 +127,7 @@ namespace StudentUnion0105.Controllers
                          }).ToList();
 
             var TypeList = new List<SelectListItem>();
-            foreach (var TypeFromDb in test1)
+            foreach (var TypeFromDb in ToForm)
             {
                 TypeList.Add(new SelectListItem
                 {
@@ -370,7 +370,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _PageLanguage.GetAllPageLanguages()
+            var ToForm = (from c in _PageLanguage.GetAllPageLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -396,9 +396,9 @@ namespace StudentUnion0105.Controllers
 
             var PageAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = PageList
+                SuObject = ToForm //, a = PageList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }

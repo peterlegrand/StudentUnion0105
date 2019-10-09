@@ -746,10 +746,3 @@ INSERT INTO dbTermScreen (Id, TermId, ScreenId) VALUES(4, 4, 1);
 
 SET IDENTITY_INSERT dbTermScreen OFF;
 
-SET IDENTITY_INSERT dbTermLanguage ON;
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId) VALUES(1, 1, 41, 'Properties');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId) VALUES(2, 2, 41, 'Id #');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId) VALUES(3, 3, 41, 'Unique name');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId) VALUES(4, 4, 41, 'Add new property');
-
-SET IDENTITY_INSERT dbTermLangauge OFF;

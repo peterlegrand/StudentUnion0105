@@ -144,7 +144,7 @@ namespace StudentUnion0105.Controllers
                          }).First();
             var ClassificationList = new List<SelectListItem>();
             //string a;
-            //a = test1.Description;
+            //a = ToForm.Description;
             var ProcessTemplateGroupList = new List<SelectListItem>();
             var ProcessTemplateGroupFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
 
@@ -213,7 +213,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()
+            var ToForm = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -235,7 +235,7 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ProcessTemplateList
+                SuObject = ToForm //, a = ProcessTemplateList
             };
             return View(ProcessTemplateAndStatus);
 

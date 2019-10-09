@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetSecurityLevel]  
+CREATE PROCEDURE [dbo].[SecurityLevelSelectAll]  
 AS  
 SELECT  
 dbSecurityLevel.Id Id 

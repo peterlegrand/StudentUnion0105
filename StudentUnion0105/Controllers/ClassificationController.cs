@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -21,6 +23,8 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
+
         //        private readonly IClassificationLevelVMRepository _classificationLevelVMRepository;
         //        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
         //        private readonly IClassificationLevelRepository _classificationLevel;
@@ -31,6 +35,7 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationRepository classification
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
+            , SuDbContext context
             //                                , IClassificationLevelVMRepository classificationLevelVMRepository
             //                                  , IClassificationLevelLanguageRepository classificationLevelLanguage
             //                                    , IClassificationLevelRepository classificationLevel
@@ -42,6 +47,7 @@ namespace StudentUnion0105.Controllers
             _classification = classification;
             _classificationLanguage = classificationLanguage;
             _language = language;
+            _context = context;
             //_classificationLevelVMRepository = classificationLevelVMRepository;
             //_classificationLevelLanguage = classificationLevelLanguage;
             //_classificationLevel = classificationLevel;
@@ -49,10 +55,18 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
             //            ViewBag.CID = 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (
+
+            var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
+                 parameters: new[] {            "Classification", "Index", //0
+                                        DefaultLanguageID.ToString()
+                    }).ToList();
+            string[] CustomizationFromDb = CustomizationFromDb.ToArray();
+            ViewBag.Customization = CustomizationFromDb.Find(;
+            var ToForm = (
 
                 from l in _classificationLanguage.GetAllClassificationLanguages()
 
@@ -65,7 +79,7 @@ namespace StudentUnion0105.Controllers
                              ,
                     Name = l.ClassificationName
                 }).ToList();
-            return View(test1);
+            return View(ToForm);
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
@@ -73,7 +87,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
 
-            var test1 = (from s in _classificationVMRepository.GetAllClassifications()
+            var ToForm = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
                          on s.Id equals t.ClassificationId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -97,7 +111,7 @@ namespace StudentUnion0105.Controllers
                          }).First();
             var ClassificationList = new List<SelectListItem>();
             //string a;
-            //a = test1.Description;
+            //a = ToForm.Description;
 
             foreach (var ClassificationFromDb in _classificationStatus.GetAllClassificationStatus())
             {
@@ -109,7 +123,7 @@ namespace StudentUnion0105.Controllers
             }
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1,
+                SuObject = ToForm,
                 SomeKindINumSelectListItem = ClassificationList
             }; //, Description = a};
             return View(ClassificationAndStatus);
@@ -235,7 +249,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _classificationVMRepository.GetAllClassificationLanguages()
+            var ToForm = (from c in _classificationVMRepository.GetAllClassificationLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -259,7 +273,7 @@ namespace StudentUnion0105.Controllers
 
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ClassificationList
+                SuObject = ToForm //, a = ClassificationList
             };
             return View(ClassificationAndStatus);
 

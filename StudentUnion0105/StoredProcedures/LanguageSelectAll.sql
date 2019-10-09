@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetLanguage] 
+CREATE PROCEDURE [dbo].[LanguageSelectAll] 
 AS  
 SELECT  
 dbLanguage.Id 

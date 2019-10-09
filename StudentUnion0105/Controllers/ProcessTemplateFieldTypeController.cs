@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _ProcessTemplateFieldType.GetAllProcessTemplateFieldTypes()
+            var ToForm = (from s in _ProcessTemplateFieldType.GetAllProcessTemplateFieldTypes()
                          join t in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                          on s.Id equals t.FieldTypeId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -106,7 +106,7 @@ namespace StudentUnion0105.Controllers
                              MouseOver = t.MouseOver
                          }).First();
 
-            return View(test1);
+            return View(ToForm);
 
 
         }
@@ -226,7 +226,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
+            var ToForm = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -248,9 +248,9 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateFieldTypeAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ProcessTemplateFieldTypeList
+                SuObject = ToForm //, a = ProcessTemplateFieldTypeList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }

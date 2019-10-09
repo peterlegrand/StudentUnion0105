@@ -109,7 +109,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.dbStatusList.FromSql($"GetDataTypes").ToList();
+            var DataTypesFromDb = _context.dbStatusList.FromSql($"DataTypeSelectAll").ToList();
 
 
             foreach (var DataTypeFromDb in DataTypesFromDb)
@@ -190,7 +190,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.dbStatusList.FromSql($"GetDataTypes").ToList();
+            var DataTypesFromDb = _context.dbStatusList.FromSql($"DataTypeSelectAll").ToList();
 
 
             //foreach (var DataTypeFromDb in DataTypesFromDb)

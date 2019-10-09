@@ -1192,3 +1192,10 @@ VALUES (1,41,'Student creator','Student creator with security 10 or higher','Stu
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
 VALUES (2,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate(), @CurrentUser, @CurrentUser)
 
+SET IDENTITY_INSERT dbTermLanguage ON;
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(1, 1, 41, 'Properties');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(2, 2, 41, 'Id #');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(3, 3, 41, 'Unique name');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(4, 4, 41, 'Add new property');
+
+SET IDENTITY_INSERT dbTermLangauge OFF;

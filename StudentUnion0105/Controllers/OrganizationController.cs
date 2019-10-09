@@ -141,7 +141,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var test1 = (from o in _organizationType.GetAllOrganizationTypes()
+            var ToForm = (from o in _organizationType.GetAllOrganizationTypes()
                          join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on o.Id equals l.OrganizationTypeId
                          where l.LanguageId == DefaultLanguageID
@@ -153,7 +153,7 @@ namespace StudentUnion0105.Controllers
                          }).ToList();
 
             var TypeList = new List<SelectListItem>();
-            foreach (var TypeFromDb in test1)
+            foreach (var TypeFromDb in ToForm)
             {
                 TypeList.Add(new SelectListItem
                 {
@@ -209,7 +209,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _Organization.GetAllOrganizations()
+            var ToForm = (from s in _Organization.GetAllOrganizations()
                          join t in _OrganizationLanguage.GetAllOrganizationLanguages()
                          on s.Id equals t.OrganizationId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -238,7 +238,7 @@ namespace StudentUnion0105.Controllers
                     Value = OrganizationFromDb.Id.ToString()
                 });
             }
-            var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = OrganizationList };
+            var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = OrganizationList };
             return View(OrganizationAndStatus);
 
 
@@ -361,7 +361,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
+            var ToForm = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -383,9 +383,9 @@ namespace StudentUnion0105.Controllers
 
             var OrganizationAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = OrganizationList
+                SuObject = ToForm //, a = OrganizationList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }

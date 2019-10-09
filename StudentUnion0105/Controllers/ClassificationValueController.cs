@@ -99,7 +99,7 @@ namespace StudentUnion0105.Controllers
                 }
             }
 
-            var test1 = (from s in _classificationLevel.GetAllClassificationLevels()
+            var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
                          where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == CValue.Level
                          select new SuObjectVM
                          {
@@ -110,9 +110,9 @@ namespace StudentUnion0105.Controllers
                              InDropDown = s.InDropDown
 
                          }).First();
-            CValue.DateLevel = test1.DateLevel;
-            CValue.Alphabetically = test1.Alphabetically;
-            CValue.InDropDown = test1.InDropDown;
+            CValue.DateLevel = ToForm.DateLevel;
+            CValue.Alphabetically = ToForm.Alphabetically;
+            CValue.InDropDown = ToForm.InDropDown;
 
             //            var x = _classificationLevel.get.ClassificationLevel()
             ViewBag.CId = HttpContext.Request.Query["CId"];
@@ -218,10 +218,10 @@ namespace StudentUnion0105.Controllers
             }
             //          var ClassificationList = new List<SelectListItem>();
             //string a;
-            //a = test1.Description;
+            //a = ToForm.Description;
 
             ClassificationValue.Level = Level;
-            var test1 = (from s in _classificationLevel.GetAllClassificationLevels()
+            var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
                          where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == ClassificationValue.Level
                          select new SuObjectVM
                          {
@@ -232,12 +232,12 @@ namespace StudentUnion0105.Controllers
                              InDropDown = s.InDropDown
 
                          }).First();
-            ClassificationValue.DateLevel = test1.DateLevel;
-            ClassificationValue.Alphabetically = test1.Alphabetically;
-            ClassificationValue.InDropDown = test1.InDropDown;
+            ClassificationValue.DateLevel = ToForm.DateLevel;
+            ClassificationValue.Alphabetically = ToForm.Alphabetically;
+            ClassificationValue.InDropDown = ToForm.InDropDown;
 
 
-            //            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = test1, SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
+            //            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = ClassificationList }; //, Description = a};
             return View(ClassificationValue);
 
 
@@ -339,10 +339,10 @@ namespace StudentUnion0105.Controllers
             }
             //          var ClassificationList = new List<SelectListItem>();
             //string a;
-            //a = test1.Description;
+            //a = ToForm.Description;
 
             //ClassificationValue.Level = Level;
-            var test1 = (from s in _classificationLevel.GetAllClassificationLevels()
+            var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
                          where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == Level
                          select new SuObjectVM
                          {
@@ -363,7 +363,7 @@ namespace StudentUnion0105.Controllers
 
             };
 
-            ViewBag.ShowInDropDown = test1.InDropDown;
+            ViewBag.ShowInDropDown = ToForm.InDropDown;
             return View(ClassificationAndStatus);
         }
 

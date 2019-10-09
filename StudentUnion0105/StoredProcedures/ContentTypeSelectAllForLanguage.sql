@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[GetContentType] (@Language Int) 
+CREATE PROCEDURE [dbo].[ContentTypeSelectAllForLanguage] (@Language Int) 
 AS  
 SELECT  
 dbContentTypeLanguage.ContentTypeId Id 

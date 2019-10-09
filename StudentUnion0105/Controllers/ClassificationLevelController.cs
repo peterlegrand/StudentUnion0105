@@ -299,7 +299,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            var ToForm = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -323,7 +323,7 @@ namespace StudentUnion0105.Controllers
 
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ClassificationList
+                SuObject = ToForm //, a = ClassificationList
             };
             return View(ClassificationAndStatus);
 

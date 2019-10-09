@@ -93,7 +93,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.dbStatusList.FromSql($"GetContentStatus").ToList();
+            var ContentStatusFromDb = _context.dbStatusList.FromSql($"ContentStatusSelectAll").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)
@@ -104,7 +104,7 @@ namespace StudentUnion0105.Controllers
                     Value = StatusFromDb.Id.ToString()
                 });
             }
-            var ContentTypesFromDb = _context.dbTypeList.FromSql($"GetContentType {DefaultLanguageID}").ToList();
+            var ContentTypesFromDb = _context.dbTypeList.FromSql($"ContentTypeSelectAllForLanguage {DefaultLanguageID}").ToList();
 
             foreach (var TypeFromDb in ContentTypesFromDb)
             {
@@ -139,7 +139,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var SecurityLevelsFromDb = _context.dbSecurityLevelList.FromSql($"GetSecurityLevel").ToList();
+            var SecurityLevelsFromDb = _context.dbSecurityLevelList.FromSql($"SecurityLevelSelectAll").ToList();
 
             foreach (var SecurityLevelFromDb in SecurityLevelsFromDb)
             {
@@ -150,7 +150,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var LanguagesFromDb = _context.dbLanguageList.FromSql($"GetLanguage").ToList();
+            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
 
             foreach (var LanguageFromDb in LanguagesFromDb)
             {

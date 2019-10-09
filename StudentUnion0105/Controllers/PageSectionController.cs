@@ -167,7 +167,7 @@ namespace StudentUnion0105.Controllers
             //Existing levels
 
             //PageSectionTypes
-            var test1 = (from o in _pageSectionType.GetAllPageSectionTypes()
+            var ToForm = (from o in _pageSectionType.GetAllPageSectionTypes()
                          join l in _pageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
                          on o.Id equals l.PageSectionTypeId
                          where l.LanguageId == DefaultLanguageID
@@ -179,7 +179,7 @@ namespace StudentUnion0105.Controllers
                          }).ToList();
 
             var TypeList = new List<SelectListItem>();
-            foreach (var TypeFromDb in test1)
+            foreach (var TypeFromDb in ToForm)
             {
                 TypeList.Add(new SelectListItem
                 {
@@ -319,7 +319,7 @@ namespace StudentUnion0105.Controllers
             ExistingLevels.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
 
             //PageSectionTypes
-            var test1 = (from o in _pageSectionType.GetAllPageSectionTypes()
+            var ToForm = (from o in _pageSectionType.GetAllPageSectionTypes()
                          join l in _pageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
                          on o.Id equals l.PageSectionTypeId
                          where l.LanguageId == DefaultLanguageID
@@ -331,7 +331,7 @@ namespace StudentUnion0105.Controllers
                          }).ToList();
 
             var TypeList = new List<SelectListItem>();
-            foreach (var TypeFromDb in test1)
+            foreach (var TypeFromDb in ToForm)
             {
                 TypeList.Add(new SelectListItem
                 {
@@ -493,7 +493,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
+            var ToForm = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -515,7 +515,7 @@ namespace StudentUnion0105.Controllers
 
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = ClassificationList
+                SuObject = ToForm //, a = ClassificationList
             };
             return View(ClassificationAndStatus);
 

@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLangauge;
-            var test1 = (from s in _PageType.GetAllPageTypes()
+            var ToForm = (from s in _PageType.GetAllPageTypes()
                          join t in _PageTypeLanguage.GetAllPageTypeLanguages()
                          on s.Id equals t.PageTypeId
                          where t.LanguageId == DefaultLanguageID && s.Id == Id
@@ -106,7 +106,7 @@ namespace StudentUnion0105.Controllers
                              MouseOver = t.MouseOver
                          }).First();
 
-            return View(test1);
+            return View(ToForm);
 
 
         }
@@ -226,7 +226,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var test1 = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
+            var ToForm = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
                          where c.Id == Id
@@ -248,9 +248,9 @@ namespace StudentUnion0105.Controllers
 
             var PageTypeAndStatus = new SuObjectAndStatusViewModel
             {
-                SuObject = test1 //, a = PageTypeList
+                SuObject = ToForm //, a = PageTypeList
             };
-            return View(test1);
+            return View(ToForm);
 
 
         }
