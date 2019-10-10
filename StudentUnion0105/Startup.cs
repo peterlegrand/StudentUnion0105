@@ -92,6 +92,15 @@ namespace StudentUnion0105
             services.AddTransient<IContentRepository, SQLContentRepository>();
             services.AddTransient<IContentClassificationValueRepository, SQLContentClassificationValueRepository>();
             services.AddTransient<IContentStatusRepository, SQLContentStatusRepository>();
+            services.AddTransient<IUserOrganizationRepository, SQLUserOrganizationRepository>();
+            services.AddTransient<IUserOrganizationTypeRepository, SQLUserOrganizationTypeRepository>();
+            services.AddTransient<IUserOrganizationTypeLanguageRepository, SQLUserOrganizationTypeLanguageRepository>();
+            services.AddTransient<IUserProjectRepository, SQLUserProjectRepository>();
+            services.AddTransient<IUserProjectTypeRepository, SQLUserProjectTypeRepository>();
+            services.AddTransient<IUserProjectTypeLanguageRepository, SQLUserProjectTypeLanguageRepository>();
+            services.AddTransient<IUserRelationRepository, SQLUserRelationRepository>();
+            services.AddTransient<IUserRelationTypeRepository, SQLUserRelationTypeRepository>();
+            services.AddTransient<IUserRelationTypeLanguageRepository, SQLUserRelationTypeLanguageRepository>();
             services.AddTransient<ISecurityLevelRepository, SQLSecurityLevelRepository>();
             services.AddTransient<IMasterListRepository, SQLMasterListRepository>();
             services.AddTransient<IDataTypeRepository, SQLDataTypeRepository>();
@@ -100,6 +109,9 @@ namespace StudentUnion0105
             services.AddTransient<ISettingRepository, SQLSettingRepository>();
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
+
+            services.AddTransient<IObjectVMRepository, SQLObjectVMRepository>();
+            services.AddTransient<IIdWithStringsRepository, SQLIdWithStringsRepository>();
 
             services.AddTransient<IUIScreenRepository, SQLUIScreenRepository>();
             services.AddTransient<IUITermLanguageRepository, SQLUITermLanguageRepository>();

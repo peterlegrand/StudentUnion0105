@@ -746,3 +746,37 @@ INSERT INTO dbTermScreen (Id, TermId, ScreenId) VALUES(4, 4, 1);
 
 SET IDENTITY_INSERT dbTermScreen OFF;
 
+
+
+SET IDENTITY_INSERT dbUserOrganizationType ON;
+INSERT INTO dbUserOrganizationType (Id, Name, Description) VALUES(1, 'Member', 'Member');
+INSERT INTO dbUserOrganizationType (Id, Name, Description) VALUES(2, 'Manager', 'Manager');
+
+SET IDENTITY_INSERT dbUserOrganizationType OFF;
+
+
+SET IDENTITY_INSERT dbUserOrganizationTypeLanguage ON;
+INSERT INTO dbUserOrganizationTypeLanguage (Id, TypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 41, 'Member', 'Member', 'Member', 'Member', @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbUserOrganizationTypeLanguage (Id, TypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 2, 41, 'Manager', 'Manager', 'Manager', 'Manager', @CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbUserOrganizationTypeLanguage OFF;
+
+
+
+SET IDENTITY_INSERT dbUserProjectType ON;
+INSERT INTO dbUserProjectType (Id, Name, Description) VALUES(1, 'Team member', 'Team member');
+INSERT INTO dbUserProjectType (Id, Name, Description) VALUES(2, 'Team leader', 'Team leader');
+
+SET IDENTITY_INSERT dbUserProjectType OFF;
+
+
+SET IDENTITY_INSERT dbUserProjectTypeLanguage ON;
+INSERT INTO dbUserProjectTypeLanguage (Id, TypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 41, 'Team member', 'Team member', 'Team member', 'Team member', @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbUserProjectTypeLanguage (Id, TypeId, LanguageId, Name, Description, MenuName, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 2, 41, 'Team leader', 'Team leader', 'Team leader', 'Team leader', @CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbUserProjectTypeLanguage OFF;
+

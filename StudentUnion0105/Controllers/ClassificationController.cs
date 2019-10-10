@@ -60,10 +60,10 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
-                 parameters: new[] {            "Classification", "Index", //0
-                                        DefaultLanguageID.ToString()
-                    }).ToList();
+            //var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
+            //     parameters: new[] {            "Classification", "Index", //0
+            //                            DefaultLanguageID.ToString()
+            //        }).ToList();
          //   string[] CustomizationFromDb = CustomizationFromDb.ToArray();
           //  ViewBag.Customization = CustomizationFromDb.Find(;
             var ToForm = (

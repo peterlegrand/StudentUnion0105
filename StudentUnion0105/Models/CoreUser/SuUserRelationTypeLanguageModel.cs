@@ -12,14 +12,27 @@ namespace StudentUnion0105.Models
         [Display(Name = "Language id")]
         public int LanguageId { get; set; }
         [MaxLength(50)]
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Display(Name = "From is of To name")]
+        public string FromIsOfToName { get; set; }
         [MaxLength(50)]
-        [Display(Name = "Menu name")]
-        public string MenuName { get; set; }
+        [Display(Name = "To is of From name")]
+        public string ToIsOfFromName { get; set; }
+        [Display(Name = "From is of To description")]
+        public string FromIsOfToDescription { get; set; }
+        [Display(Name = "To is of From description")]
+        public string ToIsOfFromDescription { get; set; }
         [MaxLength(50)]
-        [Display(Name = "Mouse over")]
-        public string MouseOver { get; set; }
+        [Display(Name = "From is of To menu name")]
+        public string FromIsOfToMenuName { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "To is of From menu name")]
+        public string ToIsOfFromMenuName { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "From is of To mouse over")]
+        public string FromIsOfToMouseOver { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "To is of From mouse over")]
+        public string ToIsOfFromMouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

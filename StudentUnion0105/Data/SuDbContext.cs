@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Models;
 using StudentUnion0105.SPModel;
+using StudentUnion0105.ViewModels;
 using static StudentUnion0105.SPModel.GetProjectStructure;
 
 namespace StudentUnion0105.Data
@@ -65,6 +66,15 @@ namespace StudentUnion0105.Data
         public DbSet<SuProcessTemplateStepFieldStatusModel> dbProcessTemplateStepFieldStatus { get; set; }
         public DbSet<SuProcessTemplateStepLanguageModel> dbProcessTemplateStepLanguage { get; set; }
         public DbSet<SuProcessTemplateStepModel> dbProcessTemplateStep { get; set; }
+        public DbSet<SuUserOrganizationModel> dbUserOrganization { get; set; }
+        public DbSet<SuUserOrganizationTypeModel> dbUserOrganizationType { get; set; }
+        public DbSet<SuUserOrganizationTypeLanguageModel> dbUserOrganizationTypeLanguage { get; set; }
+        public DbSet<SuUserProjectModel> dbUserProject { get; set; }
+        public DbSet<SuUserProjectTypeModel> dbUserProjectType { get; set; }
+        public DbSet<SuUserProjectTypeLanguageModel> dbUserProjectTypeLanguage { get; set; }
+        public DbSet<SuUserRelationModel> dbUserRelation { get; set; }
+        public DbSet<SuUserRelationTypeModel> dbUserRelationType { get; set; }
+        public DbSet<SuUserRelationTypeLanguageModel> dbUserRelationTypeLanguage { get; set; }
         public DbSet<SuMasterListModel> dbMasterList { get; set; }
         public DbSet<SuDataTypeModel> dbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> dbSecurityLevel { get; set; }
@@ -85,6 +95,8 @@ namespace StudentUnion0105.Data
         public DbSet<SuGetClassificationValueStructure> dbGetClassificationValueStructure { get; set; }
         public DbSet<SuGetProjectStructure> dbGetProjectStructure { get; set; }
         public DbSet<SuPageSectionsViewModel> dbPageSectionsViewModel { get; set; }
+        public DbSet<SuObjectVM> dbObjectVM { get; set; }
+        public DbSet<SuIdWithStrings> dbIdWithStrings { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
 

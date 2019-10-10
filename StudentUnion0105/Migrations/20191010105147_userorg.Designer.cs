@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191010105147_userorg")]
+    partial class userorg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dea7c34d-b863-4114-86ad-00daa006f480",
-                            ConcurrencyStamp = "bf03105d-4558-4135-8240-f66104f899b3",
+                            Id = "57436b03-a584-44c1-9d84-87b488199ac6",
+                            ConcurrencyStamp = "03ef53a7-f788-49da-bcd6-a67239909733",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "37624060-f541-4b91-b600-bf60ab3223b0",
-                            ConcurrencyStamp = "87d5f39e-1e85-4e20-9938-27bdc2200b38",
+                            Id = "29e32a1b-cfb9-43dd-aacc-678d9f064270",
+                            ConcurrencyStamp = "1587d1b4-b0b9-4d8f-bfd7-ba9cade8d9c8",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -2170,7 +2172,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("MouseOver");
+
                     b.Property<string>("Name");
+
+                    b.Property<string>("String1");
+
+                    b.Property<string>("String2");
 
                     b.HasKey("Id");
 

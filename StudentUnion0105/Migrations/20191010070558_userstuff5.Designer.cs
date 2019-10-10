@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191010070558_userstuff5")]
+    partial class userstuff5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dea7c34d-b863-4114-86ad-00daa006f480",
-                            ConcurrencyStamp = "bf03105d-4558-4135-8240-f66104f899b3",
+                            Id = "8fce28fc-392b-452a-91de-e4406f14153f",
+                            ConcurrencyStamp = "21454962-820b-4c37-82cb-9605bcc6ba80",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "37624060-f541-4b91-b600-bf60ab3223b0",
-                            ConcurrencyStamp = "87d5f39e-1e85-4e20-9938-27bdc2200b38",
+                            Id = "3178f384-2d13-45d8-a1a7-99cd4ee51f22",
+                            ConcurrencyStamp = "fdb531f1-fd90-4bc6-bda2-c85f48d52eba",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -2160,98 +2162,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Path");
 
                     b.ToTable("dbGetOrganizationStructure");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.ViewModels.SuIdWithStrings", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dbIdWithStrings");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.ViewModels.SuObjectVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Alphabetically");
-
-                    b.Property<bool>("CanLink");
-
-                    b.Property<DateTimeOffset?>("DateFrom");
-
-                    b.Property<int>("DateLevel");
-
-                    b.Property<DateTimeOffset?>("DateTo");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Description2");
-
-                    b.Property<string>("DropDownName");
-
-                    b.Property<bool>("HasDropDown");
-
-                    b.Property<string>("HeaderDescription");
-
-                    b.Property<string>("HeaderName");
-
-                    b.Property<bool>("InDropDown");
-
-                    b.Property<bool>("IndexSection");
-
-                    b.Property<string>("Language");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<int>("Level");
-
-                    b.Property<string>("MenuName");
-
-                    b.Property<string>("MouseOver");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NotNullId");
-
-                    b.Property<int>("NotNullId2");
-
-                    b.Property<int?>("NullId");
-
-                    b.Property<int?>("NullId2");
-
-                    b.Property<int>("ObjectId");
-
-                    b.Property<int>("ObjectLanguageId");
-
-                    b.Property<bool>("OnTheFly");
-
-                    b.Property<string>("PageDescription");
-
-                    b.Property<string>("PageName");
-
-                    b.Property<int>("Sequence");
-
-                    b.Property<int>("Status");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("TopicName");
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dbObjectVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

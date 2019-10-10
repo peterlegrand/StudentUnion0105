@@ -8,9 +8,11 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         [Display(Name = "From user Id")]
-        public int FromUserId { get; set; }
+        [MaxLength(450)]
+        public string FromUserId { get; set; }
         [Display(Name = "To user Id")]
-        public int ToUserId { get; set; }
+        [MaxLength(450)]
+        public string ToUserId { get; set; }
         [Display(Name = "Relation type Id")]
         public int TypeId { get; set; }
         public Guid CreatorId { get; set; }

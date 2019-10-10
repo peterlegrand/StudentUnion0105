@@ -8,7 +8,8 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         [Display(Name = "User Id")]
-        public int UserId { get; set; }
+        [MaxLength(450)]
+        public string UserId { get; set; }
         [Display(Name = "Project Id")]
         public int ProjectId { get; set; }
         [Display(Name = "Type Id")]

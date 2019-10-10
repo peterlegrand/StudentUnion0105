@@ -892,9 +892,9 @@ VALUES (1,39,'Gemaakt door leerling','Gemaakt door student leerling met security
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
 VALUES (2,39,'Goedkeuring door leraar','Goedkeuring door leraar','Goedkeuring door leraar',getdate(),getdate(), @CurrentUser, @CurrentUser)
 SET IDENTITY_INSERT dbTermLanguage ON;
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(1, 1, 39, 'Eigenschappen');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(2, 2, 41, 'Identiteit');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(3, 3, 41, 'Naam');
-INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(4, 4, 41, 'Eigenschap toevoegen');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(5, 1, 39, 'Eigenschappen');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(6, 2, 39, 'Identiteit');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(7, 3, 39, 'Naam');
+INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(8, 4, 39, 'Eigenschap toevoegen');
 
-SET IDENTITY_INSERT dbTermLangauge OFF;
+SET IDENTITY_INSERT dbTermLanguage OFF;

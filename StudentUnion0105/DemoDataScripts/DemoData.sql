@@ -1198,4 +1198,37 @@ INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(2, 2, 
 INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(3, 3, 41, 'Unique name');
 INSERT INTO dbTermLanguage (Id, TermId, LanguageId, Customization) VALUES(4, 4, 41, 'Add new property');
 
-SET IDENTITY_INSERT dbTermLangauge OFF;
+SET IDENTITY_INSERT dbTermLanguage OFF;
+
+
+
+SET IDENTITY_INSERT dbUserRelationType ON;
+INSERT INTO dbUserRelationType (Id, Name, Description) VALUES(1, 'Teacher/Student', 'Teacher/Student');
+INSERT INTO dbUserRelationType (Id, Name, Description) VALUES(2, 'Principal/Teacher', 'Principal/Teacher');
+
+SET IDENTITY_INSERT dbUserRelationType OFF;
+
+
+SET IDENTITY_INSERT dbUserRelationTypeLanguage ON;
+INSERT INTO dbUserRelationTypeLanguage (Id, TypeId, LanguageId, FromIsOfToName, ToIsOfFromName, FromIsOfToDescription, ToIsOfFromDescription, FromIsOfToMenuName, ToIsOfFromMenuName, FromIsOfToMouseOver, ToIsOfFromMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 41, 'Student', 'Teacher', 'Student', 'Teacher','Student', 'Teacher', 'Student', 'Teacher', @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbUserRelationTypeLanguage (Id, TypeId, LanguageId, FromIsOfToName, ToIsOfFromName, FromIsOfToDescription, ToIsOfFromDescription, FromIsOfToMenuName, ToIsOfFromMenuName, FromIsOfToMouseOver, ToIsOfFromMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 2, 41, 'Teacher', 'Principle', 'Teacher', 'Principle','Teacher', 'Principle','Teacher', 'Principle',@CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbUserRelationTypeLanguage OFF;
+
+SET IDENTITY_INSERT dbOrganization ON;
+INSERT INTO dbOrganization (Id, OrganizationStatusId, OrganizationTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 1 , @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbOrganization (Id, ParentOrganizationId,OrganizationStatusId, OrganizationTypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 1, 1, 2 , @CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbOrganization OFF;
+
+SET IDENTITY_INSERT dbOrganizationLanguage ON;
+INSERT INTO dbOrganizationLanguage (Id, OrganizationId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 41, 'Chulalongkorn University','Chulalongkorn University','Chulalongkorn University',  @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbOrganizationLanguage (Id, OrganizationId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 2, 41, 'Faculty of medicine','Faculty of medicine','Faculty of medicine',  @CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbOrganizationLanguage OFF;
