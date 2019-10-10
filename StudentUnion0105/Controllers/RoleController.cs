@@ -16,11 +16,11 @@ namespace StudentUnion0105.Controllers
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IClaimRepository _claim;
 
         public RoleController(RoleManager<IdentityRole> roleManager
-                                        , UserManager<SuUser> userManager, IClaimRepository Claim)
+                                        , UserManager<SuUserModel> userManager, IClaimRepository Claim)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
@@ -183,7 +183,7 @@ namespace StudentUnion0105.Controllers
                 bool CheckedUser = u.IsSelected;
 
                 bool HaveUser = false;
-                SuUser AssignedUser = new SuUser();
+                SuUserModel  AssignedUser = new SuUserModel();
 
                 foreach (var x in AssignedUsers)
                 {

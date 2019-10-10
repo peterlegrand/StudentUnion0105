@@ -10,7 +10,7 @@ namespace StudentUnion0105.Classes
 
         public async Task<bool> ShowMenuBasedOnClaim(System.Security.Claims.ClaimsPrincipal User,
             string ClaimType, string ClaimValue,
-            UserManager<SuUser> userManager
+            UserManager<SuUserModel> userManager
             , RoleManager<IdentityRole> roleManager)
         {
 

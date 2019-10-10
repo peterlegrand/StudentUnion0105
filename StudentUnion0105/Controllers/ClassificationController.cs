@@ -17,7 +17,7 @@ namespace StudentUnion0105.Controllers
     [Authorize("Classification")]
     public class ClassificationController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationVMRepository _classificationVMRepository;
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
@@ -29,7 +29,7 @@ namespace StudentUnion0105.Controllers
         //        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
         //        private readonly IClassificationLevelRepository _classificationLevel;
 
-        public ClassificationController(UserManager<SuUser> userManager
+        public ClassificationController(UserManager<SuUserModel> userManager
                                                 , IClassificationVMRepository classificationVMRepository
                                                 , IClassificationStatusRepository classificationStatus
                                                 , IClassificationRepository classification
@@ -58,14 +58,14 @@ namespace StudentUnion0105.Controllers
 
             //            ViewBag.CID = 
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
                  parameters: new[] {            "Classification", "Index", //0
                                         DefaultLanguageID.ToString()
                     }).ToList();
-            string[] CustomizationFromDb = CustomizationFromDb.ToArray();
-            ViewBag.Customization = CustomizationFromDb.Find(;
+         //   string[] CustomizationFromDb = CustomizationFromDb.ToArray();
+          //  ViewBag.Customization = CustomizationFromDb.Find(;
             var ToForm = (
 
                 from l in _classificationLanguage.GetAllClassificationLanguages()
@@ -85,7 +85,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ToForm = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
@@ -146,7 +146,7 @@ namespace StudentUnion0105.Controllers
                 Classification.ModifierId = guid;
                 _classification.UpdateClassification(Classification);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(FromForm.SuObject.ObjectLanguageId);
                 ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;
                 ClassificationLanguage.ClassificationMenuName = FromForm.SuObject.MenuName;
@@ -167,7 +167,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ClassificationList = new List<SelectListItem>();
 
             foreach (var ClassificationFromDb in _classificationStatus.GetAllClassificationStatus())
@@ -189,7 +189,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var Classification = new SuClassificationModel();
@@ -286,7 +286,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var ClassificationLanguage = _classificationLanguage.GetClassificationLanguage(FromForm.SuObject.Id);
@@ -351,7 +351,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
                 var ClassificationLanguage = new SuClassificationLanguageModel();
                 ClassificationLanguage.ClassificationName = FromForm.SuObject.Name;

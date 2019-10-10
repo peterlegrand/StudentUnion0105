@@ -12,13 +12,13 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateStepFieldsController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateStepFieldRepository _processTemplateStepField;
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
         private readonly ILanguageRepository _language;
 
-        public ProcessTemplateStepFieldsController(UserManager<SuUser> userManager
+        public ProcessTemplateStepFieldsController(UserManager<SuUserModel> userManager
             , IProcessTemplateStepFieldRepository processTemplateStepField
             , IProcessTemplateFieldLanguageRepository processTemplateFieldLanguage
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
@@ -35,7 +35,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var Steps = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
                          join f in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()

@@ -15,14 +15,14 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateFlowConditionController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateFlowConditionRepository _processTemplateFlowCondition;
         private readonly IProcessTemplateFlowConditionLanguageRepository _processTemplateFlowConditionLanguageRepository;
         private readonly ILanguageRepository _language;
         private readonly IPageSectionTypeRepository _pageSectionType;
         private readonly SuDbContext _context;
 
-        public ProcessTemplateFlowConditionController(UserManager<SuUser> userManager
+        public ProcessTemplateFlowConditionController(UserManager<SuUserModel> userManager
             , IProcessTemplateFlowConditionRepository processTemplateFlowCondition
             , IProcessTemplateFlowConditionLanguageRepository templateFlowConditionLanguageRepository
             , ILanguageRepository language
@@ -40,7 +40,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var pageSection = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
                                join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
@@ -62,7 +62,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var FlowCondition = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
                                join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
                                on c.Id equals l.FlowConditionId
@@ -148,7 +148,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 //                var FieldId 
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
                     "@p8, @p9, @p10",
@@ -183,7 +183,7 @@ namespace StudentUnion0105.Controllers
             ToForm.Id = Id;
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             ToForm.LanguageId= DefaultLanguageID;
             var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateFlowConditionType").ToList();
 
@@ -239,7 +239,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 //                var FieldId 
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
                     "@p8, @p9, @p10",

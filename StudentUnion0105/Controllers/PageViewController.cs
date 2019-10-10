@@ -12,10 +12,10 @@ namespace StudentUnion0105.Controllers
     public class PageViewController : Controller
     {
         private readonly SuDbContext _context;
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
 
         public PageViewController(SuDbContext context
-            , UserManager<SuUser> userManager)
+            , UserManager<SuUserModel> userManager)
         {
             _context = context;
             this.userManager = userManager;
@@ -23,7 +23,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             int Id = 2;
             var Sections = _context.dbPageSectionsViewModel.FromSql($"ShowPageSection {Id}, {DefaultLanguageID}").ToList();
             int NoOfSections = Sections.Count();

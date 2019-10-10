@@ -16,7 +16,7 @@ namespace StudentUnion0105.Controllers
 
     public class ProcessTemplateFlowController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly ILanguageRepository _language;
         private readonly IProcessTemplateFlowRepository _processTemplateFlow;
         private readonly IProcessTemplateFlowLanguageRepository _processTemplateFlowLanguage;
@@ -24,7 +24,7 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
         private readonly SuDbContext _context;
 
-        public ProcessTemplateFlowController(UserManager<SuUser> userManager
+        public ProcessTemplateFlowController(UserManager<SuUserModel> userManager
             , ILanguageRepository language
             , IProcessTemplateFlowRepository processTemplateFlow
             , IProcessTemplateFlowLanguageRepository processTemplateFlowLanguage
@@ -43,7 +43,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ProcessTemplateFlow = (from p in _processTemplateFlow.GetAllProcessTemplateFlows()
                                         join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
@@ -77,7 +77,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var Flow = (from f in _processTemplateFlow.GetAllProcessTemplateFlows()
                                join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
                                on f.Id equals l.FlowId
@@ -134,7 +134,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                     parameters: new[] { UpdatedFlow.SuObject.ObjectId.ToString()           //0
                                         ,UpdatedFlow.SuObject.NotNullId.ToString()    //1
@@ -157,7 +157,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             SuObjectVMPageSection SuObject = new SuObjectVMPageSection();
             SuObject.ObjectId = Id;
 
@@ -192,7 +192,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                    parameters: new[] { FromForm.SuObject.ObjectId.ToString()           //0

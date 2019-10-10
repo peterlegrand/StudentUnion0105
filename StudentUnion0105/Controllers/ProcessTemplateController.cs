@@ -15,7 +15,7 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IProcessTemplateLanguageRepository _processTemplateLanguage;
         private readonly IProcessTemplateRepository _processTemplate;
         private readonly IProcessTemplateGroupRepository _processTemplateGroup;
@@ -23,7 +23,7 @@ namespace StudentUnion0105.Controllers
         private readonly SuDbContext _context;
         private readonly ILanguageRepository _language;
 
-        public ProcessTemplateController(UserManager<SuUser> userManager
+        public ProcessTemplateController(UserManager<SuUserModel> userManager
                 , IProcessTemplateLanguageRepository ProcessTemplateLanguage
                 , IProcessTemplateRepository ProcessTemplate
                 , IProcessTemplateGroupRepository processTemplateGroup
@@ -44,7 +44,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateList = (
 
                 from l in _processTemplateLanguage.GetAllProcessTemplateLanguages()
@@ -66,7 +66,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateGroupList = new List<SelectListItem>();
 
             var ProcessTemplateGroupFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
@@ -98,7 +98,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
@@ -122,7 +122,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ProcessTemplateToForm = (from s in _processTemplate.GetAllProcessTemplates()
                          join t in _processTemplateLanguage.GetAllProcessTemplateLanguages()
@@ -173,7 +173,7 @@ namespace StudentUnion0105.Controllers
                 _processTemplate.UpdateProcessTemplate(ProcessTemplate);
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
                 var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(FromForm.SuObject.ObjectLanguageId);
                 ProcessTemplateLanguage.ProcessTemplateName = FromForm.SuObject.Name;
@@ -248,7 +248,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(FromForm.SuObject.Id);
@@ -311,7 +311,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 Guid guid = new Guid(CurrentUser.Id);
 
                 var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();

@@ -12,11 +12,11 @@ namespace StudentUnion0105.Controllers
 {
     public class SettingController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly ISettingRepository _setting;
         private readonly ILanguageRepository _language;
 
-        public SettingController(UserManager<SuUser> userManager
+        public SettingController(UserManager<SuUserModel> userManager
                                                 , ISettingRepository setting
                                                 , ILanguageRepository language)
         {
@@ -28,7 +28,7 @@ namespace StudentUnion0105.Controllers
         {
             //            ViewBag.CID = 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (
 
                 from l in _setting.GetAllSettings()
@@ -53,7 +53,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ToForm = (
 

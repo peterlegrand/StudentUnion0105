@@ -13,12 +13,12 @@ namespace StudentUnion0105.Controllers
 {
     public class ContentTypeController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IContentTypeLanguageRepository _contentTypeLanguage;
         private readonly IContentTypeRepository _contentType;
         private readonly ILanguageRepository _language;
 
-        public ContentTypeController(UserManager<SuUser> userManager
+        public ContentTypeController(UserManager<SuUserModel> userManager
             , IContentTypeLanguageRepository ContentTypeLanguage
             , IContentTypeRepository contentType
             , ILanguageRepository language)
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ContentTypes = (
 
                 from l in _contentTypeLanguage.GetAllContentTypeLanguages()
@@ -68,7 +68,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ContentTypeLanguage = new SuContentTypeLanguageModel();
 
                 ContentTypeLanguage.Name = FromForm.Name;
@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _contentType.GetAllContentTypes()
                          join t in _contentTypeLanguage.GetAllContentTypeLanguages()
                          on s.Id equals t.ContentTypeId
@@ -124,7 +124,7 @@ namespace StudentUnion0105.Controllers
                 ContentType.ModifierId = new Guid(CurrentUser.Id);
                 _contentType.UpdateContentType(ContentType);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.ObjectLanguageId);
                 ContentTypeLanguage.Name = test3.Name;
                 ContentTypeLanguage.Description = test3.Description;

@@ -13,12 +13,12 @@ namespace StudentUnion0105.Controllers
 {
     public class PageSectionTypeController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IPageSectionTypeLanguageRepository _PageSectionTypeLanguage;
         private readonly IPageSectionTypeRepository _PageSectionType;
         private readonly ILanguageRepository _language;
 
-        public PageSectionTypeController(UserManager<SuUser> userManager
+        public PageSectionTypeController(UserManager<SuUserModel> userManager
             , IPageSectionTypeLanguageRepository PageSectionTypeLanguage
             , IPageSectionTypeRepository PageSectionType
             , ILanguageRepository language)
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var PageSectionTypes = (
 
                 from l in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
@@ -68,7 +68,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageSectionTypeLanguage = new SuPageSectionTypeLanguageModel();
 
                 PageSectionTypeLanguage.Name = FromForm.Name;
@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _PageSectionType.GetAllPageSectionTypes()
                          join t in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
                          on s.Id equals t.PageSectionTypeId
@@ -127,7 +127,7 @@ namespace StudentUnion0105.Controllers
                 PageSectionType.IndexSection = test3.IndexSection;
                 _PageSectionType.UpdatePageSectionType(PageSectionType);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageSectionTypeLanguage = _PageSectionTypeLanguage.GetPageSectionTypeLanguage(test3.ObjectLanguageId);
                 PageSectionTypeLanguage.Name = test3.Name;
                 PageSectionTypeLanguage.Description = test3.Description;

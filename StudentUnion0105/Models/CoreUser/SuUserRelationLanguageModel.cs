@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
-    public class SuClassificationLanguageModel
+    public class SuUserRelationLanguageModel
     {
         public int Id { get; set; }
         [Display(Name = "Classification Id")]

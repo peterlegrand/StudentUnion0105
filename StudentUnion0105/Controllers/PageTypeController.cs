@@ -13,12 +13,12 @@ namespace StudentUnion0105.Controllers
 {
     public class PageTypeController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
         private readonly IPageTypeRepository _PageType;
         private readonly ILanguageRepository _language;
 
-        public PageTypeController(UserManager<SuUser> userManager
+        public PageTypeController(UserManager<SuUserModel> userManager
             , IPageTypeLanguageRepository PageTypeLanguage
             , IPageTypeRepository PageType
             , ILanguageRepository language)
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var PageTypes = (
 
                 from l in _PageTypeLanguage.GetAllPageTypeLanguages()
@@ -67,7 +67,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageTypeLanguage = new SuPageTypeLanguageModel();
 
                 PageTypeLanguage.Name = FromForm.Name;
@@ -88,7 +88,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _PageType.GetAllPageTypes()
                          join t in _PageTypeLanguage.GetAllPageTypeLanguages()
                          on s.Id equals t.PageTypeId
@@ -123,7 +123,7 @@ namespace StudentUnion0105.Controllers
                 PageType.ModifierId = new Guid(CurrentUser.Id);
                 _PageType.UpdatePageType(PageType);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageTypeLanguage = _PageTypeLanguage.GetPageTypeLanguage(test3.ObjectLanguageId);
                 PageTypeLanguage.Name = test3.Name;
                 PageTypeLanguage.Description = test3.Description;

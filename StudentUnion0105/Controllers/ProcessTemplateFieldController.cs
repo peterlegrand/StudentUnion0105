@@ -14,7 +14,7 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateFieldController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateRepository _processTemplate;
         private readonly IProcessTemplateLanguageRepository _processTemplateLanguage;
         private readonly ILanguageRepository _language;
@@ -26,7 +26,7 @@ namespace StudentUnion0105.Controllers
         private readonly IMasterListRepository _masterList;
         private readonly IDataTypeRepository _dataType;
 
-        public ProcessTemplateFieldController(UserManager<SuUser> userManager
+        public ProcessTemplateFieldController(UserManager<SuUserModel> userManager
             , IProcessTemplateRepository processTemplate
             , IProcessTemplateLanguageRepository processTemplateLanguage
             , ILanguageRepository language
@@ -56,7 +56,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ProcessTemplateField = (from c in  _processTemplateField.GetAllProcessTemplateFields()
                                join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
@@ -83,7 +83,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateField = (from c in _processTemplateField.GetAllProcessTemplateFields()
                                         join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
                                         on c.Id equals l.ProcessTemplateFieldId
@@ -158,7 +158,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6 " 
                     ,
                     parameters: new[] { FromForm.Field.ObjectId.ToString()           //0
@@ -184,7 +184,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateField = new SuObjectVM
             {
                 Id = Id
@@ -239,7 +239,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6  ",
                     parameters: new[] { FromForm.Field.Id.ToString()           //0

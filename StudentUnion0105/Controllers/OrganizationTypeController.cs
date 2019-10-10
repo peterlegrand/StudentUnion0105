@@ -13,12 +13,12 @@ namespace StudentUnion0105.Controllers
 {
     public class OrganizationTypeController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IOrganizationTypeLanguageRepository _OrganizationTypeLanguage;
         private readonly IOrganizationTypeRepository _OrganizationType;
         private readonly ILanguageRepository _language;
 
-        public OrganizationTypeController(UserManager<SuUser> userManager
+        public OrganizationTypeController(UserManager<SuUserModel> userManager
             , IOrganizationTypeLanguageRepository OrganizationTypeLanguage
             , IOrganizationTypeRepository OrganizationType
             , ILanguageRepository language)
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var OrganizationTypes = (
 
                 from l in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
@@ -67,7 +67,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var OrganizationTypeLanguage = new SuOrganizationTypeLanguageModel();
 
                 OrganizationTypeLanguage.Name = FromForm.Name;
@@ -88,7 +88,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _OrganizationType.GetAllOrganizationTypes()
                          join t in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on s.Id equals t.OrganizationTypeId
@@ -123,7 +123,7 @@ namespace StudentUnion0105.Controllers
                 OrganizationType.ModifierId = new Guid(CurrentUser.Id);
                 _OrganizationType.UpdateOrganizationType(OrganizationType);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var OrganizationTypeLanguage = _OrganizationTypeLanguage.GetOrganizationTypeLanguage(test3.ObjectLanguageId);
                 OrganizationTypeLanguage.Name = test3.Name;
                 OrganizationTypeLanguage.Description = test3.Description;

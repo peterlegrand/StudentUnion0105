@@ -14,7 +14,7 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateStepController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateRepository _processTemplate;
         private readonly IProcessTemplateLanguageRepository _processTemplateLanguage;
         private readonly ILanguageRepository _language;
@@ -26,7 +26,7 @@ namespace StudentUnion0105.Controllers
         private readonly IMasterListRepository _masterList;
         private readonly IDataTypeRepository _dataType;
 
-        public ProcessTemplateStepController(UserManager<SuUser> userManager
+        public ProcessTemplateStepController(UserManager<SuUserModel> userManager
             , IProcessTemplateRepository processTemplate
             , IProcessTemplateLanguageRepository processTemplateLanguage
             , ILanguageRepository language
@@ -56,7 +56,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ProcessTemplateStep = (from c in  _processTemplateStep.GetAllProcessTemplateSteps()
                                join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
@@ -83,7 +83,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateStep = (from c in _processTemplateStep.GetAllProcessTemplateSteps()
                                         join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                         on c.Id equals l.StepId
@@ -156,7 +156,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateStepUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6 " 
                     ,
                     parameters: new[] { FromForm.ObjectId.ToString()           //0
@@ -179,7 +179,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateStep = new SuObjectVM
             {
                 Id = Id
@@ -234,7 +234,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateStepCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6  ",
                     parameters: new[] { FromForm.Id.ToString()           //0

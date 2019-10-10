@@ -34,7 +34,7 @@ namespace StudentUnion0105
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddIdentity<SuUser, IdentityRole>().AddEntityFrameworkStores<SuDbContext>();
+            services.AddIdentity<SuUserModel, IdentityRole>().AddEntityFrameworkStores<SuDbContext>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Classification", policy => policy.RequireClaim("Menu", "Classification"));
@@ -116,7 +116,7 @@ namespace StudentUnion0105
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<SuUserModel> userManager, RoleManager<IdentityRole> roleManager)
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MDAxQDMxMzcyZTMyMmUzME4wa1lJMzBiUUJJTklORnpaZVFIL1RBa3UrUE1PLzAvZWcvNUQ0dUdaekU9");
             if (env.IsDevelopment())

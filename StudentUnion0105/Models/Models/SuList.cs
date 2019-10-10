@@ -22,6 +22,12 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+    public class SuCountryList
+    {
+        [Key]
+        public int Id { get; set; }
+        public string CountryName { get; set; }
+    }
     public class SuValueList
     {
         [Key]

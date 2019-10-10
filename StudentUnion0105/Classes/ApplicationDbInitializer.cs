@@ -5,15 +5,15 @@ namespace StudentUnion0105.Classes
 {
     public class ApplicationDbInitializer
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public ApplicationDbInitializer(UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
+        public ApplicationDbInitializer(UserManager<SuUserModel> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
-        //public ApplicationDbInitializer(UserManager<SuUser> userManager, RoleManager<IdentityRole> roleManager)
+        //public ApplicationDbInitializer(UserManager<SuUserModel> userManager, RoleManager<IdentityRole> roleManager)
         //{
 
         //}
@@ -22,7 +22,7 @@ namespace StudentUnion0105.Classes
         {
             //using (IServiceScope serviceScope = ServiceProviderServiceExtensions.GetRequiredService<IServiceScopeFactory>().CreateScope())
             //{
-            //    var userManager = serviceScope.ServiceProvider.GetService<UserManager<SuUser>>();
+            //    var userManager = serviceScope.ServiceProvider.GetService<UserManager<SuUserModel>>();
             //    var RoleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
             //}
 

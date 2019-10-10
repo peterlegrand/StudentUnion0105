@@ -15,14 +15,14 @@ namespace StudentUnion0105.Controllers
 {
     public class ProjectController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IProjectLanguageRepository _ProjectLanguage;
         private readonly IProjectRepository _Project;
         private readonly ILanguageRepository _language;
         private readonly IProjectStatusRepository _projectStatus;
         private readonly SuDbContext _context;
 
-        public ProjectController(UserManager<SuUser> userManager
+        public ProjectController(UserManager<SuUserModel> userManager
             , IProjectLanguageRepository ProjectLanguage
             , IProjectRepository Project
             , ILanguageRepository language
@@ -40,7 +40,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var a = _context.dbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
 
             //if (a.Count != 0)
@@ -60,7 +60,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Indexw()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var Projects = (
 
                 from l in _ProjectLanguage.GetAllProjectLanguages()
@@ -81,7 +81,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ParentProject = _Project.GetProject(Id);
 
             var ProjectList = new List<SelectListItem>();
@@ -119,7 +119,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProjectLanguage = new SuProjectLanguageModel();
 
                 ProjectLanguage.Name = FromForm.SuObject.Name;
@@ -140,7 +140,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _Project.GetAllProjects()
                          join t in _ProjectLanguage.GetAllProjectLanguages()
                          on s.Id equals t.ProjectId
@@ -191,7 +191,7 @@ namespace StudentUnion0105.Controllers
                 Project.ModifierId = new Guid(CurrentUser.Id);
                 _Project.UpdateProject(Project);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(FromForm.SuObject.ObjectLanguageId);
                 ProjectLanguage.Name = FromForm.SuObject.Name;
                 ProjectLanguage.Description = FromForm.SuObject.Description;

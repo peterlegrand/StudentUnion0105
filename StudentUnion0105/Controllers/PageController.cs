@@ -14,7 +14,7 @@ namespace StudentUnion0105.Controllers
 {
     public class PageController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IPageLanguageRepository _PageLanguage;
         private readonly IPageRepository _Page;
         private readonly ILanguageRepository _language;
@@ -25,7 +25,7 @@ namespace StudentUnion0105.Controllers
         private readonly SuDbContext _context;
         //      private readonly IGetPageStructureRepository _PageStructure;
 
-        public PageController(UserManager<SuUser> userManager
+        public PageController(UserManager<SuUserModel> userManager
             , IPageLanguageRepository PageLanguage
             , IPageRepository Page
             , ILanguageRepository language
@@ -52,7 +52,7 @@ namespace StudentUnion0105.Controllers
         //public async Task<IActionResult> OrgStructure2()
         //{
         //    var CurrentUser = await userManager.GetUserAsync(User);
-        //    var DefaultLanguageID = CurrentUser.DefaultLangauge;
+        //    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
         //    var a = _context.dbGetPageStructure.FromSql($"PageStructure {DefaultLanguageID}").ToList();
 
         //    return View(a);
@@ -60,7 +60,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var Pages = (
 
                 from l in _PageLanguage.GetAllPageLanguages()
@@ -79,7 +79,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index2()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var Pages = (
 
                 from l in _PageLanguage.GetAllPageLanguages()
@@ -100,7 +100,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ParentPage = _Page.GetPage(Id);
 
             var StatusList = new List<SelectListItem>();
@@ -159,7 +159,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageLanguage = new SuPageLanguageModel();
 
                 PageLanguage.Name = FromForm.SuObject.Name;
@@ -182,7 +182,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var PageDetails = (from s in _Page.GetAllPages()
                                join t in _PageLanguage.GetAllPageLanguages()
                                on s.Id equals t.PageId
@@ -259,7 +259,7 @@ namespace StudentUnion0105.Controllers
                 Page.ModifierId = new Guid(CurrentUser.Id);
                 _Page.UpdatePage(Page);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.SuObject.ObjectLanguageId);
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;

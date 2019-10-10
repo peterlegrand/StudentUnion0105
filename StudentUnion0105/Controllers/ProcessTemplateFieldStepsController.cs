@@ -15,7 +15,7 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateFieldStepsController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IProcessTemplateStepFieldRepository _processTemplateStepField;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
@@ -24,7 +24,7 @@ namespace StudentUnion0105.Controllers
         private readonly ILanguageRepository _language;
         private readonly SuDbContext _context;
 
-        public ProcessTemplateFieldStepsController(UserManager<SuUser> userManager
+        public ProcessTemplateFieldStepsController(UserManager<SuUserModel> userManager
             , IProcessTemplateStepFieldRepository processTemplateStepField
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
             , IProcessTemplateFieldLanguageRepository processTemplateFieldLanguage
@@ -45,7 +45,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var Steps = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
                                        join s in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
@@ -75,7 +75,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var StepField = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
                                join s in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                on sf.StepId equals s.StepId
@@ -162,7 +162,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var a = _context.Database.ExecuteSqlCommand("ProcessTemplateStepFieldUpdate @p0, @p1, @p2",
                     parameters: new[] { UpdatedStepField.SuObject.Id.ToString()           //0
                                         ,UpdatedStepField.SuObject.Status.ToString()    //1

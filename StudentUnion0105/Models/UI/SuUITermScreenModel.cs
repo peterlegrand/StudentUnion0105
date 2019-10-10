@@ -11,6 +11,7 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         public int TermId { get; set; }
         public int ScreenId { get; set; }
+        public int Sequence { get; set; }
         [ForeignKey("TermId")]
         public virtual SuUITermModel Term { get; set; }
         [ForeignKey("ScreenId")]

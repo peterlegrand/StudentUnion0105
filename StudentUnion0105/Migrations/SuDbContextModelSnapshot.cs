@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "264cf283-d9d0-473e-b928-5d68c51a1e56",
-                            ConcurrencyStamp = "1d9fafc4-6bcd-430f-afd5-9bb198e21c0d",
+                            Id = "7a829a79-05ff-40d9-9585-debea7235878",
+                            ConcurrencyStamp = "f997c61f-0b61-45d5-a8b1-7077def6a93d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a055b720-c298-41b8-8f49-3ccfcfe12bae",
-                            ConcurrencyStamp = "b003e6de-86b3-454e-8401-9b1ecc79b773",
+                            Id = "0d75f50e-08cf-43d4-9c84-8ec4c82fc295",
+                            ConcurrencyStamp = "56131ec6-6f59-4e13-a6af-67a140cf5d94",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -529,6 +529,19 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbContentType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuCountryList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CountryName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbCountryList");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuCountryModel", b =>
@@ -1745,6 +1758,8 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ScreenId");
 
+                    b.Property<int>("Sequence");
+
                     b.Property<int>("TermId");
 
                     b.HasKey("Id");
@@ -1756,7 +1771,7 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbTermScreen");
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuUser", b =>
+            modelBuilder.Entity("StudentUnion0105.Models.SuUserModel", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -1766,7 +1781,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int>("DefaultLangauge");
+                    b.Property<int?>("CountryId");
+
+                    b.Property<int>("DefaultLanguageId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -1888,7 +1905,7 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("StudentUnion0105.Models.SuUser")
+                    b.HasOne("StudentUnion0105.Models.SuUserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1896,7 +1913,7 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("StudentUnion0105.Models.SuUser")
+                    b.HasOne("StudentUnion0105.Models.SuUserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1909,7 +1926,7 @@ namespace StudentUnion0105.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StudentUnion0105.Models.SuUser")
+                    b.HasOne("StudentUnion0105.Models.SuUserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -1917,7 +1934,7 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("StudentUnion0105.Models.SuUser")
+                    b.HasOne("StudentUnion0105.Models.SuUserModel")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

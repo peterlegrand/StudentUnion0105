@@ -13,12 +13,12 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateGroupController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IProcessTemplateGroupLanguageRepository _ProcessTemplateGroupLanguage;
         private readonly IProcessTemplateGroupRepository _ProcessTemplateGroup;
         private readonly ILanguageRepository _language;
 
-        public ProcessTemplateGroupController(UserManager<SuUser> userManager
+        public ProcessTemplateGroupController(UserManager<SuUserModel> userManager
             , IProcessTemplateGroupLanguageRepository ProcessTemplateGroupLanguage
             , IProcessTemplateGroupRepository ProcessTemplateGroup
             , ILanguageRepository language)
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ProcessTemplateGroups = (
 
                 from l in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
@@ -68,7 +68,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel();
 
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupName = FromForm.Name;
@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ToForm = (from s in _ProcessTemplateGroup.GetAllProcessTemplateGroups()
                          join t in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
                          on s.Id equals t.ProcessTemplateGroupId
@@ -124,7 +124,7 @@ namespace StudentUnion0105.Controllers
                 ProcessTemplateGroup.ModifierId = new Guid(CurrentUser.Id);
                 _ProcessTemplateGroup.UpdateProcessTemplateGroup(ProcessTemplateGroup);
 
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.GetProcessTemplateGroupLanguage(test3.ObjectLanguageId);
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupName = test3.Name;
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = test3.Description;

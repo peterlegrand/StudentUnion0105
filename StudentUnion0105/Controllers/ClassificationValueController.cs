@@ -15,14 +15,14 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationValueController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationValueRepository _classificationValue;
         private readonly IClassificationValueLanguageRepository _classificationValueLanguage;
         private readonly SuDbContext _context;
         private readonly IClassificationLevelRepository _classificationLevel;
         private readonly ILanguageRepository _language;
 
-        public ClassificationValueController(UserManager<SuUser> userManager
+        public ClassificationValueController(UserManager<SuUserModel> userManager
             , IClassificationValueRepository classificationValue
             , IClassificationValueLanguageRepository classificationValueLanguage
            , SuDbContext context
@@ -41,7 +41,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var checklevels = _classificationLevel.GetAllClassificationLevels();
             int MaxConfigLevel = 0;
@@ -74,7 +74,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             SuObjectVM CValue = new SuObjectVM()
             {
@@ -137,7 +137,7 @@ namespace StudentUnion0105.Controllers
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ClassificationValueLanguage = new SuClassificationValueLanguageModel();
 
                 ClassificationValueLanguage.ClassificationValueName = FromForm.Name;
@@ -164,7 +164,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ClassificationValue = (from v in _classificationValue.GetAllClassifcationValues()
                                        join l in _classificationValueLanguage.GetAllClassificationValueLanguages()
@@ -255,7 +255,7 @@ namespace StudentUnion0105.Controllers
                 _classificationValue.UpdateClassificationValue(ClassificationValue);
 
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ClassificationValueLanguage = _classificationValueLanguage.GetClassificationValueLanguage(FromForm.ObjectLanguageId);
                 ClassificationValueLanguage.ClassificationValueName = FromForm.Name;
                 ClassificationValueLanguage.ClassificationValueDescription = FromForm.Description;

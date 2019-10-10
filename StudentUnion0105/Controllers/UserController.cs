@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Data;
 using StudentUnion0105.IdentityViewModels;
 using StudentUnion0105.Models;
+using StudentUnion0105.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
@@ -10,15 +16,137 @@ namespace StudentUnion0105.Controllers
     [AllowAnonymous]
     public class UserController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
+        private readonly SuDbContext _context;
 
-        public UserController(UserManager<SuUser> userManager, SignInManager<SuUser> signInManager)
+        public UserController(UserManager<SuUserModel> userManager, SignInManager<SuUserModel> signInManager, SuDbContext Context)
         {
             this.userManager = userManager;
             SignInManager = signInManager;
+            _context = Context;
         }
 
-        public SignInManager<SuUser> SignInManager { get; }
+        public SignInManager<SuUserModel> SignInManager { get; }
+
+        public async Task<IActionResult> Index()
+        {
+
+            //            ViewBag.CID = 
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var AllUsers = await userManager.Users.ToListAsync();
+            List<SuObjectVM> UserList = new List<SuObjectVM>();
+            foreach(var a in AllUsers)
+                {
+            UserList.Add(new SuObjectVM
+                {
+                    Description2 = a.Id
+                             ,
+                    Name = a.UserName
+                    , Description = a.Email
+                });
+            }
+
+            return View(UserList);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var UserFromDb = await userManager.FindByIdAsync(Id);
+            CreateUserViewModel UserToForm = new CreateUserViewModel();
+            UserToForm.Id = UserFromDb.Id;
+            UserToForm.UserName = UserFromDb.UserName;
+            UserToForm.Email = UserFromDb.Email;
+            UserToForm.DefaultLanguageId = UserFromDb.DefaultLanguageId;
+            UserToForm.CountryId = UserFromDb.CountryId;
+
+            var LanguageList = new List<SelectListItem>();
+            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            foreach (var LanguageFromDb in LanguagesFromDb)
+            {
+                LanguageList.Add(new SelectListItem
+                {
+                    Text = LanguageFromDb.Name,
+                    Value = LanguageFromDb.Id.ToString()
+                });
+            }
+
+            var CountryList = new List<SelectListItem>();
+            var CountriesFromDb = _context.dbCountryList.FromSql($"CountrySelectAll").ToList();
+            foreach (var CountryFromDb in CountriesFromDb)
+            {
+                CountryList.Add(new SelectListItem
+                {
+                    Text = CountryFromDb.CountryName,
+                    Value = CountryFromDb.Id.ToString()
+                });
+            }
+         
+            SuUserAndLists UserAndLists = new SuUserAndLists { User = UserToForm, Countries = CountryList , Languages= LanguageList };
+
+                        return View(UserAndLists);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SuUserAndLists FromForm)
+        {
+           // SuUserModel UpdateUser = new SuUserModel();
+            var UserFromDb = await userManager.FindByIdAsync(FromForm.User.Id);
+
+            UserFromDb.Email = FromForm.User.Email;
+            UserFromDb.NormalizedEmail = FromForm.User.Email.ToUpper();
+            UserFromDb.UserName = FromForm.User.UserName;
+            UserFromDb.DefaultLanguageId = FromForm.User.DefaultLanguageId;
+            UserFromDb.CountryId = FromForm.User.CountryId;
+            //  FromForm.User.SecurityStamp = UserFromDb;
+            await userManager.UpdateAsync(UserFromDb);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var LanguageList = new List<SelectListItem>();
+            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            foreach (var LanguageFromDb in LanguagesFromDb)
+            {
+                LanguageList.Add(new SelectListItem
+                {
+                    Text = LanguageFromDb.Name,
+                    Value = LanguageFromDb.Id.ToString()
+                });
+            }
+
+            var CountryList = new List<SelectListItem>();
+            var CountriesFromDb = _context.dbCountryList.FromSql($"CountrySelectAll").ToList();
+            foreach (var CountryFromDb in CountriesFromDb)
+            {
+                CountryList.Add(new SelectListItem
+                {
+                    Text = CountryFromDb.CountryName,
+                    Value = CountryFromDb.Id.ToString()
+                });
+            }
+            CreateUserViewModel UserToForm = new CreateUserViewModel();
+            SuUserAndLists UserAndLists = new SuUserAndLists { User = UserToForm, Countries = CountryList, Languages = LanguageList };
+
+            return View(UserAndLists);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SuUserAndLists FromForm)
+        {
+            // SuUserModel UpdateUser = new SuUserModel();
+            SuUserModel NewUser = new SuUserModel { Email = FromForm.User.Email, UserName = FromForm.User.UserName, DefaultLanguageId = FromForm.User.DefaultLanguageId, CountryId = FromForm.User.CountryId};
+
+            //NewUser.Email = FromForm.User.Description;
+            //NewUser.UserName = FromForm.User.Name;
+            //NewUser.DefaultLanguageId = FromForm.User.NotNullId;
+            //NewUser.CountryId = FromForm.User.NullId;
+            await userManager.CreateAsync(NewUser, FromForm.User.Password);
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         public IActionResult Register()
@@ -31,7 +159,7 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new SuUser { UserName = registerViewModel.Email, Email = registerViewModel.Email };
+                var user = new SuUserModel { UserName = registerViewModel.Email, Email = registerViewModel.Email };
                 var result = await userManager.CreateAsync(user, registerViewModel.Password);
 
                 if (result.Succeeded)

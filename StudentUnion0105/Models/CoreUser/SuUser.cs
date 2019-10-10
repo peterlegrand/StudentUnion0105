@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StudentUnion0105.Models
 {
-    public class SuUser : IdentityUser
+    public class SuUserModel : IdentityUser
     {
         [Display(Name = "Default language")]
-        public int DefaultLangauge { get; set; }
+        public int DefaultLanguageId { get; set; }
+        public int? CountryId { get; set; }
     }
 }

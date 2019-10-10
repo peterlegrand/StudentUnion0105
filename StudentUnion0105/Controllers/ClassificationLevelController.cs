@@ -13,13 +13,13 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationLevelController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly IClassificationLevelRepository _classificationLevel;
         private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
         private readonly ILanguageRepository _language;
 
-        public ClassificationLevelController(UserManager<SuUser> userManager
+        public ClassificationLevelController(UserManager<SuUserModel> userManager
             , IClassificationLanguageRepository classificationLanguage
             , IClassificationLevelRepository classificationLevel
             , IClassificationLevelLanguageRepository classificationLevelLanguage
@@ -36,7 +36,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var ClassificationLevel = (from c in _classificationLevel.GetAllClassificationLevels()
                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -134,7 +134,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             SuObjectVM SuObject = new SuObjectVM();
             SuObject.ObjectId = Id;
 
@@ -187,7 +187,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 var TestForNull = (
 

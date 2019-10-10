@@ -14,12 +14,12 @@ namespace StudentUnion0105.Controllers
     [AllowAnonymous]
     public class SetupWizardController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IHostingEnvironment env;
         private readonly SuDbContext _context;
 
-        public SetupWizardController(UserManager<SuUser> userManager
+        public SetupWizardController(UserManager<SuUserModel> userManager
             , RoleManager<IdentityRole> roleManager
             , IHostingEnvironment env
             , SuDbContext context
@@ -39,11 +39,11 @@ namespace StudentUnion0105.Controllers
             var x = await userManager.FindByEmailAsync("eplegrand@gmail.com");
             if (x == null)
             {
-                SuUser user1 = new SuUser()
+                SuUserModel  user1 = new SuUserModel()
                 {
                     UserName = "eplegrand@gmail.com",
                     Email = "eplegrand@gmail.com",
-                    DefaultLangauge = 41
+                    DefaultLanguageId = 41
                 };
 
                 await userManager.CreateAsync(user1, "Pipo!9165");
@@ -55,11 +55,11 @@ namespace StudentUnion0105.Controllers
             {
                 if (userManager.FindByEmailAsync("pipo@gmail.com").Result == null)
                 {
-                    SuUser user1 = new SuUser()
+                    SuUserModel  user1 = new SuUserModel()
                     {
                         UserName = "pipo@gmail.com",
                         Email = "pipo@gmail.com",
-                        DefaultLangauge = 41
+                        DefaultLanguageId = 41
                     };
 
                     await userManager.CreateAsync(user1, "Xipo!9165");
@@ -95,8 +95,9 @@ namespace StudentUnion0105.Controllers
             , "ContentInsert.sql"
             , "ContentUpdate.sql"
             , "ContentValueCreate.sql"
-            ,"ContentStatusSelectAll.sql"
+            , "ContentStatusSelectAll.sql"
             , "ContentTypeSelectAllForLanguage.sql"
+            , "CountrySelectAll.sql"
             , "DataTypeSelectAll.sql"
             , "LanguageSelectAll.sql"
             , "GetMasterList.sql"

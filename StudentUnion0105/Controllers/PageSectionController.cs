@@ -16,7 +16,7 @@ namespace StudentUnion0105.Controllers
 {
     public class PageSectionController : Controller
     {
-        private readonly UserManager<SuUser> userManager;
+        private readonly UserManager<SuUserModel> userManager;
         private readonly IPageSectionRepository _pageSection;
         private readonly IPageSectionLanguageRepository _pageSectionLanguage;
         private readonly ILanguageRepository _language;
@@ -26,7 +26,7 @@ namespace StudentUnion0105.Controllers
         private readonly IContentTypeLanguageRepository _contentTypeLanguage;
         private readonly SuDbContext _context;
 
-        public PageSectionController(UserManager<SuUser> userManager
+        public PageSectionController(UserManager<SuUserModel> userManager
             , IPageSectionRepository PageSection
             , IPageSectionLanguageRepository PageSectionLanguage
             , ILanguageRepository language
@@ -50,7 +50,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var pageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
@@ -76,7 +76,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var PageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
                                on c.Id equals l.PageSectionId
@@ -235,7 +235,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var a = _context.Database.ExecuteSqlCommand("PageSectionUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
                     "@p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20",
                     parameters: new[] { UpdatedPageSection.SuObject.ObjectId.ToString()           //0
@@ -276,7 +276,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             SuObjectVMPageSection SuObject = new SuObjectVMPageSection();
             SuObject.ObjectId = Id;
 
@@ -379,7 +379,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLangauge;
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 var TestForNull = (
 

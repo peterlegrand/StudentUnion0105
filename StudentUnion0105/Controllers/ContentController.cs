@@ -18,7 +18,7 @@ namespace StudentUnion0105.Controllers
     public class ContentController : Controller
     {
         // private readonly SuContentModel _contentModel;
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IContentStatusRepository _contentStatus;
         private SuDbContext _context;
         private readonly IClassificationRepository _classification;
@@ -28,7 +28,7 @@ namespace StudentUnion0105.Controllers
         public ContentController(
             //SuContentModel contentModel
             //, 
-            UserManager<SuUser> userManager
+            UserManager<SuUserModel> userManager
             , IContentStatusRepository contentStatus
            , SuDbContext context
             , IClassificationRepository classification
@@ -52,7 +52,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLangauge;
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var StatusList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
             var OrganizationList = new List<SelectListItem>();

@@ -8,7 +8,7 @@ using static StudentUnion0105.SPModel.GetProjectStructure;
 namespace StudentUnion0105.Data
 {
 
-    public class SuDbContext : IdentityDbContext<SuUser>
+    public class SuDbContext : IdentityDbContext<SuUserModel>
     {
 
 
@@ -71,6 +71,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuStatusList> dbStatusList { get; set; }
         public DbSet<SuSecurityLevelList> dbSecurityLevelList { get; set; }
         public DbSet<SuLanguageList> dbLanguageList { get; set; }
+        public DbSet<SuCountryList> dbCountryList { get; set; }
         public DbSet<SuTypeList> dbTypeList { get; set; }
         public DbSet<SuValueList> dbValueList { get; set; }
 

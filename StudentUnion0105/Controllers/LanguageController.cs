@@ -8,10 +8,10 @@ namespace StudentUnion0105.Controllers
 {
     public class LanguageController : Controller
     {
-        private readonly UserManager<SuUser> _userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly ILanguageRepository _language;
 
-        public LanguageController(UserManager<SuUser> userManager
+        public LanguageController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language)
         {
             _userManager = userManager;
