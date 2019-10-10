@@ -1232,3 +1232,33 @@ INSERT INTO dbOrganizationLanguage (Id, OrganizationId, LanguageId, Name, Descri
 VALUES(2, 2, 41, 'Faculty of medicine','Faculty of medicine','Faculty of medicine',  @CurrentUser, @CurrentUser, getdate(), getdate());
 
 SET IDENTITY_INSERT dbOrganizationLanguage OFF;
+
+SET IDENTITY_INSERT dbProject ON;
+INSERT INTO dbProject (Id, ProjectStatusId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbProject (Id, ParentProjectId,ProjectStatusId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 1, 1 , @CurrentUser, @CurrentUser, getdate(), getdate());
+SET IDENTITY_INSERT dbProject OFF;
+
+SET IDENTITY_INSERT dbProjectLanguage ON;
+INSERT INTO dbProjectLanguage (Id, ProjectId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, 1, 41, 'Zero Waste','Zero Waste','Zero Waste',  @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbProjectLanguage (Id, ProjectId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, 2, 41, 'Clean up beach 2019','Clean up beach 2019','Clean up beach 2019',  @CurrentUser, @CurrentUser, getdate(), getdate());
+
+SET IDENTITY_INSERT dbProjectLanguage OFF;
+
+SET IDENTITY_INSERT dbUserOrganization ON;
+INSERT INTO dbUserOrganization (Id, UserId, OrganizationId, TypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, @CurrentUser, 1, 1,  @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbUserOrganization (Id, UserId, OrganizationId, TypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, @CurrentUser, 2, 2,  @CurrentUser, @CurrentUser, getdate(), getdate());
+SET IDENTITY_INSERT dbUserOrganization OFF;
+
+
+SET IDENTITY_INSERT dbUserProject ON;
+INSERT INTO dbUserProject (Id, UserId, ProjectId, TypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(1, @CurrentUser, 1, 1,  @CurrentUser, @CurrentUser, getdate(), getdate());
+INSERT INTO dbUserProject (Id, UserId, ProjectId, TypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES(2, @CurrentUser, 2, 2,  @CurrentUser, @CurrentUser, getdate(), getdate());
+SET IDENTITY_INSERT dbUserProject OFF;

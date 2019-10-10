@@ -127,7 +127,11 @@ namespace StudentUnion0105.Controllers
             , "UserOrganizationSelectAll.sql"
             , "UserOrganizationSelectBasedOnUser.sql"
             , "UserOrganizationTypeSelectAll.sql"
+            , "UserProjectCreate.sql"
+            , "UserProjectNewOrganizationsSelect.sql"
             , "UserProjectSelectAll.sql"
+            , "UserProjectSelectBasedOnUser.sql"
+            , "UserProjectTypeSelectAll.sql"
             };
 
             foreach (string StoredProcedure in StoredProcedures)
