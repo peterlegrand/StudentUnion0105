@@ -131,6 +131,8 @@ namespace StudentUnion0105.Controllers
             , "UserOrganizationSelectAll.sql"
             , "UserOrganizationSelectBasedOnUser.sql"
             , "UserOrganizationTypeSelectAll.sql"
+            , "UserOrganizationTypeSelectAllLanguages.sql"
+            , "UserOrganizationTypeSelectLanguage.sql"
             , "UserProjectCreate.sql"
             , "UserProjectNewProjectsSelect.sql"
             , "UserProjectSelectAll.sql"
