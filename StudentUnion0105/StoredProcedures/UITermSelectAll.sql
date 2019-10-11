@@ -1,0 +1,4 @@
+CREATE PROCEDURE UITermSelectAll AS
+SELECT Id, Name
+FROM dbUITerm
+ORDER BY dbUITerm.Name

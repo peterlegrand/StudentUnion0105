@@ -15,6 +15,6 @@ WHERE dbUserProject.UserId = @User
 	AND dbProjectLanguage.LanguageId = @LanguageId
 	AND dbUserProjectTypeLanguage.LanguageId = @LanguageId
 ORDER BY dbProjectLanguage.Name
-GO
+
 
 

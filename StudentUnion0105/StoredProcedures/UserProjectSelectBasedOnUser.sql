@@ -11,6 +11,3 @@ JOIN dbProjectLanguage
 WHERE dbUserProject.Id  = @Id
 	AND dbProjectLanguage.LanguageId = @LanguageId
 ORDER BY dbProjectLanguage.Name
-GO
-
-

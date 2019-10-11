@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -60,12 +61,9 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            //var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
-            //     parameters: new[] {            "Classification", "Index", //0
-            //                            DefaultLanguageID.ToString()
-            //        }).ToList();
-         //   string[] CustomizationFromDb = CustomizationFromDb.ToArray();
-          //  ViewBag.Customization = CustomizationFromDb.Find(;
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "Index", DefaultLanguageID);
+
             var ToForm = (
 
                 from l in _classificationLanguage.GetAllClassificationLanguages()
@@ -86,6 +84,9 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "Edit", DefaultLanguageID);
 
             var ToForm = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
@@ -170,6 +171,9 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ClassificationList = new List<SelectListItem>();
 
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "Create", DefaultLanguageID);
+
             foreach (var ClassificationFromDb in _classificationStatus.GetAllClassificationStatus())
             {
                 ClassificationList.Add(new SelectListItem
@@ -220,8 +224,14 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "LanguageIndex", DefaultLanguageID);
+
 
             var ClassificationLanguage = (from c in _classificationVMRepository.GetAllClassificationLanguages()
                                           join l in _language.GetAllLanguages()
@@ -247,8 +257,15 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "LanguageEdit", DefaultLanguageID);
+
             var ToForm = (from c in _classificationVMRepository.GetAllClassificationLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
@@ -311,8 +328,14 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "LanguageCreate", DefaultLanguageID);
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationLanguage.GetAllClassificationLanguages()
                                 where c.ClassificationId == Id
@@ -374,8 +397,14 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageDelete(int Id)
+        public async Task<IActionResult> LanguageDelete(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var x = new UICustomization(_context);
+            ViewBag.Terms = x.UIArray("Classification", "LanguageDelete", DefaultLanguageID);
+
             var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
             var a = new SuObjectVM();
             a.Id = ClassifationLanguage.Id;

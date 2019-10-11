@@ -48,15 +48,7 @@ namespace StudentUnion0105.Controllers
             //            _PageStructure = PageStructure;
         }
 
-        //PETER probably can be deleted
-        //public async Task<IActionResult> OrgStructure2()
-        //{
-        //    var CurrentUser = await userManager.GetUserAsync(User);
-        //    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-        //    var a = _context.dbGetPageStructure.FromSql($"PageStructure {DefaultLanguageID}").ToList();
-
-        //    return View(a);
-        //}
+       
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);

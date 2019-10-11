@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUITermScreenModel> GetAllTermScreens()
         {
-            return context.dbTermScreen;
+            return context.dbUITermScreen;
         }
 
         public SuUITermScreenModel GetTermScreen(int Id)
         {
-            return context.dbTermScreen.Find(Id);
+            return context.dbUITermScreen.Find(Id);
         }
 
     }
