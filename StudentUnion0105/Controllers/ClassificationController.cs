@@ -61,8 +61,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "Index", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "Index", DefaultLanguageID);
 
             var ToForm = (
 
@@ -85,8 +85,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "Edit", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "Edit", DefaultLanguageID);
 
             var ToForm = (from s in _classificationVMRepository.GetAllClassifications()
                          join t in _classificationVMRepository.GetAllClassificationLanguages()
@@ -171,8 +171,8 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var ClassificationList = new List<SelectListItem>();
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "Create", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "Create", DefaultLanguageID);
 
             foreach (var ClassificationFromDb in _classificationStatus.GetAllClassificationStatus())
             {
@@ -229,8 +229,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "LanguageIndex", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "LanguageIndex", DefaultLanguageID);
 
 
             var ClassificationLanguage = (from c in _classificationVMRepository.GetAllClassificationLanguages()
@@ -263,8 +263,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "LanguageEdit", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "LanguageEdit", DefaultLanguageID);
 
             var ToForm = (from c in _classificationVMRepository.GetAllClassificationLanguages()
                          join l in _language.GetAllLanguages()
@@ -333,8 +333,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "LanguageCreate", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "LanguageCreate", DefaultLanguageID);
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationLanguage.GetAllClassificationLanguages()
@@ -402,8 +402,8 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var x = new UICustomization(_context);
-            ViewBag.Terms = x.UIArray("Classification", "LanguageDelete", DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("Classification", "LanguageDelete", DefaultLanguageID);
 
             var ClassifationLanguage = _classificationLanguage.GetClassificationLanguage(Id);
             var a = new SuObjectVM();

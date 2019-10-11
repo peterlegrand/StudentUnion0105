@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -42,6 +43,8 @@ namespace StudentUnion0105.Controllers
 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationValue", "Index", DefaultLanguageID);
 
             var checklevels = _classificationLevel.GetAllClassificationLevels();
             int MaxConfigLevel = 0;
@@ -75,6 +78,8 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationValue", "Create", DefaultLanguageID);
 
             SuObjectVM CValue = new SuObjectVM()
             {
@@ -165,6 +170,8 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationValue", "Edit", DefaultLanguageID);
 
             var ClassificationValue = (from v in _classificationValue.GetAllClassifcationValues()
                                        join l in _classificationValueLanguage.GetAllClassificationValueLanguages()
@@ -206,14 +213,14 @@ namespace StudentUnion0105.Controllers
                                        }).First();
 
             int Level = 1;
-            var x = new SuClassificationValueModel();
+            var y = new SuClassificationValueModel();
             int? Parent = ClassificationValue.NullId;
             while (Parent != null)
             {
                 Level++;
 
-                x = _classificationValue.GetClassificationValue(Parent ?? 0);
-                Parent = x.ParentValueId;
+                y = _classificationValue.GetClassificationValue(Parent ?? 0);
+                Parent = y.ParentValueId;
 
             }
             //          var ClassificationList = new List<SelectListItem>();
@@ -277,8 +284,12 @@ namespace StudentUnion0105.Controllers
 
         }
 
-        public IActionResult LanguageIndex(int Id)
+        public async  Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationValue", "Index", DefaultLanguageID);
 
             var ClassificationLanguage = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
                                           join l in _language.GetAllLanguages()
@@ -299,8 +310,12 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async  Task<IActionResult> LanguageCreate(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationValue", "LanguageCreate", DefaultLanguageID);
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
                                 where c.ClassificationValueId == Id

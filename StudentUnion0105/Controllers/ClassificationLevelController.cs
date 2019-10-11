@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
@@ -18,12 +20,14 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationLevelRepository _classificationLevel;
         private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public ClassificationLevelController(UserManager<SuUserModel> userManager
             , IClassificationLanguageRepository classificationLanguage
             , IClassificationLevelRepository classificationLevel
             , IClassificationLevelLanguageRepository classificationLevelLanguage
             , ILanguageRepository language
+            , SuDbContext context
             )
         {
             this.userManager = userManager;
@@ -31,12 +35,16 @@ namespace StudentUnion0105.Controllers
             _classificationLevel = classificationLevel;
             _classificationLevelLanguage = classificationLevelLanguage;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Index", DefaultLanguageID);
 
             var ClassificationLevel = (from c in _classificationLevel.GetAllClassificationLevels()
                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -58,8 +66,13 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Edit", DefaultLanguageID);
+
             var Level = (from c in _classificationLevel.GetAllClassificationLevels()
                          join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                          on c.Id equals l.ClassificationLevelId
@@ -135,6 +148,10 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Create", DefaultLanguageID);
+
             SuObjectVM SuObject = new SuObjectVM();
             SuObject.ObjectId = Id;
 
@@ -270,8 +287,12 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = NewLevel.SuObject.ObjectId.ToString() });
 
         }
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageIndex", DefaultLanguageID);
 
             var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                           join l in _language.GetAllLanguages()
@@ -297,8 +318,14 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageEdit", DefaultLanguageID);
+
             var ToForm = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
@@ -354,8 +381,13 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageCreate", DefaultLanguageID);
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                 where c.ClassificationLevelId == Id

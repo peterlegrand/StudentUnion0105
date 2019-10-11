@@ -5,7 +5,7 @@
 @{
 }
 @{
-    ViewBag.Title = "Classification value";
+    ViewBag.Title = @ViewBag.Terms[0];
 }
 <h1 class="font-weight-bold">
     <img src="~/Images/Icons/values.png" height="60" width="60" /> Values
@@ -17,8 +17,8 @@
             <tr>
                 @{var a = Model.MaxLevel + 1;
                     var b = a * 10;
-                    <th colspan="@a" style="width: @b px">ID</th>
-                    <th>Name</th>
+                                <th colspan="@a" style="width: @b px">@ViewBag.Terms[1]</th>
+                                <th>@ViewBag.Terms[2]</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -41,15 +41,15 @@
 
                 <td style="width:10px" colspan="@z">@x.Id</td>
                 <td>@x.ClassificationValueName</td>
-                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Edit" asp-route-Id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
-                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"  asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
-                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Edit" asp-route-Id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[3]" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"  asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[4]" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[5]" height="20" width="20" /></a></td>
                 @if (Model.MaxConfigLevel > x.Level)
                 {
-                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/Add.png" title="Add values" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/Add.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>
                 }
             </tr>
         }
     </table>
 </div>
-<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="0" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/values.png" title="New value" height="20" width="20" /> Create new value</a>
+<a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="0" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/values.png" title="@ViewBag.Terms[7]" height="20" width="20" /> @ViewBag.Terms[7]</a>

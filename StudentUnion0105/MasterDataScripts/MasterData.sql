@@ -794,6 +794,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(61, 'Values', 'Values');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(62, 'Classifications', 'Classifications');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(63, 'Add new classification', 'Add new classification');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(64, 'Levels', 'Levels');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(65, 'Sequence', 'Sequence');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(66, 'Classification level languages', 'Classification level languages');
 
 SET IDENTITY_INSERT dbUITerm OFF;
 
@@ -967,6 +969,22 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(165, 34, 5, 9
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(166, 34, 7, 10);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(167, 34, 8, 11);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(168, 62, 8, 12);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(169, 18, 9, 12);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(170, 64, 9, 13);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(171, 65, 9, 14);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(172, 64, 12, 6);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(173, 24, 12, 7);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(174, 46, 12, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(175, 34, 12, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(176, 21, 12, 10);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(177, 6, 13, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(178, 34, 13, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(179, 66, 16, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(180, 34, 16, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(181, 24, 16, 10);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(182, 21, 16, 11);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(183, 6, 21, 14);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(184, 34, 21, 15);
 
 SET IDENTITY_INSERT dbUITermScreen OFF;
 
