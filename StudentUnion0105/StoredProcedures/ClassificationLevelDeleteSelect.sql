@@ -29,5 +29,5 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassificationLevel.CreatorId) = Modifier.Id
 WHERE dbClassificationLevel.Id = @Id AND dbClassificationLevelLanguage.LanguageId = @LanguageId
-GO
+
 

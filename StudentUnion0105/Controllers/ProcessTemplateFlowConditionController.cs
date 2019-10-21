@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -42,6 +43,10 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
             var pageSection = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
                                join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
                       on c.Id equals l.FlowConditionId
@@ -63,6 +68,10 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var FlowCondition = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
                                join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
                                on c.Id equals l.FlowConditionId
@@ -184,6 +193,10 @@ namespace StudentUnion0105.Controllers
 
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             ToForm.LanguageId= DefaultLanguageID;
             var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateFlowConditionType").ToList();
 

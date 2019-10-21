@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -15,20 +17,27 @@ namespace StudentUnion0105.Controllers
         private readonly UserManager<SuUserModel> _userManager;
         private readonly ISettingRepository _setting;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public SettingController(UserManager<SuUserModel> userManager
                                                 , ISettingRepository setting
-                                                , ILanguageRepository language)
+                                                , ILanguageRepository language
+            , SuDbContext context)
         {
             _userManager = userManager;
             _setting = setting;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
-            //            ViewBag.CID = 
+
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ToForm = (
 
                 from l in _setting.GetAllSettings()
@@ -54,6 +63,9 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ToForm = (
 

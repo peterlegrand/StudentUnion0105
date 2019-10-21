@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.IdentityViewModels;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -18,17 +20,28 @@ namespace StudentUnion0105.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<SuUserModel> userManager;
         private readonly IClaimRepository _claim;
+        private readonly SuDbContext _context;
 
         public RoleController(RoleManager<IdentityRole> roleManager
-                                        , UserManager<SuUserModel> userManager, IClaimRepository Claim)
+                                        , UserManager<SuUserModel> userManager
+            , IClaimRepository Claim
+            , SuDbContext context)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             _claim = Claim;
+            _context = context;
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             return View();
         }
         [HttpPost]
@@ -52,8 +65,15 @@ namespace StudentUnion0105.Controllers
 
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var roles = roleManager.Roles;
 
             return View(roles);
@@ -61,6 +81,13 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var role = await roleManager.FindByIdAsync(id);
             if (role == null)
 
@@ -131,6 +158,13 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Users(string Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var NewUsers = new List<AddUsersToRoleViewModel>();
             var AllUserList = userManager.Users;
             var role = await roleManager.FindByIdAsync(Id);
@@ -214,6 +248,12 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Rights(string Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             //List<string> NewClaims = new List<string>();
             var NewClaims = new List<AddRightsToRoleViewModel>();
             //All rights assigned and not assigned.

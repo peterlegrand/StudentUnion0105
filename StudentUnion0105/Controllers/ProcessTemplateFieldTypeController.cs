@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -17,21 +19,28 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateFieldTypeLanguageRepository _ProcessTemplateFieldTypeLanguage;
         private readonly IProcessTemplateFieldTypeRepository _ProcessTemplateFieldType;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public ProcessTemplateFieldTypeController(UserManager<SuUserModel> userManager
             , IProcessTemplateFieldTypeLanguageRepository ProcessTemplateFieldTypeLanguage
             , IProcessTemplateFieldTypeRepository ProcessTemplateFieldType
-            , ILanguageRepository language)
+            , ILanguageRepository language
+            , SuDbContext context)
         {
             this.userManager = userManager;
             _ProcessTemplateFieldTypeLanguage = ProcessTemplateFieldTypeLanguage;
             _ProcessTemplateFieldType = ProcessTemplateFieldType;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ProcessTemplateFieldTypes = (
 
                 from l in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
@@ -49,8 +58,15 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ProcessTemplateFieldType = new SuObjectVM();
             return View(ProcessTemplateFieldType);
         }
@@ -89,6 +105,10 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ToForm = (from s in _ProcessTemplateFieldType.GetAllProcessTemplateFieldTypes()
                          join t in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                          on s.Id equals t.FieldTypeId
@@ -118,12 +138,16 @@ namespace StudentUnion0105.Controllers
             {
                 var ProcessTemplateFieldType = _ProcessTemplateFieldType.GetProcessTemplateFieldType(test3.Id);
                 var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+                var UICustomizationArray = new UICustomization(_context);
+                ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
 
                 ProcessTemplateFieldType.ModifiedDate = DateTime.Now;
                 ProcessTemplateFieldType.ModifierId = new Guid(CurrentUser.Id);
                 _ProcessTemplateFieldType.UpdateProcessTemplateFieldType(ProcessTemplateFieldType);
 
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProcessTemplateFieldTypeLanguage = _ProcessTemplateFieldTypeLanguage.GetProcessTemplateFieldTypeLanguage(test3.ObjectLanguageId);
                 ProcessTemplateFieldTypeLanguage.Name = test3.Name;
                 ProcessTemplateFieldTypeLanguage.Description = test3.Description;
@@ -140,8 +164,14 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ProcessTemplateFieldLanguage = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                                         join l in _language.GetAllLanguages()
@@ -167,8 +197,16 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                                 where c.FieldTypeId == Id
@@ -224,8 +262,15 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ToForm = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id

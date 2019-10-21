@@ -45,7 +45,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Index", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ClassificationLevel = (from c in _classificationLevel.GetAllClassificationLevels()
                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -74,7 +74,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Edit", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var Level = (from c in _classificationLevel.GetAllClassificationLevels()
                          join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -161,7 +161,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Create", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             SuObjectVM SuObject = new SuObjectVM();
             SuObject.ObjectId = Id;
@@ -309,7 +309,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageIndex", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                           join l in _language.GetAllLanguages()
@@ -344,7 +344,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageEdit", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ToForm = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                          join l in _language.GetAllLanguages()
@@ -406,7 +406,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageCreate", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -470,7 +470,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageDelete", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ClassifationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(Id);
             var ClassificationLevelToForm = new SuObjectVM();
@@ -503,7 +503,7 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Delete", DefaultLanguageID);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var Classification = _context.dbObject.FromSql($"ClassificationLevelDeleteSelect {Id}, {DefaultLanguageID}").First();
 
