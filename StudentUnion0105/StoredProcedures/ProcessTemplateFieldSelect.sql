@@ -10,7 +10,7 @@ SELECT
 	, dbProcessTemplateField.FieldDataTypeId
 	, dbProcessTemplateFieldLanguage.Id dbProcessTemplateFieldLanguageId
 	, dbProcessTemplateFieldLanguage.LanguageId
-	, dbProcessTemplateFieldLanguage.ProcessTemplateFieldName
+	, dbProcessTemplateFieldLanguage.Name
 FROM dbProcessTemplateField
 JOIN dbProcessTemplateFieldLanguage
 	ON dbProcessTemplateField.Id = dbProcessTemplateFieldLanguage.ProcessTemplateFieldId

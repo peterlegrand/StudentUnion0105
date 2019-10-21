@@ -9,7 +9,7 @@ namespace StudentUnion0105.Models
         [Display(Name = "Status name")]
         [MaxLength(50)]
 
-        public string StatusName { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<SuContentModel> SuProcessTemplateStepFieldModel { get; set; }
     }

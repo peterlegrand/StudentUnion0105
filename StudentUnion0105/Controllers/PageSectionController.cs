@@ -62,7 +62,7 @@ namespace StudentUnion0105.Controllers
                                {
                                    Id = c.Id
                                ,
-                                   Name = l.PageSectionName
+                                   Name = l.Name
                                ,
                                    ObjectId = c.PageId
                                }).ToList();
@@ -114,15 +114,15 @@ namespace StudentUnion0105.Controllers
                                    ,
                                    Sequence = c.Sequence
                                    ,
-                                   Name = l.PageSectionName
+                                   Name = l.Name
                                    ,
-                                   Description = l.PageSectionDescription
+                                   Description = l.Description
                                    ,
-                                   PageSectionTitle = l.PageSectionTitle
+                                   Title = l.Title
                                    ,
-                                   PageSectionTitleDescription = l.PageSectionTitleDescription
+                                   TitleDescription = l.TitleDescription
                                    ,
-                                   MouseOver = l.PageSectionMouseOver
+                                   MouseOver = l.MouseOver
                                }).First();
 
             //Existing levels
@@ -136,7 +136,7 @@ namespace StudentUnion0105.Controllers
                                                    {
                                                        Value = c.Sequence.ToString()
                                                    ,
-                                                       Text = l.PageSectionName
+                                                       Text = l.Name
                                                    }).ToList();
             var TestForNull = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
@@ -253,8 +253,8 @@ namespace StudentUnion0105.Controllers
                     , UpdatedPageSection.SuObject.LanguageId.ToString()                     //12
                     , UpdatedPageSection.SuObject.Name                                      //13
                     , UpdatedPageSection.SuObject.Description                               //14
-                    , UpdatedPageSection.SuObject.PageSectionTitle                          //15
-                    , UpdatedPageSection.SuObject.PageSectionTitleDescription               //16
+                    , UpdatedPageSection.SuObject.Title                          //15
+                    , UpdatedPageSection.SuObject.TitleDescription               //16
                     , UpdatedPageSection.SuObject.MouseOver                                 //17
                     , DateTimeOffset.Now.ToString()                                         //18
                     , UpdatedPageSection.SuObject.ObjectLanguageId.ToString()               //19
@@ -290,7 +290,7 @@ namespace StudentUnion0105.Controllers
                                                    {
                                                        Value = c.Sequence.ToString()
                                                    ,
-                                                       Text = l.PageSectionName
+                                                       Text = l.Name
                                                    }).ToList();
             var TestForNull = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
@@ -451,11 +451,11 @@ namespace StudentUnion0105.Controllers
 
                 var PageSectionLanguage = new SuPageSectionLanguageModel();
 
-                PageSectionLanguage.PageSectionName = NewLevel.SuObject.Name;
-                PageSectionLanguage.PageSectionDescription = NewLevel.SuObject.Description;
-                PageSectionLanguage.PageSectionTitle = NewLevel.SuObject.PageSectionTitle;
-                PageSectionLanguage.PageSectionTitleDescription = NewLevel.SuObject.PageSectionTitleDescription;
-                PageSectionLanguage.PageSectionMouseOver = NewLevel.SuObject.MouseOver;
+                PageSectionLanguage.Name = NewLevel.SuObject.Name;
+                PageSectionLanguage.Description = NewLevel.SuObject.Description;
+                PageSectionLanguage.Title = NewLevel.SuObject.Title;
+                PageSectionLanguage.TitleDescription = NewLevel.SuObject.TitleDescription;
+                PageSectionLanguage.MouseOver = NewLevel.SuObject.MouseOver;
                 PageSectionLanguage.PageSectionId = NewPageSection.Id;
                 PageSectionLanguage.LanguageId = DefaultLanguageID;
                 _pageSectionLanguage.AddPageSectionLanguage(PageSectionLanguage);
@@ -477,11 +477,11 @@ namespace StudentUnion0105.Controllers
                                           {
                                               Id = c.Id
                                           ,
-                                              Name = c.PageSectionName
+                                              Name = c.Name
                                           ,
                                               Language = l.LanguageName
                                           ,
-                                              MouseOver = c.PageSectionMouseOver
+                                              MouseOver = c.MouseOver
                                           ,
                                               ObjectId = c.PageSectionId
                                           }).ToList();
@@ -501,11 +501,11 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = c.Id
                             ,
-                             Name = c.PageSectionName
+                             Name = c.Name
                             ,
-                             Description = c.PageSectionDescription
+                             Description = c.Description
                             ,
-                             MouseOver = c.PageSectionMouseOver
+                             MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
                             ,
@@ -528,10 +528,10 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var PageSectionLanguage = _pageSectionLanguage.GetPageSectionLanguage(test3.SuObject.Id);
-                PageSectionLanguage.PageSectionName = test3.SuObject.Name;
-                PageSectionLanguage.PageSectionDescription = test3.SuObject.Description;
+                PageSectionLanguage.Name = test3.SuObject.Name;
+                PageSectionLanguage.Description = test3.SuObject.Description;
 
-                PageSectionLanguage.PageSectionMouseOver = test3.SuObject.MouseOver;
+                PageSectionLanguage.MouseOver = test3.SuObject.MouseOver;
                 _pageSectionLanguage.UpdatePageSectionLanguage(PageSectionLanguage);
 
 
@@ -585,9 +585,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var PageSectionLanguage = new SuPageSectionLanguageModel();
-                PageSectionLanguage.PageSectionName = test3.SuObject.Name;
-                PageSectionLanguage.PageSectionDescription = test3.SuObject.Description;
-                PageSectionLanguage.PageSectionMouseOver = test3.SuObject.MouseOver;
+                PageSectionLanguage.Name = test3.SuObject.Name;
+                PageSectionLanguage.Description = test3.SuObject.Description;
+                PageSectionLanguage.MouseOver = test3.SuObject.MouseOver;
                 PageSectionLanguage.PageSectionId = test3.SuObject.ObjectId;
                 PageSectionLanguage.LanguageId = test3.SuObject.LanguageId;
 

@@ -16,6 +16,9 @@ namespace StudentUnion0105.Models
         public string Name { get; set; }
         [Display(Name = "Content type description")]
         public string Description { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Menu name")]
+        public string MenuName { get; set; }
         [Display(Name = "Content type mouse over")]
         [MaxLength(50)]
         public string MouseOver { get; set; }

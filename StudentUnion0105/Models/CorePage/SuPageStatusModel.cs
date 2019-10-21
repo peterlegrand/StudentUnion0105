@@ -8,7 +8,7 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         [Display(Name = "Page status name")]
         [MaxLength(50)]
-        public string PageStatusName { get; set; }
+        public string Name { get; set; }
         public virtual ICollection<SuPageModel> Pages { get; set; }
 
     }

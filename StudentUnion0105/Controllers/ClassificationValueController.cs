@@ -145,16 +145,16 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ClassificationValueLanguage = new SuClassificationValueLanguageModel();
 
-                ClassificationValueLanguage.ClassificationValueName = FromForm.Name;
-                ClassificationValueLanguage.ClassificationValueDescription = FromForm.Description;
-                ClassificationValueLanguage.ClassificationValueDropDownName = FromForm.DropDownName;
-                ClassificationValueLanguage.ClassificationValueMenuName = FromForm.MenuName;
-                ClassificationValueLanguage.ClassificationValueMouseOver = FromForm.MouseOver;
-                ClassificationValueLanguage.ClassificationValuePageName = FromForm.PageName;
-                ClassificationValueLanguage.ClassificationValuePageDescription = FromForm.PageDescription;
-                ClassificationValueLanguage.ClassificationValueHeaderName = FromForm.HeaderName;
-                ClassificationValueLanguage.ClassificationValueHeaderDescription = FromForm.HeaderDescription;
-                ClassificationValueLanguage.ClassificationValueTopicName = FromForm.TopicName;
+                ClassificationValueLanguage.Name = FromForm.Name;
+                ClassificationValueLanguage.Description = FromForm.Description;
+                ClassificationValueLanguage.DropDownName = FromForm.DropDownName;
+                ClassificationValueLanguage.MenuName = FromForm.MenuName;
+                ClassificationValueLanguage.MouseOver = FromForm.MouseOver;
+                ClassificationValueLanguage.PageName = FromForm.Title;
+                ClassificationValueLanguage.PageDescription = FromForm.PageDescription;
+                ClassificationValueLanguage.HeaderName = FromForm.HeaderName;
+                ClassificationValueLanguage.HeaderDescription = FromForm.HeaderDescription;
+                ClassificationValueLanguage.TopicName = FromForm.TopicName;
 
                 ClassificationValueLanguage.ClassificationValueId = NewClassificationValue.Id;
                 ClassificationValueLanguage.LanguageId = DefaultLanguageID;
@@ -179,25 +179,25 @@ namespace StudentUnion0105.Controllers
                                        where l.LanguageId == DefaultLanguageID && v.Id == Id
                                        select new SuObjectVM
                                        {
-                                           Name = l.ClassificationValueName
+                                           Name = l.Name
                           ,
-                                           Description = l.ClassificationValueDescription
+                                           Description = l.Description
                           ,
-                                           DropDownName = l.ClassificationValueDropDownName
+                                           DropDownName = l.DropDownName
                           ,
-                                           MenuName = l.ClassificationValueMenuName
+                                           MenuName = l.MenuName
                           ,
-                                           MouseOver = l.ClassificationValueMouseOver
+                                           MouseOver = l.MouseOver
                           ,
-                                           PageName = l.ClassificationValuePageName
+                                          Title = l.PageName
                           ,
-                                           PageDescription = l.ClassificationValuePageDescription
+                                           PageDescription = l.PageDescription
                           ,
-                                           HeaderName = l.ClassificationValueHeaderName
+                                           HeaderName = l.HeaderName
                           ,
-                                           HeaderDescription = l.ClassificationValueHeaderDescription
+                                           HeaderDescription = l.HeaderDescription
                           ,
-                                           TopicName = l.ClassificationValueTopicName
+                                           TopicName = l.TopicName
                           ,
                                            DateFrom = v.DateFrom
                           ,
@@ -264,16 +264,16 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ClassificationValueLanguage = _classificationValueLanguage.GetClassificationValueLanguage(FromForm.ObjectLanguageId);
-                ClassificationValueLanguage.ClassificationValueName = FromForm.Name;
-                ClassificationValueLanguage.ClassificationValueDescription = FromForm.Description;
-                ClassificationValueLanguage.ClassificationValueDropDownName = FromForm.DropDownName;
-                ClassificationValueLanguage.ClassificationValueMenuName = FromForm.MenuName;
-                ClassificationValueLanguage.ClassificationValueMouseOver = FromForm.MouseOver;
-                ClassificationValueLanguage.ClassificationValuePageName = FromForm.PageName;
-                ClassificationValueLanguage.ClassificationValuePageDescription = FromForm.PageDescription;
-                ClassificationValueLanguage.ClassificationValueHeaderName = FromForm.HeaderName;
-                ClassificationValueLanguage.ClassificationValueHeaderDescription = FromForm.HeaderDescription;
-                ClassificationValueLanguage.ClassificationValueTopicName = FromForm.TopicName;
+                ClassificationValueLanguage.Name = FromForm.Name;
+                ClassificationValueLanguage.Description = FromForm.Description;
+                ClassificationValueLanguage.DropDownName = FromForm.DropDownName;
+                ClassificationValueLanguage.MenuName = FromForm.MenuName;
+                ClassificationValueLanguage.MouseOver = FromForm.MouseOver;
+                ClassificationValueLanguage.PageName = FromForm.Title;
+                ClassificationValueLanguage.PageDescription = FromForm.PageDescription;
+                ClassificationValueLanguage.HeaderName = FromForm.HeaderName;
+                ClassificationValueLanguage.HeaderDescription = FromForm.HeaderDescription;
+                ClassificationValueLanguage.TopicName = FromForm.TopicName;
 
                 _classificationValueLanguage.UpdateClassificationValueLanguage(ClassificationValueLanguage);
 
@@ -299,7 +299,7 @@ namespace StudentUnion0105.Controllers
                                           {
                                               Id = c.Id
                                           ,
-                                              Name = c.ClassificationValueName
+                                              Name = c.Name
                                           ,
                                               Language = l.LanguageName
                                           }).ToList();
@@ -388,16 +388,16 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ClassificationValueLanguage = new SuClassificationValueLanguageModel();
-                ClassificationValueLanguage.ClassificationValueName = FromForm.SuObject.Name;
-                ClassificationValueLanguage.ClassificationValueDescription = FromForm.SuObject.Description;
-                ClassificationValueLanguage.ClassificationValueDropDownName = FromForm.SuObject.DropDownName;
-                ClassificationValueLanguage.ClassificationValueMenuName = FromForm.SuObject.MenuName;
-                ClassificationValueLanguage.ClassificationValueMouseOver = FromForm.SuObject.MouseOver;
-                ClassificationValueLanguage.ClassificationValuePageName = FromForm.SuObject.PageName;
-                ClassificationValueLanguage.ClassificationValuePageDescription = FromForm.SuObject.PageDescription;
-                ClassificationValueLanguage.ClassificationValueHeaderName = FromForm.SuObject.HeaderName;
-                ClassificationValueLanguage.ClassificationValueHeaderDescription = FromForm.SuObject.HeaderDescription;
-                ClassificationValueLanguage.ClassificationValueTopicName = FromForm.SuObject.TopicName;
+                ClassificationValueLanguage.Name = FromForm.SuObject.Name;
+                ClassificationValueLanguage.Description = FromForm.SuObject.Description;
+                ClassificationValueLanguage.DropDownName = FromForm.SuObject.DropDownName;
+                ClassificationValueLanguage.MenuName = FromForm.SuObject.MenuName;
+                ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                ClassificationValueLanguage.PageDescription = FromForm.SuObject.PageDescription;
+                ClassificationValueLanguage.HeaderName = FromForm.SuObject.HeaderName;
+                ClassificationValueLanguage.HeaderDescription = FromForm.SuObject.HeaderDescription;
+                ClassificationValueLanguage.TopicName = FromForm.SuObject.TopicName;
 
                 ClassificationValueLanguage.ClassificationValueId = FromForm.SuObject.ObjectId;
                 ClassificationValueLanguage.LanguageId = FromForm.SuObject.LanguageId;

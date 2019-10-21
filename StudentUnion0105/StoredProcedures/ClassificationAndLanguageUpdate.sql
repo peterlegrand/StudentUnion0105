@@ -7,10 +7,10 @@ CREATE PROCEDURE
 , @DropDownSequence  int 
 , @ClassificationLanguageId  int 
 , @LanguageId  int 
-, @ClassificationName nvarchar(max) 
-, @ClassificationDescription nvarchar(max) 
-, @ClassificationMenuName nvarchar(max) 
-, @ClassificationMouseOver nvarchar(max) 
+, @Name nvarchar(max) 
+, @Description nvarchar(max) 
+, @MenuName nvarchar(max) 
+, @MouseOver nvarchar(max) 
 , @ModifiedDate datetime2(7) 
 AS 
 BEGIN TRANSACTION 
@@ -28,10 +28,10 @@ dbClassification.Id = @Id
 UPDATE  
 dbClassificationLanguage 
 SET 
- dbClassificationLanguage.ClassificationName  = @ClassificationName 
-, dbClassificationLanguage.ClassificationDescription = @ClassificationDescription 
-, dbClassificationLanguage.ClassificationMenuName = @ClassificationMenuName  
-, dbClassificationLanguage.ClassificationMouseOver = @ClassificationMouseOver 
+ dbClassificationLanguage.Name  = @Name 
+, dbClassificationLanguage.Description = @Description 
+, dbClassificationLanguage.MenuName = @MenuName  
+, dbClassificationLanguage.MouseOver = @MouseOver 
 , dbClassificationLanguage.ModifiedDate = @ModifiedDate 
 WHERE  
  Id = @ClassificationLanguageId 

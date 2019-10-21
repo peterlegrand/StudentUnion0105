@@ -2,6 +2,6 @@ CREATE PROCEDURE [DataTypeSelectAll]
 AS  
 SELECT  
 dbDataType.Id Id 
-, ISNULL(dbDataType.DataTypeName,'') Name 
+, ISNULL(dbDataType.Name,'') Name 
 FROM dbDataType 
-ORDER BY dbDataType.DataTypeName
+ORDER BY dbDataType.Name

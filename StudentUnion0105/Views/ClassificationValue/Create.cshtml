@@ -2,17 +2,17 @@
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/values.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <h1><img src="~/Images/Icons/values.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
 
-    <div class="form-group row">
+    <div class="form-group row" hidden>
         <label asp-for="@Model.NullId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="@Model.NullId" class="form-control" />
             <span asp-validation-for="@Model.NullId" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" hidden>
         <label asp-for="@Model.ObjectId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="@Model.ObjectId" class="form-control" />
@@ -57,10 +57,10 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.PageName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <label asp-for="@Model.Title" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.PageName" class="form-control" />
-            <span asp-validation-for="@Model.PageName" class="text-danger"></span>
+            <input asp-for="@Model.Title" class="form-control" />
+            <span asp-validation-for="@Model.Title" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">

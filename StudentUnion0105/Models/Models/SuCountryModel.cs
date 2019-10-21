@@ -7,7 +7,7 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         [Required]
-        public string CountryName { get; set; }
+        public string Name { get; set; }
         public string ForeignName { get; set; }
 
         public string ISO31662 { get; set; }

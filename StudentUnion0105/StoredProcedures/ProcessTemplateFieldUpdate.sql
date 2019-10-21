@@ -4,9 +4,9 @@ CREATE PROCEDURE [dbo].[ProcessTemplateFieldUpdate]
 	, @FieldDataTypeId int
 	, @FieldMasterListId int
 	, @ProcessTemplateFieldLanguageID int
-	, @ProcessTemplateFieldName nvarchar(max)
-	, @ProcessTemplateFieldDescription nvarchar(max)
-	, @ProcessTemplateFieldMouseOver nvarchar(max)
+	, @Name nvarchar(max)
+	, @Description nvarchar(max)
+	, @MouseOver nvarchar(max)
 	)
 AS
 BEGIN TRANSACTION 
@@ -18,9 +18,9 @@ BEGIN TRANSACTION
 	WHERE dbProcessTemplateField.Id = @ProcessTemplateFieldId
 
 	UPDATE dbProcessTemplateFieldLanguage SET
-		dbProcessTemplateFieldLanguage.ProcessTemplateFieldName = @ProcessTemplateFieldName
-		, dbProcessTemplateFieldLanguage.ProcessTemplateFieldDescription = @ProcessTemplateFieldDescription
-		, dbProcessTemplateFieldLanguage.ProcessTemplateFieldMouseOver = @ProcessTemplateFieldMouseOver
+		dbProcessTemplateFieldLanguage.Name = @Name
+		, dbProcessTemplateFieldLanguage.Description = @Description
+		, dbProcessTemplateFieldLanguage.MouseOver = @MouseOver
 		, dbProcessTemplateFieldLanguage.ModifiedDate = getdate()
 	WHERE  dbProcessTemplateFieldLanguage.Id = @ProcessTemplateFieldLanguageID
 COMMIT TRANSACTION 

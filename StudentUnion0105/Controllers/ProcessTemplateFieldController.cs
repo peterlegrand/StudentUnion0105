@@ -63,12 +63,12 @@ namespace StudentUnion0105.Controllers
                       on c.Id equals l.ProcessTemplateFieldId
                                where c.ProcessTemplateId== Id
                                && l.LanguageId == DefaultLanguageID
-                               orderby l.ProcessTemplateFieldName
+                               orderby l.Name
                                select new SuObjectVM
                                {
                                    Id = c.Id
                                ,
-                                   Name = l.ProcessTemplateFieldName
+                                   Name = l.Name
                                ,
                                    ObjectId = c.ProcessTemplateId
                                }).ToList();
@@ -88,7 +88,7 @@ namespace StudentUnion0105.Controllers
                                         join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
                                         on c.Id equals l.ProcessTemplateFieldId
                                         where c.Id == Id && l.LanguageId == DefaultLanguageID
-                                        orderby l.ProcessTemplateFieldName
+                                        orderby l.Name
                                         select new SuObjectVM
                                         {
                                             Id = c.ProcessTemplateId
@@ -99,11 +99,11 @@ namespace StudentUnion0105.Controllers
                                             ,
                                             ObjectLanguageId = l.Id
                                             ,
-                                            Name = l.ProcessTemplateFieldName
+                                            Name = l.Name
                                             ,
-                                            Description = l.ProcessTemplateFieldDescription
+                                            Description = l.Description
                                             ,
-                                            MouseOver = l.ProcessTemplateFieldMouseOver
+                                            MouseOver = l.MouseOver
                                             , NotNullId = c.FieldDataTypeId
                                             , NotNullId2 = c.FieldMasterListId
                                         }).First();
@@ -272,11 +272,11 @@ namespace StudentUnion0105.Controllers
                                           {
                                               Id = c.Id
                                           ,
-                                              Name = c.ProcessTemplateFieldName
+                                              Name = c.Name
                                           ,
                                               Language = l.LanguageName
                                           ,
-                                              MouseOver = c.ProcessTemplateFieldMouseOver
+                                              MouseOver = c.MouseOver
                                           ,
                                               ObjectId = c.ProcessTemplateFieldId
                                           }).ToList();
@@ -296,11 +296,11 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = c.Id
                             ,
-                             Name = c.ProcessTemplateFieldName
+                             Name = c.Name
                             ,
-                             Description = c.ProcessTemplateFieldDescription
+                             Description = c.Description
                             ,
-                             MouseOver = c.ProcessTemplateFieldMouseOver
+                             MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
                             ,
@@ -324,10 +324,10 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateFieldLanguage = _processTemplateFieldLanguage.GetProcessTemplateFieldLanguage(FromForm.SuObject.Id);
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldName = FromForm.SuObject.Name;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldDescription = FromForm.SuObject.Description;
+                ProcessTemplateFieldLanguage.Name = FromForm.SuObject.Name;
+                ProcessTemplateFieldLanguage.Description = FromForm.SuObject.Description;
 
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldMouseOver = FromForm.SuObject.MouseOver;
+                ProcessTemplateFieldLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 _processTemplateFieldLanguage.UpdateProcessTemplateFieldLanguage(ProcessTemplateFieldLanguage);
 
 
@@ -381,9 +381,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateFieldLanguage = new SuProcessTemplateFieldLanguageModel();
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldName = FromForm.SuObject.Name;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldDescription = FromForm.SuObject.Description;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldMouseOver = FromForm.SuObject.MouseOver;
+                ProcessTemplateFieldLanguage.Name = FromForm.SuObject.Name;
+                ProcessTemplateFieldLanguage.Description = FromForm.SuObject.Description;
+                ProcessTemplateFieldLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ProcessTemplateFieldLanguage.ProcessTemplateFieldId = FromForm.SuObject.ObjectId;
                 ProcessTemplateFieldLanguage.LanguageId = FromForm.SuObject.LanguageId;
 

@@ -9,7 +9,7 @@ namespace StudentUnion0105.Models
         [Display(Name = "Content status name")]
         [MaxLength(50)]
 
-        public string ContentStatusName { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<SuContentModel> Contents { get; set; }
     }

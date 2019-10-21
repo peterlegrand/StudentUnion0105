@@ -40,12 +40,12 @@ namespace StudentUnion0105.Classes
         //    {
         //        var classificationStatusL = classificationStatus.GetAllClassificationStatus();
         //        List<SelectListItem> a = 
-        //        .OrderBy(n => n.ClassificationStatusName)
+        //        .OrderBy(n => n.Name)
         //                  .Select(n =>
         //                  new SelectListItem
         //                  {
         //                      Value = n.Id.ToString(),
-        //                      Text = n.ClassificationStatusName
+        //                      Text = n.Name
         //                  }).ToList();
         //    var ClassificationStatusTip = new SelectListItem()
         //    {

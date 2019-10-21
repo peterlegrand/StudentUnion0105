@@ -17,9 +17,12 @@ namespace StudentUnion0105.Models
         [Display(Name = "Mouse over")]
         [MaxLength(50)]
         public string MouseOver { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Menu name")]
+        public string MenuName { get; set; }
         [Display(Name = "Page title")]
         [MaxLength(50)]
-        public string PageTitle { get; set; }
+        public string Title { get; set; }
         [Display(Name = "Page description")]
         public string PageDescription { get; set; }
         public Guid CreatorId { get; set; }

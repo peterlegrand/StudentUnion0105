@@ -13,11 +13,11 @@ CREATE PROCEDURE
 	, @ShowSectionTitleDescription bit					--10
 	, @SortById bit										--11
 	, @LanguageId int									--12
-	, @PageSectionName nvarchar(max)					--13
-	, @PageSectionDescription nvarchar(max)				--14
-	, @PageSectionTitleName nvarchar(max)				--15
-	, @PageSectionTitleDescription nvarchar(max)		--16
-	, @PageSectionMouseOver nvarchar(max)				--17
+	, @Name nvarchar(max)					--13
+	, @Description nvarchar(max)				--14
+	, @TitleName nvarchar(max)				--15
+	, @TitleDescription nvarchar(max)		--16
+	, @MouseOver nvarchar(max)				--17
 	, @ModifiedDate datetime2(7)						--18
 	, @PageSectionLanguageId int						--19
 	, @PageId int										--20
@@ -64,11 +64,11 @@ WHERE
 UPDATE 
 	dbPageSectionLanguage
 SET
-	 PageSectionName  = @PageSectionName 
-	, PageSectionDescription = @PageSectionDescription 
-	, PageSectionTitle = @PageSectionTitleName 
-	, PageSectionTitleDescription = @PageSectionTitleDescription 
-	, PageSectionMouseOver = @PageSectionMouseOver 
+	 Name  = @Name 
+	, Description = @Description 
+	, Title = @TitleName 
+	, TitleDescription = @TitleDescription 
+	, MouseOver = @MouseOver 
 	, ModifiedDate = @ModifiedDate
 WHERE 
  Id = @PageSectionLanguageId 

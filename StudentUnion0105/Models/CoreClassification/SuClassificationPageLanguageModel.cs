@@ -20,17 +20,20 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         [Display(Name = "Page name")]
         [MaxLength(50)]
-        public string ClassificationPageName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Page description")]
-        public string ClassificationPageDescription { get; set; }
+        public string Description { get; set; }
+        [Display(Name = "Menu name")]
+        [MaxLength(50)]
+        public string MenuName { get; set; }
         [Display(Name = "Page mouse over")]
         [MaxLength(50)]
-        public string ClassificationPageMouseOver { get; set; }
+        public string MouseOver { get; set; }
         [Display(Name = "Page title")]
         [MaxLength(50)]
-        public string ClassificationPageTitle { get; set; }
+        public string Title { get; set; }
         [Display(Name = "Page description")]
-        public string ClassificationPageTitleDescription { get; set; }
+        public string TitleDescription { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

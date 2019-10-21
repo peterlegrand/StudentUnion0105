@@ -3,9 +3,9 @@ CREATE PROCEDURE [dbo].[ProcessTemplateFieldCreate]
 	, @FieldDataTypeId int
 	, @FieldMasterListId int
 	, @LanguageId int
-	, @ProcessTemplateFieldName nvarchar(max)
-	, @ProcessTemplateFieldDescription nvarchar(max)
-	, @ProcessTemplateFieldMouseOver nvarchar(max)
+	, @Name nvarchar(max)
+	, @Description nvarchar(max)
+	, @MouseOver nvarchar(max)
 	)
 AS
 BEGIN TRANSACTION 
@@ -19,18 +19,18 @@ BEGIN TRANSACTION
 	INSERT dbProcessTemplateFieldLanguage (
 		ProcessTemplateFieldId
 		, LanguageId
-		, ProcessTemplateFieldName
-		, ProcessTemplateFieldDescription
-		, ProcessTemplateFieldMouseOver
+		, Name
+		, Description
+		, MouseOver
 		, CreatedDate
 		, ModifiedDate
 		)
 	VALUES (
 		@NewProcessTemplateFieldId
 		, @LanguageId
-		, @ProcessTemplateFieldName
-		, @ProcessTemplateFieldDescription
-		, @ProcessTemplateFieldMouseOver
+		, @Name
+		, @Description
+		, @MouseOver
 		, getdate()
 		, getdate()
 	) 

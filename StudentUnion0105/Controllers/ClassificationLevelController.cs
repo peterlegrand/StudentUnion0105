@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
@@ -56,9 +57,11 @@ namespace StudentUnion0105.Controllers
                                        {
                                            Id = c.Id
                                        ,
-                                           Name = l.ClassificationLevelName
+                                           Name = l.Name
                                        ,
                                            ObjectId = c.ClassificationId
+                                           , MouseOver = l.MouseOver
+                                           , MenuName = l.MenuName
                                        }).ToList();
             ViewBag.ObjectId = Id.ToString();
             //PETER TODO add a classification label so you know to which classification the levels belong.
@@ -89,7 +92,7 @@ namespace StudentUnion0105.Controllers
                             ,
                              InDropDown = c.InDropDown
                             ,
-                             Description = l.ClassificationLevelDescription
+                             Description = l.Description
                             ,
                              OnTheFly = c.OnTheFly
                             ,
@@ -97,17 +100,25 @@ namespace StudentUnion0105.Controllers
                             ,
                              ObjectLanguageId = l.Id
                             ,
-                             MenuName = l.ClassificationLevelMenuName
+                             MenuName = l.MenuName
                             ,
-                             MouseOver = l.ClassificationLevelMouseOver
+                             MouseOver = l.MouseOver
                             ,
-                             Name = l.ClassificationLevelName
+                             Name = l.Name
+                             , ObjectId = c.ClassificationId
                          }).First();
+
+            var DateType = new List<SelectListItem>();
+            DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
+            DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
+            DateType.Add(new SelectListItem { Value = "2", Text = "Date range" });
+            DateType.Add(new SelectListItem { Value = "3", Text = "Date time" });
+            DateType.Add(new SelectListItem { Value = "4", Text = "Date time range" });
 
             var suObjectAndStatusView = new SuObjectAndStatusViewModel
             {
 
-                SuObject = Level //, a = ClassificationList
+                SuObject = Level , ProbablyTypeListItem = DateType //, a = ClassificationList 
             };
             return View(suObjectAndStatusView);
 
@@ -128,16 +139,16 @@ namespace StudentUnion0105.Controllers
                 _classificationLevel.UpdateClassificationLevel(ClassificationLevel);
 
                 var ClassificationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(test3.SuObject.ObjectLanguageId);
-                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
-                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
-                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
+                ClassificationLevelLanguage.Name = test3.SuObject.Name;
+                ClassificationLevelLanguage.MenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.Description = test3.SuObject.Description;
                 _classificationLevelLanguage.UpdateClassificationLevelLanguage(ClassificationLevelLanguage);
 
 
             }
             //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
 
-            return RedirectToAction("Index", new { Id = test3.SuObject.Id.ToString() });
+            return RedirectToAction("Index", new { Id = test3.SuObject.ObjectId.ToString() });
 
 
 
@@ -155,6 +166,7 @@ namespace StudentUnion0105.Controllers
             SuObjectVM SuObject = new SuObjectVM();
             SuObject.ObjectId = Id;
 
+
             List<SelectListItem> ExistingLevels = (from c in _classificationLevel.GetAllClassificationLevels()
                                                    join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                                    on c.Id equals l.ClassificationLevelId
@@ -165,7 +177,7 @@ namespace StudentUnion0105.Controllers
                                                    {
                                                        Value = c.Sequence.ToString()
                                                    ,
-                                                       Text = l.ClassificationLevelName
+                                                       Text = l.Name
                                                    }).ToList();
             var TestForNull = (from c in _classificationLevel.GetAllClassificationLevels()
                                join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
@@ -189,11 +201,16 @@ namespace StudentUnion0105.Controllers
 
                 MaxLevelSequence++;
             }
-
+            var DateType = new List<SelectListItem>();
+            DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
+            DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
+            DateType.Add(new SelectListItem { Value = "2", Text = "Date range" });
+            DateType.Add(new SelectListItem { Value = "3", Text = "Date time" });
+            DateType.Add(new SelectListItem { Value = "4", Text = "Date time range" });
 
             ExistingLevels.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
 
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = SuObject, SomeKindINumSelectListItem = ExistingLevels };
+            var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = SuObject, SomeKindINumSelectListItem = ExistingLevels, ProbablyTypeListItem = DateType };
             return View(ClassificationAndStatus);
 
         }
@@ -273,10 +290,10 @@ namespace StudentUnion0105.Controllers
 
                 var ClassificationLevelLanguage = new SuClassificationLevelLanguageModel();
 
-                ClassificationLevelLanguage.ClassificationLevelName = NewLevel.SuObject.Name;
-                ClassificationLevelLanguage.ClassificationLevelMenuName = NewLevel.SuObject.MenuName;
-                ClassificationLevelLanguage.ClassificationLevelDescription = NewLevel.SuObject.Description;
-                ClassificationLevelLanguage.ClassificationLevelMouseOver = NewLevel.SuObject.MouseOver;
+                ClassificationLevelLanguage.Name = NewLevel.SuObject.Name;
+                ClassificationLevelLanguage.MenuName = NewLevel.SuObject.MenuName;
+                ClassificationLevelLanguage.Description = NewLevel.SuObject.Description;
+                ClassificationLevelLanguage.MouseOver = NewLevel.SuObject.MouseOver;
                 ClassificationLevelLanguage.ClassificationLevelId = NewClassificationLevel.Id;
                 ClassificationLevelLanguage.LanguageId = DefaultLanguageID;
                 _classificationLevelLanguage.AddClassificationLevelLanguage(ClassificationLevelLanguage);
@@ -297,20 +314,23 @@ namespace StudentUnion0105.Controllers
             var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
                                           join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
+                                          join x in _classificationLevel.GetAllClassificationLevels()
+                                          on c.ClassificationLevelId equals x.Id
                                           where c.ClassificationLevelId == Id
                                           select new SuObjectVM
                                           {
                                               Id = c.Id
                                           ,
-                                              Name = c.ClassificationLevelName
+                                              Name = c.Name
                                           ,
                                               Language = l.LanguageName
                                           ,
-                                              MenuName = c.ClassificationLevelMenuName
+                                              MenuName = c.MenuName
                                           ,
-                                              MouseOver = c.ClassificationLevelMouseOver
+                                              MouseOver = c.MouseOver
                                           ,
                                               ObjectId = c.ClassificationLevelId
+                                              , NotNullId = x.ClassificationId
                                           }).ToList();
             ViewBag.Id = Id;
 
@@ -334,13 +354,13 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = c.Id
                             ,
-                             Name = c.ClassificationLevelName
+                             Name = c.Name
                             ,
-                             MenuName = c.ClassificationLevelMenuName
+                             MenuName = c.MenuName
                              ,
-                             Description = c.ClassificationLevelDescription
+                             Description = c.Description
                             ,
-                             MouseOver = c.ClassificationLevelMouseOver
+                             MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
                             ,
@@ -363,11 +383,11 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ClassificationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(test3.SuObject.Id);
-                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
-                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
-                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
+                ClassificationLevelLanguage.Name = test3.SuObject.Name;
+                ClassificationLevelLanguage.MenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.Description = test3.SuObject.Description;
 
-                ClassificationLevelLanguage.ClassificationLevelMouseOver = test3.SuObject.MouseOver;
+                ClassificationLevelLanguage.MouseOver = test3.SuObject.MouseOver;
                 _classificationLevelLanguage.UpdateClassificationLevelLanguage(ClassificationLevelLanguage);
 
 
@@ -426,10 +446,10 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ClassificationLevelLanguage = new SuClassificationLevelLanguageModel();
-                ClassificationLevelLanguage.ClassificationLevelName = test3.SuObject.Name;
-                ClassificationLevelLanguage.ClassificationLevelMenuName = test3.SuObject.MenuName;
-                ClassificationLevelLanguage.ClassificationLevelDescription = test3.SuObject.Description;
-                ClassificationLevelLanguage.ClassificationLevelMouseOver = test3.SuObject.MouseOver;
+                ClassificationLevelLanguage.Name = test3.SuObject.Name;
+                ClassificationLevelLanguage.MenuName = test3.SuObject.MenuName;
+                ClassificationLevelLanguage.Description = test3.SuObject.Description;
+                ClassificationLevelLanguage.MouseOver = test3.SuObject.MouseOver;
                 ClassificationLevelLanguage.ClassificationLevelId = test3.SuObject.ObjectId;
                 ClassificationLevelLanguage.LanguageId = test3.SuObject.LanguageId;
 
@@ -443,8 +463,64 @@ namespace StudentUnion0105.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LanguageDelete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "LanguageDelete", DefaultLanguageID);
+
+            var ClassifationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(Id);
+            var ClassificationLevelToForm = new SuObjectVM();
+            ClassificationLevelToForm.Id = ClassifationLevelLanguage.Id;
+            ClassificationLevelToForm.Name = ClassifationLevelLanguage.Name;
+            ClassificationLevelToForm.MenuName = ClassifationLevelLanguage.MenuName;
+            ClassificationLevelToForm.MouseOver = ClassifationLevelLanguage.MouseOver;
+            ClassificationLevelToForm.LanguageId = ClassifationLevelLanguage.LanguageId;
+            ClassificationLevelToForm.ObjectId = ClassifationLevelLanguage.ClassificationLevelId;
+            return View(ClassificationLevelToForm);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectVM a)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _classificationLevelLanguage.DeleteClassificationLevelLanguage(a.Id);
+                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+            }
+            return RedirectToAction("LanguageIndex");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray("ClassificationLevel", "Delete", DefaultLanguageID);
+
+            var Classification = _context.dbObject.FromSql($"ClassificationLevelDeleteSelect {Id}, {DefaultLanguageID}").First();
 
 
+
+            return View(Classification);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(SuObjectVM a)
+        {
+
+
+             _classificationLevel.DeleteClassificationLevel(a.Id);
+            return RedirectToAction("Index", new { Id = a.ObjectId });
+            
+        }
     }
 
 

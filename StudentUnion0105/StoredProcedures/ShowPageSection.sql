@@ -15,8 +15,8 @@ SELECT
 	, dbPageSection.SortById
 	, dbPageSection.MaxContent
 	, dbPageSection.HasPaging
-	, dbPageSectionLanguage.PageSectionTitle
-	, dbPageSectionLanguage.PageSectionDescription
+	, dbPageSectionLanguage.Title
+	, dbPageSectionLanguage.Description
 	, dbPageSectionType.IndexSection
 FROM dbPageSection 
 JOIN dbPageSectionLanguage

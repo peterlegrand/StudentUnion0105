@@ -13,15 +13,15 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         [Display(Name = "Classification name")]
         [MaxLength(50)]
-        public string ClassificationName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Classification description")]
-        public string ClassificationDescription { get; set; }
+        public string Description { get; set; }
         [MaxLength(50)]
         [Display(Name = "Classification menu name")]
-        public string ClassificationMenuName { get; set; }
+        public string MenuName { get; set; }
         [MaxLength(50)]
         [Display(Name = "Classification mouse over")]
-        public string ClassificationMouseOver { get; set; }
+        public string MouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

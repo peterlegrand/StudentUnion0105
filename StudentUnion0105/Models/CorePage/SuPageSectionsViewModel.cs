@@ -27,9 +27,9 @@ namespace StudentUnion0105.Models
         public bool HasPaging { get; set; }
         [Display(Name = "Page section title")]
         [MaxLength(50)]
-        public string PageSectionTitle { get; set; }
+        public string Title { get; set; }
         [Display(Name = "Show section title description")]
-        public string PageSectionDescription { get; set; }
+        public string Description { get; set; }
         [Display(Name = "Index section")]
         public bool IndexSection { get; set; }
     }

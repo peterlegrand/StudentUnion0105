@@ -4,7 +4,7 @@ CREATE PROCEDURE
 , @LanguageId int 
 AS 
 SELECT dbPage.Id 
-, dbPageLanguage.PageTitle 
+, dbPageLanguage.Title 
 , dbPageLanguage.PageDescription 
 FROM dbpage  
 JOIN dbPageLanguage 

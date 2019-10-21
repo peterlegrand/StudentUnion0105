@@ -9,7 +9,7 @@
 }
     <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
-    <div class="form-group row">
+    <div class="form-group row" hidden>
         <label asp-for="@Model.SuObject.ObjectId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ObjectId" class="form-control" hidden />

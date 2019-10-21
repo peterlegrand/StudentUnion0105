@@ -4,12 +4,12 @@
 *@
 @{
 }@{
-    ViewBag.Title = "Create page section";
+    ViewBag.Title = @ViewBag.Terms[0];
 }
-<h1><img src="~/Images/Icons/Section.png" title="Levels" height="60" width="60" /> Create page section</h1>
+    <h1><img src="~/Images/Icons/Section.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
 
-    <div class="form-group row">
+    <div class="form-group row" hidden>
         <label asp-for="@Model.SuObject.ObjectId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ObjectId" class="form-control" />
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.Name" class="form-control" />
             <span asp-validation-for="@Model.SuObject.Name" class="text-danger"></span>
@@ -25,35 +25,35 @@
     </div>
 
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
         <div class="col-sm-10">
             <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor" id="description" name="description"></textarea>
             <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.PageSectionTitle" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.Title" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.PageSectionTitle" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.PageSectionTitle" class="text-danger"></span>
+            <input asp-for="@Model.SuObject.Title" class="form-control" />
+            <span asp-validation-for="@Model.SuObject.Title" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.PageSectionTitleDescription" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
         <div class="col-sm-10">
-            <textarea asp-for="@Model.SuObject.PageSectionTitleDescription" class="form-control ckeditor" id="description" name="SuObject.PageSectionTitleDescription"></textarea>
-            <span asp-validation-for="@Model.SuObject.PageSectionTitleDescription" class="text-danger"></span>
+            <textarea asp-for="@Model.SuObject.TitleDescription" class="form-control ckeditor" id="description" name="SuObject.TitleDescription"></textarea>
+            <span asp-validation-for="@Model.SuObject.TitleDescription" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.MouseOver" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.MouseOver" class="form-control" />
             <span asp-validation-for="@Model.SuObject.MouseOver" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Sequence" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.Sequence" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10 ">
 
             @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.ContentTypeId" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.ContentTypeId" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
         <div class="col-sm-10 ">
 
             @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
@@ -72,7 +72,7 @@
 
         </div>
     </div>    <div class="form-group row">
-        <label asp-for="@Model.SuObject.Type" class="col-sm-2 col-form-label"></label>
+                  <label asp-for="@Model.SuObject.Type" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
         <div class="col-sm-10 ">
 
             @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
@@ -83,28 +83,28 @@
     </div>
 
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.ShowSectionTitle" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.ShowSectionTitle" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ShowSectionTitle" class="form-check" />
             <span asp-validation-for="@Model.SuObject.ShowSectionTitle" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.ShowSectionDescription" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.ShowSectionDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ShowSectionDescription" class="form-check" />
             <span asp-validation-for="@Model.SuObject.ShowSectionDescription" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.ShowContentTypeTitle" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.ShowContentTypeTitle" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ShowContentTypeTitle" class="form-check" />
             <span asp-validation-for="@Model.SuObject.ShowContentTypeTitle" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.ShowContentTypeTitleDescription" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.SuObject.ShowContentTypeTitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.SuObject.ShowContentTypeTitleDescription" class="form-check" />
             <span asp-validation-for="@Model.SuObject.ShowContentTypeTitleDescription" class="text-danger"></span>
@@ -113,8 +113,8 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary btn-dark">Add</button>
-            <a asp-action="Index" asp-controller="PageSection" class="btn btn-primary btn-light">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[5]</button>
+            <a asp-action="Index" asp-controller="PageSection" class="btn btn-primary btn-light">@ViewBag.Terms[6]</a>
         </div>
     </div>
 </form>

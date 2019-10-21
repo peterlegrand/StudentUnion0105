@@ -43,8 +43,8 @@ namespace StudentUnion0105.Controllers
                 {
                     Id = l.ProcessTemplateGroupId
                              ,
-                    Name = l.ProcessTemplateGroupName,
-                    Description = l.ProcessTemplateGroupDescription
+                    Name = l.Name,
+                    Description = l.Description
                 }).ToList();
             return View(ProcessTemplateGroups);
         }
@@ -71,9 +71,9 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel();
 
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupName = FromForm.Name;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = FromForm.Description;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver = FromForm.MouseOver;
+                ProcessTemplateGroupLanguage.Name = FromForm.Name;
+                ProcessTemplateGroupLanguage.Description = FromForm.Description;
+                ProcessTemplateGroupLanguage.MouseOver = FromForm.MouseOver;
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupId = NewProcessTemplateGroup.Id;
                 ProcessTemplateGroupLanguage.LanguageId = DefaultLanguageID;
                 _ProcessTemplateGroupLanguage.AddProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
@@ -98,13 +98,13 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = s.Id
                             ,
-                             Name = t.ProcessTemplateGroupName
+                             Name = t.Name
                             ,
                              ObjectLanguageId = t.Id
                             ,
-                             Description = t.ProcessTemplateGroupDescription
+                             Description = t.Description
                             ,
-                             MouseOver = t.ProcessTemplateGroupMouseOver
+                             MouseOver = t.MouseOver
                          }).First();
 
             return View(ToForm);
@@ -126,9 +126,9 @@ namespace StudentUnion0105.Controllers
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.GetProcessTemplateGroupLanguage(test3.ObjectLanguageId);
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupName = test3.Name;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = test3.Description;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver = test3.MouseOver;
+                ProcessTemplateGroupLanguage.Name = test3.Name;
+                ProcessTemplateGroupLanguage.Description = test3.Description;
+                ProcessTemplateGroupLanguage.MouseOver = test3.MouseOver;
                 ProcessTemplateGroupLanguage.ModifiedDate = DateTime.Now;
                 ProcessTemplateGroupLanguage.ModifierId = new Guid(CurrentUser.Id);
                 _ProcessTemplateGroupLanguage.UpdateProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
@@ -152,13 +152,13 @@ namespace StudentUnion0105.Controllers
                                    {
                                        Id = c.Id
                                    ,
-                                       Name = c.ProcessTemplateGroupName
+                                       Name = c.Name
                                    ,
                                        Language = l.LanguageName
                                    ,
-                                       Description = c.ProcessTemplateGroupDescription
+                                       Description = c.Description
                                    ,
-                                       MouseOver = c.ProcessTemplateGroupMouseOver
+                                       MouseOver = c.MouseOver
                                    ,
                                        ObjectId = c.ProcessTemplateGroupId
                                    }).ToList();
@@ -208,9 +208,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel();
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupName = test3.SuObject.Name;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = test3.SuObject.Description;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver = test3.SuObject.MouseOver;
+                ProcessTemplateGroupLanguage.Name = test3.SuObject.Name;
+                ProcessTemplateGroupLanguage.Description = test3.SuObject.Description;
+                ProcessTemplateGroupLanguage.MouseOver = test3.SuObject.MouseOver;
                 ProcessTemplateGroupLanguage.ProcessTemplateGroupId = test3.SuObject.ObjectId;
                 ProcessTemplateGroupLanguage.LanguageId = test3.SuObject.LanguageId;
 
@@ -235,11 +235,11 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = c.Id
                             ,
-                             Name = c.ProcessTemplateGroupName
+                             Name = c.Name
                             ,
-                             Description = c.ProcessTemplateGroupDescription
+                             Description = c.Description
                             ,
-                             MouseOver = c.ProcessTemplateGroupMouseOver
+                             MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
                             ,
@@ -262,9 +262,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.GetProcessTemplateGroupLanguage(test3.Id);
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupName = test3.Name;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription = test3.Description;
-                ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver = test3.MouseOver;
+                ProcessTemplateGroupLanguage.Name = test3.Name;
+                ProcessTemplateGroupLanguage.Description = test3.Description;
+                ProcessTemplateGroupLanguage.MouseOver = test3.MouseOver;
                 _ProcessTemplateGroupLanguage.UpdateProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
 
 
@@ -282,9 +282,9 @@ namespace StudentUnion0105.Controllers
             var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.DeleteProcessTemplateGroupLanguage(Id);
             var a = new SuObjectVM();
             a.Id = ProcessTemplateGroupLanguage.Id;
-            a.Name = ProcessTemplateGroupLanguage.ProcessTemplateGroupName;
-            a.Description = ProcessTemplateGroupLanguage.ProcessTemplateGroupDescription;
-            a.MouseOver = ProcessTemplateGroupLanguage.ProcessTemplateGroupMouseOver;
+            a.Name = ProcessTemplateGroupLanguage.Name;
+            a.Description = ProcessTemplateGroupLanguage.Description;
+            a.MouseOver = ProcessTemplateGroupLanguage.MouseOver;
             a.LanguageId = ProcessTemplateGroupLanguage.LanguageId;
             a.ObjectId = ProcessTemplateGroupLanguage.ProcessTemplateGroupId;
             return View(a);

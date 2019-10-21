@@ -16,6 +16,9 @@ namespace StudentUnion0105.Models
         public string Name { get; set; }
         [Display(Name = "Page section type description")]
         public string Description { get; set; }
+        [Display(Name = "Page section type menu name")]
+        [MaxLength(50)]
+        public string MenuName { get; set; }
         [Display(Name = "Page section type mouse over")]
         [MaxLength(50)]
         public string MouseOver { get; set; }

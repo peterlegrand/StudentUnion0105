@@ -101,7 +101,7 @@ namespace StudentUnion0105.Controllers
             {
                 StatusList.Add(new SelectListItem
                 {
-                    Text = StatusFromDb.PageStatusName,
+                    Text = StatusFromDb.Name,
                     Value = StatusFromDb.Id.ToString()
                 });
             }
@@ -157,7 +157,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.PageTitle = FromForm.SuObject.PageName;
+                PageLanguage.Title = FromForm.SuObject.MouseOver;
                 PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = NewPage.Id;
                 PageLanguage.LanguageId = DefaultLanguageID;
@@ -194,8 +194,8 @@ namespace StudentUnion0105.Controllers
                                    MouseOver = t.MouseOver
                                    ,
                                    PageDescription = t.PageDescription
-                                   ,
-                                   PageName = t.PageTitle
+//                                   ,
+//                                   MouseOver = t.Title
                                }).First();
 
             var PageList = new List<SelectListItem>();
@@ -204,7 +204,7 @@ namespace StudentUnion0105.Controllers
             {
                 PageList.Add(new SelectListItem
                 {
-                    Text = PageFromDb.PageStatusName,
+                    Text = PageFromDb.Name,
                     Value = PageFromDb.Id.ToString()
                 });
             }
@@ -256,7 +256,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.PageTitle = FromForm.SuObject.PageName;
+                PageLanguage.Title = FromForm.SuObject.MouseOver;
                 PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
                 PageLanguage.ModifierId = new Guid(CurrentUser.Id);
@@ -289,7 +289,7 @@ namespace StudentUnion0105.Controllers
                                    ,
                                        MouseOver = c.MouseOver
 ,
-                                       Title = c.PageTitle
+                                       Title = c.Title
 ,
                                        Description2 = c.PageDescription
                                    ,
@@ -344,7 +344,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.PageTitle = FromForm.SuObject.PageName;
+                PageLanguage.Title = FromForm.SuObject.MouseOver;
                 PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = FromForm.SuObject.ObjectId;
                 PageLanguage.LanguageId = FromForm.SuObject.LanguageId;
@@ -378,8 +378,8 @@ namespace StudentUnion0105.Controllers
                             ,
                              Language = l.LanguageName
 ,
-                             PageName = c.PageTitle
-,
+//                             MouseOver = c.Title
+//,
                              PageDescription = c.PageDescription
                             ,
                              ObjectId = c.PageId
@@ -403,7 +403,7 @@ namespace StudentUnion0105.Controllers
                 var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.Id);
                 PageLanguage.Name = FromForm.Name;
                 PageLanguage.Description = FromForm.Description;
-                PageLanguage.PageTitle = FromForm.PageName;
+                PageLanguage.Title = FromForm.MouseOver;
                 PageLanguage.PageDescription = FromForm.PageDescription;
                 PageLanguage.MouseOver = FromForm.MouseOver;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);

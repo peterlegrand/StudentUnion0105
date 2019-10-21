@@ -69,8 +69,8 @@ namespace StudentUnion0105.Controllers
             {
                 List<SuValueList> ValuesFromDb = new List<SuValueList>();
                 // dbValueList[y] = new DbSet<SuValueList>();
-                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 1, ClassificationValueName = "a" });
-                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 2, ClassificationValueName = "b" });
+                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 1, Name = "a" });
+                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 2, Name = "b" });
                 //                _context.dbValueList[0] = new DbSet<SuValueList>;
                 ValuesFromDb = _context.dbValueList.FromSql($"ClassificationValueStructureValues  {DefaultLanguageID}, {ClassificationfromDb.Id}").ToList();
                 ClassificationValueSets[y] = new List<SelectListItem>();
@@ -86,7 +86,7 @@ namespace StudentUnion0105.Controllers
                     ClassificationValueSets[y].Add(new SelectListItem
 
                     {
-                        Text = ValueFromDb.ClassificationValueName,
+                        Text = ValueFromDb.Name,
                         Value = ValueFromDb.ClassificationValueId.ToString()
                     });
                 }

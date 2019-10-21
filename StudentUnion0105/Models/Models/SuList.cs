@@ -32,6 +32,6 @@ namespace StudentUnion0105.Models
     {
         [Key]
         public int ClassificationValueId { get; set; }
-        public string ClassificationValueName { get; set; }
+        public string Name { get; set; }
     }
 }

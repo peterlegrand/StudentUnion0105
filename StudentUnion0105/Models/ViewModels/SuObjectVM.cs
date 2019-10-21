@@ -41,7 +41,6 @@ namespace StudentUnion0105.ViewModels
         public string Description2 { get; set; }
 
         public string DropDownName { get; set; }
-        public string PageName { get; set; }
         public string PageDescription { get; set; }
         public string HeaderName { get; set; }
         public string HeaderDescription { get; set; }

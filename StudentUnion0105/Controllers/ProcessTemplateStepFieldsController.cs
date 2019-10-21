@@ -50,8 +50,8 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = sf.Id
                          ,
-                             Name = f.ProcessTemplateFieldName
-                             , Description = s.ProcessTemplateStepName
+                             Name = f.Name
+                             , Description = s.Name
 
                          ,
                              ObjectId = s.StepId

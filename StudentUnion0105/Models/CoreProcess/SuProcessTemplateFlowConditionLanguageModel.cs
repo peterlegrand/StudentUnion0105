@@ -17,8 +17,11 @@ namespace StudentUnion0105.Models
         [Display(Name = "Mouse over")]
         [MaxLength(50)]
         public string MouseOver { get; set; }
-        public Guid? CreatorId { get; set; }
-        public Guid? ModifierId { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Menu name")]
+        public string MenuName { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         [ForeignKey("FlowConditionId")]

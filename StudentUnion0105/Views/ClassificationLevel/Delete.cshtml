@@ -1,0 +1,96 @@
+﻿@model SuObject
+@{
+//ViewBag.Title = ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+
+        <div class="form-group row">
+            <label asp-for="@Model.Id" class="col-sm-2 col-form-label">ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Id" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.LanguageId" hidden class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.LanguageId" hidden class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Name" class="col-sm-2 col-form-label">ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Description" class="col-sm-2 col-form-label">ViewBag.Terms[4]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.Description" class="form-control ckeditor" id="descriptionx" name="SuObject.Description"></textarea>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Status" class="col-sm-2 col-form-label">ViewBag.Terms[6]</label>
+            <div class="col-sm-10 ">
+                <input asp-for="@Model.MouseOver" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Bool1" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Bool1" class="form-check" />
+                <span asp-validation-for="@Model.Bool1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Creator" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Creator" class="form-check" />
+                <span asp-validation-for="@Model.Creator" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Modifier" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Modifier" class="form-check" />
+                <span asp-validation-for="@Model.Modifier" class="text-danger"></span>
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">ViewBag.Terms[8]</button>
+                <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">ViewBag.Terms[9]</a>
+            </div>
+        </div>
+    </form>
+<script>
+    $(document).ready(function () {
+        if (CKEDITOR.instances['descriptionx']) {
+            CKEDITOR.instances['descriptionx'].destroy();
+        }
+        CKEDITOR.replace('descriptionx', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['descriptionx'].getData()
+            console.log(ckValue);
+        });
+    });
+</script>

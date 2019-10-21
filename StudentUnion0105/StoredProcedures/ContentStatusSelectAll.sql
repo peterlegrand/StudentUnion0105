@@ -2,6 +2,6 @@ CREATE PROCEDURE [dbo].[ContentStatusSelectAll]
 AS  
 SELECT  
 dbContentStatus.Id 
-, ISNULL(dbContentStatus.ContentStatusName,'') Name 
+, ISNULL(dbContentStatus.Name,'') Name 
 FROM dbContentStatus 
-ORDER BY dbContentStatus.ContentStatusName
+ORDER BY dbContentStatus.Name

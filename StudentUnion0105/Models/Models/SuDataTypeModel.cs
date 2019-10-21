@@ -7,9 +7,9 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         [Display(Name = "Data type name")]
         [MaxLength(50)]
-        public string DataTypeName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Data type description")]
-        public string DataTypeDescription { get; set; }
+        public string Description { get; set; }
 
     }
 }

@@ -7,7 +7,7 @@ namespace StudentUnion0105.SPModel
         public int ParentId { get; set; }
         public int Id { get; set; }
         public int ClassificationId { get; set; }
-        public string ClassificationValueName { get; set; }
+        public string Name { get; set; }
         public int Level { get; set; }
         [Key]
         public string Path { get; set; }

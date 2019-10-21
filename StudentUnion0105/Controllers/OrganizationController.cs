@@ -136,7 +136,7 @@ namespace StudentUnion0105.Controllers
             {
                 StatusList.Add(new SelectListItem
                 {
-                    Text = StatusFromDb.OrganizationStatusName,
+                    Text = StatusFromDb.Name,
                     Value = StatusFromDb.Id.ToString()
                 });
             }
@@ -234,7 +234,7 @@ namespace StudentUnion0105.Controllers
             {
                 OrganizationList.Add(new SelectListItem
                 {
-                    Text = OrganizationFromDb.OrganizationStatusName,
+                    Text = OrganizationFromDb.Name,
                     Value = OrganizationFromDb.Id.ToString()
                 });
             }

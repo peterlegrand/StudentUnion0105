@@ -2,9 +2,9 @@
 CREATE PROCEDURE [dbo].[ProcessTemplateStepCreate]
 	(@ProcessTemplateId int
 	, @LanguageId int
-	, @ProcessTemplateStepName nvarchar(max)
-	, @ProcessTemplateStepDescription nvarchar(max)
-	, @ProcessTemplateStepMouseOver nvarchar(max)
+	, @Name nvarchar(max)
+	, @Description nvarchar(max)
+	, @MouseOver nvarchar(max)
 	)
 AS
 BEGIN TRANSACTION 
@@ -18,18 +18,18 @@ BEGIN TRANSACTION
 	INSERT dbProcessTemplateStepLanguage (
 		StepId
 		, LanguageId
-		, ProcessTemplateStepName
-		, ProcessTemplateStepDescription
-		, ProcessTemplateStepMouseOver
+		, Name
+		, Description
+		, MouseOver
 		, CreatedDate
 		, ModifiedDate
 		)
 	VALUES (
 		@NewProcessTemplateStepId
 		, @LanguageId
-		, @ProcessTemplateStepName
-		, @ProcessTemplateStepDescription
-		, @ProcessTemplateStepMouseOver
+		, @Name
+		, @Description
+		, @MouseOver
 		, getdate()
 		, getdate()
 	) 

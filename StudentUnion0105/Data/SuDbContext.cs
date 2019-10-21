@@ -96,6 +96,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuGetProjectStructure> dbGetProjectStructure { get; set; }
         public DbSet<SuPageSectionsViewModel> dbPageSectionsViewModel { get; set; }
         public DbSet<SuObjectVM> dbObjectVM { get; set; }
+        public DbSet<SuObject> dbObject { get; set; }
         public DbSet<SuIdWithStrings> dbIdWithStrings { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
@@ -209,24 +210,24 @@ namespace StudentUnion0105.Data
             //    );
 
             //modelBuilder.Entity<SuClassificationStatusModel>().HasData(
-            //    new SuClassificationStatusModel { Id = 1, ClassificationStatusName = "Active" },
-            //    new SuClassificationStatusModel { Id = 2, ClassificationStatusName = "Inactive" }
+            //    new SuClassificationStatusModel { Id = 1, Name = "Active" },
+            //    new SuClassificationStatusModel { Id = 2, Name = "Inactive" }
             //    );
             //modelBuilder.Entity<SuOrganizationStatusModel>().HasData(
-            //    new SuOrganizationStatusModel { Id = 1, OrganizationStatusName = "Active" },
-            //    new SuOrganizationStatusModel { Id = 2, OrganizationStatusName = "Inactive" }
+            //    new SuOrganizationStatusModel { Id = 1, Name = "Active" },
+            //    new SuOrganizationStatusModel { Id = 2, Name = "Inactive" }
             //    );
             //modelBuilder.Entity<SuProjectStatusModel>().HasData(
-            //    new SuProjectStatusModel { Id = 1, ProjectStatusName = "Active" },
-            //    new SuProjectStatusModel { Id = 2, ProjectStatusName = "Inactive" }
+            //    new SuProjectStatusModel { Id = 1, Name = "Active" },
+            //    new SuProjectStatusModel { Id = 2, Name = "Inactive" }
             //    );
             //modelBuilder.Entity<SuPageStatusModel>().HasData(
-            //    new SuPageStatusModel { Id = 1, PageStatusName = "Active" },
-            //    new SuPageStatusModel { Id = 2, PageStatusName = "Inactive" }
+            //    new SuPageStatusModel { Id = 1, Name = "Active" },
+            //    new SuPageStatusModel { Id = 2, Name = "Inactive" }
             //    );
             //modelBuilder.Entity<SuContentStatusModel>().HasData(
-            //    new SuContentStatusModel { Id = 1, ContentStatusName = "Active" },
-            //    new SuContentStatusModel { Id = 2, ContentStatusName = "Inactive" }
+            //    new SuContentStatusModel { Id = 1, Name = "Active" },
+            //    new SuContentStatusModel { Id = 2, Name = "Inactive" }
             //    );
 
             //modelBuilder.Entity<SuUser>().HasData(new SuUser

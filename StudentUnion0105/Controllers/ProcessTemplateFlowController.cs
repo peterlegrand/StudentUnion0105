@@ -108,12 +108,12 @@ namespace StudentUnion0105.Controllers
                                              on s.Id equals l.StepId
                                                    where l.LanguageId == DefaultLanguageID
                                                    && s.ProcessTemplateId == Flow.Id
-                                                   orderby l.ProcessTemplateStepName
+                                                   orderby l.Name
                                                    select new SelectListItem
                                                    {
                                                        Value = s.Id.ToString()
                                                    ,
-                                                       Text = l.ProcessTemplateStepName
+                                                       Text = l.Name
                                                    }).ToList();
 
 
@@ -167,12 +167,12 @@ namespace StudentUnion0105.Controllers
                                              on s.Id equals l.StepId
                                              where l.LanguageId == DefaultLanguageID
                                              && s.ProcessTemplateId ==Id
-                                             orderby l.ProcessTemplateStepName
+                                             orderby l.Name
                                              select new SelectListItem
                                              {
                                                  Value = s.Id.ToString()
                                              ,
-                                                 Text = l.ProcessTemplateStepName
+                                                 Text = l.Name
                                              }).ToList();
 
 

@@ -9,9 +9,9 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         [Display(Name = "Condition type name")]
         [MaxLength(50)]
-        public string ConditionTypeName { get; set; }
-        public Guid? CreatorId { get; set; }
-        public Guid? ModifierId { get; set; }
+        public string Name { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual ICollection<SuProcessTemplateFlowConditionModel> ProcessTemplateFlowConditions { get; set; }

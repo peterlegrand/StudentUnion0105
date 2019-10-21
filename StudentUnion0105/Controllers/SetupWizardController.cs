@@ -88,12 +88,18 @@ namespace StudentUnion0105.Controllers
             await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Type"));
 
             string[] StoredProcedures;
-            StoredProcedures = new string[]{ "ClassificationAndLanguageUpdate.sql"
+            StoredProcedures = new string[]{ 
+                "ClassificationAndLanguageUpdate.sql"
+                , "ClassificationDelete.sql"
+, "ClassificationIndexSelect.sql"
+, "ClassificationLevelDeleteSelect.sql"
+, "ClassificationSelectOne.sql"
                                             , "ClassificationValueStructure.sql"
                                             , "ClassificationValueStructureValues.sql"
             , "ContentCreate.sql"
             , "ContentInsert.sql"
             , "ContentStatusSelectAll.sql"
+            , "ContentTypeIndexSelect.sql"
             , "ContentTypeSelectAllForLanguage.sql"
             , "ContentUpdate.sql"
             , "ContentValueCreate.sql"
@@ -104,6 +110,8 @@ namespace StudentUnion0105.Controllers
             , "GetProcessTemplateFlowConditionType.sql"
             , "GetProcessTemplateGroup.sql"
             , "LanguageSelectAll.sql"
+            , "OrganizationIndexSelect.sql"
+            , "OrganizationTypeIndexSelect.sql"
             , "OrgStructure.sql"
             , "PageSectionUpdate.sql"
             , "ProcessTemplateFieldCreate.sql"
@@ -150,7 +158,7 @@ namespace StudentUnion0105.Controllers
             }
 
             string[] MasterDataScripts;
-            MasterDataScripts = new string[]{ "MasterData.sql"
+            MasterDataScripts = new string[]{ "MasterData.sql", "UIScreens.sql","UITerms.sql", "UITermScreen.sql"
 };
 
             foreach (string MasterDataScript in MasterDataScripts)
@@ -166,7 +174,24 @@ namespace StudentUnion0105.Controllers
         public IActionResult DemoData()
         {
             string[] StoredProcedures;
-            StoredProcedures = new string[]{ "DemoData.sql", "DemoDutch.sql"};
+            StoredProcedures = new string[] { "DemoData.sql" };
+
+            foreach (string StoredProcedure in StoredProcedures)
+            {
+                using (StreamReader sr = new StreamReader("DemoDataScripts\\" + StoredProcedure, System.Text.Encoding.UTF8))
+                {
+                    string line = sr.ReadToEnd();
+                    _context.Database.ExecuteSqlCommand(line);
+                }
+            }
+
+
+            return View();
+        }
+        public IActionResult DemoDataNL()
+        {
+            string[] StoredProcedures;
+            StoredProcedures = new string[] { "DemoDutch.sql" };
 
             foreach (string StoredProcedure in StoredProcedures)
             {

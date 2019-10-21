@@ -11,16 +11,16 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         [Display(Name = "Classification level name")]
         [MaxLength(50)]
-        public string ClassificationLevelName { get; set; }
+        public string Name { get; set; }
+        [Display(Name = "Classification level menu name")]
+        public string Description { get; set; }
         [Display(Name = "Classification level menu name")]
         [MaxLength(50)]
-        public string ClassificationLevelMenuName { get; set; }
-        [Display(Name = "Classification level menu name")]
-        public string ClassificationLevelDescription { get; set; }
+        public string MenuName { get; set; }
 
         [Display(Name = "Classification level mouse over")]
         [MaxLength(50)]
-        public string ClassificationLevelMouseOver { get; set; }
+        public string MouseOver { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

@@ -60,8 +60,8 @@ namespace StudentUnion0105.Controllers
                                        {
                                            Id = sf.Id
                                        ,
-                                           Name = s.ProcessTemplateStepName,
-                                           Description= f.ProcessTemplateFieldName
+                                           Name = s.Name,
+                                           Description= f.Name
 
                                        ,
                                            ObjectId =sf.StepId
@@ -91,9 +91,9 @@ namespace StudentUnion0105.Controllers
                                    Status = sf.StatusId
                                    , Sequence = sf.Sequence
                                    , 
-                                   Name = s.ProcessTemplateStepName
+                                   Name = s.Name
                                    ,
-                                   Description = f.ProcessTemplateFieldName
+                                   Description = f.Name
                                    , NotNullId = s.Id
                                    , NotNullId2 = f.ProcessTemplateFieldId
                                }).First();
@@ -109,7 +109,7 @@ namespace StudentUnion0105.Controllers
                                                    {
                                                        Value = sf.Sequence.ToString()
                                                    ,
-                                                       Text = f.ProcessTemplateFieldName
+                                                       Text = f.Name
                                                    }).ToList();
 
             int MaxFields;
@@ -133,7 +133,7 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = s.Id
                             ,
-                             Name = s.StatusName
+                             Name = s.Name
                          }).ToList();
 
             var StatusList = new List<SelectListItem>();

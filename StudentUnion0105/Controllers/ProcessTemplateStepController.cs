@@ -63,12 +63,12 @@ namespace StudentUnion0105.Controllers
                       on c.Id equals l.StepId
                                where c.ProcessTemplateId== Id
                                && l.LanguageId == DefaultLanguageID
-                               orderby l.ProcessTemplateStepName
+                               orderby l.Name
                                select new SuObjectVM
                                {
                                    Id = c.Id
                                ,
-                                   Name = l.ProcessTemplateStepName
+                                   Name = l.Name
                                ,
                                    ObjectId = c.ProcessTemplateId
                                }).ToList();
@@ -88,7 +88,7 @@ namespace StudentUnion0105.Controllers
                                         join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                         on c.Id equals l.StepId
                                         where c.Id == Id && l.LanguageId == DefaultLanguageID
-                                        orderby l.ProcessTemplateStepName
+                                        orderby l.Name
                                         select new SuObjectVM
                                         {
                                             Id = c.ProcessTemplateId
@@ -99,11 +99,11 @@ namespace StudentUnion0105.Controllers
                                             ,
                                             ObjectLanguageId = l.Id
                                             ,
-                                            Name = l.ProcessTemplateStepName
+                                            Name = l.Name
                                             ,
-                                            Description = l.ProcessTemplateStepDescription
+                                            Description = l.Description
                                             ,
-                                            MouseOver = l.ProcessTemplateStepMouseOver
+                                            MouseOver = l.MouseOver
                                         }).First();
 
             //DataTypes
@@ -264,11 +264,11 @@ namespace StudentUnion0105.Controllers
                                           {
                                               Id = c.Id
                                           ,
-                                              Name = c.ProcessTemplateStepName
+                                              Name = c.Name
                                           ,
                                               Language = l.LanguageName
                                           ,
-                                              MouseOver = c.ProcessTemplateStepMouseOver
+                                              MouseOver = c.MouseOver
                                           ,
                                               ObjectId = c.StepId
                                           }).ToList();
@@ -288,11 +288,11 @@ namespace StudentUnion0105.Controllers
                          {
                              Id = c.Id
                             ,
-                             Name = c.ProcessTemplateStepName
+                             Name = c.Name
                             ,
-                             Description = c.ProcessTemplateStepDescription
+                             Description = c.Description
                             ,
-                             MouseOver = c.ProcessTemplateStepMouseOver
+                             MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
                             ,
@@ -316,10 +316,10 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateStepLanguage = _processTemplateStepLanguage.GetProcessTemplateStepLanguage(FromForm.SuObject.Id);
-                ProcessTemplateStepLanguage.ProcessTemplateStepName = FromForm.SuObject.Name;
-                ProcessTemplateStepLanguage.ProcessTemplateStepDescription = FromForm.SuObject.Description;
+                ProcessTemplateStepLanguage.Name = FromForm.SuObject.Name;
+                ProcessTemplateStepLanguage.Description = FromForm.SuObject.Description;
 
-                ProcessTemplateStepLanguage.ProcessTemplateStepMouseOver = FromForm.SuObject.MouseOver;
+                ProcessTemplateStepLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 _processTemplateStepLanguage.UpdateProcessTemplateStepLanguage(ProcessTemplateStepLanguage);
 
 
@@ -373,9 +373,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var ProcessTemplateStepLanguage = new SuProcessTemplateStepLanguageModel();
-                ProcessTemplateStepLanguage.ProcessTemplateStepName = test3.SuObject.Name;
-                ProcessTemplateStepLanguage.ProcessTemplateStepDescription = test3.SuObject.Description;
-                ProcessTemplateStepLanguage.ProcessTemplateStepMouseOver = test3.SuObject.MouseOver;
+                ProcessTemplateStepLanguage.Name = test3.SuObject.Name;
+                ProcessTemplateStepLanguage.Description = test3.SuObject.Description;
+                ProcessTemplateStepLanguage.MouseOver = test3.SuObject.MouseOver;
                 ProcessTemplateStepLanguage.StepId = test3.SuObject.ObjectId;
                 ProcessTemplateStepLanguage.LanguageId = test3.SuObject.LanguageId;
 

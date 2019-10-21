@@ -7,7 +7,7 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         [Display(Name = "Name")]
-        public string ProjectStatusName { get; set; }
+        public string Name { get; set; }
 
         public virtual ICollection<SuProjectModel> Projects { get; set; }
 

@@ -111,6 +111,7 @@ namespace StudentUnion0105
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
 
             services.AddTransient<IObjectVMRepository, SQLObjectVMRepository>();
+            services.AddTransient<IObjectRepository, SQLObjectRepository>();
             services.AddTransient<IIdWithStringsRepository, SQLIdWithStringsRepository>();
 
             services.AddTransient<IUIScreenRepository, SQLUIScreenRepository>();

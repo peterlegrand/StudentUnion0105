@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a8e9cd2b-caa8-4887-9b06-e66e5939fe56",
-                            ConcurrencyStamp = "9c416bc1-8eb0-40d6-8cc4-ec063cc5dba7",
+                            Id = "47d659e9-e7f6-41fb-9cc6-d34a3955b387",
+                            ConcurrencyStamp = "63704595-21b9-41fc-b954-bf7d07b0b73a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bd8316ea-7da8-412a-9508-7155e203be69",
-                            ConcurrencyStamp = "3f1cf129-fca3-4335-bb58-2d94020ed112",
+                            Id = "fca0c82b-5f23-48d6-ae75-1909d77543a9",
+                            ConcurrencyStamp = "2a411aa2-e3ed-4819-81e6-06b068f4dc6a",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -168,28 +168,28 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationDescription");
-
                     b.Property<int>("ClassificationId");
-
-                    b.Property<string>("ClassificationMenuName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ClassificationMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ClassificationName")
-                        .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<Guid>("CreatorId");
 
+                    b.Property<string>("Description");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -206,28 +206,28 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationLevelDescription");
-
                     b.Property<int>("ClassificationLevelId");
-
-                    b.Property<string>("ClassificationLevelMenuName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ClassificationLevelMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ClassificationLevelName")
-                        .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<Guid>("CreatorId");
 
+                    b.Property<string>("Description");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -308,7 +308,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationStatusName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -322,37 +322,39 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationValueDescription");
-
-                    b.Property<string>("ClassificationValueDropDownName");
-
-                    b.Property<string>("ClassificationValueHeaderDescription");
-
-                    b.Property<string>("ClassificationValueHeaderName");
-
                     b.Property<int>("ClassificationValueId");
-
-                    b.Property<string>("ClassificationValueMenuName");
-
-                    b.Property<string>("ClassificationValueMouseOver");
-
-                    b.Property<string>("ClassificationValueName");
-
-                    b.Property<string>("ClassificationValuePageDescription");
-
-                    b.Property<string>("ClassificationValuePageName");
-
-                    b.Property<string>("ClassificationValueTopicName");
 
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<Guid>("CreatorId");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("DropDownName");
+
+                    b.Property<string>("HeaderDescription");
+
+                    b.Property<string>("HeaderName");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PageDescription");
+
+                    b.Property<string>("PageName");
+
+                    b.Property<string>("TopicName");
 
                     b.HasKey("Id");
 
@@ -469,7 +471,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ContentStatusName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -492,6 +494,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -550,9 +555,6 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CountryName")
-                        .IsRequired();
-
                     b.Property<string>("ForeignName");
 
                     b.Property<string>("ISO31662");
@@ -560,6 +562,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("ISO31663");
 
                     b.Property<int>("ISO3166Num");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<string>("Region");
 
@@ -574,9 +579,9 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DataTypeDescription");
+                    b.Property<string>("Description");
 
-                    b.Property<string>("DataTypeName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -626,15 +631,56 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("MasterListDescription");
+                    b.Property<string>("Description");
 
-                    b.Property<string>("MasterListName");
+                    b.Property<string>("Name");
 
                     b.Property<int>("Sequence");
 
                     b.HasKey("Id");
 
                     b.ToTable("dbMasterList");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuObject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Bool1");
+
+                    b.Property<bool>("Bool2");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Int1");
+
+                    b.Property<int>("Int2");
+
+                    b.Property<int?>("IntNull1");
+
+                    b.Property<int?>("IntNull2");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("ParentId");
+
+                    b.Property<string>("Status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbObject");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationLanguageModel", b =>
@@ -650,6 +696,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -709,7 +758,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("OrganizationStatusName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -730,6 +779,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -785,6 +837,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
@@ -799,7 +854,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("PageId");
 
-                    b.Property<string>("PageTitle")
+                    b.Property<string>("Title")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -848,26 +903,29 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("CreatorId");
 
+                    b.Property<string>("Description");
+
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
 
-                    b.Property<string>("PageSectionDescription");
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.Property<int>("PageSectionId");
 
-                    b.Property<string>("PageSectionMouseOver")
+                    b.Property<string>("Title")
                         .HasMaxLength(50);
 
-                    b.Property<string>("PageSectionName")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PageSectionTitle")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PageSectionTitleDescription");
+                    b.Property<string>("TitleDescription");
 
                     b.HasKey("Id");
 
@@ -935,6 +993,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<Guid>("ModifierId");
@@ -987,6 +1048,8 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int?>("ContentTypeId");
 
+                    b.Property<string>("Description");
+
                     b.Property<bool>("HasPaging");
 
                     b.Property<bool>("IndexSection");
@@ -997,11 +1060,6 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("PageId");
 
-                    b.Property<string>("PageSectionDescription");
-
-                    b.Property<string>("PageSectionTitle")
-                        .HasMaxLength(50);
-
                     b.Property<bool>("ShowContentTypeDescription");
 
                     b.Property<bool>("ShowContentTypeTitle");
@@ -1011,6 +1069,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<bool>("ShowSectionTitleDescription");
 
                     b.Property<int>("SortById");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -1023,7 +1084,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("PageStatusName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -1044,6 +1105,9 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("ModifiedDate");
 
@@ -1093,23 +1157,26 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
-                    b.Property<string>("ProcessTemplateFieldDescription");
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.Property<int>("ProcessTemplateFieldId");
-
-                    b.Property<string>("ProcessTemplateFieldMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ProcessTemplateFieldName")
-                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -1151,7 +1218,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1159,9 +1226,12 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1205,7 +1275,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1213,9 +1283,12 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1270,16 +1343,16 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ConditionTypeName")
-                        .HasMaxLength(50);
-
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -1294,7 +1367,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1302,9 +1375,12 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1351,23 +1427,26 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
-                    b.Property<string>("ProcessTemplateGroupDescription");
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.Property<int>("ProcessTemplateGroupId");
-
-                    b.Property<string>("ProcessTemplateGroupMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ProcessTemplateGroupName")
-                        .HasMaxLength(50);
 
                     b.Property<int?>("SuProcessTemplateGroupModelId");
 
@@ -1407,26 +1486,29 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(50);
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
-                    b.Property<string>("ProcessTemplateDescription")
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.Property<int?>("ProcessTemplateGroupId");
 
                     b.Property<int>("ProcessTemplateId");
-
-                    b.Property<string>("ProcessTemplateMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("ProcessTemplateName")
-                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -1491,7 +1573,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("StatusName")
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
@@ -1507,20 +1589,23 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
 
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<Guid?>("ModifierId");
-
-                    b.Property<string>("ProcessTemplateStepDescription");
-
-                    b.Property<string>("ProcessTemplateStepMouseOver")
+                    b.Property<string>("MenuName")
                         .HasMaxLength(50);
 
-                    b.Property<string>("ProcessTemplateStepName")
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<Guid>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
                         .HasMaxLength(50);
 
                     b.Property<int>("StepId");
@@ -1557,15 +1642,18 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<string>("Description");
 
                     b.Property<int>("LanguageId");
 
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<Guid>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1615,7 +1703,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ProjectStatusName");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -2099,7 +2187,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationValueName");
+                    b.Property<string>("Name");
 
                     b.HasKey("ClassificationValueId");
 
@@ -2131,11 +2219,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ClassificationId");
 
-                    b.Property<string>("ClassificationValueName");
-
                     b.Property<int>("Id");
 
                     b.Property<int>("Level");
+
+                    b.Property<string>("Name");
 
                     b.Property<int>("ParentId");
 
@@ -2236,8 +2324,6 @@ namespace StudentUnion0105.Migrations
                     b.Property<bool>("OnTheFly");
 
                     b.Property<string>("PageDescription");
-
-                    b.Property<string>("PageName");
 
                     b.Property<int>("Sequence");
 

@@ -13,14 +13,17 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         [Display(Name = "Step name")]
         [MaxLength(50)]
-        public string ProcessTemplateStepName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Step description")]
-        public string ProcessTemplateStepDescription { get; set; }
+        public string Description { get; set; }
         [Display(Name = "Mouse over")]
         [MaxLength(50)]
-        public string ProcessTemplateStepMouseOver { get; set; }
-        public Guid? CreatorId { get; set; }
-        public Guid? ModifierId { get; set; }
+        public string MouseOver { get; set; }
+        [MaxLength(50)]
+        [Display(Name = "Menu name")]
+        public string MenuName { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         [ForeignKey("StepId")]

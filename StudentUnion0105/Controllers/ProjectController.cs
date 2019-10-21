@@ -90,7 +90,7 @@ namespace StudentUnion0105.Controllers
             {
                 ProjectList.Add(new SelectListItem
                 {
-                    Text = ProjectFromDb.ProjectStatusName,
+                    Text = ProjectFromDb.Name,
                     Value = ProjectFromDb.Id.ToString()
                 });
             }
@@ -167,7 +167,7 @@ namespace StudentUnion0105.Controllers
             {
                 ProjectList.Add(new SelectListItem
                 {
-                    Text = ProjectFromDb.ProjectStatusName,
+                    Text = ProjectFromDb.Name,
                     Value = ProjectFromDb.Id.ToString()
                 });
             }

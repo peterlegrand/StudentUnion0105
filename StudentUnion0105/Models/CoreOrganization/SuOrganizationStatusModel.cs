@@ -8,7 +8,7 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         [Display(Name = "Organization status name")]
         [MaxLength(50)]
-        public string OrganizationStatusName { get; set; }
+        public string Name { get; set; }
         public virtual ICollection<SuOrganizationModel> Organization { get; set; }
 
     }
