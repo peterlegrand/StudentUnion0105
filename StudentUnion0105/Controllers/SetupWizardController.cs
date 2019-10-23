@@ -103,6 +103,8 @@ namespace StudentUnion0105.Controllers
             , "ContentTypeSelectAllForLanguage.sql"
             , "ContentUpdate.sql"
             , "ContentValueCreate.sql"
+            , "ClassificationValueDeleteGet.sql"
+            , "ClassificationValueDeletePost.sql"
             , "CountrySelectAll.sql"
             , "DataTypeSelectAll.sql"
             , "GetMasterList.sql"
@@ -146,11 +148,20 @@ namespace StudentUnion0105.Controllers
             , "UserProjectSelectAll.sql"
             , "UserProjectSelectBasedOnUser.sql"
             , "UserProjectTypeSelectAll.sql"
+
+            , "ClassificationIndexGet.sql"
+            , "ClassificationLevelIndexGet.sql"
+            , "ContentTypeIndexGet.sql"
+            , "LanguageIndexGet.sql"
+            , "OrganizationIndexGet.sql"
+            , "OrganizationTypeIndexGet.sql"
+            , "PageSectionIndexGet.sql"
+            , "PageSectionTypeIndexGet.sql"
             };
 
             foreach (string StoredProcedure in StoredProcedures)
             {
-                using (StreamReader sr = new StreamReader("StoredProcedures\\" +StoredProcedure, System.Text.Encoding.UTF8))
+                using (StreamReader sr = new StreamReader("MasterDataScripts\\StoredProcedures\\" +StoredProcedure, System.Text.Encoding.UTF8))
                 {
                     string line = sr.ReadToEnd();
                     _context.Database.ExecuteSqlCommand(line);

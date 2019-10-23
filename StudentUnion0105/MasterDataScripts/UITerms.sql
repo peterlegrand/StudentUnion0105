@@ -194,5 +194,28 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(191, 'Content project', 'Con
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(192, 'Foreign name', 'Foreign name');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(193, 'ISO6391', 'ISO6391');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(194, 'ISO6392', 'ISO6392');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(195, 'Back to process fields', 'Back to process fields');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(196, 'Fields for step', 'Fields for step');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(197, 'Back to steps', 'Back to steps');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(198, 'Process template steps', 'Process template steps');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(199, 'Create new process template step', 'Create new process template step');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(200, 'Edit step', 'Edit step');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(201, 'Add step', 'Add step');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(202, 'Process template step languages', 'Process template step languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(203, 'Add new language', 'Add new language');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(204, 'Active', 'Active');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(205, 'Int', 'Int');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(206, 'String', 'String');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(207, 'Date', 'Date');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(208, 'Edit setting', 'Edit setting');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(209, 'Process template field type languages', 'Process template field type languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(210, 'Edit process template field type', 'Edit process template field type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(211, 'Delete process template field type', 'Delete process template field type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(212, 'Create process template field type', 'Create process template field type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(213, 'Back to process template field types', 'Back to process template field types');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(214, 'User organization type', 'User organization type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(215, 'User organization type languages', 'User organization type languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(216, 'Add user organization type language', 'Add user organization type language');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(217, 'Back to user organization types', 'Back to user organization types');
 
 SET IDENTITY_INSERT dbUITerm OFF;

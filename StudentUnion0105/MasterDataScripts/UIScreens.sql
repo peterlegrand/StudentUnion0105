@@ -178,5 +178,8 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1173, 'UserProject', 'Inde
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1174, 'UserProject', 'Create');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1175, 'ProcessTemplateFieldSteps', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1176, 'ProcessTemplateFieldSteps', 'LanguageCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1177, 'UserOrganizationType', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1178, 'UserOrganizationType', 'LanguageIndex');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1179, 'UserOrganizationType', 'LanguageEdit');
 
 SET IDENTITY_INSERT dbUIScreen OFF;
