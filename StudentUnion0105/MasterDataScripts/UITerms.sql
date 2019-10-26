@@ -219,5 +219,6 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(216, 'Add user organization 
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(217, 'Back to user organization types', 'Back to user organization types');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(218, 'CreatedDate', 'CreatedDate');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(219, 'ModifiedDate', 'ModifiedDate');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(220, 'Delete content type', 'Delete content type');
 
 SET IDENTITY_INSERT dbUITerm OFF;
