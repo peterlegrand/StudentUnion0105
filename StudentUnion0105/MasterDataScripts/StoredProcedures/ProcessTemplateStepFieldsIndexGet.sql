@@ -1,0 +1,11 @@
+CREATE PROCEDURE ProcessTemplateStepFieldsIndexGet (@LanguageId int)
+AS
+SELECT 
+	dbProcessTemplateStepFieldsLanguage.Id
+	, dbProcessTemplateStepFieldsLanguage.Name
+	, dbProcessTemplateStepFieldsLanguage.Description
+	, dbProcessTemplateStepFieldsLanguage.MouseOver
+	, dbProcessTemplateStepFieldsLanguage.MenuName
+FROM dbProcessTemplateStepFieldsLanguage
+WHERE dbProcessTemplateStepFieldsLanguage.LanguageId = @LanguageId
+ORDER BY dbProcessTemplateStepFieldsLanguage.Name

@@ -217,5 +217,7 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(214, 'User organization type
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(215, 'User organization type languages', 'User organization type languages');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(216, 'Add user organization type language', 'Add user organization type language');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(217, 'Back to user organization types', 'Back to user organization types');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(218, 'CreatedDate', 'CreatedDate');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(219, 'ModifiedDate', 'ModifiedDate');
 
 SET IDENTITY_INSERT dbUITerm OFF;

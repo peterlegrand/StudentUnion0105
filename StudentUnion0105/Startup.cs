@@ -90,6 +90,7 @@ namespace StudentUnion0105
             services.AddTransient<IProcessTemplateStepRepository, SQLProcessTemplateStepRepository>();
             services.AddTransient<IProjectStatusRepository, SQLProjectStatusRepository>();
             services.AddTransient<IContentRepository, SQLContentRepository>();
+            services.AddTransient<IContentTypeDeleteGetRepository, SQLContentTypeDeleteGetRepository>();
             services.AddTransient<IContentClassificationValueRepository, SQLContentClassificationValueRepository>();
             services.AddTransient<IContentStatusRepository, SQLContentStatusRepository>();
             services.AddTransient<IUserOrganizationRepository, SQLUserOrganizationRepository>();
@@ -109,6 +110,8 @@ namespace StudentUnion0105
             services.AddTransient<ISettingRepository, SQLSettingRepository>();
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
+
+            services.AddTransient<IObjectLanguageEditRepository, SQLObjectLanguageEditRepository>();
 
             services.AddTransient<IObjectVMRepository, SQLObjectVMRepository>();
             services.AddTransient<IObjectRepository, SQLObjectRepository>();

@@ -1,0 +1,11 @@
+CREATE PROCEDURE ProcessTemplateFlowConditionIndexGet (@LanguageId int)
+AS
+SELECT 
+	dbProcessTemplateFlowConditionLanguage.Id
+	, dbProcessTemplateFlowConditionLanguage.Name
+	, dbProcessTemplateFlowConditionLanguage.Description
+	, dbProcessTemplateFlowConditionLanguage.MouseOver
+	, dbProcessTemplateFlowConditionLanguage.MenuName
+FROM dbProcessTemplateFlowConditionLanguage
+WHERE dbProcessTemplateFlowConditionLanguage.LanguageId = @LanguageId
+ORDER BY dbProcessTemplateFlowConditionLanguage.Name

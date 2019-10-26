@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "47d659e9-e7f6-41fb-9cc6-d34a3955b387",
-                            ConcurrencyStamp = "63704595-21b9-41fc-b954-bf7d07b0b73a",
+                            Id = "ff02fc31-573b-4f0b-8586-042fc2df5a82",
+                            ConcurrencyStamp = "99457f21-edca-42e6-aadb-b3789143e437",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fca0c82b-5f23-48d6-ae75-1909d77543a9",
-                            ConcurrencyStamp = "2a411aa2-e3ed-4819-81e6-06b068f4dc6a",
+                            Id = "2ad10056-5422-4229-82de-f018b5c34217",
+                            ConcurrencyStamp = "a1491015-565b-4aa0-bc6a-30c7d87d5cb0",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });

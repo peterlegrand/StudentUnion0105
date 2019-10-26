@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -17,16 +20,20 @@ namespace StudentUnion0105.Controllers
         private readonly IContentTypeLanguageRepository _contentTypeLanguage;
         private readonly IContentTypeRepository _contentType;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public ContentTypeController(UserManager<SuUserModel> userManager
             , IContentTypeLanguageRepository ContentTypeLanguage
             , IContentTypeRepository contentType
-            , ILanguageRepository language)
+            , ILanguageRepository language
+                        , SuDbContext context
+)
         {
             this.userManager = userManager;
             _contentTypeLanguage = ContentTypeLanguage;
             _contentType = contentType;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -302,5 +309,29 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var Classification = _context.dbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet {Id}").First();
+
+            return View(Classification);
+        }
+        [HttpPost]
+        public IActionResult Delete(SuContentTypeDeleteGetModel FromForm)
+        {
+            var b = _context.Database.ExecuteSqlCommand($"ContentTypeDeletePost {FromForm.Id}");
+
+            return RedirectToAction("Index");
+
+        }
+
+
     }
 }

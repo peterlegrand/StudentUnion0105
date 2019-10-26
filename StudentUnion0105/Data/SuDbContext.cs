@@ -25,6 +25,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
         public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage { get; set; }
         public DbSet<SuContentTypeLanguageModel> dbContentTypeLanguage { get; set; }
+        public DbSet<SuContentTypeDeleteGetModel> dbContentTypeDeleteGet { get; set; }
         public DbSet<SuOrganizationLanguageModel> dbOrganizationLanguage { get; set; }
         public DbSet<SuOrganizationModel> dbOrganization { get; set; }
         public DbSet<SuOrganizationStatusModel> dbOrganizationStatus { get; set; }
@@ -84,6 +85,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuCountryList> dbCountryList { get; set; }
         public DbSet<SuTypeList> dbTypeList { get; set; }
         public DbSet<SuValueList> dbValueList { get; set; }
+        public DbSet<SuObjectLanguageEditGet> dbObjectLanguage { get; set; }
 
         public DbSet<SuUIScreenModel> dbUIScreen { get; set; }
         public DbSet<SuUITermLanguageModel> dbUITermLanguage { get; set; }

@@ -1,0 +1,9 @@
+CREATE PROCEDURE PageDeletePost (@Id int)
+AS
+BEGIN TRANSACTION
+DELETE FROM dbPageLanguage 
+WHERE dbPageLanguage.PageId = @Id;
+
+DELETE FROM dbPage
+WHERE dbPage.Id = @Id
+COMMIT TRANSACTION

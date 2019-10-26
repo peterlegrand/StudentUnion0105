@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
@@ -25,5 +26,9 @@ namespace StudentUnion0105.Models
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        [ForeignKey("FlowId")]
+        public virtual SuProcessTemplateGroupModel ProcessTemplateGroup { get; set; }
+        [ForeignKey("LanguageId")]
+        public virtual SuLanguageModel Language { get; set; }
     }
 }
