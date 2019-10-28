@@ -104,7 +104,6 @@ namespace StudentUnion0105.Controllers
             , "ContentUpdate.sql"
             , "ContentValueCreate.sql"
             , "ClassificationValueDeleteGet.sql"
-            , "ClassificationValueDeletePost.sql"
             , "CountrySelectAll.sql"
             , "DataTypeSelectAll.sql"
             , "GetMasterList.sql"
@@ -163,6 +162,7 @@ namespace StudentUnion0105.Controllers
 ////, "ClassificationValueIndexGet.sql"
 ////, "HomeIndexGet.sql"
 ////, "PageIndexGet.sql"
+, "PageCreatePost.sql"
 , "PageTypeIndexGet.sql"
 //, "PageViewIndexGet.sql"
 , "ProcessTemplateIndexGet.sql"
@@ -255,7 +255,6 @@ namespace StudentUnion0105.Controllers
 
 , "ClassificationDeleteGet.sql"
 , "ClassificationLevelDeleteGet.sql"
-, "ClassificationValueDeleteGet.sql"
 , "ContentTypeDeleteGet.sql"
 , "OrganizationDeleteGet.sql"
 , "OrganizationTypeDeleteGet.sql"

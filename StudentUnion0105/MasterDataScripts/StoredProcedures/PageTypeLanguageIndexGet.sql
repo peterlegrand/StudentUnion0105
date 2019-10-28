@@ -1,4 +1,4 @@
-CREATE PROCEDURE PageTypeIndexGet (@LanguageId int)
+CREATE PROCEDURE PageTypeLanguageIndexGet (@Id int)
 AS
 SELECT 
 	dbPageTypeLanguage.Id
@@ -6,6 +6,9 @@ SELECT
 	, dbPageTypeLanguage.Description
 	, dbPageTypeLanguage.MouseOver
 	, dbPageTypeLanguage.MenuName
+	, dbLanguage.LanguageName
 FROM dbPageTypeLanguage
-WHERE dbPageTypeLanguage.LanguageId = @LanguageId
+JOIN dbLanguage
+	ON dbLanguage.Id = dbPageTypeLanguage.LanguageId
+WHERE dbPageTypeLanguage.PageTypeId = @Id
 ORDER BY dbPageTypeLanguage.Name

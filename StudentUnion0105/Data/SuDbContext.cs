@@ -28,6 +28,10 @@ namespace StudentUnion0105.Data
         public DbSet<SuContentTypeDeleteGetModel> dbContentTypeDeleteGet { get; set; }
         public DbSet<SuOrganizationLanguageModel> dbOrganizationLanguage { get; set; }
         public DbSet<SuOrganizationModel> dbOrganization { get; set; }
+        public DbSet<SuOrganizationTypeDeleteGetModel> dbOrganizationTypeDeleteGet { get; set; }
+        public DbSet<SuPageDeleteGetModel> dbPageDeleteGet { get; set; }
+        public DbSet<SuPageSectionDeleteGetModel> dbPageSectionDeleteGet { get; set; }
+        public DbSet<SuOrganizationDeleteGetModel> dbOrganizationDeleteGet { get; set; }
         public DbSet<SuOrganizationStatusModel> dbOrganizationStatus { get; set; }
         public DbSet<SuOrganizationTypeLanguageModel> dbOrganizationTypeLanguage { get; set; }
         public DbSet<SuOrganizationTypeModel> dbOrganizationType { get; set; }

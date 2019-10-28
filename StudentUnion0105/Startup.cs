@@ -57,6 +57,10 @@ namespace StudentUnion0105
             services.AddTransient<IContentTypeRepository, SQLContentTypeRepository>();
             services.AddTransient<IOrganizationLanguageRepository, SQLOrganizationLanguageRepository>();
             services.AddTransient<IOrganizationRepository, SQLOrganizationRepository>();
+            services.AddTransient<IOrganizationTypeDeleteGetRepository, SQLOrganizationTypeDeleteGetRepository>();
+            services.AddTransient<IOrganizationDeleteGetRepository, SQLOrganizationDeleteGetRepository>();
+            services.AddTransient<IPageDeleteGetRepository, SQLPageDeleteGetRepository>();
+            services.AddTransient<IPageSectionDeleteGetRepository, SQLPageSectionDeleteGetRepository>();
             services.AddTransient<IOrganizationStatusRepository, SQLOrganizationStatusRepository>();
             services.AddTransient<IOrganizationTypeLanguageRepository, SQLOrganizationTypeLanguageRepository>();
             services.AddTransient<IOrganizationTypeRepository, SQLOrganizationTypeRepository>();

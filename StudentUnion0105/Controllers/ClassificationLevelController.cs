@@ -463,38 +463,33 @@ namespace StudentUnion0105.Controllers
 
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> LanguageDelete(int Id)
-        //{
-        //    var CurrentUser = await userManager.GetUserAsync(User);
-        //    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+        [HttpGet]
+        public async Task<IActionResult> LanguageDelete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-        //    var UICustomizationArray = new UICustomization(_context);
-        //    ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-        //    var ClassifationLevelLanguage = _classificationLevelLanguage.GetClassificationLevelLanguage(Id);
-        //    var ClassificationLevelToForm = new SuObjectVM();
-        //    ClassificationLevelToForm.Id = ClassifationLevelLanguage.Id;
-        //    ClassificationLevelToForm.Name = ClassifationLevelLanguage.Name;
-        //    ClassificationLevelToForm.MenuName = ClassifationLevelLanguage.MenuName;
-        //    ClassificationLevelToForm.MouseOver = ClassifationLevelLanguage.MouseOver;
-        //    ClassificationLevelToForm.LanguageId = ClassifationLevelLanguage.LanguageId;
-        //    ClassificationLevelToForm.ObjectId = ClassifationLevelLanguage.ClassificationLevelId;
-        //    return View(ClassificationLevelToForm);
-        //}
+            var ClassificationLevelLanguage = _context.dbObjectLanguage.FromSql($"ClassificationLevelEditGet {Id}").First();
 
-        //[HttpPost]
-        //public IActionResult LanguageDelete(SuObjectVM a)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
 
-        //        _classificationLevelLanguage.DeleteClassificationLevelLanguage(a.Id);
-        //        return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
-        //    }
-        //    return RedirectToAction("LanguageIndex");
+            return View(ClassificationLevelLanguage);
+        }
 
-        //}
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectLanguageEditGet FromForm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _classificationLevelLanguage.DeleteClassificationLevelLanguage(FromForm.LId);
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
+            }
+            return RedirectToAction("LanguageIndex");
+
+        }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
@@ -522,32 +517,19 @@ namespace StudentUnion0105.Controllers
             
         }
 
-        [HttpGet]
-        public async Task<IActionResult> LanguageDelete(int Id)
-        {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+        //[HttpPost]
+        //public IActionResult LanguageDelete(SuObjectLanguageEditGet FromForm)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
 
-            var ClassificationLevelLanguage = _context.dbObjectLanguage.FromSql($"ClassificationLevelLanguageEdit {Id}").First();
+        //        _classificationLevelLanguage.DeleteClassificationLevelLanguage(FromForm.LId);
+        //        return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
+        //    }
+        //    return RedirectToAction("LanguageIndex");
 
-            return View(ClassificationLevelLanguage);
-        }
-
-        [HttpPost]
-        public IActionResult LanguageDelete(SuObjectLanguageEditGet FromForm)
-        {
-            if (ModelState.IsValid)
-            {
-
-                _classificationLevelLanguage.DeleteClassificationLevelLanguage(FromForm.LId);
-                return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
-            }
-            return RedirectToAction("LanguageIndex");
-
-        }
+        //}
 
 
     }

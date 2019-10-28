@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Models.ViewModels;
@@ -46,11 +47,16 @@ namespace StudentUnion0105.Controllers
             _contentTypeLanguage = contentTypeLanguage;
             _context = context;
         }
+        
+        
         public async Task<IActionResult> Index(int Id)
         {
 
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var pageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
@@ -77,6 +83,10 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var PageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
                                on c.Id equals l.PageSectionId
@@ -277,6 +287,10 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             SuObjectVMPageSection SuObject = new SuObjectVMPageSection();
             SuObject.ObjectId = Id;
 
@@ -466,8 +480,15 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = NewLevel.SuObject.ObjectId.ToString() });
 
         }
-        public IActionResult LanguageIndex(int Id)
+        
+        
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ClassificationLanguage = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
                                           join l in _language.GetAllLanguages()
@@ -491,8 +512,14 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ToForm = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
@@ -545,8 +572,14 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
                                 where c.PageSectionId == Id
@@ -592,14 +625,33 @@ namespace StudentUnion0105.Controllers
                 PageSectionLanguage.LanguageId = test3.SuObject.LanguageId;
 
                 var NewPageSection = _pageSectionLanguage.AddPageSectionLanguage(PageSectionLanguage);
-
-
             }
             return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+        }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var Page = _context.dbPageSectionDeleteGet.FromSql($"PageSectionDeleteGet {Id}").First();
+
+            return View(Page);
+        }
+        [HttpPost]
+        public IActionResult Delete(SuPageDeleteGetModel FromForm)
+        {
+            var b = _context.Database.ExecuteSqlCommand($"PageSectionDeletePost {FromForm.Id}");
+
+            return RedirectToAction("Index");
 
         }
+
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
@@ -8,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,6 +75,8 @@ namespace StudentUnion0105.Controllers
                 }).ToList();
             return View(Pages);
         }
+
+
         public async Task<IActionResult> Index2()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
@@ -93,11 +97,17 @@ namespace StudentUnion0105.Controllers
             return View(Pages);
         }
 
+
+
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ParentPage = _Page.GetPage(Id);
 
             var StatusList = new List<SelectListItem>();
@@ -136,37 +146,39 @@ namespace StudentUnion0105.Controllers
 
             SuObjectVM Parent = new SuObjectVM()
             {
-                NullId = ParentPage == null ? 0 : ParentPage.Id
+                NullId = ParentPage == null ? 0 : ParentPage.Id,
+                LanguageId = DefaultLanguageID
+
             };
             var PageAndStatus = new SuObjectAndStatusViewModel { SuObject = Parent, SomeKindINumSelectListItem = StatusList, ProbablyTypeListItem = TypeList };
             return View(PageAndStatus);
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> Create(SuObjectAndStatusViewModel FromForm)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var UserId = CurrentUser.Id;
             if (ModelState.IsValid)
             {
-                var Page = new SuPageModel();
-                Page.ModifiedDate = DateTime.Now;
-                Page.CreatedDate = DateTime.Now;
-                Page.PageStatusId = FromForm.SuObject.Status;
-                Page.PageTypeId = FromForm.SuObject.Type;
-                var NewPage = _Page.AddPage(Page);
+                SqlParameter[] parameters =
+                {
+                new SqlParameter("@PageStatusId", FromForm.SuObject.Status ),
+                new SqlParameter("@PageTypeId", FromForm.SuObject.Type),
+                new SqlParameter("@UserId", UserId ),
+                new SqlParameter("@LanguageId", FromForm.SuObject.LanguageId),
+                new SqlParameter("@Name", FromForm.SuObject.Name ?? ""),
+                new SqlParameter("@Description", FromForm.SuObject.Description ?? ""),
+                new SqlParameter("@MouseOver", FromForm.SuObject.MouseOver ?? ""),
+                new SqlParameter("@MenuName", FromForm.SuObject.MenuName ?? ""),
+                new SqlParameter("@Title", FromForm.SuObject.Title ?? ""),
+                new SqlParameter("@PageDescription", FromForm.SuObject.PageDescription ?? ""),
+            };
 
+                var b = _context.Database.ExecuteSqlCommand("PageCreatePost @PageStatusId, @PageTypeId, @UserId, @LanguageId, @Name, @Description, @MouseOver, @MenuName, @Title, @PageDescription", parameters);
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var PageLanguage = new SuPageLanguageModel();
-
-                PageLanguage.Name = FromForm.SuObject.Name;
-                PageLanguage.Description = FromForm.SuObject.Description;
-                PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.Title = FromForm.SuObject.MouseOver;
-                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
-                PageLanguage.PageId = NewPage.Id;
-                PageLanguage.LanguageId = DefaultLanguageID;
-                _PageLanguage.AddPageLanguage(PageLanguage);
 
             }
             return RedirectToAction("Index");
@@ -175,11 +187,17 @@ namespace StudentUnion0105.Controllers
 
         }
 
+
+
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var PageDetails = (from s in _Page.GetAllPages()
                                join t in _PageLanguage.GetAllPageLanguages()
                                on s.Id equals t.PageId
@@ -244,6 +262,8 @@ namespace StudentUnion0105.Controllers
 
         }
 
+
+
         [HttpPost]
         public async Task<IActionResult> Edit(SuObjectAndStatusViewModel FromForm)
         {
@@ -275,8 +295,13 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var ContentLanguage = (from c in _PageLanguage.GetAllPageLanguages()
                                    join l in _language.GetAllLanguages()
@@ -305,9 +330,17 @@ namespace StudentUnion0105.Controllers
             return View(ContentLanguage);
         }
 
+
+
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _PageLanguage.GetAllPageLanguages()
                                 where c.PageId == Id
@@ -340,6 +373,8 @@ namespace StudentUnion0105.Controllers
             return View(PageAndStatus);
         }
 
+
+
         [HttpPost]
         public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
@@ -349,7 +384,9 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.Title = FromForm.SuObject.MouseOver;
+                PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                PageLanguage.MenuName = FromForm.SuObject.MenuName;
+                PageLanguage.Title = FromForm.SuObject.Title;
                 PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = FromForm.SuObject.ObjectId;
                 PageLanguage.LanguageId = FromForm.SuObject.LanguageId;
@@ -364,9 +401,17 @@ namespace StudentUnion0105.Controllers
 
         }
 
+
+
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var ToForm = (from c in _PageLanguage.GetAllPageLanguages()
                          join l in _language.GetAllLanguages()
                          on c.LanguageId equals l.Id
@@ -382,9 +427,9 @@ namespace StudentUnion0105.Controllers
                              MouseOver = c.MouseOver
                             ,
                              Language = l.LanguageName
-,
-//                             MouseOver = c.Title
 //,
+// MenuName = l.Title
+,
                              PageDescription = c.PageDescription
                             ,
                              ObjectId = c.PageId
@@ -399,6 +444,8 @@ namespace StudentUnion0105.Controllers
 
 
         }
+
+
 
         [HttpPost]
         public IActionResult LanguageEdit(SuObjectVM FromForm)
@@ -421,6 +468,65 @@ namespace StudentUnion0105.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<IActionResult> LanguageDelete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var PageLanguage = _pageLanguage.DeletePageLanguage(Id);
+            var a = new SuObjectVM();
+            a.Id = PageLanguage.Id;
+            a.Name = PageLanguage.Name;
+            a.Description = PageLanguage.Description;
+            a.MouseOver = PageLanguage.MouseOver;
+            a.LanguageId = PageLanguage.LanguageId;
+            a.ObjectId = PageLanguage.PageId;
+            return View(a);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectVM a)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _pageLanguage.DeletePageLanguage(a.Id);
+                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+            }
+            return RedirectToAction("Index");
+
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var Page = _context.dbPageDeleteGet.FromSql($"PageDeleteGet {DefaultLanguageID}, {Id}").First();
+
+            return View(Page);
+        }
+        [HttpPost]
+        public IActionResult Delete(SuPageDeleteGetModel FromForm)
+        {
+            var b = _context.Database.ExecuteSqlCommand($"PageDeletePost {FromForm.Id}");
+
+            return RedirectToAction("Index");
+
+        }
 
     }
 }

@@ -220,5 +220,14 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(217, 'Back to user organizat
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(218, 'CreatedDate', 'CreatedDate');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(219, 'ModifiedDate', 'ModifiedDate');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(220, 'Delete content type', 'Delete content type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(221, 'Delete organization', 'Delete organization');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(222, 'Delete organization type', 'Delete organization type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(223, 'Delete page', 'Delete page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(224, 'Delete page section', 'Delete page section');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(225, 'Has paging', 'Has paging');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(226, 'Max content', 'Max content');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(227, 'One two columns', 'One two columns');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(228, 'Page section languages', 'Page section languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(229, 'Page languages', 'Page languages');
 
 SET IDENTITY_INSERT dbUITerm OFF;

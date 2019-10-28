@@ -443,6 +443,55 @@ namespace StudentUnion0105.Controllers
 
             return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
         }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var Classification = _context.dbOrganizationDeleteGet.FromSql($"OrganizationDeleteGet {Id}").First();
+
+            return View(Classification);
+        }
+        [HttpPost]
+        public IActionResult Delete(SuContentTypeDeleteGetModel FromForm)
+        {
+            var b = _context.Database.ExecuteSqlCommand($"OrganizationDeletePost {FromForm.Id}");
+
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LanguageDelete(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var OrganizationLanguage = _context.dbObjectLanguage.FromSql($"OrganizationEditGet {Id}").First();
+
+
+            return View(OrganizationLanguage);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectLanguageEditGet FromForm)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _OrganizationLanguage.DeleteOrganizationLanguage(FromForm.LId);
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
+            }
+            return RedirectToAction("LanguageIndex");
+
+        }
 
     }
 }
