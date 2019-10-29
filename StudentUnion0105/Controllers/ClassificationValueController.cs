@@ -291,22 +291,27 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ClassificationLanguage = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
-                                          join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                                          where c.ClassificationValueId == Id
-                                          select new SuObjectVM
-                                          {
-                                              Id = c.Id
-                                          ,
-                                              Name = c.Name
-                                          ,
-                                              Language = l.LanguageName
-                                          }).ToList();
-            ViewBag.Id = Id;
-            ViewBag.CId = HttpContext.Request.Query["CId"];
+            //var ClassificationLanguage = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
+            //                              join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //                              where c.ClassificationValueId == Id
+            //                              select new SuObjectVM
+            //                              {
+            //                                  Id = c.Id
+            //                              ,
+            //                                  Name = c.Name
+            //                              ,
+            //                                  Language = l.LanguageName
+            //                              }).ToList();
+            //ViewBag.Id = Id;
+            //ViewBag.CId = HttpContext.Request.Query["CId"];
 
-            return View(ClassificationLanguage);
+            //return View(ClassificationLanguage);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ClassificationValueLanguageIndexGet {Id}").ToList();
+            ViewBag.Id = Id;
+
+            return View(LanguageIndex);
+
         }
 
         [HttpGet]

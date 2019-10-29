@@ -2,11 +2,13 @@ CREATE PROCEDURE ClassificationLanguageIndexGet (@Id int)
 AS
 SELECT 
 	dbLanguage.LanguageName
-	, dbClassificationLanguage.Id
+	, dbClassificationLanguage.Id LId
 	, dbClassificationLanguage.Name
 	, dbClassificationLanguage.Description
 	, dbClassificationLanguage.MouseOver
 	, dbClassificationLanguage.MenuName
+	, dbClassificationLanguage.ClassificationId Id
+	, dbLanguage.LanguageName Language
 FROM dbClassificationLanguage
 JOIN dbLanguage 
 	ON dbClassificationLanguage.LanguageId = dbLanguage.Id

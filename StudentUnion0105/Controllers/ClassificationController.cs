@@ -64,25 +64,28 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ToForm = (
+            var Classification = _context.ZdbClassificationIndexGet.FromSql($"ClassificationIndexGet {DefaultLanguageID}").ToList();
+            return View(Classification);
 
-                from l in _classificationLanguage.GetAllClassificationLanguages()
+            //var ToForm = (
 
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            //    from l in _classificationLanguage.GetAllClassificationLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
 
 
-                {
-                    Id = l.ClassificationId
-                             ,
-                    Name = l.Name
-                                                               ,
-                    MouseOver = l.MouseOver
-                                           ,
-                    MenuName = l.MenuName
+            //    {
+            //        Id = l.ClassificationId
+            //                 ,
+            //        Name = l.Name
+            //                                                   ,
+            //        MouseOver = l.MouseOver
+            //                               ,
+            //        MenuName = l.MenuName
 
-                }).ToList();
-            return View(ToForm);
+            //    }).ToList();
+            //return View(ToForm);
         }
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
@@ -237,6 +240,10 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ClassificationLanguageIndexGet {Id}").ToList();
+            ViewBag.Id = Id;
+
+            return View(LanguageIndex);
 
             var ClassificationLanguage = (from c in _classificationVMRepository.GetAllClassificationLanguages()
                                           join l in _language.GetAllLanguages()

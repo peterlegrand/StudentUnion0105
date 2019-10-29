@@ -153,30 +153,39 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ContentLanguage = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-                                   join l in _language.GetAllLanguages()
-                  on c.LanguageId equals l.Id
-                                   where c.ContentTypeId == Id
-                                   select new SuObjectVM
-                                   {
-                                       Id = c.Id
-                                   ,
-                                       Name = c.Name
-                                   ,
-                                       Language = l.LanguageName
-                                   ,
-                                       Description = c.Description
-                                   ,
-                                       MouseOver = c.MouseOver
-                                   ,
-                                       ObjectId = c.ContentTypeId
-                                   }).ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ContentTypeLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(ContentLanguage);
+            return View(LanguageIndex);
+
+            //var ContentLanguage = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
+            //                       join l in _language.GetAllLanguages()
+            //      on c.LanguageId equals l.Id
+            //                       where c.ContentTypeId == Id
+            //                       select new SuObjectVM
+            //                       {
+            //                           Id = c.Id
+            //                       ,
+            //                           Name = c.Name
+            //                       ,
+            //                           Language = l.LanguageName
+            //                       ,
+            //                           Description = c.Description
+            //                       ,
+            //                           MouseOver = c.MouseOver
+            //                       ,
+            //                           ObjectId = c.ContentTypeId
+            //                       }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(ContentLanguage);
         }
 
         [HttpGet]

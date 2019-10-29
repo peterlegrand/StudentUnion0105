@@ -1226,5 +1226,6 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1223, 36, 105
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1224, 5, 1058, 8);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1225, 13, 1058, 9);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1226, 33, 1058, 10);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1227, 22, 1003, 13);
 
 SET IDENTITY_INSERT dbUITermScreen OFF;

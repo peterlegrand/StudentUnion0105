@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -17,16 +20,19 @@ namespace StudentUnion0105.Controllers
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
         private readonly IPageTypeRepository _PageType;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public PageTypeController(UserManager<SuUserModel> userManager
             , IPageTypeLanguageRepository PageTypeLanguage
             , IPageTypeRepository PageType
-            , ILanguageRepository language)
+            , ILanguageRepository language
+            , SuDbContext context)
         {
             this.userManager = userManager;
             _PageTypeLanguage = PageTypeLanguage;
             _PageType = PageType;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -140,30 +146,42 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
 
-            var OrganizationLanguage = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
-                                        join l in _language.GetAllLanguages()
-                       on c.LanguageId equals l.Id
-                                        where c.PageTypeId == Id
-                                        select new SuObjectVM
-                                        {
-                                            Id = c.Id
-                                        ,
-                                            Name = c.Name
-                                        ,
-                                            Language = l.LanguageName
-                                        ,
-                                            Description = c.Description
-                                        ,
-                                            MouseOver = c.MouseOver
-                                        ,
-                                            ObjectId = c.PageTypeId
-                                        }).ToList();
+            //var OrganizationLanguage = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
+            //                            join l in _language.GetAllLanguages()
+            //           on c.LanguageId equals l.Id
+            //                            where c.PageTypeId == Id
+            //                            select new SuObjectVM
+            //                            {
+            //                                Id = c.Id
+            //                            ,
+            //                                Name = c.Name
+            //                            ,
+            //                                Language = l.LanguageName
+            //                            ,
+            //                                Description = c.Description
+            //                            ,
+            //                                MouseOver = c.MouseOver
+            //                            ,
+            //                                ObjectId = c.PageTypeId
+            //                            }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(OrganizationLanguage);
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"PageTypeLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(OrganizationLanguage);
+            return View(LanguageIndex);
+
+
         }
 
         [HttpGet]

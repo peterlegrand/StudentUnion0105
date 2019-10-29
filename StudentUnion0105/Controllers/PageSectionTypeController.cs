@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
+using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
@@ -17,16 +20,19 @@ namespace StudentUnion0105.Controllers
         private readonly IPageSectionTypeLanguageRepository _PageSectionTypeLanguage;
         private readonly IPageSectionTypeRepository _PageSectionType;
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public PageSectionTypeController(UserManager<SuUserModel> userManager
             , IPageSectionTypeLanguageRepository PageSectionTypeLanguage
             , IPageSectionTypeRepository PageSectionType
-            , ILanguageRepository language)
+            , ILanguageRepository language
+            , SuDbContext context)
         {
             this.userManager = userManager;
             _PageSectionTypeLanguage = PageSectionTypeLanguage;
             _PageSectionType = PageSectionType;
             _language = language;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -144,30 +150,42 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
 
-            var PageLanguage = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-                                join l in _language.GetAllLanguages()
-               on c.LanguageId equals l.Id
-                                where c.PageSectionTypeId == Id
-                                select new SuObjectVM
-                                {
-                                    Id = c.Id
-                                ,
-                                    Name = c.Name
-                                ,
-                                    Language = l.LanguageName
-                                ,
-                                    Description = c.Description
-                                ,
-                                    MouseOver = c.MouseOver
-                                ,
-                                    ObjectId = c.PageSectionTypeId
-                                }).ToList();
+            //var PageLanguage = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
+            //                    join l in _language.GetAllLanguages()
+            //   on c.LanguageId equals l.Id
+            //                    where c.PageSectionTypeId == Id
+            //                    select new SuObjectVM
+            //                    {
+            //                        Id = c.Id
+            //                    ,
+            //                        Name = c.Name
+            //                    ,
+            //                        Language = l.LanguageName
+            //                    ,
+            //                        Description = c.Description
+            //                    ,
+            //                        MouseOver = c.MouseOver
+            //                    ,
+            //                        ObjectId = c.PageSectionTypeId
+            //                    }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(PageLanguage);
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"PageSectionLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(PageLanguage);
+            return View(LanguageIndex);
+
+
         }
 
         [HttpGet]

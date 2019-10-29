@@ -311,30 +311,35 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                          join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                                          join x in _classificationLevel.GetAllClassificationLevels()
-                                          on c.ClassificationLevelId equals x.Id
-                                          where c.ClassificationLevelId == Id
-                                          select new SuObjectVM
-                                          {
-                                              Id = c.Id
-                                          ,
-                                              Name = c.Name
-                                          ,
-                                              Language = l.LanguageName
-                                          ,
-                                              MenuName = c.MenuName
-                                          ,
-                                              MouseOver = c.MouseOver
-                                          ,
-                                              ObjectId = c.ClassificationLevelId
-                                              , NotNullId = x.ClassificationId
-                                          }).ToList();
+            //var ClassificationLanguage = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //                              join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //                              join x in _classificationLevel.GetAllClassificationLevels()
+            //                              on c.ClassificationLevelId equals x.Id
+            //                              where c.ClassificationLevelId == Id
+            //                              select new SuObjectVM
+            //                              {
+            //                                  Id = c.Id
+            //                              ,
+            //                                  Name = c.Name
+            //                              ,
+            //                                  Language = l.LanguageName
+            //                              ,
+            //                                  MenuName = c.MenuName
+            //                              ,
+            //                                  MouseOver = c.MouseOver
+            //                              ,
+            //                                  ObjectId = c.ClassificationLevelId
+            //                                  , NotNullId = x.ClassificationId
+            //                              }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(ClassificationLanguage);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ClassificationLevelLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(ClassificationLanguage);
+            return View(LanguageIndex);
+
         }
 
         [HttpGet]
@@ -472,14 +477,14 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ClassificationLevelLanguage = _context.dbObjectLanguage.FromSql($"ClassificationLevelEditGet {Id}").First();
+            var ClassificationLevelLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationLevelEditGet {Id}").First();
 
 
             return View(ClassificationLevelLanguage);
         }
 
         [HttpPost]
-        public IActionResult LanguageDelete(SuObjectLanguageEditGet FromForm)
+        public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {

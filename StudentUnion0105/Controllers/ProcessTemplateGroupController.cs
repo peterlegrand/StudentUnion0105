@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
@@ -170,27 +171,32 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ContentLanguage = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-                                   join l in _language.GetAllLanguages()
-                  on c.LanguageId equals l.Id
-                                   where c.ProcessTemplateGroupId == Id
-                                   select new SuObjectVM
-                                   {
-                                       Id = c.Id
-                                   ,
-                                       Name = c.Name
-                                   ,
-                                       Language = l.LanguageName
-                                   ,
-                                       Description = c.Description
-                                   ,
-                                       MouseOver = c.MouseOver
-                                   ,
-                                       ObjectId = c.ProcessTemplateGroupId
-                                   }).ToList();
+            //var ContentLanguage = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
+            //                       join l in _language.GetAllLanguages()
+            //      on c.LanguageId equals l.Id
+            //                       where c.ProcessTemplateGroupId == Id
+            //                       select new SuObjectVM
+            //                       {
+            //                           Id = c.Id
+            //                       ,
+            //                           Name = c.Name
+            //                       ,
+            //                           Language = l.LanguageName
+            //                       ,
+            //                           Description = c.Description
+            //                       ,
+            //                           MouseOver = c.MouseOver
+            //                       ,
+            //                           ObjectId = c.ProcessTemplateGroupId
+            //                       }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(ContentLanguage);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProcessTemplateGroupLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(ContentLanguage);
+            return View(LanguageIndex);
+
         }
 
         [HttpGet]

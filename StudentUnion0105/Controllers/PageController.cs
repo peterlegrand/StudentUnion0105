@@ -303,31 +303,37 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ContentLanguage = (from c in _PageLanguage.GetAllPageLanguages()
-                                   join l in _language.GetAllLanguages()
-                  on c.LanguageId equals l.Id
-                                   where c.PageId == Id
-                                   select new SuObjectVM
-                                   {
-                                       Id = c.Id
-                                   ,
-                                       Name = c.Name
-                                   ,
-                                       Language = l.LanguageName
-                                   ,
-                                       Description = c.Description
-                                   ,
-                                       MouseOver = c.MouseOver
-,
-                                       Title = c.Title
-,
-                                       Description2 = c.PageDescription
-                                   ,
-                                       ObjectId = c.PageId
-                                   }).ToList();
+            //            var ContentLanguage = (from c in _PageLanguage.GetAllPageLanguages()
+            //                                   join l in _language.GetAllLanguages()
+            //                  on c.LanguageId equals l.Id
+            //                                   where c.PageId == Id
+            //                                   select new SuObjectVM
+            //                                   {
+            //                                       Id = c.Id
+            //                                   ,
+            //                                       Name = c.Name
+            //                                   ,
+            //                                       Language = l.LanguageName
+            //                                   ,
+            //                                       Description = c.Description
+            //                                   ,
+            //                                       MouseOver = c.MouseOver
+            //,
+            //                                       Title = c.Title
+            //,
+            //                                       Description2 = c.PageDescription
+            //                                   ,
+            //                                       ObjectId = c.PageId
+            //                                   }).ToList();
+            //            ViewBag.Id = Id;
+
+            //            return View(ContentLanguage);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"PageLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(ContentLanguage);
+            return View(LanguageIndex);
+
+
         }
 
 

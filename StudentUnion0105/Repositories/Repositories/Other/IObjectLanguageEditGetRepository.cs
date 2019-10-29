@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace StudentUnion0105.Repositories
 {
-    public interface IObjectLanguageEditRepository
+    public interface IObjectLanguageEditGetRepository
     {
-        SuObjectLanguageEditGet GetObject(int ID);
+        SuObjectLanguageEditGetModel GetObjectLanguageEditGet(int ID);
 
 
     }

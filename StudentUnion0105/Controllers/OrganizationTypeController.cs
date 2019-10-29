@@ -170,27 +170,33 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var OrganizationLanguage = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
-                                        join l in _language.GetAllLanguages()
-                       on c.LanguageId equals l.Id
-                                        where c.OrganizationTypeId == Id
-                                        select new SuObjectVM
-                                        {
-                                            Id = c.Id
-                                        ,
-                                            Name = c.Name
-                                        ,
-                                            Language = l.LanguageName
-                                        ,
-                                            Description = c.Description
-                                        ,
-                                            MouseOver = c.MouseOver
-                                        ,
-                                            ObjectId = c.OrganizationTypeId
-                                        }).ToList();
+            //var OrganizationLanguage = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
+            //                            join l in _language.GetAllLanguages()
+            //           on c.LanguageId equals l.Id
+            //                            where c.OrganizationTypeId == Id
+            //                            select new SuObjectVM
+            //                            {
+            //                                Id = c.Id
+            //                            ,
+            //                                Name = c.Name
+            //                            ,
+            //                                Language = l.LanguageName
+            //                            ,
+            //                                Description = c.Description
+            //                            ,
+            //                                MouseOver = c.MouseOver
+            //                            ,
+            //                                ObjectId = c.OrganizationTypeId
+            //                            }).ToList();
+            //ViewBag.Id = Id;
+
+            //return View(OrganizationLanguage);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"OrganizationTypeLanguageIndexGet {Id}").ToList();
             ViewBag.Id = Id;
 
-            return View(OrganizationLanguage);
+            return View(LanguageIndex);
+
+
         }
 
         [HttpGet]

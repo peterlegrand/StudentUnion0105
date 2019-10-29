@@ -44,6 +44,7 @@ namespace StudentUnion0105
                 options.AddPolicy("Page", policy => policy.RequireClaim("Menu", "Page"));
             });
             services.AddTransient<IClassificationRepository, SQLClassificationRepository>();
+            services.AddTransient<IClassificationIndexGetRepository, SQLClassificationIndexGetRepository>();
             services.AddTransient<IClassificationVMRepository, SQLClassificationVMRepository>();
             services.AddTransient<IClassificationLevelVMRepository, SQLClassificationLevelVMRepository>();
             services.AddTransient<IClaimRepository, SQLClaimRepository>();
@@ -115,7 +116,9 @@ namespace StudentUnion0105
             services.AddTransient<IGetOrganizationStructureRepository, SQLGetOrganizationStructure>();
             services.AddTransient<IGetProjectStructureRepository, SQLGetProjectStructure>();
 
-            services.AddTransient<IObjectLanguageEditRepository, SQLObjectLanguageEditRepository>();
+            //            services.AddTransient<IObjectLanguageEditRepository, SQLObjectLanguageEditRepository>();
+            services.AddTransient<IObjectLanguageEditGetRepository, SQLObjectLanguageEditGetRepository>();
+            services.AddTransient<IObjectLanguageIndexGetRepository, SQLObjectLanguageIndexGetRepository>();
 
             services.AddTransient<IObjectVMRepository, SQLObjectVMRepository>();
             services.AddTransient<IObjectRepository, SQLObjectRepository>();

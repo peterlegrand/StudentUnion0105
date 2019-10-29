@@ -5,19 +5,20 @@ using System.Collections.Generic;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    public class SQLObjectLanguageEditRepository : IObjectLanguageEditRepository
+    public class SQLObjectLanguageEditGetRepository : IObjectLanguageEditGetRepository
     {
         private readonly SuDbContext context;
 
-        public SQLObjectLanguageEditRepository(SuDbContext context)
+        public SQLObjectLanguageEditGetRepository(SuDbContext context)
         {
             this.context = context;
             //  this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public SuObjectLanguageEditGet GetObject(int ID)
+        public SuObjectLanguageEditGetModel GetObjectLanguageEditGet(int ID)
         {
-            return context.dbObjectLanguage.Find(ID);
+
+            return context.ZdbObjectLanguageEditGet.Find(ID);
         }
 
     }
