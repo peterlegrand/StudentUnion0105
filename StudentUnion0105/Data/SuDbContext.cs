@@ -18,6 +18,7 @@ namespace StudentUnion0105.Data
 
         }
         public DbSet<SuClassificationModel> dbClassification { get; set; }
+        public DbSet<SuClassificationDeleteGetModel> ZdbClassificationDeleteGet { get; set; }
         public DbSet<SuClassificationEditGetModel> ZdbClassificationEditGet { get; set; }
         public DbSet<SuClassificationIndexGetModel> ZdbClassificationIndexGet { get; set; }
         public DbSet<SuClassificationStatusModel> dbClassificationStatus { get; set; }

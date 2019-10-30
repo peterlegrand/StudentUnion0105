@@ -40,12 +40,15 @@ namespace StudentUnion0105.Controllers
         }
         public async Task<IActionResult> Index(int Id)
         {
-
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            //var Classification = _context.ZdbClassificationLevelIndexGet.FromSql($"ClassificationLevelIndexGet {DefaultLanguageID}").ToList();
+            //return View(Classification);
+
 
             var ClassificationLevel = (from c in _classificationLevel.GetAllClassificationLevels()
                                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()

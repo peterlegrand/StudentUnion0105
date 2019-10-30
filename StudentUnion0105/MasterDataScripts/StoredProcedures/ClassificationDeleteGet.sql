@@ -1,7 +1,7 @@
 CREATE PROCEDURE ClassificationDeleteGet (@LanguageId int, @Id int)
 AS
 SELECT
-	dbClassification.Id 
+	dbClassification.Id OId 
 	, dbClassificationStatus.Name StatusName
 	, dbClassification.HasDropDown
 	, dbClassification.DropDownSequence
