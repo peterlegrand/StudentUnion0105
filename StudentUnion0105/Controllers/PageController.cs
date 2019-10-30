@@ -216,7 +216,7 @@ namespace StudentUnion0105.Controllers
                                   ,
                                    MouseOver = t.MouseOver
                                    ,
-                                   PageDescription = t.PageDescription
+                                   PageDescription = t.TitleDescription
 //                                   ,
 //                                   MouseOver = t.Title
                                }).First();
@@ -282,7 +282,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 PageLanguage.Title = FromForm.SuObject.MouseOver;
-                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
+                PageLanguage.TitleDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
                 PageLanguage.ModifierId = new Guid(CurrentUser.Id);
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
@@ -393,7 +393,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 PageLanguage.MenuName = FromForm.SuObject.MenuName;
                 PageLanguage.Title = FromForm.SuObject.Title;
-                PageLanguage.PageDescription = FromForm.SuObject.PageDescription;
+                PageLanguage.TitleDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = FromForm.SuObject.ObjectId;
                 PageLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
@@ -418,35 +418,39 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ToForm = (from c in _PageLanguage.GetAllPageLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-//,
-// MenuName = l.Title
-,
-                             PageDescription = c.PageDescription
-                            ,
-                             ObjectId = c.PageId
+            var PageLanguage = _context.ZdbPageLanguageEditGet.FromSql($"PageLanguageEditGet {Id}").First();
+            return View(PageLanguage);
 
-                         }).First();
 
-            var PageAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = PageList
-            };
-            return View(ToForm);
+            //            var ToForm = (from c in _PageLanguage.GetAllPageLanguages()
+            //                         join l in _language.GetAllLanguages()
+            //                         on c.LanguageId equals l.Id
+            //                         where c.Id == Id
+            //                         select new SuObjectVM
+            //                         {
+            //                             Id = c.Id
+            //                            ,
+            //                             Name = c.Name
+            //                            ,
+            //                             Description = c.Description
+            //                            ,
+            //                             MouseOver = c.MouseOver
+            //                            ,
+            //                             Language = l.LanguageName
+            ////,
+            //// MenuName = l.Title
+            //,
+            //                             PageDescription = c.TitleDescription
+            //                            ,
+            //                             ObjectId = c.PageId
+
+            //                         }).First();
+
+            //            var PageAndStatus = new SuObjectAndStatusViewModel
+            //            {
+            //                SuObject = ToForm //, a = PageList
+            //            };
+            //            return View(ToForm);
 
 
         }
@@ -462,7 +466,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.Name;
                 PageLanguage.Description = FromForm.Description;
                 PageLanguage.Title = FromForm.MouseOver;
-                PageLanguage.PageDescription = FromForm.PageDescription;
+                PageLanguage.TitleDescription = FromForm.PageDescription;
                 PageLanguage.MouseOver = FromForm.MouseOver;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
 

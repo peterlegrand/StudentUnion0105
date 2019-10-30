@@ -55,7 +55,7 @@ namespace StudentUnion0105.Controllers
                     MaxConfigLevel = z.Sequence;
                 }
             }
-
+                
             var a = _context.dbGetClassificationValueStructure.FromSql($"ClassificationValueStructure {DefaultLanguageID}, {Id}").ToList();
 
             //if (a.Count != 0)
@@ -413,11 +413,20 @@ namespace StudentUnion0105.Controllers
 
             }
             return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> LanguageEdit(int Id)
+        {
 
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationValueLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
 
         }
+        }
     }
-}

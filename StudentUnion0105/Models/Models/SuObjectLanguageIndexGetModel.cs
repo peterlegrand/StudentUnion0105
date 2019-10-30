@@ -11,6 +11,7 @@ namespace StudentUnion0105.Models
         public string Description { get; set; }
         public string MouseOver { get; set; }
         public string MenuName { get; set; }
+        [Key]
         public int LId { get; set; }
     }
 }

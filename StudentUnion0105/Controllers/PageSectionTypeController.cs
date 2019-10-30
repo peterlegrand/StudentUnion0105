@@ -246,33 +246,42 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
-            var ToForm = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.PageSectionTypeId
 
-                         }).First();
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var PageSectionTypeAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = PageSectionTypeList
-            };
-            return View(ToForm);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"PageSectionTypeLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
+
+            //var ToForm = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.PageSectionTypeId
+
+            //             }).First();
+
+            //var PageSectionTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = PageSectionTypeList
+            //};
+            //return View(ToForm);
 
 
         }

@@ -1,4 +1,4 @@
-﻿@model SuObjectVM
+﻿@model SuPageLanguageEditGetModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -17,15 +17,15 @@
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.Id" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <label asp-for="@Model.LId" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.Id" class="form-control" />
+                <input asp-for="@Model.LId" class="form-control" />
             </div>
         </div>
         <div class="form-group row" hidden>
-            <label asp-for="@Model.ObjectId" class="col-sm-2 col-form-label"></label>
+            <label asp-for="@Model.OId" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <input asp-for="@Model.ObjectId" class="form-control" />
+                <input asp-for="@Model.OId" class="form-control" />
             </div>
         </div>
         <div class="form-group row">
@@ -50,10 +50,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.PageDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <label asp-for="@Model.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
             <div class="col-sm-10">
-                <textarea asp-for="@Model.PageDescription" class="form-control ckeditor" id="pagedescription" name="pageDescription"></textarea>
-                <span asp-validation-for="@Model.PageDescription" class="text-danger"></span>
+                <textarea asp-for="@Model.TitleDescription" class="form-control ckeditor" id="pagedescription" name="pageDescription"></textarea>
+                <span asp-validation-for="@Model.TitleDescription" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">

@@ -273,27 +273,30 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var FlowLanguage = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
-                         join l in _language.GetAllLanguages()
-                         on f.LanguageId equals l.Id
-                         where f.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = f.Id
-                            ,
-                             Name = f.Name
-                            ,
-                             Description = f.Description
-                            ,
-                             MouseOver = f.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = f.FlowId
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateFlowLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
 
-                         }).First();
+            //var FlowLanguage = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on f.LanguageId equals l.Id
+            //             where f.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = f.Id
+            //                ,
+            //                 Name = f.Name
+            //                ,
+            //                 Description = f.Description
+            //                ,
+            //                 MouseOver = f.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = f.FlowId
 
-            return View(FlowLanguage);
+            //             }).First();
+
+            //return View(FlowLanguage);
 
 
         }

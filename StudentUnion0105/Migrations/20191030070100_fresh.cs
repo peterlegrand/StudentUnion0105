@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentUnion0105.Migrations
 {
-    public partial class fresh01 : Migration
+    public partial class fresh : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,12 +107,33 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dbContentTypeDeleteGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbContentTypeDeleteGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "dbCountry",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CountryName = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     ForeignName = table.Column<string>(nullable: true),
                     ISO31662 = table.Column<string>(nullable: true),
                     ISO31663 = table.Column<string>(nullable: true),
@@ -143,8 +164,8 @@ namespace StudentUnion0105.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DataTypeName = table.Column<string>(maxLength: 50, nullable: true),
-                    DataTypeDescription = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -247,13 +268,40 @@ namespace StudentUnion0105.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MasterListName = table.Column<string>(nullable: true),
-                    MasterListDescription = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Sequence = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_dbMasterList", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dbObject",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    LanguageId = table.Column<int>(nullable: false),
+                    ParentId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Int1 = table.Column<int>(nullable: false),
+                    Int2 = table.Column<int>(nullable: false),
+                    IntNull1 = table.Column<int>(nullable: true),
+                    IntNull2 = table.Column<int>(nullable: true),
+                    Bool1 = table.Column<bool>(nullable: false),
+                    Bool2 = table.Column<bool>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    Modifier = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbObject", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -301,6 +349,29 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dbOrganizationDeleteGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Status = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbOrganizationDeleteGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "dbOrganizationStatus",
                 columns: table => new
                 {
@@ -327,6 +398,85 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_dbOrganizationType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dbOrganizationTypeDeleteGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbOrganizationTypeDeleteGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dbPageDeleteGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    PageDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbPageDeleteGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dbPageSectionDeleteGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Type = table.Column<string>(nullable: true),
+                    HasPaging = table.Column<bool>(nullable: false),
+                    MaxContent = table.Column<int>(nullable: false),
+                    OneTwoColumns = table.Column<int>(nullable: false),
+                    Sequence = table.Column<int>(nullable: false),
+                    ShowContentTypeTitle = table.Column<bool>(nullable: false),
+                    ShowContentTypeDescription = table.Column<bool>(nullable: false),
+                    ShowSectionTitle = table.Column<bool>(nullable: false),
+                    ShowSectionTitleDescription = table.Column<bool>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbPageSectionDeleteGet", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -422,9 +572,9 @@ namespace StudentUnion0105.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ConditionTypeName = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -631,6 +781,129 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ZdbClassificationEditGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClassificationStatusId = table.Column<int>(nullable: false),
+                    DefaultClassificationPageId = table.Column<int>(nullable: false),
+                    HasDropDown = table.Column<bool>(nullable: false),
+                    DropDownSequence = table.Column<int>(nullable: false),
+                    Lid = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbClassificationEditGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbClassificationIndexGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbClassificationIndexGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbObjectLanguageCreateGet",
+                columns: table => new
+                {
+                    LId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OId = table.Column<int>(nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbObjectLanguageCreateGet", x => x.LId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbObjectLanguageEditGet",
+                columns: table => new
+                {
+                    LId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OId = table.Column<int>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Language = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbObjectLanguageEditGet", x => x.LId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbObjectLanguageIndexGet",
+                columns: table => new
+                {
+                    LId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Language = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbObjectLanguageIndexGet", x => x.LId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbPageLanguageEditGet",
+                columns: table => new
+                {
+                    LId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OId = table.Column<int>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    Language = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbPageLanguageEditGet", x => x.LId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -772,6 +1045,7 @@ namespace StudentUnion0105.Migrations
                     LanguageId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
@@ -843,6 +1117,7 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -876,6 +1151,7 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -940,6 +1216,7 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -973,8 +1250,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -1029,21 +1307,28 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    SuProcessTemplateGroupModelId = table.Column<int>(nullable: true)
+                    FlowId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_dbProcessTemplateGroupLanguage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_dbProcessTemplateGroupLanguage_dbProcessTemplateGroup_SuProcessTemplateGroupModelId",
-                        column: x => x.SuProcessTemplateGroupModelId,
+                        name: "FK_dbProcessTemplateGroupLanguage_dbProcessTemplateGroup_FlowId",
+                        column: x => x.FlowId,
                         principalTable: "dbProcessTemplateGroup",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_dbProcessTemplateGroupLanguage_dbLanguage_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "dbLanguage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -1057,8 +1342,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(maxLength: 50, nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     ProcessTemplateGroupId = table.Column<int>(nullable: true)
@@ -1401,6 +1687,7 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -1471,8 +1758,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     Title = table.Column<string>(maxLength: 50, nullable: true),
-                    PageDescription = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -1689,8 +1977,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -1757,8 +2046,8 @@ namespace StudentUnion0105.Migrations
                     ClassificationLevelId = table.Column<int>(nullable: false),
                     LanguageId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
-                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
@@ -1792,9 +2081,9 @@ namespace StudentUnion0105.Migrations
                     LanguageId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    MouseOver = table.Column<string>(maxLength: 50, nullable: true),
                     DropDownName = table.Column<string>(nullable: true),
-                    MenuName = table.Column<string>(nullable: true),
-                    MouseOver = table.Column<string>(nullable: true),
                     PageName = table.Column<string>(nullable: true),
                     PageDescription = table.Column<string>(nullable: true),
                     HeaderName = table.Column<string>(nullable: true),
@@ -1832,9 +2121,10 @@ namespace StudentUnion0105.Migrations
                     LanguageId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     Title = table.Column<string>(maxLength: 50, nullable: true),
                     TitleDescription = table.Column<string>(nullable: true),
-                    MouseOver = table.Column<string>(maxLength: 50, nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -1868,8 +2158,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -1933,8 +2224,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -2000,8 +2292,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -2059,8 +2352,9 @@ namespace StudentUnion0105.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Description = table.Column<string>(nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: true),
-                    ModifierId = table.Column<Guid>(nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -2084,12 +2378,12 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b9208e3a-a93d-4573-8a56-a4a20374737d", "91442afb-3388-422d-be90-3e9671c3ba94", "Admin", "ADMIN" });
+                values: new object[] { "1aa23f8d-c894-48ed-b40f-401fe2b913ca", "f1dc21d8-aef3-4c44-8112-dd89dd5e7fae", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "bfc27e37-116e-4a4a-930b-4583141983c4", "132ae80b-2134-4a1e-8c9c-e1a19d86282f", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "b0c14916-3c90-4f55-8ee4-2019357ffa58", "868e846b-6e65-40ef-a93d-507677b352c3", "Super admin", "SUPER ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -2406,9 +2700,14 @@ namespace StudentUnion0105.Migrations
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_dbProcessTemplateGroupLanguage_SuProcessTemplateGroupModelId",
+                name: "IX_dbProcessTemplateGroupLanguage_FlowId",
                 table: "dbProcessTemplateGroupLanguage",
-                column: "SuProcessTemplateGroupModelId");
+                column: "FlowId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbProcessTemplateGroupLanguage_LanguageId",
+                table: "dbProcessTemplateGroupLanguage",
+                column: "LanguageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_dbProcessTemplateLanguage_LanguageId",
@@ -2594,6 +2893,9 @@ namespace StudentUnion0105.Migrations
                 name: "dbContentClassificationValue");
 
             migrationBuilder.DropTable(
+                name: "dbContentTypeDeleteGet");
+
+            migrationBuilder.DropTable(
                 name: "dbContentTypeLanguage");
 
             migrationBuilder.DropTable(
@@ -2618,16 +2920,31 @@ namespace StudentUnion0105.Migrations
                 name: "dbLanguageList");
 
             migrationBuilder.DropTable(
+                name: "dbObject");
+
+            migrationBuilder.DropTable(
                 name: "dbObjectVM");
+
+            migrationBuilder.DropTable(
+                name: "dbOrganizationDeleteGet");
 
             migrationBuilder.DropTable(
                 name: "dbOrganizationLanguage");
 
             migrationBuilder.DropTable(
+                name: "dbOrganizationTypeDeleteGet");
+
+            migrationBuilder.DropTable(
                 name: "dbOrganizationTypeLanguage");
 
             migrationBuilder.DropTable(
+                name: "dbPageDeleteGet");
+
+            migrationBuilder.DropTable(
                 name: "dbPageLanguage");
+
+            migrationBuilder.DropTable(
+                name: "dbPageSectionDeleteGet");
 
             migrationBuilder.DropTable(
                 name: "dbPageSectionLanguage");
@@ -2709,6 +3026,24 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "dbValueList");
+
+            migrationBuilder.DropTable(
+                name: "ZdbClassificationEditGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbClassificationIndexGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbObjectLanguageCreateGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbObjectLanguageEditGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbObjectLanguageIndexGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbPageLanguageEditGet");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

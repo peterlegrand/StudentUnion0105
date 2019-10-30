@@ -14,7 +14,7 @@ SELECT
 	, dbPageLanguage.MouseOver
 	, dbPageLanguage.MenuName
 	, dbPageLanguage.Title
-	, dbPageLanguage.PageDescription
+	, dbPageLanguage.TitleDescription
 FROM dbPageLanguage
 JOIN dbPage
 	ON dbPageLanguage.PageId = dbpage.Id

@@ -351,33 +351,36 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ToForm = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             MenuName = c.MenuName
-                             ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.ClassificationLevelId
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationLevelLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
 
-                         }).First();
+            //var ToForm = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 MenuName = c.MenuName
+            //                 ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.ClassificationLevelId
 
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = ClassificationList
-            };
-            return View(ClassificationAndStatus);
+            //             }).First();
+
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = ClassificationList
+            //};
+            //return View(ClassificationAndStatus);
 
 
         }
@@ -490,7 +493,7 @@ namespace StudentUnion0105.Controllers
             {
 
                 _classificationLevelLanguage.DeleteClassificationLevelLanguage(FromForm.LId);
-                return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
             }
             return RedirectToAction("LanguageIndex");
 

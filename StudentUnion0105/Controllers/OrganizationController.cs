@@ -403,31 +403,35 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ToForm = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.OrganizationId
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationEditGet {Id}").First();
+            return View(ObjectLanguage);
 
-                         }).First();
 
-            var OrganizationAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = OrganizationList
-            };
-            return View(ToForm);
+            //var ToForm = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.OrganizationId
+
+            //             }).First();
+
+            //var OrganizationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = OrganizationList
+            //};
+            //return View(ToForm);
 
 
         }
@@ -480,7 +484,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var OrganizationLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationEditGet {Id}").First();
+            var OrganizationLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationLanguageEditGet {Id}").First();
 
 
             return View(OrganizationLanguage);
@@ -493,7 +497,7 @@ namespace StudentUnion0105.Controllers
             {
 
                 _OrganizationLanguage.DeleteOrganizationLanguage(FromForm.LId);
-                return RedirectToAction("LanguageIndex", new { Id = FromForm.Id });
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
             }
             return RedirectToAction("LanguageIndex");
 

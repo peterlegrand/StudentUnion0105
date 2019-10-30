@@ -63,6 +63,8 @@
     <Compile Remove="Migrations\20190902092933_manynewtables.Designer.cs" />
     <Compile Remove="Migrations\20190904083250_freshmigration5.cs" />
     <Compile Remove="Migrations\20190904083250_freshmigration5.Designer.cs" />
+    <Compile Remove="Repositories\Repositories\Other\IObjectLanguageIndexGetRepository.cs" />
+    <Compile Remove="Repositories\SQLRepositories\Other\SQLObjectLanguageIndexGetRepository.cs" />
   </ItemGroup>
 
 

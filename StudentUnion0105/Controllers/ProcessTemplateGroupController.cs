@@ -272,32 +272,34 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateGroupLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
 
-            var ToForm = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.ProcessTemplateGroupId
+            //var ToForm = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.ProcessTemplateGroupId
 
-                         }).First();
+            //             }).First();
 
-            var ProcessTemplateGroupAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = ProcessTemplateGroupList
-            };
-            return View(ToForm);
+            //var ProcessTemplateGroupAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = ProcessTemplateGroupList
+            //};
+            //return View(ToForm);
 
 
         }

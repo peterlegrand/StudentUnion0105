@@ -118,7 +118,8 @@ namespace StudentUnion0105
 
             //            services.AddTransient<IObjectLanguageEditRepository, SQLObjectLanguageEditRepository>();
             services.AddTransient<IObjectLanguageEditGetRepository, SQLObjectLanguageEditGetRepository>();
-            services.AddTransient<IObjectLanguageIndexGetRepository, SQLObjectLanguageIndexGetRepository>();
+            services.AddTransient<IPageLanguageEditGetRepository, SQLPageLanguageEditGetRepository>();
+//            services.AddTransient<IObjectLanguageIndexGetRepository, SQLObjectLanguageIndexGetRepository>();
 
             services.AddTransient<IObjectVMRepository, SQLObjectVMRepository>();
             services.AddTransient<IObjectRepository, SQLObjectRepository>();

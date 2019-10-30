@@ -246,33 +246,42 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
-            var ToForm = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.ContentTypeId
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-                         }).First();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ContentTypeAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = ContentTypeList
-            };
-            return View(ToForm);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ContentTypeLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
+
+            //var ToForm = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.ContentTypeId
+
+            //             }).First();
+
+            //var ContentTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = ContentTypeList
+            //};
+            //return View(ToForm);
 
 
         }

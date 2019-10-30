@@ -24,7 +24,7 @@ namespace StudentUnion0105.Models
         [MaxLength(50)]
         public string Title { get; set; }
         [Display(Name = "Page description")]
-        public string PageDescription { get; set; }
+        public string TitleDescription { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

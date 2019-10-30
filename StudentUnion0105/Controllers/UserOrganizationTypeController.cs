@@ -77,14 +77,22 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async  Task<IActionResult> LanguageEdit(int Id)
         {
-            var UserOrganizationType =  _context.dbUserOrganizationTypeLanguage.FromSql($"UserOrganizationTypeSelectLanguage @p0",
-                 parameters: new[] {             //0
-                                        Id.ToString()
-                    }).First();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            return View(UserOrganizationType); //SuUITermLanguage
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"UserOrganizationTypeLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
+
+            //var UserOrganizationType =  _context.dbUserOrganizationTypeLanguage.FromSql($"UserOrganizationTypeSelectLanguage @p0",
+            //     parameters: new[] {             //0
+            //                            Id.ToString()
+            //        }).First();
+
+            //return View(UserOrganizationType); //SuUITermLanguage
 
 
         }

@@ -10,8 +10,8 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20191026043521_alot")]
-    partial class alot
+    [Migration("20191030084318_required")]
+    partial class required
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "72265118-b768-421b-aa15-a0675ff95cfb",
-                            ConcurrencyStamp = "802a5f3d-48c3-41aa-bcca-bc9b76458472",
+                            Id = "a16a5a46-e7e5-4efe-bda9-6e076d5268ef",
+                            ConcurrencyStamp = "26861085-d6fb-4dda-ba7b-032f378a2967",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8bab266c-757c-4568-8120-0f138be3096f",
-                            ConcurrencyStamp = "62484318-c36d-4afd-91ca-d6efa12b4177",
+                            Id = "6fdd0ab7-4885-4b93-a0f4-bd6f40e4acb5",
+                            ConcurrencyStamp = "5964dbe0-93d9-45a1-b72c-972fb89f625c",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -162,6 +162,66 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("dbClaim");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuClassificationEditGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassificationStatusId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<int>("DefaultClassificationPageId");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<int>("DropDownSequence");
+
+                    b.Property<bool>("HasDropDown");
+
+                    b.Property<int>("Lid");
+
+                    b.Property<string>("MenuName")
+                        .IsRequired();
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbClassificationEditGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuClassificationIndexGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbClassificationIndexGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationLanguageModel", b =>
@@ -714,7 +774,92 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbObject");
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuObjectLanguageEditGet", b =>
+            modelBuilder.Entity("StudentUnion0105.Models.SuObjectLanguageCreateGetModel", b =>
+                {
+                    b.Property<int>("LId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .IsRequired();
+
+                    b.Property<string>("MouseOver")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("OId");
+
+                    b.HasKey("LId");
+
+                    b.ToTable("ZdbObjectLanguageCreateGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuObjectLanguageEditGetModel", b =>
+                {
+                    b.Property<int>("LId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("MenuName")
+                        .IsRequired();
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("OId");
+
+                    b.HasKey("LId");
+
+                    b.ToTable("ZdbObjectLanguageEditGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuObjectLanguageIndexGetModel", b =>
+                {
+                    b.Property<int>("LId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("LId");
+
+                    b.ToTable("ZdbObjectLanguageIndexGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationDeleteGetModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -738,9 +883,13 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Type");
+
                     b.HasKey("Id");
 
-                    b.ToTable("dbObjectLanguage");
+                    b.ToTable("dbOrganizationDeleteGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationLanguageModel", b =>
@@ -826,6 +975,35 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbOrganizationStatus");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeDeleteGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LId");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbOrganizationTypeDeleteGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuOrganizationTypeLanguageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -883,6 +1061,78 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("dbOrganizationType");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageDeleteGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LId");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PageDescription");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbPageDeleteGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageLanguageEditGetModel", b =>
+                {
+                    b.Property<int>("LId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OId");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.HasKey("LId");
+
+                    b.ToTable("ZdbPageLanguageEditGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuPageLanguageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -910,12 +1160,12 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.Property<string>("PageDescription");
-
                     b.Property<int>("PageId");
 
                     b.Property<string>("Title")
                         .HasMaxLength(50);
+
+                    b.Property<string>("TitleDescription");
 
                     b.HasKey("Id");
 
@@ -951,6 +1201,59 @@ namespace StudentUnion0105.Migrations
                     b.HasIndex("PageTypeId");
 
                     b.ToTable("dbPage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionDeleteGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasPaging");
+
+                    b.Property<int>("LId");
+
+                    b.Property<int>("MaxContent");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OneTwoColumns");
+
+                    b.Property<int>("Sequence");
+
+                    b.Property<bool>("ShowContentTypeDescription");
+
+                    b.Property<bool>("ShowContentTypeTitle");
+
+                    b.Property<bool>("ShowSectionTitle");
+
+                    b.Property<bool>("ShowSectionTitleDescription");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbPageSectionDeleteGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPageSectionLanguageModel", b =>

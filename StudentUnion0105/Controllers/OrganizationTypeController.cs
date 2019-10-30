@@ -275,31 +275,35 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
 
-            var ToForm = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.OrganizationTypeId
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationTypeLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
 
-                         }).First();
 
-            var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = OrganizationTypeList
-            };
-            return View(ToForm);
+            //var ToForm = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.OrganizationTypeId
+
+            //             }).First();
+
+            //var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = OrganizationTypeList
+            //};
+            //return View(ToForm);
 
 
         }

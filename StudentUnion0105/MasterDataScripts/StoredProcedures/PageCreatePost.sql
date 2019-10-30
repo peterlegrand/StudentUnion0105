@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[PageCreatePost]
 	, @MouseOver nvarchar(max)
 	, @MenuName nvarchar (max)
 	, @Title nvarchar (max)
-	, @PageDescription nvarchar (max)
+	, @TitleDescription nvarchar (max)
 	)
 AS
 BEGIN TRANSACTION 
@@ -27,7 +27,7 @@ BEGIN TRANSACTION
 		, MouseOver
 		, MenuName
 		, Title
-		, PageDescription
+		, TitleDescription
 		, CreatorId
 		, CreatedDate
 		, ModifierId
@@ -41,7 +41,7 @@ BEGIN TRANSACTION
 		, @MouseOver
 		, @MenuName
 		, @Title
-		, @PageDescription
+		, @TitleDescription
 		, @UserId
 		, getdate()
 		, @UserId

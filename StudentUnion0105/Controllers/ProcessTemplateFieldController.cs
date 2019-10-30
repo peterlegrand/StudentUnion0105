@@ -310,33 +310,42 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
-            var FieldLanguage = (from c in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.ProcessTemplateFieldId
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-                         }).First();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = FieldLanguage //, a = ClassificationList
-            };
-            return View(ClassificationAndStatus);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateFieldLanguageEditGet {Id}").First();
+            return View(ObjectLanguage);
+
+            //var FieldLanguage = (from c in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.ProcessTemplateFieldId
+
+            //             }).First();
+
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = FieldLanguage //, a = ClassificationList
+            //};
+            //return View(ClassificationAndStatus);
             //return View(FieldLanguage);
 
 

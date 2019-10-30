@@ -13,7 +13,7 @@ SELECT
 	, dbPageLanguage.Description
 	, dbPageLanguage.MouseOver
 	, dbPageLanguage.MenuName
-	, dbPageLanguage.PageDescription
+	, dbPageLanguage.TitleDescription
 	, dbPageLanguage.Title
 FROM dbPageLanguage
 JOIN dbPage 

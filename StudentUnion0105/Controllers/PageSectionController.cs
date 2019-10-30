@@ -525,32 +525,36 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            //PETER the Zdb for page and page section are the same.
+            var PageSectionLanguage = _context.ZdbPageLanguageEditGet.FromSql($"PageSectionLanguageEditGet {Id}").First();
+            return View(PageSectionLanguage);
 
-            var ToForm = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
-                         join l in _language.GetAllLanguages()
-                         on c.LanguageId equals l.Id
-                         where c.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = c.Id
-                            ,
-                             Name = c.Name
-                            ,
-                             Description = c.Description
-                            ,
-                             MouseOver = c.MouseOver
-                            ,
-                             Language = l.LanguageName
-                            ,
-                             ObjectId = c.PageSectionId
 
-                         }).First();
+            //var ToForm = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
+            //             join l in _language.GetAllLanguages()
+            //             on c.LanguageId equals l.Id
+            //             where c.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = c.Id
+            //                ,
+            //                 Name = c.Name
+            //                ,
+            //                 Description = c.Description
+            //                ,
+            //                 MouseOver = c.MouseOver
+            //                ,
+            //                 Language = l.LanguageName
+            //                ,
+            //                 ObjectId = c.PageSectionId
 
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            {
-                SuObject = ToForm //, a = ClassificationList
-            };
-            return View(ClassificationAndStatus);
+            //             }).First();
+
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = ToForm //, a = ClassificationList
+            //};
+            //return View(ClassificationAndStatus);
 
 
         }
