@@ -67,6 +67,13 @@
     <Compile Remove="Repositories\SQLRepositories\Other\SQLObjectLanguageIndexGetRepository.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationAndLanguageUpdate.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationDelete.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationIndexSelect.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationLanguageIndexSelect.sql" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

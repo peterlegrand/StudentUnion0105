@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace StudentUnion0105.Repositories
 {
-    public interface IClassificationIndexGetRepository
-    {
-        IEnumerable<SuClassificationIndexGetModel> GetAllClassifcations();
-    }
+    //public interface IClassificationIndexGetRepository
+    //{
+    //    IEnumerable<SuClassificationIndexGetModel> GetAllClassifcations();
+    //}
 }

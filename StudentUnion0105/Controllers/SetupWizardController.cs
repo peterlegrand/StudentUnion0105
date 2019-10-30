@@ -89,8 +89,8 @@ namespace StudentUnion0105.Controllers
 
             string[] StoredProcedures;
             StoredProcedures = new string[]{ 
-                "ClassificationAndLanguageUpdate.sql"
-                , "ClassificationIndexSelect.sql"
+                //CAN BE DELETED "ClassificationAndLanguageUpdate.sql"
+                //CAN BE DELETED "ClassificationIndexSelect.sql"
                 , "ClassificationLevelDeleteSelect.sql"
                 , "ClassificationSelectOne.sql"
                 , "ClassificationValueStructure.sql"
