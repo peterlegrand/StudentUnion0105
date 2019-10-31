@@ -91,9 +91,9 @@ namespace StudentUnion0105.Controllers
             StoredProcedures = new string[]{ 
                 //CAN BE DELETED "ClassificationAndLanguageUpdate.sql"
                 //CAN BE DELETED "ClassificationIndexSelect.sql"
-                , "ClassificationLevelDeleteSelect.sql"
-                , "ClassificationSelectOne.sql"
-                , "ClassificationValueStructure.sql"
+                //CAN BE DELETED, "ClassificationLevelDeleteSelect.sql"
+                //CAN BE DELETED, "ClassificationSelectOne.sql"
+                 "ClassificationValueStructure.sql"
                 , "ClassificationValueStructureValues.sql"
                 , "ContentCreate.sql"
                 , "ContentInsert.sql"
@@ -334,7 +334,7 @@ namespace StudentUnion0105.Controllers
 
 
 , "ClassificationCreatePost.sql"
-//, "ClassificationLevelCreatePost.sql"
+, "ClassificationLevelCreatePost.sql"
 //, "ClassificationValueCreatePost.sql"
 //, "ContentCreatePost.sql"
 //, "ContentTypeCreatePost.sql"
@@ -358,7 +358,7 @@ namespace StudentUnion0105.Controllers
 
 
 , "ClassificationEditPost.sql"
-//, "ClassificationLevelEditPost.sql"
+, "ClassificationLevelEditPost.sql"
 //, "ClassificationValueEditPost.sql"
 //, "ContentTypeEditPost.sql"
 //, "LanguageEditPost.sql"
@@ -404,7 +404,7 @@ namespace StudentUnion0105.Controllers
 
 
 , "ClassificationLanguageCreatePost.sql"
-//, "ClassificationLevelLanguageCreatePost.sql"
+, "ClassificationLevelLanguageCreatePost.sql"
 //, "ClassificationValueLanguageCreatePost.sql"
 //, "ContentTypeLanguageCreatePost.sql"
 //, "OrganizationLanguageCreatePost.sql"
@@ -424,7 +424,7 @@ namespace StudentUnion0105.Controllers
 //, "ProcessTemplateFieldStepsLanguageCreatePost.sql"
 
 , "ClassificationLanguageEditPost.sql"
-//, "ClassificationLevelLanguageEditPost.sql"
+, "ClassificationLevelLanguageEditPost.sql"
 //, "ClassificationValueLanguageEditPost.sql"
 //, "ContentTypeLanguageEditPost.sql"
 //, "OrganizationLanguageEditPost.sql"

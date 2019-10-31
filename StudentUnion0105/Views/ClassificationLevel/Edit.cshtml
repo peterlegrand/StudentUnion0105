@@ -1,4 +1,4 @@
-﻿@model SuObjectAndStatusViewModel
+﻿@model SuClassificationLevelEditGetWithListModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -11,80 +11,80 @@
     <form class="mt-3" method="post">
 
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.Id" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <label asp-for="@Model.ClassificationLevel.OId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.Id" class="form-control" />
-                <span asp-validation-for="@Model.SuObject.Id" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.OId" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationLevel.OId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row" hidden>
-            <label asp-for="@Model.SuObject.ObjectLanguageId" hidden class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <label asp-for="@Model.ClassificationLevel.PId" hidden class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.ObjectLanguageId" hidden class="form-control" />
-                <span asp-validation-for="@Model.SuObject.ObjectLanguageId" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.PId" hidden class="form-control" />
+                <span asp-validation-for="@Model.ClassificationLevel.PId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <label asp-for="@Model.ClassificationLevel.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.Name" class="form-control" />
-                <span asp-validation-for="@Model.SuObject.Name" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.Name" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationLevel.Name" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <label asp-for="@Model.ClassificationLevel.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.MenuName" class="form-control" />
-                <span asp-validation-for="@Model.SuObject.MenuName" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationLevel.MenuName" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <label asp-for="@Model.ClassificationLevel.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
             <div class="col-sm-10">
-                <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor" id="description" name="SuObject.Description"></textarea>
-                <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
+                <textarea asp-for="@Model.ClassificationLevel.Description" class="form-control ckeditor" id="description" name="ClassificationLevel.Description"></textarea>
+                <span asp-validation-for="@Model.ClassificationLevel.Description" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <label asp-for="@Model.ClassificationLevel.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.MouseOver" class="form-control" />
-                <span asp-validation-for="@Model.SuObject.MouseOver" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationLevel.MouseOver" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.DateLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+            <label asp-for="@Model.ClassificationLevel.DateLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
             <div class="col-sm-10">
-                @Html.DropDownListFor(x => x.SuObject.DateLevel, Model.ProbablyTypeListItem)
-                <span asp-validation-for="@Model.SuObject.DateLevel" class="text-danger"></span>
+                @Html.DropDownListFor(x => x.ClassificationLevel.DateLevel, Model.DateTypeList)
+                <span asp-validation-for="@Model.ClassificationLevel.DateLevel" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.OnTheFly" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <label asp-for="@Model.ClassificationLevel.OnTheFly" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.OnTheFly" class="form-check" />
-                <span asp-validation-for="@Model.SuObject.OnTheFly" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.OnTheFly" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationLevel.OnTheFly" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.Alphabetically" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <label asp-for="@Model.ClassificationLevel.Alphabetically" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.Alphabetically" class="form-check" />
-                <span asp-validation-for="@Model.SuObject.Alphabetically" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.Alphabetically" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationLevel.Alphabetically" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.CanLink" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+            <label asp-for="@Model.ClassificationLevel.CanLink" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.CanLink" class="form-check" />
-                <span asp-validation-for="@Model.SuObject.CanLink" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.CanLink" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationLevel.CanLink" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.SuObject.InDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+            <label asp-for="@Model.ClassificationLevel.InDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.SuObject.InDropDown" class="form-check" />
-                <span asp-validation-for="@Model.SuObject.InDropDown" class="text-danger"></span>
+                <input asp-for="@Model.ClassificationLevel.InDropDown" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationLevel.InDropDown" class="text-danger"></span>
             </div>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>

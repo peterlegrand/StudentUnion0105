@@ -8,7 +8,8 @@ namespace StudentUnion0105.Models
 {
     public class SuClassificationLevelEditGetModel
     {
-        public int Id { get; set; }
+        [Key]
+        public int OId { get; set; }
         public int PId { get; set; }
         public int Sequence { get; set; }
         public int DateLevel { get; set; }

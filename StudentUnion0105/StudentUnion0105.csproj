@@ -72,6 +72,10 @@
     <None Remove="MasterDataScripts\StoredProcedures\ClassificationDelete.sql" />
     <None Remove="MasterDataScripts\StoredProcedures\ClassificationIndexSelect.sql" />
     <None Remove="MasterDataScripts\StoredProcedures\ClassificationLanguageIndexSelect.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationLevelDeleteSelect.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationLevelIndexSelect.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationLevelLanguageIndexSelect.sql" />
+    <None Remove="MasterDataScripts\StoredProcedures\ClassificationSelectOne.sql" />
   </ItemGroup>
 
 

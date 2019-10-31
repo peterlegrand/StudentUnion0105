@@ -1,3 +1,21 @@
 ﻿--fk languageid
 
 onDelete: ReferentialAction.NoAction
+
+Models
+Controller
+Views
+SP
+ CreatePost
+ DeleteGet
+ DeletePost
+ EditGet
+ EditPost
+ IndexGet
+ LanguageCreatePost
+ LanguageDeletePost
+ LanguageEditGet
+ LanguageEditPost
+ LanguageIndexGet
+Data
+SetupWizard

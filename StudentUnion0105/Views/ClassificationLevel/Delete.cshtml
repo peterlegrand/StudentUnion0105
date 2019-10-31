@@ -1,4 +1,4 @@
-﻿@model SuObject
+﻿@model SuClassificationLevelDeleteGetModel
 @{
 ViewBag.Title = ViewBag.Terms[0];
 }
@@ -6,15 +6,9 @@ ViewBag.Title = ViewBag.Terms[0];
     <form class="mt-3" method="post">
 
         <div class="form-group row">
-            <label asp-for="@Model.Id" class="col-sm-2 col-form-label">ViewBag.Terms[1]</label>
+            <label asp-for="@Model.OId" class="col-sm-2 col-form-label">ViewBag.Terms[1]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.Id" class="form-control" />
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="@Model.LanguageId" hidden class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.LanguageId" hidden class="form-control" />
+                <input asp-for="@Model.OId" class="form-control" />
             </div>
         </div>
         <div class="form-group row">
@@ -46,16 +40,37 @@ ViewBag.Title = ViewBag.Terms[0];
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.Status" class="col-sm-2 col-form-label">ViewBag.Terms[6]</label>
+            <label asp-for="@Model.Alphabetically" class="col-sm-2 col-form-label">ViewBag.Terms[6]</label>
             <div class="col-sm-10 ">
-                <input asp-for="@Model.MouseOver" class="form-control" />
+                <input asp-for="@Model.Alphabetically" class="form-control" />
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.Bool1" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <label asp-for="@Model.CanLink" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.Bool1" class="form-check" />
-                <span asp-validation-for="@Model.Bool1" class="text-danger"></span>
+                <input asp-for="@Model.CanLink" class="form-check" />
+                <span asp-validation-for="@Model.CanLink" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.InDropDown" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.InDropDown" class="form-check" />
+                <span asp-validation-for="@Model.InDropDown" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.OnTheFly" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.OnTheFly" class="form-check" />
+                <span asp-validation-for="@Model.OnTheFly" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Sequence" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Sequence" class="form-check" />
+                <span asp-validation-for="@Model.Sequence" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
@@ -66,10 +81,24 @@ ViewBag.Title = ViewBag.Terms[0];
             </div>
         </div>
         <div class="form-group row">
+            <label asp-for="@Model.CreatedDate" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.CreatedDate" class="form-check" />
+                <span asp-validation-for="@Model.CreatedDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
             <label asp-for="@Model.Modifier" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
             <div class="col-sm-10">
                 <input asp-for="@Model.Modifier" class="form-check" />
                 <span asp-validation-for="@Model.Modifier" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ModifiedDate" class="col-sm-2 col-form-label">ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ModifiedDate" class="form-check" />
+                <span asp-validation-for="@Model.ModifiedDate" class="text-danger"></span>
             </div>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>

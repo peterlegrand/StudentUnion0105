@@ -20,7 +20,6 @@ namespace StudentUnion0105.Controllers
     public class ClassificationController : Controller
     {
         private readonly UserManager<SuUserModel> userManager;
-        private readonly IClassificationVMRepository _classificationVMRepository;
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
@@ -29,7 +28,6 @@ namespace StudentUnion0105.Controllers
 
 
         public ClassificationController(UserManager<SuUserModel> userManager
-                                                , IClassificationVMRepository classificationVMRepository
                                                 , IClassificationStatusRepository classificationStatus
                                                 , IClassificationRepository classification
                                                 , IClassificationLanguageRepository classificationLanguage
@@ -38,7 +36,6 @@ namespace StudentUnion0105.Controllers
             )
         {
             this.userManager = userManager;
-            _classificationVMRepository = classificationVMRepository;
             _classificationStatus = classificationStatus;
             _classification = classification;
             _classificationLanguage = classificationLanguage;
@@ -164,7 +161,7 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                     {
-                    new SqlParameter("@Id", FromForm.Classification.Id),
+//                    new SqlParameter("@Id", FromForm.Classification.Id),
                     new SqlParameter("@LanguageId", DefaultLanguageID),
                     new SqlParameter("@ClassificationStatusId", FromForm.Classification.ClassificationStatusId),
                     new SqlParameter("@DefaultClassificationPageId", FromForm.Classification.DefaultClassificationPageId),
@@ -178,8 +175,8 @@ namespace StudentUnion0105.Controllers
                     };
 
                 var b = _context.Database.ExecuteSqlCommand("ClassificationCreatePost " +
-                            "@Id" +
-                            ", @LanguageId" +
+  //                          "@Id" +
+                            "@LanguageId" +
                             ", @ClassificationStatusId" +
                             ", @DefaultClassificationPageId" +
                             ", @HasDropDown" +
@@ -303,8 +300,8 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                Guid guid = new Guid(CurrentUser.Id);
+//                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+//                Guid guid = new Guid(CurrentUser.Id);
 
                 SqlParameter[] parameters =
                     {
@@ -337,8 +334,8 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-            var parameter = new SqlParameter("@Id", DefaultLanguageID);
 
+            var parameter = new SqlParameter("@Id", DefaultLanguageID);
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationLanguageEditGet @Id" , parameter).First();
             return View(ObjectLanguage);
         }
@@ -365,7 +362,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Classification = _context.ZdbClassificationDeleteGet.FromSql($"ClassificationDeleteGet @LanguageId, @Id", parameters).First();
+            SuClassificationDeleteGetModel Classification = _context.ZdbClassificationDeleteGet.FromSql($"ClassificationDeleteGet @LanguageId, @Id", parameters).First();
 
 
 
@@ -373,9 +370,9 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(SuObjectVM FromForm)
+        public IActionResult Delete(SuClassificationDeleteGetModel FromForm)
         {
-            var parameter = new SqlParameter("@LanguageId", FromForm.Id);
+            var parameter = new SqlParameter("@LanguageId", FromForm.OId);
             var b = _context.Database.ExecuteSqlCommand($"ClassificationDeletePost @Id", parameter);
 
             return RedirectToAction("Index");

@@ -44,7 +44,7 @@ namespace StudentUnion0105
                 options.AddPolicy("Page", policy => policy.RequireClaim("Menu", "Page"));
             });
             services.AddTransient<IClassificationRepository, SQLClassificationRepository>();
-            services.AddTransient<IClassificationIndexGetRepository, SQLClassificationIndexGetRepository>();
+//            services.AddTransient<IClassificationIndexGetRepository, SQLClassificationIndexGetRepository>();
             services.AddTransient<IClassificationVMRepository, SQLClassificationVMRepository>();
             services.AddTransient<IClassificationLevelVMRepository, SQLClassificationLevelVMRepository>();
             services.AddTransient<IClaimRepository, SQLClaimRepository>();

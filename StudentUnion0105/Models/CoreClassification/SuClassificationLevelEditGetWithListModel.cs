@@ -9,7 +9,8 @@ namespace StudentUnion0105.Models
     public class SuClassificationLevelEditGetWithListModel
     {
         public SuClassificationLevelEditGetModel ClassificationLevel { get; set; }
-//        public List<SelectListItem> StatusList { get; set; }
+        public List<SelectListItem> SequenceList { get; set; }
+        public List<SelectListItem> DateTypeList { get; set; }
 
     }
 }

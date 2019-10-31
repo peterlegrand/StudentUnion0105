@@ -1,10 +1,12 @@
-CREATE PROCEDURE ClassificationCreatePost (
-//	@Id int
-	 @LanguageId int
-	, @ClassificationStatusId int
-	, @DefaultClassificationPageId int
-	, @HasDropDown bit
-	, @DropDownSequence int
+CREATE PROCEDURE ClassificationLevelCreatePost (
+	@PId int
+	, @LanguageId int
+	, @Sequence int
+	, @DateLevel int
+	, @OnTheFly bit
+	, @Alphabetically bit
+	, @CanLink bit
+	, @InDropDown bit
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -14,31 +16,37 @@ CREATE PROCEDURE ClassificationCreatePost (
 AS
 BEGIN TRANSACTION
 
-INSERT INTO dbClassification (
-	ClassificationStatusId 
-	, DefaultClassificationPageId 
-	, HasDropDown 
-	, DropDownSequence 
+INSERT INTO dbClassificationLevel (
+	ClassificationId 
+	, Sequence
+	, DateLevel
+	, OnTheFly
+	, Alphabetically
+	, CanLink
+	, InDropDown
 	, CreatorId
 	, CreatedDate
 	, ModifierId 
 	, ModifiedDate
 	)
 VALUES (
-	@ClassificationStatusId
-	, @DefaultClassificationPageId
-	, @HasDropDown
-	, @DropDownSequence
+	@PId
+	, @Sequence
+	, @DateLevel
+	, @OnTheFly
+	, @Alphabetically
+	, @CanLink
+	, @InDropDown
 	, @ModifierId
 	, getdate()
 	, @ModifierId
 	, getdate()
 	);
 
-DECLARE @NewClassificationId int	= scope_identity();
+DECLARE @NewClassificationLevelId int	= scope_identity();
 
-INSERT INTO dbClassificationLanguage (
-	ClassificationId
+INSERT INTO dbClassificationLevelLanguage (
+	ClassificationLevelId
 	, LanguageId
 	, Name 
 	, Description 
@@ -50,7 +58,7 @@ INSERT INTO dbClassificationLanguage (
 	, ModifiedDate
 	)
 VALUES (
-	@NewClassificationId
+	@NewClassificationLevelId
 	, @LanguageId
 	, @Name
 	, @Description

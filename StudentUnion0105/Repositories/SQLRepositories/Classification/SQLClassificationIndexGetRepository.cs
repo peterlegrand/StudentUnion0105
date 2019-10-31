@@ -5,18 +5,18 @@ using System.Collections.Generic;
 
 namespace StudentUnion0105.SQLRepositories
 {
-    public class SQLClassificationIndexGetRepository : IClassificationIndexGetRepository
-    {
-        private readonly SuDbContext context;
+    //public class SQLClassificationIndexGetRepository : IClassificationIndexGetRepository
+    //{
+    //    private readonly SuDbContext context;
 
-        public SQLClassificationIndexGetRepository(SuDbContext context)
-        {
-            this.context = context;
-        }
-        public IEnumerable<SuClassificationIndexGetModel> GetAllClassifcations()
-        {
-            return context.ZdbClassificationIndexGet;
-        }
+    //    public SQLClassificationIndexGetRepository(SuDbContext context)
+    //    {
+    //        this.context = context;
+    //    }
+    //    public IEnumerable<SuClassificationIndexGetModel> GetAllClassifcations()
+    //    {
+    //        return context.ZdbClassificationIndexGet;
+    //    }
 
-    }
+    //}
 }
