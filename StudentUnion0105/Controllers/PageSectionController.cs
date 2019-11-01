@@ -10,6 +10,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -58,23 +59,28 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var pageSection = (from c in _pageSection.GetAllPageSections()
-                               join l in _pageSectionLanguage.GetAllPageSectionLanguages()
-                      on c.Id equals l.PageSectionId
-                               where c.PageId == Id
-                               && l.LanguageId == DefaultLanguageID
-                               orderby c.Sequence
-                               select new SuObjectVM
-                               {
-                                   Id = c.Id
-                               ,
-                                   Name = l.Name
-                               ,
-                                   ObjectId = c.PageId
-                               }).ToList();
-            ViewBag.ObjectId = Id.ToString();
-            //PETER TODO add a classification label so you know to which classification the levels belong.
-            return View(pageSection);
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var SectionType = _context.ZdbObjectIndexGet.FromSql("PageSectionTypeIndexGet @LanguageId", parameter).ToList();
+            return View(SectionType);
+
+            //var pageSection = (from c in _pageSection.GetAllPageSections()
+            //                   join l in _pageSectionLanguage.GetAllPageSectionLanguages()
+            //          on c.Id equals l.PageSectionId
+            //                   where c.PageId == Id
+            //                   && l.LanguageId == DefaultLanguageID
+            //                   orderby c.Sequence
+            //                   select new SuObjectVM
+            //                   {
+            //                       Id = c.Id
+            //                   ,
+            //                       Name = l.Name
+            //                   ,
+            //                       ObjectId = c.PageId
+            //                   }).ToList();
+            //ViewBag.ObjectId = Id.ToString();
+            ////PETER TODO add a classification label so you know to which classification the levels belong.
+            //return View(pageSection);
         }
 
 

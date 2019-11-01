@@ -1,5 +1,4 @@
 CREATE PROCEDURE ClassificationCreatePost (
-//	@Id int
 	 @LanguageId int
 	, @ClassificationStatusId int
 	, @DefaultClassificationPageId int

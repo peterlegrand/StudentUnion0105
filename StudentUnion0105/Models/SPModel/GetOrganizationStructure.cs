@@ -2,7 +2,7 @@
 
 namespace StudentUnion0105.SPModel
 {
-    public class SuGetOrganizationStructure
+    public class SuOrganizationIndexGet
     {
         public int ParentId { get; set; }
         public int Id { get; set; }

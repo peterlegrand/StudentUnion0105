@@ -14,9 +14,9 @@ namespace StudentUnion0105.SQLRepositories
         {
             this.context = context;
         }
-        public IEnumerable<SuGetOrganizationStructure> GetOrganizationStructure(int Id)
+        public IEnumerable<SuOrganizationIndexGet> GetOrganizationStructure(int Id)
         {
-            var a = context.dbGetOrganizationStructure.FromSql("OrgStructure {0}", Id);
+            var a = context.ZdbOrganizationIndexGet.FromSql("OrgStructure {0}", Id);
 
             return a;
         }

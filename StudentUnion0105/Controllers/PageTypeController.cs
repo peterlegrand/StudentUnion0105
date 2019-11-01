@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,20 +39,29 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var PageTypes = (
 
-                from l in _PageTypeLanguage.GetAllPageTypeLanguages()
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var PageType = _context.ZdbObjectIndexGet.FromSql("PageTypeIndexGet @LanguageId", parameter).ToList();
+            return View(PageType);
+
+            //var PageTypes = (
+
+            //    from l in _PageTypeLanguage.GetAllPageTypeLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
 
 
-                {
-                    Id = l.PageTypeId
-                             ,
-                    Name = l.Name
-                }).ToList();
-            return View(PageTypes);
+            //    {
+            //        Id = l.PageTypeId
+            //                 ,
+            //        Name = l.Name
+            //    }).ToList();
+            //return View(PageTypes);
         }
 
         [HttpGet]

@@ -115,7 +115,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var OrganizationsFromDb = _context.dbGetOrganizationStructure.FromSql($"OrgStructure {DefaultLanguageID}").ToList();
+            var OrganizationsFromDb = _context.ZdbOrganizationIndexGet.FromSql($"OrgStructure {DefaultLanguageID}").ToList();
 
             foreach (var OrganizationFromDb in OrganizationsFromDb)
             {

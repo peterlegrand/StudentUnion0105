@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191101004431_objectindex")]
+    partial class objectindex
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9015894b-87bb-4985-b19d-c19626073391",
-                            ConcurrencyStamp = "84cd9451-9e3b-44c2-8fee-866b414faa6a",
+                            Id = "54d8959b-7f54-44d7-96e6-74f76f635baf",
+                            ConcurrencyStamp = "ad6d5fea-3a02-4106-a37a-11c5f17b6e2e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ceb260f0-0687-474f-9510-e2759986d243",
-                            ConcurrencyStamp = "a58b51b1-8f1d-46b9-b756-c3f4022b6f7d",
+                            Id = "2228fbdf-b451-4bbc-bd41-4e1bfb56744c",
+                            ConcurrencyStamp = "002e0442-04aa-44b3-872c-1ce4af8a207b",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });

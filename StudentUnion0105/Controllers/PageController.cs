@@ -60,20 +60,27 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Pages = (
 
-                from l in _PageLanguage.GetAllPageLanguages()
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            var Page = _context.ZdbObjectIndexGet.FromSql("PageIndexGet @LanguageId", parameter).ToList();
+            return View(Page);
 
 
-                {
-                    Id = l.PageId
-                             ,
-                    Name = l.Name
-                }).ToList();
-            return View(Pages);
+            //var Pages = (
+
+            //    from l in _PageLanguage.GetAllPageLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
+
+
+            //    {
+            //        Id = l.PageId
+            //                 ,
+            //        Name = l.Name
+            //    }).ToList();
+            //return View(Pages);
         }
 
 

@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,22 +37,36 @@ namespace StudentUnion0105.Controllers
         }
         public async Task<IActionResult> Index()
         {
+
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var PageSectionTypes = (
 
-                from l in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
 
-                {
-                    Id = l.PageSectionTypeId
-                             ,
-                    Name = l.Name
-                }).ToList();
-            return View(PageSectionTypes);
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var PageSectionType = _context.ZdbObjectIndexGet.FromSql("PageSectionTypeIndexGet @LanguageId", parameter).ToList();
+            return View(PageSectionType);
+
+
+            //var CurrentUser = await userManager.GetUserAsync(User);
+            //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            //var PageSectionTypes = (
+
+            //    from l in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
+
+
+            //    {
+            //        Id = l.PageSectionTypeId
+            //                 ,
+            //        Name = l.Name
+            //    }).ToList();
+            //return View(PageSectionTypes);
         }
 
         [HttpGet]

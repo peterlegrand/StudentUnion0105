@@ -54,15 +54,12 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-
             ViewBag.Terms = UICustomizationArray.UIArray( this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID) ;
 
-            var a = _context.dbGetOrganizationStructure.FromSql($"OrgStructure {DefaultLanguageID}").ToList();
+            var OrgStructure = _context.ZdbOrganizationIndexGet.FromSql($"OrganizationIndexGet {DefaultLanguageID}").ToList();
 
-            //if (a.Count != 0)
-            //{
             int maxLevel = 0;
-            foreach (var Org in a)
+            foreach (var Org in OrgStructure)
             {
                 if (Org.Level > maxLevel)
                 {
@@ -70,64 +67,9 @@ namespace StudentUnion0105.Controllers
                 }
             }
 
-            var c = new OrgStructureWithDepth { MaxLevel = maxLevel, OrgStructure = a };
-            return View(c);
+            var OrgStructureWithDepth = new OrgStructureWithDepth { MaxLevel = maxLevel, OrgStructure = OrgStructure };
+            return View(OrgStructureWithDepth);
         }
-        //        public async Task<IActionResult> Index()
-        //        {
-        //            var CurrentUser = await userManager.GetUserAsync(User);
-        //            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-        //            var a1 = (from o in _Organization.GetAllOrganizations()
-        //                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
-        //                      on o.Id equals l.OrganizationId
-        //                      where l.LanguageId == DefaultLanguageID
-        //                      && o.ParentOrganizationId == null
-        //                      select new SuObjectVM()
-        //                      {
-        //                          Id = o.Id
-        //                           ,
-        //                          Name = l.Name
-        //                      });
-        //            var a2 = (from o in _Organization.GetAllOrganizations()
-        //                      join l in _OrganizationLanguage.GetAllOrganizationLanguages()
-        //                      on o.Id equals l.OrganizationId
-        //                      where l.LanguageId == DefaultLanguageID
-        //                      && o.ParentOrganizationId != null
-        //                      select new SuObjectVM()
-        //                      {
-        //                          Id = o.Id
-        //                           ,
-        //                          Name = l.Name
-
-        //,
-        //                          NullId = o.ParentOrganizationId
-
-        //                      }).ToList();
-
-        //            ObjectsOf5LevelsViewModel a = new ObjectsOf5LevelsViewModel { SuObject1 = a1, SuObject2 = a2, SuObject3 = a2, SuObject4 = a2, SuObject5 = a2 };
-
-        //            return View(a);
-        //        }
-        //        public async Task<IActionResult> Index2()
-        //        {
-        //            var CurrentUser = await userManager.GetUserAsync(User);
-        //            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-        //            var Organizations = (
-
-        //                from l in _OrganizationLanguage.GetAllOrganizationLanguages()
-
-        //                where l.LanguageId == DefaultLanguageID
-        //                select new SuObjectVM
-
-
-        //                {
-        //                    Id = l.OrganizationId
-        //                             ,
-        //                    Name = l.Name
-        //                }).ToList();
-        //            return View(Organizations);
-        //        }
 
         [HttpGet]
         public async Task<IActionResult> Create(int Id)

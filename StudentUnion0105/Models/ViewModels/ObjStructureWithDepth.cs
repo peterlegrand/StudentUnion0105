@@ -8,7 +8,7 @@ namespace StudentUnion0105.ViewModels
     {
         //public List<SuClassificationStatusModel> Status { get; set; }
         public int MaxLevel { get; set; }
-        public List<SuGetOrganizationStructure> OrgStructure { get; set; }
+        public List<SuOrganizationIndexGet> OrgStructure { get; set; }
 
     }
     public class ProjStructureWithDepth
@@ -24,7 +24,7 @@ namespace StudentUnion0105.ViewModels
         //public List<SuClassificationStatusModel> Status { get; set; }
         public int MaxLevel { get; set; }
         public int MaxConfigLevel { get; set; }
-        public List<SuGetClassificationValueStructure> ValueStructure { get; set; }
+        public List<SuClassificationValueIndexGet> ValueStructure { get; set; }
 
     }
 

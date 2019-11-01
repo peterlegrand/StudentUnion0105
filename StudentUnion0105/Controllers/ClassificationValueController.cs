@@ -41,35 +41,32 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var UICustomizationArray = new UICustomization(_context);
+            SuUserModel CurrentUser = await userManager.GetUserAsync(User);
+            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var checklevels = _classificationLevel.GetAllClassificationLevels();
-            int MaxConfigLevel = 0;
-            foreach (var z in checklevels)
-            {
-                if (z.Sequence > MaxConfigLevel && z.ClassificationId == Id)
-                {
-                    MaxConfigLevel = z.Sequence;
-                }
-            }
-                
-            var a = _context.dbGetClassificationValueStructure.FromSql($"ClassificationValueStructure {DefaultLanguageID}, {Id}").ToList();
+            SuInt MaxLevel = new SuInt();
+            MaxLevel.intValue = 0;
 
-            //if (a.Count != 0)
-            //{
-            int maxLevel = 0;
-            foreach (var Value in a)
+            try
             {
-                if (Value.Level > maxLevel)
-                {
-                    maxLevel = Value.Level;
-                }
+                MaxLevel = _context.ZdbInt.FromSql($"ClassificationValueIndexGetMaxLevel {Id}").First();
             }
+            catch { }
+
+            SuInt CurrentLevel = new SuInt();
+            CurrentLevel.intValue = 0;
+            try
+            {
+                CurrentLevel = _context.ZdbInt.FromSql($"ClassificationValueIndexGetCurrentLevel {Id}").First();//? null : new SuInt { intValue = 0 };
+            }
+            catch { }
+
+            var ValueStructure = _context.ZdbClassificationValueIndexGet.FromSql($"ClassificationValueIndexGet {DefaultLanguageID}, {Id}").ToList();
             ViewBag.CId = Id.ToString();
-            var c = new ValueStructureWithDepth { MaxLevel = maxLevel, ValueStructure = a, MaxConfigLevel = MaxConfigLevel };
+            var c = new ValueStructureWithDepth { MaxLevel = MaxLevel.intValue, ValueStructure = ValueStructure, MaxConfigLevel = CurrentLevel.intValue };
             return View(c);
         }
 

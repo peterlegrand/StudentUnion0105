@@ -33,7 +33,7 @@ namespace StudentUnion0105.Data
         //ClassificationValue
         public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
         public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage { get; set; }
-        public DbSet<SuGetClassificationValueStructure> dbGetClassificationValueStructure { get; set; }
+        public DbSet<SuClassificationValueIndexGet> ZdbClassificationValueIndexGet { get; set; }
         public DbSet<SuContentTypeLanguageModel> dbContentTypeLanguage { get; set; }
         public DbSet<SuContentTypeDeleteGetModel> dbContentTypeDeleteGet { get; set; }
         public DbSet<SuOrganizationLanguageModel> dbOrganizationLanguage { get; set; }
@@ -100,6 +100,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuTypeList> dbTypeList { get; set; }
         public DbSet<SuValueList> dbValueList { get; set; }
         //        public DbSet<SuObjectLanguageEditGet> dbObjectLanguage { get; set; }
+        public DbSet<SuObjectIndexGetModel> ZdbObjectIndexGet { get; set; }
         public DbSet<SuObjectLanguageCreateGetModel> ZdbObjectLanguageCreateGet { get; set; }
         public DbSet<SuObjectLanguageEditGetModel> ZdbObjectLanguageEditGet { get; set; }
         public DbSet<SuPageLanguageEditGetModel> ZdbPageLanguageEditGet { get; set; }
@@ -111,7 +112,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuUITermScreenModel> dbUITermScreen { get; set; }
 
 
-        public DbSet<SuGetOrganizationStructure> dbGetOrganizationStructure { get; set; }
+        public DbSet<SuOrganizationIndexGet> ZdbOrganizationIndexGet { get; set; }
         public DbSet<SuGetProjectStructure> dbGetProjectStructure { get; set; }
         public DbSet<SuPageSectionsViewModel> dbPageSectionsViewModel { get; set; }
         public DbSet<SuObjectVM> dbObjectVM { get; set; }
@@ -119,6 +120,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuIdWithStrings> dbIdWithStrings { get; set; }
 
         public DbSet<SuClaim> dbClaim { get; set; }
+        public DbSet<SuInt> ZdbInt { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

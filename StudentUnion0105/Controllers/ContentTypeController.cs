@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,22 +44,27 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var ContentTypes = (
-
-                from l in _contentTypeLanguage.GetAllContentTypeLanguages()
-
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            List<SuObjectIndexGetModel> ContentType = _context.ZdbObjectIndexGet.FromSql("ContentTypeIndexGet @LanguageId", parameter).ToList();
+            return View(ContentType);
 
 
-                {
-                    Id = l.ContentTypeId
-                             ,
-                    Name = l.Name,
-                    Description = l.Description
-                }).ToList();
-            return View(ContentTypes);
+            //var ContentTypes = (
+
+            //    from l in _contentTypeLanguage.GetAllContentTypeLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
+
+
+            //    {
+            //        Id = l.ContentTypeId
+            //                 ,
+            //        Name = l.Name,
+            //        Description = l.Description
+            //    }).ToList();
+            //return View(ContentTypes);
         }
 
         [HttpGet]

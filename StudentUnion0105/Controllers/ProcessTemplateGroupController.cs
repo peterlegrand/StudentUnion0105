@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,21 +43,27 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ProcessTemplateGroups = (
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-                from l in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-
-                where l.LanguageId == DefaultLanguageID
-                select new SuObjectVM
+            var ProcessTemplateGroup = _context.ZdbObjectIndexGet.FromSql("ProcessTemplateGroupIndexGet @LanguageId", parameter).ToList();
+            return View(ProcessTemplateGroup);
 
 
-                {
-                    Id = l.ProcessTemplateGroupId
-                             ,
-                    Name = l.Name,
-                    Description = l.Description
-                }).ToList();
-            return View(ProcessTemplateGroups);
+            //var ProcessTemplateGroups = (
+
+            //    from l in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
+
+            //    where l.LanguageId == DefaultLanguageID
+            //    select new SuObjectVM
+
+
+            //    {
+            //        Id = l.ProcessTemplateGroupId
+            //                 ,
+            //        Name = l.Name,
+            //        Description = l.Description
+            //    }).ToList();
+            //return View(ProcessTemplateGroups);
         }
 
         [HttpGet]
