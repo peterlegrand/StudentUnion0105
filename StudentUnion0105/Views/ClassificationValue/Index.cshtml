@@ -46,7 +46,7 @@
         <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[5]" height="20" width="20" /></a></td>
         @if (Model.MaxConfigLevel > x.Level)
         {
-    <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/Add.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a>@ViewBag.Terms[6]</td>
+    <td style="width: 22px"><a asp-controller="ClassificationValue" asp-action="Create" asp-route-id="@x.Id.ToString()" asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/Add.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>
         }
     </tr>
         }

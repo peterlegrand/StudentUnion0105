@@ -107,8 +107,6 @@ namespace StudentUnion0105.Controllers
                                    , MouseOver = l.MouseOver
                                    , NotNullId = f.ProcessTemplateFromStepId
                                    , NotNullId2 = f.ProcessTemplateToStepId
-                                   ,
-                                   HeaderDescription = f.ConditionRelation
                                }).First();
 
             //Existing levels

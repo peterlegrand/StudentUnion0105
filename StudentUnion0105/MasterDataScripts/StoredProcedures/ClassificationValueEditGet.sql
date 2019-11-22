@@ -1,11 +1,12 @@
 CREATE PROCEDURE ClassificationValueEditGet (@LanguageId int, @Id int)
 AS
 SELECT
-	dbClassificationValue.Id 
+	dbClassificationValue.Id  OId
+	, dbClassificationValue.ClassificationId  PId
 	, dbClassificationValue.ClassificationId
-	, dbClassificationValue.DateFrom
-	, dbClassificationValue.DateTo
-	, dbClassificationValue.ParentValueId
+	, ISNULL(dbClassificationValue.DateFrom, '1900-01-01') FromDate
+	, ISNULL(dbClassificationValue.DateTo, '1900-01-01') ToDate
+	, ISNULL(dbClassificationValue.ParentValueId, 0) ParentValueId
 	, Creator.UserName Creator
 	, dbClassificationValue.CreatedDate
 	, Modifier.UserName Modifier
@@ -21,6 +22,8 @@ SELECT
 	, dbClassificationValueLanguage.PageName
 	, dbClassificationValueLanguage.PageDescription
 	, dbClassificationValueLanguage.TopicName
+	, 0 "DateLevel"
+	, CAST(0 as bit) "InDropDown"
 FROM dbClassificationValueLanguage
 JOIN dbClassificationValue 
 	ON dbClassificationValueLanguage.ClassificationValueId = dbClassificationValue.Id

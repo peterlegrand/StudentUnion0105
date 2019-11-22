@@ -1,0 +1,26 @@
+﻿@model SuFrontPageModel
+
+@if (Model.ShowTitleName)
+{
+    <h1 class="font-weight-bold">@Model.TitleName</h1>
+}
+@if (Model.ShowTitleDescription)
+{
+    <div>@Model.TitleDescription</div>
+}
+@foreach (var x in Model.FrontPageSections)
+{
+        @if (x.ShowSectionTitleName)
+    {
+        <h2>@x.TitleName</h2>
+    }
+@if (x.ShowSectionTitleDescription)
+    {
+<div>@Html.Raw(x.TitleDescription)</div>
+    }
+    @foreach (var y in x.FrontContent)
+    {
+        <h4>@y.Title</h4>
+        <div>@Html.Raw(y.Description)</div>
+    }
+}

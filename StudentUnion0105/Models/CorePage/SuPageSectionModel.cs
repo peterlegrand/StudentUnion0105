@@ -14,7 +14,7 @@ namespace StudentUnion0105.Models
         public int PageSectionTypeId { get; set; }
         [Display(Name = "Show section title")]
         [MaxLength(50)]
-        public bool ShowSectionTitle { get; set; }
+        public bool ShowSectionTitleName { get; set; }
         [Display(Name = "Show section description")]
         public bool ShowSectionTitleDescription { get; set; }
         [Display(Name = "Show content type title")]

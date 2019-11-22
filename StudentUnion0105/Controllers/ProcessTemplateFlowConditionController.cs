@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -46,22 +47,15 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@PId", Id)
+                };
 
-            var pageSection = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
-                               join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
-                      on c.Id equals l.FlowConditionId
-                               where c.ProcessTemplateFlowId == Id
-                               && l.LanguageId == DefaultLanguageID
-                               orderby c.ConditionCharacter
-                               select new SuObjectVM
-                               {
-                                   Id = c.Id
-                               , Name = l.Name
-                               , Description = c.ConditionCharacter
-                               }).ToList();
-            ViewBag.ObjectId = Id.ToString();
-            //PETER TODO add a classification label so you know to which classification the levels belong.
-            return View(pageSection);
+
+            var Condition = _context.ZdbObjectIndexGet.FromSql("ProcessTemplateFlowConditionIndexGet @LanguageId, @PId", parameters).ToList();
+            return View(Condition);
         }
     [HttpGet]
         public async Task<IActionResult> Edit(int Id)
@@ -72,37 +66,15 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var FlowCondition = (from c in _processTemplateFlowCondition.GetAllProcessTemplateFlowConditions()
-                               join l in _processTemplateFlowConditionLanguageRepository.GetAllProcessTemplateFlowConditionLanguages()
-                               on c.Id equals l.FlowConditionId
-                               where c.Id == Id && l.LanguageId == DefaultLanguageID
-                               orderby c.ConditionCharacter
-                               select new SuObjectVMPageSection
-                               {
-                                   Id = c.ProcessTemplateFlowId
-                                   ,
-                                   ObjectId = c.Id
-                                   ,
-                                   LanguageId = l.LanguageId
-                                   ,
-                                   ObjectLanguageId = c.Id
-                                   ,
-                                   Type = c.ProcessTemplateConditionTypeId
-                                   ,
-                                   NullId = c.ProcessTemplateFieldId
-                                   ,
-                                   Description2 = c.ProcessTemplateFlowConditionString
-                                   ,NullId2 = c.ProcessTemplateFlowConditionInt
-                                   , DateFrom = c.ProcessTemplateFlowConditionDate
-                                   ,Name = l.Name
-                                   ,
-                                   Description = l.Description
-                                   ,
-                                   MouseOver = l.MouseOver
-                                   , HeaderDescription = c.ComparisonOperator
-                               }).First();
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
 
-            var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateFlowConditionType").ToList();
+            var ProcessTemplateFlowConditionEditGet = _context.ZdbProcessTemplateFlowConditionEditGet.FromSql("ProcessTemplateFlowConditionEditGet @LanguageId, @Id", parameters).First();
+
+            var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
 
             var ProcessTemplateFlowConditionTypeList = new List<SelectListItem>(); 
 
@@ -115,10 +87,10 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.dbStatusList.FromSql($"GetProcessTemplateFieldsForFlow @p0, @p1",
-                    parameters: new[] {            //0
-                                        DefaultLanguageID.ToString()
-                    , Id.ToString()} ).ToList();
+            var ProcessTemplateFlowFieldsFromDb = _context.dbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @p0, @p1",
+                    parameters: new[] {            
+                        DefaultLanguageID.ToString()
+                        , Id.ToString()} ).ToList();
 
             var ProcessTemplateFlowFieldList = new List<SelectListItem>();
             ProcessTemplateFlowFieldList.Add(new SelectListItem
@@ -135,51 +107,84 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
+            var ComparisonsFromDb = _context.dbLanguageList.FromSql($"ProcessTemplateFlowConditionCreateGetComparison").ToList();
 
-            var ComparisonOperator = new List<SelectListItem>();
-            ComparisonOperator.Add(new SelectListItem() { Text = "Equal", Value = "EQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Larger", Value = "LA" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Smaller", Value = "SM" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Larger or equal", Value = "LQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Smaller or equal", Value = "SQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Not equal", Value = "NE" });
+            var ComparisonList = new List<SelectListItem>();
 
-            var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = FlowCondition, SomeKindINumSelectListItem = ComparisonOperator, ProbablyTypeListItem = ProcessTemplateFlowConditionTypeList , ProbablyTypeListItem2 = ProcessTemplateFlowFieldList  };
-            return View(ClassificationAndStatus);
+            foreach (var ComparisonFromDb in ComparisonsFromDb)
+            {
+                ComparisonList.Add(new SelectListItem
+                {
+                    Text = ComparisonFromDb.Name,
+                    Value = ComparisonFromDb.Id.ToString()
+                });
+            }
+
+
+            var DataTypesFromDb = _context.dbSecurityLevelList.FromSql($"DataTypeSelectAll").ToList();
+
+            var DataTypeList = new List<SelectListItem>();
+
+            foreach (var DataTypeFromDb in DataTypesFromDb)
+            {
+                DataTypeList.Add(new SelectListItem
+                {
+                    Text = DataTypeFromDb.Name,
+                    Value = DataTypeFromDb.Id.ToString()
+                });
+            }
+
+
+
+            var ConditionWithLists = new SuProcessTemplateFlowConditionEditGetWithListModel { 
+                    Condition = ProcessTemplateFlowConditionEditGet
+                    , ConditionTypeList = ProcessTemplateFlowConditionTypeList
+                    , FieldList = ProcessTemplateFlowFieldList
+                    , ComparisonList = ComparisonList
+                    , DataTypeList = DataTypeList
+            };
+            return View(ConditionWithLists);
             
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PageSectionAndStatusViewModel FromForm)
+        public async Task<IActionResult> Edit(SuProcessTemplateFlowConditionEditGetWithListModel FromForm)
         {
 
-            if (ModelState.IsValid)
+//            if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-//                var FieldId 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
-                    "@p8, @p9, @p10",
-                    parameters: new[] { FromForm.SuObject.ObjectId.ToString()           //0
-                                        ,FromForm.SuObject.LanguageId.ToString()    //1
-                    , FromForm.SuObject.Name                  //2
-                    , FromForm.SuObject.Description                      //3
-                    , FromForm.SuObject.MouseOver                     //4
-                    , FromForm.SuObject.Type.ToString()                  //5
-                    , FromForm.SuObject.NullId.ToString()                           //6
-                    , FromForm.SuObject.Description2           //7
-                    , FromForm.SuObject.NullId2.ToString() //8
-                    , FromForm.SuObject.DateFrom.ToString()           //9
-                   , FromForm.SuObject.HeaderDescription
+                //                var FieldId 
 
-                    });
+                SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@OId", FromForm.Condition.OId)
+                    , new SqlParameter("@Name", FromForm.Condition.Name ?? "")
+                    , new SqlParameter("@Description", FromForm.Condition.Description ?? "")
+                    , new SqlParameter("@MouseOver", FromForm.Condition.MouseOver ?? "")
+                    , new SqlParameter("@MenuName", FromForm.Condition.MenuName ?? "")
+                    , new SqlParameter("@ConditionTypeId", FromForm.Condition.ProcessTemplateConditionTypeId)
+                    , new SqlParameter("@FieldId", FromForm.Condition.ProcessTemplateFieldId)
+                    , new SqlParameter("@String", FromForm.Condition.ProcessTemplateFlowConditionString ?? "")
+                    , new SqlParameter("@Int", FromForm.Condition.ProcessTemplateFlowConditionInt ?? 0)
+                    , new SqlParameter("@Date", FromForm.Condition.ProcessTemplateFlowConditionDate )
+                    , new SqlParameter("@ComparisonOperatorId", FromForm.Condition.ComparisonOperatorId)
+                    , new SqlParameter("@DataTypeId", FromForm.Condition.DataTypeId)
+                };
+
+                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionEditPost " +
+                    "@LanguageId, @OId, @Name, @Description, @MouseOver, @MenuName, @ConditionTypeId, @FieldId, " +
+                    "@String, @Int, @Date, @ComparisonOperatorId, @DataTypeId",
+                    parameters);
 
              
             }
             //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
 
-            return RedirectToAction("Index", new { Id = FromForm.SuObject.Id.ToString() });
+            return RedirectToAction("Index", new { Id = FromForm.Condition.OId.ToString() });
 
 
 
@@ -198,7 +203,7 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             ToForm.LanguageId= DefaultLanguageID;
-            var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateFlowConditionType").ToList();
+            var ProcessTemplateFlowConditionTypesFromDb = _context.dbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
 
             var ProcessTemplateFlowConditionTypeList = new List<SelectListItem>();
 
@@ -211,7 +216,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.dbStatusList.FromSql($"GetProcessTemplateFieldsForFlow @p0, @p1",
+            var ProcessTemplateFlowFieldsFromDb = _context.dbStatusList.FromSql($"GetProcessTemplateFlowConditionCreateGetFields @p0, @p1",
                     parameters: new[] {            //0
                                         DefaultLanguageID.ToString()
                     , Id.ToString()}).ToList();
@@ -238,7 +243,7 @@ namespace StudentUnion0105.Controllers
             ComparisonOperator.Add(new SelectListItem() { Text = "Smaller", Value = "SM" });
             ComparisonOperator.Add(new SelectListItem() { Text = "Larger or equal", Value = "LQ" });
             ComparisonOperator.Add(new SelectListItem() { Text = "Smaller or equal", Value = "SQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Not equal", Value = "NE" });
+            ComparisonOperator.Add(new SelectListItem() { Text = "Not equal", Value = "NQ" });
 
             var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = ComparisonOperator, ProbablyTypeListItem = ProcessTemplateFlowConditionTypeList, ProbablyTypeListItem2 = ProcessTemplateFlowFieldList };
             return View(ClassificationAndStatus);

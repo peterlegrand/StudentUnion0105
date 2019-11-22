@@ -1,0 +1,56 @@
+﻿@model SuFrontProcessCreateGetModel
+@{
+    //ViewBag.Title = @ViewBag.Terms[0];
+}
+<h1><img src="~/Images/Icons/process.png" title="@Model.Name" height="60" width="60" /> @Model.Name</h1>
+<form class="mt-3" method="post">
+    @foreach (var x in Model.ProcessFields)
+    {
+        if (x.DataTypeId != 5 & x.DataTypeId != 6)
+        {
+            <div class="form-group row">
+                <label asp-for="@x.StringValue" class="col-sm-2 col-form-label">@x.Name</label>
+                <div class="col-sm-10">
+                    <input asp-for="@x.StringValue" class="form-control" />
+                    <span asp-validation-for="@x.StringValue" class="text-danger"></span>
+                </div>
+            </div>
+        }
+        <div asp-validation-summary="All" class="text-danger"></div>
+    }
+    <div class="form-group row">
+        <div class="col-sm-10">
+            @foreach (var x in Model.ProcessFields)
+            {
+                if (x.DataTypeId == 5)
+                {
+                    <button type="submit" class="btn btn-primary btn-dark">@x.Name</button>
+                }
+                if (x.DataTypeId == 6)
+                {
+                    <a asp-action="Index" asp-controller="FrontProcess" class="btn btn-primary btn-light">@x.Name</a>
+                }
+
+            }
+        </div>
+    </div>
+    @*<div class="form-group row">
+        <label asp-for="@Model.ObjectLanguage.LanguageId" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+        <div class="col-sm-10 ">
+
+            @Html.DropDownListFor(x => x.ObjectLanguage.LanguageId, Model.LanguageList)
+            <span asp-validation-for="@Model.ObjectLanguage.LanguageId" class="text-danger"></span>
+
+        </div>
+    </div>*@
+
+</form>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var url = '@Url.Content("~/")' + "FrontProcess/CountryDD";
+        var ddlsource = "#"
+        //DOM manipulation code
+
+    });
+</script>

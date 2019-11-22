@@ -6,7 +6,7 @@ AS
 SELECT 
 	dbPageSection.Id
 	, dbPageSection.PageId
-	, dbPageSection.ShowSectionTitle
+	, dbPageSection.ShowSectionTitleName
 	, dbPageSection.ShowSectionTitleDescription
 	, dbPageSection.ShowContentTypeTitle
 	, dbPageSection.ShowContentTypeDescription
@@ -15,7 +15,7 @@ SELECT
 	, dbPageSection.SortById
 	, dbPageSection.MaxContent
 	, dbPageSection.HasPaging
-	, dbPageSectionLanguage.Title
+	, dbPageSectionLanguage.TitleName
 	, dbPageSectionLanguage.Description
 	, dbPageSectionType.IndexSection
 FROM dbPageSection 

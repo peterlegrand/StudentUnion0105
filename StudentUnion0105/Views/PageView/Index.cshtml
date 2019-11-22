@@ -8,7 +8,7 @@
 
 @foreach (var x in Model.PageSections)
 {
-    <div> @x.Title</div>
+    <div> @x.TitleName</div>
     <div> @Html.Raw(x.Description)</div>
 
     foreach (var y in Model.ContentViews[0])

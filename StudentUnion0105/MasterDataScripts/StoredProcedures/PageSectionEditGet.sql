@@ -10,7 +10,7 @@ SELECT
 	, dbPageSection.Sequence
 	, dbPageSection.ShowContentTypeTitle
 	, dbPageSection.ShowContentTypeDescription
-	, dbPageSection.ShowSectionTitle
+	, dbPageSection.ShowSectionTitleName
 	, dbPageSection.ShowSectionTitleDescription
 	, dbPageSection.SortById
 	, Creator.UserName Creator
@@ -22,7 +22,7 @@ SELECT
 	, dbPageSectionLanguage.Description
 	, dbPageSectionLanguage.MouseOver
 	, dbPageSectionLanguage.MenuName
-	, dbPageSectionLanguage.Title
+	, dbPageSectionLanguage.TitleName
 	, dbPageSectionLanguage.TitleDescription
 FROM dbPageSectionLanguage
 JOIN dbPageSection 

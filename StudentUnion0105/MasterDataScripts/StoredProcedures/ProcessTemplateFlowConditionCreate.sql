@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ProcessTemplateFlowConditionCreate] (
+CREATE PROCEDURE ProcessTemplateFlowConditionCreate (
 	@Id int                             --0
 	, @LanguageId int					--1
 	, @Name nvarchar(max)				--2
@@ -9,16 +9,13 @@ CREATE PROCEDURE [dbo].[ProcessTemplateFlowConditionCreate] (
 	, @ConditionString  nvarchar(max)	--7
 	, @ConditionInt int					--8
 	, @ConditionDate datetime2(7)		--9
-	, @ComparisonOperator  nvarchar(max))	--10
+	, @ComparisonOperatorId  int	--10
+	, @DataTypeId int)
 	AS 
 	DECLARE @NullConditionInt int, @LatestChar char(1) , @NoOfConditions int
 	
 	
 SELECT @NoOfConditions = COUNT(*) FROM dbProcessTemplateFlowCondition WHERE dbProcessTemplateFlowCondition.ProcessTemplateFlowId = @Id 
-IF @NoOfConditions = 0 
-SET @LatestChar = 'A'
-ELSE
-	SELECT @LatestChar = CHAR(ASCII(MAX(ConditionCharacter)) + 1) FROM dbProcessTemplateFlowCondition WHERE dbProcessTemplateFlowCondition.ProcessTemplateFlowId = @Id
 
 	IF @ConditionInt = 0 
 	 SET @NullConditionInt = NULL ;
@@ -34,8 +31,8 @@ ELSE
 	, ProcessTemplateFlowConditionString
 	, ProcessTemplateFlowConditionInt
 	, ProcessTemplateFlowConditionDate
-	, ComparisonOperator
-	, ConditionCharacter)
+	, ComparisonOperatorId
+	, DataTypeId)
 	VALUES (
 	@Id
 	, @FieldId
@@ -43,8 +40,8 @@ ELSE
 	, @ConditionString
 	, @ConditionInt
 	, @ConditionDate
-	, @ComparisonOperator
-	, @LatestChar)
+	, @ComparisonOperatorId
+	, @DataTypeId)
 	DECLARE @Id2 int	= scope_identity();
 	INSERT INTO dbProcessTemplateFlowConditionLanguage (
 	FlowConditionId

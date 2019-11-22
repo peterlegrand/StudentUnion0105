@@ -12,6 +12,8 @@ namespace StudentUnion0105.Models
         public int PageStatusId { get; set; }
         [Display(Name = "Page type id")]
         public int PageTypeId { get; set; }
+        public bool ShowTitleName { get; set; }
+        public bool ShowTitleDescription { get; set; }
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

@@ -258,6 +258,16 @@ INSERT INTO dbPageStatus (Id, Name) VALUES (2, 'Inactive');
 
 SET IDENTITY_INSERT dbPageStatus OFF
 
+
+SET IDENTITY_INSERT dbContentStatus ON
+
+INSERT INTO dbContentStatus (Id, Name) VALUES (1, 'Draft'); 
+INSERT INTO dbContentStatus (Id, Name) VALUES (2, 'Pending'); 
+INSERT INTO dbContentStatus (Id, Name) VALUES (3, 'Rejected'); 
+INSERT INTO dbContentStatus (Id, Name) VALUES (4, 'Approved'); 
+
+SET IDENTITY_INSERT dbContentStatus OFF
+
 SET IDENTITY_INSERT dbMasterList ON
 
 INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (0, '-- Not linked --', '-- Not linked --',1); 
@@ -274,10 +284,13 @@ SET IDENTITY_INSERT dbMasterList OFF
 SET IDENTITY_INSERT dbDataType ON
 
 
+INSERT dbDataType (Id, Name, Description) VALUES (0, 'None', 'None'); 
 INSERT dbDataType (Id, Name, Description) VALUES (1, 'Text', 'Text'); 
 INSERT dbDataType (Id, Name, Description) VALUES (2, 'Number', 'Number'); 
 INSERT dbDataType (Id, Name, Description) VALUES (3, 'Date', 'Date'); 
 INSERT dbDataType (Id, Name, Description) VALUES (4, 'Date time', 'Date time'); 
+INSERT dbDataType (Id, Name, Description) VALUES (5, 'Action button', 'Action button'); 
+INSERT dbDataType (Id, Name, Description) VALUES (6, 'Cancel button', 'Cancel button'); 
 SET IDENTITY_INSERT dbDataType OFF
 
 SET IDENTITY_INSERT dbCountry ON
@@ -546,15 +559,31 @@ SET IDENTITY_INSERT dbProcessTemplateFlowConditionType ON
 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (1, 'Field', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (2, 'Creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
-INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (3, 'Security level creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
-INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (4, 'Role creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
-INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (5, 'Manager creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
-INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (6, 'Organization creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (3, 'Security level user', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (4, 'Role user', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (5, 'Manager user', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (6, 'Organization user', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (7, 'Field - Project parent', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (8, 'Field - Organization parent', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (9, 'Open bracket', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (10, 'And', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (11, 'Or', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (12, 'Close bracket', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 
 SET IDENTITY_INSERT dbProcessTemplateFlowConditionType OFF
 
+
+SET IDENTITY_INSERT dbComparison ON
+
+INSERT dbComparison (Id, Name) VALUES (0, 'None'); 
+INSERT dbComparison (Id, Name) VALUES (1, 'Equal'); 
+INSERT dbComparison (Id, Name) VALUES (2, 'Larger'); 
+INSERT dbComparison (Id, Name) VALUES (3, 'Smaller'); 
+INSERT dbComparison (Id, Name) VALUES (4, 'Larger or equal'); 
+INSERT dbComparison (Id, Name) VALUES (5, 'Smaller or equal'); 
+INSERT dbComparison (Id, Name) VALUES (6, 'Not equal'); 
+
+SET IDENTITY_INSERT dbComparison OFF
 
 
 SET IDENTITY_INSERT dbUserOrganizationType ON;

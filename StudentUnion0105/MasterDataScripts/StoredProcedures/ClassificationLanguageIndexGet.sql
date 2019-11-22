@@ -7,8 +7,9 @@ SELECT
 	, dbClassificationLanguage.Description
 	, dbClassificationLanguage.MouseOver
 	, dbClassificationLanguage.MenuName
-	, dbClassificationLanguage.ClassificationId Id
+	, dbClassificationLanguage.ClassificationId OId
 	, dbLanguage.LanguageName Language
+	, 0 PId
 FROM dbClassificationLanguage
 JOIN dbLanguage 
 	ON dbClassificationLanguage.LanguageId = dbLanguage.Id

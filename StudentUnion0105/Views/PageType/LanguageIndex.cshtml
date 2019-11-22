@@ -22,7 +22,7 @@
             <td>@x.Name</td>
             <td>@Html.Raw(@x.Description)</td>
             <td>@x.MouseOver </td>
-            <td>@x.Id </td>
+            <td hidden>@x.OId </td>
             @*PETER TODO Hide the object ID somehow would be nice*@
 
 <td style="width: 22px"><a asp-controller="PageType" asp-action="LanguageEdit" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>

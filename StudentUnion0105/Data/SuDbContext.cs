@@ -17,7 +17,22 @@ namespace StudentUnion0105.Data
         {
 
         }
+        //FrontPage
+        public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }
+        public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
         public DbSet<SuClassificationStatusModel> dbClassificationStatus { get; set; }
+        //FrontProcess
+        public DbSet<SuFrontProcessIndexGetTemplateGroupModel> ZdbFrontProcessIndexGetTemplateGroup { get; set; }
+        public DbSet<SuFrontProcessIndexGetTemplateModel> ZdbFrontProcessIndexGetTemplate { get; set; }
+        public DbSet<SuFrontProcessIndexGetTemplateFlowConditionModel> ZdbFrontProcessIndexGetTemplateFlowCondition { get; set; }
+        public DbSet<SuFrontProcessCreateGetModel> ZdbFrontProcessCreateGet { get; set; }
+        public DbSet<SuFrontProcessCreateGetFieldModel> ZdbFrontProcessCreateGetField { get; set; }
+
+        //Process
+        public DbSet<SuProcessModel> dbProcess { get; set; }
+        public DbSet<SuProcessFieldModel> dbProcessField { get; set; }
+
         //Classification
         public DbSet<SuClassificationModel> dbClassification { get; set; }
         public DbSet<SuClassificationDeleteGetModel> ZdbClassificationDeleteGet { get; set; }
@@ -32,6 +47,8 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationLevelLanguageModel> dbClassificationLevelLanguage { get; set; }
         //ClassificationValue
         public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
+        public DbSet<SuClassificationValueEditGetModel> ZdbClassificationValueEditGet { get; set; }
+        public DbSet<SuClassificationValueEditGetLevelModel> ZdbClassificationValueEditGetLevel { get; set; }
         public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage { get; set; }
         public DbSet<SuClassificationValueIndexGet> ZdbClassificationValueIndexGet { get; set; }
         public DbSet<SuContentTypeLanguageModel> dbContentTypeLanguage { get; set; }
@@ -90,6 +107,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuUserRelationModel> dbUserRelation { get; set; }
         public DbSet<SuUserRelationTypeModel> dbUserRelationType { get; set; }
         public DbSet<SuUserRelationTypeLanguageModel> dbUserRelationTypeLanguage { get; set; }
+        public DbSet<SuComparisonModel> dbComparison { get; set; }
         public DbSet<SuMasterListModel> dbMasterList { get; set; }
         public DbSet<SuDataTypeModel> dbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> dbSecurityLevel { get; set; }
@@ -105,6 +123,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuObjectLanguageEditGetModel> ZdbObjectLanguageEditGet { get; set; }
         public DbSet<SuPageLanguageEditGetModel> ZdbPageLanguageEditGet { get; set; }
         public DbSet<SuObjectLanguageIndexGetModel> ZdbObjectLanguageIndexGet { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionEditGetModel> ZdbProcessTemplateFlowConditionEditGet { get; set; }
 
         public DbSet<SuUIScreenModel> dbUIScreen { get; set; }
         public DbSet<SuUITermLanguageModel> dbUITermLanguage { get; set; }

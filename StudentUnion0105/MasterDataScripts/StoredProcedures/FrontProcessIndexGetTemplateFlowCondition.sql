@@ -1,0 +1,11 @@
+CREATE PROCEDURE FrontProcessIndexGetTemplateFlowCondition (@PId int)
+AS
+SELECT
+	dbProcessTemplateFlowCondition.Id OId
+	, dbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId ConditionTypeId
+	, dbProcessTemplateFlowCondition.ComparisonOperatorId 
+ 	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionString ConditionString
+	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt ConditionInt
+FROM dbProcessTemplateFlowCondition 
+WHERE dbProcessTemplateFlowCondition.ProcessTemplateFlowId = @PId
+ORDER BY Id

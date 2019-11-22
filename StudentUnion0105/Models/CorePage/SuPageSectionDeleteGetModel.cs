@@ -14,7 +14,7 @@ namespace StudentUnion0105.Models
         public int Sequence { get; set; }
         public bool ShowContentTypeTitle { get; set; }
         public bool ShowContentTypeDescription { get; set; }
-        public bool ShowSectionTitle { get; set; }
+        public bool ShowSectionTitleName { get; set; }
         public bool ShowSectionTitleDescription { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -26,7 +26,7 @@ namespace StudentUnion0105.Models
         public string MouseOver { get; set; }
         public string MenuName { get; set; }
         public string Status { get; set; }
-        public string Title { get; set; }
+        public string TitleName { get; set; }
         public string TitleDescription { get; set; }
 
     }

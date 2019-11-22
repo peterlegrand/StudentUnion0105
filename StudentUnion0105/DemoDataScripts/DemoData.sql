@@ -990,16 +990,40 @@ INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMas
 VALUES (1, 1, 0 )
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (1, 1, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (1, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (1, 6, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (1, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (1, 5, 0 )
 
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (2, 1, 0 )
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (2, 2, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (2, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (2, 6, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (2, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (2, 5, 0 )
 
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (3, 1, 0 )
 INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
 VALUES (3, 2, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (3, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (3, 6, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (3, 5, 0 )
+INSERT INTO dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListId) 
+VALUES (3, 5, 0 )
 
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
@@ -1024,30 +1048,102 @@ INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (4, 41, 'Experience topic','Experience topic','Experience topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (4, 41, 'Submit','Submit','Submit',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (5, 41, 'No of days','No of days','No of days',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (5, 41, 'Cancel','Cancel','Cancel',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (6, 41, 'Research topic','Research topic','Research topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (6, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (7, 41, 'Sample size','Sample size','Sample size',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (7, 41, 'Reject','Reject','Reject',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (8, 41, 'Experience topic','Experience topic','Experience topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (9, 41, 'No of days','No of days','No of days',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (10, 41, 'Submit','Submit','Submit',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (11, 41, 'Cancel','Cancel','Cancel',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (12, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (13, 41, 'Reject','Reject','Reject',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (14, 41, 'Research topic','Research topic','Research topic',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (15, 41, 'Sample size','Sample size','Sample size',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (16, 41, 'Submit','Submit','Submit',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (17, 41, 'Cancel','Cancel','Cancel',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (18, 41, 'Approve','Approve','Approve',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (19, 41, 'Reject','Reject','Reject',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 
  
 INSERT INTO dbProcessTemplateStep (ProcessTemplateId)
-VALUES (1)
+VALUES (1)  
 INSERT INTO dbProcessTemplateStep (ProcessTemplateId)
 VALUES (1)
 INSERT INTO dbProcessTemplateStep (ProcessTemplateId)
@@ -1117,45 +1213,216 @@ INSERT INTO dbProcessTemplateStepLanguage (StepId
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
 VALUES (8, 41, 'Inform','Inform','Inform',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
+-- Flow 1
+-- Step: Create  
+-- Field: Knowledge topic
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (1,1,1,1);
+VALUES (1,1,2,1);
+-- Step: Create  
+-- Field: Area of interest
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (2,1,1,1);
+VALUES (1,2,3,2);
+-- Step: Create  
+-- Field: Country
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (3,1,1,1);
+VALUES (1,3,4,3);
+-- Step: Create  
+-- Field: Submit
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (1,2,1,2);
+VALUES (1,4,3,4);
+-- Step: Create  
+-- Field: Cancel
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (2,2,1,2);
+VALUES (1,5,3,5);
+-- Step: Create  
+-- Field: Approve
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (3,2,1,2);
+VALUES (1,6,1,6);
+-- Step: Create  
+-- Field: Reject
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (1,3,1,3);
+VALUES (1,7,1,7);
+-- Step: Approval 
+-- Field: Knowledge topic
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (2,3,1,3);
+VALUES (2,1,2,1);
+-- Step: Approval
+-- Field: Area of interest
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (3,3,1,3);
+VALUES (2,2,2,2);
+-- Step: Approval
+-- Field: Country
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (4,4,1,1);
+VALUES (2,3,2,3);
+-- Step: Approval
+-- Field: Submit
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (5,4,1,1);
+VALUES (2,4,1,4);
+-- Step: Approval
+-- Field: Cancel
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (4,5,1,2);
+VALUES (2,5,3,7);
+-- Step: Approval
+-- Field: Approve
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (5,5,1,2);
+VALUES (2,6,3,5);
+-- Step: Approval
+-- Field: Reject
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (6,6,1,1);
+VALUES (2,7,3,6);
+-- Step: Inform 
+-- Field: Knowledge topic
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (7,6,1,1);
+VALUES (3,1,2,1);
+-- Step: Inform
+-- Field: Area of interest
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (8,6,1,1);
+VALUES (3,2,2,2);
+-- Step: Inform  
+-- Field: Country
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (6,7,1,2);
+VALUES (3,3,2,3);
+-- Step: Inform  
+-- Field: Submit
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (7,7,1,2);
+VALUES (3,4,3,4);
+-- Step: Inform  
+-- Field: Cancel
 INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
-VALUES (8,7,1,2);
+VALUES (3,5,3,5);
+-- Step: Inform  
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (3,6,1,6);
+-- Step: Inform  
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (3,7,1,7);
 
+-- Flow 2
+-- Step: Create  
+-- Field: Experience topic
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,8,3,1);
+-- Step: Create  
+-- Field: No of days
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,9,3,2);
+-- Step: Create  
+-- Field: Submit
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,10,3,3);
+-- Step: Create  
+-- Field: Cancel
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,11,3,4);
+-- Step: Create  
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,12,1,5);
+-- Step: Create  
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (4,13,1,6);
+-- Step: Approval  
+-- Field: Experience topic
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,8,2,1);
+-- Step: Approval
+-- Field: No of days
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,9,2,2);
+-- Step: Approval
+-- Field: Submit
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,10,1,3);
+-- Step: Approval
+-- Field: Cancel
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,11,1,4);
+-- Step: Approval
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,12,3,5);
+-- Step: Approval
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (5,13,3,5);
+
+
+-- Flow 3
+-- Step: Create  
+-- Field: Research topic
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,14,3,1);
+-- Step: Create  
+-- Field: Sample size
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,15,3,2);
+-- Step: Create  
+-- Field: Submit
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,16,3,3);
+-- Step: Create  
+-- Field: Cancel
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,17,3,4);
+-- Step: Create  
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,18,1,5);
+-- Step: Create  
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (6,19,1,6);
+-- Step: Approval  
+-- Field: Research topic
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,14,2,1);
+-- Step: Approval
+-- Field: Sample size
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,15,2,2);
+-- Step: Approval
+-- Field: Submit
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,16,1,3);
+-- Step: Approval
+-- Field: Cancel
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,17,1,4);
+-- Step: Approval
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,18,3,5);
+-- Step: Approval
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (7,19,3,6);
+-- Step: Inform 
+-- Field: Research topic
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,14,2,1);
+-- Step: Inform
+-- Field: Sample size
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,15,2,2);
+-- Step: Inform
+-- Field: Submit
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,16,3,3);
+-- Step: Inform
+-- Field: Cancel
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,17,3,4);
+-- Step: Inform
+-- Field: Approve
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,18,1,5);
+-- Step: Inform
+-- Field: Reject
+INSERT INTO dbProcessTemplateStepField (StepId, FieldId, StatusId, Sequence)
+VALUES (8,19,1,6);
 
 
 INSERT INTO dbProcessTemplateFlow (ProcessTemplateId, ProcessTemplateFromStepId, ProcessTemplateToStepId)
@@ -1207,16 +1474,80 @@ INSERT INTO dbProcessTemplateFlowLanguage (FlowId, LanguageId, Name, Description
 VALUES(11,41,'Completed','Completed','Completed',getdate(),getdate(), @CurrentUser, @CurrentUser)
 
 
-INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId, ComparisonOperator, ProcessTemplateFlowConditionInt, ConditionCharacter)
-VALUES (1, 3, 'GE',10,'A'); 
-INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId, ConditionCharacter)
-VALUES (2, 5,'A'); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId)
+VALUES (1, 9); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId
+	, ComparisonOperatorId
+	, DataTypeId
+	, ProcessTemplateFlowConditionString)
+VALUES (1, 4, 1, 1, 'Admin'); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId)
+VALUES (1, 10); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId
+	, ComparisonOperatorId
+	, DataTypeId
+	, ProcessTemplateFlowConditionInt)
+VALUES (1, 3, 4, 2, 5); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId)
+VALUES (1, 12); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId)
+VALUES (1, 11); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId
+	, ComparisonOperatorId
+	, DataTypeId
+	, ProcessTemplateFlowConditionInt)
+VALUES (1, 3, 4, 2, 10); 
+
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId
+	, ComparisonOperatorId
+	, DataTypeId
+	, ProcessTemplateFlowConditionInt)
+VALUES (5, 3, 4, 2, 10); 
+INSERT dbProcessTemplateFlowCondition (
+	ProcessTemplateFlowId
+	, ProcessTemplateConditionTypeId
+	, ComparisonOperatorId
+	, DataTypeId
+	, ProcessTemplateFlowConditionInt)
+VALUES (8, 3, 4, 2, 10); 
+
+
+INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId)
+VALUES (2, 5); 
 
 
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
-VALUES (1,41,'Student creator','Student creator with security 10 or higher','Student creator',getdate(),getdate(), @CurrentUser, @CurrentUser)
+VALUES (1,41,'Open bracket','Open bracket','Open bracket',getdate(),getdate(), @CurrentUser, @CurrentUser)
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
-VALUES (2,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate(), @CurrentUser, @CurrentUser)
+VALUES (2,41,'Admin','Admin','Admin',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (3,41,'And','And','And',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (4,41,'5 or higher','5 or higher','5 or higher',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (5,41,'Closing bracket','Closing bracket','Closing bracket',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (6,41,'Or','Or','Or',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (7,41,'10 or higher','10 or higher','10 or higher',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (8,41,'Teacher approver','Teacher approver','Teacher approver',getdate(),getdate(), @CurrentUser, @CurrentUser)
 
 SET IDENTITY_INSERT dbUITermLanguage ON;
 INSERT INTO dbUITermLanguage (Id, TermId, LanguageId, Customization) VALUES(1, 1, 41, 'Properties');
@@ -1288,3 +1619,23 @@ VALUES(1, @CurrentUser, 1, 1,  @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO dbUserProject (Id, UserId, ProjectId, TypeId, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES(2, @CurrentUser, 2, 2,  @CurrentUser, @CurrentUser, getdate(), getdate());
 SET IDENTITY_INSERT dbUserProject OFF;
+
+INSERT INTO dbPage (PageStatusId, PageTypeId, ShowTitleName, ShowTitleDescription, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(1, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbPageLanguage ( PageId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  1, 41, 'News page','New page','New page','New page','New page','New page', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPage (PageStatusId, PageTypeId, ShowTitleName, ShowTitleDescription,CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(1, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbPageLanguage ( PageId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  2, 41, 'General','General','General','General','General','General', @CurrentUser, @CurrentUser, getdate(),getdate())  
+
+INSERT INTO dbPageSection (PageId, Sequence, PageSectionTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitle, ShowContentTypeDescription, OneTwoColumns, ContentTypeId, SortById, MaxContent, HasPaging) 
+VALUES(1, 1, 1, 1, 1, 0, 0, 2, 1, 1, 5, 1); 
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  1, 41, 'New knowledge','New knowledge','New knowledge','New knowledge','New knowledge','New knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPageSection (PageId, Sequence, PageSectionTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitle, ShowContentTypeDescription, OneTwoColumns, ContentTypeId, SortById, MaxContent, HasPaging) 
+VALUES(1, 1, 1, 1, 1, 0, 0, 2, 2, 1, 5, 1); 
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  2, 41, 'New knowledge','New knowledge','New knowledge','New knowledge','New knowledge','New knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPageSection (PageId, Sequence, PageSectionTypeId, ShowSectionTitleName, ShowSectionTitleDescription, ShowContentTypeTitle, ShowContentTypeDescription, OneTwoColumns, ContentTypeId, SortById, MaxContent, HasPaging) 
+VALUES(2, 1, 1, 1, 1, 0, 0, 2, 3, 1, 5, 1); 
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  3, 41, 'Assignments','Assignments','Assignments','Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  

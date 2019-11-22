@@ -8,7 +8,7 @@ namespace StudentUnion0105.Models
         [Display(Name = "Page id")]
         public int PageId { get; set; }
         [Display(Name = "Show section title")]
-        public bool ShowSectionTitle { get; set; }
+        public bool ShowSectionTitleName { get; set; }
         [Display(Name = "Show title description")]
         public bool ShowSectionTitleDescription { get; set; }
         [Display(Name = "Show content type title")]
@@ -27,7 +27,7 @@ namespace StudentUnion0105.Models
         public bool HasPaging { get; set; }
         [Display(Name = "Page section title")]
         [MaxLength(50)]
-        public string Title { get; set; }
+        public string TitleName { get; set; }
         [Display(Name = "Show section title description")]
         public string Description { get; set; }
         [Display(Name = "Index section")]

@@ -1,22 +1,24 @@
 CREATE PROCEDURE ProcessTemplateFlowConditionEditGet (@LanguageId int, @Id int)
 AS
 SELECT
-	dbProcessTemplateFlowCondition.Id 
-	, dbProcessTemplateFlowCondition.ComparisonOperator
-	, dbProcessTemplateFlowCondition.ConditionCharacter
+	dbProcessTemplateFlowCondition.Id OId 
+	, dbProcessTemplateFlowConditionLanguage.Id LId
+	, dbProcessTemplateFlowConditionLanguage.LanguageId
 	, dbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId
-	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionDate
-	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt
-	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionString
+	, ISNULL(dbProcessTemplateFlowCondition.ComparisonOperatorId, 0) ComparisonOperatorId
+	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFieldId, 0) ProcessTemplateFieldId
+	, ISNULL(dbProcessTemplateFlowCondition.DataTypeId, 0) DataTypeId
+	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionDate, '1900-01-01') ProcessTemplateFlowConditionDate
+	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt, 0) ProcessTemplateFlowConditionInt 
+	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionString, '') ProcessTemplateFlowConditionString
 	, Creator.UserName Creator
 	, dbProcessTemplate.CreatedDate
 	, Modifier.UserName Modifier
 	, dbProcessTemplate.ModifiedDate
-	, dbProcessTemplateFlowConditionLanguage.Id LId
-	, dbProcessTemplateFlowConditionLanguage.Name
-	, dbProcessTemplateFlowConditionLanguage.Description
-	, dbProcessTemplateFlowConditionLanguage.MouseOver
-	, dbProcessTemplateFlowConditionLanguage.MenuName
+	, ISNULL(dbProcessTemplateFlowConditionLanguage.Name, '') Name
+	, ISNULL(dbProcessTemplateFlowConditionLanguage.Description, '')  Description
+	, ISNULL(dbProcessTemplateFlowConditionLanguage.MouseOver, '') MouseOver
+	, ISNULL(dbProcessTemplateFlowConditionLanguage.MenuName, '') MenuName
 FROM dbProcessTemplateFlowConditionLanguage
 JOIN dbProcessTemplateFlowCondition 
 	ON dbProcessTemplateFlowConditionLanguage.FlowConditionId = dbProcessTemplateFlowCondition.Id

@@ -22,6 +22,7 @@ namespace StudentUnion0105.Controllers
             var AllLanguages = _language.GetAllLanguages();
             return View(AllLanguages);
         }
+        [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
             var Language = _language.GetLanguage(Id);

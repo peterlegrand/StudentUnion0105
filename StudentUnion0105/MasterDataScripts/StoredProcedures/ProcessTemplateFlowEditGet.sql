@@ -4,7 +4,6 @@ SELECT
 	dbProcessTemplateFlow.Id 
 	, dbProcessTemplateFlow.ProcessTemplateFromStepId
 	, dbProcessTemplateFlow.ProcessTemplateToStepId
-	, dbProcessTemplateFlow.ConditionRelation
 	, Creator.UserName Creator
 	, dbProcessTemplate.CreatedDate
 	, Modifier.UserName Modifier

@@ -9,7 +9,7 @@ CREATE PROCEDURE
 	, @PageSectionTypeId  int							--6
 	, @ShowContentTypeTitle bit							--7
 	, @ShowContentTypeDescription bit					--8
-	, @ShowSectionTitle bit								--9
+	, @ShowSectionTitleName bit								--9
 	, @ShowSectionTitleDescription bit					--10
 	, @SortById bit										--11
 	, @LanguageId int									--12
@@ -55,7 +55,7 @@ SET
 	, dbPageSection.Sequence =@NewSequence
 	, dbPageSection.ShowContentTypeDescription = @ShowContentTypeDescription
 	, dbPageSection.ShowContentTypeTitle = @ShowContentTypeTitle
-	, dbPageSection.ShowSectionTitle = @ShowSectionTitle
+	, dbPageSection.ShowSectionTitleName = @ShowSectionTitleName
 	, dbPageSection.ShowSectionTitleDescription = @ShowSectionTitleDescription
 	, dbPageSection.SortById = @SortById
 WHERE 
@@ -66,7 +66,7 @@ UPDATE
 SET
 	 Name  = @Name 
 	, Description = @Description 
-	, Title = @TitleName 
+	, TitleName = @TitleName 
 	, TitleDescription = @TitleDescription 
 	, MouseOver = @MouseOver 
 	, ModifiedDate = @ModifiedDate

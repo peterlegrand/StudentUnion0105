@@ -23,7 +23,7 @@ namespace StudentUnion0105.Models
         public string MenuName { get; set; }
         [Display(Name = "Title")]
         [MaxLength(50)]
-        public string Title { get; set; }
+        public string TitleName { get; set; }
         [Display(Name = "Title description")]
         public string TitleDescription { get; set; }
         public Guid CreatorId { get; set; }

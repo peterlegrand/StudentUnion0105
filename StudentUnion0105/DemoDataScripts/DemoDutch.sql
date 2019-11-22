@@ -765,49 +765,121 @@ INSERT INTO dbProcessTemplateLanguage (ProcessTemplateId, LanguageId, Name, Desc
 VALUES (3, 39, 'Onderzoek opdracht', 'Onderzoek opdracht' , 'Onderzoek opdracht' , getdate(), getdate(), @CurrentUser, @CurrentUser)
 
 
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (1, 41, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (2, 41, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (3, 41, 'Land','Land','Land',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (4, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (5, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (6, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (7, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (8, 41, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (9, 41, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (10, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (11, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (12, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (13, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (14, 41, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (15, 41, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (16, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (17, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (18, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
+	, LanguageId
+	, Name
+	, Description
+	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
+VALUES (19, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (1, 39, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (2, 39, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (3, 39, 'Land','Land','Land',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (4, 39, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (5, 39, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (6, 39, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
-INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
-	, LanguageId
-	, Name
-	, Description
-	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (7, 39, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 	
 INSERT INTO dbProcessTemplateStepLanguage (StepId
@@ -888,9 +960,22 @@ VALUES(11,39,'Voltooid','Voltooid','Voltooid',getdate(),getdate(), @CurrentUser,
 
 
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
-VALUES (1,39,'Gemaakt door leerling','Gemaakt door student leerling met security 10 of hoger','Gemaakt door leerling',getdate(),getdate(), @CurrentUser, @CurrentUser)
+VALUES (1,39,'Open haakje','Open haakje','Open haakje',getdate(),getdate(), @CurrentUser, @CurrentUser)
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
-VALUES (2,39,'Goedkeuring door leraar','Goedkeuring door leraar','Goedkeuring door leraar',getdate(),getdate(), @CurrentUser, @CurrentUser)
+VALUES (2,39,'Admin','Admin','Admin',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (3,39,'En','En','En',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (4,39,'5 of hoger','5 of hoger','5 of hoger',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (5,39,'Sluit haakje','Sluit haakje','Sluit haakje',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (6,39,'Of','Of','Of',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (7,39,'10 of hoger','10 of hoger','10 of hoger',getdate(),getdate(), @CurrentUser, @CurrentUser)
+INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
+VALUES (8,39,'goedkeuring leraar','goedkeuring leraar','goedkeuring leraar',getdate(),getdate(), @CurrentUser, @CurrentUser)
+
 SET IDENTITY_INSERT dbUITermLanguage ON;
 INSERT INTO dbUITermLanguage (Id, TermId, LanguageId, Customization) VALUES(5, 1, 39, 'Eigenschappen');
 INSERT INTO dbUITermLanguage (Id, TermId, LanguageId, Customization) VALUES(6, 2, 39, 'Identiteit');
@@ -898,3 +983,18 @@ INSERT INTO dbUITermLanguage (Id, TermId, LanguageId, Customization) VALUES(7, 3
 INSERT INTO dbUITermLanguage (Id, TermId, LanguageId, Customization) VALUES(8, 4, 39, 'Eigenschap toevoegen');
 
 SET IDENTITY_INSERT dbUITermLanguage OFF;
+
+INSERT INTO dbPageLanguage ( PageId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  1, 39, 'Nieuws pagina', 'Nieuws pagina', 'Nieuws pagina', 'Nieuws pagina', 'Nieuws pagina', 'Nieuws pagina', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPageLanguage ( PageId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  2, 39, 'Algemeen', 'Algemeen', 'Algemeen', 'Algemeen', 'Algemeen', 'Algemeen', @CurrentUser, @CurrentUser, getdate(),getdate())  
+
+
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  1, 39, 'New knowledge','New knowledge','New knowledge','New knowledge','New knowledge','New knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  2, 39, 'New knowledge','New knowledge','New knowledge','New knowledge','New knowledge','New knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description, MouseOver, MenuName, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  3, 39, 'Assignments','Assignments','Assignments','Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  
+
+

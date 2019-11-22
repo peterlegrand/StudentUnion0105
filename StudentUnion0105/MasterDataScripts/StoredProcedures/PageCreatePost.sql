@@ -26,7 +26,7 @@ BEGIN TRANSACTION
 		, Description
 		, MouseOver
 		, MenuName
-		, Title
+		, TitleName
 		, TitleDescription
 		, CreatorId
 		, CreatedDate

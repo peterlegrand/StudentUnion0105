@@ -18,8 +18,10 @@ namespace StudentUnion0105.Models
         public string MenuName { get; set; }
         public string Type { get; set; }
         public string Status { get; set; }
-        public string Title { get; set; }
-        public string PageDescription { get; set; }
+        public string TitleName { get; set; }
+        public string TitleDescription { get; set; }
+        public bool ShowTitleName { get; set; }
+        public bool ShowTitleDescription { get; set; }
 
     }
 }

@@ -288,7 +288,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.Name = FromForm.SuObject.Name;
                 PageLanguage.Description = FromForm.SuObject.Description;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                PageLanguage.Title = FromForm.SuObject.MouseOver;
+                PageLanguage.TitleName = FromForm.SuObject.MouseOver;
                 PageLanguage.TitleDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
                 PageLanguage.ModifierId = new Guid(CurrentUser.Id);
@@ -399,7 +399,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 PageLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 PageLanguage.MenuName = FromForm.SuObject.MenuName;
-                PageLanguage.Title = FromForm.SuObject.Title;
+                PageLanguage.TitleName = FromForm.SuObject.Title;
                 PageLanguage.TitleDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.PageId = FromForm.SuObject.ObjectId;
                 PageLanguage.LanguageId = FromForm.SuObject.LanguageId;
@@ -472,7 +472,7 @@ namespace StudentUnion0105.Controllers
                 var PageLanguage = _PageLanguage.GetPageLanguage(FromForm.Id);
                 PageLanguage.Name = FromForm.Name;
                 PageLanguage.Description = FromForm.Description;
-                PageLanguage.Title = FromForm.MouseOver;
+                PageLanguage.TitleName = FromForm.MouseOver;
                 PageLanguage.TitleDescription = FromForm.PageDescription;
                 PageLanguage.MouseOver = FromForm.MouseOver;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);

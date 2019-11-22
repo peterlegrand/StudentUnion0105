@@ -2,8 +2,7 @@ CREATE PROCEDURE ProcessTemplateFlowConditionDeleteGet (@LanguageId int, @Id int
 AS
 SELECT
 	dbProcessTemplateFlowCondition.Id 
-	, dbProcessTemplateFlowCondition.ConditionCharacter
-	, dbProcessTemplateFlowCondition.ComparisonOperator
+	, dbComparison.Name ComparisonOperator
 	, dbProcessTemplateFlowConditionType.Name FlowType
 	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionDate
 	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt
@@ -30,6 +29,8 @@ JOIN AspNetUsers Creator
 	ON convert(nvarchar(50), dbProcessTemplate.CreatorId) = Creator.Id
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProcessTemplate.ModifierId) = Modifier.Id
+JOIN dbComparison
+	ON dbProcessTemplateFlowCondition.ComparisonOperatorId = dbComparison.Id
 WHERE dbProcessTemplateFlowConditionLanguage.LanguageId = @LanguageId
 	AND dbProcessTemplateFlowCondition.Id = @Id
 

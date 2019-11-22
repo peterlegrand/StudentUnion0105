@@ -59,9 +59,14 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@Id", Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                };
 
-            var SectionType = _context.ZdbObjectIndexGet.FromSql("PageSectionTypeIndexGet @LanguageId", parameter).ToList();
+            var SectionType = _context.ZdbObjectIndexGet.FromSql("PageSectionIndexGet @Id, @LanguageId", parameters).ToList();
+            ViewBag.ObjectId = Id.ToString();
             return View(SectionType);
 
             //var pageSection = (from c in _pageSection.GetAllPageSections()
@@ -110,7 +115,7 @@ namespace StudentUnion0105.Controllers
                                    ,
                                    Type = c.PageSectionTypeId
                                    ,
-                                   ShowSectionTitle = c.ShowSectionTitle
+                                   ShowSectionTitle = c.ShowSectionTitleName
                                    ,
                                    ShowSectionDescription = c.ShowSectionTitleDescription
                                    ,
@@ -134,7 +139,7 @@ namespace StudentUnion0105.Controllers
                                    ,
                                    Description = l.Description
                                    ,
-                                   Title = l.Title
+                                   Title = l.TitleName
                                    ,
                                    TitleDescription = l.TitleDescription
                                    ,
@@ -456,7 +461,7 @@ namespace StudentUnion0105.Controllers
                 PageSection.Sequence = NewLevel.SuObject.Sequence;
                 PageSection.PageId = NewLevel.SuObject.ObjectId;
                 PageSection.PageSectionTypeId = NewLevel.SuObject.Type;
-                PageSection.ShowSectionTitle = NewLevel.SuObject.ShowSectionTitle;
+                PageSection.ShowSectionTitleName = NewLevel.SuObject.ShowSectionTitle;
                 PageSection.ShowSectionTitleDescription = NewLevel.SuObject.ShowSectionDescription;
                 PageSection.ShowContentTypeTitle = NewLevel.SuObject.ShowContentTypeTitle;
                 PageSection.ShowContentTypeDescription = NewLevel.SuObject.ShowContentTypeTitleDescription;
@@ -473,7 +478,7 @@ namespace StudentUnion0105.Controllers
 
                 PageSectionLanguage.Name = NewLevel.SuObject.Name;
                 PageSectionLanguage.Description = NewLevel.SuObject.Description;
-                PageSectionLanguage.Title = NewLevel.SuObject.Title;
+                PageSectionLanguage.TitleName = NewLevel.SuObject.Title;
                 PageSectionLanguage.TitleDescription = NewLevel.SuObject.TitleDescription;
                 PageSectionLanguage.MouseOver = NewLevel.SuObject.MouseOver;
                 PageSectionLanguage.PageSectionId = NewPageSection.Id;

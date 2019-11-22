@@ -8,6 +8,7 @@ using StudentUnion0105.Models;
 using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -73,7 +74,7 @@ namespace StudentUnion0105.Controllers
                 };
 
            SuClassificationLevelEditGetModel ClassificationEditGet = _context.ZdbClassificationLevelEditGet.FromSql("ClassificationLevelEditGet @LanguageId, @Id", parameters).First();
-
+            //PETER Consider to put this in a table
             List<SelectListItem>  DateType = new List<SelectListItem>();
             DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
             DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
@@ -127,7 +128,7 @@ namespace StudentUnion0105.Controllers
                             ", @MouseOver" +
                             ", @MenuName", parameters);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { Id =FromForm.ClassificationLevel.PId});
         }
 
         [HttpGet]
@@ -139,40 +140,57 @@ namespace StudentUnion0105.Controllers
             UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            List<SelectListItem> ExistingLevels = (from c in _classificationLevel.GetAllClassificationLevels()
-                                                   join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                                   on c.Id equals l.ClassificationLevelId
-                                                   where c.ClassificationId == Id
-                                                   && l.LanguageId == DefaultLanguageID
-                                                   orderby c.Sequence
-                                                   select new SelectListItem
-                                                   {
-                                                       Value = c.Sequence.ToString()
-                                                   ,
-                                                       Text = l.Name
-                                                   }).ToList();
-            List<int> TestForNull = (from c in _classificationLevel.GetAllClassificationLevels()
-                               join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                               on c.Id equals l.ClassificationLevelId
-                               where c.Id == Id
-                               && l.LanguageId == DefaultLanguageID
-                               select c.Sequence).ToList();
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@PId", Id),
+                    };
 
-            int MaxLevelSequence;
-
-            if (TestForNull.Count() == 0)
-            { MaxLevelSequence = 1; }
-            else
+            var ExistingLevels = _context.dbStatusList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
+            int MaxLevelSequence = 0;
+            List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
+            foreach (var ExistingLevel in ExistingLevels)
             {
-                MaxLevelSequence = (from c in _classificationLevel.GetAllClassificationLevels()
-                                    join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                    on c.Id equals l.ClassificationLevelId
-                                    where c.Id == Id
-                                    && l.LanguageId == DefaultLanguageID
-                                    select c.Sequence).Max();
-
-                MaxLevelSequence++;
+                ExistingLevelList.Add(new SelectListItem { Value = ExistingLevel.Id.ToString(), Text = ExistingLevel.Name });
+                if (ExistingLevel.Id > MaxLevelSequence)
+                { MaxLevelSequence = ExistingLevel.Id; }
             }
+            MaxLevelSequence++;
+            //List<SelectListItem> ExistingLevels = (from c in _classificationLevel.GetAllClassificationLevels()
+            //                                       join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //                                       on c.Id equals l.ClassificationLevelId
+            //                                       where c.ClassificationId == Id
+            //                                       && l.LanguageId == DefaultLanguageID
+            //                                       orderby c.Sequence
+            //                                       select new SelectListItem
+            //                                       {
+            //                                           Value = c.Sequence.ToString()
+            //                                       ,
+            //                                           Text = l.Name
+            //                                       }).ToList();
+            //List<int> TestForNull = (from c in _classificationLevel.GetAllClassificationLevels()
+            //                   join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //                   on c.Id equals l.ClassificationLevelId
+            //                   where c.Id == Id
+            //                   && l.LanguageId == DefaultLanguageID
+            //                   select c.Sequence).ToList();
+
+            //if (TestForNull.Count() == 0)
+            //{ MaxLevelSequence = 1; }
+            //else
+            //{
+            //    MaxLevelSequence = (from c in _classificationLevel.GetAllClassificationLevels()
+            //                        join l in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //                        on c.Id equals l.ClassificationLevelId
+            //                        where c.Id == Id
+            //                        && l.LanguageId == DefaultLanguageID
+            //                        select c.Sequence).Max();
+
+            //    MaxLevelSequence++;
+            //}
+
+            ExistingLevelList.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
+
             List<SelectListItem> DateType = new List<SelectListItem>();
             DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
             DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
@@ -180,11 +198,10 @@ namespace StudentUnion0105.Controllers
             DateType.Add(new SelectListItem { Value = "3", Text = "Date time" });
             DateType.Add(new SelectListItem { Value = "4", Text = "Date time range" });
 
-            ExistingLevels.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
 
             SuClassificationLevelEditGetModel ClassificationLevel = new SuClassificationLevelEditGetModel();
             ClassificationLevel.OId = Id;
-            SuClassificationLevelEditGetWithListModel ClassificationAndDateAndSequenceList = new SuClassificationLevelEditGetWithListModel { ClassificationLevel = ClassificationLevel, DateTypeList = DateType , SequenceList = ExistingLevels };
+            SuClassificationLevelEditGetWithListModel ClassificationAndDateAndSequenceList = new SuClassificationLevelEditGetWithListModel { ClassificationLevel = ClassificationLevel, DateTypeList = DateType , SequenceList = ExistingLevelList };
             return View(ClassificationAndDateAndSequenceList);
         }
 
@@ -302,26 +319,31 @@ namespace StudentUnion0105.Controllers
             UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-                                where c.ClassificationLevelId == Id
-                                select c.LanguageId).ToList();
+            AvailableObjectLanguages AvailableLanguages = new AvailableObjectLanguages(_context);
+            var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), Id);
+            Int32 NoOfLanguages = SuLanguage.Count();
+            if (NoOfLanguages == 0)
+                { return RedirectToAction("LanguageIndex", new { Id = Id }); }
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
+            //                    where c.ClassificationLevelId == Id
+            //                    select c.LanguageId).ToList();
 
 
-            List< SelectListItem> SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active == true
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            //List< SelectListItem> SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active == true
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
 
-            if (SuLanguage.Count() == 0)
-            {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
-            }
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id = Id });
+            //}
             SuObjectLanguageCreateGetModel SuObject = new SuObjectLanguageCreateGetModel();
             SuObject.OId = Id;
             ViewBag.Id = Id.ToString();
@@ -339,18 +361,16 @@ namespace StudentUnion0105.Controllers
         {
             SuUserModel CurrentUser = await userManager.GetUserAsync(User);
 
-            if (ModelState.IsValid)
-            {
 
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@Id", FromForm.ObjectLanguage.OId),
                     new SqlParameter("@LanguageId", FromForm.ObjectLanguage.LanguageId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@Name", FromForm.ObjectLanguage.Name),
-                    new SqlParameter("@Description", FromForm.ObjectLanguage.Description),
-                    new SqlParameter("@MouseOver", FromForm.ObjectLanguage.MouseOver),
-                    new SqlParameter("@MenuName", FromForm.ObjectLanguage.MenuName)
+                    new SqlParameter("@Name", FromForm.ObjectLanguage.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.ObjectLanguage.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.ObjectLanguage.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.ObjectLanguage.MenuName ?? "")
                     };
 
                 var b = _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageCreatePost " +
@@ -361,7 +381,6 @@ namespace StudentUnion0105.Controllers
                             ", @Description" +
                             ", @MouseOver" +
                             ", @MenuName", parameters);
-            }
             return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectLanguage.OId.ToString() });
         }
 

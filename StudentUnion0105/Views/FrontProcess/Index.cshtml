@@ -1,0 +1,18 @@
+﻿@model List<SuFrontProcessIndexGetTemplateGroupModel>
+
+
+<h1 class="font-weight-bold"><img src="~/Images/Icons/process.png" title="New process" height="60" width="60" /> New process</h1>
+
+@foreach (var x in Model)
+{
+    <h2><img src="~/Images/Icons/group.png" title="@x.Name" height="40" width="40" /> @x.Name</h2>
+    <div>@Html.Raw(x.Description)</div>
+    @if (x.FrontProcessTemplates != null)
+    {    @foreach (var y in x.FrontProcessTemplates)
+        {
+        <a asp-controller="FrontProcess" asp-action="Create" asp-route-Id="@y.OId.ToString()"><h4><img src="~/Images/Icons/process.png" title="@y.Name" height="20" width="20" /> @y.Name</h4></a>
+
+        <div>@Html.Raw(y.Description)</div>
+        }
+        }
+    }

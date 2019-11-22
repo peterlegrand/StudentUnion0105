@@ -229,5 +229,7 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(226, 'Max content', 'Max con
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(227, 'One two columns', 'One two columns');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(228, 'Page section languages', 'Page section languages');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(229, 'Page languages', 'Page languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(231, 'Drop down sequence', 'Drop down sequence');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(232, 'Default page', 'Default page');
 
 SET IDENTITY_INSERT dbUITerm OFF;
