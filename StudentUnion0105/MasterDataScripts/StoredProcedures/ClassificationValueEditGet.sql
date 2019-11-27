@@ -3,7 +3,7 @@ AS
 SELECT
 	dbClassificationValue.Id  OId
 	, dbClassificationValue.ClassificationId  PId
-	, dbClassificationValue.ClassificationId
+	, dbClassificationValue.ParentValueId ParentId
 	, ISNULL(dbClassificationValue.DateFrom, '1900-01-01') FromDate
 	, ISNULL(dbClassificationValue.DateTo, '1900-01-01') ToDate
 	, ISNULL(dbClassificationValue.ParentValueId, 0) ParentValueId

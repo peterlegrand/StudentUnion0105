@@ -79,6 +79,16 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            SuClassificationValueEditGetModel NewValue = new SuClassificationValueEditGetModel();
+            //ClassificationId
+            NewValue.PId = Convert.ToInt32(HttpContext.Request.Query["CId"]);
+            //ParentValueId
+            NewValue.ParentId = Id;
+
+            SqlParameter parameter = new SqlParameter("@Id", Id);
+            SuClassificationValueEditGetLevelModel ClassificationValueEditGetLevel = _context.ZdbClassificationValueEditGetLevel.FromSql("ClassificationValueEditGetLevel @Id", parameter).First();
+
+
             SuObjectVM CValue = new SuObjectVM()
             {
                 NullId = Id,

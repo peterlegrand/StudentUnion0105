@@ -12,6 +12,7 @@ namespace StudentUnion0105.Models
         public int OId { get; set; }
         public int PId { get; set; }
         public int LId { get; set; }
+        public int ParentId { get; set; }
         public DateTimeOffset FromDate { get; set; }
         public DateTimeOffset ToDate { get; set; }
         [Required]
