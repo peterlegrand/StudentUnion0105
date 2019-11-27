@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuClassificationValueModel AddClassificationValue(SuClassificationValueModel suClassificationValue)
         {
-            context.dbClassificationValue.Add(suClassificationValue);
+            context.DbClassificationValue.Add(suClassificationValue);
             context.SaveChanges();
             return suClassificationValue;
         }
 
         public SuClassificationValueModel DeleteClassificationValue(int Id)
         {
-            var suClassificationValue = context.dbClassificationValue.Find(Id);
+            var suClassificationValue = context.DbClassificationValue.Find(Id);
             if (suClassificationValue != null)
             {
-                context.dbClassificationValue.Remove(suClassificationValue);
+                context.DbClassificationValue.Remove(suClassificationValue);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationValueModel> GetAllClassifcationValues()
         {
-            return context.dbClassificationValue;
+            return context.DbClassificationValue;
 
         }
 
         public SuClassificationValueModel GetClassificationValue(int Id)
         {
-            return context.dbClassificationValue.Find(Id);
+            return context.DbClassificationValue.Find(Id);
         }
 
         public SuClassificationValueModel UpdateClassificationValue(SuClassificationValueModel suClassificationValueChanges)
         {
-            var changedClassificationValue = context.dbClassificationValue.Attach(suClassificationValueChanges);
+            var changedClassificationValue = context.DbClassificationValue.Attach(suClassificationValueChanges);
             changedClassificationValue.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suClassificationValueChanges;

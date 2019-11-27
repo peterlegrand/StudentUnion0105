@@ -17,17 +17,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuContentClassificationValueModel AddContentClassificationValue(SuContentClassificationValueModel suContentClassificationValue)
         {
-            context.dbContentClassificationValue.Add(suContentClassificationValue);
+            context.DbContentClassificationValue.Add(suContentClassificationValue);
             context.SaveChanges();
             return suContentClassificationValue;
         }
 
         public SuContentClassificationValueModel DeleteContentClassificationValue(int Id)
         {
-            var SuContentClassificationValue = context.dbContentClassificationValue.Find(Id);
+            var SuContentClassificationValue = context.DbContentClassificationValue.Find(Id);
             if (SuContentClassificationValue != null)
             {
-                context.dbContentClassificationValue.Remove(SuContentClassificationValue);
+                context.DbContentClassificationValue.Remove(SuContentClassificationValue);
                 context.SaveChanges();
 
             }
@@ -38,18 +38,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuContentClassificationValueModel> GetAllContentClassificationValues()
         {
-            return context.dbContentClassificationValue;
+            return context.DbContentClassificationValue;
 
         }
 
         public SuContentClassificationValueModel GetContentClassificationValue(int Id)
         {
-            return context.dbContentClassificationValue.Find(Id);
+            return context.DbContentClassificationValue.Find(Id);
         }
 
         public SuContentClassificationValueModel UpdateContentClassificationValue(SuContentClassificationValueModel suContentClassificationValueChanges)
         {
-            var changedContentClassificationValue = context.dbContentClassificationValue.Attach(suContentClassificationValueChanges);
+            var changedContentClassificationValue = context.DbContentClassificationValue.Attach(suContentClassificationValueChanges);
             changedContentClassificationValue.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suContentClassificationValueChanges;

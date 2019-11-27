@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFlowModel AddProcessTemplateFlow(SuProcessTemplateFlowModel suProcessTemplateFlow)
         {
-            context.dbProcessTemplateFlow.Add(suProcessTemplateFlow);
+            context.DbProcessTemplateFlow.Add(suProcessTemplateFlow);
             context.SaveChanges();
             return suProcessTemplateFlow;
         }
 
         public SuProcessTemplateFlowModel DeleteProcessTemplateFlow(int Id)
         {
-            var suProcessTemplateFlow = context.dbProcessTemplateFlow.Find(Id);
+            var suProcessTemplateFlow = context.DbProcessTemplateFlow.Find(Id);
             if (suProcessTemplateFlow != null)
             {
-                context.dbProcessTemplateFlow.Remove(suProcessTemplateFlow);
+                context.DbProcessTemplateFlow.Remove(suProcessTemplateFlow);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFlowModel> GetAllProcessTemplateFlows()
         {
-            return context.dbProcessTemplateFlow;
+            return context.DbProcessTemplateFlow;
 
         }
 
         public SuProcessTemplateFlowModel GetProcessTemplateFlow(int Id)
         {
-            return context.dbProcessTemplateFlow.Find(Id);
+            return context.DbProcessTemplateFlow.Find(Id);
         }
 
         public SuProcessTemplateFlowModel UpdateProcessTemplateFlow(SuProcessTemplateFlowModel suProcessTemplateFlowChanges)
         {
-            var changedProcessTemplateFlow = context.dbProcessTemplateFlow.Attach(suProcessTemplateFlowChanges);
+            var changedProcessTemplateFlow = context.DbProcessTemplateFlow.Attach(suProcessTemplateFlowChanges);
             changedProcessTemplateFlow.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFlowChanges;

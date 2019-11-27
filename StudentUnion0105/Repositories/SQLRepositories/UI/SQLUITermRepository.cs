@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUITermModel> GetAllTerms()
         {
-            return context.dbUITerm;
+            return context.DbUITerm;
         }
 
         public SuUITermModel GetTerm(int Id)
         {
-            return context.dbUITerm.Find(Id);
+            return context.DbUITerm.Find(Id);
         }
 
     }

@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuSecurityLevelModel> GetAllSecurityLevel()
         {
-            return context.dbSecurityLevel;
+            return context.DbSecurityLevel;
 
         }
 
         public SuSecurityLevelModel GetSuSecurityLevel(int Id)
         {
-            return context.dbSecurityLevel.Find(Id);
+            return context.DbSecurityLevel.Find(Id);
         }
     }
 }

@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationValueLanguageModel AddClassificationValueLanguage(SuClassificationValueLanguageModel suClassificationValueLanguage)
         {
-            context.dbClassificationValueLanguage.Add(suClassificationValueLanguage);
+            context.DbClassificationValueLanguage.Add(suClassificationValueLanguage);
             context.SaveChanges();
             return suClassificationValueLanguage;
         }
 
         public SuClassificationValueLanguageModel DeleteClassificationValueLanguage(int Id)
         {
-            var suClassificationValueLanguage = context.dbClassificationValueLanguage.Find(Id);
+            var suClassificationValueLanguage = context.DbClassificationValueLanguage.Find(Id);
             if (suClassificationValueLanguage != null)
             {
-                context.dbClassificationValueLanguage.Remove(suClassificationValueLanguage);
+                context.DbClassificationValueLanguage.Remove(suClassificationValueLanguage);
                 context.SaveChanges();
 
             }
@@ -36,17 +36,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationValueLanguageModel> GetAllClassificationValueLanguages()
         {
-            return context.dbClassificationValueLanguage;
+            return context.DbClassificationValueLanguage;
         }
 
         public SuClassificationValueLanguageModel GetClassificationValueLanguage(int Id)
         {
-            return context.dbClassificationValueLanguage.Find(Id);
+            return context.DbClassificationValueLanguage.Find(Id);
         }
 
         public SuClassificationValueLanguageModel UpdateClassificationValueLanguage(SuClassificationValueLanguageModel suClassificationValueLanguageChanges)
         {
-            var changedClassificationValueLanguage = context.dbClassificationValueLanguage.Attach(suClassificationValueLanguageChanges);
+            var changedClassificationValueLanguage = context.DbClassificationValueLanguage.Attach(suClassificationValueLanguageChanges);
             changedClassificationValueLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suClassificationValueLanguageChanges;

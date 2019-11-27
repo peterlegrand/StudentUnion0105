@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateStepFieldModel AddProcessTemplateStepField(SuProcessTemplateStepFieldModel suProcessTemplateStepField)
         {
-            context.dbProcessTemplateStepField.Add(suProcessTemplateStepField);
+            context.DbProcessTemplateStepField.Add(suProcessTemplateStepField);
             context.SaveChanges();
             return suProcessTemplateStepField;
         }
 
         public SuProcessTemplateStepFieldModel DeleteProcessTemplateStepField(int Id)
         {
-            var suProcessTemplateStepField = context.dbProcessTemplateStepField.Find(Id);
+            var suProcessTemplateStepField = context.DbProcessTemplateStepField.Find(Id);
             if (suProcessTemplateStepField != null)
             {
-                context.dbProcessTemplateStepField.Remove(suProcessTemplateStepField);
+                context.DbProcessTemplateStepField.Remove(suProcessTemplateStepField);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateStepFieldModel> GetAllProcessTemplateStepFields()
         {
-            return context.dbProcessTemplateStepField;
+            return context.DbProcessTemplateStepField;
 
         }
 
         public SuProcessTemplateStepFieldModel GetProcessTemplateStepField(int Id)
         {
-            return context.dbProcessTemplateStepField.Find(Id);
+            return context.DbProcessTemplateStepField.Find(Id);
         }
 
         public SuProcessTemplateStepFieldModel UpdateProcessTemplateStepField(SuProcessTemplateStepFieldModel suProcessTemplateStepFieldChanges)
         {
-            var changedProcessTemplateStepField = context.dbProcessTemplateStepField.Attach(suProcessTemplateStepFieldChanges);
+            var changedProcessTemplateStepField = context.DbProcessTemplateStepField.Attach(suProcessTemplateStepFieldChanges);
             changedProcessTemplateStepField.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateStepFieldChanges;

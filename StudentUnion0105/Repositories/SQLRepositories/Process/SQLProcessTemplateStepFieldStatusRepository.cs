@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateStepFieldStatusModel> GetAllProcessTemplateStepFieldStatus()
         {
-            return context.dbProcessTemplateStepFieldStatus;
+            return context.DbProcessTemplateStepFieldStatus;
 
         }
 
         public SuProcessTemplateStepFieldStatusModel GetProcessTemplateStepFieldStatus(int Id)
         {
-            return context.dbProcessTemplateStepFieldStatus.Find(Id);
+            return context.DbProcessTemplateStepFieldStatus.Find(Id);
         }
     }
 }

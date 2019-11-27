@@ -120,7 +120,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.dbStatusList.FromSql($"DataTypeSelectAll").ToList();
+            var DataTypesFromDb = _context.DbStatusList.FromSql($"DataTypeSelectAll").ToList();
 
 
             foreach (var DataTypeFromDb in DataTypesFromDb)
@@ -138,7 +138,7 @@ namespace StudentUnion0105.Controllers
             //MasterList
             var MasterListList = new List<SelectListItem>();
 
-            var MasterListsFromDb = _context.dbStatusList.FromSql($"GetMasterList").ToList();
+            var MasterListsFromDb = _context.DbStatusList.FromSql($"GetMasterList").ToList();
 
 
             foreach (var MasterListFromDb in MasterListsFromDb)
@@ -208,7 +208,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.dbStatusList.FromSql($"DataTypeSelectAll").ToList();
+            var DataTypesFromDb = _context.DbStatusList.FromSql($"DataTypeSelectAll").ToList();
 
 
             foreach (var DataTypeFromDb in DataTypesFromDb)
@@ -226,7 +226,7 @@ namespace StudentUnion0105.Controllers
             //MasterList
             var MasterListList = new List<SelectListItem>();
 
-            var MasterListsFromDb = _context.dbTypeList.FromSql($"GetMasterList").ToList();
+            var MasterListsFromDb = _context.DbTypeList.FromSql($"GetMasterList").ToList();
 
 
             foreach (var MasterListFromDb in MasterListsFromDb)

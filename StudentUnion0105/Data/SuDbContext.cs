@@ -21,102 +21,103 @@ namespace StudentUnion0105.Data
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
         public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }
         public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
-        public DbSet<SuClassificationStatusModel> dbClassificationStatus { get; set; }
+        public DbSet<SuClassificationStatusModel> DbClassificationStatus { get; set; }
         //FrontProcess
         public DbSet<SuFrontProcessIndexGetTemplateGroupModel> ZdbFrontProcessIndexGetTemplateGroup { get; set; }
         public DbSet<SuFrontProcessIndexGetTemplateModel> ZdbFrontProcessIndexGetTemplate { get; set; }
         public DbSet<SuFrontProcessIndexGetTemplateFlowConditionModel> ZdbFrontProcessIndexGetTemplateFlowCondition { get; set; }
         public DbSet<SuFrontProcessCreateGetModel> ZdbFrontProcessCreateGet { get; set; }
         public DbSet<SuFrontProcessCreateGetFieldModel> ZdbFrontProcessCreateGetField { get; set; }
+        public DbSet<SuPreferenceIndexGetModel> ZdbPreferenceIndexGet { get; set; }
 
         //Process
-        public DbSet<SuProcessModel> dbProcess { get; set; }
-        public DbSet<SuProcessFieldModel> dbProcessField { get; set; }
+        public DbSet<SuProcessModel> DbProcess { get; set; }
+        public DbSet<SuProcessFieldModel> DbProcessField { get; set; }
 
         //Classification
-        public DbSet<SuClassificationModel> dbClassification { get; set; }
+        public DbSet<SuClassificationModel> DbClassification { get; set; }
         public DbSet<SuClassificationDeleteGetModel> ZdbClassificationDeleteGet { get; set; }
         public DbSet<SuClassificationEditGetModel> ZdbClassificationEditGet { get; set; }
         public DbSet<SuClassificationIndexGetModel> ZdbClassificationIndexGet { get; set; }
-        public DbSet<SuClassificationLanguageModel> dbClassificationLanguage { get; set; }
+        public DbSet<SuClassificationLanguageModel> DbClassificationLanguage { get; set; }
         //ClassificationLevel
-        public DbSet<SuClassificationLevelModel> dbClassificationLevel { get; set; }
+        public DbSet<SuClassificationLevelModel> DbClassificationLevel { get; set; }
         public DbSet<SuClassificationLevelDeleteGetModel> ZdbClassificationLevelDeleteGet { get; set; }
         public DbSet<SuClassificationLevelEditGetModel> ZdbClassificationLevelEditGet { get; set; }
         public DbSet<SuClassificationLevelIndexGetModel> ZdbClassificationLevelIndexGet { get; set; }
-        public DbSet<SuClassificationLevelLanguageModel> dbClassificationLevelLanguage { get; set; }
+        public DbSet<SuClassificationLevelLanguageModel> DbClassificationLevelLanguage { get; set; }
         //ClassificationValue
-        public DbSet<SuClassificationValueModel> dbClassificationValue { get; set; }
+        public DbSet<SuClassificationValueModel> DbClassificationValue { get; set; }
         public DbSet<SuClassificationValueEditGetModel> ZdbClassificationValueEditGet { get; set; }
         public DbSet<SuClassificationValueEditGetLevelModel> ZdbClassificationValueEditGetLevel { get; set; }
-        public DbSet<SuClassificationValueLanguageModel> dbClassificationValueLanguage { get; set; }
+        public DbSet<SuClassificationValueLanguageModel> DbClassificationValueLanguage { get; set; }
         public DbSet<SuClassificationValueIndexGet> ZdbClassificationValueIndexGet { get; set; }
-        public DbSet<SuContentTypeLanguageModel> dbContentTypeLanguage { get; set; }
-        public DbSet<SuContentTypeDeleteGetModel> dbContentTypeDeleteGet { get; set; }
-        public DbSet<SuOrganizationLanguageModel> dbOrganizationLanguage { get; set; }
-        public DbSet<SuOrganizationModel> dbOrganization { get; set; }
-        public DbSet<SuOrganizationTypeDeleteGetModel> dbOrganizationTypeDeleteGet { get; set; }
-        public DbSet<SuPageDeleteGetModel> dbPageDeleteGet { get; set; }
-        public DbSet<SuPageSectionDeleteGetModel> dbPageSectionDeleteGet { get; set; }
-        public DbSet<SuOrganizationDeleteGetModel> dbOrganizationDeleteGet { get; set; }
-        public DbSet<SuOrganizationStatusModel> dbOrganizationStatus { get; set; }
-        public DbSet<SuOrganizationTypeLanguageModel> dbOrganizationTypeLanguage { get; set; }
-        public DbSet<SuOrganizationTypeModel> dbOrganizationType { get; set; }
-        public DbSet<SuProjectLanguageModel> dbProjectLanguage { get; set; }
-        public DbSet<SuProjectModel> dbProject { get; set; }
-        public DbSet<SuProjectStatusModel> dbProjectStatus { get; set; }
-        public DbSet<SuContentTypeModel> dbContentType { get; set; }
-        public DbSet<SuLanguageModel> dbLanguage { get; set; }
-        public DbSet<SuCountryModel> dbCountry { get; set; }
-        public DbSet<SuSettingModel> dbSetting { get; set; }
-        public DbSet<SuPageLanguageModel> dbPageLanguage { get; set; }
-        public DbSet<SuPageModel> dbPage { get; set; }
-        public DbSet<SuPageStatusModel> dbPageStatus { get; set; }
-        public DbSet<SuPageTypeLanguageModel> dbPageTypeLanguage { get; set; }
-        public DbSet<SuPageTypeModel> dbPageType { get; set; }
-        public DbSet<SuPageSectionModel> dbPageSection { get; set; }
-        public DbSet<SuPageSectionLanguageModel> dbPageSectionLanguage { get; set; }
-        public DbSet<SuPageSectionTypeModel> dbPageSectionType { get; set; }
-        public DbSet<SuPageSectionTypeLanguageModel> dbPageSectionTypeLanguage { get; set; }
-        public DbSet<SuContentModel> dbContent { get; set; }
-        public DbSet<SuContentClassificationValueModel> dbContentClassificationValue { get; set; }
-        public DbSet<SuContentStatusModel> dbContentStatus { get; set; }
-        public DbSet<SuProcessTemplateFieldLanguageModel> dbProcessTemplateFieldLanguage { get; set; }
-        public DbSet<SuProcessTemplateFieldModel> dbProcessTemplateField { get; set; }
-        public DbSet<SuProcessTemplateFieldTypeLanguageModel> dbProcessTemplateFieldTypeLanguage { get; set; }
-        public DbSet<SuProcessTemplateFieldTypeModel> dbProcessTemplateFieldType { get; set; }
-        public DbSet<SuProcessTemplateFlowConditionTypeModel> dbProcessTemplateFlowConditionType { get; set; }
-        public DbSet<SuProcessTemplateFlowConditionLanguageModel> dbProcessTemplateFlowConditionLanguage { get; set; }
-        public DbSet<SuProcessTemplateFlowConditionModel> dbProcessTemplateFlowCondition { get; set; }
-        public DbSet<SuProcessTemplateFlowModel> dbProcessTemplateFlow { get; set; }
-        public DbSet<SuProcessTemplateFlowLanguageModel> dbProcessTemplateFlowLanguage { get; set; }
-        public DbSet<SuProcessTemplateGroupLanguageModel> dbProcessTemplateGroupLanguage { get; set; }
-        public DbSet<SuProcessTemplateGroupModel> dbProcessTemplateGroup { get; set; }
-        public DbSet<SuProcessTemplateLanguageModel> dbProcessTemplateLanguage { get; set; }
-        public DbSet<SuProcessTemplateModel> dbProcessTemplate { get; set; }
-        public DbSet<SuProcessTemplateStepFieldModel> dbProcessTemplateStepField { get; set; }
-        public DbSet<SuProcessTemplateStepFieldStatusModel> dbProcessTemplateStepFieldStatus { get; set; }
-        public DbSet<SuProcessTemplateStepLanguageModel> dbProcessTemplateStepLanguage { get; set; }
-        public DbSet<SuProcessTemplateStepModel> dbProcessTemplateStep { get; set; }
-        public DbSet<SuUserOrganizationModel> dbUserOrganization { get; set; }
-        public DbSet<SuUserOrganizationTypeModel> dbUserOrganizationType { get; set; }
-        public DbSet<SuUserOrganizationTypeLanguageModel> dbUserOrganizationTypeLanguage { get; set; }
-        public DbSet<SuUserProjectModel> dbUserProject { get; set; }
-        public DbSet<SuUserProjectTypeModel> dbUserProjectType { get; set; }
-        public DbSet<SuUserProjectTypeLanguageModel> dbUserProjectTypeLanguage { get; set; }
-        public DbSet<SuUserRelationModel> dbUserRelation { get; set; }
-        public DbSet<SuUserRelationTypeModel> dbUserRelationType { get; set; }
-        public DbSet<SuUserRelationTypeLanguageModel> dbUserRelationTypeLanguage { get; set; }
-        public DbSet<SuComparisonModel> dbComparison { get; set; }
-        public DbSet<SuMasterListModel> dbMasterList { get; set; }
-        public DbSet<SuDataTypeModel> dbDataType { get; set; }
-        public DbSet<SuSecurityLevelModel> dbSecurityLevel { get; set; }
-        public DbSet<SuStatusList> dbStatusList { get; set; }
-        public DbSet<SuSecurityLevelList> dbSecurityLevelList { get; set; }
-        public DbSet<SuLanguageList> dbLanguageList { get; set; }
-        public DbSet<SuCountryList> dbCountryList { get; set; }
-        public DbSet<SuTypeList> dbTypeList { get; set; }
-        public DbSet<SuValueList> dbValueList { get; set; }
+        public DbSet<SuContentTypeLanguageModel> DbContentTypeLanguage { get; set; }
+        public DbSet<SuContentTypeDeleteGetModel> DbContentTypeDeleteGet { get; set; }
+        public DbSet<SuOrganizationLanguageModel> DbOrganizationLanguage { get; set; }
+        public DbSet<SuOrganizationModel> DbOrganization { get; set; }
+        public DbSet<SuOrganizationTypeDeleteGetModel> DbOrganizationTypeDeleteGet { get; set; }
+        public DbSet<SuPageDeleteGetModel> DbPageDeleteGet { get; set; }
+        public DbSet<SuPageSectionDeleteGetModel> DbPageSectionDeleteGet { get; set; }
+        public DbSet<SuOrganizationDeleteGetModel> DbOrganizationDeleteGet { get; set; }
+        public DbSet<SuOrganizationStatusModel> DbOrganizationStatus { get; set; }
+        public DbSet<SuOrganizationTypeLanguageModel> DbOrganizationTypeLanguage { get; set; }
+        public DbSet<SuOrganizationTypeModel> DbOrganizationType { get; set; }
+        public DbSet<SuProjectLanguageModel> DbProjectLanguage { get; set; }
+        public DbSet<SuProjectModel> DbProject { get; set; }
+        public DbSet<SuProjectStatusModel> DbProjectStatus { get; set; }
+        public DbSet<SuContentTypeModel> DbContentType { get; set; }
+        public DbSet<SuLanguageModel> DbLanguage { get; set; }
+        public DbSet<SuCountryModel> DbCountry { get; set; }
+        public DbSet<SuSettingModel> DbSetting { get; set; }
+        public DbSet<SuPageLanguageModel> DbPageLanguage { get; set; }
+        public DbSet<SuPageModel> DbPage { get; set; }
+        public DbSet<SuPageStatusModel> DbPageStatus { get; set; }
+        public DbSet<SuPageTypeLanguageModel> DbPageTypeLanguage { get; set; }
+        public DbSet<SuPageTypeModel> DbPageType { get; set; }
+        public DbSet<SuPageSectionModel> DbPageSection { get; set; }
+        public DbSet<SuPageSectionLanguageModel> DbPageSectionLanguage { get; set; }
+        public DbSet<SuPageSectionTypeModel> DbPageSectionType { get; set; }
+        public DbSet<SuPageSectionTypeLanguageModel> DbPageSectionTypeLanguage { get; set; }
+        public DbSet<SuContentModel> DbContent { get; set; }
+        public DbSet<SuContentClassificationValueModel> DbContentClassificationValue { get; set; }
+        public DbSet<SuContentStatusModel> DbContentStatus { get; set; }
+        public DbSet<SuProcessTemplateFieldLanguageModel> DbProcessTemplateFieldLanguage { get; set; }
+        public DbSet<SuProcessTemplateFieldModel> DbProcessTemplateField { get; set; }
+        public DbSet<SuProcessTemplateFieldTypeLanguageModel> DbProcessTemplateFieldTypeLanguage { get; set; }
+        public DbSet<SuProcessTemplateFieldTypeModel> DbProcessTemplateFieldType { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionTypeModel> DbProcessTemplateFlowConditionType { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionLanguageModel> DbProcessTemplateFlowConditionLanguage { get; set; }
+        public DbSet<SuProcessTemplateFlowConditionModel> DbProcessTemplateFlowCondition { get; set; }
+        public DbSet<SuProcessTemplateFlowModel> DbProcessTemplateFlow { get; set; }
+        public DbSet<SuProcessTemplateFlowLanguageModel> DbProcessTemplateFlowLanguage { get; set; }
+        public DbSet<SuProcessTemplateGroupLanguageModel> DbProcessTemplateGroupLanguage { get; set; }
+        public DbSet<SuProcessTemplateGroupModel> DbProcessTemplateGroup { get; set; }
+        public DbSet<SuProcessTemplateLanguageModel> DbProcessTemplateLanguage { get; set; }
+        public DbSet<SuProcessTemplateModel> DbProcessTemplate { get; set; }
+        public DbSet<SuProcessTemplateStepFieldModel> DbProcessTemplateStepField { get; set; }
+        public DbSet<SuProcessTemplateStepFieldStatusModel> DbProcessTemplateStepFieldStatus { get; set; }
+        public DbSet<SuProcessTemplateStepLanguageModel> DbProcessTemplateStepLanguage { get; set; }
+        public DbSet<SuProcessTemplateStepModel> DbProcessTemplateStep { get; set; }
+        public DbSet<SuUserOrganizationModel> DbUserOrganization { get; set; }
+        public DbSet<SuUserOrganizationTypeModel> DbUserOrganizationType { get; set; }
+        public DbSet<SuUserOrganizationTypeLanguageModel> DbUserOrganizationTypeLanguage { get; set; }
+        public DbSet<SuUserProjectModel> DbUserProject { get; set; }
+        public DbSet<SuUserProjectTypeModel> DbUserProjectType { get; set; }
+        public DbSet<SuUserProjectTypeLanguageModel> DbUserProjectTypeLanguage { get; set; }
+        public DbSet<SuUserRelationModel> DbUserRelation { get; set; }
+        public DbSet<SuUserRelationTypeModel> DbUserRelationType { get; set; }
+        public DbSet<SuUserRelationTypeLanguageModel> DbUserRelationTypeLanguage { get; set; }
+        public DbSet<SuComparisonModel> DbComparison { get; set; }
+        public DbSet<SuMasterListModel> DbMasterList { get; set; }
+        public DbSet<SuDataTypeModel> DbDataType { get; set; }
+        public DbSet<SuSecurityLevelModel> DbSecurityLevel { get; set; }
+        public DbSet<SuStatusList> DbStatusList { get; set; }
+        public DbSet<SuSecurityLevelList> DbSecurityLevelList { get; set; }
+        public DbSet<SuLanguageList> DbLanguageList { get; set; }
+        public DbSet<SuCountryList> DbCountryList { get; set; }
+        public DbSet<SuTypeList> DbTypeList { get; set; }
+        public DbSet<SuValueList> DbValueList { get; set; }
         //        public DbSet<SuObjectLanguageEditGet> dbObjectLanguage { get; set; }
         public DbSet<SuObjectIndexGetModel> ZdbObjectIndexGet { get; set; }
         public DbSet<SuObjectLanguageCreateGetModel> ZdbObjectLanguageCreateGet { get; set; }
@@ -125,20 +126,20 @@ namespace StudentUnion0105.Data
         public DbSet<SuObjectLanguageIndexGetModel> ZdbObjectLanguageIndexGet { get; set; }
         public DbSet<SuProcessTemplateFlowConditionEditGetModel> ZdbProcessTemplateFlowConditionEditGet { get; set; }
 
-        public DbSet<SuUIScreenModel> dbUIScreen { get; set; }
-        public DbSet<SuUITermLanguageModel> dbUITermLanguage { get; set; }
-        public DbSet<SuUITermModel> dbUITerm { get; set; }
-        public DbSet<SuUITermScreenModel> dbUITermScreen { get; set; }
+        public DbSet<SuUIScreenModel> DbUIScreen { get; set; }
+        public DbSet<SuUITermLanguageModel> DbUITermLanguage { get; set; }
+        public DbSet<SuUITermModel> DbUITerm { get; set; }
+        public DbSet<SuUITermScreenModel> DbUITermScreen { get; set; }
 
 
         public DbSet<SuOrganizationIndexGet> ZdbOrganizationIndexGet { get; set; }
-        public DbSet<SuGetProjectStructure> dbGetProjectStructure { get; set; }
-        public DbSet<SuPageSectionsViewModel> dbPageSectionsViewModel { get; set; }
-        public DbSet<SuObjectVM> dbObjectVM { get; set; }
-        public DbSet<SuObject> dbObject { get; set; }
-        public DbSet<SuIdWithStrings> dbIdWithStrings { get; set; }
+        public DbSet<SuGetProjectStructure> DbGetProjectStructure { get; set; }
+        public DbSet<SuPageSectionsViewModel> DbPageSectionsViewModel { get; set; }
+        public DbSet<SuObjectVM> DbObjectVM { get; set; }
+        public DbSet<SuObject> DbObject { get; set; }
+        public DbSet<SuIdWithStrings> DbIdWithStrings { get; set; }
 
-        public DbSet<SuClaim> dbClaim { get; set; }
+        public DbSet<SuClaim> DbClaim { get; set; }
         public DbSet<SuInt> ZdbInt { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

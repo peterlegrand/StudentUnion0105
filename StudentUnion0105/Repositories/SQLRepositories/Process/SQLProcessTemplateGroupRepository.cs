@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateGroupModel AddProcessTemplateGroup(SuProcessTemplateGroupModel suProcessTemplateGroup)
         {
-            context.dbProcessTemplateGroup.Add(suProcessTemplateGroup);
+            context.DbProcessTemplateGroup.Add(suProcessTemplateGroup);
             context.SaveChanges();
             return suProcessTemplateGroup;
         }
 
         public SuProcessTemplateGroupModel DeleteProcessTemplateGroup(int Id)
         {
-            var suProcessTemplateGroup = context.dbProcessTemplateGroup.Find(Id);
+            var suProcessTemplateGroup = context.DbProcessTemplateGroup.Find(Id);
             if (suProcessTemplateGroup != null)
             {
-                context.dbProcessTemplateGroup.Remove(suProcessTemplateGroup);
+                context.DbProcessTemplateGroup.Remove(suProcessTemplateGroup);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateGroupModel> GetAllProcessTemplateGroups()
         {
-            return context.dbProcessTemplateGroup;
+            return context.DbProcessTemplateGroup;
 
         }
 
         public SuProcessTemplateGroupModel GetProcessTemplateGroup(int Id)
         {
-            return context.dbProcessTemplateGroup.Find(Id);
+            return context.DbProcessTemplateGroup.Find(Id);
         }
 
         public SuProcessTemplateGroupModel UpdateProcessTemplateGroup(SuProcessTemplateGroupModel suProcessTemplateGroupChanges)
         {
-            var changedProcessTemplateGroup = context.dbProcessTemplateGroup.Attach(suProcessTemplateGroupChanges);
+            var changedProcessTemplateGroup = context.DbProcessTemplateGroup.Attach(suProcessTemplateGroupChanges);
             changedProcessTemplateGroup.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateGroupChanges;

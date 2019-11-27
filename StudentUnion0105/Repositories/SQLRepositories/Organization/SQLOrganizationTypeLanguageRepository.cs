@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuOrganizationTypeLanguageModel AddOrganizationTypeLanguage(SuOrganizationTypeLanguageModel suOrganizationTypeLanguage)
         {
-            Context.dbOrganizationTypeLanguage.Add(suOrganizationTypeLanguage);
+            Context.DbOrganizationTypeLanguage.Add(suOrganizationTypeLanguage);
             Context.SaveChanges();
             return suOrganizationTypeLanguage;
         }
 
         public SuOrganizationTypeLanguageModel DeleteOrganizationTypeLanguage(int Id)
         {
-            var suOrganizationTypeLanguage = Context.dbOrganizationTypeLanguage.Find(Id);
+            var suOrganizationTypeLanguage = Context.DbOrganizationTypeLanguage.Find(Id);
             if (suOrganizationTypeLanguage != null)
             {
-                Context.dbOrganizationTypeLanguage.Remove(suOrganizationTypeLanguage);
+                Context.DbOrganizationTypeLanguage.Remove(suOrganizationTypeLanguage);
                 Context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuOrganizationTypeLanguageModel> GetAllOrganizationTypeLanguages()
         {
-            return Context.dbOrganizationTypeLanguage;
+            return Context.DbOrganizationTypeLanguage;
         }
 
         public SuOrganizationTypeLanguageModel GetOrganizationTypeLanguage(int Id)
         {
-            return Context.dbOrganizationTypeLanguage.Find(Id);
+            return Context.DbOrganizationTypeLanguage.Find(Id);
         }
 
         public SuOrganizationTypeLanguageModel UpdateOrganizationTypeLanguage(SuOrganizationTypeLanguageModel suOrganizationTypeLanguageChanges)
         {
-            var changedOrganizationTypeLanguage = Context.dbOrganizationTypeLanguage.Attach(suOrganizationTypeLanguageChanges);
+            var changedOrganizationTypeLanguage = Context.DbOrganizationTypeLanguage.Attach(suOrganizationTypeLanguageChanges);
             changedOrganizationTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Context.SaveChanges();
             return suOrganizationTypeLanguageChanges;

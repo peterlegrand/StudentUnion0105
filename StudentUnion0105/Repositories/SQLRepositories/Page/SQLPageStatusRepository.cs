@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageStatusModel> GetAllPageStatus()
         {
-            return context.dbPageStatus;
+            return context.DbPageStatus;
         }
 
         public SuPageStatusModel GetSuPageStatus(int Id)
         {
-            return context.dbPageStatus.Find(Id);
+            return context.DbPageStatus.Find(Id);
         }
     }
 }

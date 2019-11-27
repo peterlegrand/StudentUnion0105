@@ -181,5 +181,6 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1176, 'ProcessTemplateFiel
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1177, 'UserOrganizationType', 'Index');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1178, 'UserOrganizationType', 'LanguageIndex');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1179, 'UserOrganizationType', 'LanguageEdit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1180, 'Preference', 'Index');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

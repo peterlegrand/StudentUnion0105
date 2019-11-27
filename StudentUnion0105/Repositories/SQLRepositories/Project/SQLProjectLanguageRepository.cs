@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProjectLanguageModel AddProjectLanguage(SuProjectLanguageModel suProjectLanguage)
         {
-            context.dbProjectLanguage.Add(suProjectLanguage);
+            context.DbProjectLanguage.Add(suProjectLanguage);
             context.SaveChanges();
             return suProjectLanguage;
         }
 
         public SuProjectLanguageModel DeleteProjectLanguage(int Id)
         {
-            var suProjectLanguage = context.dbProjectLanguage.Find(Id);
+            var suProjectLanguage = context.DbProjectLanguage.Find(Id);
             if (suProjectLanguage != null)
             {
-                context.dbProjectLanguage.Remove(suProjectLanguage);
+                context.DbProjectLanguage.Remove(suProjectLanguage);
                 context.SaveChanges();
             }
             return suProjectLanguage;
@@ -34,17 +34,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProjectLanguageModel> GetAllProjectLanguages()
         {
-            return context.dbProjectLanguage;
+            return context.DbProjectLanguage;
         }
 
         public SuProjectLanguageModel GetProjectLanguage(int Id)
         {
-            return context.dbProjectLanguage.Find(Id);
+            return context.DbProjectLanguage.Find(Id);
         }
 
         public SuProjectLanguageModel UpdateProjectLanguage(SuProjectLanguageModel suProjectLanguageChanges)
         {
-            var changedProjectLanguage = context.dbProjectLanguage.Attach(suProjectLanguageChanges);
+            var changedProjectLanguage = context.DbProjectLanguage.Attach(suProjectLanguageChanges);
             changedProjectLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProjectLanguageChanges;

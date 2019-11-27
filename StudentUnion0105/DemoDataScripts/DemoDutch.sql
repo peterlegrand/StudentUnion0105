@@ -578,8 +578,8 @@ ClassificationValueId
 , HeaderDescription 
 , TopicName 
 , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(29, 39, 'Andisol','Andisol – volcanic ash soils. They are young and very fertile. ','Andisol','Andisol','Andisol – volcanic ash soils. They are young and very fertile. ' 
-, 'Andisol','Andisol – volcanic ash soils. They are young and very fertile. ','Andisol','Andisol – volcanic ash soils. They are young and very fertile. ','Andisol' 
+VALUES(29, 39, 'Andisol','Andisol – volcanic','Andisol','Andisol','Andisol – volcanic ' 
+, 'Andisol','Andisol – volcanic ','Andisol','Andisol – volcanic ','Andisol' 
 , @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationValueLanguage ( 
 ClassificationValueId 
@@ -770,115 +770,115 @@ INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (1, 41, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (1, 39, 'Kennis onderwerp','Kennis onderwerp','Kennis onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (2, 41, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (2, 39, 'Interessegebied','Interessegebied','Interessegebied',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (3, 41, 'Land','Land','Land',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (3, 39, 'Land','Land','Land',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (4, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (4, 39, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (5, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (5, 39, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (6, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (6, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (7, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (7, 39, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (8, 41, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (8, 39, 'Ervarings onderwerp','Ervarings onderwerp','Ervarings onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (9, 41, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (9, 39, 'Aantal dagen','Aantal dagen','Aantal dagen',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (10, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (10, 39, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (11, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (11, 39, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (12, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (12, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (13, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (13, 39, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (14, 41, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (14, 39, 'Onderzoek onderwerp','Onderzoek onderwerp','Onderzoek onderwerp',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (15, 41, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (15, 39, 'Steekproefgrootte','Steekproefgrootte','Steekproefgrootte',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (16, 41, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (16, 39, 'Invoeren','Invoeren','Invoeren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (17, 41, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (17, 39, 'Annuleren','Annuleren','Annuleren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (18, 41, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (18, 39, 'Goedkeuren','Goedkeuren','Goedkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 INSERT INTO dbProcessTemplateFieldLanguage (ProcessTemplateFieldId
 	, LanguageId
 	, Name
 	, Description
 	, MouseOver, ModifiedDate, CreatedDate, CreatorId, ModifierId) 
-VALUES (19, 41, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
+VALUES (19, 39, 'Afkeuren','Afkeuren','Afkeuren',getdate(),getdate() , @CurrentUser, @CurrentUser)
 
 
 	

@@ -63,15 +63,17 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var UserFromDb = await userManager.FindByIdAsync(Id);
-            CreateUserViewModel UserToForm = new CreateUserViewModel();
-            UserToForm.Id = UserFromDb.Id;
-            UserToForm.UserName = UserFromDb.UserName;
-            UserToForm.Email = UserFromDb.Email;
-            UserToForm.DefaultLanguageId = UserFromDb.DefaultLanguageId;
-            UserToForm.CountryId = UserFromDb.CountryId;
+            CreateUserViewModel UserToForm = new CreateUserViewModel
+            {
+                Id = UserFromDb.Id,
+                UserName = UserFromDb.UserName,
+                Email = UserFromDb.Email,
+                DefaultLanguageId = UserFromDb.DefaultLanguageId,
+                CountryId = UserFromDb.CountryId
+            };
 
             var LanguageList = new List<SelectListItem>();
-            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.DbLanguageList.FromSql($"LanguageSelectAll").ToList();
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
                 LanguageList.Add(new SelectListItem
@@ -82,12 +84,12 @@ namespace StudentUnion0105.Controllers
             }
 
             var CountryList = new List<SelectListItem>();
-            var CountriesFromDb = _context.dbCountryList.FromSql($"CountrySelectAll").ToList();
+            var CountriesFromDb = _context.DbCountryList.FromSql("CountrySelectAll").ToList();
             foreach (var CountryFromDb in CountriesFromDb)
             {
                 CountryList.Add(new SelectListItem
                 {
-                    Text = CountryFromDb.CountryName,
+                    Text = CountryFromDb.Name,
                     Value = CountryFromDb.Id.ToString()
                 });
             }
@@ -117,7 +119,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
             var LanguageList = new List<SelectListItem>();
-            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.DbLanguageList.FromSql("LanguageSelectAll").ToList();
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
                 LanguageList.Add(new SelectListItem
@@ -128,12 +130,12 @@ namespace StudentUnion0105.Controllers
             }
 
             var CountryList = new List<SelectListItem>();
-            var CountriesFromDb = _context.dbCountryList.FromSql($"CountrySelectAll").ToList();
+            var CountriesFromDb = _context.DbCountryList.FromSql($"CountrySelectAll").ToList();
             foreach (var CountryFromDb in CountriesFromDb)
             {
                 CountryList.Add(new SelectListItem
                 {
-                    Text = CountryFromDb.CountryName,
+                    Text = CountryFromDb.Name,
                     Value = CountryFromDb.Id.ToString()
                 });
             }

@@ -94,65 +94,65 @@ namespace StudentUnion0105.Controllers
                         switch (FrontProcessTemplateFlowCondition.ConditionTypeId)
                         {
                             case 3:  //Security level user
-                                DynamicSQL = DynamicSQL + " Users.SecurityLevel ";
+                                DynamicSQL += " Users.SecurityLevel ";
                                 parameterList.Add(new SqlParameter("@P" + FrontProcessTemplateFlowCondition.OId.ToString(), FrontProcessTemplateFlowCondition.ConditionInt.ToString()));
                                     switch (FrontProcessTemplateFlowCondition.ComparisonOperatorId)
                                 {
                                     case 1: //Equal
-                                        DynamicSQL = DynamicSQL + "= ";
+                                        DynamicSQL += "= ";
                                         break;
 
                                     case 2: //Larger
-                                        DynamicSQL = DynamicSQL + "> ";
+                                        DynamicSQL += "> ";
                                         break;
 
                                     case 3: //Smaller
-                                        DynamicSQL = DynamicSQL + "< ";
+                                        DynamicSQL += "< ";
                                         break;
 
                                     case 4: //Larger or equal
-                                        DynamicSQL = DynamicSQL + ">= ";
+                                        DynamicSQL += ">= ";
                                         break;
 
                                     case 5: //Smaller or equal
-                                        DynamicSQL = DynamicSQL + "<= ";
+                                        DynamicSQL += "<= ";
                                         break;
 
                                     case 6: //Not equal
-                                        DynamicSQL = DynamicSQL + "!= ";
+                                        DynamicSQL += "!= ";
                                         break;
                                 }
                                 DynamicSQL = DynamicSQL + "@P" + FrontProcessTemplateFlowCondition.OId.ToString() + " ";
                                 break;
                             case 4:  //Role user
-                                DynamicSQL = DynamicSQL + " AspNetRoles.Name ";
+                                DynamicSQL += " AspNetRoles.Name ";
                                 parameterList.Add(new SqlParameter("@P" + FrontProcessTemplateFlowCondition.OId.ToString(), FrontProcessTemplateFlowCondition.ConditionString));
                                 switch (FrontProcessTemplateFlowCondition.ComparisonOperatorId)
                                 {
                                     case 1: //Equal
-                                        DynamicSQL = DynamicSQL + "= ";
+                                        DynamicSQL += "= ";
                                         break;
                                 }
                                 DynamicSQL = DynamicSQL + "@P" + FrontProcessTemplateFlowCondition.OId.ToString() + " ";
                                 break;
                             case 9:  //open bracket
-                                DynamicSQL = DynamicSQL +  " ( ";
+                                DynamicSQL += " ( ";
                                 break;
                             case 10:  //AND
-                                DynamicSQL = DynamicSQL + " AND ";
+                                DynamicSQL += " AND ";
                                 break;
                             case 11:  //OR
-                                DynamicSQL = DynamicSQL + " OR ";
+                                DynamicSQL += " OR ";
                                 break;
                             case 12:  //Closed bracket
-                                DynamicSQL = DynamicSQL + " ) ";
+                                DynamicSQL += " ) ";
                                 break;
                         }
 
                     }
                     try
                     { 
-                    SuStatusList HasRights = _context.dbStatusList.FromSql(DynamicSQL, parameterList.ToArray()).First();
+                    SuStatusList HasRights = _context.DbStatusList.FromSql(DynamicSQL, parameterList.ToArray()).First();
                         if (HasRights.Id != 0)
                         {
                             TemplatesWithRights.Add(template);
@@ -205,7 +205,7 @@ namespace StudentUnion0105.Controllers
         {
             var CountryList = new List<SelectListItem>();
 
-            var CountriesFromDb = _context.dbStatusList.FromSql($"CountryDD").ToList();
+            var CountriesFromDb = _context.DbStatusList.FromSql($"CountryDD").ToList();
 
 
             foreach (var CountryFromDb in CountriesFromDb)

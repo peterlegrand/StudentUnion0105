@@ -25,14 +25,14 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             int Id = 2;
-            var Sections = _context.dbPageSectionsViewModel.FromSql($"ShowPageSection {Id}, {DefaultLanguageID}").ToList();
+            var Sections = _context.DbPageSectionsViewModel.FromSql($"ShowPageSection {Id}, {DefaultLanguageID}").ToList();
             int NoOfSections = Sections.Count();
             List<SuContentModel>[] Contents = new List<SuContentModel>[NoOfSections];
             int SectionCount = 0;
             foreach (var Section in Sections)
             {
 
-                Contents[SectionCount] = _context.dbContent.FromSql($"ShowContent {Section.ContentTypeId}").ToList();
+                Contents[SectionCount] = _context.DbContent.FromSql($"ShowContent {Section.ContentTypeId}").ToList();
                 SectionCount++;
             }
             SuPageViewModel ToForm = new SuPageViewModel { PageSections = Sections, ContentViews = Contents };

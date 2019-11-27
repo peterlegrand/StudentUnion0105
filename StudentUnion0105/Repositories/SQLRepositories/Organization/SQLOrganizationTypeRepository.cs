@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuOrganizationTypeModel AddOrganizationType(SuOrganizationTypeModel suOrganizationType)
         {
-            context.dbOrganizationType.Add(suOrganizationType);
+            context.DbOrganizationType.Add(suOrganizationType);
             context.SaveChanges();
             return suOrganizationType;
         }
 
         public SuOrganizationTypeModel DeleteOrganizationType(int Id)
         {
-            var suOrganizationType = context.dbOrganizationType.Find(Id);
+            var suOrganizationType = context.DbOrganizationType.Find(Id);
             if (suOrganizationType != null)
             {
-                context.dbOrganizationType.Remove(suOrganizationType);
+                context.DbOrganizationType.Remove(suOrganizationType);
                 context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuOrganizationTypeModel> GetAllOrganizationTypes()
         {
-            return context.dbOrganizationType;
+            return context.DbOrganizationType;
         }
 
         public SuOrganizationTypeModel GetOrganizationType(int Id)
         {
-            return context.dbOrganizationType.Find(Id);
+            return context.DbOrganizationType.Find(Id);
         }
 
         public SuOrganizationTypeModel UpdateOrganizationType(SuOrganizationTypeModel suOrganizationTypeChanges)
         {
-            var changedOrganizationType = context.dbOrganizationType.Attach(suOrganizationTypeChanges);
+            var changedOrganizationType = context.DbOrganizationType.Attach(suOrganizationTypeChanges);
             changedOrganizationType.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suOrganizationTypeChanges;

@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuUserRelationTypeLanguageModel AddUserRelationTypeLanguage(SuUserRelationTypeLanguageModel suUserRelationTypeLanguage)
         {
-            context.dbUserRelationTypeLanguage.Add(suUserRelationTypeLanguage);
+            context.DbUserRelationTypeLanguage.Add(suUserRelationTypeLanguage);
             context.SaveChanges();
             return suUserRelationTypeLanguage;
         }
 
         public SuUserRelationTypeLanguageModel DeleteUserRelationTypeLanguage(int Id)
         {
-            var suUserRelationTypeLanguage = context.dbUserRelationTypeLanguage.Find(Id);
+            var suUserRelationTypeLanguage = context.DbUserRelationTypeLanguage.Find(Id);
             if (suUserRelationTypeLanguage != null)
             {
-                context.dbUserRelationTypeLanguage.Remove(suUserRelationTypeLanguage);
+                context.DbUserRelationTypeLanguage.Remove(suUserRelationTypeLanguage);
                 context.SaveChanges();
 
             }
@@ -34,17 +34,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUserRelationTypeLanguageModel> GetAllUserRelationTypeLanguages()
         {
-            return context.dbUserRelationTypeLanguage;
+            return context.DbUserRelationTypeLanguage;
         }
 
         public SuUserRelationTypeLanguageModel GetUserRelationTypeLanguage(int Id)
         {
-            return context.dbUserRelationTypeLanguage.Find(Id);
+            return context.DbUserRelationTypeLanguage.Find(Id);
         }
 
         public SuUserRelationTypeLanguageModel UpdateUserRelationTypeLanguage(SuUserRelationTypeLanguageModel suUserRelationTypeLanguageChanges)
         {
-            var suUserRelationTypeLanguage = context.dbUserRelationTypeLanguage.Attach(suUserRelationTypeLanguageChanges);
+            var suUserRelationTypeLanguage = context.DbUserRelationTypeLanguage.Attach(suUserRelationTypeLanguageChanges);
             suUserRelationTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suUserRelationTypeLanguageChanges;

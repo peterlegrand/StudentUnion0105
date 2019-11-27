@@ -19,11 +19,11 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuObject> GetAllObjects()
         {
-            return context.dbObject;
+            return context.DbObject;
         }
         public SuObject GetObject(int ID)
         {
-            return context.dbObject.Find(ID);
+            return context.DbObject.Find(ID);
         }
 
     }

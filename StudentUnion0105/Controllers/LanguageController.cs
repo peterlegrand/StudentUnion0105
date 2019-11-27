@@ -8,13 +8,11 @@ namespace StudentUnion0105.Controllers
 {
     public class LanguageController : Controller
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly ILanguageRepository _language;
 
-        public LanguageController(UserManager<SuUserModel> userManager
-                                                , ILanguageRepository language)
+        public LanguageController(
+                                                 ILanguageRepository language)
         {
-            _userManager = userManager;
             _language = language;
         }
         public IActionResult Index()
@@ -23,7 +21,7 @@ namespace StudentUnion0105.Controllers
             return View(AllLanguages);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id)
+        public IActionResult Edit(int Id)
         {
             var Language = _language.GetLanguage(Id);
 
@@ -34,7 +32,7 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuLanguageModel Language)
+        public IActionResult Edit(SuLanguageModel Language)
         {
             if (ModelState.IsValid)
             {

@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationLevelLanguageModel AddClassificationLevelLanguage(SuClassificationLevelLanguageModel suClassificationLevelLanguage)
         {
-            context.dbClassificationLevelLanguage.Add(suClassificationLevelLanguage);
+            context.DbClassificationLevelLanguage.Add(suClassificationLevelLanguage);
             context.SaveChanges();
             return suClassificationLevelLanguage;
         }
 
         public SuClassificationLevelLanguageModel DeleteClassificationLevelLanguage(int Id)
         {
-            var suClassificationLevelLanguage = context.dbClassificationLevelLanguage.Find(Id);
+            var suClassificationLevelLanguage = context.DbClassificationLevelLanguage.Find(Id);
             if (suClassificationLevelLanguage != null)
             {
-                context.dbClassificationLevelLanguage.Remove(suClassificationLevelLanguage);
+                context.DbClassificationLevelLanguage.Remove(suClassificationLevelLanguage);
                 context.SaveChanges();
 
             }
@@ -36,17 +36,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationLevelLanguageModel> GetAllClassificationLevelLanguages()
         {
-            return context.dbClassificationLevelLanguage;//.AsNoTracking();
+            return context.DbClassificationLevelLanguage;//.AsNoTracking();
         }
 
         public SuClassificationLevelLanguageModel GetClassificationLevelLanguage(int Id)
         {
-            return context.dbClassificationLevelLanguage.Find(Id);
+            return context.DbClassificationLevelLanguage.Find(Id);
         }
 
         public SuClassificationLevelLanguageModel UpdateClassificationLevelLanguage(SuClassificationLevelLanguageModel suClassificationLevelLanguageChanges)
         {
-            var suClassificationLevelLanguage = context.dbClassificationLevelLanguage.Attach(suClassificationLevelLanguageChanges);
+            var suClassificationLevelLanguage = context.DbClassificationLevelLanguage.Attach(suClassificationLevelLanguageChanges);
             suClassificationLevelLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suClassificationLevelLanguageChanges;

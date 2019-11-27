@@ -16,7 +16,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClaim> GetAllClaims()
         {
-            return context.dbClaim;
+            return context.DbClaim;
         }
 
     }

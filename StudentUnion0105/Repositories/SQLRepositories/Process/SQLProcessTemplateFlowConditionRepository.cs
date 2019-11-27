@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFlowConditionModel AddProcessTemplateFlowCondition(SuProcessTemplateFlowConditionModel suProcessTemplateFlowCondition)
         {
-            context.dbProcessTemplateFlowCondition.Add(suProcessTemplateFlowCondition);
+            context.DbProcessTemplateFlowCondition.Add(suProcessTemplateFlowCondition);
             context.SaveChanges();
             return suProcessTemplateFlowCondition;
         }
 
         public SuProcessTemplateFlowConditionModel DeleteProcessTemplateFlowCondition(int Id)
         {
-            var suProcessTemplateFlowCondition = context.dbProcessTemplateFlowCondition.Find(Id);
+            var suProcessTemplateFlowCondition = context.DbProcessTemplateFlowCondition.Find(Id);
             if (suProcessTemplateFlowCondition != null)
             {
-                context.dbProcessTemplateFlowCondition.Remove(suProcessTemplateFlowCondition);
+                context.DbProcessTemplateFlowCondition.Remove(suProcessTemplateFlowCondition);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFlowConditionModel> GetAllProcessTemplateFlowConditions()
         {
-            return context.dbProcessTemplateFlowCondition;
+            return context.DbProcessTemplateFlowCondition;
 
         }
 
         public SuProcessTemplateFlowConditionModel GetProcessTemplateFlowCondition(int Id)
         {
-            return context.dbProcessTemplateFlowCondition.Find(Id);
+            return context.DbProcessTemplateFlowCondition.Find(Id);
         }
 
         public SuProcessTemplateFlowConditionModel UpdateProcessTemplateFlowCondition(SuProcessTemplateFlowConditionModel suProcessTemplateFlowConditionChanges)
         {
-            var changedProcessTemplateFlowCondition = context.dbProcessTemplateFlowCondition.Attach(suProcessTemplateFlowConditionChanges);
+            var changedProcessTemplateFlowCondition = context.DbProcessTemplateFlowCondition.Attach(suProcessTemplateFlowConditionChanges);
             changedProcessTemplateFlowCondition.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFlowConditionChanges;

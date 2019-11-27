@@ -17,19 +17,19 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuLanguageModel> GetAllLanguages()
         {
-            return context.dbLanguage;
+            return context.DbLanguage;
 
 
         }
 
         public SuLanguageModel GetLanguage(int ID)
         {
-            return context.dbLanguage.Find(ID);
+            return context.DbLanguage.Find(ID);
         }
 
         public SuLanguageModel UpdateLanguage(SuLanguageModel suLanguageChanges)
         {
-            var suLanguage = context.dbLanguage.Attach(suLanguageChanges);
+            var suLanguage = context.DbLanguage.Attach(suLanguageChanges);
             suLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suLanguageChanges;

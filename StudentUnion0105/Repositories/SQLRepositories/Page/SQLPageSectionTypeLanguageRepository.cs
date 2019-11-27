@@ -22,12 +22,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageSectionTypeLanguageModel> GetAllPageSectionTypeLanguages()
         {
-            return context.dbPageSectionTypeLanguage;
+            return context.DbPageSectionTypeLanguage;
         }
 
         public SuPageSectionTypeLanguageModel GetPageSectionTypeLanguage(int Id)
         {
-            return context.dbPageSectionTypeLanguage.Find(Id);
+            return context.DbPageSectionTypeLanguage.Find(Id);
         }
 
 
@@ -35,14 +35,14 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionTypeLanguageModel AddPageSectionTypeLanguage(SuPageSectionTypeLanguageModel suPageSectionTypeLanguage)
         {
-            context.dbPageSectionTypeLanguage.Add(suPageSectionTypeLanguage);
+            context.DbPageSectionTypeLanguage.Add(suPageSectionTypeLanguage);
             context.SaveChanges();
             return suPageSectionTypeLanguage;
         }
 
         public SuPageSectionTypeLanguageModel UpdatePageSectionTypeLanguage(SuPageSectionTypeLanguageModel suPageSectionTypeLanguageChanges)
         {
-            var changedPageSectionTypeLanguage = context.dbPageSectionTypeLanguage.Attach(suPageSectionTypeLanguageChanges);
+            var changedPageSectionTypeLanguage = context.DbPageSectionTypeLanguage.Attach(suPageSectionTypeLanguageChanges);
             changedPageSectionTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageSectionTypeLanguageChanges;
@@ -50,10 +50,10 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionTypeLanguageModel DeletePageSectionTypeLanguage(int Id)
         {
-            var suPageSectionTypeLanguage = context.dbPageSectionTypeLanguage.Find(Id);
+            var suPageSectionTypeLanguage = context.DbPageSectionTypeLanguage.Find(Id);
             if (suPageSectionTypeLanguage != null)
             {
-                context.dbPageSectionTypeLanguage.Remove(suPageSectionTypeLanguage);
+                context.DbPageSectionTypeLanguage.Remove(suPageSectionTypeLanguage);
                 context.SaveChanges();
 
             }

@@ -32,11 +32,11 @@ namespace StudentUnion0105.Controllers
             _termScreen = TermScreen;
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             //            var CurrentUser = await _userManager.GetUserAsync(User);
             //          var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var TermList = _context.dbStatusList.FromSql($"UITermSelectAll").ToList();
+            var TermList = _context.DbStatusList.FromSql($"UITermSelectAll").ToList();
 
          //   var TermList = _uITerm.GetAllTerms();
                 
@@ -46,7 +46,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            var TermLanguageList = _context.dbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @p0",
+            var TermLanguageList = _context.DbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @p0",
                  parameters: new[] {             //0
                                         Id.ToString()
                     }).ToList();
@@ -59,7 +59,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var TermLanguage = _context.dbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
+            var TermLanguage = _context.DbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
                  parameters: new[] {             //0
                                         Id.ToString()
                     }).First();
@@ -70,11 +70,11 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageEdit(SuUITermLanguageModel FromForm)
+        public IActionResult LanguageEdit(SuUITermLanguageModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var c = _context.Database.ExecuteSqlCommand($"UITermLanguageUpdate @P0, @P1",
+                _context.Database.ExecuteSqlCommand($"UITermLanguageUpdate @P0, @P1",
                  parameters: new[] {             //0
                                        FromForm.Id.ToString()
                                        , FromForm.Customization
@@ -94,7 +94,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageCreate(int Id)
         {
 
-            var Languages = _context.dbStatusList.FromSql($"UITermLanguageSelectForCreate @p0",
+            var Languages = _context.DbStatusList.FromSql($"UITermLanguageSelectForCreate @p0",
                          parameters: new[] {             //0
                                         Id.ToString()
                     }).ToList();
@@ -123,14 +123,14 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageCreate(SuObjectAndStatusViewModel FromForm)
+        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 //                var CurrentUser = await userManager.GetUserAsync(User);
                 //                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 //               Guid guid = new Guid(CurrentUser.Id);
-                var c = _context.Database.ExecuteSqlCommand($"UITermLanguageCreate @P0, @P1, @P2",
+                 _context.Database.ExecuteSqlCommand($"UITermLanguageCreate @P0, @P1, @P2",
                  parameters: new[] {             //0
                                        FromForm.SuObject.ObjectId.ToString()
                                        , FromForm.SuObject.LanguageId.ToString()
@@ -148,7 +148,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
-            var TermLanguage = _context.dbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
+            var TermLanguage = _context.DbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
                 parameters: new[] {             //0
                                         Id.ToString()
                    }).First();

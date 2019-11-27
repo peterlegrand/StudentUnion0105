@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageTypeLanguageModel AddPageTypeLanguage(SuPageTypeLanguageModel suPageTypeLanguage)
         {
-            Context.dbPageTypeLanguage.Add(suPageTypeLanguage);
+            Context.DbPageTypeLanguage.Add(suPageTypeLanguage);
             Context.SaveChanges();
             return suPageTypeLanguage;
         }
 
         public SuPageTypeLanguageModel DeletePageTypeLanguage(int Id)
         {
-            var suPageTypeLanguage = Context.dbPageTypeLanguage.Find(Id);
+            var suPageTypeLanguage = Context.DbPageTypeLanguage.Find(Id);
             if (suPageTypeLanguage != null)
             {
-                Context.dbPageTypeLanguage.Remove(suPageTypeLanguage);
+                Context.DbPageTypeLanguage.Remove(suPageTypeLanguage);
                 Context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageTypeLanguageModel> GetAllPageTypeLanguages()
         {
-            return Context.dbPageTypeLanguage;
+            return Context.DbPageTypeLanguage;
         }
 
         public SuPageTypeLanguageModel GetPageTypeLanguage(int Id)
         {
-            return Context.dbPageTypeLanguage.Find(Id);
+            return Context.DbPageTypeLanguage.Find(Id);
         }
 
         public SuPageTypeLanguageModel UpdatePageTypeLanguage(SuPageTypeLanguageModel suPageTypeLanguageChanges)
         {
-            var changedPageTypeLanguage = Context.dbPageTypeLanguage.Attach(suPageTypeLanguageChanges);
+            var changedPageTypeLanguage = Context.DbPageTypeLanguage.Attach(suPageTypeLanguageChanges);
             changedPageTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Context.SaveChanges();
             return suPageTypeLanguageChanges;

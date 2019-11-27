@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuContentStatusModel> GetAllContentStatus()
         {
-            return context.dbContentStatus;
+            return context.DbContentStatus;
 
         }
 
         public SuContentStatusModel GetSuContentStatus(int Id)
         {
-            return context.dbContentStatus.Find(Id);
+            return context.DbContentStatus.Find(Id);
         }
     }
 }

@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFieldLanguageModel AddProcessTemplateFieldLanguage(SuProcessTemplateFieldLanguageModel suProcessTemplateFieldLanguage)
         {
-            context.dbProcessTemplateFieldLanguage.Add(suProcessTemplateFieldLanguage);
+            context.DbProcessTemplateFieldLanguage.Add(suProcessTemplateFieldLanguage);
             context.SaveChanges();
             return suProcessTemplateFieldLanguage;
         }
 
         public SuProcessTemplateFieldLanguageModel DeleteProcessTemplateFieldLanguage(int Id)
         {
-            var suProcessTemplateFieldLanguage = context.dbProcessTemplateFieldLanguage.Find(Id);
+            var suProcessTemplateFieldLanguage = context.DbProcessTemplateFieldLanguage.Find(Id);
             if (suProcessTemplateFieldLanguage != null)
             {
-                context.dbProcessTemplateFieldLanguage.Remove(suProcessTemplateFieldLanguage);
+                context.DbProcessTemplateFieldLanguage.Remove(suProcessTemplateFieldLanguage);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFieldLanguageModel> GetAllProcessTemplateFieldLanguages()
         {
-            return context.dbProcessTemplateFieldLanguage;
+            return context.DbProcessTemplateFieldLanguage;
 
         }
 
         public SuProcessTemplateFieldLanguageModel GetProcessTemplateFieldLanguage(int Id)
         {
-            return context.dbProcessTemplateFieldLanguage.Find(Id);
+            return context.DbProcessTemplateFieldLanguage.Find(Id);
         }
 
         public SuProcessTemplateFieldLanguageModel UpdateProcessTemplateFieldLanguage(SuProcessTemplateFieldLanguageModel suProcessTemplateFieldLanguageChanges)
         {
-            var changedProcessTemplateFieldLanguage = context.dbProcessTemplateFieldLanguage.Attach(suProcessTemplateFieldLanguageChanges);
+            var changedProcessTemplateFieldLanguage = context.DbProcessTemplateFieldLanguage.Attach(suProcessTemplateFieldLanguageChanges);
             changedProcessTemplateFieldLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFieldLanguageChanges;

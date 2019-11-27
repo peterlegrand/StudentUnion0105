@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateLanguageModel AddProcessTemplateLanguage(SuProcessTemplateLanguageModel suProcessTemplateLanguage)
         {
-            context.dbProcessTemplateLanguage.Add(suProcessTemplateLanguage);
+            context.DbProcessTemplateLanguage.Add(suProcessTemplateLanguage);
             context.SaveChanges();
             return suProcessTemplateLanguage;
         }
 
         public SuProcessTemplateLanguageModel DeleteProcessTemplateLanguage(int Id)
         {
-            var suProcessTemplateLanguage = context.dbProcessTemplateLanguage.Find(Id);
+            var suProcessTemplateLanguage = context.DbProcessTemplateLanguage.Find(Id);
             if (suProcessTemplateLanguage != null)
             {
-                context.dbProcessTemplateLanguage.Remove(suProcessTemplateLanguage);
+                context.DbProcessTemplateLanguage.Remove(suProcessTemplateLanguage);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateLanguageModel> GetAllProcessTemplateLanguages()
         {
-            return context.dbProcessTemplateLanguage;
+            return context.DbProcessTemplateLanguage;
 
         }
 
         public SuProcessTemplateLanguageModel GetProcessTemplateLanguage(int Id)
         {
-            return context.dbProcessTemplateLanguage.Find(Id);
+            return context.DbProcessTemplateLanguage.Find(Id);
         }
 
         public SuProcessTemplateLanguageModel UpdateProcessTemplateLanguage(SuProcessTemplateLanguageModel suProcessTemplateLanguageChanges)
         {
-            var changedProcessTemplateLanguage = context.dbProcessTemplateLanguage.Attach(suProcessTemplateLanguageChanges);
+            var changedProcessTemplateLanguage = context.DbProcessTemplateLanguage.Attach(suProcessTemplateLanguageChanges);
             changedProcessTemplateLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateLanguageChanges;

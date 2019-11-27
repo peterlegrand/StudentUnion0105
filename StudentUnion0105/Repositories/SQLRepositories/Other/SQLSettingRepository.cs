@@ -17,16 +17,16 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuSettingModel> GetAllSettings()
         {
-            return Context.dbSetting;
+            return Context.DbSetting;
         }
 
         public SuSettingModel GetSetting(int Id)
         {
-            return Context.dbSetting.Find(Id);
+            return Context.DbSetting.Find(Id);
         }
         public SuSettingModel UpdateSetting(SuSettingModel suSettingChanges)
         {
-            var changedSetting = Context.dbSetting.Attach(suSettingChanges);
+            var changedSetting = Context.DbSetting.Attach(suSettingChanges);
             changedSetting.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Context.SaveChanges();
             return suSettingChanges;

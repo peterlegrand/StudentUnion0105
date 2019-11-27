@@ -16,7 +16,7 @@ namespace StudentUnion0105.SQLRepositories
         }
         public IEnumerable<SuGetProjectStructure> GetProjectStructure(int Id)
         {
-            var a = context.dbGetProjectStructure.FromSql("ProjStructure {0}", Id);
+            var a = context.DbGetProjectStructure.FromSql("ProjStructure {0}", Id);
 
             return a;
         }

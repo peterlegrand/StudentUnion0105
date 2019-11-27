@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationStatusModel> GetAllClassificationStatus()
         {
-            return _context.dbClassificationStatus;
+            return _context.DbClassificationStatus;
 
         }
 
         public SuClassificationStatusModel GetSuClassificationStatus(int Id)
         {
-            return _context.dbClassificationStatus.Find(Id);
+            return _context.DbClassificationStatus.Find(Id);
         }
     }
 }

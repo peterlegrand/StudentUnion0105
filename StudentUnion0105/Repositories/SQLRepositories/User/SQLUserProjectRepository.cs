@@ -14,17 +14,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuUserProjectModel AddUserProject(SuUserProjectModel suUserProject)
         {
-            context.dbUserProject.Add(suUserProject);
+            context.DbUserProject.Add(suUserProject);
             context.SaveChanges();
             return suUserProject;
         }
 
         public SuUserProjectModel DeleteUserProject(int Id)
         {
-            var suUserProject = context.dbUserProject.Find(Id);
+            var suUserProject = context.DbUserProject.Find(Id);
             if (suUserProject != null)
             {
-                context.dbUserProject.Remove(suUserProject);
+                context.DbUserProject.Remove(suUserProject);
                 context.SaveChanges();
 
             }
@@ -33,17 +33,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUserProjectModel> GetAllUserProjects()
         {
-            return context.dbUserProject;
+            return context.DbUserProject;
         }
 
         public SuUserProjectModel GetUserProject(int Id)
         {
-            return context.dbUserProject.Find(Id);
+            return context.DbUserProject.Find(Id);
         }
 
         public SuUserProjectModel UpdateUserProject(SuUserProjectModel suUserProjectChanges)
         {
-            var suUserProject = context.dbUserProject.Attach(suUserProjectChanges);
+            var suUserProject = context.DbUserProject.Attach(suUserProjectChanges);
             suUserProject.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suUserProjectChanges;

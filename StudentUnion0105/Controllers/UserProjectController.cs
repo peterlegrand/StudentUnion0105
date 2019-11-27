@@ -42,7 +42,7 @@ namespace StudentUnion0105.Controllers
             //                                        DefaultLanguageID.ToString()
             //}).Count() == 0) {
 
-            UserProjectFromDb = _context.dbIdWithStrings.FromSql($"UserProjectSelectAll @P0, @P1",
+            UserProjectFromDb = _context.DbIdWithStrings.FromSql($"UserProjectSelectAll @P0, @P1",
                                     parameters: new[] {           Id, //0
                                         DefaultLanguageID.ToString()
                 }).ToList();
@@ -62,7 +62,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SuObjectVM UserProjectFromDb = _context.dbObjectVM.FromSql($"UserProjectSelectBasedOnUser @P0, @P1",
+            SuObjectVM UserProjectFromDb = _context.DbObjectVM.FromSql($"UserProjectSelectBasedOnUser @P0, @P1",
                    parameters: new[] {           Id.ToString(), //0
                                         DefaultLanguageID.ToString()
 }).First();
@@ -93,7 +93,7 @@ namespace StudentUnion0105.Controllers
             var ProjectList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
 
-            var ProjectsFromDB = _context.dbStatusList.FromSql($"UserProjectNewProjectsSelect @P0, @P1",
+            var ProjectsFromDB = _context.DbStatusList.FromSql($"UserProjectNewProjectsSelect @P0, @P1",
                     parameters: new[] {           Id, //0
                                         DefaultLanguageID.ToString()
                                     }).ToList();
@@ -107,7 +107,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var TypesFromDB = _context.dbTypeList.FromSql($"UserProjectTypeSelectAll @P0",
+            var TypesFromDB = _context.DbTypeList.FromSql($"UserProjectTypeSelectAll @P0",
                     parameters: new[] {           
                                         DefaultLanguageID.ToString()
                                     }).ToList();

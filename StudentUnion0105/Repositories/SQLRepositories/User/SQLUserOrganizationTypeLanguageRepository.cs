@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuUserOrganizationTypeLanguageModel AddUserOrganizationTypeLanguage(SuUserOrganizationTypeLanguageModel suUserOrganizationTypeLanguage)
         {
-            context.dbUserOrganizationTypeLanguage.Add(suUserOrganizationTypeLanguage);
+            context.DbUserOrganizationTypeLanguage.Add(suUserOrganizationTypeLanguage);
             context.SaveChanges();
             return suUserOrganizationTypeLanguage;
         }
 
         public SuUserOrganizationTypeLanguageModel DeleteUserOrganizationTypeLanguage(int Id)
         {
-            var suUserOrganizationTypeLanguage = context.dbUserOrganizationTypeLanguage.Find(Id);
+            var suUserOrganizationTypeLanguage = context.DbUserOrganizationTypeLanguage.Find(Id);
             if (suUserOrganizationTypeLanguage != null)
             {
-                context.dbUserOrganizationTypeLanguage.Remove(suUserOrganizationTypeLanguage);
+                context.DbUserOrganizationTypeLanguage.Remove(suUserOrganizationTypeLanguage);
                 context.SaveChanges();
 
             }
@@ -34,17 +34,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUserOrganizationTypeLanguageModel> GetAllUserOrganizationTypeLanguages()
         {
-            return context.dbUserOrganizationTypeLanguage;
+            return context.DbUserOrganizationTypeLanguage;
         }
 
         public SuUserOrganizationTypeLanguageModel GetUserOrganizationTypeLanguage(int Id)
         {
-            return context.dbUserOrganizationTypeLanguage.Find(Id);
+            return context.DbUserOrganizationTypeLanguage.Find(Id);
         }
 
         public SuUserOrganizationTypeLanguageModel UpdateUserOrganizationTypeLanguage(SuUserOrganizationTypeLanguageModel suUserOrganizationTypeLanguageChanges)
         {
-            var suUserOrganizationTypeLanguage = context.dbUserOrganizationTypeLanguage.Attach(suUserOrganizationTypeLanguageChanges);
+            var suUserOrganizationTypeLanguage = context.DbUserOrganizationTypeLanguage.Attach(suUserOrganizationTypeLanguageChanges);
             suUserOrganizationTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suUserOrganizationTypeLanguageChanges;

@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateGroupLanguageModel AddProcessTemplateGroupLanguage(SuProcessTemplateGroupLanguageModel suProcessTemplateGroupLanguage)
         {
-            context.dbProcessTemplateGroupLanguage.Add(suProcessTemplateGroupLanguage);
+            context.DbProcessTemplateGroupLanguage.Add(suProcessTemplateGroupLanguage);
             context.SaveChanges();
             return suProcessTemplateGroupLanguage;
         }
 
         public SuProcessTemplateGroupLanguageModel DeleteProcessTemplateGroupLanguage(int Id)
         {
-            var suProcessTemplateGroupLanguage = context.dbProcessTemplateGroupLanguage.Find(Id);
+            var suProcessTemplateGroupLanguage = context.DbProcessTemplateGroupLanguage.Find(Id);
             if (suProcessTemplateGroupLanguage != null)
             {
-                context.dbProcessTemplateGroupLanguage.Remove(suProcessTemplateGroupLanguage);
+                context.DbProcessTemplateGroupLanguage.Remove(suProcessTemplateGroupLanguage);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateGroupLanguageModel> GetAllProcessTemplateGroupLanguages()
         {
-            return context.dbProcessTemplateGroupLanguage;
+            return context.DbProcessTemplateGroupLanguage;
 
         }
 
         public SuProcessTemplateGroupLanguageModel GetProcessTemplateGroupLanguage(int Id)
         {
-            return context.dbProcessTemplateGroupLanguage.Find(Id);
+            return context.DbProcessTemplateGroupLanguage.Find(Id);
         }
 
         public SuProcessTemplateGroupLanguageModel UpdateProcessTemplateGroupLanguage(SuProcessTemplateGroupLanguageModel suProcessTemplateGroupLanguageChanges)
         {
-            var changedProcessTemplateGroupLanguage = context.dbProcessTemplateGroupLanguage.Attach(suProcessTemplateGroupLanguageChanges);
+            var changedProcessTemplateGroupLanguage = context.DbProcessTemplateGroupLanguage.Attach(suProcessTemplateGroupLanguageChanges);
             changedProcessTemplateGroupLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateGroupLanguageChanges;

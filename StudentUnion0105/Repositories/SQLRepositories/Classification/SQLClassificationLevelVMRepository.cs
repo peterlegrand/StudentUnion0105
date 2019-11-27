@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationLevelLanguageModel> GetAllClassificationLevelLanguages()
         {
-            return context.dbClassificationLevelLanguage;
+            return context.DbClassificationLevelLanguage;
         }
 
         public IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels()
         {
-            return context.dbClassificationLevel;
+            return context.DbClassificationLevel;
         }
     }
 }

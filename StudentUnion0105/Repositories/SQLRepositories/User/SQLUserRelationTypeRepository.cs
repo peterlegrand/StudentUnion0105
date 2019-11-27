@@ -15,12 +15,12 @@ namespace StudentUnion0105.SQLRepositories
         }
         public IEnumerable<SuUserRelationTypeModel> GetAllUserRelationTypes()
         {
-            return context.dbUserRelationType;
+            return context.DbUserRelationType;
         }
 
         public SuUserRelationTypeModel GetUserRelationType(int Id)
         {
-            return context.dbUserRelationType.Find(Id);
+            return context.DbUserRelationType.Find(Id);
         }
 
     }

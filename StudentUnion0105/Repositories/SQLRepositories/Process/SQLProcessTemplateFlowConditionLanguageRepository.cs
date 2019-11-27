@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFlowConditionLanguageModel AddProcessTemplateFlowConditionLanguage(SuProcessTemplateFlowConditionLanguageModel suProcessTemplateFlowConditionLanguage)
         {
-            context.dbProcessTemplateFlowConditionLanguage.Add(suProcessTemplateFlowConditionLanguage);
+            context.DbProcessTemplateFlowConditionLanguage.Add(suProcessTemplateFlowConditionLanguage);
             context.SaveChanges();
             return suProcessTemplateFlowConditionLanguage;
         }
 
         public SuProcessTemplateFlowConditionLanguageModel DeleteProcessTemplateFlowConditionLanguage(int Id)
         {
-            var suProcessTemplateFlowConditionLanguage = context.dbProcessTemplateFlowConditionLanguage.Find(Id);
+            var suProcessTemplateFlowConditionLanguage = context.DbProcessTemplateFlowConditionLanguage.Find(Id);
             if (suProcessTemplateFlowConditionLanguage != null)
             {
-                context.dbProcessTemplateFlowConditionLanguage.Remove(suProcessTemplateFlowConditionLanguage);
+                context.DbProcessTemplateFlowConditionLanguage.Remove(suProcessTemplateFlowConditionLanguage);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFlowConditionLanguageModel> GetAllProcessTemplateFlowConditionLanguages()
         {
-            return context.dbProcessTemplateFlowConditionLanguage;
+            return context.DbProcessTemplateFlowConditionLanguage;
 
         }
 
         public SuProcessTemplateFlowConditionLanguageModel GetProcessTemplateFlowConditionLanguage(int Id)
         {
-            return context.dbProcessTemplateFlowConditionLanguage.Find(Id);
+            return context.DbProcessTemplateFlowConditionLanguage.Find(Id);
         }
 
         public SuProcessTemplateFlowConditionLanguageModel UpdateProcessTemplateFlowConditionLanguage(SuProcessTemplateFlowConditionLanguageModel suProcessTemplateFlowConditionLanguageChanges)
         {
-            var changedProcessTemplateFlowConditionLanguage = context.dbProcessTemplateFlowConditionLanguage.Attach(suProcessTemplateFlowConditionLanguageChanges);
+            var changedProcessTemplateFlowConditionLanguage = context.DbProcessTemplateFlowConditionLanguage.Attach(suProcessTemplateFlowConditionLanguageChanges);
             changedProcessTemplateFlowConditionLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFlowConditionLanguageChanges;

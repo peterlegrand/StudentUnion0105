@@ -1,8 +1,8 @@
-CREATE PROCEDURE ClassificationLanguageIndexGet (@Id int)
+CREATE PROCEDURE ClassificationLanguageIndexGet (@OId int)
 AS
 SELECT 
-	dbLanguage.LanguageName
-	, dbClassificationLanguage.Id LId
+--	dbLanguage.LanguageName 
+	 dbClassificationLanguage.Id LId
 	, dbClassificationLanguage.Name
 	, dbClassificationLanguage.Description
 	, dbClassificationLanguage.MouseOver
@@ -13,5 +13,5 @@ SELECT
 FROM dbClassificationLanguage
 JOIN dbLanguage 
 	ON dbClassificationLanguage.LanguageId = dbLanguage.Id
-WHERE dbClassificationLanguage.ClassificationId = @Id
+WHERE dbClassificationLanguage.ClassificationId = @OId
 ORDER BY dbLanguage.LanguageName

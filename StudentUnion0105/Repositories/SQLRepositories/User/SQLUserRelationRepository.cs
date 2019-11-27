@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuUserRelationModel AddUserRelation(SuUserRelationModel suUserRelation)
         {
-            context.dbUserRelation.Add(suUserRelation);
+            context.DbUserRelation.Add(suUserRelation);
             context.SaveChanges();
             return suUserRelation;
         }
 
         public SuUserRelationModel DeleteUserRelation(int Id)
         {
-            var suUserRelation = context.dbUserRelation.Find(Id);
+            var suUserRelation = context.DbUserRelation.Find(Id);
             if (suUserRelation != null)
             {
-                context.dbUserRelation.Remove(suUserRelation);
+                context.DbUserRelation.Remove(suUserRelation);
                 context.SaveChanges();
 
             }
@@ -34,17 +34,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUserRelationModel> GetAllUserRelations()
         {
-            return context.dbUserRelation;
+            return context.DbUserRelation;
         }
 
         public SuUserRelationModel GetUserRelation(int Id)
         {
-            return context.dbUserRelation.Find(Id);
+            return context.DbUserRelation.Find(Id);
         }
 
         public SuUserRelationModel UpdateUserRelation(SuUserRelationModel suUserRelationChanges)
         {
-            var suUserRelation = context.dbUserRelation.Attach(suUserRelationChanges);
+            var suUserRelation = context.DbUserRelation.Attach(suUserRelationChanges);
             suUserRelation.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suUserRelationChanges;

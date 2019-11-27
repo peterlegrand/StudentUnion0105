@@ -16,7 +16,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuContentTypeDeleteGetModel GetContentType(int Id)
         {
-            return context.dbContentTypeDeleteGet.Find(Id);
+            return context.DbContentTypeDeleteGet.Find(Id);
         }
     }
 }

@@ -55,6 +55,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
             List<SuClassificationLevelIndexGetModel> ClassificationLevel = _context.ZdbClassificationLevelIndexGet.FromSql($"ClassificationLevelIndexGet @Id, @LanguageId", parameters).ToList();
+            ViewBag.PId = Id;
             return View(ClassificationLevel);
         }
 
@@ -75,12 +76,14 @@ namespace StudentUnion0105.Controllers
 
            SuClassificationLevelEditGetModel ClassificationEditGet = _context.ZdbClassificationLevelEditGet.FromSql("ClassificationLevelEditGet @LanguageId, @Id", parameters).First();
             //PETER Consider to put this in a table
-            List<SelectListItem>  DateType = new List<SelectListItem>();
-            DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
-            DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
-            DateType.Add(new SelectListItem { Value = "2", Text = "Date range" });
-            DateType.Add(new SelectListItem { Value = "3", Text = "Date time" });
-            DateType.Add(new SelectListItem { Value = "4", Text = "Date time range" });
+            List<SelectListItem> DateType = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No date" },
+                new SelectListItem { Value = "1", Text = "Date" },
+                new SelectListItem { Value = "2", Text = "Date range" },
+                new SelectListItem { Value = "3", Text = "Date time" },
+                new SelectListItem { Value = "4", Text = "Date time range" }
+            };
 
             SuClassificationLevelEditGetWithListModel ClassificationLevelWithList = new SuClassificationLevelEditGetWithListModel
             {
@@ -113,7 +116,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MouseOver", FromForm.ClassificationLevel.MouseOver),
                     new SqlParameter("@MenuName", FromForm.ClassificationLevel.MenuName)
                     };
-                var b = _context.Database.ExecuteSqlCommand("ClassificationLevelEditPost " +
+                _context.Database.ExecuteSqlCommand("ClassificationLevelEditPost " +
                             "@Id" +
                             ", @LanguageId" +
                             ", @Alphabetically" +
@@ -146,7 +149,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@PId", Id),
                     };
 
-            var ExistingLevels = _context.dbStatusList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
+            var ExistingLevels = _context.DbStatusList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
             int MaxLevelSequence = 0;
             List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
             foreach (var ExistingLevel in ExistingLevels)
@@ -191,16 +194,20 @@ namespace StudentUnion0105.Controllers
 
             ExistingLevelList.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
 
-            List<SelectListItem> DateType = new List<SelectListItem>();
-            DateType.Add(new SelectListItem { Value = "0", Text = "No date" });
-            DateType.Add(new SelectListItem { Value = "1", Text = "Date" });
-            DateType.Add(new SelectListItem { Value = "2", Text = "Date range" });
-            DateType.Add(new SelectListItem { Value = "3", Text = "Date time" });
-            DateType.Add(new SelectListItem { Value = "4", Text = "Date time range" });
+            List<SelectListItem> DateType = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "No date" },
+                new SelectListItem { Value = "1", Text = "Date" },
+                new SelectListItem { Value = "2", Text = "Date range" },
+                new SelectListItem { Value = "3", Text = "Date time" },
+                new SelectListItem { Value = "4", Text = "Date time range" }
+            };
 
 
-            SuClassificationLevelEditGetModel ClassificationLevel = new SuClassificationLevelEditGetModel();
-            ClassificationLevel.OId = Id;
+            SuClassificationLevelEditGetModel ClassificationLevel = new SuClassificationLevelEditGetModel
+            {
+                PId = Id
+            };
             SuClassificationLevelEditGetWithListModel ClassificationAndDateAndSequenceList = new SuClassificationLevelEditGetWithListModel { ClassificationLevel = ClassificationLevel, DateTypeList = DateType , SequenceList = ExistingLevelList };
             return View(ClassificationAndDateAndSequenceList);
         }
@@ -230,7 +237,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@MenuName", FromForm.ClassificationLevel.MenuName)
                     };
 
-                var b = _context.Database.ExecuteSqlCommand("ClassificationLevelCreatePost " +
+                 _context.Database.ExecuteSqlCommand("ClassificationLevelCreatePost " +
                             "@PId" +
                             ", @LanguageId" +
                             ", @Sequence" +
@@ -299,7 +306,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MenuName", FromForm.MenuName)
                     };
 
-                int b = _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageEditPost " +
+                 _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageEditPost " +
                             "@Id" +
                             ", @ModifierId" +
                             ", @Name" +
@@ -323,7 +330,7 @@ namespace StudentUnion0105.Controllers
             var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), Id);
             Int32 NoOfLanguages = SuLanguage.Count();
             if (NoOfLanguages == 0)
-                { return RedirectToAction("LanguageIndex", new { Id = Id }); }
+                { return RedirectToAction("LanguageIndex", new { Id }); }
             //List<int> LanguagesAlready = new List<int>();
             //LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
             //                    where c.ClassificationLevelId == Id
@@ -344,8 +351,10 @@ namespace StudentUnion0105.Controllers
             //{
             //    return RedirectToAction("LanguageIndex", new { Id = Id });
             //}
-            SuObjectLanguageCreateGetModel SuObject = new SuObjectLanguageCreateGetModel();
-            SuObject.OId = Id;
+            SuObjectLanguageCreateGetModel SuObject = new SuObjectLanguageCreateGetModel
+            {
+                OId = Id
+            };
             ViewBag.Id = Id.ToString();
             SuObjectLanguageCreateGetWithListModel ClassificationAndStatus = new SuObjectLanguageCreateGetWithListModel
             {
@@ -373,7 +382,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MenuName", FromForm.ObjectLanguage.MenuName ?? "")
                     };
 
-                var b = _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageCreatePost " +
+                 _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageCreatePost " +
                             "@Id" +
                             ", @LanguageId" +
                             ", @ModifierId" +
@@ -431,7 +440,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var parameter = new SqlParameter("@LanguageId", FromForm.OId);
-            var b = _context.Database.ExecuteSqlCommand($"ClassificationDeletePost @Id", parameter);
+             _context.Database.ExecuteSqlCommand($"ClassificationDeletePost @Id", parameter);
 
             return RedirectToAction("Index", new { Id = FromForm.PId });
         }

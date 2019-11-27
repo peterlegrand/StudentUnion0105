@@ -18,12 +18,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuIdWithStrings> GetAllIdWithStringss()
         {
-            return context.dbIdWithStrings;
+            return context.DbIdWithStrings;
         }
 
         public SuIdWithStrings GetIdWithStrings(int Id)
         {
-            return context.dbIdWithStrings.Find(Id);
+            return context.DbIdWithStrings.Find(Id);
         }
 
     }

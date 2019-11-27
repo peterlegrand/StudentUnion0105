@@ -84,7 +84,7 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateGroupList = new List<SelectListItem>();
 
-            var ProcessTemplateGroupFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
+            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {
@@ -164,7 +164,7 @@ namespace StudentUnion0105.Controllers
             //string a;
             //a = ToForm.Description;
             var ProcessTemplateGroupList = new List<SelectListItem>();
-            var ProcessTemplateGroupFromDb = _context.dbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
+            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {

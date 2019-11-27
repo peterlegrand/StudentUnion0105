@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProjectModel AddProject(SuProjectModel suProject)
         {
-            context.dbProject.Add(suProject);
+            context.DbProject.Add(suProject);
             context.SaveChanges();
             return suProject;
         }
 
         public SuProjectModel DeleteProject(int Id)
         {
-            var suProject = context.dbProject.Find(Id);
+            var suProject = context.DbProject.Find(Id);
             if (suProject != null)
             {
-                context.dbProject.Remove(suProject);
+                context.DbProject.Remove(suProject);
                 context.SaveChanges();
             }
             return suProject;
@@ -33,17 +33,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProjectModel> GetAllProjects()
         {
-            return context.dbProject;
+            return context.DbProject;
         }
 
         public SuProjectModel GetProject(int Id)
         {
-            return context.dbProject.Find(Id);
+            return context.DbProject.Find(Id);
         }
 
         public SuProjectModel UpdateProject(SuProjectModel suProjectChanges)
         {
-            var changedProject = context.dbProject.Attach(suProjectChanges);
+            var changedProject = context.DbProject.Attach(suProjectChanges);
             changedProject.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProjectChanges;

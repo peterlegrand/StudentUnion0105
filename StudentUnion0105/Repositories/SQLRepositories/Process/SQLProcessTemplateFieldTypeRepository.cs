@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFieldTypeModel AddProcessTemplateFieldType(SuProcessTemplateFieldTypeModel suProcessTemplateFieldType)
         {
-            context.dbProcessTemplateFieldType.Add(suProcessTemplateFieldType);
+            context.DbProcessTemplateFieldType.Add(suProcessTemplateFieldType);
             context.SaveChanges();
             return suProcessTemplateFieldType;
         }
 
         public SuProcessTemplateFieldTypeModel DeleteProcessTemplateFieldType(int Id)
         {
-            var suProcessTemplateFieldType = context.dbProcessTemplateFieldType.Find(Id);
+            var suProcessTemplateFieldType = context.DbProcessTemplateFieldType.Find(Id);
             if (suProcessTemplateFieldType != null)
             {
-                context.dbProcessTemplateFieldType.Remove(suProcessTemplateFieldType);
+                context.DbProcessTemplateFieldType.Remove(suProcessTemplateFieldType);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFieldTypeModel> GetAllProcessTemplateFieldTypes()
         {
-            return context.dbProcessTemplateFieldType;
+            return context.DbProcessTemplateFieldType;
 
         }
 
         public SuProcessTemplateFieldTypeModel GetProcessTemplateFieldType(int Id)
         {
-            return context.dbProcessTemplateFieldType.Find(Id);
+            return context.DbProcessTemplateFieldType.Find(Id);
         }
 
         public SuProcessTemplateFieldTypeModel UpdateProcessTemplateFieldType(SuProcessTemplateFieldTypeModel suProcessTemplateFieldTypeChanges)
         {
-            var changedProcessTemplateFieldType = context.dbProcessTemplateFieldType.Attach(suProcessTemplateFieldTypeChanges);
+            var changedProcessTemplateFieldType = context.DbProcessTemplateFieldType.Attach(suProcessTemplateFieldTypeChanges);
             changedProcessTemplateFieldType.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFieldTypeChanges;

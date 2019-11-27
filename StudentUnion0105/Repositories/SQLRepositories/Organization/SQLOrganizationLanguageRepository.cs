@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuOrganizationLanguageModel AddOrganizationLanguage(SuOrganizationLanguageModel suOrganizationLanguage)
         {
-            context.dbOrganizationLanguage.Add(suOrganizationLanguage);
+            context.DbOrganizationLanguage.Add(suOrganizationLanguage);
             context.SaveChanges();
             return suOrganizationLanguage;
         }
 
         public SuOrganizationLanguageModel DeleteOrganizationLanguage(int Id)
         {
-            var suOrganizationLanguage = context.dbOrganizationLanguage.Find(Id);
+            var suOrganizationLanguage = context.DbOrganizationLanguage.Find(Id);
             if (suOrganizationLanguage != null)
             {
-                context.dbOrganizationLanguage.Remove(suOrganizationLanguage);
+                context.DbOrganizationLanguage.Remove(suOrganizationLanguage);
                 context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuOrganizationLanguageModel> GetAllOrganizationLanguages()
         {
-            return context.dbOrganizationLanguage;
+            return context.DbOrganizationLanguage;
         }
 
         public SuOrganizationLanguageModel GetOrganizationLanguage(int Id)
         {
-            return context.dbOrganizationLanguage.Find(Id);
+            return context.DbOrganizationLanguage.Find(Id);
         }
 
         public SuOrganizationLanguageModel UpdateOrganizationLanguage(SuOrganizationLanguageModel suOrganizationLanguageChanges)
         {
-            var suOrganizationLanguage = context.dbOrganizationLanguage.Attach(suOrganizationLanguageChanges);
+            var suOrganizationLanguage = context.DbOrganizationLanguage.Attach(suOrganizationLanguageChanges);
             suOrganizationLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suOrganizationLanguageChanges;

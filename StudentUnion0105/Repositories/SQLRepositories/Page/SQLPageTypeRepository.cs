@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageTypeModel AddPageType(SuPageTypeModel suPageType)
         {
-            context.dbPageType.Add(suPageType);
+            context.DbPageType.Add(suPageType);
             context.SaveChanges();
             return suPageType;
         }
 
         public SuPageTypeModel DeletePageType(int Id)
         {
-            var suPageType = context.dbPageType.Find(Id);
+            var suPageType = context.DbPageType.Find(Id);
             if (suPageType != null)
             {
-                context.dbPageType.Remove(suPageType);
+                context.DbPageType.Remove(suPageType);
                 context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageTypeModel> GetAllPageTypes()
         {
-            return context.dbPageType;
+            return context.DbPageType;
         }
 
         public SuPageTypeModel GetPageType(int Id)
         {
-            return context.dbPageType.Find(Id);
+            return context.DbPageType.Find(Id);
         }
 
         public SuPageTypeModel UpdatePageType(SuPageTypeModel suPageTypeChanges)
         {
-            var changedPageType = context.dbPageType.Attach(suPageTypeChanges);
+            var changedPageType = context.DbPageType.Attach(suPageTypeChanges);
             changedPageType.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageTypeChanges;

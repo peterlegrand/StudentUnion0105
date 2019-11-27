@@ -231,5 +231,6 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(228, 'Page section languages
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(229, 'Page languages', 'Page languages');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(231, 'Drop down sequence', 'Drop down sequence');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(232, 'Default page', 'Default page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(233, 'Preference', 'Preference');
 
 SET IDENTITY_INSERT dbUITerm OFF;

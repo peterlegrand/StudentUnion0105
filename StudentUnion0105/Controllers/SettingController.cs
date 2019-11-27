@@ -95,7 +95,7 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM FromForm)
+        public IActionResult Edit(SuObjectVM FromForm)
         {
             if (ModelState.IsValid)
             {

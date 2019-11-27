@@ -17,14 +17,14 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuCountryModel> GetAllCountrys()
         {
-            return context.dbCountry;
+            return context.DbCountry;
 
 
         }
 
         public SuCountryModel GetCountry(int ID)
         {
-            return context.dbCountry.Find(ID);
+            return context.DbCountry.Find(ID);
         }
 
     }

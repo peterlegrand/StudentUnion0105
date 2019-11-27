@@ -117,6 +117,8 @@ namespace StudentUnion0105.Controllers
                 , "DataTypeSelectAll.sql"
                 , "GetMasterList.sql"
                 , "GetProcessTemplateFlowConditionCreateGetFields.sql"
+                , "PreferenceIndexGet.sql"
+                , "PreferenceIndexPost.sql"
                 , "ProcessTemplateFlowConditionCreateGetComparison.sql"
                 , "ProcessTemplateFlowConditionCreateGetFields.sql"
                 , "ProcessTemplateFlowConditionCreateGetType.sql"

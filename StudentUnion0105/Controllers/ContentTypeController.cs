@@ -348,7 +348,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Classification = _context.dbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet {Id}").First();
+            var Classification = _context.DbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet {Id}").First();
 
             return View(Classification);
         }

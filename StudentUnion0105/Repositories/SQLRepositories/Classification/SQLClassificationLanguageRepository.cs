@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationLanguageModel AddClassificationLanguage(SuClassificationLanguageModel suClassificationLanguage)
         {
-            context.dbClassificationLanguage.Add(suClassificationLanguage);
+            context.DbClassificationLanguage.Add(suClassificationLanguage);
             context.SaveChanges();
             return suClassificationLanguage;
         }
 
         public SuClassificationLanguageModel DeleteClassificationLanguage(int Id)
         {
-            var suClassificationLanguage = context.dbClassificationLanguage.Find(Id);
+            var suClassificationLanguage = context.DbClassificationLanguage.Find(Id);
             if (suClassificationLanguage != null)
             {
-                context.dbClassificationLanguage.Remove(suClassificationLanguage);
+                context.DbClassificationLanguage.Remove(suClassificationLanguage);
                 context.SaveChanges();
 
             }
@@ -36,17 +36,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationLanguageModel> GetAllClassificationLanguages()
         {
-            return context.dbClassificationLanguage;
+            return context.DbClassificationLanguage;
         }
 
         public SuClassificationLanguageModel GetClassificationLanguage(int Id)
         {
-            return context.dbClassificationLanguage.Find(Id);
+            return context.DbClassificationLanguage.Find(Id);
         }
 
         public SuClassificationLanguageModel UpdateClassificationLanguage(SuClassificationLanguageModel suClassificationLanguageChanges)
         {
-            var suClassificationLanguage = context.dbClassificationLanguage.Attach(suClassificationLanguageChanges);
+            var suClassificationLanguage = context.DbClassificationLanguage.Attach(suClassificationLanguageChanges);
             suClassificationLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suClassificationLanguageChanges;

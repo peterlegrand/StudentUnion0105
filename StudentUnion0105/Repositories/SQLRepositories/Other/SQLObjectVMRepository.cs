@@ -18,12 +18,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuObjectVM> GetAllObjectVMs()
         {
-            return context.dbObjectVM;
+            return context.DbObjectVM;
         }
 
         public SuObjectVM GetObjectVM(int Id)
         {
-            return context.dbObjectVM.Find(Id);
+            return context.DbObjectVM.Find(Id);
         }
 
     }

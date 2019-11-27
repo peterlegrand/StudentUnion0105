@@ -21,7 +21,7 @@
     <tr>
         <td style="width: 44px">@x.Id</td>
         <td>@x.Name</td>
-        <td>@x.Description</td>
+        <td>@Html.Raw(x.Description)</td>
         <td>@x.MenuName</td>
         <td>@x.MouseOver</td>
         <td style="width: 22px"><a asp-controller="Classification" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[4]" height="20" width="20" /></a></td>

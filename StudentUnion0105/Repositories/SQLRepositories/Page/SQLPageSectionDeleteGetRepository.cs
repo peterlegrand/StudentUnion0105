@@ -16,7 +16,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionDeleteGetModel GetPageSection(int Id)
         {
-            return context.dbPageSectionDeleteGet.Find(Id);
+            return context.DbPageSectionDeleteGet.Find(Id);
         }
     }
 }

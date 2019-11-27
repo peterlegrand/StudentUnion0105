@@ -46,7 +46,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var a = _context.dbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
+            var a = _context.DbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
 
             //if (a.Count != 0)
             //{

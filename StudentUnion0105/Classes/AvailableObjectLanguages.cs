@@ -18,9 +18,9 @@ namespace StudentUnion0105.Classes
         {
             _context = context;
         }
-        public List<SelectListItem> ReturnFreeLanguages(string ObjectName)
+        public List<SelectListItem> ReturnFreeLanguages(string ObjectName, SqlParameter parameter)
         {
-            var ObjectLanguages = _context.dbStatusList.FromSql(ObjectName + "LanguageCreateGetLanguages").ToList();
+            var ObjectLanguages = _context.DbStatusList.FromSql(ObjectName + "LanguageCreateGetLanguages @OId", parameter).ToList();
             List<SelectListItem> LanguageList = new List<SelectListItem>();
             foreach (var ObjectLanguage in ObjectLanguages)
             {
@@ -31,7 +31,7 @@ namespace StudentUnion0105.Classes
         public List<SelectListItem> ReturnFreeLanguages(string ObjectName, int OId)
         {
             var parameter = new SqlParameter("@OId", OId.ToString());
-            var ObjectLanguages = _context.dbStatusList.FromSql(ObjectName + "LanguageCreateGetLanguages @OId", parameter).ToList();
+            var ObjectLanguages = _context.DbStatusList.FromSql(ObjectName + "LanguageCreateGetLanguages @OId", parameter).ToList();
             List<SelectListItem> LanguageList = new List<SelectListItem>();
             foreach (var ObjectLanguage in ObjectLanguages)
             {

@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuContentTypeLanguageModel AddContentTypeLanguage(SuContentTypeLanguageModel suContentTypeLanguage)
         {
-            context.dbContentTypeLanguage.Add(suContentTypeLanguage);
+            context.DbContentTypeLanguage.Add(suContentTypeLanguage);
             context.SaveChanges();
             return suContentTypeLanguage;
         }
 
         public SuContentTypeLanguageModel DeleteContentTypeLanguage(int Id)
         {
-            var suContentTypeLanguage = context.dbContentTypeLanguage.Find(Id);
+            var suContentTypeLanguage = context.DbContentTypeLanguage.Find(Id);
             if (suContentTypeLanguage != null)
             {
-                context.dbContentTypeLanguage.Remove(suContentTypeLanguage);
+                context.DbContentTypeLanguage.Remove(suContentTypeLanguage);
                 context.SaveChanges();
 
             }
@@ -34,17 +34,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuContentTypeLanguageModel> GetAllContentTypeLanguages()
         {
-            return context.dbContentTypeLanguage;
+            return context.DbContentTypeLanguage;
         }
 
         public SuContentTypeLanguageModel GetContentTypeLanguage(int Id)
         {
-            return context.dbContentTypeLanguage.Find(Id);
+            return context.DbContentTypeLanguage.Find(Id);
         }
 
         public SuContentTypeLanguageModel UpdateContentTypeLanguage(SuContentTypeLanguageModel suContentTypeLanguageChanges)
         {
-            var suContentTypeLanguage = context.dbContentTypeLanguage.Attach(suContentTypeLanguageChanges);
+            var suContentTypeLanguage = context.DbContentTypeLanguage.Attach(suContentTypeLanguageChanges);
             suContentTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suContentTypeLanguageChanges;

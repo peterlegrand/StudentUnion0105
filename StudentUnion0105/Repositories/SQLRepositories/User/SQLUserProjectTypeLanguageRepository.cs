@@ -14,17 +14,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuUserProjectTypeLanguageModel AddUserProjectTypeLanguage(SuUserProjectTypeLanguageModel suUserProjectTypeLanguage)
         {
-            context.dbUserProjectTypeLanguage.Add(suUserProjectTypeLanguage);
+            context.DbUserProjectTypeLanguage.Add(suUserProjectTypeLanguage);
             context.SaveChanges();
             return suUserProjectTypeLanguage;
         }
 
         public SuUserProjectTypeLanguageModel DeleteUserProjectTypeLanguage(int Id)
         {
-            var suUserProjectTypeLanguage = context.dbUserProjectTypeLanguage.Find(Id);
+            var suUserProjectTypeLanguage = context.DbUserProjectTypeLanguage.Find(Id);
             if (suUserProjectTypeLanguage != null)
             {
-                context.dbUserProjectTypeLanguage.Remove(suUserProjectTypeLanguage);
+                context.DbUserProjectTypeLanguage.Remove(suUserProjectTypeLanguage);
                 context.SaveChanges();
 
             }
@@ -33,17 +33,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUserProjectTypeLanguageModel> GetAllUserProjectTypeLanguages()
         {
-            return context.dbUserProjectTypeLanguage;
+            return context.DbUserProjectTypeLanguage;
         }
 
         public SuUserProjectTypeLanguageModel GetUserProjectTypeLanguage(int Id)
         {
-            return context.dbUserProjectTypeLanguage.Find(Id);
+            return context.DbUserProjectTypeLanguage.Find(Id);
         }
 
         public SuUserProjectTypeLanguageModel UpdateUserProjectTypeLanguage(SuUserProjectTypeLanguageModel suUserProjectTypeLanguageChanges)
         {
-            var suUserProjectTypeLanguage = context.dbUserProjectTypeLanguage.Attach(suUserProjectTypeLanguageChanges);
+            var suUserProjectTypeLanguage = context.DbUserProjectTypeLanguage.Attach(suUserProjectTypeLanguageChanges);
             suUserProjectTypeLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suUserProjectTypeLanguageChanges;

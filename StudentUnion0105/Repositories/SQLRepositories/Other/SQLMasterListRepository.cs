@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuMasterListModel> GetAllMasterLists()
         {
-            return _context.dbMasterList;
+            return _context.DbMasterList;
 
         }
 
         public SuMasterListModel GetMasterList(int Id)
         {
-            return _context.dbMasterList.Find(Id);
+            return _context.DbMasterList.Find(Id);
         }
     }
 }

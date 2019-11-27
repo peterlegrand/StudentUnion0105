@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuOrganizationStatusModel> GetAllOrganizationStatus()
         {
-            return context.dbOrganizationStatus;
+            return context.DbOrganizationStatus;
         }
 
         public SuOrganizationStatusModel GetSuOrganizationStatus(int Id)
         {
-            return context.dbOrganizationStatus.Find(Id);
+            return context.DbOrganizationStatus.Find(Id);
         }
     }
 }

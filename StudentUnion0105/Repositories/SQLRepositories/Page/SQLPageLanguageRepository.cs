@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageLanguageModel AddPageLanguage(SuPageLanguageModel suPageLanguage)
         {
-            context.dbPageLanguage.Add(suPageLanguage);
+            context.DbPageLanguage.Add(suPageLanguage);
             context.SaveChanges();
             return suPageLanguage;
         }
 
         public SuPageLanguageModel DeletePageLanguage(int Id)
         {
-            var suPageLanguage = context.dbPageLanguage.Find(Id);
+            var suPageLanguage = context.DbPageLanguage.Find(Id);
             if (suPageLanguage != null)
             {
-                context.dbPageLanguage.Remove(suPageLanguage);
+                context.DbPageLanguage.Remove(suPageLanguage);
                 context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageLanguageModel> GetAllPageLanguages()
         {
-            return context.dbPageLanguage;
+            return context.DbPageLanguage;
         }
 
         public SuPageLanguageModel GetPageLanguage(int Id)
         {
-            return context.dbPageLanguage.Find(Id);
+            return context.DbPageLanguage.Find(Id);
         }
 
         public SuPageLanguageModel UpdatePageLanguage(SuPageLanguageModel suPageLanguageChanges)
         {
-            var suPageLanguage = context.dbPageLanguage.Attach(suPageLanguageChanges);
+            var suPageLanguage = context.DbPageLanguage.Attach(suPageLanguageChanges);
             suPageLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageLanguageChanges;

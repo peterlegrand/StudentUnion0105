@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuContentModel AddContent(SuContentModel suContent)
         {
-            context.dbContent.Add(suContent);
+            context.DbContent.Add(suContent);
             context.SaveChanges();
             return suContent;
         }
 
         public SuContentModel DeleteContent(int Id)
         {
-            var suContent = context.dbContent.Find(Id);
+            var suContent = context.DbContent.Find(Id);
             if (suContent != null)
             {
-                context.dbContent.Remove(suContent);
+                context.DbContent.Remove(suContent);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuContentModel> GetAllClassifcations()
         {
-            return context.dbContent;
+            return context.DbContent;
 
         }
 
         public SuContentModel GetContent(int Id)
         {
-            return context.dbContent.Find(Id);
+            return context.DbContent.Find(Id);
         }
 
         public SuContentModel UpdateContent(SuContentModel suContentChanges)
         {
-            var changedContent = context.dbContent.Attach(suContentChanges);
+            var changedContent = context.DbContent.Attach(suContentChanges);
             changedContent.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suContentChanges;

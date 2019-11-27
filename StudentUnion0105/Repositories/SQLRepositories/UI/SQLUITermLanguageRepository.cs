@@ -16,33 +16,33 @@ namespace StudentUnion0105.SQLRepositories
             
         public IEnumerable<SuUITermLanguageModel> GetAllTermLanguages()
         {
-            return context.dbUITermLanguage;
+            return context.DbUITermLanguage;
         }
 
         public SuUITermLanguageModel GetTermLanguage(int Id)
         {
-            return context.dbUITermLanguage.Find(Id);
+            return context.DbUITermLanguage.Find(Id);
         }
         public SuUITermLanguageModel DeleteTermLanguage(int Id)
         {
-            var SuUITermLanguage = context.dbUITermLanguage.Find(Id);
+            var SuUITermLanguage = context.DbUITermLanguage.Find(Id);
             if (SuUITermLanguage != null)
             {
-                context.dbUITermLanguage.Remove(SuUITermLanguage);
+                context.DbUITermLanguage.Remove(SuUITermLanguage);
                 context.SaveChanges();
             }
             return SuUITermLanguage;
         }
         public SuUITermLanguageModel UpdateTermLanguage(SuUITermLanguageModel SuTermLanguageChanges)
         {
-            var changedUITermLanguage = context.dbUITermLanguage.Attach(SuTermLanguageChanges);
+            var changedUITermLanguage = context.DbUITermLanguage.Attach(SuTermLanguageChanges);
             changedUITermLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return SuTermLanguageChanges;
         }
         public SuUITermLanguageModel AddTermLanguage(SuUITermLanguageModel SuTermLanguage)
         {
-            context.dbUITermLanguage.Add(SuTermLanguage);
+            context.DbUITermLanguage.Add(SuTermLanguage);
             context.SaveChanges();
             return SuTermLanguage;
         }

@@ -660,7 +660,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Page = _context.dbPageSectionDeleteGet.FromSql($"PageSectionDeleteGet {Id}").First();
+            var Page = _context.DbPageSectionDeleteGet.FromSql($"PageSectionDeleteGet {Id}").First();
 
             return View(Page);
         }

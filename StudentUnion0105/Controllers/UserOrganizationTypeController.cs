@@ -67,7 +67,7 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var UserOrganizationLanguageList = _context.dbIdWithStrings.FromSql("UserOrganizationTypeSelectAllLanguages @p0",
+            var UserOrganizationLanguageList = _context.DbIdWithStrings.FromSql("UserOrganizationTypeSelectAllLanguages @p0",
      parameters: new[] {             //0
                                         Id.ToString()
         }).ToList();

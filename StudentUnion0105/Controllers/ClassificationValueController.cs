@@ -48,8 +48,10 @@ namespace StudentUnion0105.Controllers
             UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SuInt MaxLevel = new SuInt();
-            MaxLevel.intValue = 0;
+            SuInt MaxLevel = new SuInt
+            {
+                intValue = 0
+            };
 
             try
             {
@@ -57,8 +59,10 @@ namespace StudentUnion0105.Controllers
             }
             catch { }
 
-            SuInt CurrentLevel = new SuInt();
-            CurrentLevel.intValue = 0;
+            SuInt CurrentLevel = new SuInt
+            {
+                intValue = 0
+            };
             try
             {
                 CurrentLevel = _context.ZdbInt.FromSql($"ClassificationValueIndexGetCurrentLevel {Id}").First();//? null : new SuInt { intValue = 0 };
@@ -79,11 +83,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SuClassificationValueEditGetModel NewValue = new SuClassificationValueEditGetModel();
-            //ClassificationId
-            NewValue.PId = Convert.ToInt32(HttpContext.Request.Query["CId"]);
-            //ParentValueId
-            NewValue.ParentId = Id;
+            SuClassificationValueEditGetModel NewValue = new SuClassificationValueEditGetModel
+            {
+                //ClassificationId
+                PId = Convert.ToInt32(HttpContext.Request.Query["CId"]),
+                //ParentValueId
+                ParentId = Id
+            };
 
             SqlParameter parameter = new SqlParameter("@Id", Id);
             SuClassificationValueEditGetLevelModel ClassificationValueEditGetLevel = _context.ZdbClassificationValueEditGetLevel.FromSql("ClassificationValueEditGetLevel @Id", parameter).First();
@@ -139,10 +145,12 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ClassificationValue = new SuClassificationValueModel();
-                ClassificationValue.ModifiedDate = DateTime.Now;
-                ClassificationValue.CreatedDate = DateTime.Now;
-                ClassificationValue.ClassificationId = FromForm.ObjectId;
+                var ClassificationValue = new SuClassificationValueModel
+                {
+                    ModifiedDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
+                    ClassificationId = FromForm.ObjectId
+                };
 
                 if (FromForm.NullId != 0)
                 { ClassificationValue.ParentValueId = FromForm.NullId; }
@@ -151,21 +159,22 @@ namespace StudentUnion0105.Controllers
 
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ClassificationValueLanguage = new SuClassificationValueLanguageModel();
+                var ClassificationValueLanguage = new SuClassificationValueLanguageModel
+                {
+                    Name = FromForm.Name,
+                    Description = FromForm.Description,
+                    DropDownName = FromForm.DropDownName,
+                    MenuName = FromForm.MenuName,
+                    MouseOver = FromForm.MouseOver,
+                    PageName = FromForm.Title,
+                    PageDescription = FromForm.PageDescription,
+                    HeaderName = FromForm.HeaderName,
+                    HeaderDescription = FromForm.HeaderDescription,
+                    TopicName = FromForm.TopicName,
 
-                ClassificationValueLanguage.Name = FromForm.Name;
-                ClassificationValueLanguage.Description = FromForm.Description;
-                ClassificationValueLanguage.DropDownName = FromForm.DropDownName;
-                ClassificationValueLanguage.MenuName = FromForm.MenuName;
-                ClassificationValueLanguage.MouseOver = FromForm.MouseOver;
-                ClassificationValueLanguage.PageName = FromForm.Title;
-                ClassificationValueLanguage.PageDescription = FromForm.PageDescription;
-                ClassificationValueLanguage.HeaderName = FromForm.HeaderName;
-                ClassificationValueLanguage.HeaderDescription = FromForm.HeaderDescription;
-                ClassificationValueLanguage.TopicName = FromForm.TopicName;
-
-                ClassificationValueLanguage.ClassificationValueId = NewClassificationValue.Id;
-                ClassificationValueLanguage.LanguageId = DefaultLanguageID;
+                    ClassificationValueId = NewClassificationValue.Id,
+                    LanguageId = DefaultLanguageID
+                };
                 _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
 
             }
@@ -222,7 +231,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@TopicName", FromForm.MenuName)
 
                     };
-                var b = _context.Database.ExecuteSqlCommand("ClassificationValueEditPost " +
+                 _context.Database.ExecuteSqlCommand("ClassificationValueEditPost " +
                             "@OId" +
                             ", @LanguageId" +
                             ", @FromDate" +
@@ -265,7 +274,8 @@ namespace StudentUnion0105.Controllers
             //ViewBag.CId = HttpContext.Request.Query["CId"];
 
             //return View(ClassificationLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ClassificationValueLanguageIndexGet {Id}").ToList();
+            SqlParameter parameter = new SqlParameter("@OId", Id);
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ClassificationValueLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -297,10 +307,12 @@ namespace StudentUnion0105.Controllers
 
             if (SuLanguage.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuObjectVM SuObject = new SuObjectVM
+            {
+                ObjectId = Id
+            };
             //------
             var xyz = _classificationValue.GetClassificationValue(Id);
             // ClassificationValue.NullId = xyz.ParentValueId;
@@ -350,12 +362,14 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ClassificationValueLanguage = new SuClassificationValueLanguageModel();
-                ClassificationValueLanguage.Name = FromForm.SuObject.Name;
-                ClassificationValueLanguage.Description = FromForm.SuObject.Description;
-                ClassificationValueLanguage.DropDownName = FromForm.SuObject.DropDownName;
-                ClassificationValueLanguage.MenuName = FromForm.SuObject.MenuName;
-                ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
+                var ClassificationValueLanguage = new SuClassificationValueLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    DropDownName = FromForm.SuObject.DropDownName,
+                    MenuName = FromForm.SuObject.MenuName,
+                    MouseOver = FromForm.SuObject.MouseOver
+                };
                 ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ClassificationValueLanguage.PageDescription = FromForm.SuObject.PageDescription;
                 ClassificationValueLanguage.HeaderName = FromForm.SuObject.HeaderName;
@@ -366,7 +380,7 @@ namespace StudentUnion0105.Controllers
                 ClassificationValueLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
 
-                var NewClassificationValue = _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
+               _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
 
 
             }

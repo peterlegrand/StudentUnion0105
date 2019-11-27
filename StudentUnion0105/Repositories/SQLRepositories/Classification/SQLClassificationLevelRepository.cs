@@ -20,7 +20,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationLevelModel AddClassificationLevel(SuClassificationLevelModel suClassificationLevel)
         {
-            context.dbClassificationLevel.Add(suClassificationLevel);
+            context.DbClassificationLevel.Add(suClassificationLevel);
             context.SaveChanges();
             //            context.dbClassificationLevel.
             return suClassificationLevel;
@@ -28,10 +28,10 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuClassificationLevelModel DeleteClassificationLevel(int Id)
         {
-            var suClassificationLevel = context.dbClassificationLevel.Find(Id);
+            var suClassificationLevel = context.DbClassificationLevel.Find(Id);
             if (suClassificationLevel != null)
             {
-                context.dbClassificationLevel.Remove(suClassificationLevel);
+                context.DbClassificationLevel.Remove(suClassificationLevel);
                 context.SaveChanges();
 
             }
@@ -41,17 +41,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuClassificationLevelModel> GetAllClassificationLevels()
         {
-            return context.dbClassificationLevel;//.AsNoTracking();
+            return context.DbClassificationLevel;//.AsNoTracking();
         }
 
         public SuClassificationLevelModel GetClassificationLevel(int Id)
         {
-            return context.dbClassificationLevel.Find(Id);
+            return context.DbClassificationLevel.Find(Id);
         }
 
         public SuClassificationLevelModel UpdateClassificationLevel(SuClassificationLevelModel suClassificationLevelChanges)
         {
-            var suClassificationLevel = context.dbClassificationLevel.Attach(suClassificationLevelChanges);
+            var suClassificationLevel = context.DbClassificationLevel.Attach(suClassificationLevelChanges);
             suClassificationLevel.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             context.SaveChanges();

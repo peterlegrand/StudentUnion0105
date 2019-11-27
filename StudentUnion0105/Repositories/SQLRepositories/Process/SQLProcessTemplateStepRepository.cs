@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateStepModel AddProcessTemplateStep(SuProcessTemplateStepModel suProcessTemplateStep)
         {
-            context.dbProcessTemplateStep.Add(suProcessTemplateStep);
+            context.DbProcessTemplateStep.Add(suProcessTemplateStep);
             context.SaveChanges();
             return suProcessTemplateStep;
         }
 
         public SuProcessTemplateStepModel DeleteProcessTemplateStep(int Id)
         {
-            var suProcessTemplateStep = context.dbProcessTemplateStep.Find(Id);
+            var suProcessTemplateStep = context.DbProcessTemplateStep.Find(Id);
             if (suProcessTemplateStep != null)
             {
-                context.dbProcessTemplateStep.Remove(suProcessTemplateStep);
+                context.DbProcessTemplateStep.Remove(suProcessTemplateStep);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateStepModel> GetAllProcessTemplateSteps()
         {
-            return context.dbProcessTemplateStep;
+            return context.DbProcessTemplateStep;
 
         }
 
         public SuProcessTemplateStepModel GetProcessTemplateStep(int Id)
         {
-            return context.dbProcessTemplateStep.Find(Id);
+            return context.DbProcessTemplateStep.Find(Id);
         }
 
         public SuProcessTemplateStepModel UpdateProcessTemplateStep(SuProcessTemplateStepModel suProcessTemplateStepChanges)
         {
-            var changedProcessTemplateStep = context.dbProcessTemplateStep.Attach(suProcessTemplateStepChanges);
+            var changedProcessTemplateStep = context.DbProcessTemplateStep.Attach(suProcessTemplateStepChanges);
             changedProcessTemplateStep.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateStepChanges;

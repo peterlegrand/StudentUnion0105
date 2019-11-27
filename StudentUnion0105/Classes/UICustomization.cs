@@ -18,7 +18,7 @@ namespace StudentUnion0105.Classes
         public string[] UIArray(string Controller , string Action,int  languageId )
         {
             //UI Customization
-            var CustomizationFromDb = _context.dbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
+            var CustomizationFromDb = _context.DbStatusList.FromSql($"UITermLanguageSelect @p0, @p1, @P2",
                  parameters: new[] {            Controller, Action, //0
                                         languageId.ToString()
                     }).ToList();

@@ -16,17 +16,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageModel AddPage(SuPageModel suPage)
         {
-            context.dbPage.Add(suPage);
+            context.DbPage.Add(suPage);
             context.SaveChanges();
             return suPage;
         }
 
         public SuPageModel DeletePage(int Id)
         {
-            var suPage = context.dbPage.Find(Id);
+            var suPage = context.DbPage.Find(Id);
             if (suPage != null)
             {
-                context.dbPage.Remove(suPage);
+                context.DbPage.Remove(suPage);
                 context.SaveChanges();
 
             }
@@ -35,17 +35,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageModel> GetAllPages()
         {
-            return context.dbPage;
+            return context.DbPage;
         }
 
         public SuPageModel GetPage(int Id)
         {
-            return context.dbPage.Find(Id);
+            return context.DbPage.Find(Id);
         }
 
         public SuPageModel UpdatePage(SuPageModel suPageChanges)
         {
-            var changedPage = context.dbPage.Attach(suPageChanges);
+            var changedPage = context.DbPage.Attach(suPageChanges);
             changedPage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageChanges;

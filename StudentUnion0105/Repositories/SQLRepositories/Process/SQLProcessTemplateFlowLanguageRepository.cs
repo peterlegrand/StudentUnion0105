@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuProcessTemplateFlowLanguageModel AddProcessTemplateFlowLanguage(SuProcessTemplateFlowLanguageModel suProcessTemplateFlowLanguage)
         {
-            context.dbProcessTemplateFlowLanguage.Add(suProcessTemplateFlowLanguage);
+            context.DbProcessTemplateFlowLanguage.Add(suProcessTemplateFlowLanguage);
             context.SaveChanges();
             return suProcessTemplateFlowLanguage;
         }
 
         public SuProcessTemplateFlowLanguageModel DeleteProcessTemplateFlowLanguage(int Id)
         {
-            var suProcessTemplateFlowLanguage = context.dbProcessTemplateFlowLanguage.Find(Id);
+            var suProcessTemplateFlowLanguage = context.DbProcessTemplateFlowLanguage.Find(Id);
             if (suProcessTemplateFlowLanguage != null)
             {
-                context.dbProcessTemplateFlowLanguage.Remove(suProcessTemplateFlowLanguage);
+                context.DbProcessTemplateFlowLanguage.Remove(suProcessTemplateFlowLanguage);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuProcessTemplateFlowLanguageModel> GetAllProcessTemplateFlowLanguages()
         {
-            return context.dbProcessTemplateFlowLanguage;
+            return context.DbProcessTemplateFlowLanguage;
 
         }
 
         public SuProcessTemplateFlowLanguageModel GetProcessTemplateFlowLanguage(int Id)
         {
-            return context.dbProcessTemplateFlowLanguage.Find(Id);
+            return context.DbProcessTemplateFlowLanguage.Find(Id);
         }
 
         public SuProcessTemplateFlowLanguageModel UpdateProcessTemplateFlowLanguage(SuProcessTemplateFlowLanguageModel suProcessTemplateFlowLanguageChanges)
         {
-            var changedProcessTemplateFlowLanguage = context.dbProcessTemplateFlowLanguage.Attach(suProcessTemplateFlowLanguageChanges);
+            var changedProcessTemplateFlowLanguage = context.DbProcessTemplateFlowLanguage.Attach(suProcessTemplateFlowLanguageChanges);
             changedProcessTemplateFlowLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suProcessTemplateFlowLanguageChanges;

@@ -20,6 +20,23 @@
         <h1>Student Union 1.5</h1>
 
     </header>
+    <div class="col-12 text-right">
+                @if (signInManager.IsSignedIn(User))
+                {
+                        <form method="post" asp-action="Logout" asp-controller="User">
+                            <button type="submit" class="nav-link btn btn-link py-0 right float-right right text-right">Logout @User.Identity.Name</button>
+                        </form>
+                }
+                else
+                {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                }
+          
+            <a asp-controller="Preference" asp-action="Index">
+                <img src="~/Images/Icons/preference.png" title="Preference" height="20" width="20" />
+            </a>
+    </div>
     <div class="container">
         <div class="row">
             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
@@ -246,6 +263,8 @@
             <div class="col-sm-1">
                 <table>
                     <tr>
+                    </tr>
+                    <tr>
                         <td>
                             <a asp-controller="Classification" asp-action="Create">
                                 <img src="~/Images/Icons/plus2.png" title="Add content" height="20" width="20" />
@@ -283,14 +302,15 @@
                     </tr>
                     <tr>
                         <td>
-                        <td>
                             <a asp-controller="OrganizationType" asp-action="Create">
                                 <img src="~/Images/Icons/plus2.png" height="20" title="Add organization type" width="20" />
                             </a>
                         </td>
-                        <a asp-controller="OrganizationType" asp-action="Index">
-                            <img src="~/Images/Icons/conference.png" title="Conference" height="20" width="20" />
-                        </a>
+                        <td>
+
+                            <a asp-controller="OrganizationType" asp-action="Index">
+                                <img src="~/Images/Icons/conference.png" title="Conference" height="20" width="20" />
+                            </a>
                         </td>
                     </tr>
                     <tr>
@@ -347,25 +367,6 @@
             </div>
         </div>
     </div>
-    <ul class="navbar-nav ml-auto">
-        @if (signInManager.IsSignedIn(User))
-        {
-            <li class="nav-item">
-                <form method="post" asp-action="Logout" asp-controller="User">
-                    <button type="submit" class="nav-link btn btn-link py-0">Logout @User.Identity.Name</button>
-                </form>
-            </li>
-        }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
-            </li>
-        }
-    </ul>
 
 
     <footer class="border-top footer text-muted">

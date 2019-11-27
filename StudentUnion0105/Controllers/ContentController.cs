@@ -19,7 +19,6 @@ namespace StudentUnion0105.Controllers
     {
         // private readonly SuContentModel _contentModel;
         private readonly UserManager<SuUserModel> _userManager;
-        private readonly IContentStatusRepository _contentStatus;
         private SuDbContext _context;
         private readonly IClassificationRepository _classification;
 
@@ -29,7 +28,6 @@ namespace StudentUnion0105.Controllers
             //SuContentModel contentModel
             //, 
             UserManager<SuUserModel> userManager
-            , IContentStatusRepository contentStatus
            , SuDbContext context
             , IClassificationRepository classification
             //            , SuContentModel content
@@ -37,7 +35,6 @@ namespace StudentUnion0105.Controllers
         {
             //  _contentModel = contentModel;
             _userManager = userManager;
-            _contentStatus = contentStatus;
             _context = context;
             _classification = classification;
             //        _content = content;
@@ -62,7 +59,7 @@ namespace StudentUnion0105.Controllers
             int NoOfClassifications = _classification.GetAllClassifcations().Count();
 
             List<SelectListItem>[] ClassificationValueSets = new List<SelectListItem>[NoOfClassifications];
-            DbSet<SuValueList>[] dbValueList = new DbSet<SuValueList>[NoOfClassifications];
+          //  DbSet<SuValueList>[] dbValueList = new DbSet<SuValueList>[NoOfClassifications];
             int y = 0;
 
             foreach (var ClassificationfromDb in _classification.GetAllClassifcations())
@@ -72,7 +69,7 @@ namespace StudentUnion0105.Controllers
                 //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 1, Name = "a" });
                 //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 2, Name = "b" });
                 //                _context.dbValueList[0] = new DbSet<SuValueList>;
-                ValuesFromDb = _context.dbValueList.FromSql($"ClassificationValueStructureValues  {DefaultLanguageID}, {ClassificationfromDb.Id}").ToList();
+                ValuesFromDb = _context.DbValueList.FromSql($"ClassificationValueStructureValues  {DefaultLanguageID}, {ClassificationfromDb.Id}").ToList();
                 ClassificationValueSets[y] = new List<SelectListItem>();
                 ClassificationValueSets[y].Add(new SelectListItem
 
@@ -93,7 +90,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.dbStatusList.FromSql($"ContentStatusSelectAll").ToList();
+            var ContentStatusFromDb = _context.DbStatusList.FromSql($"ContentStatusSelectAll").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)
@@ -104,7 +101,7 @@ namespace StudentUnion0105.Controllers
                     Value = StatusFromDb.Id.ToString()
                 });
             }
-            var ContentTypesFromDb = _context.dbTypeList.FromSql($"ContentTypeSelectAllForLanguage {DefaultLanguageID}").ToList();
+            var ContentTypesFromDb = _context.DbTypeList.FromSql($"ContentTypeSelectAllForLanguage {DefaultLanguageID}").ToList();
 
             foreach (var TypeFromDb in ContentTypesFromDb)
             {
@@ -126,7 +123,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProjectsFromDb = _context.dbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
+            var ProjectsFromDb = _context.DbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
 
             ProjectList.Add(new SelectListItem { Value = "0", Text = "No project" });
             foreach (var ProjectFromDb in ProjectsFromDb)
@@ -139,7 +136,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var SecurityLevelsFromDb = _context.dbSecurityLevelList.FromSql($"SecurityLevelSelectAll").ToList();
+            var SecurityLevelsFromDb = _context.DbSecurityLevelList.FromSql($"SecurityLevelSelectAll").ToList();
 
             foreach (var SecurityLevelFromDb in SecurityLevelsFromDb)
             {
@@ -150,7 +147,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var LanguagesFromDb = _context.dbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.DbLanguageList.FromSql($"LanguageSelectAll").ToList();
 
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
@@ -190,7 +187,7 @@ namespace StudentUnion0105.Controllers
             return View(ContentWithDropDowns);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(SuCreateContentModel FromForm)
+        public IActionResult Create(SuCreateContentModel FromForm)
         {
 
             var ProjectId = FromForm.Content.ProjectId == null ? 0 : FromForm.Content.ProjectId;
@@ -212,7 +209,7 @@ namespace StudentUnion0105.Controllers
                 }
             };
 
-            var b = _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId, @ContentStatusId, @LangaugeId, @Title, @Description, @SecurityLevel, @OrganizationId, @ProjectId, @new_identity OUTPUT", parameters);
+            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId, @ContentStatusId, @LangaugeId, @Title, @Description, @SecurityLevel, @OrganizationId, @ProjectId, @new_identity OUTPUT", parameters);
 
             if (FromForm.NoOfClassifications != null)
             {

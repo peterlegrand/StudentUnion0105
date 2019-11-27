@@ -16,12 +16,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuUIScreenModel> GetAllScreens()
         {
-            return context.dbUIScreen;
+            return context.DbUIScreen;
         }
 
         public SuUIScreenModel GetScreen(int Id)
         {
-            return context.dbUIScreen.Find(Id);
+            return context.DbUIScreen.Find(Id);
         }
 
     }

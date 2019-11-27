@@ -15,17 +15,17 @@ namespace StudentUnion0105.SQLRepositories
         }
         public SuContentTypeModel AddContentType(SuContentTypeModel suContentType)
         {
-            context.dbContentType.Add(suContentType);
+            context.DbContentType.Add(suContentType);
             context.SaveChanges();
             return suContentType;
         }
 
         public SuContentTypeModel DeleteContentType(int Id)
         {
-            var suContentType = context.dbContentType.Find(Id);
+            var suContentType = context.DbContentType.Find(Id);
             if (suContentType != null)
             {
-                context.dbContentType.Remove(suContentType);
+                context.DbContentType.Remove(suContentType);
                 context.SaveChanges();
 
             }
@@ -34,18 +34,18 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuContentTypeModel> GetAllContentTypes()
         {
-            return context.dbContentType;
+            return context.DbContentType;
 
         }
 
         public SuContentTypeModel GetContentType(int Id)
         {
-            return context.dbContentType.Find(Id);
+            return context.DbContentType.Find(Id);
         }
 
         public SuContentTypeModel UpdateContentType(SuContentTypeModel suContentTypeChanges)
         {
-            var changedContentType = context.dbContentType.Attach(suContentTypeChanges);
+            var changedContentType = context.DbContentType.Attach(suContentTypeChanges);
             changedContentType.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suContentTypeChanges;

@@ -15,12 +15,12 @@ namespace StudentUnion0105.SQLRepositories
         }
         public IEnumerable<SuProjectStatusModel> GetAllProjectStatus()
         {
-            return context.dbProjectStatus;
+            return context.DbProjectStatus;
         }
 
         public SuProjectStatusModel GetSuProjectStatus(int Id)
         {
-            return context.dbProjectStatus.Find(Id);
+            return context.DbProjectStatus.Find(Id);
         }
     }
 }

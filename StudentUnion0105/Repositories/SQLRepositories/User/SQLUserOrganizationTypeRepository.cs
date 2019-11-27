@@ -15,12 +15,12 @@ namespace StudentUnion0105.SQLRepositories
         }
         public IEnumerable<SuUserOrganizationTypeModel> GetAllUserOrganizationTypes()
         {
-            return context.dbUserOrganizationType;
+            return context.DbUserOrganizationType;
         }
 
         public SuUserOrganizationTypeModel GetUserOrganizationType(int Id)
         {
-            return context.dbUserOrganizationType.Find(Id);
+            return context.DbUserOrganizationType.Find(Id);
         }
 
     }

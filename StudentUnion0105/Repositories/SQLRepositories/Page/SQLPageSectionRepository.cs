@@ -18,17 +18,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionModel AddPageSection(SuPageSectionModel suPageSection)
         {
-            context.dbPageSection.Add(suPageSection);
+            context.DbPageSection.Add(suPageSection);
             context.SaveChanges();
             return suPageSection;
         }
 
         public SuPageSectionModel DeletePageSection(int Id)
         {
-            var suPageSection = context.dbPageSection.Find(Id);
+            var suPageSection = context.DbPageSection.Find(Id);
             if (suPageSection != null)
             {
-                context.dbPageSection.Remove(suPageSection);
+                context.DbPageSection.Remove(suPageSection);
                 context.SaveChanges();
 
             }
@@ -37,17 +37,17 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageSectionModel> GetAllPageSections()
         {
-            return context.dbPageSection.AsNoTracking().ToList();
+            return context.DbPageSection.AsNoTracking().ToList();
         }
 
         public SuPageSectionModel GetPageSection(int Id)
         {
-            return context.dbPageSection.Find(Id);
+            return context.DbPageSection.Find(Id);
         }
 
         public SuPageSectionModel UpdatePageSection(SuPageSectionModel suPageSectionChanges)
         {
-            var changedPageSection = context.dbPageSection.Attach(suPageSectionChanges);
+            var changedPageSection = context.DbPageSection.Attach(suPageSectionChanges);
             changedPageSection.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageSectionChanges;

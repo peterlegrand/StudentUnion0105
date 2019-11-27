@@ -24,12 +24,12 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuPageSectionLanguageModel> GetAllPageSectionLanguages()
         {
-            return context.dbPageSectionLanguage.AsNoTracking().ToList();
+            return context.DbPageSectionLanguage.AsNoTracking().ToList();
         }
 
         public SuPageSectionLanguageModel GetPageSectionLanguage(int Id)
         {
-            return context.dbPageSectionLanguage.Find(Id);
+            return context.DbPageSectionLanguage.Find(Id);
         }
 
 
@@ -37,14 +37,14 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionLanguageModel AddPageSectionLanguage(SuPageSectionLanguageModel suPageSectionLanguage)
         {
-            context.dbPageSectionLanguage.Add(suPageSectionLanguage);
+            context.DbPageSectionLanguage.Add(suPageSectionLanguage);
             context.SaveChanges();
             return suPageSectionLanguage;
         }
 
         public SuPageSectionLanguageModel UpdatePageSectionLanguage(SuPageSectionLanguageModel suPageSectionLanguageChanges)
         {
-            var changedPageSectionLanguage = context.dbPageSectionLanguage.Attach(suPageSectionLanguageChanges);
+            var changedPageSectionLanguage = context.DbPageSectionLanguage.Attach(suPageSectionLanguageChanges);
             changedPageSectionLanguage.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return suPageSectionLanguageChanges;
@@ -52,10 +52,10 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuPageSectionLanguageModel DeletePageSectionLanguage(int Id)
         {
-            var suPageSectionLanguage = context.dbPageSectionLanguage.Find(Id);
+            var suPageSectionLanguage = context.DbPageSectionLanguage.Find(Id);
             if (suPageSectionLanguage != null)
             {
-                context.dbPageSectionLanguage.Remove(suPageSectionLanguage);
+                context.DbPageSectionLanguage.Remove(suPageSectionLanguage);
                 context.SaveChanges();
 
             }

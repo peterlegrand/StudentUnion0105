@@ -16,13 +16,13 @@ namespace StudentUnion0105.SQLRepositories
 
         public IEnumerable<SuDataTypeModel> GetAllDataTypes()
         {
-            return _context.dbDataType;
+            return _context.DbDataType;
 
         }
 
         public SuDataTypeModel GetDataType(int Id)
         {
-            return _context.dbDataType.Find(Id);
+            return _context.DbDataType.Find(Id);
         }
     }
 }

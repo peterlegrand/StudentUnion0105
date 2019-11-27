@@ -15,12 +15,12 @@ namespace StudentUnion0105.SQLRepositories
         }
         public IEnumerable<SuUserProjectTypeModel> GetAllUserProjectTypes()
         {
-            return context.dbUserProjectType;
+            return context.DbUserProjectType;
         }
 
         public SuUserProjectTypeModel GetUserProjectType(int Id)
         {
-            return context.dbUserProjectType.Find(Id);
+            return context.DbUserProjectType.Find(Id);
         }
 
     }
