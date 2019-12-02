@@ -1,15 +1,17 @@
-CREATE PROCEDURE ContentTypeLanguageIndexGet (@Id int)
+CREATE PROCEDURE ContentTypeLanguageIndexGet (@OId int)
 AS
 SELECT 
-dbLanguage.LanguageName
-	, dbContentTypeLanguage.Id
-	, dbContentTypeLanguage.Name
-	, dbContentTypeLanguage.Description
-	, dbContentTypeLanguage.MouseOver
-	, dbContentTypeLanguage.MenuName
+	dbContentTypeLanguage.Id LId
+	, dbContentTypeLanguage.ContentTypeId OId
 	, 0 PId
+	, ISNULL(dbContentTypeLanguage.Name,'') Name
+	, ISNULL(dbContentTypeLanguage.Description, '') Description
+	, ISNULL(dbContentTypeLanguage.MouseOver, '') MouseOver
+	, ISNULL(dbContentTypeLanguage.MenuName, '') MenuName
+	, dbLanguage.Id LanguageId
+	, ISNULL(dbLanguage.LanguageName,'') LanguageName
 FROM dbContentTypeLanguage
 JOIN dbLanguage 
 	ON dbContentTypeLanguage.LanguageId = dbLanguage.Id
-WHERE dbContentTypeLanguage.ContentTypeId = @Id
+WHERE dbContentTypeLanguage.ContentTypeId = @OId
 ORDER BY dbLanguage.LanguageName

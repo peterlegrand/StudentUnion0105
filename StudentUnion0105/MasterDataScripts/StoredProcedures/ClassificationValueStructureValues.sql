@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ClassificationValueStructureValues] (@Language Int, @ClassificationId Int )
+CREATE PROCEDURE [dbo].[ClassificationValueStructureValues] (@LanguageId Int, @Id Int )
                                         AS 
                                         WITH StructureClassValue (ClassificationId
 												, ParentId, Id, Name, Level, Path)
@@ -15,8 +15,8 @@ CREATE PROCEDURE [dbo].[ClassificationValueStructureValues] (@Language Int, @Cla
                                         	JOIN dbClassificationValueLanguage AS l
                                         		ON v.Id = l.ClassificationValueId
                                         	WHERE v.ParentValueId IS NULL
-                                        		AND l.LanguageId = @Language
-                                        		AND v.ClassificationId = @ClassificationId
+                                        		AND l.LanguageId = @LanguageId
+                                        		AND v.ClassificationId = @Id
                                         	UNION ALL
                                         	SELECT v.ClassificationId
 												, v.ParentValueId
@@ -29,8 +29,8 @@ CREATE PROCEDURE [dbo].[ClassificationValueStructureValues] (@Language Int, @Cla
                                         		ON v.Id = l.ClassificationValueId
                                         	JOIN StructureClassValue s
                                         		ON s.Id = v.ParentValueId
-                                        	WHERE l.LanguageId = @Language
-                                        	AND v.ClassificationId = @ClassificationId
+                                        	WHERE l.LanguageId = @LanguageId
+                                        	AND v.ClassificationId = @Id
                                         	)
 
                                         	SELECT Id ClassificationValueId

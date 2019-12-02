@@ -1,8 +1,8 @@
 CREATE PROCEDURE 
 [dbo].[ShowContent] 
-  @ContentTypeId int
+  @Id int
 AS
-IF @ContentTypeId IS NULL 
+IF @Id IS NULL 
 BEGIN
 SELECT dbContent.Id
 	, dbContent.Title
@@ -35,5 +35,5 @@ SELECT dbContent.Id
 	, dbContent.ProjectId
 	, dbContent.SecurityLevel
 FROM dbContent
-WHERE dbContent.ContentTypeId = @ContentTypeId
+WHERE dbContent.ContentTypeId = @Id
 END

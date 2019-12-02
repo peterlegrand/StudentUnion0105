@@ -87,10 +87,8 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @p0, @p1",
-                    parameters: new[] {            
-                        DefaultLanguageID.ToString()
-                        , Id.ToString()} ).ToList();
+
+            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @LanguageId, @Id", parameters).ToList();
 
             var ProcessTemplateFlowFieldList = new List<SelectListItem>();
             ProcessTemplateFlowFieldList.Add(new SelectListItem
@@ -216,10 +214,14 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"GetProcessTemplateFlowConditionCreateGetFields @p0, @p1",
-                    parameters: new[] {            //0
-                                        DefaultLanguageID.ToString()
-                    , Id.ToString()}).ToList();
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+
+            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql("GetProcessTemplateFlowConditionCreateGetFields @LanguageId, @Id", parameters).ToList();
 
             var ProcessTemplateFlowFieldList = new List<SelectListItem>();
             ProcessTemplateFlowFieldList.Add(new SelectListItem

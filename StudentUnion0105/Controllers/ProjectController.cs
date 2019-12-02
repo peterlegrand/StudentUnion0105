@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -46,7 +47,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var a = _context.DbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var a = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
             //if (a.Count != 0)
             //{
@@ -230,28 +233,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //var ContentLanguage = (from c in _ProjectLanguage.GetAllProjectLanguages()
-            //                       join l in _language.GetAllLanguages()
-            //      on c.LanguageId equals l.Id
-            //                       where c.ProjectId == Id
-            //                       select new SuObjectVM
-            //                       {
-            //                           Id = c.Id
-            //                       ,
-            //                           Name = c.Name
-            //                       ,
-            //                           Language = l.LanguageName
-            //                       ,
-            //                           Description = c.Description
-            //                       ,
-            //                           MouseOver = c.MouseOver
-            //                       ,
-            //                           ObjectId = c.ProjectId
-            //                       }).ToList();
-            //ViewBag.Id = Id;
+            var parameter = new SqlParameter("@OId", Id);
 
-            //return View(ContentLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProjectLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProjectLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -331,34 +315,11 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProjectLanguageEditGet {Id}").First();
+
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProjectLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
-
-            //var ToForm = (from c in _ProjectLanguage.GetAllProjectLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.ProjectId
-
-            //             }).First();
-
-            //var ProjectAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = ProjectList
-            //};
-            //return View(ToForm);
 
 
         }

@@ -205,7 +205,7 @@ namespace StudentUnion0105.Controllers
         {
             var CountryList = new List<SelectListItem>();
 
-            var CountriesFromDb = _context.ZDbStatusList.FromSql($"CountryDD").ToList();
+            var CountriesFromDb = _context.ZDbStatusList.FromSql("CountryDD").ToList();
 
 
             foreach (var CountryFromDb in CountriesFromDb)

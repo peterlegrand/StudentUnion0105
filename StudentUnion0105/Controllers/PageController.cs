@@ -310,32 +310,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //            var ContentLanguage = (from c in _PageLanguage.GetAllPageLanguages()
-            //                                   join l in _language.GetAllLanguages()
-            //                  on c.LanguageId equals l.Id
-            //                                   where c.PageId == Id
-            //                                   select new SuObjectVM
-            //                                   {
-            //                                       Id = c.Id
-            //                                   ,
-            //                                       Name = c.Name
-            //                                   ,
-            //                                       Language = l.LanguageName
-            //                                   ,
-            //                                       Description = c.Description
-            //                                   ,
-            //                                       MouseOver = c.MouseOver
-            //,
-            //                                       Title = c.Title
-            //,
-            //                                       Description2 = c.PageDescription
-            //                                   ,
-            //                                       ObjectId = c.PageId
-            //                                   }).ToList();
-            //            ViewBag.Id = Id;
+            var parameter = new SqlParameter("@OId", Id);
 
-            //            return View(ContentLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"PageLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("PageLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -425,7 +402,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var PageLanguage = _context.ZdbPageLanguageEditGet.FromSql($"PageLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var PageLanguage = _context.ZdbPageLanguageEditGet.FromSql("PageLanguageEditGet @Id", parameter).First();
             return View(PageLanguage);
 
 
@@ -532,7 +511,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Page = _context.DbPageDeleteGet.FromSql($"PageDeleteGet {DefaultLanguageID}, {Id}").First();
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var Page = _context.DbPageDeleteGet.FromSql("PageDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Page);
         }

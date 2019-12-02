@@ -1,19 +1,19 @@
-CREATE PROCEDURE ClassificationLevelLanguageIndexGet (@Id int)
+CREATE PROCEDURE ClassificationLevelLanguageIndexGet (@OId int)
 AS
 SELECT 
-dbLanguage.LanguageName
-	, dbClassificationLevelLanguage.Id Lid
-	, dbClassificationLevelLanguage.Name
-	, dbClassificationLevelLanguage.Description
-	, dbClassificationLevelLanguage.MouseOver
-	, dbClassificationLevelLanguage.MenuName
+	dbClassificationLevelLanguage.Id LId
 	, dbClassificationLevelLanguage.ClassificationLevelId OId
-	, dbLanguage.LanguageName Language
 	, dbClassificationLevel.ClassificationId PId
+	, ISNULL(dbClassificationLevelLanguage.Name,'') Name
+	, ISNULL(dbClassificationLevelLanguage.Description,'') Description
+	, ISNULL(dbClassificationLevelLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbClassificationLevelLanguage.MenuName,'') MenuName
+	, dbLanguage.Id LanguageId
+	, ISNULL(dbLanguage.LanguageName,'') LanguageName
 FROM dbClassificationLevelLanguage
 JOIN dbLanguage 
 	ON dbClassificationLevelLanguage.LanguageId = dbLanguage.Id
 JOIN dbClassificationLevel
 	ON dbClassificationLevel.Id = dbClassificationLevelLanguage.ClassificationLevelId 
-WHERE dbClassificationLevelLanguage.ClassificationLevelId = @Id
+WHERE dbClassificationLevelLanguage.ClassificationLevelId = @OId
 ORDER BY dbLanguage.LanguageName

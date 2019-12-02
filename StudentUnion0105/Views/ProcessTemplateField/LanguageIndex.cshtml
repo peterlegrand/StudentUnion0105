@@ -18,11 +18,11 @@
     {
 <tr>
     <td style="width: 44px">@x.LId</td>
-    <td>@x.Language</td>
+    <td>@x.LanguageName</td>
     <td>@x.Name</td>
     <td>@x.MenuName</td>
     <td>@x.MouseOver</td>
-    <td>@x.OId</td>
+    <td hidden>@x.OId</td>
     @*PETER TODO Hide the object ID somehow would be nice*@
 
     <td style="width: 22px"><a asp-controller="ProcessTemplateField" asp-action="LanguageEdit" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>

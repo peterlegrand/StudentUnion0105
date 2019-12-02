@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ProjStructure] (@Language Int )
+CREATE PROCEDURE [dbo].[ProjStructure] (@LanguageId Int )
                                     AS 
                                     WITH StructureProj (ParentId, Id, Name, Level, Path)
                                     AS
@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[ProjStructure] (@Language Int )
                                     		ON p.Id = l.ProjectId
                                     	WHERE (p.ParentProjectId IS NULL 
                                             OR p.ParentProjectId = 0) 
-                                    		AND l.LanguageId = @Language
+                                    		AND l.LanguageId = @LanguageId
                                     	UNION ALL
                                     	SELECT p.ParentProjectId
                                     		, p.Id
@@ -25,7 +25,7 @@ CREATE PROCEDURE [dbo].[ProjStructure] (@Language Int )
                                     		ON p.Id = l.ProjectId
                                     	JOIN StructureProj s
                                     		ON s.Id = p.ParentProjectId
-                                    	WHERE l.LanguageId = @Language
+                                    	WHERE l.LanguageId = @LanguageId
                                     	)
 
                                     	SELECT ISNULL(ParentId,0) ParentId

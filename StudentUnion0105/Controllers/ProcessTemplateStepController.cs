@@ -8,6 +8,7 @@ using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;   
 
@@ -206,38 +207,6 @@ namespace StudentUnion0105.Controllers
             var DataTypesFromDb = _context.ZDbStatusList.FromSql($"DataTypeSelectAll").ToList();
 
 
-            //foreach (var DataTypeFromDb in DataTypesFromDb)
-            //{
-            //    DataTypeList.Add(new SelectListItem
-            //    {
-            //        Text = DataTypeFromDb.Name,
-            //        Value = DataTypeFromDb.Id.ToString()
-            //    });
-            //}
-
-            //ContentType
-
-
-            //MasterList
-            //var MasterListList = new List<SelectListItem>();
-
-            //var MasterListsFromDb = _context.dbTypeList.FromSql($"GetMasterList").ToList();
-
-
-            //foreach (var MasterListFromDb in MasterListsFromDb)
-            //{
-            //    MasterListList.Add(new SelectListItem
-            //    {
-            //        Text = MasterListFromDb.Name,
-            //        Value = MasterListFromDb.Id.ToString()
-            //    });
-            //}
-
-            //MasterList
-
-            //var StepsAndDropDowns = new SuObjectVM { Step = ProcessTemplateStep, DataTypes = DataTypeList, MasterList = MasterListList };
-
-
             return View(ProcessTemplateStep);
         }
 
@@ -249,15 +218,17 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await _userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateStepCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6  ",
-                    parameters: new[] { FromForm.Id.ToString()           //0
-                                           , FromForm.LanguageId.ToString()
-                                           , FromForm.Name
-                                           , FromForm.Description
-                                           , FromForm.MouseOver
+                SqlParameter[] parameters =
+    {
+                    new SqlParameter("@ProcessTemplateId", FromForm.Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Name", FromForm.Name)
+                    , new SqlParameter("@Description", FromForm.Description)
+                    , new SqlParameter("@MouseOver", FromForm.MouseOver)
+                };
 
 
-                    });
+                _context.Database.ExecuteSqlCommand("ProcessTemplateStepCreate @ProcessTemplateId, @LanguageId, @Name, @Description, @MouseOver", parameters);
 
             }
             return RedirectToAction("Index", new { Id = FromForm.Id.ToString() });
@@ -274,27 +245,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //var
-            //    ProcessTemplateStepLanguage = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
-            //                              join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //                              where c.StepId == Id
-            //                              select new SuObjectVM
-            //                              {
-            //                                  Id = c.Id
-            //                              ,
-            //                                  Name = c.Name
-            //                              ,
-            //                                  Language = l.LanguageName
-            //                              ,
-            //                                  MouseOver = c.MouseOver
-            //                              ,
-            //                                  ObjectId = c.StepId
-            //                              }).ToList();
-            //ViewBag.Id = Id;
+            var parameter = new SqlParameter("@OId", Id);
 
-            //return View(ProcessTemplateStepLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProcessTemplateStepLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProcessTemplateStepLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -309,36 +262,11 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateStepLanguageEditGet {Id}").First();
+
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateStepLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
-
-            //var StepLanguage = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.StepId
-
-            //             }).First();
-
-            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = StepLanguage //, a = ClassificationList
-            //};
-            //return View(ClassificationAndStatus);
-            ////return View(StepLanguage);
-
 
         }
 

@@ -9,6 +9,7 @@ using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -56,7 +57,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray( this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID) ;
 
-            var OrgStructure = _context.ZdbOrganizationIndexGet.FromSql($"OrganizationIndexGet {DefaultLanguageID}").ToList();
+            var parameter = new SqlParameter("@LanguageID", DefaultLanguageID);
+
+            var OrgStructure = _context.ZdbOrganizationIndexGet.FromSql("OrganizationIndexGet @LanguageID", parameter).ToList();
 
             int maxLevel = 0;
             foreach (var Org in OrgStructure)
@@ -241,29 +244,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            var parameter = new SqlParameter("@OId", Id);
 
-            //var ContentLanguage = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
-            //                       join l in _language.GetAllLanguages()
-            //      on c.LanguageId equals l.Id
-            //                       where c.OrganizationId == Id
-            //                       select new SuObjectVM
-            //                       {
-            //                           Id = c.Id
-            //                       ,
-            //                           Name = c.Name
-            //                       ,
-            //                           Language = l.LanguageName
-            //                       ,
-            //                           Description = c.Description
-            //                       ,
-            //                           MouseOver = c.MouseOver
-            //                       ,
-            //                           ObjectId = c.OrganizationId
-            //                       }).ToList();
-            //ViewBag.Id = Id;
-
-            //return View(ContentLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"OrganizationLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("OrganizationLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -345,35 +328,14 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationEditGet {Id}").First();
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("OrganizationEditGet @LanguageId, @Id", parameters).First();
             return View(ObjectLanguage);
-
-
-            //var ToForm = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.OrganizationId
-
-            //             }).First();
-
-            //var OrganizationAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = OrganizationList
-            //};
-            //return View(ToForm);
 
 
         }
@@ -404,7 +366,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Classification = _context.DbOrganizationDeleteGet.FromSql($"OrganizationDeleteGet {Id}").First();
+            SqlParameter[] parameters =
+{
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var Classification = _context.DbOrganizationDeleteGet.FromSql("OrganizationDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Classification);
         }
@@ -426,7 +394,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var OrganizationLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"OrganizationLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var OrganizationLanguage = _context.ZdbObjectLanguageEditGet.FromSql("OrganizationLanguageEditGet @Id", parameter).First();
 
 
             return View(OrganizationLanguage);

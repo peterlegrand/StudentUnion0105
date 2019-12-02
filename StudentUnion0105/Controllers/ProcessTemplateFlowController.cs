@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -234,27 +235,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //            var FlowLanguage = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
-            //                                          join l in _language.GetAllLanguages()
-            //                         on f.LanguageId equals l.Id
-            //                                          where f.FlowId == Id
-            //                                          select new SuObjectVM
-            //                                          {
-            //                                              Id = f.Id
-            //                                          ,
-            //                                              Name = f.Name
-            //                                          ,
-            //                                              Language = l.LanguageName
-            //                                          ,
-            //                                              MouseOver = f.MouseOver
-            //,                                              Description = f.Description
-            //                                          ,
-            //                                              ObjectId = f.FlowId
-            //                                          }).ToList();
-            //            ViewBag.Id = Id;
+            var parameter = new SqlParameter("@OId", Id);
 
-            //            return View(FlowLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProcessTemplateFlowLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProcessTemplateFlowLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -271,7 +254,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateFlowLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateFlowLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
             //var FlowLanguage = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()

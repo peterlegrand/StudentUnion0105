@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -34,18 +35,15 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //TO DO, should also show the type in the grid. But then I have to do all kind of things.
-            //List<SuStatusList> UserOrganizationFromDb = new List<SuStatusList>();
             List<SuIdWithStrings> UserOrganizationFromDb = new List<SuIdWithStrings>();
-            //           if (_context.dbStatusList.FromSql($"UserOrganizationSelectAll @P0, @P1",
-            //                    parameters: new[] {           Id, //0
-            //                                        DefaultLanguageID.ToString()
-            //}).Count() == 0) {
 
-            UserOrganizationFromDb = _context.DbIdWithStrings.FromSql($"UserOrganizationSelectAll @P0, @P1",
-                                    parameters: new[] {           Id, //0
-                                        DefaultLanguageID.ToString()
-                }).ToList();
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@User", Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                };
+
+            UserOrganizationFromDb = _context.DbIdWithStrings.FromSql("UserOrganizationSelectAll @User, @LanguageId", parameters).ToList();
             //}
 
             ViewBag.ObjectId = Id;
@@ -63,11 +61,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
 
-            SuObjectVM UserOrganizationFromDb = _context.DbObjectVM.FromSql($"UserOrganizationSelectBasedOnUser @P0, @P1",
-                   parameters: new[] {           Id.ToString(), //0
-                                        DefaultLanguageID.ToString()
-}).First();
+            SuObjectVM UserOrganizationFromDb = _context.DbObjectVM.FromSql("UserOrganizationSelectBasedOnUser @LanguageId, @Id", parameters).First();
             return View(UserOrganizationFromDb);
         }
 
@@ -95,10 +95,13 @@ namespace StudentUnion0105.Controllers
             var OrganizationList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
 
-            var OrganizationsFromDB = _context.ZDbStatusList.FromSql($"UserOrganizationNewOrganizationsSelect @P0, @P1",
-                    parameters: new[] {           Id, //0
-                                        DefaultLanguageID.ToString()
-                                    }).ToList();
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@UserId", Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                };
+
+            var OrganizationsFromDB = _context.ZDbStatusList.FromSql("UserOrganizationNewOrganizationsSelect @UserId, @LanguageId", parameters).ToList();
 
             foreach (var OrganizationFromDB in OrganizationsFromDB)
             {
@@ -109,10 +112,9 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var TypesFromDB = _context.DbTypeList.FromSql($"UserOrganizationTypeSelectAll @P0",
-                    parameters: new[] {           
-                                        DefaultLanguageID.ToString()
-                                    }).ToList();
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var TypesFromDB = _context.DbTypeList.FromSql("UserOrganizationTypeSelectAll @LanguageId", parameter).ToList();
 
             foreach (var TypeFromDB in TypesFromDB)
             {

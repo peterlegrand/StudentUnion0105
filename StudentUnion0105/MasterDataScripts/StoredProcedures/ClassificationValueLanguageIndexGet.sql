@@ -1,14 +1,15 @@
 CREATE PROCEDURE ClassificationValueLanguageIndexGet (@OId int)
 AS
 SELECT 
-dbLanguage.LanguageName Language
-	, dbClassificationValueLanguage.Id LId
-	, dbClassificationValueLanguage.Name
-	, dbClassificationValueLanguage.Description
-	, dbClassificationValueLanguage.MouseOver
-	, dbClassificationValueLanguage.MenuName
+	dbClassificationValueLanguage.Id LId
 	, dbClassificationValueLanguage.ClassificationValueId OId
 	, dbClassificationValue.ClassificationId PId 
+	, ISNULL(dbClassificationValueLanguage.Name,'') Name
+	, ISNULL(dbClassificationValueLanguage.Description,'') Description
+	, ISNULL(dbClassificationValueLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbClassificationValueLanguage.MenuName,'') MenuName
+	, dbLanguage.Id LanguageId
+	, ISNULL(dbLanguage.LanguageName,'') LanguageName
 FROM dbClassificationValueLanguage
 JOIN dbLanguage 
 	ON dbClassificationValueLanguage.LanguageId = dbLanguage.Id

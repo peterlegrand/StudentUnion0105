@@ -53,9 +53,12 @@ namespace StudentUnion0105.Controllers
                 intValue = 0
             };
 
+            var parameter = new SqlParameter("@Id", Id);
+
             try
             {
-                MaxLevel = _context.ZdbInt.FromSql($"ClassificationValueIndexGetMaxLevel {Id}").First();
+
+                MaxLevel = _context.ZdbInt.FromSql("ClassificationValueIndexGetMaxLevel @Id", parameter).First();
             }
             catch { }
 
@@ -65,11 +68,17 @@ namespace StudentUnion0105.Controllers
             };
             try
             {
-                CurrentLevel = _context.ZdbInt.FromSql($"ClassificationValueIndexGetCurrentLevel {Id}").First();//? null : new SuInt { intValue = 0 };
+                CurrentLevel = _context.ZdbInt.FromSql("ClassificationValueIndexGetCurrentLevel @Id", parameter).First();//? null : new SuInt { intValue = 0 };
             }
             catch { }
 
-            var ValueStructure = _context.ZdbClassificationValueIndexGet.FromSql($"ClassificationValueIndexGet {DefaultLanguageID}, {Id}").ToList();
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var ValueStructure = _context.ZdbClassificationValueIndexGet.FromSql("ClassificationValueIndexGet @LanguageId, @Id", parameters).ToList();
             ViewBag.CId = Id.ToString();
             var c = new ValueStructureWithDepth { MaxLevel = MaxLevel.intValue, ValueStructure = ValueStructure, MaxConfigLevel = CurrentLevel.intValue };
             return View(c);
@@ -308,22 +317,6 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //var ClassificationLanguage = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
-            //                              join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //                              where c.ClassificationValueId == Id
-            //                              select new SuObjectVM
-            //                              {
-            //                                  Id = c.Id
-            //                              ,
-            //                                  Name = c.Name
-            //                              ,
-            //                                  Language = l.LanguageName
-            //                              }).ToList();
-            //ViewBag.Id = Id;
-            //ViewBag.CId = HttpContext.Request.Query["CId"];
-
-            //return View(ClassificationLanguage);
             SqlParameter parameter = new SqlParameter("@OId", Id);
             var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ClassificationValueLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
@@ -446,7 +439,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationValueLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationValueLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
         }

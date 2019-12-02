@@ -108,55 +108,51 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var ToForm = (from s in _contentType.GetAllContentTypes()
-                         join t in _contentTypeLanguage.GetAllContentTypeLanguages()
-                         on s.Id equals t.ContentTypeId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                         }).First();
 
-            return View(ToForm);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var ContentTypeEditGet = _context.ZdbContentTypeEditGet.FromSql("ContentTypeEditGet @LanguageId, @Id", parameters).First();
+
+
+            return View(ContentTypeEditGet);
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuContentTypeEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var ContentType = _contentType.GetContentType(test3.Id);
-                var CurrentUser = await userManager.GetUserAsync(User);
-
-                ContentType.ModifiedDate = DateTime.Now;
-                ContentType.ModifierId = new Guid(CurrentUser.Id);
-                _contentType.UpdateContentType(ContentType);
-
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.ObjectLanguageId);
-                ContentTypeLanguage.Name = test3.Name;
-                ContentTypeLanguage.Description = test3.Description;
-                ContentTypeLanguage.MouseOver = test3.MouseOver;
-                ContentTypeLanguage.ModifiedDate = DateTime.Now;
-                ContentTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
-                _contentTypeLanguage.UpdateContentTypeLanguage(ContentTypeLanguage);
-
-            }
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OId", FromForm.Id),
+                    new SqlParameter("@LId", FromForm.Lid),
+                    new SqlParameter("@Name", FromForm.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.MenuName ?? ""),
+                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    };
+            var b = _context.Database.ExecuteSqlCommand("ContentTypeEditPost " +
+                        "@OId" +
+                        ", @LId" +
+                        ", @Name" +
+                        ", @Description" +
+                        ", @MouseOver" +
+                        ", @MenuName" +
+                        ", @ModifierId", parameters);
+        
             return RedirectToAction("Index");
 
-
-
-        }
+    }
 
 
         public async Task<IActionResult> LanguageIndex(int Id)
@@ -166,32 +162,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ContentTypeLanguageIndexGet {Id}").ToList();
+            var parameter = new SqlParameter("@OId", Id);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ContentTypeLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
 
-            //var ContentLanguage = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-            //                       join l in _language.GetAllLanguages()
-            //      on c.LanguageId equals l.Id
-            //                       where c.ContentTypeId == Id
-            //                       select new SuObjectVM
-            //                       {
-            //                           Id = c.Id
-            //                       ,
-            //                           Name = c.Name
-            //                       ,
-            //                           Language = l.LanguageName
-            //                       ,
-            //                           Description = c.Description
-            //                       ,
-            //                           MouseOver = c.MouseOver
-            //                       ,
-            //                           ObjectId = c.ContentTypeId
-            //                       }).ToList();
-            //ViewBag.Id = Id;
-
-            //return View(ContentLanguage);
         }
 
         [HttpGet]
@@ -260,7 +237,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ContentTypeLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
             //var ToForm = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
@@ -348,7 +327,13 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var Classification = _context.DbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet {Id}").First();
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var Classification = _context.DbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Classification);
         }

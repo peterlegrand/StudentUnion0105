@@ -46,11 +46,9 @@ namespace StudentUnion0105.Controllers
 
         public IActionResult LanguageIndex(int Id)
         {
+            var parameter = new SqlParameter("@TermId", Id);
 
-            var TermLanguageList = _context.DbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @p0",
-                 parameters: new[] {             //0
-                                        Id.ToString()
-                    }).ToList();
+            var TermLanguageList = _context.DbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @Id", parameter).ToList();
             ViewBag.Id = Id;
             
             return View(TermLanguageList);
@@ -61,7 +59,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
             var parameter = new SqlParameter("@Id", Id);
-            SuUITermLanguageEditGetModel TermLanguage = _context.ZDbUITermLanguageEditGet.FromSql($"UITermLanguageEditGet @Id", parameter).First();
+            SuUITermLanguageEditGetModel TermLanguage = _context.ZDbUITermLanguageEditGet.FromSql("UITermLanguageEditGet @Id", parameter).First();
 
             return View(TermLanguage); //SuUITermLanguage
 
@@ -142,10 +140,9 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
-            var TermLanguage = _context.DbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
-                parameters: new[] {             //0
-                                        Id.ToString()
-                   }).First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var TermLanguage = _context.DbUITermLanguage.FromSql("UITermLanguageSelectForUpdate @Id", parameter).First();
 
             return View(TermLanguage); //SuUITermLanguage
         }

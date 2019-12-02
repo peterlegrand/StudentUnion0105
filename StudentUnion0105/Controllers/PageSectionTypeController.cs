@@ -167,35 +167,15 @@ namespace StudentUnion0105.Controllers
 
         public async Task<IActionResult> LanguageIndex(int Id)
         {
-
-            //var PageLanguage = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-            //                    join l in _language.GetAllLanguages()
-            //   on c.LanguageId equals l.Id
-            //                    where c.PageSectionTypeId == Id
-            //                    select new SuObjectVM
-            //                    {
-            //                        Id = c.Id
-            //                    ,
-            //                        Name = c.Name
-            //                    ,
-            //                        Language = l.LanguageName
-            //                    ,
-            //                        Description = c.Description
-            //                    ,
-            //                        MouseOver = c.MouseOver
-            //                    ,
-            //                        ObjectId = c.PageSectionTypeId
-            //                    }).ToList();
-            //ViewBag.Id = Id;
-
-            //return View(PageLanguage);
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"PageSectionLanguageIndexGet {Id}").ToList();
+            var parameter = new SqlParameter("@OId", Id);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("PageSectionTypeLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -269,7 +249,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"PageSectionTypeLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("PageSectionTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
             //var ToForm = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()

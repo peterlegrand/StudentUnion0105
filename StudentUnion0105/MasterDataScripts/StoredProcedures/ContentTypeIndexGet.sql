@@ -9,4 +9,5 @@ SELECT
 FROM dbContentType 
 JOIN dbContentTypeLanguage 
 	ON dbContentType.Id = dbContentTypeLanguage.ContentTypeId
+WHERE dbContentTypeLanguage.LanguageId = @LanguageId
 ORDER BY Name

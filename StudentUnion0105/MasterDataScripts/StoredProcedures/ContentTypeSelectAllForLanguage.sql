@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ContentTypeSelectAllForLanguage] (@Language Int) 
+CREATE PROCEDURE [dbo].[ContentTypeSelectAllForLanguage] (@LanguageId Int) 
 AS  
 SELECT  
 dbContentTypeLanguage.ContentTypeId Id 
@@ -6,5 +6,5 @@ dbContentTypeLanguage.ContentTypeId Id
 FROM dbContentType 
 JOIN dbContentTypeLanguage 
 ON dbContentType.Id = dbContentTypeLanguage.ContentTypeId 
-WHERE dbContentTypeLanguage.LanguageId = @Language 
+WHERE dbContentTypeLanguage.LanguageId = @LanguageId 
 ORDER BY dbContentTypeLanguage.Name 

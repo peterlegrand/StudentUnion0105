@@ -1,4 +1,4 @@
-CREATE PROCEDURE OrganizationIndexGet (@Language Int )
+CREATE PROCEDURE OrganizationIndexGet (@LanguageId Int )
                                     AS 
                                     WITH StructureOrg (ParentId, Id, Name, Level, Path)
                                     AS
@@ -12,7 +12,7 @@ CREATE PROCEDURE OrganizationIndexGet (@Language Int )
                                     	JOIN dbOrganizationLanguage AS l
                                     		ON o.Id = l.OrganizationId
                                     	WHERE o.ParentOrganizationId IS NULL
-                                    		AND l.LanguageId = @Language
+                                    		AND l.LanguageId = @LanguageId
                                     	UNION ALL
                                     	SELECT o.ParentOrganizationId
                                     		, o.Id
@@ -24,7 +24,7 @@ CREATE PROCEDURE OrganizationIndexGet (@Language Int )
                                     		ON o.Id = l.OrganizationId
                                     	JOIN StructureOrg s
                                     		ON s.Id = o.ParentOrganizationId
-                                    	WHERE l.LanguageId = @Language
+                                    	WHERE l.LanguageId = @LanguageId
                                     	)
 
                                     	SELECT ISNULL(ParentId,0) ParentId

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -67,13 +68,12 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var UserOrganizationLanguageList = _context.DbIdWithStrings.FromSql("UserOrganizationTypeSelectAllLanguages @p0",
-     parameters: new[] {             //0
-                                        Id.ToString()
-        }).ToList();
+            var parameter = new SqlParameter("@OId", Id);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("UserOrganizationTypeLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
-            return View(UserOrganizationLanguageList);
+            return View(LanguageIndex);
         }
 
         [HttpGet]
@@ -84,15 +84,12 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"UserOrganizationTypeLanguageEditGet {Id}").First();
+
+            var parameter = new SqlParameter("@Id", Id);
+            //PETER this SP is missing
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"UserOrganizationTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
-            //var UserOrganizationType =  _context.dbUserOrganizationTypeLanguage.FromSql($"UserOrganizationTypeSelectLanguage @p0",
-            //     parameters: new[] {             //0
-            //                            Id.ToString()
-            //        }).First();
-
-            //return View(UserOrganizationType); //SuUITermLanguage
 
 
         }

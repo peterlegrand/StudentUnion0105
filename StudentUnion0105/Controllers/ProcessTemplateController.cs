@@ -84,7 +84,9 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateGroupList = new List<SelectListItem>();
 
-            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {
@@ -164,7 +166,10 @@ namespace StudentUnion0105.Controllers
             //string a;
             //a = ToForm.Description;
             var ProcessTemplateGroupList = new List<SelectListItem>();
-            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql($"GetProcessTemplateGroup {DefaultLanguageID}").ToList();
+
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {
@@ -213,7 +218,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProcessTemplateLanguageIndexGet {Id}").ToList();
+            var parameter = new SqlParameter("@OId", Id);
+
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProcessTemplateLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -229,7 +236,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SuObjectLanguageEditGetModel ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            SuObjectLanguageEditGetModel ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
             //var ToForm = (from c in _processTemplateLanguage.GetAllProcessTemplateLanguages()

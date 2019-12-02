@@ -65,11 +65,14 @@ namespace StudentUnion0105.Controllers
             foreach (var ClassificationfromDb in _classification.GetAllClassifcations())
             {
                 List<SuValueList> ValuesFromDb = new List<SuValueList>();
-                // dbValueList[y] = new DbSet<SuValueList>();
-                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 1, Name = "a" });
-                //ValuesFromDb.Add(new SuValueList { ClassificationValueId = 2, Name = "b" });
-                //                _context.dbValueList[0] = new DbSet<SuValueList>;
-                ValuesFromDb = _context.DbValueList.FromSql($"ClassificationValueStructureValues  {DefaultLanguageID}, {ClassificationfromDb.Id}").ToList();
+
+                SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id",ClassificationfromDb.Id)
+                };
+
+                ValuesFromDb = _context.DbValueList.FromSql("ClassificationValueStructureValues  @LanguageId, @Id", parameters).ToList();
                 ClassificationValueSets[y] = new List<SelectListItem>();
                 ClassificationValueSets[y].Add(new SelectListItem
 
@@ -90,7 +93,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.ZDbStatusList.FromSql($"ContentStatusSelectAll").ToList();
+            var ContentStatusFromDb = _context.ZDbStatusList.FromSql("ContentStatusSelectAll").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)
@@ -101,7 +104,10 @@ namespace StudentUnion0105.Controllers
                     Value = StatusFromDb.Id.ToString()
                 });
             }
-            var ContentTypesFromDb = _context.DbTypeList.FromSql($"ContentTypeSelectAllForLanguage {DefaultLanguageID}").ToList();
+
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var ContentTypesFromDb = _context.DbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
 
             foreach (var TypeFromDb in ContentTypesFromDb)
             {
@@ -112,7 +118,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var OrganizationsFromDb = _context.ZdbOrganizationIndexGet.FromSql($"OrgStructure {DefaultLanguageID}").ToList();
+            var OrganizationsFromDb = _context.ZdbOrganizationIndexGet.FromSql("OrgStructure @LanguageId", parameter).ToList();
 
             foreach (var OrganizationFromDb in OrganizationsFromDb)
             {
@@ -123,7 +129,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProjectsFromDb = _context.DbGetProjectStructure.FromSql($"ProjStructure {DefaultLanguageID}").ToList();
+            var ProjectsFromDb = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
             ProjectList.Add(new SelectListItem { Value = "0", Text = "No project" });
             foreach (var ProjectFromDb in ProjectsFromDb)
@@ -136,7 +142,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var SecurityLevelsFromDb = _context.DbSecurityLevelList.FromSql($"SecurityLevelSelectAll").ToList();
+            var SecurityLevelsFromDb = _context.DbSecurityLevelList.FromSql("SecurityLevelSelectAll").ToList();
 
             foreach (var SecurityLevelFromDb in SecurityLevelsFromDb)
             {
@@ -147,7 +153,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var LanguagesFromDb = _context.ZDbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
 
             foreach (var LanguageFromDb in LanguagesFromDb)
             {

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[UserProjectSelectBasedOnUser] (@Id int, @LanguageId int) 
+CREATE PROCEDURE [dbo].[UserProjectSelectBasedOnUser] (@LanguageId int, @Id int ) 
 AS  
 SELECT  
 dbUserProject.ProjectId Id

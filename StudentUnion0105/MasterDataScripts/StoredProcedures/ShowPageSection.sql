@@ -1,7 +1,8 @@
 CREATE PROCEDURE 
 [dbo].[ShowPageSection] 
-@Id int
-, @LanguageId int
+@LanguageId int
+, @Id int
+
 AS
 SELECT 
 	dbPageSection.Id

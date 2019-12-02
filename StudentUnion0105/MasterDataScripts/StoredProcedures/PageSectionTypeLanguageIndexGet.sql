@@ -1,16 +1,17 @@
-CREATE PROCEDURE PageSectionTypeLanguageIndexGet (@Id int)
+CREATE PROCEDURE PageSectionTypeLanguageIndexGet (@OId int)
 AS
 SELECT 
-dbLanguage.LanguageName
-	, dbPageSectionTypeLanguage.Id LId
-	, dbPageSectionTypeLanguage.Name
-	, dbPageSectionTypeLanguage.Description
-	, dbPageSectionTypeLanguage.MouseOver
-	, dbPageSectionTypeLanguage.MenuName
+	dbPageSectionTypeLanguage.Id LId
 	, dbPageSectionTypeLanguage.PageSectionTypeId OId
 	, 0 PId
+	, ISNULL(dbPageSectionTypeLanguage.Name,'') Name
+	, ISNULL(dbPageSectionTypeLanguage.Description,'') Description
+	, ISNULL(dbPageSectionTypeLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbPageSectionTypeLanguage.MenuName,'') MenuName
+	, dbLanguage.Id LanguageId
+	, ISNULL(dbLanguage.LanguageName,'') LanguageName
 FROM dbPageSectionTypeLanguage
 JOIN dbLanguage 
 	ON dbPageSectionTypeLanguage.LanguageId = dbLanguage.Id
-WHERE dbPageSectionTypeLanguage.PageSectionTypeId = @Id
+WHERE dbPageSectionTypeLanguage.PageSectionTypeId = @OId
 ORDER BY dbLanguage.LanguageName

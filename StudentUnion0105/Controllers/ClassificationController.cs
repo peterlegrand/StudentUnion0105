@@ -198,9 +198,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@Id", Id);
+            var parameter = new SqlParameter("@OId", Id);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ClassificationLanguageIndexGet @Id", parameter).ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ClassificationLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -217,7 +217,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@Id", Id);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationLanguageEditGet @Id", parameter).First();
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
         }
 
@@ -271,17 +271,6 @@ namespace StudentUnion0105.Controllers
             if (NoOfLanguages == 0)
             { return RedirectToAction("LanguageIndex", new { Id = Id }); }
 
-
-            //var ObjectLanguages = _context.dbStatusList.FromSql($"ClassificationLanguageCreateGetLanguages @Id", parameter).ToList();
-            //if (ObjectLanguages.Count() ==0)
-            //{
-            //    return RedirectToAction("LanguageIndex", new { Id = Id });
-            //}
-            //List<SelectListItem> LanguageList = new List<SelectListItem>();
-            //foreach (var ObjectLanguage in ObjectLanguages)
-            //{
-            //    LanguageList.Add(new SelectListItem { Value = ObjectLanguage.Id.ToString(), Text = ObjectLanguage.Name });
-            //}
             SuObjectLanguageCreateGetModel Classification = new SuObjectLanguageCreateGetModel();
             Classification.OId= Id;
             ViewBag.Id = Id.ToString();
@@ -336,7 +325,7 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var parameter = new SqlParameter("@Id", Id);
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ClassificationLanguageEditGet @Id" , parameter).First();
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLanguageEditGet @Id" , parameter).First();
             return View(ObjectLanguage);
         }
 
@@ -362,7 +351,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            SuClassificationDeleteGetModel Classification = _context.ZdbClassificationDeleteGet.FromSql($"ClassificationDeleteGet @LanguageId, @Id", parameters).First();
+            SuClassificationDeleteGetModel Classification = _context.ZdbClassificationDeleteGet.FromSql("ClassificationDeleteGet @LanguageId, @Id", parameters).First();
 
 
 

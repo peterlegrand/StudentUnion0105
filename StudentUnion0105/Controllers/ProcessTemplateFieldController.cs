@@ -8,6 +8,7 @@ using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -120,7 +121,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.ZDbStatusList.FromSql($"DataTypeSelectAll").ToList();
+            var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
 
 
             foreach (var DataTypeFromDb in DataTypesFromDb)
@@ -138,7 +139,7 @@ namespace StudentUnion0105.Controllers
             //MasterList
             var MasterListList = new List<SelectListItem>();
 
-            var MasterListsFromDb = _context.ZDbStatusList.FromSql($"GetMasterList").ToList();
+            var MasterListsFromDb = _context.ZDbStatusList.FromSql("GetMasterList").ToList();
 
 
             foreach (var MasterListFromDb in MasterListsFromDb)
@@ -208,7 +209,7 @@ namespace StudentUnion0105.Controllers
             //DataTypes
             var DataTypeList = new List<SelectListItem>();
 
-            var DataTypesFromDb = _context.ZDbStatusList.FromSql($"DataTypeSelectAll").ToList();
+            var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
 
 
             foreach (var DataTypeFromDb in DataTypesFromDb)
@@ -226,7 +227,7 @@ namespace StudentUnion0105.Controllers
             //MasterList
             var MasterListList = new List<SelectListItem>();
 
-            var MasterListsFromDb = _context.DbTypeList.FromSql($"GetMasterList").ToList();
+            var MasterListsFromDb = _context.DbTypeList.FromSql("GetMasterList").ToList();
 
 
             foreach (var MasterListFromDb in MasterListsFromDb)
@@ -254,18 +255,18 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await _userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6  ",
-                    parameters: new[] { FromForm.Field.Id.ToString()           //0
-                                           , FromForm.Field.NotNullId.ToString()
-                                           , FromForm.Field.NotNullId2.ToString()
-                                           , FromForm.Field.LanguageId.ToString()
-                                           , FromForm.Field.Name
-                                           , FromForm.Field.Description
-                                           , FromForm.Field.MouseOver
-                                           , CurrentUser.Id
+                SqlParameter[] parameters =
+    {
+                    new SqlParameter("@ProcessTemplateId", FromForm.Field.Id)
+                    , new SqlParameter("@FieldDataTypeId", FromForm.Field.NotNullId)
+                    , new SqlParameter("@FieldMasterListId", FromForm.Field.NotNullId2)
+                    , new SqlParameter("@LanguageId", FromForm.Field.LanguageId)
+                    , new SqlParameter("@Name", FromForm.Field.Name)
+                    , new SqlParameter("@Description", FromForm.Field.Description)
+                    , new SqlParameter("@MouseOver", FromForm.Field.MouseOver)
+                };
 
-
-                    });
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreate @ProcessTemplateId, @FieldDataTypeId, @FieldMasterListId, @LanguageId, @Name, @Description, @MouseOver", parameters);
 
             }
             return RedirectToAction("Index", new { Id = FromForm.Field.Id.ToString() });
@@ -283,26 +284,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            //var ProcessTemplateFieldLanguage = (from c in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
-            //                              join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //                              where c.ProcessTemplateFieldId == Id
-            //                              select new SuObjectVM
-            //                              {
-            //                                  Id = c.Id
-            //                              ,
-            //                                  Name = c.Name
-            //                              ,
-            //                                  Language = l.LanguageName
-            //                              ,
-            //                                  MouseOver = c.MouseOver
-            //                              ,
-            //                                  ObjectId = c.ProcessTemplateFieldId
-            //                              }).ToList();
-            //ViewBag.Id = Id;
+            var parameter = new SqlParameter("@OId", Id);
 
-            //return View(ProcessTemplateFieldLanguage);
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql($"ProcessTemplateFieldLanguageIndexGet {Id}").ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProcessTemplateFieldLanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -318,35 +302,10 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"ProcessTemplateFieldLanguageEditGet {Id}").First();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateFieldLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
-
-            //var FieldLanguage = (from c in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.ProcessTemplateFieldId
-
-            //             }).First();
-
-            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = FieldLanguage //, a = ClassificationList
-            //};
-            //return View(ClassificationAndStatus);
-            //return View(FieldLanguage);
 
 
         }
