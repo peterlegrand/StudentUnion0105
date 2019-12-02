@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,7 @@ namespace StudentUnion0105.Controllers
         {
             //            var CurrentUser = await _userManager.GetUserAsync(User);
             //          var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var TermList = _context.DbStatusList.FromSql($"UITermSelectAll").ToList();
+            var TermList = _context.ZDbStatusList.FromSql("UITermSelectAll").ToList();
 
          //   var TermList = _uITerm.GetAllTerms();
                 
@@ -59,10 +60,8 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            var TermLanguage = _context.DbUITermLanguage.FromSql($"UITermLanguageSelectForUpdate @p0",
-                 parameters: new[] {             //0
-                                        Id.ToString()
-                    }).First();
+            var parameter = new SqlParameter("@Id", Id);
+            SuUITermLanguageEditGetModel TermLanguage = _context.ZDbUITermLanguageEditGet.FromSql($"UITermLanguageEditGet @Id", parameter).First();
 
             return View(TermLanguage); //SuUITermLanguage
 
@@ -70,18 +69,19 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuUITermLanguageModel FromForm)
+        public IActionResult LanguageEdit(SuUITermLanguageEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Database.ExecuteSqlCommand($"UITermLanguageUpdate @P0, @P1",
-                 parameters: new[] {             //0
-                                       FromForm.Id.ToString()
-                                       , FromForm.Customization
-                    });
-            }
-            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
 
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@Id", FromForm.Id)
+                    , new SqlParameter("@Customization", FromForm.Customization)
+                };
+
+            _context.Database.ExecuteSqlCommand("UITermLanguageEditPost @Id, @Customization",
+                 parameters);
+            
+     
             return RedirectToAction("LanguageIndex", new { Id = FromForm.TermId.ToString() });
 
 
@@ -93,16 +93,16 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageCreate(int Id)
         {
+            SqlParameter CountryList = new SqlParameter("@Id", Id);
 
-            var Languages = _context.DbStatusList.FromSql($"UITermLanguageSelectForCreate @p0",
-                         parameters: new[] {             //0
-                                        Id.ToString()
-                    }).ToList();
+            var Languages = _context.ZDbLanguageList.FromSql("UITermLanguageCreateGetLanguages @Id",
+                         CountryList
+                    ).ToList();
 
 
             if (Languages.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("Index", new { Id = Id });
             }
             List<SelectListItem> LanguageList = new List<SelectListItem>();
 
@@ -110,41 +110,35 @@ namespace StudentUnion0105.Controllers
             {
                 LanguageList.Add(new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuTermLanguageCreateGetModel TermLanguage = new SuTermLanguageCreateGetModel();
+            TermLanguage.Id = Id;
             ViewBag.Id = Id.ToString();
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            var TermLanguageWithList = new SuTermLanguageCreateGetWithListModel
             {
-                SuObject = SuObject
+                TermLanguage = TermLanguage
                 ,
-                SomeKindINumSelectListItem = LanguageList
+                LanguageList = LanguageList
             };
-            return View(ClassificationAndStatus);
+            return View(TermLanguageWithList);
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
+        public IActionResult LanguageCreate(SuTermLanguageCreateGetWithListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                //                var CurrentUser = await userManager.GetUserAsync(User);
-                //                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                //               Guid guid = new Guid(CurrentUser.Id);
-                 _context.Database.ExecuteSqlCommand($"UITermLanguageCreate @P0, @P1, @P2",
-                 parameters: new[] {             //0
-                                       FromForm.SuObject.ObjectId.ToString()
-                                       , FromForm.SuObject.LanguageId.ToString()
-                                       , FromForm.SuObject.Name
-                    });
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@Id", FromForm.TermLanguage.Id)
+                    , new SqlParameter("@LanguageId", FromForm.TermLanguage.LanguageId)
+                    , new SqlParameter("@Customization", FromForm.TermLanguage.Customization)
+
+                };
+
+            _context.Database.ExecuteSqlCommand("UITermLanguageCreatePost @Id, @LanguageId, @Customization", parameters);
 
 
-
-            }
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
-
-
-
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.TermLanguage.Id.ToString() });
         }
+
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {

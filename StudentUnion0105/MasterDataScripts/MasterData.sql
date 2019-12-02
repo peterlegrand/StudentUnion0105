@@ -2,7 +2,7 @@ DECLARE @CurrentUser uniqueidentifier;
  
 SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
  
-UPDATE AspNetUsers SET DefaultLanguageId = 41, CountryId =236; 
+UPDATE AspNetUsers SET DefaultLanguageId = 41, CountryId =236, SecurityLevel = 5; 
  
 
 SET IDENTITY_INSERT dbLanguage ON;
@@ -227,6 +227,7 @@ SET IDENTITY_INSERT dbSetting ON
 
 INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (1, 41, 'Default language'); 
 INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (2, 2, 'Home page'); 
+INSERT INTO dbSetting  (Id, IntValue, StringValue, SettingName) VALUES (3, 0, 'Student Union 1.5', 'Application title'); 
  
 SET IDENTITY_INSERT dbSetting OFF
 

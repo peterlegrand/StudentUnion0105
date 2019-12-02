@@ -19,6 +19,8 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuFrontPageViewGetModel> ZdbFrontPageViewGet { get; set; }
+        public DbSet<SuLayoutTermList> ZdbLayoutTermList { get; set; }
         public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }
         public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
         public DbSet<SuClassificationStatusModel> DbClassificationStatus { get; set; }
@@ -39,6 +41,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationDeleteGetModel> ZdbClassificationDeleteGet { get; set; }
         public DbSet<SuClassificationEditGetModel> ZdbClassificationEditGet { get; set; }
         public DbSet<SuClassificationIndexGetModel> ZdbClassificationIndexGet { get; set; }
+        public DbSet<SuTermLanguageCreateGetModel> ZdbTermLanguageCreateGetWith { get; set; }
         public DbSet<SuClassificationLanguageModel> DbClassificationLanguage { get; set; }
         //ClassificationLevel
         public DbSet<SuClassificationLevelModel> DbClassificationLevel { get; set; }
@@ -112,9 +115,11 @@ namespace StudentUnion0105.Data
         public DbSet<SuMasterListModel> DbMasterList { get; set; }
         public DbSet<SuDataTypeModel> DbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> DbSecurityLevel { get; set; }
-        public DbSet<SuStatusList> DbStatusList { get; set; }
+        public DbSet<SuStatusList> ZDbStatusList { get; set; }
+        public DbSet<SuUITermList> ZDbUITermList { get; set; }
         public DbSet<SuSecurityLevelList> DbSecurityLevelList { get; set; }
-        public DbSet<SuLanguageList> DbLanguageList { get; set; }
+        public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
+        public DbSet<SuUITermLanguageEditGetModel> ZDbUITermLanguageEditGet { get; set; }
         public DbSet<SuCountryList> DbCountryList { get; set; }
         public DbSet<SuTypeList> DbTypeList { get; set; }
         public DbSet<SuValueList> DbValueList { get; set; }

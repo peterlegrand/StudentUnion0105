@@ -85,6 +85,24 @@ namespace StudentUnion0105.Controllers
             }
             return View(FrontPage);
         }
+        public async Task<IActionResult> View(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var FrontPageContent = _context.ZdbFrontPageViewGet.FromSql("FrontPageViewGet @LanguageId, @Id", parameters).First();
+
+            return View(FrontPageContent);
+        }
 
     }
 }

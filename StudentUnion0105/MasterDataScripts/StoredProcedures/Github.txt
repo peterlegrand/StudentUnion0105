@@ -1,0 +1,2 @@
+Title should be a setting
+Show default language if not own language

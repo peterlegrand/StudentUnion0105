@@ -14,7 +14,7 @@ CREATE PROCEDURE ClassificationValueIndexGet (@Language Int, @ClassificationId I
                                         	FROM dbClassificationValue AS v
                                         	JOIN dbClassificationValueLanguage AS l
                                         		ON v.Id = l.ClassificationValueId
-                                        	WHERE v.ParentValueId IS NULL
+                                        	WHERE (v.ParentValueId IS NULL OR v.ParentValueId = 0)
                                         		AND l.LanguageId = @Language
                                         		AND v.ClassificationId = @ClassificationId
                                         	UNION ALL

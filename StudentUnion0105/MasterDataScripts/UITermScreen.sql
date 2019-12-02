@@ -1304,5 +1304,23 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1302, 130, 11
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1303, 64, 1180, 4);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1304, 13, 1180, 5);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1305, 2, 1180, 6);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1306, 214, 1, 1);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1307, 234, 1, 2);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1308, 235, 1, 3);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1309, 236, 1, 4);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1310, 237, 1, 5);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1311, 238, 1, 6);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1312, 239, 1, 7);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1313, 240, 1, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1314, 241, 1, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1315, 242, 1, 10);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1316, 243, 1, 11);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1317, 244, 1, 12);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1318, 245, 1, 13);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1319, 246, 1, 14);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1320, 247, 1, 15);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1321, 248, 1, 16);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1322, 17, 1, 17);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1323, 249, 1, 18);
 
 SET IDENTITY_INSERT dbUITermScreen OFF;

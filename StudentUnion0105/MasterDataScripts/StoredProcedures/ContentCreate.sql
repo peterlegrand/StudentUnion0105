@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[ContentCreate]
 , @SecurityLevel int 
 , @OrganizationId int 
 , @ProjectId int 
+, @CreatorId nvarchar(255)
 , @new_identity INT = NULL OUTPUT 
 AS 
 INSERT dbContent 
@@ -18,6 +19,8 @@ INSERT dbContent
 , SecurityLevel 
 , OrganizationId 
 , ProjectId 
+, CreatorId
+, ModifierId
 , CreatedDate 
 , ModifiedDate) 
 VALUES ( 
@@ -29,6 +32,8 @@ VALUES (
 , @SecurityLevel 
 , @OrganizationId 
 , iif(@ProjectId=0,null,@ProjectId) 
+, @CreatorId
+, @CreatorId
 , GETDATE() 
 , getdate() 
 ) 

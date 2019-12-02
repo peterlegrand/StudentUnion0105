@@ -15,6 +15,16 @@ CREATE PROCEDURE ClassificationLevelEditPost (
 	)
 AS
 BEGIN TRANSACTION
+DECLARE @OldSequence int, @PId int
+SELECT @OldSequence = Sequence, @PId = ClassificationId FROM dbClassificationLevel WHERE Id = @Id
+IF @OldSequence > @Sequence
+BEGIN
+UPDATE dbClassificationLevel SET Sequence = Sequence + 1 WHERE Sequence < @Sequence AND Sequence >= @OldSequence
+END
+ELSE
+BEGIN
+UPDATE dbClassificationLevel SET Sequence = Sequence - 1 WHERE Sequence <= @Sequence AND Sequence > @OldSequence
+END
 UPDATE dbClassificationLevel 
 SET
 	Alphabetically = @Alphabetically

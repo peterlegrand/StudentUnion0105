@@ -93,7 +93,7 @@ namespace StudentUnion0105.Controllers
             var ProjectList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
 
-            var ProjectsFromDB = _context.DbStatusList.FromSql($"UserProjectNewProjectsSelect @P0, @P1",
+            var ProjectsFromDB = _context.ZDbStatusList.FromSql($"UserProjectNewProjectsSelect @P0, @P1",
                     parameters: new[] {           Id, //0
                                         DefaultLanguageID.ToString()
                                     }).ToList();

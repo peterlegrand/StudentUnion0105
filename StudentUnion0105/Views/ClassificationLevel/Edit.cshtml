@@ -87,6 +87,15 @@
                 <span asp-validation-for="@Model.ClassificationLevel.InDropDown" class="text-danger"></span>
             </div>
         </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationLevel.Sequence" class="col-sm-2 col-form-label">ViewBag.Terms[13]</label>
+            <div class="col-sm-10 ">
+
+                @Html.DropDownListFor(x => x.ClassificationLevel.Sequence, Model.SequenceList)
+                <span asp-validation-for="@Model.ClassificationLevel.Sequence" class="text-danger"></span>
+
+            </div>
+        </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-sm-10">

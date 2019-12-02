@@ -73,7 +73,7 @@ namespace StudentUnion0105.Controllers
             };
 
             var LanguageList = new List<SelectListItem>();
-            var LanguagesFromDb = _context.DbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.ZDbLanguageList.FromSql($"LanguageSelectAll").ToList();
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
                 LanguageList.Add(new SelectListItem
@@ -119,7 +119,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
             var LanguageList = new List<SelectListItem>();
-            var LanguagesFromDb = _context.DbLanguageList.FromSql("LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
                 LanguageList.Add(new SelectListItem

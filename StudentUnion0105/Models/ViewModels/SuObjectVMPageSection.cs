@@ -13,7 +13,7 @@ namespace StudentUnion0105.ViewModels
         [Display(Name = "Show content type description")]
         public bool ShowContentTypeTitleDescription { get; set; }
         [Display(Name = "Title")]
-        public string Title { get; set; }
+        public new string Title { get; set; }
         [Display(Name = "Description")]
         public string TitleDescription { get; set; }
         [Display(Name = "1 or 2 columns")]

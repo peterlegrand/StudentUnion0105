@@ -95,7 +95,7 @@ namespace StudentUnion0105.Controllers
             var OrganizationList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
 
-            var OrganizationsFromDB = _context.DbStatusList.FromSql($"UserOrganizationNewOrganizationsSelect @P0, @P1",
+            var OrganizationsFromDB = _context.ZDbStatusList.FromSql($"UserOrganizationNewOrganizationsSelect @P0, @P1",
                     parameters: new[] {           Id, //0
                                         DefaultLanguageID.ToString()
                                     }).ToList();

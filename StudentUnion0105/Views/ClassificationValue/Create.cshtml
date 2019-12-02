@@ -1,140 +1,147 @@
-﻿@model SuObjectVM
+﻿@model SuClassificationValueEditGetModel
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
     <h1><img src="~/Images/Icons/values.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-<form class="mt-3" method="post">
+    <form class="mt-3" method="post">
 
-    <div class="form-group row" hidden>
-        <label asp-for="@Model.NullId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.NullId" class="form-control" />
-            <span asp-validation-for="@Model.NullId" class="text-danger"></span>
+        <div class="form-group row" hidden>
+            <label asp-for="@Model.OId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.OId" class="form-control" />
+                <span asp-validation-for="@Model.OId" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group row" hidden>
-        <label asp-for="@Model.ObjectId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.ObjectId" class="form-control" />
-            <span asp-validation-for="@Model.ObjectId" class="text-danger"></span>
+        <div class="form-group row" hidden>
+            <label asp-for="@Model.PId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.PId" class="form-control" />
+                <span asp-validation-for="@Model.PId" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.Name" class="form-control" />
-            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+        <div class="form-group row" hidden>
+            <label asp-for="@Model.ParentId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ParentId" class="form-control" />
+                <span asp-validation-for="@Model.ParentId" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
-        <div class="col-sm-10">
-            <textarea asp-for="@Model.Description" class="form-control ckeditor" id="description" name="description"></textarea>
-            <span asp-validation-for="@Model.Description" class="text-danger"></span>
-        </div>
-    </div>
-    @if (Model.InDropDown)
-    {
         <div class="form-group row">
-            <label asp-for="@Model.DropDownName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.DropDownName" class="form-control" />
-                <span asp-validation-for="@Model.DropDownName" class="text-danger"></span>
+                <input asp-for="@Model.Name" class="form-control" />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
             </div>
         </div>
-    }<div class="form-group row">
-         <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.MenuName" class="form-control" />
-            <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.MouseOver" class="form-control" />
-            <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Title" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.Title" class="form-control" />
-            <span asp-validation-for="@Model.Title" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.PageDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
-        <div class="col-sm-10">
-            <textarea asp-for="@Model.PageDescription" class="form-control ckeditor" id="pagedescription" name="pageDescription"></textarea>
-            <span asp-validation-for="@Model.PageDescription" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.HeaderName" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.HeaderName" class="form-control" />
-            <span asp-validation-for="@Model.HeaderName" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.HeaderDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
-        <div class="col-sm-10">
-            <textarea asp-for="@Model.HeaderDescription" class="form-control ckeditor" id="HeaderDescription" name="HeaderDescription"></textarea>
-            <span asp-validation-for="@Model.HeaderDescription" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.TopicName" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.TopicName" class="form-control" />
-            <span asp-validation-for="@Model.TopicName" class="text-danger"></span>
-        </div>
-    </div>
-    @if (Model.DateLevel == 1 || Model.DateLevel == 2)
-    {<div class="form-group row">
-            @Html.Label("From date", null,
-                 new { @class = "col-sm-2 col-form-label" })
+        <div class="form-group row">
+            <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.DateFrom" type="date" class="form-control" />
+                <textarea asp-for="@Model.Description" class="form-control ckeditor" id="description" name="description"></textarea>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
             </div>
         </div>
-    }
-    @if (Model.DateLevel == 3 || Model.DateLevel == 4)
-    {<div class="form-group row">
-            @Html.Label("From date", null,
-                 new { @class = "col-sm-2 col-form-label" })
+        @if (Model.InDropDown)
+        {
+            <div class="form-group row">
+                <label asp-for="@Model.DropDownName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+                <div class="col-sm-10">
+                    <input asp-for="@Model.DropDownName" class="form-control" />
+                    <span asp-validation-for="@Model.DropDownName" class="text-danger"></span>
+                </div>
+            </div>
+        }<div class="form-group row">
+            <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.DateFrom" type="datetime-local" class="form-control" />
+                <input asp-for="@Model.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
             </div>
         </div>
-    }
-    @if (Model.DateLevel == 2)
-    {<div class="form-group row">
-            @Html.Label("From date", null,
-                 new { @class = "col-sm-2 col-form-label" })
+        <div class="form-group row">
+            <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.DateTo" type="date" class="form-control" />
+                <input asp-for="@Model.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
             </div>
         </div>
-    }
-    @if (Model.DateLevel == 4)
-    {<div class="form-group row">
-            @Html.Label("From date", null,
-                 new { @class = "col-sm-2 col-form-label" })
+        <div class="form-group row">
+            <label asp-for="@Model.PageName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
             <div class="col-sm-10">
-                <input asp-for="@Model.DateTo" type="datetime-local" class="form-control" />
+                <input asp-for="@Model.PageName" class="form-control" />
+                <span asp-validation-for="@Model.PageName" class="text-danger"></span>
             </div>
         </div>
-    }
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[11]</button>
-            <a asp-action="Index" asp-controller="Organization" class="btn btn-primary btn-light">@ViewBag.Terms[12]</a>
+        <div class="form-group row">
+            <label asp-for="@Model.PageDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.PageDescription" class="form-control ckeditor" id="pagedescription" name="pageDescription"></textarea>
+                <span asp-validation-for="@Model.PageDescription" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-</form>
+        <div class="form-group row">
+            <label asp-for="@Model.HeaderName" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.HeaderName" class="form-control" />
+                <span asp-validation-for="@Model.HeaderName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.HeaderDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.HeaderDescription" class="form-control ckeditor" id="HeaderDescription" name="HeaderDescription"></textarea>
+                <span asp-validation-for="@Model.HeaderDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.TopicName" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.TopicName" class="form-control" />
+                <span asp-validation-for="@Model.TopicName" class="text-danger"></span>
+            </div>
+        </div>
+        @if (Model.DateLevel == 1 || Model.DateLevel == 2)
+        {<div class="form-group row">
+                @Html.Label("From date", null,
+                     new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    <input asp-for="@Model.FromDate" type="date" class="form-control" />
+                </div>
+            </div>
+        }
+        @if (Model.DateLevel == 3 || Model.DateLevel == 4)
+        {<div class="form-group row">
+                @Html.Label("From date", null,
+                     new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    <input asp-for="@Model.FromDate" type="datetime-local" class="form-control" />
+                </div>
+            </div>
+        }
+        @if (Model.DateLevel == 2)
+        {<div class="form-group row">
+                @Html.Label("From date", null,
+                     new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    <input asp-for="@Model.ToDate" type="date" class="form-control" />
+                </div>
+            </div>
+        }
+        @if (Model.DateLevel == 4)
+        {<div class="form-group row">
+                @Html.Label("From date", null,
+                     new { @class = "col-sm-2 col-form-label" })
+                <div class="col-sm-10">
+                    <input asp-for="@Model.ToDate" type="datetime-local" class="form-control" />
+                </div>
+            </div>
+        }
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[11]</button>
+                <a asp-action="Index" asp-controller="Organization" class="btn btn-primary btn-light">@ViewBag.Terms[12]</a>
+            </div>
+        </div>
+    </form>
 
 <script>
             $(document).ready(function () {

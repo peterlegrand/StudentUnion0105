@@ -51,7 +51,7 @@ namespace StudentUnion0105.Controllers
                 Preference = preference
             };
             List<SuCountryList> countryList = _context.DbCountryList.FromSql("CountrySelectAll").ToList();
-            List<SuLanguageList> languageList = _context.DbLanguageList.FromSql("LanguageSelectAll").ToList();
+            List<SuLanguageList> languageList = _context.ZDbLanguageList.FromSql("LanguageSelectActive").ToList();
             List<SelectListItem> countries = new List<SelectListItem>();
             List<SelectListItem> languages = new List<SelectListItem>();
             foreach (var countryitem in countryList)

@@ -1,0 +1,31 @@
+﻿@model SuFrontPageViewGetModel
+@{
+    ViewBag.Title = ViewBag.Terms[0];
+}
+<h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> @Model.Title</h1>
+<div class="font-weight-bold">@Html.Raw(Model.Description)</div>
+<hr class="" />
+<div class="row">
+    <div>Creator:&nbsp</div><div>@Model.Creator</div>
+</div>
+<div class="row">
+    <div>Modifier:&nbsp</div><div>@Model.Modifier</div>
+</div>
+<div class="row">
+    <div>Created:&nbsp</div><div>@Model.CreatedDate</div>
+</div>
+<div class="row">
+    <div>Modified:&nbsp</div><div>@Model.ModifiedDate</div>
+</div>
+<div class="row">
+    <div>Status:&nbsp</div><div>@Model.StatusName</div>
+</div>
+<div class="row">
+    <div>Type:&nbsp</div><div>@Model.TypeName</div>
+</div>
+<div class="row">
+    <div>Organization:&nbsp</div><div>@Model.OrganizationName</div>
+</div>
+
+
+

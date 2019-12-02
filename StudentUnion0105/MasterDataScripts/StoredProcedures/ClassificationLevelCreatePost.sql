@@ -16,6 +16,8 @@ CREATE PROCEDURE ClassificationLevelCreatePost (
 AS
 BEGIN TRANSACTION
 
+UPDATE dbClassificationLevel SET Sequence = Sequence + 1 WHERE Sequence >= @Sequence and ClassificationId = @PId
+
 INSERT INTO dbClassificationLevel (
 	ClassificationId 
 	, Sequence

@@ -85,9 +85,21 @@ namespace StudentUnion0105.Controllers
                 new SelectListItem { Value = "4", Text = "Date time range" }
             };
 
+            var ExistingLevels = _context.DbTypeList.FromSql("ClassificationLevelEditGetExistingLevels @LanguageId, @Id", parameters).ToList();
+            int MaxLevelSequence = 0;
+            List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
+            foreach (var ExistingLevel in ExistingLevels)
+            {
+                ExistingLevelList.Add(new SelectListItem { Value = ExistingLevel.Id.ToString(), Text = ExistingLevel.Name });
+                if (ExistingLevel.Id > MaxLevelSequence)
+                { MaxLevelSequence = ExistingLevel.Id; }
+            }
+            MaxLevelSequence++;
+//            ExistingLevelList.Add(new SelectListItem { Text = "add at bottom", Value = MaxLevelSequence.ToString() });
+
             SuClassificationLevelEditGetWithListModel ClassificationLevelWithList = new SuClassificationLevelEditGetWithListModel
             {
-                ClassificationLevel = ClassificationEditGet,  DateTypeList = DateType //, a = ClassificationList 
+                ClassificationLevel = ClassificationEditGet,  DateTypeList = DateType, SequenceList = ExistingLevelList //, a = ClassificationList 
             };
             return View(ClassificationLevelWithList);
 
@@ -149,7 +161,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@PId", Id),
                     };
 
-            var ExistingLevels = _context.DbStatusList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
+            var ExistingLevels = _context.DbTypeList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
             int MaxLevelSequence = 0;
             List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
             foreach (var ExistingLevel in ExistingLevels)

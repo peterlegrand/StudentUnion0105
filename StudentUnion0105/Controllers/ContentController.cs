@@ -90,7 +90,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.DbStatusList.FromSql($"ContentStatusSelectAll").ToList();
+            var ContentStatusFromDb = _context.ZDbStatusList.FromSql($"ContentStatusSelectAll").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)
@@ -147,7 +147,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var LanguagesFromDb = _context.DbLanguageList.FromSql($"LanguageSelectAll").ToList();
+            var LanguagesFromDb = _context.ZDbLanguageList.FromSql($"LanguageSelectAll").ToList();
 
             foreach (var LanguageFromDb in LanguagesFromDb)
             {
@@ -187,9 +187,10 @@ namespace StudentUnion0105.Controllers
             return View(ContentWithDropDowns);
         }
         [HttpPost]
-        public IActionResult Create(SuCreateContentModel FromForm)
+        public async Task<IActionResult> Create(SuCreateContentModel FromForm)
         {
 
+            var CurrentUser = await _userManager.GetUserAsync(User);
             var ProjectId = FromForm.Content.ProjectId == null ? 0 : FromForm.Content.ProjectId;
             SqlParameter[] parameters =
             {
@@ -201,6 +202,8 @@ namespace StudentUnion0105.Controllers
                 new SqlParameter("@SecurityLevel", FromForm.Content.SecurityLevel),
                 new SqlParameter("@OrganizationId", FromForm.Content.OrganizationId),
                 new SqlParameter("@ProjectId", ProjectId),
+                new SqlParameter("@CreatorId", CurrentUser.Id),
+        
                 new SqlParameter
                 {
                     ParameterName = "@new_identity",
@@ -209,7 +212,7 @@ namespace StudentUnion0105.Controllers
                 }
             };
 
-            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId, @ContentStatusId, @LangaugeId, @Title, @Description, @SecurityLevel, @OrganizationId, @ProjectId, @new_identity OUTPUT", parameters);
+            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId, @ContentStatusId, @LangaugeId, @Title, @Description, @SecurityLevel, @OrganizationId, @ProjectId, @CreatorId, @new_identity OUTPUT", parameters);
 
             if (FromForm.NoOfClassifications != null)
             {

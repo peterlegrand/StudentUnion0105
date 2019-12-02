@@ -4,6 +4,18 @@ namespace StudentUnion0105.Models
 {
     public class SuStatusList
     {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class SuLayoutTermList
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class SuUITermList
+    {
         public int Id { get; set; }
         public string Name { get; set; }
     }

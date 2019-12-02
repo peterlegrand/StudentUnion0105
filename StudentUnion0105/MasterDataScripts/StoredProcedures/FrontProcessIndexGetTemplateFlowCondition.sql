@@ -3,9 +3,9 @@ AS
 SELECT
 	dbProcessTemplateFlowCondition.Id OId
 	, dbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId ConditionTypeId
-	, dbProcessTemplateFlowCondition.ComparisonOperatorId 
- 	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionString ConditionString
-	, dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt ConditionInt
+	, ISNULL(dbProcessTemplateFlowCondition.ComparisonOperatorId,0) ComparisonOperatorId 
+ 	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionString,'') ConditionString
+	, ISNULL(dbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt,0) ConditionInt
 FROM dbProcessTemplateFlowCondition 
 WHERE dbProcessTemplateFlowCondition.ProcessTemplateFlowId = @PId
 ORDER BY Id

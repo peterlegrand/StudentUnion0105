@@ -232,5 +232,21 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(229, 'Page languages', 'Page
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(231, 'Drop down sequence', 'Drop down sequence');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(232, 'Default page', 'Default page');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(233, 'Preference', 'Preference');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(234, 'User project type', 'User project type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(235, 'User relation type', 'User relation type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(236, 'login', 'login');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(237, 'Register', 'Register');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(238, 'Add content', 'Add content');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(239, 'Content', 'Content');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(240, 'Calendar', 'Calendar');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(241, 'Chat', 'Chat');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(242, 'Conference', 'Conference');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(243, 'Favorites', 'Favorites');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(244, 'Game', 'Game');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(245, 'Add process', 'Add process');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(246, 'Process', 'Process');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(247, 'Add todo', 'Add todo');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(248, 'Todo', 'Todo');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(249, 'Search', 'Search');
 
 SET IDENTITY_INSERT dbUITerm OFF;

@@ -152,7 +152,7 @@ namespace StudentUnion0105.Controllers
                     }
                     try
                     { 
-                    SuStatusList HasRights = _context.DbStatusList.FromSql(DynamicSQL, parameterList.ToArray()).First();
+                    SuStatusList HasRights = _context.ZDbStatusList.FromSql(DynamicSQL, parameterList.ToArray()).First();
                         if (HasRights.Id != 0)
                         {
                             TemplatesWithRights.Add(template);
@@ -205,7 +205,7 @@ namespace StudentUnion0105.Controllers
         {
             var CountryList = new List<SelectListItem>();
 
-            var CountriesFromDb = _context.DbStatusList.FromSql($"CountryDD").ToList();
+            var CountriesFromDb = _context.ZDbStatusList.FromSql($"CountryDD").ToList();
 
 
             foreach (var CountryFromDb in CountriesFromDb)

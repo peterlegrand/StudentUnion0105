@@ -10,17 +10,19 @@
 }
 @foreach (var x in Model.FrontPageSections)
 {
-        @if (x.ShowSectionTitleName)
+    @if (x.ShowSectionTitleName)
     {
         <h2>@x.TitleName</h2>
     }
-@if (x.ShowSectionTitleDescription)
+    @if (x.ShowSectionTitleDescription)
     {
-<div>@Html.Raw(x.TitleDescription)</div>
+        <div>@Html.Raw(x.TitleDescription)</div>
     }
     @foreach (var y in x.FrontContent)
     {
-        <h4>@y.Title</h4>
+<h4>
+    <a asp-controller="FrontPage" asp-action="View" asp-route-Id="@y.OId.ToString()">@y.Title</a>
+</h4>
         <div>@Html.Raw(y.Description)</div>
     }
 }

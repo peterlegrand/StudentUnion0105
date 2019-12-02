@@ -87,7 +87,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.DbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @p0, @p1",
+            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @p0, @p1",
                     parameters: new[] {            
                         DefaultLanguageID.ToString()
                         , Id.ToString()} ).ToList();
@@ -107,7 +107,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ComparisonsFromDb = _context.DbLanguageList.FromSql($"ProcessTemplateFlowConditionCreateGetComparison").ToList();
+            var ComparisonsFromDb = _context.ZDbLanguageList.FromSql($"ProcessTemplateFlowConditionCreateGetComparison").ToList();
 
             var ComparisonList = new List<SelectListItem>();
 
@@ -216,7 +216,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProcessTemplateFlowFieldsFromDb = _context.DbStatusList.FromSql($"GetProcessTemplateFlowConditionCreateGetFields @p0, @p1",
+            var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"GetProcessTemplateFlowConditionCreateGetFields @p0, @p1",
                     parameters: new[] {            //0
                                         DefaultLanguageID.ToString()
                     , Id.ToString()}).ToList();

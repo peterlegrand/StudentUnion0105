@@ -1,5 +1,7 @@
-CREATE PROCEDURE ClassificationValueCreateGetLevel ( @Id Int )
+CREATE PROCEDURE ClassificationValueCreateGetLevel ( @ParentId Int, @PId int  )
                                         AS 
+IF @ParentId <> 0
+BEGIN
                                         WITH StructureClassValue (ClassificationId
 												, ParentId, Id,  Level)
                                         AS
@@ -10,7 +12,7 @@ CREATE PROCEDURE ClassificationValueCreateGetLevel ( @Id Int )
                                         		, v.Id
                                         		, 0 AS level
                                         	FROM dbClassificationValue AS v
-                                        	WHERE v.Id = @Id 
+                                        	WHERE v.Id = @ParentId 
                                         	UNION ALL
                                         	SELECT v.ClassificationId
 												, v.ParentValueId
@@ -25,5 +27,10 @@ SELECT DateLevel "DateLevel", InDropDown "InDropDown" FROM dbClassificationLevel
 	SELECT 
     max(Level) + 1
     FROM StructureClassValue  
-	WHERE StructureClassValue.ClassificationId IN  (SELECT ClassificationId FROM dbClassificationValue WHERE Id = @Id) )
-	AND ClassificationId IN (SELECT ClassificationId FROM dbClassificationValue WHERE Id = @Id) 
+	WHERE StructureClassValue.ClassificationId IN  (SELECT ClassificationId FROM dbClassificationValue WHERE Id = @ParentId) )
+	AND ClassificationId IN (SELECT ClassificationId FROM dbClassificationValue WHERE Id = @ParentId) 
+END
+ELSE
+BEGIN
+SELECT DateLevel "DateLevel", InDropDown "InDropDown" FROM dbClassificationLevel WHERE Sequence = 1 and ClassificationId = @PId
+END

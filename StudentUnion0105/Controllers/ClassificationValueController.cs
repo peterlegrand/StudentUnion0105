@@ -80,6 +80,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
@@ -90,95 +91,145 @@ namespace StudentUnion0105.Controllers
                 //ParentValueId
                 ParentId = Id
             };
+            SqlParameter[] parameters =
+{
+                    new SqlParameter("@ParentId", NewValue.ParentId)
+                    , new SqlParameter("@PId", NewValue.PId)
+                };
 
             SqlParameter parameter = new SqlParameter("@Id", Id);
-            SuClassificationValueEditGetLevelModel ClassificationValueEditGetLevel = _context.ZdbClassificationValueEditGetLevel.FromSql("ClassificationValueEditGetLevel @Id", parameter).First();
+            SuClassificationValueEditGetLevelModel ClassificationValueEditGetLevel = _context.ZdbClassificationValueEditGetLevel.FromSql("ClassificationValueCreateGetLevel @ParentId, @PId", parameters).First();
+
+            NewValue.InDropDown = ClassificationValueEditGetLevel.InDropDown;
+            NewValue.DateLevel = ClassificationValueEditGetLevel.DateLevel;
 
 
-            SuObjectVM CValue = new SuObjectVM()
-            {
-                NullId = Id,
-                ObjectId = Convert.ToInt32(HttpContext.Request.Query["CId"]),
-            };
-            if (Id == 0)
-            {
-                CValue.Level = 1;
-            }
-            else
-            {
-                var x = new SuClassificationValueModel();
-                int? Parent = Id;
-                while (Parent != null)
-                {
-                    CValue.Level++;
+            //SuObjectVM CValue = new SuObjectVM()
+            //{
+            //    NullId = Id,
+            //    ObjectId = Convert.ToInt32(HttpContext.Request.Query["CId"]),
+            //};
+            //if (Id == 0)
+            //{
+            //    CValue.Level = 1;
+            //}
+            //else
+            //{
+            //    var x = new SuClassificationValueModel();
+            //    int? Parent = Id;
+            //    while (Parent != null)
+            //    {
+            //        CValue.Level++;
 
-                    x = _classificationValue.GetClassificationValue(Parent ?? 0);
-                    Parent = x.ParentValueId;
+            //        x = _classificationValue.GetClassificationValue(Parent ?? 0);
+            //        Parent = x.ParentValueId;
 
-                }
-            }
+            //    }
+            //}
 
-            var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
-                         where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == CValue.Level
-                         select new SuObjectVM
-                         {
-                             DateLevel = s.DateLevel
-                            ,
-                             Alphabetically = s.Alphabetically
-                            ,
-                             InDropDown = s.InDropDown
+            //var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
+            //             where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == CValue.Level
+            //             select new SuObjectVM
+            //             {
+            //                 DateLevel = s.DateLevel
+            //                ,
+            //                 Alphabetically = s.Alphabetically
+            //                ,
+            //                 InDropDown = s.InDropDown
 
-                         }).First();
-            CValue.DateLevel = ToForm.DateLevel;
-            CValue.Alphabetically = ToForm.Alphabetically;
-            CValue.InDropDown = ToForm.InDropDown;
+            //             }).First();
+            //CValue.DateLevel = ToForm.DateLevel;
+            //CValue.Alphabetically = ToForm.Alphabetically;
+            //CValue.InDropDown = ToForm.InDropDown;
 
-            //            var x = _classificationLevel.get.ClassificationLevel()
-            ViewBag.CId = HttpContext.Request.Query["CId"];
-            return View(CValue);
-
+            ////            var x = _classificationLevel.get.ClassificationLevel()
+            //ViewBag.CId = HttpContext.Request.Query["CId"];
+            //return View(CValue);
+            return View(NewValue);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuClassificationValueEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var ClassificationValue = new SuClassificationValueModel
-                {
-                    ModifiedDate = DateTime.Now,
-                    CreatedDate = DateTime.Now,
-                    ClassificationId = FromForm.ObjectId
-                };
-
-                if (FromForm.NullId != 0)
-                { ClassificationValue.ParentValueId = FromForm.NullId; }
-                var NewClassificationValue = _classificationValue.AddClassificationValue(ClassificationValue);
-
+            
 
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ClassificationValueLanguage = new SuClassificationValueLanguageModel
-                {
-                    Name = FromForm.Name,
-                    Description = FromForm.Description,
-                    DropDownName = FromForm.DropDownName,
-                    MenuName = FromForm.MenuName,
-                    MouseOver = FromForm.MouseOver,
-                    PageName = FromForm.Title,
-                    PageDescription = FromForm.PageDescription,
-                    HeaderName = FromForm.HeaderName,
-                    HeaderDescription = FromForm.HeaderDescription,
-                    TopicName = FromForm.TopicName,
 
-                    ClassificationValueId = NewClassificationValue.Id,
-                    LanguageId = DefaultLanguageID
-                };
-                _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
 
-            }
-            return RedirectToAction("Index", new { Id = FromForm.ObjectId.ToString() });
+                //var ClassificationValue = new SuClassificationValueModel
+                //{
+                //    ModifiedDate = DateTime.Now,
+                //    CreatedDate = DateTime.Now,
+                //    ClassificationId = FromForm.ObjectId
+                //};
+
+                //if (FromForm.NullId != 0)
+                //{ ClassificationValue.ParentValueId = FromForm.NullId; }
+                //var NewClassificationValue = _classificationValue.AddClassificationValue(ClassificationValue);
+
+
+                //var CurrentUser = await userManager.GetUserAsync(User);
+                //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                //var ClassificationValueLanguage = new SuClassificationValueLanguageModel
+                //{
+                //    Name = FromForm.Name,
+                //    Description = FromForm.Description,
+                //    DropDownName = FromForm.DropDownName,
+                //    MenuName = FromForm.MenuName,
+                //    MouseOver = FromForm.MouseOver,
+                //    PageName = FromForm.Title,
+                //    PageDescription = FromForm.PageDescription,
+                //    HeaderName = FromForm.HeaderName,
+                //    HeaderDescription = FromForm.HeaderDescription,
+                //    TopicName = FromForm.TopicName,
+
+                //    ClassificationValueId = NewClassificationValue.Id,
+                //    LanguageId = DefaultLanguageID
+                //};
+                //_classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
+                SqlParameter[] parameters =
+                    {
+//                    new SqlParameter("@Id", FromForm.Classification.Id),
+                    new SqlParameter("@PId", FromForm.PId),
+                    new SqlParameter("@ParentId", FromForm.ParentId),
+                    new SqlParameter("@FromDate", FromForm.FromDate),
+                    new SqlParameter("@ToDate", FromForm.ToDate ),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@Name", FromForm.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.MenuName ?? ""), 
+                    new SqlParameter("@DropDownName", FromForm.DropDownName ?? ""),
+                    new SqlParameter("@PageName", FromForm.PageName ?? ""),
+                    new SqlParameter("@PageDescription", FromForm.PageDescription ?? ""),
+                    new SqlParameter("@HeaderName", FromForm.HeaderName ?? ""),
+                    new SqlParameter("@HeaderDescription", FromForm.HeaderDescription ?? ""),
+                    new SqlParameter("@TopicName", FromForm.TopicName ?? "")
+                    };
+
+                var b = _context.Database.ExecuteSqlCommand("ClassificationValueCreatePost " +
+                            "@PId" +
+                            ", @ParentId" +
+                            ", @FromDate" +
+                            ", @ToDate" +
+                            ", @ModifierId" +
+                            ", @LanguageId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" +
+                            ", @DropDownName" +
+                            ", @PageName" +
+                            ", @PageDescription" +
+                            ", @HeaderName" +
+                            ", @HeaderDescription" +
+                            ", @TopicName", parameters);
+            
+        
+            return RedirectToAction("Index", new { Id = FromForm.PId.ToString() });
 
 
 
@@ -208,8 +259,7 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(SuClassificationValueEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
+          
                 SuUserModel CurrentUser = await userManager.GetUserAsync(User);
                 int DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 SqlParameter[] parameters =
@@ -219,16 +269,16 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@FromDate", FromForm.FromDate),
                     new SqlParameter("@ToDate", FromForm.ToDate),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@Name", FromForm.Name),
-                    new SqlParameter("@Description", FromForm.Description),
-                    new SqlParameter("@MouseOver", FromForm.MouseOver),
-                    new SqlParameter("@MenuName", FromForm.MenuName),
-                    new SqlParameter("@DropDownName", FromForm.MenuName),
-                    new SqlParameter("@PageName", FromForm.MenuName),
-                    new SqlParameter("@PageDescription", FromForm.MenuName),
-                    new SqlParameter("@HeaderName", FromForm.MenuName),
-                    new SqlParameter("@HeaderDescription", FromForm.MenuName),
-                    new SqlParameter("@TopicName", FromForm.MenuName)
+                    new SqlParameter("@Name", FromForm.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.MenuName ?? ""),
+                    new SqlParameter("@DropDownName", FromForm.MenuName ?? ""),
+                    new SqlParameter("@PageName", FromForm.MenuName ?? ""),
+                    new SqlParameter("@PageDescription", FromForm.MenuName ?? ""),
+                    new SqlParameter("@HeaderName", FromForm.MenuName ?? ""),
+                    new SqlParameter("@HeaderDescription", FromForm.MenuName ?? ""),
+                    new SqlParameter("@TopicName", FromForm.MenuName ?? "")
 
                     };
                  _context.Database.ExecuteSqlCommand("ClassificationValueEditPost " +
@@ -247,7 +297,7 @@ namespace StudentUnion0105.Controllers
                             ", @HeaderName" +
                             ", @HeaderDescription" +
                             ", @TopicName", parameters);
-            }
+      
             return RedirectToAction("Index", new { Id = FromForm.PId });
         }
 

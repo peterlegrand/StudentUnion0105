@@ -1,6 +1,6 @@
 SET IDENTITY_INSERT dbUIScreen ON;
 
-INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1, '_Home', '');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1, '_Layout', '');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1000, 'Classification', 'Create');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1001, 'Classification', 'Delete');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1002, 'Classification', 'Edit');
