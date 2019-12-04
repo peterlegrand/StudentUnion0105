@@ -1,16 +1,18 @@
-CREATE PROCEDURE OrganizationTypeLanguageEditGet (@Id int)
+CREATE PROCEDURE OrganizationTypeLanguageEditGet (@LId int)
 AS
 SELECT
-	dbOrganizationType.Id 
+	dbOrganizationType.Id  OId
 	, Creator.UserName Creator
 	, dbOrganizationTypeLanguage.CreatedDate
 	, Modifier.UserName Modifier
 	, dbOrganizationTypeLanguage.ModifiedDate
 	, dbOrganizationTypeLanguage.Id LId
-	, dbOrganizationTypeLanguage.Name
-	, dbOrganizationTypeLanguage.Description
-	, dbOrganizationTypeLanguage.MouseOver
-	, dbOrganizationTypeLanguage.MenuName
+	, ISNULL(dbOrganizationTypeLanguage.Name,'') Name
+	, ISNULL(dbOrganizationTypeLanguage.Description,'') Description
+	, ISNULL(dbOrganizationTypeLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbOrganizationTypeLanguage.MenuName,'') MenuName
+	, ISNULL(dbLanguage.LanguageName,'') Language
+	, 0 PId
 FROM dbOrganizationTypeLanguage
 JOIN dbOrganizationType
 	ON dbOrganizationType.Id = dbOrganizationTypeLanguage.OrganizationTypeId
@@ -18,5 +20,7 @@ JOIN AspNetUsers Creator
 	ON convert(nvarchar(50), dbOrganizationType.CreatorId) = Creator.Id
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbOrganizationType.ModifierId) = Modifier.Id
-WHERE dbOrganizationTypeLanguage.Id=@Id
+JOIN dbLanguage
+	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+WHERE dbOrganizationTypeLanguage.Id=@LId
 

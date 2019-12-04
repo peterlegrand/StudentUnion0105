@@ -122,7 +122,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
         public DbSet<SuUITermLanguageEditGetModel> ZDbUITermLanguageEditGet { get; set; }
         public DbSet<SuCountryList> DbCountryList { get; set; }
-        public DbSet<SuTypeList> DbTypeList { get; set; }
+        public DbSet<SuTypeList> ZDbTypeList { get; set; }
         public DbSet<SuValueList> DbValueList { get; set; }
         //        public DbSet<SuObjectLanguageEditGet> dbObjectLanguage { get; set; }
         public DbSet<SuObjectIndexGetModel> ZdbObjectIndexGet { get; set; }

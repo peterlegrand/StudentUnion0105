@@ -1,14 +1,13 @@
 CREATE PROCEDURE ClassificationLanguageCreatePost (
-	@Id int
+	@OId int
 	, @LanguageId int
-	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MouseOver nvarchar(50)
 	, @MenuName nvarchar(50)
+	, @ModifierId nvarchar(450)
 	)
 AS
-BEGIN TRANSACTION
 INSERT INTO dbClassificationLanguage (
 	ClassificationId
 	, LanguageId
@@ -22,7 +21,7 @@ INSERT INTO dbClassificationLanguage (
 	, ModifiedDate
 	)
 VALUES (
-	@Id
+	@OId
 	, @LanguageId
 	, @Name
 	, @Description
@@ -33,6 +32,3 @@ VALUES (
 	, @ModifierId
 	, getdate()
 	);
-COMMIT TRANSACTION
-
-

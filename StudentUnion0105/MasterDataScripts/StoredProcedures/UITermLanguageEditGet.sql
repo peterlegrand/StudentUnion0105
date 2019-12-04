@@ -1,6 +1,6 @@
-CREATE PROCEDURE UITermLanguageEditGet (@Id int)
+CREATE PROCEDURE UITermLanguageEditGet (@LId int)
 AS
-SELECT dbUITermLanguage.Id
+SELECT dbUITermLanguage.Id OId
 	, dbUITermLanguage.Customization
 	, dbUITermLanguage.TermId
 	, dbUITermLanguage.LanguageId

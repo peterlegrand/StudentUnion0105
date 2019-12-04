@@ -1,16 +1,18 @@
-CREATE PROCEDURE PageSectionLanguageEditGet (@Id int)
+CREATE PROCEDURE PageSectionLanguageEditGet (@LId int)
 AS
 SELECT
-	dbPageSection.Id 
+	dbPageSection.Id OId
 	, Creator.UserName Creator
 	, dbPageSectionLanguage.CreatedDate
 	, Modifier.UserName Modifier
 	, dbPageSectionLanguage.ModifiedDate
 	, dbPageSectionLanguage.Id LId
-	, dbPageSectionLanguage.Name
-	, dbPageSectionLanguage.Description
-	, dbPageSectionLanguage.MouseOver
-	, dbPageSectionLanguage.MenuName
+	, ISNULL(dbPageSectionLanguage.Name,'') Name
+	, ISNULL(dbPageSectionLanguage.Description,'') Description
+	, ISNULL(dbPageSectionLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbPageSectionLanguage.MenuName,'') MenuName
+	, ISNULL(dbLanguage.LanguageName,'') Language
+	, dbPageSection.PageId PId
 FROM dbPageSectionLanguage
 JOIN dbPageSection
 	ON dbPageSection.Id = dbPageSectionLanguage.PageSectionId
@@ -18,5 +20,7 @@ JOIN AspNetUsers Creator
 	ON convert(nvarchar(50), dbPageSectionLanguage.CreatorId) = Creator.Id
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbPageSectionLanguage.ModifierId) = Modifier.Id
-WHERE dbPageSectionLanguage.Id=@Id
+JOIN dbLanguage
+	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+WHERE dbPageSectionLanguage.Id=@LId
 

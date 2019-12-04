@@ -1,3 +1,3 @@
-CREATE PROCEDURE UITermLanguageEditPost (@Id int, @Customization nvarchar(255))
+CREATE PROCEDURE UITermLanguageEditPost (@LId int, @Customization nvarchar(255))
 AS
-UPDATE dbUITermLanguage SET Customization = @Customization WHERE Id = @Id
+UPDATE dbUITermLanguage SET Customization = @Customization WHERE Id = @LId

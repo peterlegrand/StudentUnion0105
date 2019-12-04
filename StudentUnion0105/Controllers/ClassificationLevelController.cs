@@ -54,7 +54,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@LanguageId", DefaultLanguageID)
                     , new SqlParameter("@Id", Id)
                 };
-            List<SuClassificationLevelIndexGetModel> ClassificationLevel = _context.ZdbClassificationLevelIndexGet.FromSql("ClassificationLevelIndexGet @Id, @LanguageId", parameters).ToList();
+            var ClassificationLevel = _context.ZdbObjectIndexGet.FromSql("ClassificationLevelIndexGet @Id, @LanguageId", parameters).ToList();
             ViewBag.PId = Id;
             return View(ClassificationLevel);
         }
@@ -71,10 +71,10 @@ namespace StudentUnion0105.Controllers
             SqlParameter[] parameters =
     {
                     new SqlParameter("@LanguageId", DefaultLanguageID)
-                    , new SqlParameter("@Id", Id)
+                    , new SqlParameter("@OId", Id)
                 };
 
-           SuClassificationLevelEditGetModel ClassificationEditGet = _context.ZdbClassificationLevelEditGet.FromSql("ClassificationLevelEditGet @LanguageId, @Id", parameters).First();
+           SuClassificationLevelEditGetModel ClassificationLevelEditGet = _context.ZdbClassificationLevelEditGet.FromSql("ClassificationLevelEditGet @LanguageId, @OId", parameters).First();
             //PETER Consider to put this in a table
             List<SelectListItem> DateType = new List<SelectListItem>
             {
@@ -85,7 +85,7 @@ namespace StudentUnion0105.Controllers
                 new SelectListItem { Value = "4", Text = "Date time range" }
             };
 
-            var ExistingLevels = _context.DbTypeList.FromSql("ClassificationLevelEditGetExistingLevels @LanguageId, @Id", parameters).ToList();
+            var ExistingLevels = _context.ZDbTypeList.FromSql("ClassificationLevelEditGetExistingLevels @LanguageId, @Id", parameters).ToList();
             int MaxLevelSequence = 0;
             List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
             foreach (var ExistingLevel in ExistingLevels)
@@ -99,7 +99,7 @@ namespace StudentUnion0105.Controllers
 
             SuClassificationLevelEditGetWithListModel ClassificationLevelWithList = new SuClassificationLevelEditGetWithListModel
             {
-                ClassificationLevel = ClassificationEditGet,  DateTypeList = DateType, SequenceList = ExistingLevelList //, a = ClassificationList 
+                ClassificationLevel = ClassificationLevelEditGet,  DateTypeList = DateType, SequenceList = ExistingLevelList //, a = ClassificationList 
             };
             return View(ClassificationLevelWithList);
 
@@ -161,7 +161,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@PId", Id),
                     };
 
-            var ExistingLevels = _context.DbTypeList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
+            var ExistingLevels = _context.ZDbTypeList.FromSql("ClassificationLevelCreateGetExistingLevels @LanguageId, @PId", parameters).ToList();
             int MaxLevelSequence = 0;
             List<SelectListItem> ExistingLevelList = new List<SelectListItem>();
             foreach (var ExistingLevel in ExistingLevels)
@@ -292,9 +292,9 @@ namespace StudentUnion0105.Controllers
             UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SqlParameter parameter = new SqlParameter("@Id", Id);
+            SqlParameter parameter = new SqlParameter("@LId", Id);
 
-            SuObjectLanguageEditGetModel ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLevelLanguageEditGet @Id", parameter).First();
+            SuObjectLanguageEditGetModel ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLevelLanguageEditGet @LId", parameter).First();
             return View(ObjectLanguage);
         }
 
@@ -310,7 +310,7 @@ namespace StudentUnion0105.Controllers
             {
                 SqlParameter[] parameters =
                     {
-                    new SqlParameter("@Id", FromForm.LId),
+                    new SqlParameter("@LId", FromForm.LId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
                     new SqlParameter("@Name", FromForm.Name),
                     new SqlParameter("@Description", FromForm.Description),
@@ -319,7 +319,7 @@ namespace StudentUnion0105.Controllers
                     };
 
                  _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageEditPost " +
-                            "@Id" +
+                            "@LId" +
                             ", @ModifierId" +
                             ", @Name" +
                             ", @Description" +
@@ -343,38 +343,18 @@ namespace StudentUnion0105.Controllers
             Int32 NoOfLanguages = SuLanguage.Count();
             if (NoOfLanguages == 0)
                 { return RedirectToAction("LanguageIndex", new { Id }); }
-            //List<int> LanguagesAlready = new List<int>();
-            //LanguagesAlready = (from c in _classificationLevelLanguage.GetAllClassificationLevelLanguages()
-            //                    where c.ClassificationLevelId == Id
-            //                    select c.LanguageId).ToList();
-
-
-            //List< SelectListItem> SuLanguage = (from l in _language.GetAllLanguages()
-            //                  where !LanguagesAlready.Contains(l.Id)
-            //                  && l.Active == true
-            //                  select new SelectListItem
-            //                  {
-            //                      Value = l.Id.ToString()
-            //                  ,
-            //                      Text = l.LanguageName
-            //                  }).ToList();
-
-            //if (SuLanguage.Count() == 0)
-            //{
-            //    return RedirectToAction("LanguageIndex", new { Id = Id });
-            //}
             SuObjectLanguageCreateGetModel SuObject = new SuObjectLanguageCreateGetModel
             {
                 OId = Id
             };
             ViewBag.Id = Id.ToString();
-            SuObjectLanguageCreateGetWithListModel ClassificationAndStatus = new SuObjectLanguageCreateGetWithListModel
+            SuObjectLanguageCreateGetWithListModel ClassificationLevelAndLanguages = new SuObjectLanguageCreateGetWithListModel
             {
                 ObjectLanguage = SuObject
                 ,
                  LanguageList = SuLanguage
             };
-            return View(ClassificationAndStatus);
+            return View(ClassificationLevelAndLanguages);
         }
 
         [HttpPost]
@@ -385,7 +365,7 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                     {
-                    new SqlParameter("@Id", FromForm.ObjectLanguage.OId),
+                    new SqlParameter("@OId", FromForm.ObjectLanguage.OId),
                     new SqlParameter("@LanguageId", FromForm.ObjectLanguage.LanguageId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
                     new SqlParameter("@Name", FromForm.ObjectLanguage.Name ?? ""),
@@ -395,7 +375,7 @@ namespace StudentUnion0105.Controllers
                     };
 
                  _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageCreatePost " +
-                            "@Id" +
+                            "@OId" +
                             ", @LanguageId" +
                             ", @ModifierId" +
                             ", @Name" +
@@ -414,8 +394,8 @@ namespace StudentUnion0105.Controllers
             UICustomization UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SqlParameter parameter = new SqlParameter("@Id", Id);
-            SuObjectLanguageEditGetModel ClassificationLevelLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLevelLanguageEditGet @Id", parameter).First();
+            SqlParameter parameter = new SqlParameter("@LId", Id);
+            SuObjectLanguageEditGetModel ClassificationLevelLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLevelLanguageEditGet @LId", parameter).First();
 
             return View(ClassificationLevelLanguage);
         }
@@ -442,17 +422,17 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@LanguageId", DefaultLanguageID)
                 };
 
-            SuClassificationLevelDeleteGetModel Classification = _context.ZdbClassificationLevelDeleteGet.FromSql("ClassificationLevelDeleteGet @Id, @LanguageId", parameters).First();
+            SuClassificationLevelDeleteGetModel ClassificationLevel = _context.ZdbClassificationLevelDeleteGet.FromSql("ClassificationLevelDeleteGet @Id, @LanguageId", parameters).First();
 
-            return View(Classification);
+            return View(ClassificationLevel);
         }
 
         [HttpPost]
         public IActionResult Delete(SuClassificationLevelDeleteGetModel FromForm)
         {
 
-            var parameter = new SqlParameter("@LanguageId", FromForm.OId);
-             _context.Database.ExecuteSqlCommand($"ClassificationDeletePost @Id", parameter);
+            var parameter = new SqlParameter("@OId", FromForm.OId);
+             _context.Database.ExecuteSqlCommand("ClassificationDeletePost @OId", parameter);
 
             return RedirectToAction("Index", new { Id = FromForm.PId });
         }

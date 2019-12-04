@@ -1,16 +1,18 @@
-CREATE PROCEDURE ProjectLanguageEditGet (@Id int)
+CREATE PROCEDURE ProjectLanguageEditGet (@LId int)
 AS
 SELECT
-	dbProject.Id 
+	dbProject.Id OId
 	, Creator.UserName Creator
 	, dbProjectLanguage.CreatedDate
 	, Modifier.UserName Modifier
 	, dbProjectLanguage.ModifiedDate
 	, dbProjectLanguage.Id LId
-	, dbProjectLanguage.Name
-	, dbProjectLanguage.Description
-	, dbProjectLanguage.MouseOver
-	, dbProjectLanguage.MenuName
+	, ISNULL(dbProjectLanguage.Name,'') Name
+	, ISNULL(dbProjectLanguage.Description,'') Description
+	, ISNULL(dbProjectLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbProjectLanguage.MenuName,'') MenuName
+	, ISNULL(dbLanguage.LanguageName Language
+	, ISNULL(dbProject.ParentId, 0) PId
 FROM dbProjectLanguage
 JOIN dbProject
 	ON dbProject.Id = dbProjectLanguage.ProjectId
@@ -18,5 +20,7 @@ JOIN AspNetUsers Creator
 	ON convert(nvarchar(50), dbProjectLanguage.CreatorId) = Creator.Id
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProjectLanguage.ModifierId) = Modifier.Id
-WHERE dbProjectLanguage.Id=@Id
+JOIN dbLanguage
+	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+WHERE dbProjectLanguage.Id=@LId
 

@@ -43,7 +43,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@LanguageId", DefaultLanguageID)
                 };
 
-            UserProjectFromDb = _context.DbIdWithStrings.FromSql($"UserProjectSelectAll @User, @LanguageId", parameters).ToList();
+            UserProjectFromDb = _context.DbIdWithStrings.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
 
             ViewBag.ObjectId = Id;
 
@@ -111,7 +111,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var TypesFromDB = _context.DbTypeList.FromSql($"UserProjectTypeSelectAll @LanguageId", parameter).ToList();
+            var TypesFromDB = _context.DbTypeList.FromSql("UserProjectTypeSelectAll @LanguageId", parameter).ToList();
 
             foreach (var TypeFromDB in TypesFromDB)
             {

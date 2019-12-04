@@ -1,5 +1,5 @@
 CREATE PROCEDURE ClassificationLanguageEditPost (
-	@Id int
+	@LId int
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -14,4 +14,4 @@ SET Name = @Name
 	, MenuName = @MenuName
 	, ModifierId = @ModifierId
 	, ModifiedDate = getdate()
-WHERE Id = @Id;
+WHERE Id = @LId;

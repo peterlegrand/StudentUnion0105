@@ -87,7 +87,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@Id", Id);
             //PETER this SP is missing
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql($"UserOrganizationTypeLanguageEditGet @Id", parameter).First();
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("UserOrganizationTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
 
@@ -103,17 +103,20 @@ namespace StudentUnion0105.Controllers
 
             if (ModelState.IsValid)
             {
-                var c = _context.Database.ExecuteSqlCommand($"UserOrganizationTypeUpdate @P0, @P1, @P2, @P3, @P4, @P5",
-                 parameters: new[] {             //0
-                                       FromForm.Id.ToString()
-                                       , FromForm.Name
-                                       , FromForm.Description
-                                       , FromForm.MenuName
-                                       , FromForm.MouseOver
-                                       , CurrentUserId
-                    });
+
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LId", FromForm.Id)
+                    , new SqlParameter("@Name", FromForm.Name)
+                    , new SqlParameter("@Description", FromForm.Description)
+                    , new SqlParameter("@MouseOver", FromForm.MouseOver)
+                    , new SqlParameter("@MenuName", FromForm.MenuName)
+                    , new SqlParameter("@Modifier", CurrentUserId)
+                };
+
+                var c = _context.Database.ExecuteSqlCommand("UserOrganizationTypeLanguageEditPost @PLId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
+                 parameters);
             }
-            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
 
             return RedirectToAction("LanguageIndex", new { Id = FromForm.TypeId.ToString() });
 

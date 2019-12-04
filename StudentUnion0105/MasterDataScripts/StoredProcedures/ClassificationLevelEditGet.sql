@@ -1,4 +1,4 @@
-CREATE PROCEDURE ClassificationLevelEditGet (@LanguageId int, @Id int)
+CREATE PROCEDURE ClassificationLevelEditGet (@LanguageId int, @OId int)
 AS
 SELECT
 	dbClassificationLevel.Id OId
@@ -27,5 +27,5 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassificationLevel.ModifierId) = Modifier.Id
 WHERE dbClassificationLevelLanguage.LanguageId = @LanguageId
-	AND dbClassificationLevel.Id = @Id
+	AND dbClassificationLevel.Id = @OId
 

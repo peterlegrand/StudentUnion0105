@@ -1,4 +1,4 @@
-CREATE PROCEDURE ClassificationLevelLanguageEditGet (@Id int)
+CREATE PROCEDURE ClassificationLevelLanguageEditGet (@LId int)
 AS
 SELECT
 	dbClassificationLevel.Id OId
@@ -7,11 +7,12 @@ SELECT
 	, Modifier.UserName Modifier
 	, dbClassificationLevelLanguage.ModifiedDate
 	, dbClassificationLevelLanguage.Id LId
-	, dbClassificationLevelLanguage.Name
-	, dbClassificationLevelLanguage.Description
-	, dbClassificationLevelLanguage.MouseOver
-	, dbClassificationLevelLanguage.MenuName
-	, dbLanguage.LanguageName Language
+	, ISNULL(dbClassificationLevelLanguage.Name,'') Name
+	, ISNULL(dbClassificationLevelLanguage.Description,'') Description
+	, ISNULL(dbClassificationLevelLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbClassificationLevelLanguage.MenuName,'') MenuName
+	, ISNULL(dbLanguage.LanguageName,'') Language
+	, dbClassificationLevel.ClassificationId PId
 FROM dbClassificationLevelLanguage
 JOIN dbClassificationLevel
 	ON dbClassificationLevel.Id = dbClassificationLevelLanguage.ClassificationLevelId
@@ -21,5 +22,5 @@ JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassificationLevel.ModifierId) = Modifier.Id
 JOIN dbLanguage
 	ON dbLanguage.Id = dbClassificationLevelLanguage.LanguageId
-WHERE dbClassificationLevelLanguage.Id=@Id
+WHERE dbClassificationLevelLanguage.Id=@LId
 
