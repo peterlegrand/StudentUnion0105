@@ -21,6 +21,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbPageSectionTypeLanguage.ModifierId) = Modifier.Id
 JOIN dbLanguage
-	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+	ON dbLanguage.Id = dbPageSectionTypeLanguage.LanguageId
 WHERE dbPageSectionTypeLanguage.Id=@LId
 

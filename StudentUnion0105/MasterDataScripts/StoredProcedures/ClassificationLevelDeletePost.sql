@@ -1,9 +1,9 @@
-CREATE PROCEDURE ClassificationLevelDeletePost (@Id int)
+CREATE PROCEDURE ClassificationLevelDeletePost (@OId int)
 AS
 BEGIN TRANSACTION
 DELETE FROM dbClassificationLevelLanguage 
-WHERE dbClassificationLevelLanguage.ClassificationLevelId = @Id;
+WHERE dbClassificationLevelLanguage.ClassificationLevelId = @OId;
 
 DELETE FROM dbClassificationLevel
-WHERE dbClassificationLevel.Id = @Id
+WHERE dbClassificationLevel.Id = @OId
 COMMIT TRANSACTION

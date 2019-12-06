@@ -9,7 +9,7 @@ CREATE PROCEDURE ProcessTemplateGroupLanguageCreatePost (
 	)
 AS
 INSERT INTO dbProcessTemplateGroupLanguage (
-	ClassificationId
+	ProcessTemplateGroupId
 	, LanguageId
 	, Name 
 	, Description 

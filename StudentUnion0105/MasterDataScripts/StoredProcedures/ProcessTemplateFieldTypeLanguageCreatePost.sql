@@ -9,7 +9,7 @@ CREATE PROCEDURE ProcessTemplateFieldTypeLanguageCreatePost (
 	)
 AS
 INSERT INTO dbProcessTemplateFieldTypeLanguage (
-	ClassificationId
+ 	FieldTypeId
 	, LanguageId
 	, Name 
 	, Description 

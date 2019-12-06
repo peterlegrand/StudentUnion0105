@@ -9,7 +9,7 @@ CREATE PROCEDURE OrganizationTypeLanguageCreatePost (
 	)
 AS
 INSERT INTO dbOrganizationTypeLanguage (
-	ClassificationId
+	OrganizationTypeId
 	, LanguageId
 	, Name 
 	, Description 

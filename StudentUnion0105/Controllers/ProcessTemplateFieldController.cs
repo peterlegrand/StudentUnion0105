@@ -227,7 +227,7 @@ namespace StudentUnion0105.Controllers
             //MasterList
             var MasterListList = new List<SelectListItem>();
 
-            var MasterListsFromDb = _context.DbTypeList.FromSql("GetMasterList").ToList();
+            var MasterListsFromDb = _context.ZDbTypeList.FromSql("GetMasterList").ToList();
 
 
             foreach (var MasterListFromDb in MasterListsFromDb)

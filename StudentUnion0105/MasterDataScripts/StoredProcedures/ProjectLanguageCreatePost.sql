@@ -9,7 +9,7 @@ CREATE PROCEDURE ProjectLanguageCreatePost (
 	)
 AS
 INSERT INTO dbProjectLanguage (
-	ClassificationId
+	ProjectId
 	, LanguageId
 	, Name 
 	, Description 

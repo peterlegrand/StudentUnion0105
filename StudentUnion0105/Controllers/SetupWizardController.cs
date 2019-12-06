@@ -230,7 +230,7 @@ namespace StudentUnion0105.Controllers
 , "ProcessTemplateFieldDeletePost.sql"
 , "ProcessTemplateFieldEditGet.sql"
 , "ProcessTemplateFieldIndexGet.sql"
-, "ProcessTemplateFieldLanguageCreateDeletePost.sql"
+, "ProcessTemplateFieldLanguageCreatePost.sql"
 , "ProcessTemplateFieldLanguageDeletePost.sql"
 , "ProcessTemplateFieldLanguageEditGet.sql"
 , "ProcessTemplateFieldLanguageEditPost.sql"

@@ -11,4 +11,4 @@ JOIN dbUITerm
 	ON dbUITermLanguage.TermId = dbUITerm.Id 
 JOIN dbLanguage
 	ON dbLanguage.Id = dbUITermLanguage.LanguageId
-WHERE dbUITermLanguage.Id = @Id
+WHERE dbUITermLanguage.Id = @LId

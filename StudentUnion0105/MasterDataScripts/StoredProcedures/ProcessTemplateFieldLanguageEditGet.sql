@@ -21,6 +21,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProcessTemplateFieldLanguage.ModifierId) = Modifier.Id
 JOIN dbLanguage
-	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+	ON dbLanguage.Id = dbProcessTemplateFieldLanguage.LanguageId
 WHERE dbProcessTemplateFieldLanguage.Id=@LId
 

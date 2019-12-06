@@ -1,9 +1,10 @@
-CREATE PROCEDURE PageSectionLanguageCreatePost (
+CREATE PROCEDURE ClassificationValueLanguageCreatePost (
 	@OId int
 	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MouseOver nvarchar(50)
+	, @MenuName nvarchar(50)
 	, @DropDownName nvarchar(50)
 	, @PageName nvarchar(50)
 	, @PageDescription nvarchar(max)
@@ -13,8 +14,8 @@ CREATE PROCEDURE PageSectionLanguageCreatePost (
 	, @ModifierId nvarchar(450)
 	)
 AS
-INSERT INTO dbPageSectionLanguage (
-	ClassificationId
+INSERT INTO dbClassificationValueLanguage (
+	ClassificationValueId
 	, LanguageId
 	, Name 
 	, Description 

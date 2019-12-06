@@ -4,13 +4,14 @@ CREATE PROCEDURE PageSectionLanguageCreatePost (
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MouseOver nvarchar(50)
+	, @MenuName nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
 	, @ModifierId nvarchar(450)
 	)
 AS
 INSERT INTO dbPageSectionLanguage (
-	ClassificationId
+	PageSectionId
 	, LanguageId
 	, Name 
 	, Description 

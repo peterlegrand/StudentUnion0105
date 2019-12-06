@@ -12,14 +12,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace StudentUnion0105.Controllers
 {
     public class ContentController : Controller
     {
-        // private readonly SuContentModel _contentModel;
         private readonly UserManager<SuUserModel> _userManager;
-        private SuDbContext _context;
+        private readonly SuDbContext _context;
         private readonly IClassificationRepository _classification;
 
         //      private readonly SuContentModel _content;
@@ -41,6 +39,7 @@ namespace StudentUnion0105.Controllers
         }
         public IActionResult Index()
         {
+            //PETER no terms go to the content yet?
             return View();
         }
 
@@ -107,7 +106,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var ContentTypesFromDb = _context.DbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
+            var ContentTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
 
             foreach (var TypeFromDb in ContentTypesFromDb)
             {

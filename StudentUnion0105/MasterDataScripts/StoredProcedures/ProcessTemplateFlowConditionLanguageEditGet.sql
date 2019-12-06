@@ -12,7 +12,7 @@ SELECT
 	, ISNULL(dbProcessTemplateFlowConditionLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbProcessTemplateFlowConditionLanguage.MenuName,'') MenuName
 	, ISNULL(dbLanguage.LanguageName,'') Language
-	, dbProcessTemplateFlowCondition.FlowId PId
+	, dbProcessTemplateFlowCondition.ProcessTemplateFlowId PId
 FROM dbProcessTemplateFlowConditionLanguage
 JOIN dbProcessTemplateFlowCondition
 	ON dbProcessTemplateFlowCondition.Id = dbProcessTemplateFlowConditionLanguage.FlowConditionId
@@ -21,6 +21,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProcessTemplateFlowConditionLanguage.ModifierId) = Modifier.Id
 JOIN dbLanguage
-	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+	ON dbLanguage.Id = dbProcessTemplateFlowConditionLanguage.LanguageId
 WHERE dbProcessTemplateFlowConditionLanguage.Id=@LId
 

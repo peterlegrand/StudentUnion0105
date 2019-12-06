@@ -11,7 +11,7 @@ SELECT
 	, ISNULL(dbProcessTemplateFieldTypeLanguage.Description,'') Description
 	, ISNULL(dbProcessTemplateFieldTypeLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbProcessTemplateFieldTypeLanguage.MenuName,'') MenuName
-	, ISNULL(dbLanguage.LanguageName Language
+	, ISNULL(dbLanguage.LanguageName,'') Language
 	, 0 PId
 FROM dbProcessTemplateFieldTypeLanguage
 JOIN dbProcessTemplateFieldType
@@ -21,6 +21,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProcessTemplateFieldTypeLanguage.ModifierId) = Modifier.Id
 JOIN dbLanguage
-	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+	ON dbLanguage.Id = dbProcessTemplateFieldTypeLanguage.LanguageId
 WHERE dbProcessTemplateFieldTypeLanguage.Id=@LId
 

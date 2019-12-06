@@ -9,7 +9,7 @@ CREATE PROCEDURE ProcessTemplateFlowConditionLanguageCreatePost (
 	)
 AS
 INSERT INTO dbProcessTemplateFlowConditionLanguage (
-	ClassificationId
+	FlowConditionId
 	, LanguageId
 	, Name 
 	, Description 

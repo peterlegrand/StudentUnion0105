@@ -69,23 +69,6 @@ namespace StudentUnion0105.Controllers
             ViewBag.ObjectId = Id.ToString();
             return View(SectionType);
 
-            //var pageSection = (from c in _pageSection.GetAllPageSections()
-            //                   join l in _pageSectionLanguage.GetAllPageSectionLanguages()
-            //          on c.Id equals l.PageSectionId
-            //                   where c.PageId == Id
-            //                   && l.LanguageId == DefaultLanguageID
-            //                   orderby c.Sequence
-            //                   select new SuObjectVM
-            //                   {
-            //                       Id = c.Id
-            //                   ,
-            //                       Name = l.Name
-            //                   ,
-            //                       ObjectId = c.PageId
-            //                   }).ToList();
-            //ViewBag.ObjectId = Id.ToString();
-            ////PETER TODO add a classification label so you know to which classification the levels belong.
-            //return View(pageSection);
         }
 
 
@@ -239,13 +222,6 @@ namespace StudentUnion0105.Controllers
 
             var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = PageSection, SomeKindINumSelectListItem = ExistingLevels, ProbablyTypeListItem = TypeList, ProbablyTypeListItem2 = ContentTypeList };
             return View(ClassificationAndStatus);
-            //var suObjectAndStatusView = new SuObjectAndStatusViewModel
-            //{
-
-            //    SuObject = Level //, a = ClassificationList
-            //};
-            //return View(suObjectAndStatusView);
-
 
         }
 
@@ -285,7 +261,6 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
 
             return RedirectToAction("Index", new { Id = UpdatedPageSection.SuObject.Id.ToString() });
 
@@ -527,32 +502,6 @@ namespace StudentUnion0105.Controllers
             return View(PageSectionLanguage);
 
 
-            //var ToForm = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.PageSectionId
-
-            //             }).First();
-
-            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = ClassificationList
-            //};
-            //return View(ClassificationAndStatus);
-
 
         }
 
@@ -570,7 +519,6 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.Classification.ClassificationId.ToString() );
 
             return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
 

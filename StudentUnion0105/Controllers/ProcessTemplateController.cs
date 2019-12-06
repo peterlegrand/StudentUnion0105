@@ -86,7 +86,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
+            var ProcessTemplateGroupFromDb = _context.ZDbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {
@@ -169,7 +169,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var ProcessTemplateGroupFromDb = _context.DbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
+            var ProcessTemplateGroupFromDb = _context.ZDbTypeList.FromSql("GetProcessTemplateGroup @LanguageId", parameter).ToList();
 
             foreach (var ProcessTemplateGroup in ProcessTemplateGroupFromDb)
             {

@@ -41,7 +41,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationModel> DbClassification { get; set; }
         public DbSet<SuClassificationDeleteGetModel> ZdbClassificationDeleteGet { get; set; }
         public DbSet<SuClassificationEditGetModel> ZdbClassificationEditGet { get; set; }
-        public DbSet<SuClassificationIndexGetModel> ZdbClassificationIndexGet { get; set; }
+//        public DbSet<SuClassificationIndexGetModel> ZdbClassificationIndexGet { get; set; }
         public DbSet<SuTermLanguageCreateGetModel> ZdbTermLanguageCreateGetWith { get; set; }
         public DbSet<SuClassificationLanguageModel> DbClassificationLanguage { get; set; }
         //ClassificationLevel

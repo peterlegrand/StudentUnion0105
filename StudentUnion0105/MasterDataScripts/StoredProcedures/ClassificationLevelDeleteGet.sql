@@ -1,8 +1,10 @@
-CREATE PROCEDURE ClassificationLevelDeleteGet (@LanguageId int, @Id int)
+CREATE PROCEDURE ClassificationLevelDeleteGet (@OId int, @LanguageId int)
 AS
 SELECT
-	dbClassificationLevel.Id 
+	dbClassificationLevel.Id OId 
+	, dbClassificationLevel.ClassificationId PId 
 	, dbClassificationLevel.Alphabetically
+	, dbClassificationLevel.DateLevel
 	, dbClassificationLevel.CanLink
 	, dbClassificationLevel.InDropDown
 	, dbClassificationLevel.OnTheFly
@@ -24,5 +26,4 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassificationLevel.ModifierId) = Modifier.Id
 WHERE dbClassificationLevelLanguage.LanguageId = @LanguageId
-	AND dbClassificationLevel.Id = @Id
-
+	AND dbClassificationLevel.Id = @OId

@@ -9,7 +9,7 @@ CREATE PROCEDURE PageSectionTypeLanguageCreatePost (
 	)
 AS
 INSERT INTO dbPageSectionTypeLanguage (
-	ClassificationId
+	PageSectionTypeId
 	, LanguageId
 	, Name 
 	, Description 

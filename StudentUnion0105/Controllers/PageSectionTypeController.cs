@@ -51,22 +51,6 @@ namespace StudentUnion0105.Controllers
             return View(PageSectionType);
 
 
-            //var CurrentUser = await userManager.GetUserAsync(User);
-            //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            //var PageSectionTypes = (
-
-            //    from l in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-
-            //    where l.LanguageId == DefaultLanguageID
-            //    select new SuObjectVM
-
-
-            //    {
-            //        Id = l.PageSectionTypeId
-            //                 ,
-            //        Name = l.Name
-            //    }).ToList();
-            //return View(PageSectionTypes);
         }
 
         [HttpGet]
@@ -254,32 +238,6 @@ namespace StudentUnion0105.Controllers
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("PageSectionTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
-            //var ToForm = (from c in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.PageSectionTypeId
-
-            //             }).First();
-
-            //var PageSectionTypeAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = PageSectionTypeList
-            //};
-            //return View(ToForm);
-
 
         }
 
@@ -296,7 +254,6 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.PageSectionType.PageSectionTypeId.ToString() );
 
             return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
         }

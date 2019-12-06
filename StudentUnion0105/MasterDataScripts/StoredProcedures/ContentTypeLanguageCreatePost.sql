@@ -4,13 +4,14 @@ CREATE PROCEDURE ContentTypeLanguageCreatePost (
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MouseOver nvarchar(50)
+	, @MenuName nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(max)
 	, @ModifierId nvarchar(450)
 	)
 AS
-INSERT INTO dbContentLanguage (
-	ClassificationId
+INSERT INTO dbContentTypeLanguage (
+	ContentTypeId
 	, LanguageId
 	, Name 
 	, Description 

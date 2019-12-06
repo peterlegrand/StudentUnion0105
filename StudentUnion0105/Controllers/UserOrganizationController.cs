@@ -114,7 +114,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var TypesFromDB = _context.DbTypeList.FromSql("UserOrganizationTypeSelectAll @LanguageId", parameter).ToList();
+            var TypesFromDB = _context.ZDbTypeList.FromSql("UserOrganizationTypeSelectAll @LanguageId", parameter).ToList();
 
             foreach (var TypeFromDB in TypesFromDB)
             {

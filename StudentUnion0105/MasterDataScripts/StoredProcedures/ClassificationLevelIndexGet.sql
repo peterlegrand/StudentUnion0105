@@ -1,9 +1,7 @@
-
-
 CREATE PROCEDURE ClassificationLevelIndexGet (@Id int, @LanguageId int)
 AS
 SELECT 
-	dbClassificationLevelLanguage.Id
+	dbClassificationLevel.Id
 	, dbClassificationLevelLanguage.Name
 	, dbClassificationLevelLanguage.Description
 	, dbClassificationLevelLanguage.MouseOver

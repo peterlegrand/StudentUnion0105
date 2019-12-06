@@ -74,7 +74,7 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateFlowConditionEditGet = _context.ZdbProcessTemplateFlowConditionEditGet.FromSql("ProcessTemplateFlowConditionEditGet @LanguageId, @Id", parameters).First();
 
-            var ProcessTemplateFlowConditionTypesFromDb = _context.DbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
+            var ProcessTemplateFlowConditionTypesFromDb = _context.ZDbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
 
             var ProcessTemplateFlowConditionTypeList = new List<SelectListItem>(); 
 
@@ -201,7 +201,7 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             ToForm.LanguageId= DefaultLanguageID;
-            var ProcessTemplateFlowConditionTypesFromDb = _context.DbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
+            var ProcessTemplateFlowConditionTypesFromDb = _context.ZDbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
 
             var ProcessTemplateFlowConditionTypeList = new List<SelectListItem>();
 

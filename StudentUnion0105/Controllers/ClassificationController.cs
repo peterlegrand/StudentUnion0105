@@ -163,7 +163,6 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                     {
-//                    new SqlParameter("@Id", FromForm.Classification.Id),
                     new SqlParameter("@LanguageId", DefaultLanguageID),
                     new SqlParameter("@ClassificationStatusId", FromForm.Classification.ClassificationStatusId),
                     new SqlParameter("@DefaultClassificationPageId", FromForm.Classification.DefaultClassificationPageId),
@@ -177,7 +176,6 @@ namespace StudentUnion0105.Controllers
                     };
 
                 _context.Database.ExecuteSqlCommand("ClassificationCreatePost " +
-  //                          "@Id" +
                             "@LanguageId" +
                             ", @ClassificationStatusId" +
                             ", @DefaultClassificationPageId" +
@@ -280,7 +278,7 @@ namespace StudentUnion0105.Controllers
             {
                 ObjectLanguage = Classification
                 
-                ,LanguageList  = SuLanguage //LanguageList
+                ,LanguageList  = SuLanguage 
             };
             return View(ClassificationAndLanguages);
         }
@@ -291,8 +289,6 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
-//                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-//                Guid guid = new Guid(CurrentUser.Id);
 
                 SqlParameter[] parameters =
                     {

@@ -48,20 +48,6 @@ namespace StudentUnion0105.Controllers
             var PageType = _context.ZdbObjectIndexGet.FromSql("PageTypeIndexGet @LanguageId", parameter).ToList();
             return View(PageType);
 
-            //var PageTypes = (
-
-            //    from l in _PageTypeLanguage.GetAllPageTypeLanguages()
-
-            //    where l.LanguageId == DefaultLanguageID
-            //    select new SuObjectVM
-
-
-            //    {
-            //        Id = l.PageTypeId
-            //                 ,
-            //        Name = l.Name
-            //    }).ToList();
-            //return View(PageTypes);
         }
 
         [HttpGet]
@@ -246,32 +232,6 @@ namespace StudentUnion0105.Controllers
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("PageTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
-            //var ToForm = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.PageTypeId
-
-            //             }).First();
-
-            //var PageTypeAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = PageTypeList
-            //};
-            //return View(ToForm);
-
 
         }
 
@@ -288,7 +248,7 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.PageType.PageTypeId.ToString() );
+
 
             return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
         }

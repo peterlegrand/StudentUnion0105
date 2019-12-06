@@ -11,8 +11,8 @@ SELECT
 	, ISNULL(dbProjectLanguage.Description,'') Description
 	, ISNULL(dbProjectLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbProjectLanguage.MenuName,'') MenuName
-	, ISNULL(dbLanguage.LanguageName Language
-	, ISNULL(dbProject.ParentId, 0) PId
+	, ISNULL(dbLanguage.LanguageName,'') Language
+	, ISNULL(dbProject.ParentProjectId, 0) PId
 FROM dbProjectLanguage
 JOIN dbProject
 	ON dbProject.Id = dbProjectLanguage.ProjectId
@@ -21,6 +21,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbProjectLanguage.ModifierId) = Modifier.Id
 JOIN dbLanguage
-	ON dbLanguage.Id = dbClassificationLanguage.LanguageId
+	ON dbLanguage.Id = dbProjectLanguage.LanguageId
 WHERE dbProjectLanguage.Id=@LId
 

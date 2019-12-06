@@ -26,7 +26,6 @@ namespace StudentUnion0105.Controllers
         private readonly IPageTypeRepository _PageType;
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
         private readonly SuDbContext _context;
-        //      private readonly IGetPageStructureRepository _PageStructure;
 
         public PageController(UserManager<SuUserModel> userManager
             , IPageLanguageRepository PageLanguage
@@ -36,7 +35,6 @@ namespace StudentUnion0105.Controllers
             , IPageStatusRepository PageStatus
             , IPageTypeRepository PageType
             , IPageTypeLanguageRepository PageTypeLanguage
-            //, IGetPageStructureRepository PageStructure
             , SuDbContext context)
         {
             this.userManager = userManager;
