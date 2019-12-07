@@ -115,6 +115,7 @@ namespace StudentUnion0105.Controllers
 , "ClassificationLevelLanguageEditGet.sql"
 , "ClassificationLevelLanguageEditPost.sql"
 , "ClassificationLevelLanguageIndexGet.sql"
+, "ClassificationPageIndexGet.sql"
 , "ClassificationValueCreatePost.sql"
 , "ClassificationValueDeleteGet.sql"
 , "ClassificationValueDeletePost.sql"

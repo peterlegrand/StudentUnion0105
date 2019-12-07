@@ -248,5 +248,7 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(246, 'Process', 'Process');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(247, 'Add todo', 'Add todo');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(248, 'Todo', 'Todo');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(249, 'Search', 'Search');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(250, 'Classification pages', 'Classification pages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(251, 'Create new classification page', 'Create new classification page');
 
 SET IDENTITY_INSERT dbUITerm OFF;

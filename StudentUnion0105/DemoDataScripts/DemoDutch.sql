@@ -998,3 +998,40 @@ INSERT INTO dbPageSectionLanguage ( PageSectionId, LanguageId, Name, Description
 VALUES(  3, 39, 'Assignments','Assignments','Assignments','Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  
 
 
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 39, 'Klimaat pagina','Klimaat pagina','Klimaat pagina','Klimaat pagina','Deze pagina gaat over het klimaat','Dit is een algemene pagina over klimaat', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(2, 39, 'Grond soort pagina','Grond soort pagina','Grond soort pagina','Grond soort pagina','Pagina over verschillende grond soorten','Deze pagina gaat over verschillende grond soorten.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 41, 'Gewas pagina','Gewas pagina','Gewas pagina','Gewas pagina','Pagina over gewassen','Deze pagina gaat over verschillende gewassen.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+

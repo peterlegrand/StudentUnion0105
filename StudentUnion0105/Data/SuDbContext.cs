@@ -25,6 +25,10 @@ namespace StudentUnion0105.Data
         public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }
         public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
         public DbSet<SuClassificationStatusModel> DbClassificationStatus { get; set; }
+        public DbSet<SuClassificationPageModel> DbClassificationPage { get; set; }
+        public DbSet<SuClassificationPageLanguageModel> DbClassificationPageLanguage { get; set; }
+        public DbSet<SuClassificationPageSectionModel> DbClassificationPageSection { get; set; }
+        public DbSet<SuClassificationPageSectionLanguageModel> DbClassificationPageSectionLanguage { get; set; }
         //FrontProcess
         public DbSet<SuFrontProcessIndexGetTemplateGroupModel> ZdbFrontProcessIndexGetTemplateGroup { get; set; }
         public DbSet<SuFrontProcessIndexGetTemplateModel> ZdbFrontProcessIndexGetTemplate { get; set; }

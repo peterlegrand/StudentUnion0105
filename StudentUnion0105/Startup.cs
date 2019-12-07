@@ -52,6 +52,10 @@ namespace StudentUnion0105
             services.AddTransient<IClassificationLanguageRepository, SQLClassificationLanguageRepository>();
             services.AddTransient<IClassificationLevelRepository, SQLClassificationLevelRepository>();
             services.AddTransient<IClassificationLevelLanguageRepository, SQLClassificationLevelLanguageRepository>();
+            services.AddTransient<IClassificationPageRepository, SQLClassificationPageRepository>();
+            services.AddTransient<IClassificationPageLanguageRepository, SQLClassificationPageLanguageRepository>();
+            services.AddTransient<IClassificationPageSectionRepository, SQLClassificationPageSectionRepository>();
+            services.AddTransient<IClassificationPageSectionLanguageRepository, SQLClassificationPageSectionLanguageRepository>();
             services.AddTransient<IClassificationValueRepository, SQLClassificationValueRepository>();
             services.AddTransient<IClassificationValueLanguageRepository, SQLClassificationValueLanguageRepository>();
             services.AddTransient<IContentTypeLanguageRepository, SQLContentTypeLanguageRepository>();

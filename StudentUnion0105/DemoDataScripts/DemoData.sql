@@ -1645,3 +1645,48 @@ INSERT INTO dbContent (ContentTypeId, ContentStatusId, LanguageId, Title, Descri
 VALUES (3,4,41,'Solar installation site assignment', 'This is the assignment for site survey for an installation of a solar array',1,1, @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO dbContent (ContentTypeId, ContentStatusId, LanguageId, Title, Description, SecurityLevel, OrganizationId, CreatorId, ModifierId, ModifiedDate, CreatedDate)
 VALUES (3,4,41,'Agriculture in a circular model', 'Assignment on how to make use of the circular concept in agriculture',1,1, @CurrentUser, @CurrentUser, getdate(), getdate())
+
+
+INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationTitle, ShowClassificationTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 41, 'Climate page','Climate page','Climate page','Climate page','Page about different climates','This page shows general information on climate', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationTitle, ShowClassificationTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(2, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(2, 41, 'Soil page','Soil page','Soil page','Soil page','Page about different soils','This page shows general information on soils', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationTitle, ShowClassificationTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationPageLanguage ( 
+ClassificationPageId 
+, LanguageId 
+, Name 
+, MenuName 
+, Description 
+, MouseOver
+, Title
+, TitleDescription, 
+CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 41, 'Crop page','Crop page','Crop page','Crop page','Page about different crops','This page shows general information on crops', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+
