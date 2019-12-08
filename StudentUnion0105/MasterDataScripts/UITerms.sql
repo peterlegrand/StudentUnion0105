@@ -250,5 +250,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(248, 'Todo', 'Todo');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(249, 'Search', 'Search');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(250, 'Classification pages', 'Classification pages');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(251, 'Create new classification page', 'Create new classification page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(252, 'Edit classification page', 'Edit classification page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(253, 'Show title name', 'Show title name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(254, 'Title name', 'Title name');
 
 SET IDENTITY_INSERT dbUITerm OFF;

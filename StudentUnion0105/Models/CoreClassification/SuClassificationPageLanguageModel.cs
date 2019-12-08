@@ -31,7 +31,7 @@ namespace StudentUnion0105.Models
         public string MouseOver { get; set; }
         [Display(Name = "Page title")]
         [MaxLength(50)]
-        public string Title { get; set; }
+        public string TitleName { get; set; }
         [Display(Name = "Page description")]
         public string TitleDescription { get; set; }
         public Guid CreatorId { get; set; }

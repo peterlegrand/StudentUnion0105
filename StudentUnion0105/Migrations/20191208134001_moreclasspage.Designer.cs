@@ -10,8 +10,8 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20191207131536_changenametable")]
-    partial class changenametable
+    [Migration("20191208134001_moreclasspage")]
+    partial class moreclasspage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c89dcf6a-ad2f-4c3f-aae9-b85ea5293cac",
-                            ConcurrencyStamp = "b96b38d9-1a61-415f-a5b2-4c57f9d40f1b",
+                            Id = "25ecb899-6678-42ce-bef9-fb13cbc1a612",
+                            ConcurrencyStamp = "eec9775f-9ce8-4936-bcba-e71d5c581976",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "736e1327-3b11-4b3b-8b5a-d87d35b64df8",
-                            ConcurrencyStamp = "1057481f-8391-4009-a9f4-0165a06fea3a",
+                            Id = "775522cb-160c-4bde-a7b1-d59130e7144b",
+                            ConcurrencyStamp = "dc764a7d-c50f-41d4-9d5c-84e76a9c470e",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -489,6 +489,49 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("DbClassification");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuClassificationPageEditGetModel", b =>
+                {
+                    b.Property<int>("OId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassificationId");
+
+                    b.Property<int>("ClassificationPageStatusId");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LId");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("PId");
+
+                    b.Property<bool>("ShowClassificationTitleDescription");
+
+                    b.Property<bool>("ShowClassificationTitleName");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.Property<string>("TitleName");
+
+                    b.HasKey("OId");
+
+                    b.ToTable("ZdbClassificationPageEditGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationPageLanguageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -518,10 +561,10 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Title")
-                        .HasMaxLength(50);
-
                     b.Property<string>("TitleDescription");
+
+                    b.Property<string>("TitleName")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -550,9 +593,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("ModifierId");
 
-                    b.Property<bool>("ShowClassificationTitle");
-
                     b.Property<bool>("ShowClassificationTitleDescription");
+
+                    b.Property<bool>("ShowClassificationTitleName");
 
                     b.HasKey("Id");
 

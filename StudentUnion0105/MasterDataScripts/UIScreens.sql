@@ -183,5 +183,6 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1178, 'UserOrganizationTyp
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1179, 'UserOrganizationType', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1180, 'Preference', 'Index');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1181, 'ClassificationPage', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1182, 'ClassificationPage', 'Edit');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

@@ -8,6 +8,12 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+    public class SuLanguageList
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
     public class SuLayoutTermList
     {
         [Key]
@@ -25,11 +31,6 @@ namespace StudentUnion0105.Models
         public string Name { get; set; }
     }
     public class SuSecurityLevelList
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-    public class SuLanguageList
     {
         public int Id { get; set; }
         public string Name { get; set; }

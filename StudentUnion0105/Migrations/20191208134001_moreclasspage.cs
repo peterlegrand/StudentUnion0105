@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentUnion0105.Migrations
 {
-    public partial class all : Migration
+    public partial class moreclasspage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -862,6 +862,34 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ZdbClassificationLevelIndexGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbClassificationPageEditGet",
+                columns: table => new
+                {
+                    OId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PId = table.Column<int>(nullable: false),
+                    ClassificationId = table.Column<int>(nullable: false),
+                    ClassificationPageStatusId = table.Column<int>(nullable: false),
+                    ShowClassificationTitleName = table.Column<bool>(nullable: false),
+                    ShowClassificationTitleDescription = table.Column<bool>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Modifier = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    TitleName = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbClassificationPageEditGet", x => x.OId);
                 });
 
             migrationBuilder.CreateTable(
@@ -2180,9 +2208,8 @@ namespace StudentUnion0105.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ClassificationId = table.Column<int>(nullable: false),
                     ClassificationPageStatusId = table.Column<int>(nullable: false),
-                    ShowClassificationTitle = table.Column<bool>(nullable: false),
-                    ShowClassificationTitleDescriptipn = table.Column<bool>(nullable: false),
-                    ShowTitleDescription = table.Column<bool>(nullable: false),
+                    ShowClassificationTitleName = table.Column<bool>(nullable: false),
+                    ShowClassificationTitleDescription = table.Column<bool>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
@@ -2619,7 +2646,7 @@ namespace StudentUnion0105.Migrations
                     Description = table.Column<string>(nullable: true),
                     MenuName = table.Column<string>(maxLength: 50, nullable: true),
                     MouseOver = table.Column<string>(maxLength: 50, nullable: true),
-                    Title = table.Column<string>(maxLength: 50, nullable: true),
+                    TitleName = table.Column<string>(maxLength: 50, nullable: true),
                     TitleDescription = table.Column<string>(nullable: true),
                     CreatorId = table.Column<Guid>(nullable: false),
                     ModifierId = table.Column<Guid>(nullable: false),
@@ -3115,12 +3142,12 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d7e15690-1857-48ab-9674-eb05cf794469", "d3323cdf-dbe2-4100-a7a9-0b9b67d0c234", "Admin", "ADMIN" });
+                values: new object[] { "25ecb899-6678-42ce-bef9-fb13cbc1a612", "eec9775f-9ce8-4936-bcba-e71d5c581976", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8ffed300-8687-4b65-a065-9e37c54b790e", "9cb2bb5f-eec2-4a9c-8fd5-3cb500a958d0", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "775522cb-160c-4bde-a7b1-d59130e7144b", "dc764a7d-c50f-41d4-9d5c-84e76a9c470e", "Super admin", "SUPER ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -3885,6 +3912,9 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "ZdbClassificationLevelIndexGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbClassificationPageEditGet");
 
             migrationBuilder.DropTable(
                 name: "ZdbClassificationValueEditGet");

@@ -1005,7 +1005,7 @@ ClassificationPageId
 , MenuName 
 , Description 
 , MouseOver
-, Title
+, TitleName
 , TitleDescription, 
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(1, 39, 'Klimaat pagina','Klimaat pagina','Klimaat pagina','Klimaat pagina','Deze pagina gaat over het klimaat','Dit is een algemene pagina over klimaat', @CurrentUser, @CurrentUser, getdate(), getdate()); 
@@ -1017,7 +1017,7 @@ ClassificationPageId
 , MenuName 
 , Description 
 , MouseOver
-, Title
+, TitleName
 , TitleDescription, 
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 39, 'Grond soort pagina','Grond soort pagina','Grond soort pagina','Grond soort pagina','Pagina over verschillende grond soorten','Deze pagina gaat over verschillende grond soorten.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
@@ -1029,9 +1029,9 @@ ClassificationPageId
 , MenuName 
 , Description 
 , MouseOver
-, Title
+, TitleName
 , TitleDescription, 
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(3, 41, 'Gewas pagina','Gewas pagina','Gewas pagina','Gewas pagina','Pagina over gewassen','Deze pagina gaat over verschillende gewassen.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+VALUES(3, 39, 'Gewas pagina','Gewas pagina','Gewas pagina','Gewas pagina','Pagina over gewassen','Deze pagina gaat over verschillende gewassen.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
 

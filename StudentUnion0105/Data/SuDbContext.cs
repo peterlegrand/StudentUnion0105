@@ -26,6 +26,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
         public DbSet<SuClassificationStatusModel> DbClassificationStatus { get; set; }
         public DbSet<SuClassificationPageModel> DbClassificationPage { get; set; }
+        public DbSet<SuClassificationPageEditGetModel> ZdbClassificationPageEditGet  { get; set; }
         public DbSet<SuClassificationPageLanguageModel> DbClassificationPageLanguage { get; set; }
         public DbSet<SuClassificationPageSectionModel> DbClassificationPageSection { get; set; }
         public DbSet<SuClassificationPageSectionLanguageModel> DbClassificationPageSectionLanguage { get; set; }
@@ -120,10 +121,10 @@ namespace StudentUnion0105.Data
         public DbSet<SuMasterListModel> DbMasterList { get; set; }
         public DbSet<SuDataTypeModel> DbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> DbSecurityLevel { get; set; }
+        public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
         public DbSet<SuStatusList> ZDbStatusList { get; set; }
         public DbSet<SuUITermList> ZDbUITermList { get; set; }
         public DbSet<SuSecurityLevelList> DbSecurityLevelList { get; set; }
-        public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
         public DbSet<SuUITermLanguageEditGetModel> ZDbUITermLanguageEditGet { get; set; }
         public DbSet<SuCountryList> DbCountryList { get; set; }
         public DbSet<SuTypeList> ZDbTypeList { get; set; }
