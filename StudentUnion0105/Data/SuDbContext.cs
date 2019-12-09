@@ -19,6 +19,8 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuClassificationPageLanguageEditGetModel> ZdbClassificationPageLanguageEditGet { get; set; }
+        public DbSet<SuClassificationPageDeleteGetModel> ZdbClassificationPageDeleteGet { get; set; }
         public DbSet<SuContentTypeEditGetModel> ZdbContentTypeEditGet { get; set; }
         public DbSet<SuFrontPageViewGetModel> ZdbFrontPageViewGet { get; set; }
         public DbSet<SuLayoutTermList> ZdbLayoutTermList { get; set; }

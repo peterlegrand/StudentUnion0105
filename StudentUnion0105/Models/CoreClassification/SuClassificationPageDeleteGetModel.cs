@@ -1,17 +1,14 @@
-﻿using StudentUnion0105.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
-    public class SuClassificationPageEditGetModel
+    public class SuClassificationPageDeleteGetModel
     {
         [Key]
         public int OId { get; set; }
         public int PId { get; set; }
-        public int ClassificationPageStatusId { get; set; }
+        public int Status { get; set; }
         public bool ShowClassificationPageTitleName { get; set; }
         public bool ShowClassificationPageTitleDescription { get; set; }
         public string Creator { get; set; }

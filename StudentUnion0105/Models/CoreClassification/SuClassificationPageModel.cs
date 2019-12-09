@@ -21,9 +21,9 @@ namespace StudentUnion0105.Models
         [Display(Name = "Classification page status id")]
         public int ClassificationPageStatusId { get; set; }
         [Display(Name = "Show classification title")]
-        public bool ShowClassificationTitleName { get; set; }
+        public bool ShowClassificationPageTitleName { get; set; }
         [Display(Name = "Show classification title description")]
-        public bool ShowClassificationTitleDescription { get; set; }
+        public bool ShowClassificationPageTitleDescription { get; set; }
         [Display(Name = "Show classification page title")]
         public Guid CreatorId { get; set; }
         public Guid ModifierId { get; set; }

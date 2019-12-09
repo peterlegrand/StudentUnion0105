@@ -2,8 +2,8 @@ CREATE PROCEDURE ClassificationPageEditPost (
 	@OId int
 	, @LanguageId int
 	, @StatusId int
-	, @ShowClassificationTitleName bit
-	, @ShowClassificationTitleDescription bit
+	, @ShowClassificationPageTitleName bit
+	, @ShowClassificationPageTitleDescription bit
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -17,8 +17,8 @@ BEGIN TRANSACTION
 UPDATE dbClassificationPage 
 SET
 	ClassificationPageStatusId = @StatusId
-	, ShowClassificationTitleName = @ShowClassificationTitleName
-	, ShowClassificationTitleDescription= @ShowClassificationTitleDescription 
+	, ShowClassificationPageTitleName = @ShowClassificationPageTitleName
+	, ShowClassificationPageTitleDescription= @ShowClassificationPageTitleDescription 
 	, ModifierId = @ModifierId
 	, ModifiedDate = getdate()
 WHERE Id = @OId;

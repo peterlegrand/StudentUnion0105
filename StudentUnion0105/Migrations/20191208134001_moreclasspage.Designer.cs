@@ -519,9 +519,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("PId");
 
-                    b.Property<bool>("ShowClassificationTitleDescription");
+                    b.Property<bool>("ShowClassificationPageTitleDescription");
 
-                    b.Property<bool>("ShowClassificationTitleName");
+                    b.Property<bool>("ShowClassificationPageTitleName");
 
                     b.Property<string>("TitleDescription");
 
@@ -593,9 +593,9 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<Guid>("ModifierId");
 
-                    b.Property<bool>("ShowClassificationTitleDescription");
+                    b.Property<bool>("ShowClassificationPageTitleDescription");
 
-                    b.Property<bool>("ShowClassificationTitleName");
+                    b.Property<bool>("ShowClassificationPageTitleName");
 
                     b.HasKey("Id");
 

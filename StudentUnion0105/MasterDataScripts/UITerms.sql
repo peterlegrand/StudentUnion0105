@@ -253,5 +253,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(251, 'Create new classificat
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(252, 'Edit classification page', 'Edit classification page');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(253, 'Show title name', 'Show title name');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(254, 'Title name', 'Title name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(255, 'Add classification page', 'Add classification page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(256, 'Delete classification page', 'Delete classification page');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(257, 'Back to classification pages', 'Back to classification pages');
 
 SET IDENTITY_INSERT dbUITerm OFF;
