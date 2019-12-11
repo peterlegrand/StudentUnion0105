@@ -152,7 +152,7 @@ namespace StudentUnion0105.Controllers
 
 
                 ProcessTemplateFieldType.ModifiedDate = DateTime.Now;
-                ProcessTemplateFieldType.ModifierId = new Guid(CurrentUser.Id);
+                ProcessTemplateFieldType.ModifierId = CurrentUser.Id;
                 _ProcessTemplateFieldType.UpdateProcessTemplateFieldType(ProcessTemplateFieldType);
 
                 var ProcessTemplateFieldTypeLanguage = _ProcessTemplateFieldTypeLanguage.GetProcessTemplateFieldTypeLanguage(test3.ObjectLanguageId);
@@ -160,7 +160,7 @@ namespace StudentUnion0105.Controllers
                 ProcessTemplateFieldTypeLanguage.Description = test3.Description;
                 ProcessTemplateFieldTypeLanguage.MouseOver = test3.MouseOver;
                 ProcessTemplateFieldTypeLanguage.ModifiedDate = DateTime.Now;
-                ProcessTemplateFieldTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
+                ProcessTemplateFieldTypeLanguage.ModifierId =  CurrentUser.Id;
                 _ProcessTemplateFieldTypeLanguage.UpdateProcessTemplateFieldTypeLanguage(ProcessTemplateFieldTypeLanguage);
 
             }

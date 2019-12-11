@@ -204,7 +204,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 Project.ModifiedDate = DateTime.Now;
-                Project.ModifierId = new Guid(CurrentUser.Id);
+                Project.ModifierId = CurrentUser.Id;
                 _Project.UpdateProject(Project);
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -213,7 +213,7 @@ namespace StudentUnion0105.Controllers
                 ProjectLanguage.Description = FromForm.SuObject.Description;
                 ProjectLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ProjectLanguage.ModifiedDate = DateTime.Now;
-                ProjectLanguage.ModifierId = new Guid(CurrentUser.Id);
+                ProjectLanguage.ModifierId = CurrentUser.Id;
                 _ProjectLanguage.UpdateProjectLanguage(ProjectLanguage);
 
             }

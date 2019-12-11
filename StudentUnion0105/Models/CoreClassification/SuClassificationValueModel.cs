@@ -17,8 +17,8 @@ namespace StudentUnion0105.Models
         public DateTimeOffset? DateFrom { get; set; }
         [Display(Name = "Classification value date to")]
         public DateTimeOffset? DateTo { get; set; }
-        public Guid CreatorId { get; set; }
-        public Guid ModifierId { get; set; }
+        public string CreatorId { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 

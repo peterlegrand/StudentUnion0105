@@ -14,8 +14,8 @@ namespace StudentUnion0105.Models
         public int OrganizationStatusId { get; set; }
         [Display(Name = "Organization type id")]
         public int OrganizationTypeId { get; set; }
-        public Guid CreatorId { get; set; }
-        public Guid ModifierId { get; set; }
+        public string CreatorId { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         [ForeignKey("ParentOrganizationId")]

@@ -37,8 +37,8 @@ namespace StudentUnion0105.Models
         public string TitleDescription { get; set; }
         [Display(Name = "Page section mouse over")]
         [MaxLength(50)]
-        public Guid CreatorId { get; set; }
-        public Guid ModifierId { get; set; }
+        public string CreatorId { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 

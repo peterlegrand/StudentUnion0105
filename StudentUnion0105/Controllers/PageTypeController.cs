@@ -122,7 +122,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 PageType.ModifiedDate = DateTime.Now;
-                PageType.ModifierId = new Guid(CurrentUser.Id);
+                PageType.ModifierId = CurrentUser.Id;
                 _PageType.UpdatePageType(PageType);
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -131,7 +131,7 @@ namespace StudentUnion0105.Controllers
                 PageTypeLanguage.Description = test3.Description;
                 PageTypeLanguage.MouseOver = test3.MouseOver;
                 PageTypeLanguage.ModifiedDate = DateTime.Now;
-                PageTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
+                PageTypeLanguage.ModifierId = CurrentUser.Id;
                 _PageTypeLanguage.UpdatePageTypeLanguage(PageTypeLanguage);
 
             }

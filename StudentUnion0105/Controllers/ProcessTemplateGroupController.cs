@@ -149,7 +149,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 ProcessTemplateGroup.ModifiedDate = DateTime.Now;
-                ProcessTemplateGroup.ModifierId = new Guid(CurrentUser.Id);
+                ProcessTemplateGroup.ModifierId = CurrentUser.Id;
                 _ProcessTemplateGroup.UpdateProcessTemplateGroup(ProcessTemplateGroup);
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -158,7 +158,7 @@ namespace StudentUnion0105.Controllers
                 ProcessTemplateGroupLanguage.Description = test3.Description;
                 ProcessTemplateGroupLanguage.MouseOver = test3.MouseOver;
                 ProcessTemplateGroupLanguage.ModifiedDate = DateTime.Now;
-                ProcessTemplateGroupLanguage.ModifierId = new Guid(CurrentUser.Id);
+                ProcessTemplateGroupLanguage.ModifierId = CurrentUser.Id;
                 _ProcessTemplateGroupLanguage.UpdateProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
 
             }

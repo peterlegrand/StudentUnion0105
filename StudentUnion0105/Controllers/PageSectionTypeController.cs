@@ -128,7 +128,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 PageSectionType.ModifiedDate = DateTime.Now;
-                PageSectionType.ModifierId = new Guid(CurrentUser.Id);
+                PageSectionType.ModifierId = CurrentUser.Id;
                 PageSectionType.IndexSection = test3.IndexSection;
                 _PageSectionType.UpdatePageSectionType(PageSectionType);
 
@@ -138,7 +138,7 @@ namespace StudentUnion0105.Controllers
                 PageSectionTypeLanguage.Description = test3.Description;
                 PageSectionTypeLanguage.MouseOver = test3.MouseOver;
                 PageSectionTypeLanguage.ModifiedDate = DateTime.Now;
-                PageSectionTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
+                PageSectionTypeLanguage.ModifierId = CurrentUser.Id;
                 _PageSectionTypeLanguage.UpdatePageSectionTypeLanguage(PageSectionTypeLanguage);
 
             }

@@ -12,13 +12,9 @@ namespace StudentUnion0105.Models
         public DateTime ModifiedDate { get; set; }
         [Key]
         public int LId { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required] 
         public string Description { get; set; }
-        [Required] 
         public string MouseOver { get; set; }
-        [Required] 
         public string MenuName { get; set; }
         public string Language { get; set; }
     }

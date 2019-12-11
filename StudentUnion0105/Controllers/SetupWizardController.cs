@@ -121,6 +121,7 @@ namespace StudentUnion0105.Controllers
 , "ClassificationPageEditGet.sql"
 , "ClassificationPageEditPost.sql"
 , "ClassificationPageIndexGet.sql"
+, "ClassificationPageLanguageCreateGetLanguages.sql"
 , "ClassificationPageLanguageCreatePost.sql"
 , "ClassificationPageLanguageEditGet.sql"
 , "ClassificationPageLanguageEditPost.sql"

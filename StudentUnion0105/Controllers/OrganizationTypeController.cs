@@ -148,7 +148,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 OrganizationType.ModifiedDate = DateTime.Now;
-                OrganizationType.ModifierId = new Guid(CurrentUser.Id);
+                OrganizationType.ModifierId = CurrentUser.Id;
                 _OrganizationType.UpdateOrganizationType(OrganizationType);
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -157,7 +157,7 @@ namespace StudentUnion0105.Controllers
                 OrganizationTypeLanguage.Description = test3.Description;
                 OrganizationTypeLanguage.MouseOver = test3.MouseOver;
                 OrganizationTypeLanguage.ModifiedDate = DateTime.Now;
-                OrganizationTypeLanguage.ModifierId = new Guid(CurrentUser.Id);
+                OrganizationTypeLanguage.ModifierId = CurrentUser.Id;
                 _OrganizationTypeLanguage.UpdateOrganizationTypeLanguage(OrganizationTypeLanguage);
 
             }

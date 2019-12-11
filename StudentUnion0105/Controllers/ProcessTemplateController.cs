@@ -116,7 +116,7 @@ namespace StudentUnion0105.Controllers
 
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                Guid guid = new Guid(CurrentUser.Id);
+                
 
                 var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
 
@@ -125,8 +125,8 @@ namespace StudentUnion0105.Controllers
                 ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ProcessTemplateLanguage.ProcessTemplateId = NewProcessTemplate.Id;
                 ProcessTemplateLanguage.LanguageId = DefaultLanguageID;
-                ProcessTemplateLanguage.ModifierId = guid;
-                ProcessTemplateLanguage.CreatorId = guid;
+                ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
+                ProcessTemplateLanguage.CreatorId = CurrentUser.Id;
                 _processTemplateLanguage.AddProcessTemplateLanguage(ProcessTemplateLanguage);
 
             }
@@ -197,12 +197,11 @@ namespace StudentUnion0105.Controllers
 
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                Guid guid = new Guid(CurrentUser.Id);
                 var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(FromForm.SuObject.ObjectLanguageId);
                 ProcessTemplateLanguage.Name = FromForm.SuObject.Name;
                 ProcessTemplateLanguage.Description = FromForm.SuObject.Description;
                 ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProcessTemplateLanguage.ModifierId = guid;
+                ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
                 _processTemplateLanguage.UpdateProcessTemplateLanguage(ProcessTemplateLanguage);
 
             }
@@ -277,13 +276,12 @@ namespace StudentUnion0105.Controllers
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                Guid guid = new Guid(CurrentUser.Id);
 
                 var ProcessTemplateLanguage = _processTemplateLanguage.GetProcessTemplateLanguage(FromForm.SuObject.Id);
                 ProcessTemplateLanguage.Name = FromForm.SuObject.Name;
                 ProcessTemplateLanguage.Description = FromForm.SuObject.Description;
                 ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProcessTemplateLanguage.ModifierId = guid;
+                ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
                 _processTemplateLanguage.UpdateProcessTemplateLanguage(ProcessTemplateLanguage);
 
 
@@ -347,15 +345,14 @@ namespace StudentUnion0105.Controllers
             {
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                Guid guid = new Guid(CurrentUser.Id);
-
+             
                 var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
                 ProcessTemplateLanguage.Name = FromForm.SuObject.Name;
                 ProcessTemplateLanguage.Description = FromForm.SuObject.Description;
                 ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
                 ProcessTemplateLanguage.ProcessTemplateId = FromForm.SuObject.ObjectId;
                 ProcessTemplateLanguage.LanguageId = FromForm.SuObject.LanguageId;
-                ProcessTemplateLanguage.ModifierId = guid;
+                ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
 
                 var NewProcessTemplate = _processTemplateLanguage.AddProcessTemplateLanguage(ProcessTemplateLanguage);
 

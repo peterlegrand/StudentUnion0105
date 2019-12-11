@@ -278,7 +278,7 @@ namespace StudentUnion0105.Controllers
                 var CurrentUser = await userManager.GetUserAsync(User);
 
                 Page.ModifiedDate = DateTime.Now;
-                Page.ModifierId = new Guid(CurrentUser.Id);
+                Page.ModifierId = CurrentUser.Id;
                 _Page.UpdatePage(Page);
 
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -289,7 +289,7 @@ namespace StudentUnion0105.Controllers
                 PageLanguage.TitleName = FromForm.SuObject.MouseOver;
                 PageLanguage.TitleDescription = FromForm.SuObject.PageDescription;
                 PageLanguage.ModifiedDate = DateTime.Now;
-                PageLanguage.ModifierId = new Guid(CurrentUser.Id);
+                PageLanguage.ModifierId = CurrentUser.Id;
                 _PageLanguage.UpdatePageLanguage(PageLanguage);
 
             }

@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4b71536d-37c0-4b36-bff0-6ae23bccb6ad",
-                            ConcurrencyStamp = "8691d24b-05e9-456b-af4a-14a9f5bf8b6f",
+                            Id = "639bee46-550a-45c6-aa54-31a66eb92be6",
+                            ConcurrencyStamp = "864d879d-9c7b-45db-9b78-02598305c74a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9b7d2898-4d7e-43be-b196-9cecc9c6d82f",
-                            ConcurrencyStamp = "b3f85846-c73c-4421-832e-ddab89e6b680",
+                            Id = "b0af3228-8026-45f1-8546-60d8568e8f3c",
+                            ConcurrencyStamp = "2aff7ad8-7a59-4c21-8995-9411900b7ac3",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -248,7 +248,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -259,7 +259,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -395,7 +395,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -406,7 +406,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -437,7 +437,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<int>("DateLevel");
 
@@ -445,7 +445,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<bool>("OnTheFly");
 
@@ -468,7 +468,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<int>("DefaultClassificationPageId");
 
@@ -478,7 +478,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -569,6 +569,41 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbClassificationPageEditGet");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuClassificationPageLanguageEditGetModel", b =>
+                {
+                    b.Property<int>("LId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OId");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.Property<string>("TitleName");
+
+                    b.HasKey("LId");
+
+                    b.ToTable("ZdbClassificationPageLanguageEditGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuClassificationPageLanguageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -579,7 +614,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -590,7 +625,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -624,11 +659,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<bool>("ShowClassificationPageTitleDescription");
 
@@ -649,7 +684,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId")
+                    b.Property<string>("CreatorId")
                         .HasMaxLength(50);
 
                     b.Property<string>("Description");
@@ -661,7 +696,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -736,7 +771,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -747,7 +782,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -772,11 +807,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -877,7 +912,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -894,7 +929,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -926,7 +961,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTimeOffset?>("DateFrom");
 
@@ -934,7 +969,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int?>("ParentValueId");
 
@@ -989,7 +1024,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -997,7 +1032,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("OrganizationId");
 
@@ -1115,7 +1150,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1126,7 +1161,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1155,11 +1190,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -1629,34 +1664,25 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("Creator");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<string>("Language");
 
-                    b.Property<string>("MenuName")
-                        .IsRequired();
+                    b.Property<string>("MenuName");
 
                     b.Property<DateTime>("ModifiedDate");
 
                     b.Property<string>("Modifier");
 
-                    b.Property<string>("MouseOver")
-                        .IsRequired();
+                    b.Property<string>("MouseOver");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<int>("OId");
 
                     b.HasKey("LId");
 
                     b.ToTable("ZdbObjectLanguageEditGet");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("SuObjectLanguageEditGetModel");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuObjectLanguageIndexGetModel", b =>
@@ -1727,7 +1753,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1738,7 +1764,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1765,11 +1791,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("OrganizationStatusId");
 
@@ -1839,7 +1865,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1850,7 +1876,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -1877,11 +1903,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -1972,7 +1998,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -1983,7 +2009,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2015,11 +2041,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("PageStatusId");
 
@@ -2099,7 +2125,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2110,7 +2136,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2185,7 +2211,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2196,7 +2222,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2225,13 +2251,13 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<bool>("IndexSection");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -2298,7 +2324,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2309,7 +2335,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2336,11 +2362,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -2392,11 +2418,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("ProcessTemplateId");
 
@@ -2421,7 +2447,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2432,7 +2458,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2486,7 +2512,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2499,7 +2525,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2524,11 +2550,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.HasKey("Id");
 
@@ -2592,7 +2618,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2605,7 +2631,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2661,11 +2687,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
@@ -2683,7 +2709,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2696,7 +2722,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2740,7 +2766,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2753,7 +2779,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2780,11 +2806,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("Sequence");
 
@@ -2801,7 +2827,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description")
                         .HasMaxLength(50);
@@ -2813,7 +2839,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2842,11 +2868,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid?>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid?>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("ProcessTemplateGroupId");
 
@@ -2904,7 +2930,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2915,7 +2941,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2957,7 +2983,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -2968,7 +2994,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -2995,11 +3021,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int?>("ParentProjectId");
 
@@ -3290,11 +3316,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("OrganizationId");
 
@@ -3322,7 +3348,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -3333,7 +3359,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -3375,11 +3401,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<int>("ProjectId");
 
@@ -3407,7 +3433,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("Description");
 
@@ -3418,7 +3444,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("MouseOver")
                         .HasMaxLength(50);
@@ -3460,14 +3486,14 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("FromUserId")
                         .HasMaxLength(450);
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("ToUserId")
                         .HasMaxLength(450);
@@ -3493,7 +3519,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<string>("CreatorId");
 
                     b.Property<string>("FromIsOfToDescription");
 
@@ -3510,7 +3536,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("ModifiedDate");
 
-                    b.Property<Guid>("ModifierId");
+                    b.Property<string>("ModifierId");
 
                     b.Property<string>("ToIsOfFromDescription");
 
@@ -3706,17 +3732,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DbObjectVM");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuClassificationPageLanguageEditGetModel", b =>
-                {
-                    b.HasBaseType("StudentUnion0105.Models.SuObjectLanguageEditGetModel");
-
-                    b.Property<string>("TitleDescription");
-
-                    b.Property<string>("TitleName");
-
-                    b.HasDiscriminator().HasValue("SuClassificationPageLanguageEditGetModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

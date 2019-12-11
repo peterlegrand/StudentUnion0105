@@ -21,8 +21,8 @@ namespace StudentUnion0105.Models
         [Display(Name = "Classification level mouse over")]
         [MaxLength(50)]
         public string MouseOver { get; set; }
-        public Guid CreatorId { get; set; }
-        public Guid ModifierId { get; set; }
+        public string CreatorId { get; set; }
+        public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
         [ForeignKey("ClassificationLevelId")]
