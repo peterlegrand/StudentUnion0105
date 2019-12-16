@@ -117,6 +117,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@Alphabetically", FromForm.ClassificationLevel.Alphabetically),
                     new SqlParameter("@CanLink", FromForm.ClassificationLevel.CanLink),
                     new SqlParameter("@InDropDown", FromForm.ClassificationLevel.InDropDown),
+                    new SqlParameter("@InMenu", FromForm.ClassificationLevel.InMenu),
                     new SqlParameter("@OnTheFly", FromForm.ClassificationLevel.OnTheFly),
                     new SqlParameter("@Sequence", FromForm.ClassificationLevel.Sequence),
                     new SqlParameter("@DateLevel", FromForm.ClassificationLevel.DateLevel),
@@ -132,6 +133,7 @@ namespace StudentUnion0105.Controllers
                             ", @Alphabetically" +
                             ", @CanLink" +
                             ", @InDropDown" +
+                            ", @InMenu" +
                             ", @OnTheFly" +
                             ", @Sequence" +
                             ", @DateLevel" +
@@ -209,6 +211,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Alphabetically", FromForm.ClassificationLevel.Alphabetically)
                     , new SqlParameter("@CanLink", FromForm.ClassificationLevel.CanLink)
                     , new SqlParameter("@InDropDown", FromForm.ClassificationLevel.InDropDown)
+                    , new SqlParameter("@InMenu", FromForm.ClassificationLevel.InMenu)
                     , new SqlParameter("@ModifierId", CurrentUser.Id)
                     , new SqlParameter("@Name", FromForm.ClassificationLevel.Name)
                     , new SqlParameter("@Description", FromForm.ClassificationLevel.Description)
@@ -225,6 +228,7 @@ namespace StudentUnion0105.Controllers
                             ", @Alphabetically" +
                             ", @CanLink" +
                             ", @InDropDown" +
+                            ", @InMenu" +
                             ", @ModifierId" +
                             ", @Name" +
                             ", @Description" +

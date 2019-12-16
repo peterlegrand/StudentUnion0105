@@ -17,6 +17,7 @@ namespace StudentUnion0105.Models
         public bool Alphabetically { get; set; }
         public bool CanLink { get; set; }
         public bool InDropDown { get; set; }
+        public bool InMenu { get; set; }
         public int Lid { get; set; }
         [Required]
         public string Name { get; set; }

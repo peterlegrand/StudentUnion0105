@@ -7,6 +7,7 @@ SELECT
 	, dbClassificationLevel.DateLevel
 	, dbClassificationLevel.CanLink
 	, dbClassificationLevel.InDropDown
+	, dbClassificationLevel.InMenu
 	, dbClassificationLevel.OnTheFly
 	, dbClassificationLevel.Sequence
 	, Creator.UserName Creator

@@ -9,8 +9,8 @@ namespace StudentUnion0105.Models
         public int OId { get; set; }
         public int PId { get; set; }
         public int Status { get; set; }
-        public bool ShowClassificationPageTitleName { get; set; }
-        public bool ShowClassificationPageTitleDescription { get; set; }
+        public bool ShowTitleName { get; set; }
+        public bool ShowTitleDescription { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }

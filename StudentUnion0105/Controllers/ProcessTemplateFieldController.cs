@@ -398,6 +398,25 @@ namespace StudentUnion0105.Controllers
 
         }
 
+        public ActionResult GetMasterList()
+        {
+            var DataTypeList = new List<SelectListItem>();
+
+
+            var MasterListsFromDb = _context.ZDbStatusList.FromSql("GetMasterList").ToList();
+
+            foreach (var DataTypeFromDb in MasterListsFromDb)
+            {
+                DataTypeList.Add(new SelectListItem
+                {
+                    Text = DataTypeFromDb.Name,
+                    Value = DataTypeFromDb.Id.ToString()
+                });
+            }
+
+            JsonResult x = Json(DataTypeList);
+            return x;
+        }
 
     }
 }

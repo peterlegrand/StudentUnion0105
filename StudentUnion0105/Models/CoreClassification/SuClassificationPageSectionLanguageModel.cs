@@ -32,7 +32,7 @@ namespace StudentUnion0105.Models
         [Display(Name = "Page section title")]
         [MaxLength(50)]
 
-        public string Title { get; set; }
+        public string TitleName { get; set; }
         [Display(Name = "Page Section title description")]
         public string TitleDescription { get; set; }
         [Display(Name = "Page section mouse over")]

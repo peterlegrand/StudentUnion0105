@@ -24,6 +24,7 @@ namespace StudentUnion0105.Models
         public bool CanLink { get; set; }
         [Display(Name = "In dropdown")]
         public bool InDropDown { get; set; }
+        public bool InMenu { get; set; }
         public string CreatorId { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

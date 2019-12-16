@@ -228,6 +228,7 @@ SET IDENTITY_INSERT dbSetting ON
 INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (1, 41, 'Default language'); 
 INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (2, 2, 'Home page'); 
 INSERT INTO dbSetting  (Id, IntValue, StringValue, SettingName) VALUES (3, 0, 'Student Union 1.5', 'Application title'); 
+INSERT INTO dbSetting  (Id, IntValue, StringValue, SettingName) VALUES (4, 0, 'Theme1', 'Theme'); 
  
 SET IDENTITY_INSERT dbSetting OFF
 
@@ -618,4 +619,13 @@ INSERT INTO dbUserProjectTypeLanguage (Id, TypeId, LanguageId, Name, Description
 VALUES(2, 2, 41, 'Team leader', 'Team leader', 'Team leader', 'Team leader', @CurrentUser, @CurrentUser, getdate(), getdate());
 
 SET IDENTITY_INSERT dbUserProjectTypeLanguage OFF;
+
+SET IDENTITY_INSERT dbMenuType ON;
+
+INSERT dbMenuType (Id, Name) VALUES (1, 'No action') 
+INSERT dbMenuType (Id, Name) VALUES (2, 'Classification')
+INSERT dbMenuType (Id, Name) VALUES (3, 'Controller/Action/Id')
+INSERT dbMenuType (Id, Name) VALUES (4, 'Feature')
+
+SET IDENTITY_INSERT dbMenuType OFF;
 

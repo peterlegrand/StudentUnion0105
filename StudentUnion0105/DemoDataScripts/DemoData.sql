@@ -43,8 +43,8 @@ INSERT INTO dbClassification (ClassificationStatusId, DefaultClassificationPageI
 INSERT INTO dbClassificationLanguage (ClassificationId, LanguageId,Name, Description, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(3,41, 'Crop','Crop','Crop','Crop', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(1, 1, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 1, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -53,8 +53,8 @@ ClassificationLevelId
 , Description 
 , MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(1, 41, 'Main climate group','Main climate group','Main climate group','Main climate group', @CurrentUser, @CurrentUser, getdate(), getdate()); 
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(1, 2, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 2, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -64,8 +64,8 @@ ClassificationLevelId
 , MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 41, 'Sub climate group','Sub climate group','Sub climate group','Sub climate group', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(1, 3, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 3, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -76,8 +76,8 @@ ClassificationLevelId
 VALUES(3, 41, '2nd sub climate group','2nd sub climate group','2nd sub climate group','2nd sub climate group', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(2, 1, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(2, 1, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -88,8 +88,8 @@ ClassificationLevelId
 VALUES(4, 41, 'Soil group','Soil group','Soil group','Soil group', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(3, 1, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 1, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -99,8 +99,8 @@ ClassificationLevelId
 , MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(5, 41, 'Crop group','Crop group','Crop group','Crop group', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(3, 2, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown,InMenu,  CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 2, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -110,8 +110,8 @@ ClassificationLevelId
 , MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(6, 41, 'Crop class','Crop class','Crop class','Crop class', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(3, 3, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 3, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -121,8 +121,8 @@ ClassificationLevelId
 , MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(7, 41, 'Crop sub-class','Crop sub-class','Crop sub-class','Crop sub-class', @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
-INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(3, 4, 0,0,1,0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbClassificationLevel (ClassificationId, Sequence, DateLevel, OnTheFly, Alphabetically, CanLink, InDropDown, InMenu, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 4, 0,0,1,0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationLevelLanguage ( 
 ClassificationLevelId 
 , LanguageId 
@@ -1647,7 +1647,7 @@ INSERT INTO dbContent (ContentTypeId, ContentStatusId, LanguageId, Title, Descri
 VALUES (3,4,41,'Agriculture in a circular model', 'Assignment on how to make use of the circular concept in agriculture',1,1, @CurrentUser, @CurrentUser, getdate(), getdate())
 
 
-INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationPageTitleName, ShowClassificationPageTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+INSERT INTO dbClassificationPage (ClassificationId, StatusId, ShowTitleName, ShowTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(1, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationPageLanguage ( 
 ClassificationPageId 
@@ -1661,7 +1661,7 @@ ClassificationPageId
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(1, 41, 'Climate page','Climate page','Climate page','Climate page','Page about different climates','This page shows general information on climate', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
-INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationPageTitleName, ShowClassificationPageTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+INSERT INTO dbClassificationPage (ClassificationId, StatusId, ShowTitleName, ShowTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationPageLanguage ( 
 ClassificationPageId 
@@ -1675,7 +1675,7 @@ ClassificationPageId
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 41, 'Soil page','Soil page','Soil page','Soil page','Page about different soils','This page shows general information on soils', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
-INSERT INTO dbClassificationPage (ClassificationId, ClassificationPageStatusId, ShowClassificationPageTitleName, ShowClassificationPageTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+INSERT INTO dbClassificationPage (ClassificationId, StatusId, ShowTitleName, ShowTitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(3, 1, 1, 1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbClassificationPageLanguage ( 
 ClassificationPageId 
@@ -1689,4 +1689,155 @@ ClassificationPageId
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(3, 41, 'Crop page','Crop page','Crop page','Crop page','Page about different crops','This page shows general information on crops', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
+SELECT * FROM dbClassificationPageSection
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(1, 1, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
 
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(1, 2, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
+
+
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(2, 1, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
+
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(2, 2, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
+
+
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(3, 1, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
+
+INSERT INTO dbClassificationPageSection (
+ClassificationPageId
+, Sequence
+, SectionTypeId
+, ShowSectionTitleName
+, ShowSectionTitleDescription
+, ShowContentTypeTitleName
+, ShowContentTypeTitleDescription
+, OneTwoColumns
+, SortById
+, MaxContent
+, HasPaging)  
+VALUES(3, 2, 1, 1, 1, 0, 0, 1, 1, 5, 1); 
+
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (1, 41, 'Main section 1', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (2, 41, 'Second section 1', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (3, 41, 'Main section 2', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (4, 41, 'Second section 2', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (5, 41, 'Main section 3', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (6, 41, 'Second section 3', 'Main section', 'Main section', 'Main section', 'Main section', 'Main section',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+
+INSERT INTO dbMenu1 (
+	MenuTypeId
+, Sequence
+, ClassificationId
+, FeatureId
+, Controller
+, Action
+, DestinationId
+ , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 1, 0, 0, 'FrontPage', 'Index', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
+
+INSERT INTO dbMenu1 (
+	MenuTypeId
+, Sequence
+, ClassificationId
+, FeatureId
+, Controller
+, Action
+, DestinationId
+ , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 2, 1, 0, '', '', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
+
+INSERT INTO dbMenu1 (
+	MenuTypeId
+, Sequence
+, ClassificationId
+, FeatureId
+, Controller
+, Action
+, DestinationId
+ , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(3, 3, 2, 0, '', '', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
+
+SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (1, 39, 'Home', 'Home', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (2, 39, 'First class', 'First', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (3, 39, 'Second class', 'Second', @CurrentUser, @CurrentUser, getdate(), getdate()); 

@@ -19,9 +19,9 @@ FROM dbClassificationPageLanguage
 JOIN dbClassificationPage
 	ON dbClassificationPage.Id = dbClassificationPageLanguage.ClassificationPageId
 JOIN AspNetUsers Creator
-	ON convert(nvarchar(50), dbClassificationPage.CreatorId) = Creator.Id
+	ON dbClassificationPage.CreatorId = Creator.Id
 JOIN AspNetUsers Modifier
-	ON convert(nvarchar(50), dbClassificationPage.ModifierId) = Modifier.Id
+	ON dbClassificationPage.ModifierId = Modifier.Id
 JOIN dbLanguage
 	ON dbLanguage.Id = dbClassificationPageLanguage.LanguageId
 WHERE dbClassificationPageLanguage.Id=@LId

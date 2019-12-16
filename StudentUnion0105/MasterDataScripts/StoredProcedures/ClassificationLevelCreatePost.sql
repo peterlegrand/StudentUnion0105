@@ -7,6 +7,7 @@ CREATE PROCEDURE ClassificationLevelCreatePost (
 	, @Alphabetically bit
 	, @CanLink bit
 	, @InDropDown bit
+	, @InMenu bit
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
@@ -26,6 +27,7 @@ INSERT INTO dbClassificationLevel (
 	, Alphabetically
 	, CanLink
 	, InDropDown
+	, InMenu
 	, CreatorId
 	, CreatedDate
 	, ModifierId 
@@ -39,6 +41,7 @@ VALUES (
 	, @Alphabetically
 	, @CanLink
 	, @InDropDown
+	, @InMenu
 	, @ModifierId
 	, getdate()
 	, @ModifierId

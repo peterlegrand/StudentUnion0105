@@ -106,9 +106,9 @@ namespace StudentUnion0105.Controllers
                     {
                         new SqlParameter("@OId", FromForm.ClassificationPage.OId),
                         new SqlParameter("@LanguageId", DefaultLanguageID),
-                        new SqlParameter("@StatusId", FromForm.ClassificationPage.ClassificationPageStatusId),
-                        new SqlParameter("@ShowClassificationPageTitleName", FromForm.ClassificationPage.ShowClassificationPageTitleName),
-                        new SqlParameter("@ShowClassificationPageTitleDescription", FromForm.ClassificationPage.ShowClassificationPageTitleDescription),
+                        new SqlParameter("@StatusId", FromForm.ClassificationPage.StatusId),
+                        new SqlParameter("@ShowTitleName", FromForm.ClassificationPage.ShowTitleName),
+                        new SqlParameter("@ShowTitleDescription", FromForm.ClassificationPage.ShowTitleDescription),
                         new SqlParameter("@ModifierId", CurrentUser.Id),
                         new SqlParameter("@Name", FromForm.ClassificationPage.Name),
                         new SqlParameter("@Description", FromForm.ClassificationPage.Description),
@@ -121,8 +121,8 @@ namespace StudentUnion0105.Controllers
                             "@OId" +
                             ", @LanguageId" +
                             ", @StatusId" +
-                            ", @ShowClassificationPageTitleName" +
-                            ", @ShowClassificationPageTitleDescription" +
+                            ", @ShowTitleName" +
+                            ", @ShowTitleDescription" +
                             ", @ModifierId" +
                             ", @Name" +
                             ", @Description" +
@@ -173,9 +173,9 @@ namespace StudentUnion0105.Controllers
                     {
                         new SqlParameter("@PId", FromForm.ClassificationPage.PId)
                         , new SqlParameter("@LanguageId", DefaultLanguageID)
-                        , new SqlParameter("@StatusId", FromForm.ClassificationPage.ClassificationPageStatusId)
-                        , new SqlParameter("@ShowTitleName", FromForm.ClassificationPage.ShowClassificationPageTitleName)
-                        , new SqlParameter("@ShowTitleDescription", FromForm.ClassificationPage.ShowClassificationPageTitleDescription)
+                        , new SqlParameter("@StatusId", FromForm.ClassificationPage.StatusId)
+                        , new SqlParameter("@ShowTitleName", FromForm.ClassificationPage.ShowTitleName)
+                        , new SqlParameter("@ShowTitleDescription", FromForm.ClassificationPage.ShowTitleDescription)
                         , new SqlParameter("@ModifierId", CurrentUser.Id)
                         , new SqlParameter("@Name", FromForm.ClassificationPage.Name)
                         , new SqlParameter("@Description", FromForm.ClassificationPage.Description)

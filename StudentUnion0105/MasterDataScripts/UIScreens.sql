@@ -190,5 +190,13 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1185, 'ClassificationPage'
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1186, 'ClassificationPage', 'LanguageDelete');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1187, 'ClassificationPage', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1188, 'ClassificationPage', 'LanguageIndex');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1189, 'ClassificationPageSection', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1190, 'ClassificationPageSection', 'Edit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1191, 'ClassificationPageSection', 'Create');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1192, 'ClassificationPageSection', 'Delete');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1193, 'ClassificationPageSection', 'LanguageCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1194, 'ClassificationPageSection', 'LanguageDelete');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1195, 'ClassificationPageSection', 'LanguageEdit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1196, 'ClassificationPageSection', 'LanguageIndex');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

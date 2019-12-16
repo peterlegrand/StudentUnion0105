@@ -256,5 +256,17 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(254, 'Title name', 'Title na
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(255, 'Add classification page', 'Add classification page');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(256, 'Delete classification page', 'Delete classification page');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(257, 'Back to classification pages', 'Back to classification pages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(258, 'Classification page sections', 'Classification page sections');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(259, 'Create new classification page section', 'Create new classification page section');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(260, 'Edit classification page section', 'Edit classification page section');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(261, 'Section type', 'Section type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(262, 'Show section title name', 'Show section title name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(263, 'Show section title description', 'Show section title description');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(264, 'Show content type title name', 'Show content type title name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(265, 'Show content type title description', 'Show content type title description');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(266, 'Sort by', 'Sort by');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(267, 'Add classification page section', 'Add classification page section');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(268, 'Delete classification page section', 'Delete classification page section');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(269, 'In Menu', 'In Menu');
 
 SET IDENTITY_INSERT dbUITerm OFF;

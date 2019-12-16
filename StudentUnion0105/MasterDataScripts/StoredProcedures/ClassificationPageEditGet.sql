@@ -3,9 +3,9 @@ AS
 SELECT
 	dbClassificationPage.Id OId
 	, dbClassificationPage.ClassificationId PId
-	, dbClassificationPage.ClassificationPageStatusId
-	, dbClassificationPage.ShowClassificationPageTitleName
-	, dbClassificationPage.ShowClassificationPageTitleDescription
+	, dbClassificationPage.StatusId
+	, dbClassificationPage.ShowTitleName
+	, dbClassificationPage.ShowTitleDescription
 	, Creator.UserName Creator
 	, dbClassificationPage.CreatedDate
 	, Modifier.UserName Modifier

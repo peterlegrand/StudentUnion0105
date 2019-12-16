@@ -14,6 +14,7 @@ namespace StudentUnion0105.Models
         public bool Alphabetically { get; set; }
         public bool CanLink { get; set; }
         public bool InDropDown { get; set; }
+        public bool InMenu { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }

@@ -1034,4 +1034,34 @@ ClassificationPageId
 CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(3, 39, 'Gewas pagina','Gewas pagina','Gewas pagina','Gewas pagina','Pagina over gewassen','Deze pagina gaat over verschillende gewassen.', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (1, 39, 'hoofd sectie 1', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (2, 39, 'Tweede sectie 1', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (3, 39, 'hoofd sectie 2', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (4, 39, 'Tweede sectie 2', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (5, 39, 'hoofd sectie 3', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbClassificationPageSectionLanguage (
+PageSectionId, LanguageId, Name, Description, MenuName, MouseOver, TitleName, TitleDescription, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (6, 39, 'Tweede sectie 3', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie',@CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (1, 41, 'Thuis', 'Thuis', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (2, 41, 'Eerste', 'Eerste', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO DbMenu1Language (
+Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (3, 41, 'Tweede', 'Tweede', @CurrentUser, @CurrentUser, getdate(), getdate()); 

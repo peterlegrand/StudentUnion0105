@@ -1,0 +1,176 @@
+﻿@model SuClassificationPageSectionEditGetWithListModel
+@{
+    ViewBag.Title = @ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/Section.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+
+        <div class="form-group row" hidden>
+            <label asp-for="@Model.ClassificationPageSection.PId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.PId" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationPageSection.PId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.Name" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationPageSection.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.ClassificationPageSection.Description" class="form-control ckeditor" id="description" name="ClassificationPageSection.description"></textarea>
+                <span asp-validation-for="@Model.ClassificationPageSection.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationPageSection.MouseOver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationPageSection.MenuName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.Sequence" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.Sequence" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationPageSection.Sequence" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.SectionTypeId" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(x => x.ClassificationPageSection.SectionTypeId, Model.SectionTypeList)
+                <span asp-validation-for="@Model.ClassificationPageSection.SectionTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.ContentTypeId" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(x => x.ClassificationPageSection.ContentTypeId, Model.ContentTypeList)
+                <span asp-validation-for="@Model.ClassificationPageSection.ContentTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.Sequence" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.Sequence" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.Sequence" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.OneTwoColumns" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.OneTwoColumns" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.OneTwoColumns" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.SortById" class="col-sm-2 col-form-label">@ViewBag.Terms[13]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.SortById" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.SortById" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.MaxContent" class="col-sm-2 col-form-label">@ViewBag.Terms[14]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.MaxContent" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.MaxContent" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.HasPaging" class="col-sm-2 col-form-label">@ViewBag.Terms[15]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.HasPaging" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.HasPaging" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.ShowSectionTitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.ShowSectionTitleName" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.ShowSectionTitleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.ShowSectionTitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.ShowSectionTitleDescription" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.ShowSectionTitleDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.ShowContentTypeTitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.ShowContentTypeTitleName" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.ShowContentTypeTitleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.ShowContentTypeTitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.ShowContentTypeTitleDescription" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.ShowContentTypeTitleDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[16]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationPageSection.TitleName" class="form-check" />
+                <span asp-validation-for="@Model.ClassificationPageSection.TitleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationPageSection.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[17]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.ClassificationPageSection.Description" class="form-control ckeditor" id="description2" name="ClassificationPageSection.TitleDescription"></textarea>
+                <span asp-validation-for="@Model.ClassificationPageSection.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[18]</button>
+                <a asp-action="Index" asp-controller="ClassificationPageSection" class="btn btn-primary btn-light">@ViewBag.Terms[19]</a>
+            </div>
+        </div>
+    </form>
+
+
+<script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description']) {
+                    CKEDITOR.instances['description'].destroy();
+                }
+                CKEDITOR.replace('description', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description'].getData()
+                    console.log(ckValue);
+                });
+            });
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description2']) {
+                    CKEDITOR.instances['description2'].destroy();
+                }
+                CKEDITOR.replace('description2', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description2'].getData()
+                    console.log(ckValue);
+                });
+            });
+</script>

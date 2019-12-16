@@ -19,15 +19,15 @@ namespace StudentUnion0105.Models
         public int ClassificationPageId { get; set; }
         public int Sequence { get; set; }
         [Display(Name = "Classification page section type id")]
-        public int ClassificationPageSectionTypeId { get; set; }
+        public int SectionTypeId { get; set; }
         [Display(Name = "Show section title")]
-        public bool ShowSectionTitle { get; set; }
+        public bool ShowSectionTitleName { get; set; }
         [Display(Name = "Show section title description")]
         public bool ShowSectionTitleDescription { get; set; }
         [Display(Name = "Show content type title")]
-        public bool ShowContentTypeTitle { get; set; }
+        public bool ShowContentTypeTitleName { get; set; }
         [Display(Name = "Show content type title description")]
-        public bool ShowContentTypeDescription { get; set; }
+        public bool ShowContentTypeTitleDescription { get; set; }
         [Display(Name = "One two columns")]
         public int OneTwoColumns { get; set; }
         [Display(Name = "Content type id")]
@@ -40,8 +40,8 @@ namespace StudentUnion0105.Models
         public bool HasPaging { get; set; }
         [ForeignKey("ClassificationPageId")]
         public virtual SuClassificationPageModel ClassificationPage { get; set; }
-        [ForeignKey("ClassificationPageSectionTypeId")]
-        public virtual SuClassificationPageSectionTypeModel ClassificationPageSectionType { get; set; }
+        [ForeignKey("SectionTypeId")]
+        public virtual SuPageSectionTypeModel PageSectionType { get; set; }
         [ForeignKey("ContentTypeId")]
         public virtual SuContentTypeModel ContentType { get; set; }
 

@@ -4,6 +4,7 @@ CREATE PROCEDURE ClassificationLevelEditPost (
 	, @Alphabetically bit
 	, @CanLink bit
 	, @InDropDown bit
+	, @InMenu bit
 	, @OnTheFly bit 
 	, @Sequence int
 	, @DateLevel int
@@ -30,6 +31,7 @@ SET
 	Alphabetically = @Alphabetically
 	, CanLink = @CanLink
 	, InDropDown = @InDropDown
+	, InMenu = @InMenu
 	, OnTheFly = @OnTheFly
 	, Sequence = @Sequence
 	, DateLevel = @DateLevel

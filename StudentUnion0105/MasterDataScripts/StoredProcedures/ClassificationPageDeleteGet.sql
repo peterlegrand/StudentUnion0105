@@ -4,8 +4,8 @@ SELECT
 	dbClassificationPage.Id OId 
 	, dbClassificationPage.ClassificationId PId 
 	, dbPageStatus.Name Status
-	, dbClassificationPage.ShowClassificationPageTitleName
-	, dbClassificationPage.ShowClassificationPageTitleDescription
+	, dbClassificationPage.ShowTitleName
+	, dbClassificationPage.ShowTitleDescription
 	, Creator.UserName Creator
 	, dbClassificationPage.CreatedDate
 	, Modifier.UserName Modifier
@@ -25,6 +25,6 @@ JOIN AspNetUsers Creator
 JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassificationPage.ModifierId) = Modifier.Id
 JOIN dbPageStatus
-	ON dbPageStatus.Id = dbclassificationPage.ClassificationPageStatusId
+	ON dbPageStatus.Id = dbclassificationPage.StatusId
 WHERE dbClassificationPageLanguage.LanguageId = @LanguageId
 	AND dbClassificationPage.Id = @OId

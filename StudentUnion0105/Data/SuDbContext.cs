@@ -19,8 +19,18 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuMenu1Model> dbMenu1 { get; set; }
+        public DbSet<SuMenu2Model> dbMenu2 { get; set; }
+        public DbSet<SuMenu3Model> dbMenu3 { get; set; }
+        public DbSet<SuMenu1LanguageModel> dbMenu1Language { get; set; }
+        public DbSet<SuMenu2LanguageModel> dbMenu2Language { get; set; }
+        public DbSet<SuMenu3LanguageModel> dbMenu3Language { get; set; }
+        public DbSet<SuMenuTypeModel> dbMenuType { get; set; }
         public DbSet<SuClassificationPageLanguageEditGetModel> ZdbClassificationPageLanguageEditGet { get; set; }
+        public DbSet<SuClassificationPageSectionLanguageEditGetModel> ZdbClassificationPageSectionLanguageEditGet { get; set; }
+        public DbSet<SuClassificationPageSectionEditGetModel> ZdbClassificationPageSectionEditGet { get; set; }
         public DbSet<SuClassificationPageDeleteGetModel> ZdbClassificationPageDeleteGet { get; set; }
+        public DbSet<SuClassificationPageSectionDeleteGetModel> ZdbClassificationPageSectionDeleteGet { get; set; }
         public DbSet<SuContentTypeEditGetModel> ZdbContentTypeEditGet { get; set; }
         public DbSet<SuFrontPageViewGetModel> ZdbFrontPageViewGet { get; set; }
         public DbSet<SuLayoutTermList> ZdbLayoutTermList { get; set; }

@@ -1,0 +1,86 @@
+﻿@model SuClassificationPageSectionLanguageCreateGetWithListModel
+@{
+    ViewBag.Title = @ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.OId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.OId" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.Name" class="form-control" />
+                <span asp-validation-for="@Model.ObjectLanguage.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.ObjectLanguage.MenuName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.ObjectLanguage.Description" class="form-control ckeditor" id="description" name="ObjectLanguage.Description"></textarea>
+                <span asp-validation-for="@Model.ObjectLanguage.Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.ObjectLanguage.MouseOver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.TitleName" class="form-control" />
+                <span asp-validation-for="@Model.ObjectLanguage.TitleName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ObjectLanguage.TitleDescription" class="form-control" />
+                <span asp-validation-for="@Model.ObjectLanguage.TitleDescription" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ObjectLanguage.LanguageId" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <div class="col-sm-10 ">
+
+                @Html.DropDownListFor(x => x.ObjectLanguage.LanguageId, Model.LanguageList)
+                <span asp-validation-for="@Model.ObjectLanguage.LanguageId" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[8]</button>
+                <a asp-action="LanguageIndex" asp-controller="ClassificationLevel" class="btn btn-primary btn-light">@ViewBag.Terms[9]</a>
+            </div>
+        </div>
+    </form>
+
+<script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description']) {
+                    CKEDITOR.instances['description'].destroy();
+                }
+                CKEDITOR.replace('description', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description'].getData()
+                    console.log(ckValue);
+                });
+            });
+</script>

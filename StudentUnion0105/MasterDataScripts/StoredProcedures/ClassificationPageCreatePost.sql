@@ -17,9 +17,9 @@ BEGIN TRANSACTION
 
 INSERT INTO dbClassificationPage (
 	ClassificationId 
-	, ClassificationPageStatusId
-	, ShowClassificationPageTitleName
-	, ShowClassificationPageTitleDescription 
+	, StatusId
+	, ShowTitleName
+	, ShowTitleDescription 
 	, CreatorId
 	, CreatedDate
 	, ModifierId 
