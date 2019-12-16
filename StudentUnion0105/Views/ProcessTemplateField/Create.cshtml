@@ -67,7 +67,7 @@
 
         </div>
     </div>
-<select class="form-control" id="MasterListDropDown" name="MasterListDropDown"></select>
+<select asp-for="@Model.Field.NotNullId2" class="form-control" id="MasterListDropDown" name="MasterListDropDown"></select>
     @*<div class="form-group row">
         <label asp-for="@Model.Field.NotNullId2" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10 ">
@@ -107,16 +107,14 @@
            type: "GET",  
            url: "/ProcessTemplateField/GetMasterList",  
            data: "{}",  
-           
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
+           dataType: "json",
            success: function (data) { 
                console.log(data);
 
-               var s = '<option value="-1">Please Select a master list</option>';  
+               var s; // = '<option value="-1">Please Select a master list</option>';  
 
                for (var i = 0; i < data.length; i++) {  
-                   s += '<option value="' + data[i].value + '">' + data[i].text + '</option>';  
+                   s += '<option class="h1" value="' + data[i].value + '">' + data[i].text + '</option>';  
                }  
                $("#MasterListDropDown").html(s);  
            }  
