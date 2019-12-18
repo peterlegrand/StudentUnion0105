@@ -845,7 +845,7 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(842, 129, 117
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(843, 130, 1172, 5);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(844, 131, 1172, 6);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(845, 132, 1172, 7);
-INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(846, 64, 1172, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(846, 5, 1172, 8);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(847, 13, 1172, 9);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(848, 126, 1171, 1);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(849, 2, 1171, 2);
@@ -1551,6 +1551,16 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1550, 257, 11
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1551, 269, 1010, 14);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1552, 269, 1009, 14);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1553, 269, 1008, 15);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1554, 6, 1197, 1);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1555, 3, 1197, 2);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1556, 36, 1197, 3);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1557, 22, 1197, 4);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1558, 37, 1197, 5);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1559, 33, 1197, 6);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1560, 5, 1197, 7);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1561, 13, 1197, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1562, 34, 1197, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(1563, 36, 1052, 9);
 
 
 SET IDENTITY_INSERT dbUITermScreen OFF;

@@ -172,8 +172,15 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
                                 where c.ContentTypeId == Id
@@ -239,54 +246,26 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@Id", Id);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
+            SuObjectLanguageEditGetModel ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
-
-            //var ToForm = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.ContentTypeId
-
-            //             }).First();
-
-            //var ContentTypeAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = ContentTypeList
-            //};
-            //return View(ToForm);
-
-
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectVM test3)
+        public IActionResult LanguageEdit(SuObjectLanguageEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(test3.Id);
-                ContentTypeLanguage.Name = test3.Name;
-                ContentTypeLanguage.Description = test3.Description;
-                ContentTypeLanguage.MouseOver = test3.MouseOver;
+                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(FromForm.LId);
+                ContentTypeLanguage.Name = FromForm.Name;
+                ContentTypeLanguage.Description = FromForm.Description;
+                ContentTypeLanguage.MouseOver = FromForm.MouseOver;
                 _contentTypeLanguage.UpdateContentTypeLanguage(ContentTypeLanguage);
 
 
             }
             //            return  RedirectToRoute("EditRole" + "/"+test3.ContentType.ContentTypeId.ToString() );
 
-            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.LId.ToString() });
 
 
 

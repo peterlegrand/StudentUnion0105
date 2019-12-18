@@ -143,7 +143,7 @@ namespace StudentUnion0105.Controllers
                 var result = await roleManager.UpdateAsync(role);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("RoleList");
+                    return RedirectToAction("Index");
                 }
                 foreach (var error in result.Errors)
                 {

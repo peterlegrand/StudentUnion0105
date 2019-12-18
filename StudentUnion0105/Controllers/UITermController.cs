@@ -48,7 +48,7 @@ namespace StudentUnion0105.Controllers
         {
             var parameter = new SqlParameter("@TermId", Id);
 
-            var TermLanguageList = _context.DbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @Id", parameter).ToList();
+            var TermLanguageList = _context.DbIdWithStrings.FromSql("UITermLanguagesSelectForOneTerm @TermId", parameter).ToList();
             ViewBag.Id = Id;
             
             return View(TermLanguageList);

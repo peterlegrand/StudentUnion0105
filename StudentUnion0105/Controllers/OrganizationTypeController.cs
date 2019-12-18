@@ -267,53 +267,41 @@ namespace StudentUnion0105.Controllers
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("OrganizationTypeLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
-
-            //var ToForm = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.OrganizationTypeId
-
-            //             }).First();
-
-            //var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = OrganizationTypeList
-            //};
-            //return View(ToForm);
-
-
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectVM test3)
+        public async Task<IActionResult> LanguageEdit(SuObjectLanguageEditGetModel FromForm)
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
             if (ModelState.IsValid)
             {
-                var OrganizationTypeLanguage = _OrganizationTypeLanguage.GetOrganizationTypeLanguage(test3.Id);
-                OrganizationTypeLanguage.Name = test3.Name;
-                OrganizationTypeLanguage.Description = test3.Description;
-                OrganizationTypeLanguage.MouseOver = test3.MouseOver;
-                _OrganizationTypeLanguage.UpdateOrganizationTypeLanguage(OrganizationTypeLanguage);
 
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
+                _context.Database.ExecuteSqlCommand("OrganizationTypeLanguageEditPost " +
+                            "@LId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId.ToString() });
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.OrganizationType.OrganizationTypeId.ToString() );
-
-            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
+            return View();
         }
+
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
@@ -356,12 +344,12 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Classification = _context.DbOrganizationTypeDeleteGet.FromSql("OrganizationTypeDeleteGet @LanguageId, @Id" , parameters).First();
+            var OrganizationType = _context.DbOrganizationTypeDeleteGet.FromSql("OrganizationTypeDeleteGet @LanguageId, @Id" , parameters).First();
 
-            return View(Classification);
+            return View(OrganizationType);
         }
         [HttpPost]
-        public IActionResult Delete(SuContentTypeDeleteGetModel FromForm)
+        public IActionResult Delete(SuOrganizationTypeDeleteGetModel FromForm)
         {
             var b = _context.Database.ExecuteSqlCommand($"OrganizationTypeDeletePost {FromForm.Id}");
 

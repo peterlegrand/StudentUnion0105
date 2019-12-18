@@ -198,5 +198,6 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1193, 'ClassificationPageS
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1194, 'ClassificationPageSection', 'LanguageDelete');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1195, 'ClassificationPageSection', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1196, 'ClassificationPageSection', 'LanguageIndex');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1197, 'UserOrganizationType', 'LanguageCreate');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

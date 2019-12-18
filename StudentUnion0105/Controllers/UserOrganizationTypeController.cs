@@ -95,7 +95,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageEdit(SuUserOrganizationTypeLanguageModel FromForm)
+        public async Task<IActionResult> LanguageEdit(SuObjectLanguageEditGetModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -106,7 +106,7 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LId", FromForm.Id)
+                    new SqlParameter("@LId", FromForm.LId)
                     , new SqlParameter("@Name", FromForm.Name)
                     , new SqlParameter("@Description", FromForm.Description)
                     , new SqlParameter("@MouseOver", FromForm.MouseOver)
@@ -114,15 +114,78 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Modifier", CurrentUserId)
                 };
 
-                var c = _context.Database.ExecuteSqlCommand("UserOrganizationTypeLanguageEditPost @PLId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
+                var c = _context.Database.ExecuteSqlCommand("UserOrganizationTypeLanguageEditPost @LId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
                  parameters);
             }
 
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.TypeId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId.ToString() });
 
 
 
         }
+
+        //
+        [HttpGet]
+        public async Task<IActionResult> LanguageCreate(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var parameter = new SqlParameter("@OId", Id);
+
+            AvailableObjectLanguages AvailableLanguages = new AvailableObjectLanguages(_context);
+            var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), parameter);
+            Int32 NoOfLanguages = SuLanguage.Count();
+            if (NoOfLanguages == 0)
+            { return RedirectToAction("LanguageIndex", new { Id = Id }); }
+
+            SuObjectLanguageCreateGetModel UserOrganizationType = new SuObjectLanguageCreateGetModel();
+            UserOrganizationType.OId = Id;
+            ViewBag.Id = Id.ToString();
+            var UserOrganizationTypeAndLanguages = new SuObjectLanguageCreateGetWithListModel
+            {
+                ObjectLanguage = UserOrganizationType
+
+                ,
+                LanguageList = SuLanguage
+            };
+            return View(UserOrganizationTypeAndLanguages);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LanguageCreate(SuObjectLanguageCreateGetWithListModel FromForm)
+        {
+            if (ModelState.IsValid)
+            {
+                var CurrentUser = await _userManager.GetUserAsync(User);
+
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@Id", FromForm.ObjectLanguage.OId),
+                    new SqlParameter("@LanguageId", FromForm.ObjectLanguage.LanguageId),
+                    new SqlParameter("@Name", FromForm.ObjectLanguage.Name),
+                    new SqlParameter("@Description", FromForm.ObjectLanguage.Description),
+                    new SqlParameter("@MouseOver", FromForm.ObjectLanguage.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.ObjectLanguage.MenuName),
+                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    };
+
+                _context.Database.ExecuteSqlCommand("UserOrganizationTypeLanguageCreatePost " +
+                            "@Id" +
+                            ", @LanguageId" +
+                            ", @MenuName" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @ModifierId", parameters);
+            }
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectLanguage.OId.ToString() });
+        }
+
+        //
 
 
     }

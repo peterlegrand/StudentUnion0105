@@ -116,8 +116,14 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
             var LanguageList = new List<SelectListItem>();
             var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
             foreach (var LanguageFromDb in LanguagesFromDb)
