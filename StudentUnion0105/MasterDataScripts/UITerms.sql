@@ -268,5 +268,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(266, 'Sort by', 'Sort by');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(267, 'Add classification page section', 'Add classification page section');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(268, 'Delete classification page section', 'Delete classification page section');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(269, 'In Menu', 'In Menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(270, 'User Project type languages', 'User Project type languages');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(271, 'Add user Project type language', 'Add user Project type language');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(272, 'Back to user Project types', 'Back to user Project types');
 
 SET IDENTITY_INSERT dbUITerm OFF;

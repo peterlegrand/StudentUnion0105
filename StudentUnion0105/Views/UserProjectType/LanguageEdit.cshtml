@@ -1,0 +1,62 @@
+﻿@model SuObjectLanguageEditGetModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewBag.Title = @ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+
+        <div class="form-group row">
+            <label asp-for="@Model.Language" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Language" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.LId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.LId" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row" hidden>
+            <label asp-for="@Model.OId" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.OId" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Name" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Description" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MouseOver" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MenuName" class="form-control" />
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[6]</button>
+                <a asp-action="LanguageIndex" asp-controller="Page" class="btn btn-primary btn-light">@ViewBag.Terms[7]</a>
+            </div>
+        </div>
+    </form>

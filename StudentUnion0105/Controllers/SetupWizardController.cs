@@ -359,6 +359,11 @@ namespace StudentUnion0105.Controllers
 , "UserProjectCreate.sql"
 , "UserProjectSelectAll.sql"
 , "UserProjectSelectBasedOnUser.sql"
+, "UserProjectTypeLanguageCreateGetLanguages.sql"
+, "UserProjectTypeLanguageCreatePost.sql"
+, "UserProjectTypeLanguageEditGet.sql"
+, "UserProjectTypeLanguageEditPost.sql"
+, "UserProjectTypeLanguageIndexGet.sql"
 , "UserProjectTypeSelectAll.sql"
 
 

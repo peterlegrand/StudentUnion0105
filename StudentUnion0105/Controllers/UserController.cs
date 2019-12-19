@@ -109,6 +109,7 @@ namespace StudentUnion0105.Controllers
             UserFromDb.Email = FromForm.User.Email;
             UserFromDb.NormalizedEmail = FromForm.User.Email.ToUpper();
             UserFromDb.UserName = FromForm.User.UserName;
+            UserFromDb.NormalizedUserName = FromForm.User.UserName.ToUpper();
             UserFromDb.DefaultLanguageId = FromForm.User.DefaultLanguageId;
             UserFromDb.CountryId = FromForm.User.CountryId;
             //  FromForm.User.SecurityStamp = UserFromDb;
@@ -157,10 +158,13 @@ namespace StudentUnion0105.Controllers
             // SuUserModel UpdateUser = new SuUserModel();
             SuUserModel NewUser = new SuUserModel { Email = FromForm.User.Email, UserName = FromForm.User.UserName, DefaultLanguageId = FromForm.User.DefaultLanguageId, CountryId = FromForm.User.CountryId};
 
-            //NewUser.Email = FromForm.User.Description;
-            //NewUser.UserName = FromForm.User.Name;
-            //NewUser.DefaultLanguageId = FromForm.User.NotNullId;
-            //NewUser.CountryId = FromForm.User.NullId;
+            NewUser.Email = FromForm.User.Email;
+            NewUser.UserName = FromForm.User.UserName;
+            NewUser.NormalizedEmail= FromForm.User.Email.ToUpper();
+            NewUser.NormalizedUserName = FromForm.User.UserName.ToUpper();
+            NewUser.DefaultLanguageId = FromForm.User.DefaultLanguageId;
+            NewUser.CountryId = FromForm.User.CountryId;
+            NewUser.SecurityLevel = 5;
             await userManager.CreateAsync(NewUser, FromForm.User.Password);
             return RedirectToAction("Index");
         }

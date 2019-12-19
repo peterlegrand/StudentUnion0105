@@ -45,23 +45,23 @@ namespace StudentUnion0105.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        public async Task<IActionResult> Create(CreateRoleViewModel model)
         {
             if (ModelState.IsValid)
             {
                 IdentityRole irole = new IdentityRole
-                { Name = model.RoleName };
+                { Name = model.RoleName, NormalizedName = model.RoleName.ToUpper() };
                 IdentityResult iresult = await roleManager.CreateAsync(irole);
                 if (iresult.Succeeded)
                 {
-                    return RedirectToAction("RoleList", "Administration");
+                    return RedirectToAction("Index");
                 }
                 foreach (IdentityError e in iresult.Errors)
                 {
                     ModelState.AddModelError("", e.Description);
                 }
             }
-            return View(model);
+            return RedirectToAction("Index");
 
         }
         [HttpGet]

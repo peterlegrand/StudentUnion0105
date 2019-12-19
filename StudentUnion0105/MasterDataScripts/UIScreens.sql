@@ -199,5 +199,9 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1194, 'ClassificationPageS
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1195, 'ClassificationPageSection', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1196, 'ClassificationPageSection', 'LanguageIndex');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1197, 'UserOrganizationType', 'LanguageCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1198, 'UserProjectType', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1199, 'UserProjectType', 'LanguageIndex');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1200, 'UserProjectType', 'LanguageEdit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1201, 'UserProjectType', 'LanguageCreate');
 
 SET IDENTITY_INSERT dbUIScreen OFF;
