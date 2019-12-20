@@ -32,6 +32,9 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationPageDeleteGetModel> ZdbClassificationPageDeleteGet { get; set; }
         public DbSet<SuClassificationPageSectionDeleteGetModel> ZdbClassificationPageSectionDeleteGet { get; set; }
         public DbSet<SuContentTypeEditGetModel> ZdbContentTypeEditGet { get; set; }
+        public DbSet<SuOrganizationTypeEditGetModel> ZdbOrganizationTypeEditGet { get; set; }
+        public DbSet<SuPageTypeEditGetModel> ZdbPageTypeEditGet { get; set; }
+        public DbSet<SuPageSectionTypeEditGetModel> ZdbPageSectionTypeEditGet { get; set; }
         public DbSet<SuFrontPageViewGetModel> ZdbFrontPageViewGet { get; set; }
         public DbSet<SuLayoutTermList> ZdbLayoutTermList { get; set; }
         public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }

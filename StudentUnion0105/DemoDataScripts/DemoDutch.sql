@@ -13,7 +13,7 @@ VALUES(  1, 39, 'Organizatie','Organizatie','Organizatie', @CurrentUser, @Curren
 INSERT INTO dbOrganizationTypeLanguage ( OrganizationTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 39, 'Afdeling','Afdeling','Afdeling', @CurrentUser, @CurrentUser, getdate(),getdate())  
 INSERT INTO dbPageSectionTypeLanguage ( PageSectionTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES(  2, 39, 'Default','Default','Default', @CurrentUser, @CurrentUser, getdate(),getdate())  
+VALUES(  1, 39, 'Default','Default','Default', @CurrentUser, @CurrentUser, getdate(),getdate())  
 INSERT INTO dbPageSectionTypeLanguage ( PageSectionTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 39, 'Inhoudsopgave','Inhoudsopgave','Inhoudsopgave', @CurrentUser, @CurrentUser, getdate(),getdate())  
 INSERT INTO dbPageTypeLanguage ( PageTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  

@@ -1,17 +1,17 @@
 CREATE PROCEDURE PageSectionTypeEditGet (@LanguageId int, @Id int)
 AS
 SELECT
-	dbPageSectionType.Id 
-	, dbPageSectionType.IndexSection
+	dbPageSectionType.Id OId
 	, Creator.UserName Creator
 	, dbPageSectionType.CreatedDate
 	, Modifier.UserName Modifier
 	, dbPageSectionType.ModifiedDate
 	, dbPageSectionTypeLanguage.Id LId
-	, dbPageSectionTypeLanguage.Name
-	, dbPageSectionTypeLanguage.Description
-	, dbPageSectionTypeLanguage.MouseOver
-	, dbPageSectionTypeLanguage.MenuName
+	, ISNULL(dbPageSectionTypeLanguage.Name,'') Name
+	, ISNULL(dbPageSectionTypeLanguage.Description,'') Description
+	, ISNULL(dbPageSectionTypeLanguage.MouseOver,'') MouseOver
+	, ISNULL(dbPageSectionTypeLanguage.MenuName,'') MenuName
+	, dbPageSectionType.IndexSection
 FROM dbPageSectionTypeLanguage
 JOIN dbPageSectionType 
 	ON dbPageSectionTypeLanguage.PageSectionTypeId = dbPageSectionType.Id
@@ -22,3 +22,7 @@ JOIN AspNetUsers Modifier
 WHERE dbPageSectionTypeLanguage.LanguageId = @LanguageId
 	AND dbPageSectionType.Id = @Id
 
+
+
+	SELECT * FROM dbPageSectionTypeLanguage
+SELECT * FROM dbPageSectionType

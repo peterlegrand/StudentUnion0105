@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
-    public class SuContentTypeEditGetModel
+    public class SuPageTypeEditGetModel
     {
         public int Id { get; set; }
         public int Lid { get; set; }
@@ -18,8 +18,6 @@ namespace StudentUnion0105.Models
         public string MouseOver { get; set; }
         [Required]
         public string MenuName { get; set; }
-        public string TitleName { get; set; }
-        public string TitleDescription { get; set; }
         public string Creator { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }

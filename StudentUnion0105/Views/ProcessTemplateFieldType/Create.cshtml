@@ -1,4 +1,4 @@
-﻿@model StudentUnion0105.ViewModels.SuObjectVM
+﻿@model SuProcessTemplateFieldTypeEditGetModel
 @{
     ViewBag.Title = "Create Process template field type";
 }
@@ -24,6 +24,13 @@
         <div class="col-sm-10">
             <input asp-for="@Model.MouseOver" class="form-control" />
             <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
         </div>
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>

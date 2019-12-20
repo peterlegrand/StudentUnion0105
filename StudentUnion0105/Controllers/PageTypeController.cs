@@ -51,37 +51,48 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async  Task<IActionResult> Create()
         {
-            var PageType = new SuObjectVM();
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            var PageType = new SuPageTypeEditGetModel();
             return View(PageType);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuPageTypeEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var PageType = new SuPageTypeModel();
-                PageType.ModifiedDate = DateTime.Now;
-                PageType.CreatedDate = DateTime.Now;
-                var NewPageType = _PageType.AddPageType(PageType);
-
-
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var PageTypeLanguage = new SuPageTypeLanguageModel();
 
-                PageTypeLanguage.Name = FromForm.Name;
-                PageTypeLanguage.Description = FromForm.Description;
-                PageTypeLanguage.MouseOver = FromForm.MouseOver;
-                PageTypeLanguage.PageTypeId = NewPageType.Id;
-                PageTypeLanguage.LanguageId = DefaultLanguageID;
-                _PageTypeLanguage.AddPageTypeLanguage(PageTypeLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
+                _context.Database.ExecuteSqlCommand("PageTypeCreatePost " +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName"
+                            , parameters);
             }
-            return RedirectToAction("Index");
 
+            return RedirectToAction("Index");
 
 
         }
@@ -91,24 +102,41 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var ToForm = (from s in _PageType.GetAllPageTypes()
-                         join t in _PageTypeLanguage.GetAllPageTypeLanguages()
-                         on s.Id equals t.PageTypeId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                         }).First();
 
-            return View(ToForm);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var PageTypeEditGet = _context.ZdbPageTypeEditGet.FromSql("PageTypeEditGet @LanguageId, @Id", parameters).First();
+
+
+            return View(PageTypeEditGet);
+
+            //var CurrentUser = await userManager.GetUserAsync(User);
+            //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            //var ToForm = (from s in _PageType.GetAllPageTypes()
+            //             join t in _PageTypeLanguage.GetAllPageTypeLanguages()
+            //             on s.Id equals t.PageTypeId
+            //             where t.LanguageId == DefaultLanguageID && s.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = s.Id
+            //                ,
+            //                 Name = t.Name
+            //                ,
+            //                 ObjectLanguageId = t.Id
+            //                ,
+            //                 Description = t.Description
+            //                ,
+            //                 MouseOver = t.MouseOver
+            //             }).First();
+
+            //return View(ToForm);
 
 
         }

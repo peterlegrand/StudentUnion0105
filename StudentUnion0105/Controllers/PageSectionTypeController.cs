@@ -54,39 +54,48 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var PageSectionType = new SuObjectVM();
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var PageSectionType = new SuPageSectionTypeEditGetModel();
             return View(PageSectionType);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuPageSectionTypeEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var PageSectionType = new SuPageSectionTypeModel();
-                PageSectionType.ModifiedDate = DateTime.Now;
-                PageSectionType.CreatedDate = DateTime.Now;
-                PageSectionType.IndexSection = FromForm.IndexSection;
-                var NewPageSectionType = _PageSectionType.AddPageSectionType(PageSectionType);
-
-
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var PageSectionTypeLanguage = new SuPageSectionTypeLanguageModel();
 
-                PageSectionTypeLanguage.Name = FromForm.Name;
-                PageSectionTypeLanguage.Description = FromForm.MenuName;
-                PageSectionTypeLanguage.MouseOver = FromForm.MouseOver;
-                PageSectionTypeLanguage.PageSectionTypeId = NewPageSectionType.Id;
-                PageSectionTypeLanguage.LanguageId = DefaultLanguageID;
-                _PageSectionTypeLanguage.AddPageSectionTypeLanguage(PageSectionTypeLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@IndexSection", FromForm.IndexSection),
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
+                _context.Database.ExecuteSqlCommand("PageSectionTypeCreatePost " +
+                            "@IndexSection " +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
+
             return RedirectToAction("Index");
-
-
 
         }
 
@@ -95,54 +104,76 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var ToForm = (from s in _PageSectionType.GetAllPageSectionTypes()
-                         join t in _PageSectionTypeLanguage.GetAllPageSectionTypeLanguages()
-                         on s.Id equals t.PageSectionTypeId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                             ,
-                             IndexSection = s.IndexSection
-                         }).First();
 
-            return View(ToForm);
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var PageSectionTypeEditGet = _context.ZdbPageSectionTypeEditGet.FromSql("PageSectionTypeEditGet @LanguageId, @Id", parameters).First();
+
+
+            return View(PageSectionTypeEditGet);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuPageSectionTypeEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var PageSectionType = _PageSectionType.GetPageSectionType(test3.Id);
                 var CurrentUser = await userManager.GetUserAsync(User);
-
-                PageSectionType.ModifiedDate = DateTime.Now;
-                PageSectionType.ModifierId = CurrentUser.Id;
-                PageSectionType.IndexSection = test3.IndexSection;
-                _PageSectionType.UpdatePageSectionType(PageSectionType);
-
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var PageSectionTypeLanguage = _PageSectionTypeLanguage.GetPageSectionTypeLanguage(test3.ObjectLanguageId);
-                PageSectionTypeLanguage.Name = test3.Name;
-                PageSectionTypeLanguage.Description = test3.Description;
-                PageSectionTypeLanguage.MouseOver = test3.MouseOver;
-                PageSectionTypeLanguage.ModifiedDate = DateTime.Now;
-                PageSectionTypeLanguage.ModifierId = CurrentUser.Id;
-                _PageSectionTypeLanguage.UpdatePageSectionTypeLanguage(PageSectionTypeLanguage);
-
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@OId", FromForm.OId),
+                    new SqlParameter("@IndexSection", FromForm.IndexSection),
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName),
+                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    };
+                var b = _context.Database.ExecuteSqlCommand("PageSectionTypeEditPost " +
+                            "@OId" +
+                            ", @IndexSection" +
+                            ", @LId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" +
+                            ", @ModifierId" 
+                            , parameters);
             }
             return RedirectToAction("Index");
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    var PageSectionType = _PageSectionType.GetPageSectionType(test3.Id);
+            //    var CurrentUser = await userManager.GetUserAsync(User);
+
+            //    PageSectionType.ModifiedDate = DateTime.Now;
+            //    PageSectionType.ModifierId = CurrentUser.Id;
+            //    PageSectionType.IndexSection = test3.IndexSection;
+            //    _PageSectionType.UpdatePageSectionType(PageSectionType);
+
+            //    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            //    var PageSectionTypeLanguage = _PageSectionTypeLanguage.GetPageSectionTypeLanguage(test3.ObjectLanguageId);
+            //    PageSectionTypeLanguage.Name = test3.Name;
+            //    PageSectionTypeLanguage.Description = test3.Description;
+            //    PageSectionTypeLanguage.MouseOver = test3.MouseOver;
+            //    PageSectionTypeLanguage.ModifiedDate = DateTime.Now;
+            //    PageSectionTypeLanguage.ModifierId = CurrentUser.Id;
+            //    _PageSectionTypeLanguage.UpdatePageSectionTypeLanguage(PageSectionTypeLanguage);
+
+            //}
+            //return RedirectToAction("Index");
 
 
 

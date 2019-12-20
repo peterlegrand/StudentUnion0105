@@ -68,38 +68,51 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var ContentType = new SuObjectVM();
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var ContentType = new SuContentTypeEditGetModel();
             return View(ContentType);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuContentTypeEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var ContentType = new SuContentTypeModel();
-                ContentType.ModifiedDate = DateTime.Now;
-                ContentType.CreatedDate = DateTime.Now;
-                var NewContentType = _contentType.AddContentType(ContentType);
-
-
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ContentTypeLanguage = new SuContentTypeLanguageModel();
 
-                ContentTypeLanguage.Name = FromForm.Name;
-                ContentTypeLanguage.Description = FromForm.Description;
-                ContentTypeLanguage.MouseOver = FromForm.MouseOver;
-                ContentTypeLanguage.ContentTypeId = NewContentType.Id;
-                ContentTypeLanguage.LanguageId = DefaultLanguageID;
-                _contentTypeLanguage.AddContentTypeLanguage(ContentTypeLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName),
+                    new SqlParameter("@TitleName", FromForm.TitleName),
+                    new SqlParameter("@TitleDescription", FromForm.TitleDescription)
+                    };
 
+                _context.Database.ExecuteSqlCommand("ContentTypeCreatePost " +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" +
+                            ", @TitleName" +
+                            ", @TitleDescription" 
+                            , parameters);
             }
+
             return RedirectToAction("Index");
-
-
 
         }
 

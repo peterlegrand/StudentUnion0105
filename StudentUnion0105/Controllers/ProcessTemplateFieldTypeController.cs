@@ -74,37 +74,38 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ProcessTemplateFieldType = new SuObjectVM();
+            var ProcessTemplateFieldType = new SuProcessTemplateFieldTypeEditGetModel();
             return View(ProcessTemplateFieldType);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuProcessTemplateFieldTypeEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var ProcessTemplateFieldType = new SuProcessTemplateFieldTypeModel();
-                ProcessTemplateFieldType.ModifiedDate = DateTime.Now;
-                ProcessTemplateFieldType.CreatedDate = DateTime.Now;
-                var NewProcessTemplateFieldType = _ProcessTemplateFieldType.AddProcessTemplateFieldType(ProcessTemplateFieldType);
+                if (ModelState.IsValid)
+                {
+                    var CurrentUser = await userManager.GetUserAsync(User);
+                    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+                    SqlParameter[] parameters =
+                        {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ProcessTemplateFieldTypeLanguage = new SuProcessTemplateFieldTypeLanguageModel();
+                    _context.Database.ExecuteSqlCommand("ProcessTemplateFieldTypeCreatePost " +
+                                "@LanguageId" +
+                                ", @ModifierId" +
+                                ", @Name" +
+                                ", @Description" +
+                                ", @MouseOver" +
+                                ", @MenuName", parameters);
+                }
 
-                ProcessTemplateFieldTypeLanguage.Name = FromForm.Name;
-                ProcessTemplateFieldTypeLanguage.Description = FromForm.Description;
-                ProcessTemplateFieldTypeLanguage.MouseOver = FromForm.MouseOver;
-                ProcessTemplateFieldTypeLanguage.FieldTypeId = NewProcessTemplateFieldType.Id;
-                ProcessTemplateFieldTypeLanguage.LanguageId = DefaultLanguageID;
-                _ProcessTemplateFieldTypeLanguage.AddProcessTemplateFieldTypeLanguage(ProcessTemplateFieldTypeLanguage);
-
-            }
             return RedirectToAction("Index");
-
-
-
         }
 
         [HttpGet]

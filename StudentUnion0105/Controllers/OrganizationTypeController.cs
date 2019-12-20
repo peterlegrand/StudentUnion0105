@@ -74,37 +74,39 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var OrganizationType = new SuObjectVM();
+            var OrganizationType = new SuOrganizationTypeEditGetModel();
             return View(OrganizationType);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuPageTypeEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var OrganizationType = new SuOrganizationTypeModel();
-                OrganizationType.ModifiedDate = DateTime.Now;
-                OrganizationType.CreatedDate = DateTime.Now;
-                var NewOrganizationType = _OrganizationType.AddOrganizationType(OrganizationType);
-
-
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var OrganizationTypeLanguage = new SuOrganizationTypeLanguageModel();
 
-                OrganizationTypeLanguage.Name = FromForm.Name;
-                OrganizationTypeLanguage.Description = FromForm.Description;
-                OrganizationTypeLanguage.MouseOver = FromForm.MouseOver;
-                OrganizationTypeLanguage.OrganizationTypeId = NewOrganizationType.Id;
-                OrganizationTypeLanguage.LanguageId = DefaultLanguageID;
-                _OrganizationTypeLanguage.AddOrganizationTypeLanguage(OrganizationTypeLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
+                _context.Database.ExecuteSqlCommand("OrganizationTypeCreatePost " +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" 
+                            , parameters);
             }
+
             return RedirectToAction("Index");
-
-
-
         }
 
         [HttpGet]
@@ -116,26 +118,16 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
 
-            var ToForm = (from s in _OrganizationType.GetAllOrganizationTypes()
-                         join t in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
-                         on s.Id equals t.OrganizationTypeId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                         }).First();
+            var OrganizationTypeEditGet = _context.ZdbOrganizationTypeEditGet.FromSql("OrganizationTypeEditGet @LanguageId, @Id", parameters).First();
 
-            return View(ToForm);
 
+            return View(OrganizationTypeEditGet);
 
         }
 
