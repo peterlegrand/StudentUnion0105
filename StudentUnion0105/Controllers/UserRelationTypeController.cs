@@ -45,7 +45,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
             //PETER cannot be generic object
-            var UserRelationTypes = _context.ZdbObjectIndexGet.FromSql("ClassificationIndexGet @LanguageId", parameter).ToList();
+            List< SuUserRelationTypeIndexGetModel> UserRelationTypes = _context.ZdbUserRelationTypeIndexGet.FromSql("UserRelationTypeIndexGet @LanguageId", parameter).ToList();
 
             return View(UserRelationTypes);
         }
@@ -58,9 +58,9 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@OId", Id);
+            var parameter = new SqlParameter("@LanguageId", Id);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("UserRelationTypeLanguageIndexGet @OId", parameter).ToList();
+            var LanguageIndex = _context.ZdbUserRelationTypeLanguageIndexGet.FromSql("UserRelationTypeLanguageIndexGet @LanguageId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -77,15 +77,15 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@Id", Id);
             //PETER this SP is missing
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("UserRelationTypeLanguageEditGet @Id", parameter).First();
-            return View(ObjectLanguage);
+            var UserRelationTypeLanguage = _context.ZdbUserRelationTypeLanguageEditGet.FromSql("UserRelationTypeLanguageEditGet @Id", parameter).First();
+            return View(UserRelationTypeLanguage);
 
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageEdit(SuObjectLanguageEditGetModel FromForm)
+        public async Task<IActionResult> LanguageEdit(SuUserRelationTypeLanguageEditGetModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -96,15 +96,29 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LId", FromForm.LId)
-                    , new SqlParameter("@Name", FromForm.Name)
-                    , new SqlParameter("@Description", FromForm.Description)
-                    , new SqlParameter("@MouseOver", FromForm.MouseOver)
-                    , new SqlParameter("@MenuName", FromForm.MenuName)
-                    , new SqlParameter("@Modifier", CurrentUserId)
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@FromIsOfToName", FromForm.FromIsOfToName),
+                    new SqlParameter("@ToIsOfFromName", FromForm.ToIsOfFromName),
+                    new SqlParameter("@FromIsOfToDescription", FromForm.FromIsOfToDescription),
+                    new SqlParameter("@ToIsOfFromDescription", FromForm.ToIsOfFromDescription),
+                    new SqlParameter("@FromIsOfToMouseOver", FromForm.FromIsOfToMouseOver),
+                    new SqlParameter("@ToIsOfFromMouseOver", FromForm.ToIsOfFromMouseOver),
+                    new SqlParameter("@FromIsOfToMenuName", FromForm.FromIsOfToMenuName),
+                    new SqlParameter("@ToIsOfFromMenuName", FromForm.ToIsOfFromMenuName),
+                    new SqlParameter("@Modifier", CurrentUserId)
                 };
 
-                var c = _context.Database.ExecuteSqlCommand("UserRelationTypeLanguageEditPost @LId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
+                var c = _context.Database.ExecuteSqlCommand("UserRelationTypeLanguageEditPost " +
+                    "@LId" +
+                    ", @FromIsOfToName" +
+                    ", @ToIsOfFromName" +
+                    ", @FromIsOfToDescription" +
+                    ", @ToIsOfFromDescription" +
+                    ", @FromIsOfToMouseOver" +
+                    ", @ToIsOfFromMouseOver" +
+                    ", @FromIsOfToMenuName" +
+                    ", @ToIsOfFromMenuName" +
+                    ", @Modifier",
                  parameters);
             }
 
@@ -132,12 +146,12 @@ namespace StudentUnion0105.Controllers
             if (NoOfLanguages == 0)
             { return RedirectToAction("LanguageIndex", new { Id = Id }); }
 
-            SuObjectLanguageCreateGetModel UserRelationType = new SuObjectLanguageCreateGetModel();
+            SuUserRelationTypeLanguageCreateGetModel UserRelationType = new SuUserRelationTypeLanguageCreateGetModel();
             UserRelationType.OId = Id;
             ViewBag.Id = Id.ToString();
-            var UserRelationTypeAndLanguages = new SuObjectLanguageCreateGetWithListModel
+            var UserRelationTypeAndLanguages = new SuUserRelationTypeLanguageCreateGetWithListModel
             {
-                ObjectLanguage = UserRelationType
+                UserRelationType = UserRelationType
 
                 ,
                 LanguageList = SuLanguage
@@ -146,7 +160,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LanguageCreate(SuObjectLanguageCreateGetWithListModel FromForm)
+        public async Task<IActionResult> LanguageCreate(SuUserRelationTypeLanguageCreateGetWithListModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -154,29 +168,64 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
                     {
-                    new SqlParameter("@Id", FromForm.ObjectLanguage.OId),
-                    new SqlParameter("@LanguageId", FromForm.ObjectLanguage.LanguageId),
-                    new SqlParameter("@Name", FromForm.ObjectLanguage.Name),
-                    new SqlParameter("@Description", FromForm.ObjectLanguage.Description),
-                    new SqlParameter("@MouseOver", FromForm.ObjectLanguage.MouseOver),
-                    new SqlParameter("@MenuName", FromForm.ObjectLanguage.MenuName),
+                    new SqlParameter("@OId", FromForm.UserRelationType.OId),
+                    new SqlParameter("@LanguageId", FromForm.UserRelationType.LanguageId),
+                    new SqlParameter("@FromIsOfToName", FromForm.UserRelationType.FromIsOfToName),
+                    new SqlParameter("@ToIsOfFromName", FromForm.UserRelationType.ToIsOfFromName),
+                    new SqlParameter("@FromIsOfToDescription", FromForm.UserRelationType.FromIsOfToDescription),
+                    new SqlParameter("@ToIsOfFromDescription", FromForm.UserRelationType.ToIsOfFromDescription),
+                    new SqlParameter("@FromIsOfToMouseOver", FromForm.UserRelationType.FromIsOfToMouseOver),
+                    new SqlParameter("@ToIsOfFromMouseOver", FromForm.UserRelationType.ToIsOfFromMouseOver),
+                    new SqlParameter("@FromIsOfToMenuName", FromForm.UserRelationType.FromIsOfToMenuName),
+                    new SqlParameter("@ToIsOfFromMenuName", FromForm.UserRelationType.ToIsOfFromMenuName),
                     new SqlParameter("@ModifierId", CurrentUser.Id)
                     };
 
                 _context.Database.ExecuteSqlCommand("UserRelationTypeLanguageCreatePost " +
-                            "@Id" +
+                            "@OId" +
                             ", @LanguageId" +
-                            ", @MenuName" +
-                            ", @Name" +
-                            ", @Description" +
-                            ", @MouseOver" +
+                            ", @FromIsOfToName" +
+                            ", @ToIsOfFromName" +
+                            ", @FromIsOfToDescription" +
+                            ", @ToIsOfFromDescription" +
+                            ", @FromIsOfToMouseOver" +
+                            ", @ToIsOfFromMouseOver" +
+                            ", @FromIsOfToMenuName" +
+                            ", @ToIsOfFromMenuName" +
                             ", @ModifierId", parameters);
             }
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectLanguage.OId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.UserRelationType.OId.ToString() });
         }
 
-        //
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var UserRelationType = _context.ZdbUserRelationTypeLanguageDeleteGet.FromSql("SuUserRelationTypeLanguageDeleteGetModel @LanguageId, @Id", parameters).First();
+
+            return View(UserRelationType);
+        }
+        [HttpPost]
+        public IActionResult Delete(SuUserRelationTypeLanguageDeleteGetModel FromForm)
+        {
+            SqlParameter parameter = new SqlParameter("@Id", FromForm.LId);
+            var b = _context.Database.ExecuteSqlCommand("UserRelationTypeDeletePost @Id", parameter);
+
+            return RedirectToAction("Index");
+
+        }
 
     }
 }

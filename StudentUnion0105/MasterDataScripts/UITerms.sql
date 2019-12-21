@@ -271,5 +271,19 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(269, 'In Menu', 'In Menu');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(270, 'User Project type languages', 'User Project type languages');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(271, 'Add user Project type language', 'Add user Project type language');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(272, 'Back to user Project types', 'Back to user Project types');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(273, 'From is of to name', 'From is of to name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(274, 'To is of from name', 'To is of from name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(275, 'From is of to description', 'From is of to description');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(276, 'To is of from description', 'To is of from description');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(277, 'From is of to mouse over', 'From is of to mouse over');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(278, 'To is of from mouse over', 'To is of from mouse over');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(279, 'From is of to menu name', 'From is of to menu name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(280, 'To is of from menu name', 'To is of from menu name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(281, 'Back to user relation types', 'Back to user relation types');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(282, 'Add user relation type language', 'Add user relation type language');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(283, 'User relation types', 'User relation types');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(284, 'Edit user relation type language', 'Edit user relation type language');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(285, 'Delete user relation type language', 'Delete user relation type language');
+
 
 SET IDENTITY_INSERT dbUITerm OFF;

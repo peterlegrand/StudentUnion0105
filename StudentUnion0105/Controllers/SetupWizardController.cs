@@ -371,6 +371,14 @@ namespace StudentUnion0105.Controllers
 , "UserProjectTypeLanguageEditPost.sql"
 , "UserProjectTypeLanguageIndexGet.sql"
 , "UserProjectTypeSelectAll.sql"
+, "UserRelationTypeIndexGet.sql"
+, "UserRelationTypeLanguageCreateGetLanguages.sq;"
+, "UserRelationTypeLanguageCreatePost.sql"
+, "UserRelationTypeLanguageDeleteGet.sql"
+, "UserRelationTypeLanguageDeletePost.sql"
+, "UserRelationTypeLanguageEditGet.sql"
+, "UserRelationTypeLanguageEditPost.sql"
+, "UserRelationTypeLanguageIndexGet.sql"
 
 
 

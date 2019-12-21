@@ -19,7 +19,11 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuUserRelationTypeLanguageDeleteGetModel> ZdbUserRelationTypeLanguageDeleteGet { get; set; }
+        public DbSet<SuUserRelationTypeLanguageEditGetModel> ZdbUserRelationTypeLanguageEditGet { get; set; }
+        public DbSet<SuUserRelationTypeLanguageIndexGetModel> ZdbUserRelationTypeLanguageIndexGet { get; set; }
         public DbSet<SuOrganizationEditGetModel> ZdbOrganizationEditGet { get; set; }
+        public DbSet<SuUserRelationTypeIndexGetModel> ZdbUserRelationTypeIndexGet { get; set; }
         public DbSet<SuPageSectionEditGetModel> ZdbPageSectionEditGet { get; set; }
         public DbSet<SuMenu1Model> dbMenu1 { get; set; }
         public DbSet<SuMenu2Model> dbMenu2 { get; set; }

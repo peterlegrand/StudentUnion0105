@@ -203,5 +203,10 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1198, 'UserProjectType', '
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1199, 'UserProjectType', 'LanguageIndex');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1200, 'UserProjectType', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1201, 'UserProjectType', 'LanguageCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1202, 'UserRelationType', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1203, 'UserRelationType', 'LanguageIndex');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1204, 'UserRelationType', 'LanguageCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1205, 'UserRelationType', 'LanguageEdit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1206, 'UserRelationType', 'LanguageDelete');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

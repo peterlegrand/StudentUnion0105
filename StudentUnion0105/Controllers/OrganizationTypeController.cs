@@ -344,7 +344,10 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public IActionResult Delete(SuOrganizationTypeDeleteGetModel FromForm)
         {
-            var b = _context.Database.ExecuteSqlCommand($"OrganizationTypeDeletePost {FromForm.Id}");
+
+            SqlParameter parameter = new SqlParameter("@Id", FromForm.LId);
+            
+            var b = _context.Database.ExecuteSqlCommand("OrganizationTypeDeletePost @Id", parameter);
 
             return RedirectToAction("Index");
 
