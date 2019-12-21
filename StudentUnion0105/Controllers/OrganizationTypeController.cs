@@ -295,17 +295,18 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageDelete(int Id)
+        public async Task<IActionResult> LanguageDelete(int Id)
         {
-            var OrganizationTypeLanguage = _OrganizationTypeLanguage.DeleteOrganizationTypeLanguage(Id);
-            var a = new SuObjectVM();
-            a.Id = OrganizationTypeLanguage.Id;
-            a.Name = OrganizationTypeLanguage.Name;
-            a.Description = OrganizationTypeLanguage.Description;
-            a.MouseOver = OrganizationTypeLanguage.MouseOver;
-            a.LanguageId = OrganizationTypeLanguage.LanguageId;
-            a.ObjectId = OrganizationTypeLanguage.OrganizationTypeId;
-            return View(a);
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            var parameter = new SqlParameter("@LId", Id);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("OrganizationTypeLanguageEditGet @LId", parameter).First();
+            return View(ObjectLanguage);
+
         }
 
         [HttpPost]

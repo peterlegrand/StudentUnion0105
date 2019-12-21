@@ -19,6 +19,7 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuPageSectionEditGetModel> ZdbPageSectionEditGet { get; set; }
         public DbSet<SuMenu1Model> dbMenu1 { get; set; }
         public DbSet<SuMenu2Model> dbMenu2 { get; set; }
         public DbSet<SuMenu3Model> dbMenu3 { get; set; }

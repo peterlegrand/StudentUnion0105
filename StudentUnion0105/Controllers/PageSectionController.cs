@@ -81,6 +81,16 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var PageSectionEditGet = _context.ZdbPageSectionEditGet.FromSql("PageSectionEditGet @LanguageId, @Id", parameters).First();
+
+
             var PageSection = (from c in _pageSection.GetAllPageSections()
                                join l in _pageSectionLanguage.GetAllPageSectionLanguages()
                                on c.Id equals l.PageSectionId

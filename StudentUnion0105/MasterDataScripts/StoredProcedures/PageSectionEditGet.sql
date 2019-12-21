@@ -1,7 +1,7 @@
 CREATE PROCEDURE PageSectionEditGet (@LanguageId int, @Id int)
 AS
 SELECT
-	dbPageSection.Id 
+	dbPageSection.Id OId
 	, dbPageSection.ContentTypeId
 	, dbPageSection.HasPaging
 	, dbPageSection.MaxContent
