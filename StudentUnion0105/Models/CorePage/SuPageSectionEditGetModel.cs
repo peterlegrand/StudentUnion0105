@@ -10,7 +10,7 @@ namespace StudentUnion0105.Models
         public int OId { get; set; }
         public int ContentTypeId { get; set; }
         public bool HasPaging { get; set; }
-        public bool MaxContent { get; set; }
+        public int MaxContent { get; set; }
         public int OneTwoColumns { get; set; }
         public int PageSectionTypeId { get; set; }
         public int Sequence { get; set; }

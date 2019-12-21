@@ -1,6 +1,8 @@
 CREATE PROCEDURE [dbo].[PageCreatePost]
 	(@PageStatusId int
 	, @PageTypeId int
+	, @ShowTitle bit
+	, @ShowDesciption bit
 	, @UserId varchar(450)
 	, @LanguageId int
 	, @Name nvarchar(max)
@@ -14,13 +16,13 @@ AS
 BEGIN TRANSACTION 
  
 	INSERT 
-		dbPage (PageStatusId, PageTypeId, CreatorId, CreatedDate, ModifierId, ModifiedDate)
-	VALUES (@PageStatusId, @PageTypeId,@UserId, getdate(), @UserId, GETDATE());
+		dbPage (PageStatusId, PageTypeId, ShowTitleName, ShowTitleDescription, CreatorId, CreatedDate, ModifierId, ModifiedDate)
+	VALUES (@PageStatusId, @PageTypeId, @ShowTitle, @ShowDesciption ,@UserId, getdate(), @UserId, GETDATE());
 
 	DECLARE @NewPageId int	= scope_identity();
 	
 	INSERT dbPageLanguage (
-		PageId
+		PageId 
 		, LanguageId
 		, Name
 		, Description

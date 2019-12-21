@@ -1,4 +1,4 @@
-﻿@model SuObjectAndStatusViewModel
+﻿@model SuOrganizationEditGetWithListModel
 @{
     ViewBag.Title = "Edit organization";
 }
@@ -6,58 +6,79 @@
 <form class="mt-3" method="post">
 
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Name" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.OId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.Name" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.Name" class="text-danger"></span>
+            <input asp-for="@Model.Organization.OId" class="form-control" />
+            <span asp-validation-for="@Model.Organization.OId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Description" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.ParentOrganization" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <textarea asp-for="@Model.SuObject.Description" class="form-control ckeditor" id="description" name="description"></textarea>
-            <span asp-validation-for="@Model.SuObject.Description" class="text-danger"></span>
+            <input asp-for="@Model.Organization.ParentOrganization" class="form-control" />
+            <span asp-validation-for="@Model.Organization.ParentOrganization" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.MenuName" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.MenuName" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.MenuName" class="text-danger"></span>
+            <input asp-for="@Model.Organization.Name" class="form-control" />
+            <span asp-validation-for="@Model.Organization.Name" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.MouseOver" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.Description" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.MouseOver" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.MouseOver" class="text-danger"></span>
+            <textarea asp-for="@Model.Organization.Description" class="form-control ckeditor" id="description" name="description"></textarea>
+            <span asp-validation-for="@Model.Organization.Description" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Status" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.MenuName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Organization.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.Organization.MenuName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Organization.MouseOver" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Organization.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.Organization.MouseOver" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Organization.OrganizationStatusId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10 ">
 
             @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(x => x.SuObject.Status, Model.SomeKindINumSelectListItem)
-            <span asp-validation-for="@Model.SuObject.Status" class="text-danger"></span>
+            @Html.DropDownListFor(x => x.Organization.OrganizationStatusId, Model.StatusList)
+            <span asp-validation-for="@Model.Organization.OrganizationStatusId" class="text-danger"></span>
 
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.Type" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.OrganizationTypeId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10 ">
 
             @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(x => x.SuObject.Type, Model.ProbablyTypeListItem)
-            <span asp-validation-for="@Model.SuObject.Type" class="text-danger"></span>
+            @Html.DropDownListFor(x => x.Organization.OrganizationTypeId, Model.TypeList)
+            <span asp-validation-for="@Model.Organization.OrganizationTypeId" class="text-danger"></span>
 
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SuObject.NullId" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.Organization.LanguageId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.SuObject.NullId" class="form-control" />
-            <span asp-validation-for="@Model.SuObject.NullId" class="text-danger"></span>
+            <input asp-for="@Model.Organization.LanguageId" class="form-control" />
+            <span asp-validation-for="@Model.Organization.LanguageId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Organization.LId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Organization.LId" class="form-control" />
+            <span asp-validation-for="@Model.Organization.LId" class="text-danger"></span>
         </div>
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>

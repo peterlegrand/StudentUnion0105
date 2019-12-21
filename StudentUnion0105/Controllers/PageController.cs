@@ -113,7 +113,7 @@ namespace StudentUnion0105.Controllers
 
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ParentPage = _Page.GetPage(Id);
+            //var ParentPage = _Page.GetPage(Id);
 
             var StatusList = new List<SelectListItem>();
 
@@ -149,40 +149,44 @@ namespace StudentUnion0105.Controllers
             }
             //wwwwwwwwwwwwwwwwwwwwwwww
 
-            SuObjectVM Parent = new SuObjectVM()
-            {
-                NullId = ParentPage == null ? 0 : ParentPage.Id,
-                LanguageId = DefaultLanguageID
+            //SuObjectVM Parent = new SuObjectVM()
+            //{
+            //    NullId = ParentPage == null ? 0 : ParentPage.Id,
+            //    LanguageId = DefaultLanguageID
 
-            };
-            var PageAndStatus = new SuObjectAndStatusViewModel { SuObject = Parent, SomeKindINumSelectListItem = StatusList, ProbablyTypeListItem = TypeList };
-            return View(PageAndStatus);
+            //};
+            var Page = new SuPageEditGetModel();
+            var PageAndLists = new SuPageEditGetWithListModel { Page = Page, StatusList= StatusList, TypeList= TypeList };
+            return View(PageAndLists);
         }
 
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectAndStatusViewModel FromForm)
+        public async Task<IActionResult> Create(SuPageEditGetWithListModel FromForm)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
             var UserId = CurrentUser.Id;
             if (ModelState.IsValid)
             {
                 SqlParameter[] parameters =
                 {
-                new SqlParameter("@PageStatusId", FromForm.SuObject.Status ),
-                new SqlParameter("@PageTypeId", FromForm.SuObject.Type),
+                new SqlParameter("@PageStatusId", FromForm.Page.PageStatusId ),
+                new SqlParameter("@PageTypeId", FromForm.Page.PageTypeId),
+                new SqlParameter("@ShowTitle", FromForm.Page.ShowTitleName),
+                new SqlParameter("@ShowDescription", FromForm.Page.ShowTitleDescription),
                 new SqlParameter("@UserId", UserId ),
-                new SqlParameter("@LanguageId", FromForm.SuObject.LanguageId),
-                new SqlParameter("@Name", FromForm.SuObject.Name ?? ""),
-                new SqlParameter("@Description", FromForm.SuObject.Description ?? ""),
-                new SqlParameter("@MouseOver", FromForm.SuObject.MouseOver ?? ""),
-                new SqlParameter("@MenuName", FromForm.SuObject.MenuName ?? ""),
-                new SqlParameter("@Title", FromForm.SuObject.Title ?? ""),
-                new SqlParameter("@PageDescription", FromForm.SuObject.PageDescription ?? ""),
+                new SqlParameter("@LanguageId", DefaultLanguageID),
+                new SqlParameter("@Name", FromForm.Page.Name ?? ""),
+                new SqlParameter("@Description", FromForm.Page.Description ?? ""),
+                new SqlParameter("@MouseOver", FromForm.Page.MouseOver ?? ""),
+                new SqlParameter("@MenuName", FromForm.Page.MenuName ?? ""),
+                new SqlParameter("@Title", FromForm.Page.TitleName ?? ""),
+                new SqlParameter("@PageDescription", FromForm.Page.TitleDescription ?? ""),
             };
 
-                var b = _context.Database.ExecuteSqlCommand("PageCreatePost @PageStatusId, @PageTypeId, @UserId, @LanguageId, @Name, @Description, @MouseOver, @MenuName, @Title, @PageDescription", parameters);
+                var b = _context.Database.ExecuteSqlCommand("PageCreatePost @PageStatusId, @PageTypeId, @ShowTitle, @ShowDescription, @UserId, @LanguageId, @Name, @Description, @MouseOver, @MenuName, @Title, @PageDescription", parameters);
 
 
             }

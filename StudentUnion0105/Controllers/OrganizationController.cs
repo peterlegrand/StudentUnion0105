@@ -168,38 +168,89 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            //LISTS
+            var StatusList = new List<SelectListItem>();
 
-            var ToForm = (from s in _Organization.GetAllOrganizations()
-                         join t in _OrganizationLanguage.GetAllOrganizationLanguages()
-                         on s.Id equals t.OrganizationId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             Status = s.OrganizationStatusId
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                         }).First();
-
-            var OrganizationList = new List<SelectListItem>();
-
-            foreach (var OrganizationFromDb in _OrganizationStatus.GetAllOrganizationStatus())
+            foreach (var StatusFromDb in _OrganizationStatus.GetAllOrganizationStatus())
             {
-                OrganizationList.Add(new SelectListItem
+                StatusList.Add(new SelectListItem
                 {
-                    Text = OrganizationFromDb.Name,
-                    Value = OrganizationFromDb.Id.ToString()
+                    Text = StatusFromDb.Name,
+                    Value = StatusFromDb.Id.ToString()
                 });
             }
-            var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = OrganizationList };
-            return View(OrganizationAndStatus);
+
+            //wwwwwwwwwwwwwwwwwwwwwwwwww
+            var ToForm = (from o in _organizationType.GetAllOrganizationTypes()
+                          join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
+                          on o.Id equals l.OrganizationTypeId
+                          where l.LanguageId == DefaultLanguageID
+                          select new SuObjectVM
+                          {
+                              Id = o.Id
+                             ,
+                              Name = l.Name
+                          }).ToList();
+
+            var TypeList = new List<SelectListItem>();
+            foreach (var TypeFromDb in ToForm)
+            {
+                TypeList.Add(new SelectListItem
+                {
+                    Text = TypeFromDb.Name,
+                    Value = TypeFromDb.Id.ToString()
+                });
+            }
+            //wwwwwwwwwwwwwwwwwwwwwwww
+            //LISTS
+
+
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            SuOrganizationEditGetModel Organization = _context.ZdbOrganizationEditGet.FromSql("OrganizationEditGet @LanguageId, @Id", parameters).First();
+            SuOrganizationEditGetWithListModel OrganizationWithList = new SuOrganizationEditGetWithListModel();
+            OrganizationWithList.StatusList = StatusList;
+            OrganizationWithList.TypeList = TypeList;
+            OrganizationWithList.Organization = Organization;
+
+            return View(OrganizationWithList);
+
+
+            //var ToForm = (from s in _Organization.GetAllOrganizations()
+            //             join t in _OrganizationLanguage.GetAllOrganizationLanguages()
+            //             on s.Id equals t.OrganizationId
+            //             where t.LanguageId == DefaultLanguageID && s.Id == Id
+            //             select new SuObjectVM
+            //             {
+            //                 Id = s.Id
+            //                ,
+            //                 Name = t.Name
+            //                ,
+            //                 Status = s.OrganizationStatusId
+            //                ,
+            //                 ObjectLanguageId = t.Id
+            //                ,
+            //                 Description = t.Description
+            //                ,
+            //                 MouseOver = t.MouseOver
+            //             }).First();
+
+            //var OrganizationList = new List<SelectListItem>();
+
+            //foreach (var OrganizationFromDb in _OrganizationStatus.GetAllOrganizationStatus())
+            //{
+            //    OrganizationList.Add(new SelectListItem
+            //    {
+            //        Text = OrganizationFromDb.Name,
+            //        Value = OrganizationFromDb.Id.ToString()
+            //    });
+            //}
+            //var OrganizationAndStatus = new SuObjectAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = OrganizationList };
+            //return View(OrganizationAndStatus);
 
 
 
@@ -207,29 +258,35 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuOrganizationEditGetWithListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var Organization = _Organization.GetOrganization(test3.Id);
-                var CurrentUser = await userManager.GetUserAsync(User);
-
-                Organization.ModifiedDate = DateTime.Now;
-                Organization.ModifierId = CurrentUser.Id;
-                _Organization.UpdateOrganization(Organization);
-
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var OrganizationLanguage = _OrganizationLanguage.GetOrganizationLanguage(test3.ObjectLanguageId);
-                OrganizationLanguage.Name = test3.Name;
-                OrganizationLanguage.Description = test3.Description;
-                OrganizationLanguage.MouseOver = test3.MouseOver;
-                OrganizationLanguage.ModifiedDate = DateTime.Now;
-                OrganizationLanguage.ModifierId = CurrentUser.Id;
-                _OrganizationLanguage.UpdateOrganizationLanguage(OrganizationLanguage);
-
-            }
+                SuUserModel CurrentUser = await userManager.GetUserAsync(User);
+                int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@OId", FromForm.Organization.OId),
+                    new SqlParameter("@StatusId", FromForm.Organization.OrganizationStatusId),
+                    new SqlParameter("@TypeId", FromForm.Organization.OrganizationTypeId),
+                    new SqlParameter("@LId", FromForm.Organization.LId),
+                    new SqlParameter("@LanguageId", FromForm.Organization.LanguageId),
+                    new SqlParameter("@Name", FromForm.Organization.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.Organization.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.Organization.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.Organization.MenuName ?? ""),
+                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    };
+                _context.Database.ExecuteSqlCommand("OrganizationEditPost " +
+                            "@OId" +
+                            ", @StatusId" +
+                            ", @TypeId" +
+                            ", @LId" +
+                            ", @LanguageId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" + 
+                            ", @ModifierId" , parameters);
             return RedirectToAction("Index");
-
 
 
         }
