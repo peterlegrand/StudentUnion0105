@@ -43,21 +43,11 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ToForm = (
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            //PETER cannot be generic object
+            var UserOrganizationTypes = _context.ZdbObjectIndexGet.FromSql("OrganizationTypeIndexGet @LanguageId", parameter).ToList();
 
-                from u in _userOrganizationType.GetAllUserOrganizationTypes()
-
-                select new SuObjectVM
-
-
-                {
-                    Id = u.Id
-                             ,
-                    Name = u.Name
-                             ,
-                    Description = u.Description
-                }).ToList();
-            return View(ToForm);
+            return View(UserOrganizationTypes);
         }
         public async Task<IActionResult> LanguageIndex(int Id)
         {
