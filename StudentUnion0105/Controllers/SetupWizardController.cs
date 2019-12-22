@@ -182,6 +182,7 @@ namespace StudentUnion0105.Controllers
 , "FrontProcessIndexGetTemplate.sql"
 , "FrontProcessIndexGetTemplateFlowCondition.sql"
 , "FrontProcessIndexGetTemplateGroup.sql"
+, "FrontProcessToDoIndexGet.sql"
 , "GetMasterList.sql"
 , "GetProcessTemplateFlowConditionCreateGetFields.sql"
 , "GetProcessTemplateGroup.sql"

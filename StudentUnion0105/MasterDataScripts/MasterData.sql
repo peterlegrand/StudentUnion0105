@@ -273,13 +273,15 @@ SET IDENTITY_INSERT dbContentStatus OFF
 SET IDENTITY_INSERT dbMasterList ON
 
 INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (0, '-- Not linked --', '-- Not linked --',1); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (1, 'Users', 'Users',5); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (1, 'Users', 'Users',2); 
 INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (2, 'Organizations', 'Organizations',3); 
 INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (3, 'Projects', 'Projects',4); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (4, 'Classifications', 'Classifications',2); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (5, 'Content', 'Content',2); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (6, 'Language', 'Language',2); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (7, 'Country', 'Country',2); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (4, 'Classifications', 'Classifications',5); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (5, 'Content', 'Content',6); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (6, 'Language', 'Language',7); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (7, 'Country', 'Country',8); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (8, 'Security level', 'Security level',9); 
+INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (9, 'Role', 'Role',10); 
 
 SET IDENTITY_INSERT dbMasterList OFF
 
