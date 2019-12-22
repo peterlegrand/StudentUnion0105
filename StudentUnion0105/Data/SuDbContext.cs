@@ -19,7 +19,8 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
-        public DbSet<SuFrontProcessTodoGetModel> ZdbSuFrontProcessTodoGet { get; set; }
+        public DbSet<SuFrontProcessTodoIndexGetModel> ZdbSuFrontProcessTodoIndexGet { get; set; }
+        public DbSet<SuFrontProcessTodoEditGetModel> ZdbSuFrontProcessTodoEditGet { get; set; }
         public DbSet<SuUserRelationTypeLanguageDeleteGetModel> ZdbUserRelationTypeLanguageDeleteGet { get; set; }
         public DbSet<SuUserRelationTypeLanguageEditGetModel> ZdbUserRelationTypeLanguageEditGet { get; set; }
         public DbSet<SuUserRelationTypeLanguageIndexGetModel> ZdbUserRelationTypeLanguageIndexGet { get; set; }

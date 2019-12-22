@@ -1,6 +1,8 @@
 DECLARE @CurrentUser uniqueidentifier; 
+DECLARE @SecondUser uniqueidentifier; 
  
 SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+SELECT @SecondUser = Id from AspNetUSers Where email = 'pipo@gmail.com'; 
 --DEMO 
  
 INSERT INTO dbContentType (CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(@CurrentUser, @CurrentUser, getdate(), getdate()); 
@@ -1529,7 +1531,7 @@ VALUES (8, 3, 4, 2, 10);
 
 
 INSERT dbProcessTemplateFlowCondition (ProcessTemplateFlowId, ProcessTemplateConditionTypeId)
-VALUES (2, 5); 
+VALUES (2, 14); 
 
 
 INSERT dbProcessTemplateFlowConditionLanguage (FlowConditionId, LanguageId, Name, Description, MouseOver, CreatedDate,ModifiedDate, CreatorId, ModifierId)
@@ -1841,3 +1843,22 @@ VALUES (2, 39, 'First class', 'First', @CurrentUser, @CurrentUser, getdate(), ge
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES (3, 39, 'Second class', 'Second', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+
+INSERT INTO DbUserRelation (FromUserId, ToUserId, TypeId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
+VALUES(@SecondUser, @CurrentUser, 1, @CurrentUser, @CurrentUser, getdate(), getdate())
+
+INSERT INTO DbProcess (ProcessTemplateId, StepId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
+VALUES(1, 1, @SecondUser, @SecondUser, getdate(), getdate())
+
+INSERT INTO DbProcess (ProcessTemplateId, StepId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
+VALUES(1, 1, @SecondUser, @SecondUser, getdate(), getdate())
+
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (1, 1, 'Airpolution', getdate(), 0)
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (1, 2, 'Urban air polution', getdate(), 0)
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (1, 3, 'Netherlands', getdate(), 0)
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (2, 1, 'Plastics', getdate(), 0)
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (2, 2, 'Plastics in the ocean', getdate(), 0)
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (2, 3, 'Micronesia', getdate(), 0)
+
+

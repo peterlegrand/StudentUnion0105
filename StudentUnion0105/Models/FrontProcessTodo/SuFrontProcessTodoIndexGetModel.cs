@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StudentUnion0105.Models
 {
-    public class SuFrontProcessTodoGetModel
+    public class SuFrontProcessTodoIndexGetModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -122,3 +122,23 @@ WHERE StepId <> 0
 	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 6 
 
 
+UNION ALL
+
+SELECT 
+	DbProcess.Id
+	, DbProcessTemplateLanguage.Name
+	, dbprocess.CreatedDate
+FROM DbProcess
+JOIN DbProcessTemplateFlow
+	ON DbProcess.ProcessTemplateId = DbProcessTemplateFlow.ProcessTemplateId
+	AND DbProcess.StepId = DbProcessTemplateFlow.ProcessTemplateFromStepId
+JOIN DbProcessTemplateFlowCondition
+	ON DbProcessTemplateFlow.Id = DbProcessTemplateFlowCondition.ProcessTemplateFlowId
+JOIN DbUserRelation
+	ON DbUserRelation.FromUserId = DbProcess.CreatorId
+JOIN DbProcessTemplateLanguage
+	ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId
+WHERE StepId <> 0
+	AND DbUserRelation.TypeId = 1
+	AND DbUserRelation.ToUserId = @CurrentUser
+	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 14

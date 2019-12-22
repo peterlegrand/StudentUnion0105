@@ -284,6 +284,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(282, 'Add user relation type
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(283, 'User relation types', 'User relation types');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(284, 'Edit user relation type language', 'Edit user relation type language');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(285, 'Delete user relation type language', 'Delete user relation type language');
-
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(286, 'To do', 'To do');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(287, 'Process name', 'Process name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(288, 'Created date', 'Created date');
 
 SET IDENTITY_INSERT dbUITerm OFF;

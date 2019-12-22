@@ -573,6 +573,8 @@ INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (10, 'And', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (11, 'Or', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (12, 'Close bracket', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (13, 'User', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (14, 'Manager creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 
 SET IDENTITY_INSERT dbProcessTemplateFlowConditionType OFF
 

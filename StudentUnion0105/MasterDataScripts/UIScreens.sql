@@ -208,5 +208,6 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1203, 'UserRelationType', 
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1204, 'UserRelationType', 'LanguageCreate');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1205, 'UserRelationType', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1206, 'UserRelationType', 'LanguageDelete');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1207, 'FrontProcessToDo', 'Index');
 
 SET IDENTITY_INSERT dbUIScreen OFF;

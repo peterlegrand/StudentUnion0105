@@ -58,12 +58,12 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@CurrentUser", CurrentUser.Id)
                 };
 
-            var ToDo = _context.ZdbSuFrontProcessTodoGet.FromSql("FrontProcessToDoIndexGet @LanguageId, @CurrentUser", parameters).ToList();
+            var ToDo = _context.ZdbSuFrontProcessTodoIndexGet.FromSql("FrontProcessToDoIndexGet @LanguageId, @CurrentUser", parameters).ToList();
             return View(ToDo);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -71,23 +71,15 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameterPage = new SqlParameter("@LanguageId", DefaultLanguageID);
-
-
-            SuFrontProcessCreateGetModel FrontProcess = _context.ZdbFrontProcessCreateGet.FromSql("FrontProcessCreateGet @LanguageId", parameterPage).First();
-
-            SqlParameter[] FieldParameter =
+            SqlParameter[] parameters =
                 {
                     new SqlParameter("@LanguageId", DefaultLanguageID)
-                    , new SqlParameter("@PId", Id)
+                    , new SqlParameter("@PId",Id)
                 };
 
+            List< SuFrontProcessTodoEditGetModel> ToDo = _context.ZdbSuFrontProcessTodoEditGet.FromSql("FrontProcessToDoEditGet @LanguageId, @PId", parameters).ToList();
 
-            List<SuFrontProcessCreateGetFieldModel> FrontProcessFields = _context.ZdbFrontProcessCreateGetField.FromSql("FrontProcessCreateGetField @LanguageId, @PId", FieldParameter).ToList();
-
-            FrontProcess.ProcessFields = FrontProcessFields;
-
-            return View(FrontProcess);
+            return View(ToDo);
         }
 
         public ActionResult CountryDD()
