@@ -26,7 +26,7 @@ namespace StudentUnion0105.Models
         public DateTime CreatedDate { get; set; }
 
         [ForeignKey("FieldTypeId")]
-        public virtual SuPageTypeModel PageType { get; set; }
+        public virtual SuProcessTemplateFieldTypeModel ProcessTemplateFieldType { get; set; }
         [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
 

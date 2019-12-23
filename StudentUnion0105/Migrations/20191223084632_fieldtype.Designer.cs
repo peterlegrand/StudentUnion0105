@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191223084632_fieldtype")]
+    partial class fieldtype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "167c88b9-6f61-465f-ae77-2012f133a0f0",
-                            ConcurrencyStamp = "2fda2096-75f7-4aa7-ae7a-16324614c09a",
+                            Id = "61bf82a7-65e2-420a-a0ea-c6a9b5dcdc56",
+                            ConcurrencyStamp = "2f171c19-b773-4135-a8f1-979967e0c1eb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a99567d8-9e29-42da-8579-1cbe425d3cb3",
-                            ConcurrencyStamp = "f9de9807-64d1-49c9-a1cd-4a01ee48e44e",
+                            Id = "eff511f5-db74-4966-9a10-6a81c91d2c74",
+                            ConcurrencyStamp = "1384fded-cbb9-4757-872b-df4d65b767fd",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -4960,7 +4962,7 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateFieldTypeLanguageModel", b =>
                 {
-                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateFieldTypeModel", "ProcessTemplateFieldType")
+                    b.HasOne("StudentUnion0105.Models.SuPageTypeModel", "PageType")
                         .WithMany()
                         .HasForeignKey("FieldTypeId")
                         .OnDelete(DeleteBehavior.Cascade);

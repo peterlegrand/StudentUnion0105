@@ -82,24 +82,43 @@ namespace StudentUnion0105.Controllers
             return View(ToDo);
         }
 
-        public ActionResult CountryDD()
-        {
-            var CountryList = new List<SelectListItem>();
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(SuFrontProcessTodoEditGetModel FromForm)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var CurrentUser = await userManager.GetUserAsync(User);
+        //        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+        //        SqlParameter[] parameters =
+        //            {
+        //            new SqlParameter("@Id", FromForm.Classification.Id),
+        //            new SqlParameter("@LanguageId", DefaultLanguageID),
+        //            new SqlParameter("@ClassificationStatusId", FromForm.Classification.ClassificationStatusId),
+        //            new SqlParameter("@DefaultClassificationPageId", FromForm.Classification.DefaultClassificationPageId),
+        //            new SqlParameter("@HasDropDown", FromForm.Classification.HasDropDown),
+        //            new SqlParameter("@DropDownSequence", FromForm.Classification.DropDownSequence),
+        //            new SqlParameter("@ModifierId", CurrentUser.Id),
+        //            new SqlParameter("@Name", FromForm.Classification.Name),
+        //            new SqlParameter("@Description", FromForm.Classification.Description),
+        //            new SqlParameter("@MouseOver", FromForm.Classification.MouseOver),
+        //            new SqlParameter("@MenuName", FromForm.Classification.MenuName)
+        //            };
+        //        var b = _context.Database.ExecuteSqlCommand("ClassificationEditPost " +
+        //                    "@Id" +
+        //                    ", @LanguageId" +
+        //                    ", @ClassificationStatusId" +
+        //                    ", @DefaultClassificationPageId" +
+        //                    ", @HasDropDown" +
+        //                    ", @DropDownSequence" +
+        //                    ", @ModifierId" +
+        //                    ", @Name" +
+        //                    ", @Description" +
+        //                    ", @MouseOver" +
+        //                    ", @MenuName", parameters);
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
-            var CountriesFromDb = _context.ZDbStatusList.FromSql("CountryDD").ToList();
-
-
-            foreach (var CountryFromDb in CountriesFromDb)
-            {
-                CountryList.Add(new SelectListItem
-                {
-                    Text = CountryFromDb.Name,
-                    Value = CountryFromDb.Id.ToString()
-                });
-            }
-            return View();
-
-        }
 
     }
 }

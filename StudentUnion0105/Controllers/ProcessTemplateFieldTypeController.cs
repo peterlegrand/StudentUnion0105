@@ -139,37 +139,37 @@ namespace StudentUnion0105.Controllers
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
-        {
-            if (ModelState.IsValid)
-            {
-                var ProcessTemplateFieldType = _ProcessTemplateFieldType.GetProcessTemplateFieldType(test3.Id);
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(SuObjectVM test3)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var ProcessTemplateFieldType = _ProcessTemplateFieldType.GetProcessTemplateFieldType(test3.Id);
+        //        var CurrentUser = await userManager.GetUserAsync(User);
+        //        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-                var UICustomizationArray = new UICustomization(_context);
-                ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-
-                ProcessTemplateFieldType.ModifiedDate = DateTime.Now;
-                ProcessTemplateFieldType.ModifierId = CurrentUser.Id;
-                _ProcessTemplateFieldType.UpdateProcessTemplateFieldType(ProcessTemplateFieldType);
-
-                var ProcessTemplateFieldTypeLanguage = _ProcessTemplateFieldTypeLanguage.GetProcessTemplateFieldTypeLanguage(test3.ObjectLanguageId);
-                ProcessTemplateFieldTypeLanguage.Name = test3.Name;
-                ProcessTemplateFieldTypeLanguage.Description = test3.Description;
-                ProcessTemplateFieldTypeLanguage.MouseOver = test3.MouseOver;
-                ProcessTemplateFieldTypeLanguage.ModifiedDate = DateTime.Now;
-                ProcessTemplateFieldTypeLanguage.ModifierId =  CurrentUser.Id;
-                _ProcessTemplateFieldTypeLanguage.UpdateProcessTemplateFieldTypeLanguage(ProcessTemplateFieldTypeLanguage);
-
-            }
-            return RedirectToAction("Index");
+        //        var UICustomizationArray = new UICustomization(_context);
+        //        ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
 
+        //        ProcessTemplateFieldType.ModifiedDate = DateTime.Now;
+        //        ProcessTemplateFieldType.ModifierId = CurrentUser.Id;
+        //        _ProcessTemplateFieldType.UpdateProcessTemplateFieldType(ProcessTemplateFieldType);
 
-        }
+        //        var ProcessTemplateFieldTypeLanguage = _ProcessTemplateFieldTypeLanguage.GetProcessTemplateFieldTypeLanguage(test3.ObjectLanguageId);
+        //        ProcessTemplateFieldTypeLanguage.Name = test3.Name;
+        //        ProcessTemplateFieldTypeLanguage.Description = test3.Description;
+        //        ProcessTemplateFieldTypeLanguage.MouseOver = test3.MouseOver;
+        //        ProcessTemplateFieldTypeLanguage.ModifiedDate = DateTime.Now;
+        //        ProcessTemplateFieldTypeLanguage.ModifierId =  CurrentUser.Id;
+        //        _ProcessTemplateFieldTypeLanguage.UpdateProcessTemplateFieldTypeLanguage(ProcessTemplateFieldTypeLanguage);
+
+        //    }
+        //    return RedirectToAction("Index");
+
+
+
+        //}
 
 
         public async Task<IActionResult> LanguageIndex(int Id)
