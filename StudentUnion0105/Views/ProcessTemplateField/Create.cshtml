@@ -1,4 +1,4 @@
-﻿@model SuProcessTemplateFieldWith2DropDown
+﻿@model SuProcessTemplateFieldEditGetWithListModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -10,73 +10,63 @@
 <form class="mt-3" method="post">
 
     <div class="form-group row" hidden>
-        <label asp-for="@Model.Field.ObjectId" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.ProcessTemplateField.LId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.ObjectId" class="form-control" />
-            <span asp-validation-for="@Model.Field.ObjectId" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.LId" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.LId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.Field.Id" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <label asp-for="@Model.ProcessTemplateField.OId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.Id" class="form-control" />
-            <span asp-validation-for="@Model.Field.Id" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.OId" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.OId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row" hidden>
-        <label asp-for="@Model.Field.LanguageId" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.ProcessTemplateField.LanguageId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.LanguageId" class="form-control" />
-            <span asp-validation-for="@Model.Field.LanguageId" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.LanguageId" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.LanguageId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row" hidden>
-        <label asp-for="@Model.Field.ObjectLanguageId" class="col-sm-2 col-form-label"></label>
+        <label asp-for="@Model.ProcessTemplateField.PId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.ObjectLanguageId" class="form-control" />
-            <span asp-validation-for="@Model.Field.ObjectLanguageId" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.PId" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.PId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.Field.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <label asp-for="@Model.ProcessTemplateField.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.Name" class="form-control" />
-            <span asp-validation-for="@Model.Field.Name" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.Name" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.Name" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group row">
-        <label asp-for="@Model.Field.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+        <label asp-for="@Model.ProcessTemplateField.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
         <div class="col-sm-10">
-            <textarea asp-for="@Model.Field.Description" class="form-control ckeditor" id="description" name="description"></textarea>
-            <span asp-validation-for="@Model.Field.Description" class="text-danger"></span>
+            <textarea asp-for="@Model.ProcessTemplateField.Description" class="form-control ckeditor" id="description" name="description"></textarea>
+            <span asp-validation-for="@Model.ProcessTemplateField.Description" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.Field.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+        <label asp-for="@Model.ProcessTemplateField.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Field.MouseOver" class="form-control" />
-            <span asp-validation-for="@Model.Field.MouseOver" class="text-danger"></span>
+            <input asp-for="@Model.ProcessTemplateField.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateField.MouseOver" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.Field.NotNullId" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+        <label asp-for="@Model.ProcessTemplateField.ProcessTemplateFieldTypeId" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
         <div class="col-sm-10 ">
-            @Html.DropDownListFor(x => x.Field.NotNullId, Model.DataTypes)
-            <span asp-validation-for="@Model.Field.NotNullId" class="text-danger"></span>
+            @Html.DropDownListFor(x => x.ProcessTemplateField.ProcessTemplateFieldTypeId, Model.FieldTypeList)
+            <span asp-validation-for="@Model.ProcessTemplateField.ProcessTemplateFieldTypeId" class="text-danger"></span>
 
         </div>
     </div>
-<select asp-for="@Model.Field.NotNullId2" class="form-control" id="MasterListDropDown" name="MasterListDropDown"></select>
-    @*<div class="form-group row">
-        <label asp-for="@Model.Field.NotNullId2" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-        <div class="col-sm-10 ">
-
-            @Html.DropDownListFor(x => x.Field.NotNullId2, Model.MasterList)
-            <span asp-validation-for="@Model.Field.NotNullId2" class="text-danger"></span>
-
-        </div>
-    </div>*@        
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">

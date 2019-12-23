@@ -2,8 +2,7 @@ CREATE PROCEDURE ProcessTemplateFieldEditGet (@LanguageId int, @Id int)
 AS
 SELECT
 	dbProcessTemplateField.Id 
-	, dbProcessTemplateField.FieldDataTypeId
-	, dbProcessTemplateField.FieldMasterListId
+	, dbProcessTemplateField.ProcessTemplateFieldTypeId
 	, Creator.UserName Creator
 	, dbProcessTemplate.CreatedDate
 	, Modifier.UserName Modifier

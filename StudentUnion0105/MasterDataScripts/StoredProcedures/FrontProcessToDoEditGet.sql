@@ -10,8 +10,7 @@ SELECT
 	, ISNULL(DbProcessField.IntValue, '') IntValue
 	, ISNULL(DbProcessField.DateTimeValue, getdate()) DateTimeValue
 	, DbProcessTemplateStepField.Sequence
-	, DbProcessTemplateField.FieldDataTypeId
-	, DbProcessTemplateField.FieldMasterListId
+	, DbProcessTemplateField.ProcessTemplateFieldTypeId
 FROM DbProcess
 JOIN DbProcessTemplateStepField
 	ON dbprocess.StepId =  DbProcessTemplateStepField.StepId

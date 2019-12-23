@@ -21,9 +21,9 @@
             <tr>
                 <td style="width: 44px">@x.Id</td>
                 <td>@x.Name</td>
-                <td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
+                @*<td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>*@
                 <td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
-                <td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
+                @*<td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>*@
             </tr>
         }
     </table>

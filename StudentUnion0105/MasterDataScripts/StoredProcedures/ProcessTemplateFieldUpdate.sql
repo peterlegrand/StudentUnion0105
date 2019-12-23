@@ -13,8 +13,7 @@ BEGIN TRANSACTION
  
 	UPDATE 
 		dbProcessTemplateField SET
-		dbProcessTemplateField.FieldDataTypeId = @FieldDataTypeId
-		, dbProcessTemplateField.FieldMasterListID = @FieldMasterListID 
+		dbProcessTemplateField.ProcessTemplateFieldTypeId = @FieldDataTypeId
 	WHERE dbProcessTemplateField.Id = @ProcessTemplateFieldId
 
 	UPDATE dbProcessTemplateFieldLanguage SET

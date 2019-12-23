@@ -1,11 +1,15 @@
-CREATE PROCEDURE ProcessTemplateFieldIndexGet (@LanguageId int)
+CREATE PROCEDURE ProcessTemplateFieldIndexGet (@PId int, @LanguageId int)
 AS
 SELECT 
-	dbProcessTemplateFieldLanguage.Id
+	dbProcessTemplateField.Id
 	, dbProcessTemplateFieldLanguage.Name
 	, dbProcessTemplateFieldLanguage.Description
 	, dbProcessTemplateFieldLanguage.MouseOver
 	, dbProcessTemplateFieldLanguage.MenuName
 FROM dbProcessTemplateFieldLanguage
+JOIN dbProcessTemplateField 
+	ON dbProcessTemplateFieldLanguage.ProcessTemplateFieldId = dbProcessTemplateField.Id
 WHERE dbProcessTemplateFieldLanguage.LanguageId = @LanguageId
-ORDER BY dbProcessTemplateFieldLanguage.Name
+	AND dbProcessTemplateField.ProcessTemplateId = @PId
+ORDER BY 	dbProcessTemplateFieldLanguage.Name
+

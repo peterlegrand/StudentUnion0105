@@ -7,8 +7,7 @@ SELECT
 	, dbProcessTemplateFieldLanguage.Name
 	, dbProcessTemplateFieldLanguage.Description
 	, dbProcessTemplateStepField.StatusId
-	, dbProcessTemplateField.FieldDataTypeId DataTypeId
-	, dbProcessTemplateField.FieldMasterListId MasterListId
+	, dbProcessTemplateField.ProcessTemplateFieldTypeId
 	, '' StringValue
 	, 0 IntValue
 	, CAST('1900-01-01' as datetime) DateTimeValue
@@ -21,8 +20,6 @@ JOIN dbProcessTemplateStep
 	ON dbProcessTemplateStep.Id = dbProcessTemplateStepField.StepId
 JOIN dbProcessTemplateFlow
 	ON dbProcessTemplateFlow.ProcessTemplateToStepId = dbProcessTemplateStep.Id
-JOIN dbDataType
-	ON dbDataType.Id = dbProcessTemplateField.FieldDataTypeId
 WHERE dbProcessTemplateFlow.ProcessTemplateFromStepId = 0
 AND dbProcessTemplateField.ProcessTemplateId = @PId
 AND dbProcessTemplateFieldLanguage.LanguageId = 41

@@ -11,8 +11,8 @@ AS
 BEGIN TRANSACTION 
  
 	INSERT 
-		dbProcessTemplateField (ProcessTemplateId, FieldDataTypeId, FieldMasterListID)
-	VALUES (@ProcessTemplateId, @FieldDataTypeId,@FieldMasterListId);
+		dbProcessTemplateField (ProcessTemplateId )
+	VALUES (@ProcessTemplateId);
 
 	DECLARE @NewProcessTemplateFieldId int	= scope_identity();
 	

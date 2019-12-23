@@ -63,24 +63,35 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ProcessTemplateField = (from c in  _processTemplateField.GetAllProcessTemplateFields()
-                               join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
-                      on c.Id equals l.ProcessTemplateFieldId
-                               where c.ProcessTemplateId== Id
-                               && l.LanguageId == DefaultLanguageID
-                               orderby l.Name
-                               select new SuObjectVM
-                               {
-                                   Id = c.Id
-                               ,
-                                   Name = l.Name
-                               ,
-                                   ObjectId = c.ProcessTemplateId
-                               }).ToList();
-            ViewBag.ObjectId = Id.ToString();
-
-
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@PId", Id)
+                };
+            var ProcessTemplateField = _context.ZdbObjectIndexGet.FromSql("ProcessTemplateFieldIndexGet @Id, @LanguageId", parameters).ToList();
+            //PETER Why do I need this viewbag
+            ViewBag.PId = Id;
             return View(ProcessTemplateField);
+
+
+            //var ProcessTemplateField = (from c in  _processTemplateField.GetAllProcessTemplateFields()
+            //                   join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
+            //          on c.Id equals l.ProcessTemplateFieldId
+            //                   where c.ProcessTemplateId== Id
+            //                   && l.LanguageId == DefaultLanguageID
+            //                   orderby l.Name
+            //                   select new SuObjectVM
+            //                   {
+            //                       Id = c.Id
+            //                   ,
+            //                       Name = l.Name
+            //                   ,
+            //                       ObjectId = c.ProcessTemplateId
+            //                   }).ToList();
+            //ViewBag.ObjectId = Id.ToString();
+
+
+            //return View(ProcessTemplateField);
         }
 
 
@@ -94,101 +105,136 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ProcessTemplateField = (from c in _processTemplateField.GetAllProcessTemplateFields()
-                                        join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
-                                        on c.Id equals l.ProcessTemplateFieldId
-                                        where c.Id == Id && l.LanguageId == DefaultLanguageID
-                                        orderby l.Name
-                                        select new SuObjectVM
-                                        {
-                                            Id = c.ProcessTemplateId
-                                            ,
-                                            ObjectId = c.Id
-                                            ,
-                                            LanguageId = l.LanguageId
-                                            ,
-                                            ObjectLanguageId = l.Id
-                                            ,
-                                            Name = l.Name
-                                            ,
-                                            Description = l.Description
-                                            ,
-                                            MouseOver = l.MouseOver
-                                            , NotNullId = c.FieldDataTypeId
-                                            , NotNullId2 = c.FieldMasterListId
-                                        }).First();
 
-            //DataTypes
-            var DataTypeList = new List<SelectListItem>();
-
-            var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
-
-
-            foreach (var DataTypeFromDb in DataTypesFromDb)
+            SqlParameter[] parameters =
             {
-                DataTypeList.Add(new SelectListItem
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@OId", Id)
+                };
+
+            SuProcessTemplateFieldEditGetModel ProcessTemplateFieldEditGet = _context.ZdbSuProcessTemplateFieldEditGet.FromSql("ProcessTemplateFieldEditGet @LanguageId, @OId", parameters).First();
+
+            var FieldTypeList = new List<SelectListItem>();
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var FieldTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
+            foreach (var FieldTypeFromDb in FieldTypesFromDb)
+            {
+                FieldTypeList.Add(new SelectListItem
                 {
-                    Text = DataTypeFromDb.Name,
-                    Value = DataTypeFromDb.Id.ToString()
+                    Text = FieldTypeFromDb.Name,
+                    Value = FieldTypeFromDb.Id.ToString()
                 });
             }
 
-            //ContentType
+            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel();
+            ProcessTemplateFieldWithList.ProcessTemplateField = ProcessTemplateFieldEditGet;
+            ProcessTemplateFieldWithList.FieldTypeList = FieldTypeList;
+
+            return View(ProcessTemplateFieldWithList);
+
+            //var ProcessTemplateField = (from c in _processTemplateField.GetAllProcessTemplateFields()
+            //                            join l in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
+            //                            on c.Id equals l.ProcessTemplateFieldId
+            //                            where c.Id == Id && l.LanguageId == DefaultLanguageID
+            //                            orderby l.Name
+            //                            select new SuObjectVM
+            //                            {
+            //                                Id = c.ProcessTemplateId
+            //                                ,
+            //                                ObjectId = c.Id
+            //                                ,
+            //                                LanguageId = l.LanguageId
+            //                                ,
+            //                                ObjectLanguageId = l.Id
+            //                                ,
+            //                                Name = l.Name
+            //                                ,
+            //                                Description = l.Description
+            //                                ,
+            //                                MouseOver = l.MouseOver
+            //                                , NotNullId = c.FieldDataTypeId
+            //                                , NotNullId2 = c.FieldMasterListId
+            //                            }).First();
+
+            ////DataTypes
+            //var DataTypeList = new List<SelectListItem>();
+
+            //var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
 
 
-            //MasterList
-            var MasterListList = new List<SelectListItem>();
+            //foreach (var DataTypeFromDb in DataTypesFromDb)
+            //{
+            //    DataTypeList.Add(new SelectListItem
+            //    {
+            //        Text = DataTypeFromDb.Name,
+            //        Value = DataTypeFromDb.Id.ToString()
+            //    });
+            //}
 
-            var MasterListsFromDb = _context.ZDbTypeList.FromSql("GetMasterList").ToList();
-
-
-            foreach (var MasterListFromDb in MasterListsFromDb)
-            {
-                MasterListList.Add(new SelectListItem
-                {
-                    Text = MasterListFromDb.Name,
-                    Value = MasterListFromDb.Id.ToString()
-                });
-            }
-
-            //MasterList
-
-            var FieldsAndDropDowns = new SuProcessTemplateFieldWith2DropDown { Field = ProcessTemplateField, DataTypes = DataTypeList, MasterList = MasterListList } ;
+            ////ContentType
 
 
-            return View(FieldsAndDropDowns);
-           
+            ////MasterList
+            //var MasterListList = new List<SelectListItem>();
+
+            //var MasterListsFromDb = _context.ZDbTypeList.FromSql("GetMasterList").ToList();
+
+
+            //foreach (var MasterListFromDb in MasterListsFromDb)
+            //{
+            //    MasterListList.Add(new SelectListItem
+            //    {
+            //        Text = MasterListFromDb.Name,
+            //        Value = MasterListFromDb.Id.ToString()
+            //    });
+            //}
+
+            ////MasterList
+
+            //var FieldsAndDropDowns = new SuProcessTemplateFieldWith2DropDown { Field = ProcessTemplateField, DataTypes = DataTypeList, MasterList = MasterListList } ;
+
+
+            //return View(FieldsAndDropDowns);
+
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuProcessTemplateFieldWith2DropDown FromForm)
+        public async Task<IActionResult> Edit(SuProcessTemplateFieldEditGetWithListModel FromForm)
         {
 
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6 " 
-                    ,
-                    parameters: new[] { FromForm.Field.ObjectId.ToString()           //0
-                                        ,FromForm.Field.NotNullId.ToString()
-                                        ,FromForm.Field.NotNullId2.ToString()
-                                        , FromForm.Field.ObjectLanguageId.ToString()
-                                        , FromForm.Field.Name
-                                        , FromForm.Field.Description
-                                        , FromForm.Field.MouseOver
-                                        , CurrentUser.Id
-
-                    });
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@Id", FromForm.ProcessTemplateField.OId),
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ProcessTemplateFieldTypeId", FromForm.ProcessTemplateField.ProcessTemplateFieldTypeId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.ProcessTemplateField.Name),
+                    new SqlParameter("@Description", FromForm.ProcessTemplateField.Description),
+                    new SqlParameter("@MouseOver", FromForm.ProcessTemplateField.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.ProcessTemplateField.MenuName)
+                    };
+                var b = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldEditPost " +
+                            "@Id" +
+                            ", @LanguageId" +
+                            ", @ProcessTemplateFieldTypeId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
-            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
-
-            return RedirectToAction("Index", new { Id = FromForm.Field.Id.ToString() });
-
-
+            return RedirectToAction("Index", new { Id = FromForm.ProcessTemplateField.PId.ToString() });
 
         }
+        //            return  RedirectToRoute("EditRole" + "/"+FromForm.Classification.ClassificationId.ToString() );
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
@@ -199,56 +245,77 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var ProcessTemplateField = new SuObjectVM
+
+            var FieldTypeList = new List<SelectListItem>();
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var FieldTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
+            foreach (var FieldTypeFromDb in FieldTypesFromDb)
             {
-                Id = Id
-                                            ,
-                LanguageId = DefaultLanguageID
-            };
-
-            //DataTypes
-            var DataTypeList = new List<SelectListItem>();
-
-            var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
-
-
-            foreach (var DataTypeFromDb in DataTypesFromDb)
-            {
-                DataTypeList.Add(new SelectListItem
+                FieldTypeList.Add(new SelectListItem
                 {
-                    Text = DataTypeFromDb.Name,
-                    Value = DataTypeFromDb.Id.ToString()
+                    Text = FieldTypeFromDb.Name,
+                    Value = FieldTypeFromDb.Id.ToString()
                 });
             }
 
-            //ContentType
+            SuProcessTemplateFieldEditGetModel ProcessTemplateFieldEditGet = new SuProcessTemplateFieldEditGetModel();
+            ProcessTemplateFieldEditGet.PId = Id;
+            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel();
+            ProcessTemplateFieldWithList.ProcessTemplateField = ProcessTemplateFieldEditGet;
+            ProcessTemplateFieldWithList.FieldTypeList = FieldTypeList;
+
+            return View(ProcessTemplateFieldWithList);
+
+            //var ProcessTemplateField = new SuObjectVM
+            //{
+            //    Id = Id
+            //                                ,
+            //    LanguageId = DefaultLanguageID
+            //};
+
+            ////DataTypes
+            //var DataTypeList = new List<SelectListItem>();
+
+            //var DataTypesFromDb = _context.ZDbStatusList.FromSql("DataTypeSelectAll").ToList();
 
 
-            //MasterList
-            var MasterListList = new List<SelectListItem>();
+            //foreach (var DataTypeFromDb in DataTypesFromDb)
+            //{
+            //    DataTypeList.Add(new SelectListItem
+            //    {
+            //        Text = DataTypeFromDb.Name,
+            //        Value = DataTypeFromDb.Id.ToString()
+            //    });
+            //}
 
-            var MasterListsFromDb = _context.ZDbTypeList.FromSql("GetMasterList").ToList();
-
-
-            foreach (var MasterListFromDb in MasterListsFromDb)
-            {
-                MasterListList.Add(new SelectListItem
-                {
-                    Text = MasterListFromDb.Name,
-                    Value = MasterListFromDb.Id.ToString()
-                });
-            }
-
-            //MasterList
-
-            var FieldsAndDropDowns = new SuProcessTemplateFieldWith2DropDown { Field = ProcessTemplateField, DataTypes = DataTypeList, MasterList = MasterListList };
+            ////ContentType
 
 
-            return View(FieldsAndDropDowns);
+            ////MasterList
+            //var MasterListList = new List<SelectListItem>();
+
+            //var MasterListsFromDb = _context.ZDbTypeList.FromSql("GetMasterList").ToList();
+
+
+            //foreach (var MasterListFromDb in MasterListsFromDb)
+            //{
+            //    MasterListList.Add(new SelectListItem
+            //    {
+            //        Text = MasterListFromDb.Name,
+            //        Value = MasterListFromDb.Id.ToString()
+            //    });
+            //}
+
+            ////MasterList
+
+            //var FieldsAndDropDowns = new SuProcessTemplateFieldWith2DropDown { Field = ProcessTemplateField, DataTypes = DataTypeList, MasterList = MasterListList };
+
+
+            //return View(FieldsAndDropDowns);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuProcessTemplateFieldWith2DropDown FromForm)
+        public async Task<IActionResult> Create(SuProcessTemplateFieldEditGetWithListModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -256,20 +323,46 @@ namespace StudentUnion0105.Controllers
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
                 SqlParameter[] parameters =
-    {
-                    new SqlParameter("@ProcessTemplateId", FromForm.Field.Id)
-                    , new SqlParameter("@FieldDataTypeId", FromForm.Field.NotNullId)
-                    , new SqlParameter("@FieldMasterListId", FromForm.Field.NotNullId2)
-                    , new SqlParameter("@LanguageId", FromForm.Field.LanguageId)
-                    , new SqlParameter("@Name", FromForm.Field.Name)
-                    , new SqlParameter("@Description", FromForm.Field.Description)
-                    , new SqlParameter("@MouseOver", FromForm.Field.MouseOver)
-                };
+                    {
+                    new SqlParameter("@PId", FromForm.ProcessTemplateField.PId),
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ProcessTemplateFieldTypeId", FromForm.ProcessTemplateField.ProcessTemplateFieldTypeId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.ProcessTemplateField.Name),
+                    new SqlParameter("@Description", FromForm.ProcessTemplateField.Description),
+                    new SqlParameter("@MouseOver", FromForm.ProcessTemplateField.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.ProcessTemplateField.MenuName)
+                    };
 
-                _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreate @ProcessTemplateId, @FieldDataTypeId, @FieldMasterListId, @LanguageId, @Name, @Description, @MouseOver", parameters);
-
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreatePost " +
+                            "@PId" +
+                            ", @LanguageId" +
+                            ", @ProcessTemplateFieldTypeId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
-            return RedirectToAction("Index", new { Id = FromForm.Field.Id.ToString() });
+            return RedirectToAction("Index", new { Id = FromForm.ProcessTemplateField.PId.ToString() });
+
+//            return RedirectToAction("Index");
+
+            //            var CurrentUser = await _userManager.GetUserAsync(User);
+            //            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            //            SqlParameter[] parameters =
+            //{
+            //                new SqlParameter("@ProcessTemplateId", FromForm.Field.Id)
+            //                , new SqlParameter("@FieldDataTypeId", FromForm.Field.NotNullId)
+            //                , new SqlParameter("@FieldMasterListId", FromForm.Field.NotNullId2)
+            //                , new SqlParameter("@LanguageId", FromForm.Field.LanguageId)
+            //                , new SqlParameter("@Name", FromForm.Field.Name)
+            //                , new SqlParameter("@Description", FromForm.Field.Description)
+            //                , new SqlParameter("@MouseOver", FromForm.Field.MouseOver)
+            //            };
+
+            //            _context.Database.ExecuteSqlCommand("ProcessTemplateFieldCreate @ProcessTemplateId, @FieldDataTypeId, @FieldMasterListId, @LanguageId, @Name, @Description, @MouseOver", parameters);
 
         }
 

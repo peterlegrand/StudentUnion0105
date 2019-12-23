@@ -37,7 +37,7 @@ JOIN DbProcessTemplateLanguage
 JOIN AspNetUsers
 	ON AspNetUsers.SecurityLevel >= DbProcessField.IntValue 
 WHERE StepId <> 0
-	AND DbProcessTemplateField.FieldMasterListId = 8
+	AND DbProcessTemplateField.ProcessTemplateFieldTypeId = 27
 --	AND DbProcessField.IntValue <= @CurrentSecurityLevel --Security level
 	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 3 
 	AND AspNetUsers.Id = @CurrentUser
@@ -64,7 +64,7 @@ JOIN AspNetUserRoles
 JOIN DbProcessTemplateLanguage
 	ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId
 WHERE StepId <> 0
-	AND DbProcessTemplateField.FieldMasterListId = 9 --Role user
+	AND DbProcessTemplateField.ProcessTemplateFieldTypeId = 29 --Role user
 	AND AspNetUserRoles.UserId = @CurrentUser
 	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 4 
 
@@ -90,7 +90,7 @@ JOIN DbUserRelation
 JOIN DbProcessTemplateLanguage
 	ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId
 WHERE StepId <> 0
-	AND DbProcessTemplateField.FieldMasterListId = 1 --manager
+	AND DbProcessTemplateField.ProcessTemplateFieldTypeId = 11 --manager
 	AND DbUserRelation.TypeId = 1
 	AND DbUserRelation.ToUserId = @CurrentUser
 	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 5 
@@ -117,7 +117,7 @@ JOIN DbUserOrganization
 JOIN DbProcessTemplateLanguage
 	ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId
 WHERE StepId <> 0
-	AND DbProcessTemplateField.FieldMasterListId = 2 --Organization
+	AND DbProcessTemplateField.ProcessTemplateFieldTypeId = 13 --Organization
 	AND DbUserOrganization.UserId = @CurrentUser
 	AND DbProcessTemplateFlowCondition.ProcessTemplateConditionTypeId = 6 
 
