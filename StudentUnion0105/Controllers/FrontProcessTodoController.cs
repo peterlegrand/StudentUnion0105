@@ -183,7 +183,7 @@ namespace StudentUnion0105.Controllers
                 FirstRecord = false;
 
             }
-            WhereString = WhereString + " ) ";
+            WhereString = WhereString + " ) )";
             SqlParameter[] parameters =
                 {
                     new SqlParameter("@LanguageId", DefaultLanguageID)
