@@ -74,22 +74,38 @@ namespace StudentUnion0105.Controllers
 
             var AndOrList = _context.ZdbFrontProcessToDoIndex2GetForAndOr.FromSql("FrontProcessToDoIndex2GetForAndOr").ToList();
 
-            string WhereString = " WHERE StepId <> 0 ( ";
             int OldFlowId = 0;
             string FromString = "SELECT DbProcess.Id , DbProcessTemplateLanguage.Name , dbprocess.CreatedDate " +
-                " FROM DbProcess JOIN DbProcessTemplateFlow ON DbProcess.ProcessTemplateId = DbProcessTemplateFlow.ProcessTemplateId AND DbProcess.StepId = DbProcessTemplateFlow.ProcessTemplateFromStepId JOIN DbProcessTemplateFlowCondition ON DbProcessTemplateFlow.Id = DbProcessTemplateFlowCondition.ProcessTemplateFlowId LEFT JOIN DbComparison ON ProcessTemplateFlowId.ComparisonOperatorId = DbComparison.Id JOIN DbProcessTemplateLanguage ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId ";
+                " FROM DbProcess " +
+                "JOIN DbProcessTemplateFlow " +
+                "   ON DbProcess.ProcessTemplateId = DbProcessTemplateFlow.ProcessTemplateId " +
+                "   AND DbProcess.StepId = DbProcessTemplateFlow.ProcessTemplateFromStepId " +
+                "JOIN DbProcessTemplateFlowCondition " +
+                "   ON DbProcessTemplateFlow.Id = DbProcessTemplateFlowCondition.ProcessTemplateFlowId " +
+                "LEFT JOIN DbComparison " +
+                "   ON DbProcessTemplateFlowCondition.ComparisonOperatorId = DbComparison.Id " +
+                "JOIN DbProcessTemplateLanguage " +
+                "   ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId ";
+
+            string WhereString = " WHERE StepId <> 0 AND ( ";
+
+            bool FirstRecord = true;
             foreach (var AndOr in AndOrList)
             {
-                if (AndOr.FlowId != OldFlowId && OldFlowId !=0)
-                    { 
-                    WhereString = WhereString + "OR ( DbProcessTemplateFlow.ID = " + AndOr.FlowId + " AND " ;
+                if (AndOr.FlowId != OldFlowId && !FirstRecord)
+                {
+                    WhereString = WhereString +  " ) OR ( DbProcessTemplateFlow.ID = " + AndOr.FlowId + " AND ";
                 }
-                switch(AndOr.ConditionTypeId)
+                if (FirstRecord)
+                {
+                    WhereString = WhereString + " ( DbProcessTemplateFlow.ID = " + AndOr.FlowId + " AND ";
+                }
+                switch (AndOr.ConditionTypeId)
                 {
                     case 1:
                         WhereString = WhereString + " DbProcessTemplateField AS TemplateField" + AndOr.ConditionId.ToString() + ".Id = " + AndOr.ConditionFieldId.ToString();
 
-                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplate.Id = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
+                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
                         FromString = FromString + " JOIN DbProcessField Field" + AndOr.ConditionId.ToString() + " ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id";
                         FromString = FromString + " AND Field" + AndOr.ConditionId.ToString() + ".ProcessId = DbProcess.Id";
                         break;
@@ -97,32 +113,32 @@ namespace StudentUnion0105.Controllers
                         WhereString = WhereString + " DbProcess.CreatorId = '" + CurrentUser.Id.ToString() + "' " ;
                         break;
                     case 3:
-                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplate.Id = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
-                        FromString = FromString + " JOIN DbProcessField Field1 ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id";
+                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
+                        FromString = FromString + " JOIN DbProcessField Field" + AndOr.ConditionId.ToString() + " ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id";
                         FromString = FromString + " AND Field" + AndOr.ConditionId.ToString() + ".ProcessId = DbProcess.Id ";
-                        FromString = FromString + " JOIN AspNetUsers User" + AndOr.ConditionId.ToString() + " ON User" + AndOr.ConditionId.ToString() + ".Id = Field" + AndOr.ConditionId.ToString() + ".ValueString ";
+                        FromString = FromString + " JOIN AspNetUsers User" + AndOr.ConditionId.ToString() + " ON User" + AndOr.ConditionId.ToString() + ".Id = Field" + AndOr.ConditionId.ToString() + ".StringValue ";
 
                         WhereString = WhereString + " DbProcessTemplateFlowCondition.ProcessTemplateFlowConditionInt <= " + CurrentUser.SecurityLevel.ToString() + " ";
                         break;
                     case 4:
 
-                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplate.Id = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
+                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
                         FromString = FromString + " JOIN DbProcessField Field" + AndOr.ConditionId.ToString() + " ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id ";
                         FromString = FromString + " AND Field" + AndOr.ConditionId.ToString() + ".ProcessId = DbProcess.Id";
-                        FromString = FromString + " JOIN AspNetUserRoles Role" + AndOr.ConditionId.ToString() + " ON Role" + AndOr.ConditionId.ToString() + ".Id = Field1.ValueString ";
+                        FromString = FromString + " JOIN AspNetUserRoles Role" + AndOr.ConditionId.ToString() + " ON Role" + AndOr.ConditionId.ToString() + ".RoleId = Field" + AndOr.ConditionId.ToString() + ".StringValue ";
 
-                        WhereString = WhereString + " AspNetUserRoles.UserId ='" + CurrentUser.Id.ToString() + "' ";
+                        WhereString = WhereString + " Role" + AndOr.ConditionId.ToString() + ".UserId ='" + CurrentUser.Id.ToString() + "' ";
                         break;
                     case 5:
 
-                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplate.Id = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
+                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
                         FromString = FromString + " JOIN DbProcessField Field1 ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id ";
                         FromString = FromString + " AND Field" + AndOr.ConditionId.ToString() + ".ProcessId = DbProcess.Id ";
-                        FromString = FromString + " JOIN dbUserRelation Relation" + AndOr.ConditionId.ToString() + " ON Relation" + AndOr.ConditionId.ToString() + ".FromUserId = Field" + AndOr.ConditionId.ToString() + ".ValueString ";
+                        FromString = FromString + " JOIN dbUserRelation Relation" + AndOr.ConditionId.ToString() + " ON Relation" + AndOr.ConditionId.ToString() + ".FromUserId = Field" + AndOr.ConditionId.ToString() + ".StringValue ";
 
-                        WhereString = WhereString + " DbUserRelation.ToUserId ='" + CurrentUser.Id.ToString() + "' ";
+                        WhereString = WhereString + " Relation" + AndOr.ConditionId.ToString() + ".ToUserId ='" + CurrentUser.Id.ToString() + "' ";
                         WhereString = WhereString + " AND DbProcessTemplateField AS TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldTypeId = 11" + AndOr.ConditionFieldId.ToString();
-                        WhereString = WhereString + " AND DbProcessField AS Field" + AndOr.ConditionId.ToString() + ".StringValue = DbUserRelation.FromUserId " ;
+                        WhereString = WhereString + " AND DbProcessField AS Field" + AndOr.ConditionId.ToString() + ".StringValue = Relation" + AndOr.ConditionId.ToString() + ".FromUserId ";
                         break;
                     case 6:
                         WhereString = WhereString + " DbProcessTemplateField AS TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldTypeId = 13" + AndOr.ConditionFieldId.ToString();
@@ -142,7 +158,7 @@ namespace StudentUnion0105.Controllers
                         WhereString = WhereString + " ) ";
                         break;
                     case 13:
-                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplate.Id = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
+                        FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
                         FromString = FromString + " JOIN DbProcessField Field1 ON Field" + AndOr.ConditionId.ToString() + ".ProcessTemplateFieldId = TemplateField" + AndOr.ConditionId.ToString() + ".Id ";
                         FromString = FromString + " AND Field" + AndOr.ConditionId.ToString() + ".ProcessId = DbProcess.Id ";
                         break;
@@ -150,20 +166,21 @@ namespace StudentUnion0105.Controllers
 
                         FromString = FromString + " JOIN dbUserRelation Relation" + AndOr.ConditionId.ToString() + " ON Relation" + AndOr.ConditionId.ToString() + ".FromUserId = dbProcess.CreatorId ";
 
-                        WhereString = WhereString + " DbProcess.CreatorId = ' = DbUserRelation.FromUserId" + CurrentUser.Id.ToString() + "' ";
-                        WhereString = WhereString + " AND DbUserRelation.ToUserId ='" + CurrentUser.Id.ToString() + "' ";
+                        WhereString = WhereString + " DbProcess.CreatorId = Relation" + AndOr.ConditionId.ToString() + ".FromUserId ";// + CurrentUser.Id.ToString() + "' ";
+                        WhereString = WhereString + " AND Relation" + AndOr.ConditionId.ToString() + ".ToUserId ='" + CurrentUser.Id.ToString() + "' ";
                         break;
                     case 15:
                         FromString = FromString + " JOIN AspNetUsers User" + AndOr.ConditionId.ToString() + " ON User" + AndOr.ConditionId.ToString() + ".Id = dbProcess.CreatorId ";
                         break;
 
                 }
-                if (AndOr.FlowId != OldFlowId && OldFlowId != 0)
-                {
-                    WhereString = WhereString + ")) ";
-                }
+                //if (AndOr.FlowId != OldFlowId )
+                //{
+                //    WhereString = WhereString + ")) ";
+                //}
 
                 OldFlowId = AndOr.FlowId;
+                FirstRecord = false;
 
             }
             WhereString = WhereString + " ) ";
