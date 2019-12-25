@@ -575,19 +575,20 @@ INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (12, 'Close bracket', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (13, 'User', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (14, 'Manager creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
+INSERT dbProcessTemplateFlowConditionType (Id, Name, CreatedDate, ModifiedDate, CreatorId, ModifierId) VALUES (15, 'Security level creator', getdate(), getdate(), @CurrentUser, @CurrentUser); 
 
 SET IDENTITY_INSERT dbProcessTemplateFlowConditionType OFF
 
 
 SET IDENTITY_INSERT dbComparison ON
 
-INSERT dbComparison (Id, Name) VALUES (0, 'None'); 
-INSERT dbComparison (Id, Name) VALUES (1, 'Equal'); 
-INSERT dbComparison (Id, Name) VALUES (2, 'Larger'); 
-INSERT dbComparison (Id, Name) VALUES (3, 'Smaller'); 
-INSERT dbComparison (Id, Name) VALUES (4, 'Larger or equal'); 
-INSERT dbComparison (Id, Name) VALUES (5, 'Smaller or equal'); 
-INSERT dbComparison (Id, Name) VALUES (6, 'Not equal'); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (0, 'None',''); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (1, 'Equal','=='); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (2, 'Larger', '>'); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (3, 'Smaller','<'); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (4, 'Larger or equal', '>='); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (5, 'Smaller or equal', '<='); 
+INSERT dbComparison (Id, Name, Symbol) VALUES (6, 'Not equal', '!='); 
 
 SET IDENTITY_INSERT dbComparison OFF
 

@@ -201,24 +201,7 @@ namespace StudentUnion0105.Controllers
             return View(FrontProcess);
         }
 
-        public ActionResult CountryDD()
-        {
-            var CountryList = new List<SelectListItem>();
-
-            var CountriesFromDb = _context.ZDbStatusList.FromSql("CountryDD").ToList();
-
-
-            foreach (var CountryFromDb in CountriesFromDb)
-            {
-                CountryList.Add(new SelectListItem
-                {
-                    Text = CountryFromDb.Name,
-                    Value = CountryFromDb.Id.ToString()
-                });
-            }
-            return View();
-
-        }
+       
 
     }
 }

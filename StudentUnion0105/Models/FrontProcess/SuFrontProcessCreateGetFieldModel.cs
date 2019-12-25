@@ -14,8 +14,9 @@ namespace StudentUnion0105.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int StatusId { get; set; }
-        public int DataTypeId { get; set; }
-        public int MasterListId { get; set; }
+        //public int DataTypeId { get; set; }
+        //public int MasterListId { get; set; }
+        public int ProcessTemplateFieldTypeId { get; set; }
         public string StringValue { get; set; }
         public int IntValue { get; set; }
         public DateTime DateTimeValue { get; set; }

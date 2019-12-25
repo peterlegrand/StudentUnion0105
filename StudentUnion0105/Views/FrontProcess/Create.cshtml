@@ -6,7 +6,7 @@
 <form class="mt-3" method="post">
     @foreach (var x in Model.ProcessFields)
     {
-        if (x.DataTypeId != 5 & x.DataTypeId != 6)
+        if (x.ProcessTemplateFieldTypeId != 9 & x.ProcessTemplateFieldTypeId != 10)
         {
             <div class="form-group row">
                 <label asp-for="@x.StringValue" class="col-sm-2 col-form-label">@x.Name</label>
@@ -22,11 +22,11 @@
         <div class="col-sm-10">
             @foreach (var x in Model.ProcessFields)
             {
-                if (x.DataTypeId == 5)
+                if (x.ProcessTemplateFieldTypeId == 9)
                 {
                     <button type="submit" class="btn btn-primary btn-dark">@x.Name</button>
                 }
-                if (x.DataTypeId == 6)
+                if (x.ProcessTemplateFieldTypeId == 10)
                 {
                     <a asp-action="Index" asp-controller="FrontProcess" class="btn btn-primary btn-light">@x.Name</a>
                 }
