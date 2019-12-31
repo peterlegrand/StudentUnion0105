@@ -192,6 +192,8 @@ namespace StudentUnion0105.Controllers
 , "LanguageIndexGet.sql"
 , "LanguageSelectActive.sql"
 , "LanguageSelectAll.sql"
+, "Menu1.sql"
+, "Menu2.sql"
 , "OrganizationDeleteGet.sql"
 , "OrganizationDeletePost.sql"
 , "OrganizationEditGet.sql"
