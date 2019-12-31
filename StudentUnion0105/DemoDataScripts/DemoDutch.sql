@@ -1058,10 +1058,10 @@ VALUES (6, 39, 'Tweede sectie 3', 'hoofd sectie', 'hoofd sectie', 'hoofd sectie'
 
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES (1, 41, 'Thuis', 'Thuis', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+VALUES (1, 39, 'Thuis', 'Thuis', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES (2, 41, 'Eerste', 'Eerste', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+VALUES (2, 39, 'Eerste', 'Eerste', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
-VALUES (3, 41, 'Tweede', 'Tweede', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+VALUES (3, 39, 'Tweede', 'Tweede', @CurrentUser, @CurrentUser, getdate(), getdate()); 

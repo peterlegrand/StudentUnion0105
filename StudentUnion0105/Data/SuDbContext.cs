@@ -18,8 +18,11 @@ namespace StudentUnion0105.Data
 
         }
         //FrontPage
+        public DbSet<Menu1> ZdbMenu1 { get; set; }
+        public DbSet<Menu2> ZdbMenu2 { get; set; }
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
         public DbSet<SuFrontProcessToDoIndex2GetForAndOrModel> ZdbFrontProcessToDoIndex2GetForAndOr { get; set; }
+        public DbSet<SuFrontProcessToDoIndex2GetModel> ZdbFrontProcessToDoIndex2Get { get; set; }
         public DbSet<SuProcessTemplateFieldEditGetModel> ZdbSuProcessTemplateFieldEditGet { get; set; }
         public DbSet<SuFrontProcessTodoIndexGetModel> ZdbSuFrontProcessTodoIndexGet { get; set; }
         public DbSet<SuFrontProcessTodoEditGetModel> ZdbSuFrontProcessTodoEditGet { get; set; }

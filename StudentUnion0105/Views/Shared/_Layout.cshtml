@@ -5,16 +5,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    @*<link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />*@
     <title>@ViewData["Title"] - Student Union 1.5</title>
 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="~/css/site.css" />
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
-    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>*@
+    <script type="text/javascript" src="~/jquery/jquery.min.js"></script>
+    <script src="~/popper/popper.min.js"></script>
+        <script type="text/javascript" src="~/bootstrap/js/bootstrap.js"></script>
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+
+            $("#Menu").load("/Partial/Menu");
+
+        });
+    </script>
 </head>
 <body>
     <header class="header" style="height=148">
@@ -24,6 +31,7 @@
 
     </header>
     <img src="~/Images/menu.png" />
+    <div id="Menu"></div>
     <div class="col-12 text-right">
         @if (signInManager.IsSignedIn(User))
         {
@@ -493,7 +501,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -512,15 +520,11 @@
         </div>
     </footer>
 
-    @*<environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-        </environment>*@
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
     @RenderSection("Scripts", required: false)
 
 </body>

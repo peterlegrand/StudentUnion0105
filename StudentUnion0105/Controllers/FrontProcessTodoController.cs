@@ -72,10 +72,10 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+            var FlowIds = _context.ZdbInt.FromSql("FrontProcessToDoIndex2GetFlowId").ToList();
             var AndOrList = _context.ZdbFrontProcessToDoIndex2GetForAndOr.FromSql("FrontProcessToDoIndex2GetForAndOr").ToList();
-
             int OldFlowId = 0;
-            string FromString = "SELECT DbProcess.Id , DbProcessTemplateLanguage.Name , dbprocess.CreatedDate " +
+            string FromStringStart = "SELECT DbProcess.Id , DbProcessTemplateLanguage.Name , dbprocess.CreatedDate " +
                 " FROM DbProcess " +
                 "JOIN DbProcessTemplateFlow " +
                 "   ON DbProcess.ProcessTemplateId = DbProcessTemplateFlow.ProcessTemplateId " +
@@ -87,19 +87,25 @@ namespace StudentUnion0105.Controllers
                 "JOIN DbProcessTemplateLanguage " +
                 "   ON DbProcess.ProcessTemplateId = DbProcessTemplateLanguage.ProcessTemplateId ";
 
-            string WhereString = " WHERE StepId <> 0 AND ( ";
-
+            string WhereStringStart = " WHERE StepId <> 0 AND ";
+            string WhereString = "";
+            string FromString = "";
+            string FullSQLFrom = "";
+            string FullSQLWhere = "";
+            string FullSQL = "";
             bool FirstRecord = true;
-            foreach (var AndOr in AndOrList)
+
+            foreach (var FlowId in FlowIds)
             {
-                if (AndOr.FlowId != OldFlowId && !FirstRecord)
-                {
-                    WhereString = WhereString +  " ) OR ( DbProcessTemplateFlow.ID = " + AndOr.FlowId + " AND ";
-                }
-                if (FirstRecord)
-                {
-                    WhereString = WhereString + " ( DbProcessTemplateFlow.ID = " + AndOr.FlowId + " AND ";
-                }
+
+                FromString = FromStringStart;
+                WhereString = WhereStringStart + " DbProcessTemplateFlow.ID = " + FlowId.intValue;// + " AND ";
+
+                if (AndOrList.Where(AndOr => AndOr.FlowId == FlowId.intValue).Count() > 0)
+                    WhereString = WhereString + " AND ";
+
+                foreach (var AndOr in AndOrList.Where(AndOr => AndOr.FlowId == FlowId.intValue))
+            {
                 switch (AndOr.ConditionTypeId)
                 {
                     case 1:
@@ -174,24 +180,32 @@ namespace StudentUnion0105.Controllers
                         break;
 
                 }
+
+                }
+                if (FirstRecord)
+                {
+                    FullSQL = FullSQL + FromString + WhereString;
+
+                }
+                else
+                {
+                    FullSQL = FullSQL + " UNION ALL " + FromString + WhereString;
+                }
+                FirstRecord = false;
+
+                //  FullSQL = FullSQL + FromStringStart + FromString + WhereString;
+
                 //if (AndOr.FlowId != OldFlowId )
                 //{
                 //    WhereString = WhereString + ")) ";
                 //}
 
-                OldFlowId = AndOr.FlowId;
-                FirstRecord = false;
+                // OldFlowId = AndOr.FlowId;
 
             }
-            WhereString = WhereString + " ) )";
-            SqlParameter[] parameters =
-                {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
-                    , new SqlParameter("@CurrentUser", CurrentUser.Id)
-                };
-            var ToDo = _context.ZdbSuFrontProcessTodoIndexGet.FromSql("FrontProcessToDoIndexGet @LanguageId, @CurrentUser", parameters).ToList();
-            string fullstring = FromString + WhereString;
-            return View(fullstring);
+            //            WhereString = WhereString + " ) )";
+            var ToDo = _context.ZdbFrontProcessToDoIndex2Get.FromSql(FullSQL).ToList();
+            return View(ToDo);
         }
 
         [HttpGet]

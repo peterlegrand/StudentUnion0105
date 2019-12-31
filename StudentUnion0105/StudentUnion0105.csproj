@@ -105,6 +105,24 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Include="wwwroot\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\bootstrap\js\bootstrap.min.js.map" />
+  </ItemGroup>
+
+
   <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4bootstrap_4css_4bootstrap_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
