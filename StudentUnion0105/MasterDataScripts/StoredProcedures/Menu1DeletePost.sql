@@ -1,0 +1,9 @@
+CREATE PROCEDURE Menu1DeletePost (@OId int)
+AS
+BEGIN TRANSACTION
+DELETE FROM dbMenu1Language 
+WHERE dbMenu1Language.Menu1Id = @OId;
+
+DELETE FROM dbMenu1
+WHERE dbMenu1.Id = @OId
+COMMIT TRANSACTION

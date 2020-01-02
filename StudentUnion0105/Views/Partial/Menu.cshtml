@@ -2,22 +2,54 @@
 
 
 <div class="container">
-    @foreach (var item in Model.Menu1)
+    @foreach (var Menu1 in Model.Menu1)
     {
         <div class="btn-group">
             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @item.MenuName
+                @Menu1.MenuName
             </button>
             <ul class="dropdown-menu">
-                @foreach (var x in Model.Menu2)
+                @foreach (var Menu2 in Model.Menu2)
                 {
-                    if (x.PId == item.Id)
+                    if ((Menu2.PId == Menu1.Id && Menu2.MenuType == "M") || (Menu2.PId == Menu1.ClassificationId && Menu2.MenuType == "C"))
+
                     {
-                        <li><a href="#">@x.MenuName</a></li>
+                        <li class="dropdown-submenu">
+                            <a href="#" tabindex="-1"  class="test">@Menu2.MenuName</a>
+                            @if (Menu2.NoOfClassifications > 0 || Menu2.NoOfMenus3 > 0)
+                            {
+                                <ul class="dropdown-menu" style="display:block; position:absolute;">
+
+                                    @foreach (var Menu3 in Model.Menu3)
+                                    {
+                                        if ((Menu3.PId == Menu2.Id && Menu2.MenuType == "M" && Menu3.MenuType == "M") ||
+                                            (Menu3.PId == Menu2.Id && Menu2.MenuType == "M" && Menu3.MenuType == "C") ||
+                                            (Menu3.PId == Menu2.Id && Menu2.MenuType == "C" && Menu3.MenuType == "MC"))
+                                        {
+                                            <li ><a href="#">@Menu3.MenuName</a></li>
+                                        }
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        @*<li><a href="#">@Menu2.MenuName</a></li>*@
+
                     }
                 }
             </ul>
         </div>
-   
-}
-    </div>
+
+    }
+</div>
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>
