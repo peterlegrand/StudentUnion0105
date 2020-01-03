@@ -2,6 +2,7 @@ CREATE PROCEDURE Menu2EditGet (@LanguageId int, @Id int)
 AS
 SELECT
 	dbMenu2.Id 
+	, dbMenu2.Menu1Id
 	, dbMenu2.Sequence
 	, dbMenu2.ClassificationId
 	, dbMenu2.FeatureId

@@ -3,6 +3,7 @@ AS
 SELECT
 	dbMenu1.Id 
 	, dbMenu1.Sequence
+	, dbMenu1.MenuTypeId
 	, dbMenu1.ClassificationId
 	, dbMenu1.FeatureId
 	, dbMenu1.Controller
@@ -15,6 +16,7 @@ SELECT
 	, dbMenu1Language.Id LId
 	, dbMenu1Language.MenuName
 	, dbMenu1Language.MouseOver
+	, dbMenu1Language.LanguageId
 FROM dbMenu1Language
 JOIN dbMenu1 
 	ON dbMenu1Language.Menu1Id = dbMenu1.Id

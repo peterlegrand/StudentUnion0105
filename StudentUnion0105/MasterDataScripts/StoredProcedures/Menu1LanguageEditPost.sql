@@ -1,7 +1,6 @@
 CREATE PROCEDURE Menu1LanguageEditPost (
 	@LId int
 	, @ModifierId nvarchar(450)
-	, @Description nvarchar(max)
 	, @MenuName nvarchar(50)
 	, @MouseOver nvarchar(50)
 	)

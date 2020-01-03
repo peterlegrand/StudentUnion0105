@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
+using StudentUnion0105.Models.ViewModels;
 using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System;
@@ -16,39 +16,43 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-//    [Authorize("Menu1")]
-    public class Menu1Controller : Controller
+    public class Menu2Controller : Controller
     {
         private readonly UserManager<SuUserModel> userManager;
         private readonly ILanguageRepository _language;
         private readonly SuDbContext _context;
 
-
-        public Menu1Controller(UserManager<SuUserModel> userManager
-                                                , ILanguageRepository language
-                                                , SuDbContext context
-            )
+        public Menu2Controller(UserManager<SuUserModel> userManager
+            , ILanguageRepository language
+            , SuDbContext context)
         {
             this.userManager = userManager;
             _language = language;
             _context = context;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        
+        
+        public async Task<IActionResult> Index(int Id)
         {
+
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            SqlParameter[] parameters =
+    {
+                    new SqlParameter("@Id", Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                };
 
-            var Menu1 = _context.ZdbMenu1IndexGet.FromSql("Menu1IndexGet @LanguageId", parameter).ToList();
-            
-            return View(Menu1);
+            var Menu2 = _context.ZdbMenu2IndexGet.FromSql("Menu2IndexGet @Id, @LanguageId", parameters).ToList();
+            ViewBag.ObjectId = Id.ToString();
+            return View(Menu2);
+
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
@@ -59,17 +63,18 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
+
             SqlParameter[] parameters =
                 {
                     new SqlParameter("@LanguageId", DefaultLanguageID)
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Menu1EditGet = _context.ZdbMenu1EditGet.FromSql("Menu1EditGet @LanguageId, @Id", parameters).First();
+            var Menu2EditGet = _context.ZdbMenu2EditGet.FromSql("Menu2EditGet @LanguageId, @Id", parameters).First();
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
-            var Classifications = _context.ZDbStatusList.FromSql("Menu123EditGetClassificationList @LanguageId", parameter).ToList();
+            var Classifications = _context.ZDbTypeList.FromSql("Menu123EditGetClassificationList @LanguageId", parameter).ToList();
 
             var ClassificationList = new List<SelectListItem>();
             foreach (var Classification in Classifications)
@@ -92,55 +97,52 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
+            SuMenu2EditGetWithListModel Menu2WithList = new SuMenu2EditGetWithListModel();
 
+            Menu2WithList.Menu2 = Menu2EditGet;
+            Menu2WithList.ClassificationList = ClassificationList;
+            Menu2WithList.MenuTypeList = MenuTypeList;
+            return View(Menu2WithList);
 
-            SuMenu1EditGetWithListModel Menu1WithList  = new SuMenu1EditGetWithListModel();
-
-            Menu1WithList.Menu1 = Menu1EditGet;
-            Menu1WithList.ClassificationList = ClassificationList;
-            Menu1WithList.MenuTypeList = MenuTypeList;
-            return View(Menu1WithList);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuMenu1EditGetWithListModel FromForm)
+        public async Task<IActionResult> Edit(SuMenu2EditGetWithListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                SqlParameter[] parameters =
-                    {
-                    new SqlParameter("@Id", FromForm.Menu1.Id),
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@Id", FromForm.Menu2.Id),
                     new SqlParameter("@LanguageId", DefaultLanguageID),
-                    new SqlParameter("@Sequence", FromForm.Menu1.Sequence),
-                    new SqlParameter("@ClassificationId", FromForm.Menu1.ClassificationId),
-                    new SqlParameter("@FeatureId", FromForm.Menu1.FeatureId),
-                    new SqlParameter("@Controller", FromForm.Menu1.Controller ??""),
-                    new SqlParameter("@Action", FromForm.Menu1.Action ??""),
-                    new SqlParameter("@DestinationId", FromForm.Menu1.DestinationId),
+                    new SqlParameter("@Sequence", FromForm.Menu2.Sequence),
+                    new SqlParameter("@ClassificationId", FromForm.Menu2.ClassificationId),
+                    new SqlParameter("@FeatureId", FromForm.Menu2.FeatureId),
+                    new SqlParameter("@Controller", FromForm.Menu2.Controller ??""),
+                    new SqlParameter("@Action", FromForm.Menu2.Action ??""),
+                    new SqlParameter("@DestinationId", FromForm.Menu2.DestinationId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@MenuName", FromForm.Menu1.MenuName),
-                    new SqlParameter("@MouseOver", FromForm.Menu1.MouseOver)
+                    new SqlParameter("@MenuName", FromForm.Menu2.MenuName),
+                    new SqlParameter("@MouseOver", FromForm.Menu2.MouseOver)
                     };
-                var b = _context.Database.ExecuteSqlCommand("Menu1EditPost " +
-                            "@Id" +
-                            ", @LanguageId" +
-                            ", @Sequence" +
-                            ", @ClassificationId" +
-                            ", @FeatureId" +
-                            ", @Controller" +
-                            ", @Action" +
-                            ", @DestinationId" +
-                            ", @ModifierId" +
-                            ", @MenuName" +
-                            ", @MouseOver", parameters);
-            }
+            var b = _context.Database.ExecuteSqlCommand("Menu2EditPost " +
+                        "@Id" +
+                        ", @LanguageId" +
+                        ", @Sequence" +
+                        ", @ClassificationId" +
+                        ", @FeatureId" +
+                        ", @Controller" +
+                        ", @Action" +
+                        ", @DestinationId" +
+                        ", @ModifierId" +
+                        ", @MenuName" +
+                        ", @MouseOver", parameters);
+        
             return RedirectToAction("Index");
-        }
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
+    [HttpGet]
+        public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -173,45 +175,50 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var Menu1AndList = new SuMenu1EditGetWithListModel { ClassificationList = ClassificationList, MenuTypeList = MenuTypeList};
-            return View(Menu1AndList);
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> Create(SuMenu1EditGetWithListModel FromForm)
-        {
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var Menu2AndList = new SuMenu2EditGetWithListModel { ClassificationList = ClassificationList, MenuTypeList = MenuTypeList };
+            Menu2AndList.Menu2.Menu1Id = Id;
+            return View(Menu2AndList);
 
-                SqlParameter[] parameters =
-                    {
-                    new SqlParameter("@MenuTypeId", FromForm.Menu1.MenuTypeId),
-                    new SqlParameter("@Sequence", FromForm.Menu1.Sequence),
-                    new SqlParameter("@ClassificationId", FromForm.Menu1.ClassificationId),
-                    new SqlParameter("@FeatureId", FromForm.Menu1.FeatureId),
-                    new SqlParameter("@Controller", FromForm.Menu1.Controller),
-                    new SqlParameter("@Action", FromForm.Menu1.Action),
-                    new SqlParameter("@DestinationId", FromForm.Menu1.DestinationId),
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SuMenu2EditGetWithListModel FromForm)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@Menu1Id", FromForm.Menu2.Menu1Id),
+                    new SqlParameter("@MenuTypeId", FromForm.Menu2.MenuTypeId),
+                    new SqlParameter("@Sequence", FromForm.Menu2.Sequence),
+                    new SqlParameter("@ClassificationId", FromForm.Menu2.ClassificationId),
+                    new SqlParameter("@FeatureId", FromForm.Menu2.FeatureId),
+                    new SqlParameter("@Controller", FromForm.Menu2.Controller),
+                    new SqlParameter("@Action", FromForm.Menu2.Action),
+                    new SqlParameter("@DestinationId", FromForm.Menu2.DestinationId),
                     new SqlParameter("@LanguageId", DefaultLanguageID),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@MenuName", FromForm.Menu1.MenuName),
-                    new SqlParameter("@MouseOver", FromForm.Menu1.MouseOver)
+                    new SqlParameter("@MenuName", FromForm.Menu2.MenuName),
+                    new SqlParameter("@MouseOver", FromForm.Menu2.MouseOver)
                     };
 
-                _context.Database.ExecuteSqlCommand("Menu1CreatePost " +
-                            "@MenuTypeId" +
-                            ", @Sequence" +
-                            ", @ClassificationId" +
-                            ", @FeatureId" +
-                            ", @Controller" +
-                            ", @Action" +
-                            ", @DestinationId" +
-                            ", @LanguageId" +
-                            ", @ModifierId" +
-                            ", @MenuName" +
-                            ", @MouseOver", parameters);
-            return RedirectToAction("Index");
+            _context.Database.ExecuteSqlCommand("Menu2CreatePost " +
+                        "@Menu1Id" +
+                        "@MenuTypeId" +
+                        ", @Sequence" +
+                        ", @ClassificationId" +
+                        ", @FeatureId" +
+                        ", @Controller" +
+                        ", @Action" +
+                        ", @DestinationId" +
+                        ", @LanguageId" +
+                        ", @ModifierId" +
+                        ", @MenuName" +
+                        ", @MouseOver", parameters);
+            return RedirectToAction("Index", new { Id = FromForm.Menu2.Menu1Id.ToString() });
         }
+
 
         public async Task<IActionResult> LanguageIndex(int Id)
         {
@@ -223,7 +230,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@OId", Id);
 
-            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("Menu1LanguageIndexGet @OId", parameter).ToList();
+            var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("Menu2LanguageIndexGet @OId", parameter).ToList();
             ViewBag.Id = Id;
 
             return View(LanguageIndex);
@@ -240,7 +247,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LId", Id);
 
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("Menu1LanguageEditGet @LId", parameter).First();
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("Menu2LanguageEditGet @LId", parameter).First();
             return View(ObjectLanguage);
         }
 
@@ -263,7 +270,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MouseOver", FromForm.MouseOver)
                     };
 
-                _context.Database.ExecuteSqlCommand("Menu1LanguageEditPost " +
+                _context.Database.ExecuteSqlCommand("Menu2LanguageEditPost " +
                             "@LId" +
                             ", @ModifierId" +
                             ", @MenuName" +
@@ -290,26 +297,27 @@ namespace StudentUnion0105.Controllers
             if (NoOfLanguages == 0)
             { return RedirectToAction("LanguageIndex", new { Id = Id }); }
 
-            SuObjectLanguageCreateGetModel Menu1 = new SuObjectLanguageCreateGetModel();
-            Menu1.OId= Id;
+            SuObjectLanguageCreateGetModel Menu2 = new SuObjectLanguageCreateGetModel();
+            Menu2.OId = Id;
             ViewBag.Id = Id.ToString();
-            var Menu1AndLanguages = new SuObjectLanguageCreateGetWithListModel
+            var Menu2AndLanguages = new SuObjectLanguageCreateGetWithListModel
             {
-                ObjectLanguage = Menu1
-                
-                ,LanguageList  = SuLanguage 
+                ObjectLanguage = Menu2
+
+                ,
+                LanguageList = SuLanguage
             };
-            return View(Menu1AndLanguages);
+            return View(Menu2AndLanguages);
         }
 
         [HttpPost]
         public async Task<IActionResult> LanguageCreate(SuObjectLanguageCreateGetWithListModel FromForm)
         {
-            
-                var CurrentUser = await userManager.GetUserAsync(User);
 
-                SqlParameter[] parameters =
-                    {
+            var CurrentUser = await userManager.GetUserAsync(User);
+
+            SqlParameter[] parameters =
+                {
                     new SqlParameter("@Id", FromForm.ObjectLanguage.OId),
                     new SqlParameter("@LanguageId", FromForm.ObjectLanguage.LanguageId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
@@ -317,14 +325,14 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MouseOver", FromForm.ObjectLanguage.MouseOver)
                     };
 
-                _context.Database.ExecuteSqlCommand("Menu1LanguageCreatePost " +
-                            "@Id" +
-                            ", @LanguageId" +
-                            ", @ModifierId" +
-                            ", @MenuName" +
-                            ", @MouseOver", parameters);
-            
-        return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectLanguage.OId.ToString() });
+            _context.Database.ExecuteSqlCommand("Menu2LanguageCreatePost " +
+                        "@Id" +
+                        ", @LanguageId" +
+                        ", @ModifierId" +
+                        ", @MenuName" +
+                        ", @MouseOver", parameters);
+
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectLanguage.OId.ToString() });
         }
 
         [HttpGet]
@@ -337,7 +345,7 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
             var parameter = new SqlParameter("@LId", Id);
-            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("Menu1LanguageEditGet @LId" , parameter).First();
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("Menu2LanguageEditGet @LId", parameter).First();
             return View(ObjectLanguage);
         }
 
@@ -345,11 +353,11 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
             var parameter = new SqlParameter("@Id", FromForm.LId);
-            var b = _context.Database.ExecuteSqlCommand("Menu1LanguageDeletePost @Id", parameter);
+            var b = _context.Database.ExecuteSqlCommand("Menu2LanguageDeletePost @Id", parameter);
 
-                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
         }
-      
+
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
         {
@@ -365,18 +373,18 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            SuMenu1DeleteGetModel Menu1 = _context.ZdbMenu1DeleteGet.FromSql("Menu1DeleteGet @LanguageId, @Id", parameters).First();
+            SuMenu2DeleteGetModel Menu2 = _context.ZdbMenu2DeleteGet.FromSql("Menu2DeleteGet @LanguageId, @Id", parameters).First();
 
 
 
-            return View(Menu1);
+            return View(Menu2);
         }
 
         [HttpPost]
-        public IActionResult Delete(SuMenu1DeleteGetModel FromForm)
+        public IActionResult Delete(SuMenu2DeleteGetModel FromForm)
         {
             var parameter = new SqlParameter("@OId", FromForm.OId);
-            var b = _context.Database.ExecuteSqlCommand($"Menu1DeletePost @OId", parameter);
+            var b = _context.Database.ExecuteSqlCommand($"Menu2DeletePost @OId", parameter);
 
             return RedirectToAction("Index");
 

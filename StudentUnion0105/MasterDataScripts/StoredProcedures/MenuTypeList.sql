@@ -1,0 +1,1 @@
+CREATE PROCEDURE MenuTypeList AS SELECT Id, Name FROM dbMenuType ORDER BY Name

@@ -6,4 +6,4 @@ SELECT
 	, dbMenu1Language.MenuName
 FROM dbMenu1Language
 WHERE dbMenu1Language.LanguageId = @LanguageId
-ORDER BY dbMenu1Language.Name
+ORDER BY dbMenu1Language.MenuName

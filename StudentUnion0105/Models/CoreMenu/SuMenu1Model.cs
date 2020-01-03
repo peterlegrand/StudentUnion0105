@@ -37,10 +37,12 @@ namespace StudentUnion0105.Models
     {
         public SuMenu1EditGetModel Menu1 { get; set; }
         public List<SelectListItem> ClassificationList { get; set; }
+        public List<SelectListItem> MenuTypeList { get; set; }
     }
 
     public class SuMenu1DeleteGetModel
     {
+        [Key]
         public int OId { get; set; }
         public string TypeName { get; set; }
         public string ClassificationName { get; set; }
@@ -55,7 +57,7 @@ namespace StudentUnion0105.Models
         public int LId { get; set; }
         public string MenuName { get; set; }
         public string MouseOver { get; set; }
-        public int LanguageName { get; set; }
+        public string LanguageName { get; set; }
 
     }
 

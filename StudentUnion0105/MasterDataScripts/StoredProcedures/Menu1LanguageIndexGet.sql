@@ -6,6 +6,8 @@ SELECT
 	, 0 PId
 	, ISNULL(dbMenu1Language.MenuName,'') MenuName
 	, ISNULL(dbMenu1Language.MouseOver,'') MouseOver
+	, '' Description
+	, '' Name
 	, dbLanguage.Id LanguageId
 	, ISNULL(dbLanguage.LanguageName,'') LanguageName
 FROM dbMenu1Language

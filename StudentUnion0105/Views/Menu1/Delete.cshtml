@@ -1,0 +1,125 @@
+﻿@model SuMenu1DeleteGetModel
+@{
+ViewBag.Title = ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/Menu.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+
+        <div class="form-group row">
+            <label asp-for="@Model.OId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.OId" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.TypeName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.TypeName" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ClassificationName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ClassificationName" class="form-control" />
+                <span asp-validation-for="@Model.ClassificationName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Controller" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.Controller" class="form-control ckeditor" id="descriptionx" name="Description"></textarea>
+                <span asp-validation-for="@Model.Controller" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Action" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Action" class="form-control" />
+                <span asp-validation-for="@Model.Action" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.DestinationId" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.DestinationId" class="form-control" />
+                <span asp-validation-for="@Model.DestinationId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.FeatureId" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.FeatureId" class="form-control" />
+                <span asp-validation-for="@Model.FeatureId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.LId" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.LId" class="form-control" />
+                <span asp-validation-for="@Model.LId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Creator" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Creator" class="form-check" />
+                <span asp-validation-for="@Model.Creator" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.CreatedDate" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.CreatedDate" class="form-check" />
+                <span asp-validation-for="@Model.CreatedDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Modifier" class="col-sm-2 col-form-label">@ViewBag.Terms[13]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Modifier" class="form-check" />
+                <span asp-validation-for="@Model.Modifier" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.ModifiedDate" class="col-sm-2 col-form-label">@ViewBag.Terms[14]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ModifiedDate" class="form-check" />
+                <span asp-validation-for="@Model.ModifiedDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[15]</button>
+                <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[16]</a>
+            </div>
+        </div>
+    </form>
+<script>
+    $(document).ready(function () {
+        if (CKEDITOR.instances['descriptionx']) {
+            CKEDITOR.instances['descriptionx'].destroy();
+        }
+        CKEDITOR.replace('descriptionx', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['descriptionx'].getData()
+            console.log(ckValue);
+        });
+    });
+</script>

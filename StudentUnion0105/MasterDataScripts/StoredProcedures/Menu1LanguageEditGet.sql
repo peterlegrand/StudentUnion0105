@@ -7,6 +7,8 @@ SELECT
 	, Modifier.UserName Modifier
 	, dbMenu1Language.ModifiedDate
 	, dbMenu1Language.Id LId
+	, '' Description
+	, '' Name
 	, ISNULL(dbMenu1Language.MenuName,'') MenuName
 	, ISNULL(dbMenu1Language.MouseOver,'') MouseOver
 	, ISNULL(dbLanguage.LanguageName,'') Language

@@ -232,6 +232,7 @@ namespace StudentUnion0105.Controllers
 , "Menu3LanguageEditGet.sql"
 , "Menu3LanguageEditPost.sql"
 , "Menu3LanguageIndexGet.sql"
+, "MenuTypeList.sql"
 , "OrganizationDeleteGet.sql"
 , "OrganizationDeletePost.sql"
 , "OrganizationEditGet.sql"

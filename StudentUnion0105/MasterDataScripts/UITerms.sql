@@ -287,5 +287,18 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(285, 'Delete user relation t
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(286, 'To do', 'To do');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(287, 'Process name', 'Process name');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(288, 'Created date', 'Created date');
-
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(289, 'Add menu', 'Add menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(290, 'Controller', 'Controller');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(291, 'Action', 'Action');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(292, 'Destination Id', 'Destination Id');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(293, 'Feature', 'Feature');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(294, 'Delete menu', 'Delete menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(295, 'OId', 'OId');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(296, 'Type name', 'Type name');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(297, 'LId', 'LId');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(298, 'Edit menu', 'Edit menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(299, 'Menu type', 'Menu type');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(300, 'Menus', 'Menus');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(301, 'Menu level 2', 'Menu level 2');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(302, 'Back to menu', 'Back to menu');
 SET IDENTITY_INSERT dbUITerm OFF;

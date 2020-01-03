@@ -1,0 +1,101 @@
+﻿@model SuMenu2EditGetWithListModel
+@{
+    ViewBag.Title = @ViewBag.Terms[0];
+}
+    <h1><img src="~/Images/Icons/Menu.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+    <form class="mt-3" method="post">
+
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.Id" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.Id" class="form-control" />
+                <span asp-validation-for="@Model.Menu2.Id" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.MenuName" class="form-control" />
+                <span asp-validation-for="@Model.Menu2.MenuName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.MenuTypeId" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(x => x.Menu2.MenuTypeId, Model.MenuTypeList)
+                <span asp-validation-for="@Model.Menu2.MenuTypeId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.MouseOver" class="form-control" />
+                <span asp-validation-for="@Model.Menu2.MouseOver" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.ClassificationId" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+            <div class="col-sm-10 ">
+
+                @Html.DropDownListFor(x => x.Menu2.ClassificationId, Model.ClassificationList)
+                <span asp-validation-for="@Model.Menu2.ClassificationId" class="text-danger"></span>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.Controller" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.Controller" class="form-check" />
+                <span asp-validation-for="@Model.Menu2.Controller" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.Action" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.Action" class="form-check" />
+                <span asp-validation-for="@Model.Menu2.Action" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.DestinationId" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.DestinationId" class="form-check" />
+                <span asp-validation-for="@Model.Menu2.DestinationId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.FeatureId" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.FeatureId" class="form-check" />
+                <span asp-validation-for="@Model.Menu2.FeatureId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Menu2.Sequence" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Menu2.Sequence" class="form-check" />
+                <span asp-validation-for="@Model.Menu2.Sequence" class="text-danger"></span>
+            </div>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[10]</button>
+                <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[11]</a>
+            </div>
+        </div>
+    </form>
+<script>
+            $(document).ready(function () {
+                if (CKEDITOR.instances['description']) {
+                    CKEDITOR.instances['description'].destroy();
+                }
+                CKEDITOR.replace('description', {
+                    fullPage: false, uiColor: '#efe8ce'
+                });
+                $('#getVal').on('click', function (e) {
+                    let ckValue = CKEDITOR.instances['description'].getData()
+                    console.log(ckValue);
+                });
+            });
+</script>

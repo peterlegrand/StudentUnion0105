@@ -123,6 +123,11 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <Folder Include="Views\Menu3\" />
+  </ItemGroup>
+
+
   <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4bootstrap_4css_4bootstrap_1css_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
