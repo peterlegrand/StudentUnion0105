@@ -1,88 +1,118 @@
-﻿@model SuClassificationEditGetWithListModel
+﻿
+@using Syncfusion.JavaScript;
+@using Syncfusion.JavaScript.Models;
+@model SuClassificationEditGetWithListModel;
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-    <form class="mt-3" method="post">
+<h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<form asp-controller="Classification" asp-action="Create" class="mt-3" method="post">
 
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.Name" class="form-control" />
-                <span asp-validation-for="@Model.Classification.Name" class="text-danger"></span>
-            </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.Name" class="form-control" />
+            <span asp-validation-for="@Model.Classification.Name" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.MenuName" class="form-control" />
-                <span asp-validation-for="@Model.Classification.MenuName" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.Classification.MenuName" class="text-danger"></span>
         </div>
-        <div class="form-group row">
+    </div>
+    @*<div class="form-group row">
             <label asp-for="@Model.Classification.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
             <div class="col-sm-10">
                 <textarea asp-for="@Model.Classification.Description" class="form-control ckeditor" id="description" name="Classification.Description"></textarea>
                 <span asp-validation-for="@Model.Classification.Description" class="text-danger"></span>
             </div>
+        </div>*@
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.Classification.MouseOver" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.MouseOver" class="form-control" />
-                <span asp-validation-for="@Model.Classification.MouseOver" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.ClassificationStatusId" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
-            <div class="col-sm-10 ">
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.ClassificationStatusId" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+        <div class="col-sm-10 ">
 
-                @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-                @Html.DropDownListFor(x => x.Classification.ClassificationStatusId, Model.StatusList)
-                <span asp-validation-for="@Model.Classification.ClassificationStatusId" class="text-danger"></span>
+            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
+            @Html.DropDownListFor(x => x.Classification.ClassificationStatusId, Model.StatusList)
+            <span asp-validation-for="@Model.Classification.ClassificationStatusId" class="text-danger"></span>
 
-            </div>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.HasDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.HasDropDown" class="form-check" />
-                <span asp-validation-for="@Model.Classification.HasDropDown" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.HasDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.HasDropDown" class="form-check" />
+            <span asp-validation-for="@Model.Classification.HasDropDown" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.DropDownSequence" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.DropDownSequence" class="form-check" />
-                <span asp-validation-for="@Model.Classification.DropDownSequence" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.DropDownSequence" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.DropDownSequence" class="form-check" />
+            <span asp-validation-for="@Model.Classification.DropDownSequence" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Classification.DefaultClassificationPageId" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Classification.DefaultClassificationPageId" class="form-check" />
-                <span asp-validation-for="@Model.Classification.DefaultClassificationPageId" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.DefaultClassificationPageId" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.DefaultClassificationPageId" class="form-check" />
+            <span asp-validation-for="@Model.Classification.DefaultClassificationPageId" class="text-danger"></span>
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[7]</button>
-                <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[8]</a>
-            </div>
+    </div>
+    
+    @*<ej-rte ej-for="@Model.Classification.Description" name="RTEvalue" id="input" width="820px"></ej-rte>*@
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[7]</button>
+            <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[8]</a>
         </div>
-    </form>
+    </div>
+    <ejs-richtexteditor ejs-for="@Model.Classification.Description" id="defaultRTE">
+        <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
+        <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
+        <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>
+
+        <e-richtexteditor-toolbarsettings items="@ViewBag.tools"></e-richtexteditor-toolbarsettings>
+        <e-content-template>
+
+        </e-content-template>
+    </ejs-richtexteditor>
+
+</form>
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>
+@*<script>
+    var formObject, options;
+    function created() {
+        formObject = new ej.inputs.FormValidator('#form-element', options);
+    };
+    window.onload = function () {
+        document.getElementById('validateSubmit').onclick = function () {
+            getValue();
+        };
+    }
+    function getValue() {
+        formObject.validate();
+    }
+</script>*@

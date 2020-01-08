@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,20 +14,24 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace StudentUnion0105.Controllers
 {
     [Authorize("Classification")]
     public class ClassificationController : Controller
     {
+        
         private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly ILanguageRepository _language;
         private readonly SuDbContext _context;
-
+        private readonly IHostingEnvironment hostingEnv;
 
         public ClassificationController(UserManager<SuUserModel> userManager
                                                 , IClassificationStatusRepository classificationStatus
@@ -33,6 +39,7 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
+            , IHostingEnvironment hostingEnv
             )
         {
             this.userManager = userManager;
@@ -41,6 +48,7 @@ namespace StudentUnion0105.Controllers
             _classificationLanguage = classificationLanguage;
             _language = language;
             _context = context;
+            this.hostingEnv = hostingEnv;
         }
 
         [HttpGet]
@@ -149,7 +157,18 @@ namespace StudentUnion0105.Controllers
                     Value = ClassificationStatusFromDb.Id.ToString()
                 });
             }
-            var ClassificationAndStatus = new SuClassificationEditGetWithListModel {  StatusList = ClassificationStatusList };
+            var Classification = new SuClassificationEditGetModel { Description = "x" };
+            var ClassificationAndStatus = new SuClassificationEditGetWithListModel { Classification= Classification, StatusList = ClassificationStatusList };
+
+            ViewBag.tools = new[] {
+        "Bold", "Italic", "Underline", "StrikeThrough",
+        "FontName", "FontSize", "FontColor", "BackgroundColor",
+        "LowerCase", "UpperCase", "|",
+        "Formats", "Alignments", "OrderedList", "UnorderedList",
+        "Outdent", "Indent", "|",
+        "CreateLink", "Image", "CreateTable", "|", "ClearFormat", "Print",
+        "SourceCode", "FullScreen", "|", "Undo", "Redo"
+            };
             return View(ClassificationAndStatus);
         }
         
@@ -366,5 +385,49 @@ namespace StudentUnion0105.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SaveImage(IList<IFormFile> UploadFiles)
+        {
+            try
+            {
+                foreach (IFormFile file in UploadFiles)
+                {
+                    if (UploadFiles != null)
+                    {
+                        string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        Guid g = Guid.NewGuid();
+                        string GuidString = Convert.ToBase64String(g.ToByteArray());
+                        GuidString = GuidString.Replace("=", "");
+                        GuidString = GuidString.Replace("+", "");
+                        filename = hostingEnv.ContentRootPath + "\\wwwroot\\Images\\Content\\" + GuidString + $@"{filename}";
+                        if (!System.IO.File.Exists(filename))
+                        {
+                            using (FileStream fs = System.IO.File.Create(filename))
+                            {
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                        else
+                        {
+                            Response.Clear();
+                            Response.StatusCode = 204;
+                            Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "File already exists.";
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.StatusCode = 204;
+                Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "No Content";
+                Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = e.Message;
+            }
+            return Content("");
+        }
     }
+
 }
+

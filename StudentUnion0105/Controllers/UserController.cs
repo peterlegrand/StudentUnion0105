@@ -225,7 +225,7 @@ namespace StudentUnion0105.Controllers
                 var result = await SignInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index2", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt");
 

@@ -83,9 +83,10 @@
     <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Syncfusion.EJ" Version="17.4.0.41" />
     
-<PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="17.2.0.34" />
-<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+<PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="17.4.0.41" />
+<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
 
@@ -125,6 +126,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Menu3\" />
+    <Folder Include="wwwroot\Images\Content\" />
   </ItemGroup>
 
 
