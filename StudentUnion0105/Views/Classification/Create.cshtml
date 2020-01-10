@@ -67,16 +67,9 @@
             <span asp-validation-for="@Model.Classification.DefaultClassificationPageId" class="text-danger"></span>
         </div>
     </div>
-    
+
     @*<ej-rte ej-for="@Model.Classification.Description" name="RTEvalue" id="input" width="820px"></ej-rte>*@
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[7]</button>
-            <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[8]</a>
-        </div>
-    </div>
-    <ejs-richtexteditor ejs-for="@Model.Classification.Description" id="defaultRTE">
+    <ejs-richtexteditor ejs-for="@Model.Classification.Description" id="defaultRTE" imageUploadSuccess="onImageUploadSuccess">
         <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
         <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
         <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>
@@ -86,33 +79,81 @@
 
         </e-content-template>
     </ejs-richtexteditor>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[7]</button>
+            <a asp-action="Index" asp-controller="Classification" class="btn btn-primary btn-light">@ViewBag.Terms[8]</a>
+        </div>
+    </div>
 
 </form>
 <script>
-    $(document).ready(function () {
-        if (CKEDITOR.instances['description']) {
-            CKEDITOR.instances['description'].destroy();
-        }
-        CKEDITOR.replace('description', {
-            fullPage: false, uiColor: '#efe8ce'
+    function onImageUploadSuccess() {
+
+        $.ajax({
+            type: "POST",
+            url: '/Classification/SaveImage',
+            success: function (data, status, xhr) {
+                if (xhr) {
+                    let newImageName = xhr.getResponseHeader('name');
+                    $('Sample1.png').attr('src', newImageName);
+                }
+                console.log(xhr);
+            }
+           // Console.log(xhr);
         });
-        $('#getVal').on('click', function (e) {
-            let ckValue = CKEDITOR.instances['description'].getData()
-            console.log(ckValue);
-        });
-    });
+    }
 </script>
+  @*//    alert("hi");
+        //    if (args.e.currentTarget.getResponseHeader('name') != null) {
+        //        alert("hi2");
+        //        args.file.name = args.e.currentTarget.getResponseHeader('name');
+        //        var filename = document.querySelectorAll(".e-file-name")[0];
+        //        filename.innerHTML = args.file.name.replace(document.querySelectorAll(".e-file-type")[0].innerHTML, '');
+        //        filename.title = args.file.name;
+        //    }
+        //}*@
+@*////var FileName = new XMLHttpRequest();
+    ////FileName.open()
+    ////if(FileName.status=)
+    ////var contentType = FileName.getResponseHeader("Name");
+    ////alert(contentType);
+
+    //$.ajax({
+    //    type: "POST",
+    //    data: {"key":"value"},
+    //    url: "labels.json",
+    //    success: function(output, status, xhr) {
+    //      console.log(xhr.getResponseHeader("Content-Type"));
+    //    },
+    //    alert(xhr.)
+    //});*@
 @*<script>
-    var formObject, options;
-    function created() {
-        formObject = new ej.inputs.FormValidator('#form-element', options);
-    };
-    window.onload = function () {
-        document.getElementById('validateSubmit').onclick = function () {
-            getValue();
+        $(document).ready(function () {
+            if (CKEDITOR.instances['description']) {
+                CKEDITOR.instances['description'].destroy();
+            }
+            CKEDITOR.replace('description', {
+                fullPage: false, uiColor: '#efe8ce'
+            });
+            $('#getVal').on('click', function (e) {
+                let ckValue = CKEDITOR.instances['description'].getData()
+                console.log(ckValue);
+            });
+        });
+    </script>*@
+@*<script>
+        var formObject, options;
+        function created() {
+            formObject = new ej.inputs.FormValidator('#form-element', options);
         };
-    }
-    function getValue() {
-        formObject.validate();
-    }
-</script>*@
+        window.onload = function () {
+            document.getElementById('validateSubmit').onclick = function () {
+                getValue();
+            };
+        }
+        function getValue() {
+            formObject.validate();
+        }
+    </script>*@

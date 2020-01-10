@@ -399,17 +399,26 @@ namespace StudentUnion0105.Controllers
                         string GuidString = Convert.ToBase64String(g.ToByteArray());
                         GuidString = GuidString.Replace("=", "");
                         GuidString = GuidString.Replace("+", "");
+                        string onlyfilename = GuidString + $@"{filename}";
                         filename = hostingEnv.ContentRootPath + "\\wwwroot\\Images\\Content\\" + GuidString + $@"{filename}";
                         if (!System.IO.File.Exists(filename))
                         {
+                            Response.ContentType = "application/json; charset=utf-8";
+                            Response.Headers.Add("name", onlyfilename);
+                            //Response.Clear();
+                            Response.StatusCode = 204;
+                            
                             using (FileStream fs = System.IO.File.Create(filename))
                             {
                                 file.CopyTo(fs);
                                 fs.Flush();
                             }
+                            //Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "File already exists.";
                         }
                         else
                         {
+                            Response.ContentType = "application/json; charset=utf-8";
+                            Response.Headers.Add("name", onlyfilename);
                             Response.Clear();
                             Response.StatusCode = 204;
                             Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "File already exists.";
