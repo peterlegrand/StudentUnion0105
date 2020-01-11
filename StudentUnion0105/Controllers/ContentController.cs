@@ -189,6 +189,16 @@ namespace StudentUnion0105.Controllers
                 ,
                 SelectedValues = SelectedValues
             };
+            ViewBag.tools = new[] {
+        "Bold", "Italic", "Underline", "StrikeThrough",
+        "FontName", "FontSize", "FontColor", "BackgroundColor",
+        "LowerCase", "UpperCase", "|",
+        "Formats", "Alignments", "OrderedList", "UnorderedList",
+        "Outdent", "Indent", "|",
+        "CreateLink", "Image", "CreateTable", "|", "ClearFormat", "Print",
+        "SourceCode", "FullScreen", "|", "Undo", "Redo"
+            };
+
             return View(ContentWithDropDowns);
         }
         [HttpPost]
@@ -206,7 +216,7 @@ namespace StudentUnion0105.Controllers
                 new SqlParameter("@Description", FromForm.Content.Description),
                 new SqlParameter("@SecurityLevel", FromForm.Content.SecurityLevel),
                 new SqlParameter("@OrganizationId", FromForm.Content.OrganizationId),
-                new SqlParameter("@ProjectId", ProjectId),
+                new SqlParameter("@ProjectId", ProjectId ?? 0 ),
                 new SqlParameter("@CreatorId", CurrentUser.Id),
         
                 new SqlParameter
@@ -230,7 +240,7 @@ namespace StudentUnion0105.Controllers
                     {
                         SqlParameter[] parameters2 =
                     {
-                new SqlParameter("@ContentId", parameters[8].Value),
+                new SqlParameter("@ContentId", parameters[9].Value),
                 new SqlParameter("@ClassificationValueId", x.Value)
                         };
                         var c = _context.Database.ExecuteSqlCommand("ContentValueCreate @ContentId, @ClassificationValueId", parameters2);

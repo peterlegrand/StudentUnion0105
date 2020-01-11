@@ -1,4 +1,6 @@
-﻿@model SuCreateContentModel
+﻿@using Syncfusion.JavaScript;
+@using Syncfusion.JavaScript.Models;
+@model SuCreateContentModel
 @{
     ViewBag.Title = "Create content";
 }
@@ -19,13 +21,24 @@
             <span asp-validation-for="@Model.NoOfClassifications" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.Description" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <textarea asp-for="@Model.Content.Description" class="form-control ckeditor" id="description" name="Content.Description"></textarea>
-            <span asp-validation-for="@Model.Content.Description" class="text-danger"></span>
-        </div>
-    </div>
+    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE" imageUploadSuccess="onImageUploadSuccess">
+        <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
+        <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
+        <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>
+
+        <e-richtexteditor-toolbarsettings items="@ViewBag.tools"></e-richtexteditor-toolbarsettings>
+        <e-content-template>
+
+        </e-content-template>
+    </ejs-richtexteditor>
+
+    @*<div class="form-group row">
+            <label asp-for="@Model.Content.Description" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <textarea asp-for="@Model.Content.Description" class="form-control ckeditor" id="description" name="Content.Description"></textarea>
+                <span asp-validation-for="@Model.Content.Description" class="text-danger"></span>
+            </div>
+        </div>*@
     <div class="form-group row">
         <label asp-for="@Model.Content.ContentStatusId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10 ">
@@ -107,16 +120,16 @@
     </div>
 </form>
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>
