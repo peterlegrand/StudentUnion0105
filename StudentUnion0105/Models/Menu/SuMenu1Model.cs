@@ -12,7 +12,9 @@ namespace StudentUnion0105.Models
         public int Sequence { get; set; }
         public int ClassificationId { get; set; }
         public int FeatureId { get; set; }
+        [MaxLength(20)]
         public string Controller { get; set; }
+        [MaxLength(20)]
         public string Action { get; set; }
         public int DestinationId { get; set; }
         public string CreatorId { get; set; }

@@ -38,6 +38,7 @@
             <form method="post" asp-action="Logout" asp-controller="User">
                 <button type="submit" class="nav-link btn btn-link py-0 right float-right right text-right">Logout @User.Identity.Name</button>
             </form>
+            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="FrontPage" asp-action="Index">Enter Student Union</a>
         }
         else
         {

@@ -21,7 +21,7 @@
             <span asp-validation-for="@Model.NoOfClassifications" class="text-danger"></span>
         </div>
     </div>
-    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE" imageUploadSuccess="onImageUploadSuccess">
+    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE"> @*imageUploadSuccess="onImageUploadSuccess">*@
         <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
         <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
         <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>

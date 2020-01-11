@@ -254,7 +254,7 @@ namespace StudentUnion0105.Controllers
             return RedirectToRoute(new
             {
                 controller = "Home",
-                action = "Index"
+                action = "Index2"
             });
 
         }
