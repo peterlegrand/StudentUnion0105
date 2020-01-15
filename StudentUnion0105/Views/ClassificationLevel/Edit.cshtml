@@ -7,116 +7,119 @@
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/levels.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-    <form class="mt-3" method="post">
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1><img src="~/Images/Icons/levels.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<form class="mt-3" method="post">
 
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.OId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.OId" class="form-control" />
-                <span asp-validation-for="@Model.ClassificationLevel.OId" class="text-danger"></span>
-            </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.OId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.OId" class="form-control" />
+            <span asp-validation-for="@Model.ClassificationLevel.OId" class="text-danger"></span>
         </div>
-        <div class="form-group row" hidden>
-            <label asp-for="@Model.ClassificationLevel.PId" hidden class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.PId" hidden class="form-control" />
-                <span asp-validation-for="@Model.ClassificationLevel.PId" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row" hidden>
+        <label asp-for="@Model.ClassificationLevel.PId" hidden class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.PId" hidden class="form-control" />
+            <span asp-validation-for="@Model.ClassificationLevel.PId" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.Name" class="form-control" />
-                <span asp-validation-for="@Model.ClassificationLevel.Name" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.Name" class="form-control" />
+            <span asp-validation-for="@Model.ClassificationLevel.Name" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.MenuName" class="form-control" />
-                <span asp-validation-for="@Model.ClassificationLevel.MenuName" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.ClassificationLevel.MenuName" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
-            <div class="col-sm-10">
-                <textarea asp-for="@Model.ClassificationLevel.Description" class="form-control ckeditor" id="description" name="ClassificationLevel.Description"></textarea>
-                <span asp-validation-for="@Model.ClassificationLevel.Description" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+        <div class="col-sm-10">
+            <textarea asp-for="@Model.ClassificationLevel.Description" class="form-control ckeditor" id="description" name="ClassificationLevel.Description"></textarea>
+            <span asp-validation-for="@Model.ClassificationLevel.Description" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.MouseOver" class="form-control" />
-                <span asp-validation-for="@Model.ClassificationLevel.MouseOver" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.ClassificationLevel.MouseOver" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.DateLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-            <div class="col-sm-10">
-                @Html.DropDownListFor(x => x.ClassificationLevel.DateLevel, Model.DateTypeList)
-                <span asp-validation-for="@Model.ClassificationLevel.DateLevel" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.DateLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.ClassificationLevel.DateLevel, Model.DateTypeList)
+            <span asp-validation-for="@Model.ClassificationLevel.DateLevel" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.OnTheFly" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.OnTheFly" class="form-check" />
-                <span asp-validation-for="@Model.ClassificationLevel.OnTheFly" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.OnTheFly" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.OnTheFly" class="form-check" />
+            <span asp-validation-for="@Model.ClassificationLevel.OnTheFly" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.Alphabetically" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.Alphabetically" class="form-check" />
-                <span asp-validation-for="@Model.ClassificationLevel.Alphabetically" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.Alphabetically" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.Alphabetically" class="form-check" />
+            <span asp-validation-for="@Model.ClassificationLevel.Alphabetically" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.CanLink" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.CanLink" class="form-check" />
-                <span asp-validation-for="@Model.ClassificationLevel.CanLink" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.CanLink" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.CanLink" class="form-check" />
+            <span asp-validation-for="@Model.ClassificationLevel.CanLink" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.InDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ClassificationLevel.InDropDown" class="form-check" />
-                <span asp-validation-for="@Model.ClassificationLevel.InDropDown" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.InDropDown" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ClassificationLevel.InDropDown" class="form-check" />
+            <span asp-validation-for="@Model.ClassificationLevel.InDropDown" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ClassificationLevel.Sequence" class="col-sm-2 col-form-label">ViewBag.Terms[13]</label>
-            <div class="col-sm-10 ">
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ClassificationLevel.Sequence" class="col-sm-2 col-form-label">ViewBag.Terms[13]</label>
+        <div class="col-sm-10 ">
 
-                @Html.DropDownListFor(x => x.ClassificationLevel.Sequence, Model.SequenceList)
-                <span asp-validation-for="@Model.ClassificationLevel.Sequence" class="text-danger"></span>
+            @Html.DropDownListFor(x => x.ClassificationLevel.Sequence, Model.SequenceList)
+            <span asp-validation-for="@Model.ClassificationLevel.Sequence" class="text-danger"></span>
 
-            </div>
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[11]</button>
-                <a asp-action="Index" asp-controller="ClassificationLevel" class="btn btn-primary btn-light">@ViewBag.Terms[12]</a>
-            </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[11]</button>
+            <a asp-action="Index" asp-controller="ClassificationLevel" class="btn btn-primary btn-light">@ViewBag.Terms[12]</a>
         </div>
-    </form>
+    </div>
+</form>
 
 
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

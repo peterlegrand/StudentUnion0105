@@ -6,81 +6,84 @@
 }
 @{
     ViewBag.Title = @ViewBag.Terms[0];
+}@{
+    Layout = "_LayoutAdmin";
 }
-    <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-    <form class="mt-3" method="post">
 
-        <div class="form-group row">
-            <label asp-for="@Model.Language" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Language" class="form-control" />
-            </div>
+<h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<form class="mt-3" method="post">
+
+    <div class="form-group row">
+        <label asp-for="@Model.Language" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Language" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.LId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.LId" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.LId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.LId" class="form-control" />
         </div>
-        <div class="form-group row" hidden>
-            <label asp-for="@Model.OId" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.OId" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row" hidden>
+        <label asp-for="@Model.OId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.OId" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.FromIsOfToName" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.FromIsOfToName" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.FromIsOfToName" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.FromIsOfToName" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ToIsOfFromName" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ToIsOfFromName" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ToIsOfFromName" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ToIsOfFromName" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.FromIsOfToDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.FromIsOfToDescription" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.FromIsOfToDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.FromIsOfToDescription" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ToIsOfFromDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ToIsOfFromDescription" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ToIsOfFromDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[4]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ToIsOfFromDescription" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.FromIsOfToMouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.FromIsOfToMouseOver" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.FromIsOfToMouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.FromIsOfToMouseOver" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ToIsOfFromMouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ToIsOfFromMouseOver" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ToIsOfFromMouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ToIsOfFromMouseOver" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.FromIsOfToMenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.FromIsOfToMenuName" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.FromIsOfToMenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.FromIsOfToMenuName" class="form-control" />
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.ToIsOfFromMenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.ToIsOfFromMenuName" class="form-control" />
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ToIsOfFromMenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ToIsOfFromMenuName" class="form-control" />
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[9]</button>
-                <a asp-action="LanguageIndex" asp-controller="Page" class="btn btn-primary btn-light">@ViewBag.Terms[10]</a>
-            </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[9]</button>
+            <a asp-action="LanguageIndex" asp-controller="Page" class="btn btn-primary btn-light">@ViewBag.Terms[10]</a>
         </div>
-    </form>
+    </div>
+</form>

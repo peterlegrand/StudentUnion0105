@@ -1,0 +1,79 @@
+﻿@model IList<Microsoft.AspNetCore.Http.IFormFile>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    Layout = "_LayoutAdmin";
+}
+<div class="text-center">
+    <a asp-controller="SetupWizard" asp-action="Index">
+        <img src="~/Images/Icons/SetupWizard.png" title="Setup wizard" height="20" width="20" /> Setup wizard
+    </a>
+    @*<h1 class="display-4">Welcome</h1>*@
+    <ejs-menu id="menu" items="ViewBag.menuItems"></ejs-menu>
+    @*<form>
+            <ejs-richtexteditor id="defaultRTE">
+                <e-richtexteditor-toolbarsettings items="@ViewBag.tools" type="MultiRow"></e-richtexteditor-toolbarsettings>
+                <e-content-template>
+
+                    <div>
+                        <p>The RichTextEditor is WYSIWYG ('what you see is what you get') editor useful to create and edit content, and return the valid <a href='https://ej2.syncfusion.com/aspnetcore/RichTextEditor/Overview'>HTML markup</a> or <a href='https://ej2.syncfusion.com/aspnetcore/RichTextEditor/DefaultMode'>markdown</a> of the content</p>
+                        <p><b> Toolbar </b></p>
+                        <ol>
+                            <li>
+                                <p> Toolbar contains commands to align the text, insert link, insert image, insert list, undo / redo operations, HTML view, etc </p>
+                            </li>
+                            <li>
+                                <p> Toolbar is fully customizable </p>
+                            </li>
+                        </ol>
+                        <p><b> Links </b></p>
+                        <ol>
+                            <li>
+                                <p> You can insert a hyperlink with its corresponding dialog</p>
+                            </li>
+                            <li>
+                                <p> Attach a hyperlink to the displayed text. </p>
+                            </li>
+                            <li>
+                                <p> Customize the quick toolbar based on the hyperlink </p>
+                            </li>
+                        </ol>
+                        <p><b> Image.</b></p>
+                        <ol>
+                            <li>
+                                <p> Allows you to insert images from an online source as well as the local computer</p>
+                            </li>
+                            <li>
+                                <p> You can upload an image</p>
+                            </li>
+                            <li>
+                                <p> Provides an option to customize quick toolbar for an image </p>
+                            </li>
+                        </ol>
+                    </div>
+                </e-content-template>
+            </ejs-richtexteditor>
+            <button type="submit">test</button>
+        </form>*@
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @*<div><ejs-calendar id="calendar"></ejs-calendar></div>
+        <textarea class="ckeditor" id="ckElement" name="ckElement" cols="35" rows="20"></textarea>*@
+
+    <script>
+        $(document).ready(function () {
+            if (CKEDITOR.instances['ckElement']) {
+                CKEDITOR.instances['ckElement'].destroy();
+            }
+            CKEDITOR.replace('ckElement', {
+                fullPage: true, uiColor: '#efe8ce'
+            });
+            $('#getVal').on('click', function (e) {
+                let ckValue = CKEDITOR.instances['ckElement'].getData()
+                console.log(ckValue);
+            });
+        });
+    </script>
+
+
+</div>

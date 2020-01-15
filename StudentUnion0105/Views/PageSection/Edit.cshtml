@@ -7,8 +7,11 @@
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/Section.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-<form method="post" >
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1><img src="~/Images/Icons/Section.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<form method="post">
     <div class="row invisible">
         <div class="form-group col-md-3  invisible" hidden>
             <label asp-for="@Model.SuObject.ObjectId" class=" col-form-label invisible"></label>
@@ -131,28 +134,28 @@
 
 
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description2']) {
-                    CKEDITOR.instances['description2'].destroy();
-                }
-                CKEDITOR.replace('description2', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description2'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description2']) {
+            CKEDITOR.instances['description2'].destroy();
+        }
+        CKEDITOR.replace('description2', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description2'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

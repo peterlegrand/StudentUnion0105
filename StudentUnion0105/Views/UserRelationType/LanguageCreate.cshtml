@@ -6,7 +6,10 @@
 }
 @{
     ViewBag.Title = @ViewBag.Terms[0];
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
     <div class="form-group row" hidden>
@@ -102,16 +105,16 @@
             console.log(ckValue);
         });
     });
-$(document).ready(function () {
-                if (CKEDITOR.instances['ToIsOfFromDescription']) {
-                    CKEDITOR.instances['ToIsOfFromDescription'].destroy();
-                }
-                CKEDITOR.replace('ToIsOfFromDescription', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['ToIsOfFromDescription'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['ToIsOfFromDescription']) {
+            CKEDITOR.instances['ToIsOfFromDescription'].destroy();
+        }
+        CKEDITOR.replace('ToIsOfFromDescription', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['ToIsOfFromDescription'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

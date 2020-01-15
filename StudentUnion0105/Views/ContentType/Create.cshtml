@@ -2,70 +2,73 @@
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/ContentType.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
-    <form class="mt-3" method="post">
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1><img src="~/Images/Icons/ContentType.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<form class="mt-3" method="post">
 
-        <div class="form-group row">
-            <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.Name" class="form-control" />
-                <span asp-validation-for="@Model.Name" class="text-danger"></span>
-            </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
-            <div class="col-sm-10">
-                <textarea asp-for="@Model.Description" class="form-control ckeditor" id="description" name="description"></textarea>
-                <span asp-validation-for="@Model.Description" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <div class="col-sm-10">
+            <textarea asp-for="@Model.Description" class="form-control ckeditor" id="description" name="description"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.MouseOver" class="form-control" />
-                <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.MenuName" class="form-control" />
-                <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.TitleName" class="form-control" />
-                <span asp-validation-for="@Model.TitleName" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.TitleName" class="form-control" />
+            <span asp-validation-for="@Model.TitleName" class="text-danger"></span>
         </div>
-        <div class="form-group row">
-            <label asp-for="@Model.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
-            <div class="col-sm-10">
-                <input asp-for="@Model.TitleDescription" class="form-control" />
-                <span asp-validation-for="@Model.TitleDescription" class="text-danger"></span>
-            </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.TitleDescription" class="form-control" />
+            <span asp-validation-for="@Model.TitleDescription" class="text-danger"></span>
         </div>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[4]</button>
-                <a asp-action="Index" asp-controller="ContentType" class="btn btn-primary btn-light">@ViewBag.Terms[5]</a>
-            </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[4]</button>
+            <a asp-action="Index" asp-controller="ContentType" class="btn btn-primary btn-light">@ViewBag.Terms[5]</a>
         </div>
-    </form>
+    </div>
+</form>
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['Description']) {
-                    CKEDITOR.instances['Description'].destroy();
-                }
-                CKEDITOR.replace('Description', {
-                    fullPage: true, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['Description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['Description']) {
+            CKEDITOR.instances['Description'].destroy();
+        }
+        CKEDITOR.replace('Description', {
+            fullPage: true, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['Description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

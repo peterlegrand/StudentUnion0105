@@ -1,7 +1,10 @@
 ﻿@model SuOrganizationEditGetWithListModel
 @{
     ViewBag.Title = "Edit organization";
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1><img src="~/Images/Icons/Organization.png" height="60" width="60" /> Edit organization</h1>
 <form class="mt-3" method="post">
 
@@ -91,16 +94,16 @@
 </form>
 
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

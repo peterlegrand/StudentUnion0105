@@ -6,8 +6,11 @@
     ViewBag.Title = @ViewBag.Terms[0];
 }
 @model List<SuObjectLanguageIndexGetModel>
+@{
+    Layout = "_LayoutAdmin";
+}
 
-    <h1 class="font-weight-bold"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+<h1 class="font-weight-bold"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <table class="table table-bordered table-sm table-hover">
 
     <thead class="thead-dark">
@@ -16,18 +19,18 @@
     @foreach (var x in Model)
 
     {
-<tr>
-    <td style="width: 44px">@x.LId</td>
-    <td>@x.LanguageName</td>
-    <td>@x.Name</td>
-    <td>@x.MenuName</td>
-    <td>@x.MouseOver</td>
-    <td hidden>@x.OId</td>
-    @*PETER TODO Hide the object ID somehow would be nice*@
+        <tr>
+            <td style="width: 44px">@x.LId</td>
+            <td>@x.LanguageName</td>
+            <td>@x.Name</td>
+            <td>@x.MenuName</td>
+            <td>@x.MouseOver</td>
+            <td hidden>@x.OId</td>
+            @*PETER TODO Hide the object ID somehow would be nice*@
 
-    <td style="width: 22px"><a asp-controller="ProcessTemplateField" asp-action="LanguageEdit" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>
-    <td style="width: 22px"><a asp-controller="ProcessTemplateField" asp-action="LanguageDelete" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[7]" height="20" width="20" /></a></td>
-</tr>
+            <td style="width: 22px"><a asp-controller="ProcessTemplateField" asp-action="LanguageEdit" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[6]" height="20" width="20" /></a></td>
+            <td style="width: 22px"><a asp-controller="ProcessTemplateField" asp-action="LanguageDelete" asp-route-Id="@x.LId.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[7]" height="20" width="20" /></a></td>
+        </tr>
     }
 </table>
 <a asp-controller="ProcessTemplateField" asp-action="LanguageCreate" asp-route-id=@ViewBag.Id asp-route-CId="@ViewBag.CId"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[8]" height="20" width="20" /> @ViewBag.Terms[8]</a>

@@ -5,7 +5,10 @@
 @{
 }@{
     ViewBag.Title = "User Projects type";
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1 class="font-weight-bold">
     <img src="~/Images/Icons/Project.png" height="60" width="60" /> User Project type
 </h1>
@@ -18,12 +21,12 @@
         @foreach (var x in Model)
 
         {
-    <tr>
-        <td>@x.Id</td>
-        <td>@x.Name</td>
-        <td>@x.Description</td>
-        <td style="width: 22px"><a asp-controller="UserProjectType" asp-action="LanguageIndex" asp-route-id="@x.Id"><img src="~/Images/Icons/languages.jpg" title="Edit" height="20" width="20" /></a></td>
-    </tr>
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Name</td>
+                <td>@x.Description</td>
+                <td style="width: 22px"><a asp-controller="UserProjectType" asp-action="LanguageIndex" asp-route-id="@x.Id"><img src="~/Images/Icons/languages.jpg" title="Edit" height="20" width="20" /></a></td>
+            </tr>
         }
     </table>
 </div>

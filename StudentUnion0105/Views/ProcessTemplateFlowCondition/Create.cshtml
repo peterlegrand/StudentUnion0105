@@ -6,9 +6,12 @@
 }
 @{
     ViewBag.Title = "Edit Flow condition";
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1><img src="~/Images/Icons/condition.png" title="Levels" height="60" width="60" /> Create flow condition</h1>
-<form method="post" >
+<form method="post">
     <div class="row ">
         <div class="form-group col-md-3  invisible">
             <label asp-for="@Model.Condition.OId" class=" col-form-label "></label>
@@ -52,16 +55,16 @@
 
 
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

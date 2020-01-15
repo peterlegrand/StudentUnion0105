@@ -5,9 +5,12 @@
 @{
 }@{
     ViewBag.Title = "Process template view conditions";
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1 class="font-weight-bold"><img src="~/Images/Icons/condition.png" title="Conditions" height="60" width="60" /> Flow conditions</h1>
-<table  class="table table-bordered table-sm table-hover">
+<table class="table table-bordered table-sm table-hover">
 
     <thead class="thead-dark">
         <tr><th>ID</th><th>Char</th><th>Name</th><th></th><th></th><th></th><th></th></tr>
@@ -15,16 +18,17 @@
     @foreach (var x in Model)
 
     {
-<tr>
-    <td style="width: 44px">@x.Id</td>
-    <td>@x.Description</td>
-    <td>@x.Name</td>
-    <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
-    <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
-    <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
-</tr>
+        <tr>
+            <td style="width: 44px">@x.Id</td>
+            <td>@x.Description</td>
+            <td>@x.Name</td>
+            <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>
+            <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
+            <td style="width: 22px"><a asp-controller="ProcessTemplateFlowCondition" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>
+        </tr>
     }
 </table>
-<a asp-controller="ProcessTemplateFlowCondition" asp-action="Create" asp-route-id="@ViewBag.ObjectId"><img src="~/Images/Icons/condition.png" title="Conditions" height="20" width="20" /> Create new process template flow condition</a><br/>
+<a asp-controller="ProcessTemplateFlowCondition" asp-action="Create" asp-route-id="@ViewBag.ObjectId"><img src="~/Images/Icons/condition.png" title="Conditions" height="20" width="20" /> Create new process template flow condition</a>
+<br />
 <a asp-controller="ProcessTemplateFlow" asp-action="Index"><img src="~/Images/Icons/Flow.png" title="Flows" height="20" width="20" /> Back to process template flows</a>
 

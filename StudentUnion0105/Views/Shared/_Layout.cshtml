@@ -32,12 +32,13 @@
     </script>
 </head>
 <body>
-    <header class="header" style="height=148">
+    <header class="header" style=""height="148">
         <h1 style="color:#EBEBF2">
             <img src="~/Images/Icons/student.png" height="66" width="66" /> Student Union 1.5
         </h1>
 
     </header>
+    <ejs-menu id="menu" items="ViewBag.menuItems"></ejs-menu>
     <img src="~/Images/menu.png" />
     <div id="Menu"></div>
     <div class="col-12 text-right">
@@ -59,240 +60,17 @@
     </div>
     <div class="container">
         <div class="row col-12">
-            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
-            {
-                <div class="border-dark col-sm-2">
-                    <table>
-                        <tr>
-                            <td>
-                                <a asp-controller="Classification" asp-action="Index">
-                                    <img src="~/Images/Icons/Classifications.png" title="Classifications" height="20" width="20" /> Classification
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Classification" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" title="Add" height="20" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="ContentType" asp-action="Index">
-                                    <img src="~/Images/Icons/ContentType.png" title="Content type" height="20" width="20" /> Content type
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="ContentType" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add content type" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Organization" asp-action="Index">
-                                    <img src="~/Images/Icons/Organization.png" title="Organization" height="20" width="20" /> Organization
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Organization" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add organization" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="OrganizationType" asp-action="Index">
-                                    <img src="~/Images/Icons/OrganizationTYpe.png" title="Organization type" height="20" width="20" /> Organization type
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="OrganizationType" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add organization type" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Page" asp-action="Index">
-                                    <img src="~/Images/Icons/pages.jpg" title="Page" height="20" width="20" /> Pages
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Page" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add page" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="PageType" asp-action="Index">
-                                    <img src="~/Images/Icons/pageType.jpg" title="Page type" height="20" width="20" /> Page types
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="PageType" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add page type" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Project" asp-action="Index">
-                                    <img src="~/Images/Icons/Project.png" title="Project" height="20" width="20" /> Projects
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Project" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add project" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="PageSectionType" asp-action="Index">
-                                    <img src="~/Images/Icons/sectionType.png" title="Section type" height="20" width="20" /> Section types
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="PageSectionType" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add section type" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="User" asp-action="Index">
 
-                                    <img src="~/Images/Icons/User.png" title="User" height="20" width="20" /> Users
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="User" asp-action="Create">
-
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add user" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Role" asp-action="Index">
-                                    <img src="~/Images/Icons/Role.png" title="Role" height="20" width="20" /> Roles
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="Role" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add role" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="ProcessTemplate" asp-action="Index">
-                                    <img src="~/Images/Icons/process.png" title="Role" height="20" width="20" /> Process templates
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="ProcessTemplate" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add process template" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="ProcessTemplateGroup" asp-action="Index">
-                                    <img src="~/Images/Icons/processtemplategroup.png" title="Role" height="20" width="20" /> Process template groups
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="ProcessTemplateGroup" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add process template group" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="ProcessTemplateFieldType" asp-action="Index">
-                                    <img src="~/Images/Icons/FieldType.png" title="Role" height="20" width="20" /> Process template field type
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-controller="ProcessTemplateFieldType" asp-action="Create">
-                                    <img src="~/Images/Icons/plus2.png" height="20" title="Add process template field type" width="20" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="UserOrganizationType" asp-action="Index">
-                                    <img src="~/Images/Icons/OrganizationTYpe.png" title="User organization type" height="20" width="20" /> User organization type
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Menu1" asp-action="Index">
-                                    <img src="~/Images/Icons/Menu.png" title="Menu" height="20" width="20" /> Menu
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="UserProjectType" asp-action="Index">
-                                    <img src="~/Images/Icons/Project.png" title="User project type" height="20" width="20" /> User project type
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="UserRelationType" asp-action="Index">
-                                    <img src="~/Images/Icons/relation.png" title="User relation type" height="20" width="20" /> User relation type
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Language" asp-action="Index">
-                                    <img src="~/Images/Icons/languages.jpg" title="Language" height="20" width="20" /> Languages
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                                <a asp-controller="SetupWizard" asp-action="Index">
-                                    <img src="~/Images/Icons/SetupWizard.png" title="Setup wizard" height="20" width="20" /> Setup wizard
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                                <a asp-controller="UITerm" asp-action="Index">
-                                    <img src="~/Images/Icons/Terms.png" title="Terms" height="20" width="20" /> Terms
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a asp-controller="Setting" asp-action="Index">
-                                    <img src="~/Images/Icons/Settings.png" title="Settings" height="20" width="20" /> Settings
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            }
-
-            <div class="col-sm-8">
-
-                @RenderBody()
-            </div>
             <div class="col-sm-2 float-sm-right">
                 <table class="table-light">
                     <tr>
                     </tr>
                     <tr>
                         <td>
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="IndexAdmin">Enter platform</a>
+                            }
                             <a asp-controller="Content" asp-action="Create">
                                 <img src="~/Images/Icons/plus2.png" title="Add content" height="20" width="20" />
                             </a>
@@ -497,16 +275,21 @@
                     </tr>
                 </table>
             </div>
+            <div class="col-sm-8">
+
+                @RenderBody()
+            </div>
+
         </div>
 
 
         <!-- Button trigger modal -->
         @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-contact">
-            Add contact
-        </button>*@
+                Add contact
+            </button>*@
 
         <!-- Modal -->
-            @*<div class="modal fade" id="add-contact" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+        @*<div class="modal fade" id="add-contact" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

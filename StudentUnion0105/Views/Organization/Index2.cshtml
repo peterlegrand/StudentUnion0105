@@ -7,13 +7,16 @@
 @{
     ViewBag.Title = "Organizations";
 }
+@{
+    Layout = "_LayoutAdmin";
+}
 <h1 class="font-weight-bold">
     <img src="~/Images/Icons/Organization.png" height="60" width="60" /> Organizations
 </h1>
 <div class="table-responsive">
     <table class="table table-bordered table-sm table-hover">
 
-        <thead  class="thead-dark">
+        <thead class="thead-dark">
             <tr><th colspan="3" style="width: 45px">ID</th><th>Name</th><th></th><th></th><th></th><th></th></tr>
         </thead>
         @foreach (var x1 in Model.SuObject1)

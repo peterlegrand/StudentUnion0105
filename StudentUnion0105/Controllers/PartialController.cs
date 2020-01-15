@@ -89,7 +89,7 @@ namespace StudentUnion0105.Controllers
                 Children = new string[] { "Menus2", "Menus3" }
             };
             // Assign Local data from Model to ViewBag.menuItems
-            ViewBag.menuItems = Model.GetLocalData();
+            //ViewBag.menuItems = Model.GetLocalData();
             ViewBag.menuFields = menuFields;
             return View();
         }

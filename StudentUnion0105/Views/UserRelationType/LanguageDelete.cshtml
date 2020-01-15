@@ -1,7 +1,10 @@
 ﻿@model SuUserRelationTypeLanguageDeleteGetModel
 @{
     ViewBag.Title = @ViewBag.Terms[0];
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
 

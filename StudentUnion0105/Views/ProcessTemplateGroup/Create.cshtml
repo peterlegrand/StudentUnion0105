@@ -1,7 +1,10 @@
 ﻿@model StudentUnion0105.ViewModels.SuObjectVM
 @{
     ViewBag.Title = "Create Process template group";
+}@{
+    Layout = "_LayoutAdmin";
 }
+
 <h1><img src="~/Images/Icons/ProcessTemplateGroup.png" height="60" width="60" /> Create Process template group</h1>
 <form class="mt-3" method="post">
 
@@ -35,16 +38,16 @@
     </div>
 </form>
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['Description']) {
-                    CKEDITOR.instances['Description'].destroy();
-                }
-                CKEDITOR.replace('Description', {
-                    fullPage: true, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['Description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['Description']) {
+            CKEDITOR.instances['Description'].destroy();
+        }
+        CKEDITOR.replace('Description', {
+            fullPage: true, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['Description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>

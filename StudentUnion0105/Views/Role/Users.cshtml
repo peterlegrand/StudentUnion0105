@@ -4,6 +4,9 @@
 @{var roleId = ViewBag.Id;
 }
 @model List<AddUsersToRoleViewModel>
+@{
+    Layout = "_LayoutAdmin";
+}
 
 <h1><img src="~/Images/Icons/User.png" height="60" width="60" /> Manage Users to roles</h1>
 <form method="post">

@@ -6,7 +6,10 @@
 }@{
     ViewBag.Title = @ViewBag.Terms[0];
 }
-    <h1><img src="~/Images/Icons/Field.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1><img src="~/Images/Icons/Field.png" title="@ViewBag.Terms[0]" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
 
     <div class="form-group row" hidden>
@@ -78,36 +81,36 @@
 
 
 <script>
-            $(document).ready(function () {
-                if (CKEDITOR.instances['description']) {
-                    CKEDITOR.instances['description'].destroy();
-                }
-                CKEDITOR.replace('description', {
-                    fullPage: false, uiColor: '#efe8ce'
-                });
-                $('#getVal').on('click', function (e) {
-                    let ckValue = CKEDITOR.instances['description'].getData()
-                    console.log(ckValue);
-                });
-            });
+    $(document).ready(function () {
+        if (CKEDITOR.instances['description']) {
+            CKEDITOR.instances['description'].destroy();
+        }
+        CKEDITOR.replace('description', {
+            fullPage: false, uiColor: '#efe8ce'
+        });
+        $('#getVal').on('click', function (e) {
+            let ckValue = CKEDITOR.instances['description'].getData()
+            console.log(ckValue);
+        });
+    });
 </script>
 <script>
-    $(document).ready(function () {  
-       $.ajax({  
-           type: "GET",  
-           url: "/ProcessTemplateField/GetMasterList",  
-           data: "{}",  
-           dataType: "json",
-           success: function (data) { 
-               console.log(data);
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/ProcessTemplateField/GetMasterList",
+            data: "{}",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
 
-               var s; // = '<option value="-1">Please Select a master list</option>';  
+                var s; // = '<option value="-1">Please Select a master list</option>';
 
-               for (var i = 0; i < data.length; i++) {  
-                   s += '<option class="h1" value="' + data[i].value + '">' + data[i].text + '</option>';  
-               }  
-               $("#MasterListDropDown").html(s);  
-           }  
-       });  
-   });  
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option class="h1" value="' + data[i].value + '">' + data[i].text + '</option>';
+                }
+                $("#MasterListDropDown").html(s);
+            }
+        });
+    });
 </script>
