@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200115082402_leftmenu7")]
+    partial class leftmenu7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b550720f-d84f-4481-a26e-a7979bde0df9",
-                            ConcurrencyStamp = "82abdee3-7c2d-475f-b219-4934b66590b9",
+                            Id = "00ddd63b-e7fd-453e-a087-393835747d00",
+                            ConcurrencyStamp = "5cc9a4b5-a34d-40ca-aa1e-72eef981e5be",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c2309876-e259-4cac-b965-efd5e1b0e1f6",
-                            ConcurrencyStamp = "8a2d8c44-0243-4249-8de0-ab5e832aea3c",
+                            Id = "15aca2c7-d78e-442a-b33e-5e9690f00cef",
+                            ConcurrencyStamp = "13b73ba7-2961-4125-8b3f-383088c35b16",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -143,47 +145,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.LeftMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
-
-                    b.Property<string>("AddName");
-
-                    b.Property<bool>("AdvancedSearchShow");
-
-                    b.Property<bool>("HasAdd");
-
-                    b.Property<bool>("HasAdvancedSearch");
-
-                    b.Property<bool>("HasMenu");
-
-                    b.Property<bool>("HasSearch");
-
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
-
-                    b.Property<bool>("MenuAddShow");
-
-                    b.Property<string>("MenuName");
-
-                    b.Property<bool>("MenuShow");
-
-                    b.Property<bool>("SearchShow");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbLeftMenu");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.Menu1", b =>
@@ -1839,10 +1800,10 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddMouseOver")
+                    b.Property<string>("AddMenuName")
                         .HasMaxLength(50);
 
-                    b.Property<string>("AddName")
+                    b.Property<string>("AddMouseOver")
                         .HasMaxLength(50);
 
                     b.Property<DateTime>("CreatedDate");
@@ -1882,9 +1843,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
+                    b.Property<string>("AddURL");
 
                     b.Property<bool>("HasAdd");
 
@@ -1894,11 +1853,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<bool>("HasSearch");
 
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
+                    b.Property<string>("MainURL");
 
                     b.Property<string>("MenuName");
 

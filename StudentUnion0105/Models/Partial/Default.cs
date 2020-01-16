@@ -33,4 +33,24 @@ namespace StudentUnion0105.Models
         [ForeignKey("PId")]
         public virtual Menu2 Menu2 { get; set; }
     }
+    public class LeftMenu
+    {
+        public int Id { get; set; }
+        public string MenuName { get; set; }
+        public bool MenuShow { get; set; }
+        public bool MenuAddShow { get; set; }
+        public bool SearchShow { get; set; }
+        public bool AdvancedSearchShow { get; set; }
+        public bool HasMenu { get; set; }
+        public bool HasAdd { get; set; }
+        public bool HasSearch { get; set; }
+        public bool HasAdvancedSearch { get; set; }
+        public string MainController { get; set; }
+        public string MainAction { get; set; }
+        public string AddController { get; set; }
+        public string AddAction { get; set; }
+        public string AddName { get; set; }
+        public string ImageName { get; set; }
+    }
+
 }

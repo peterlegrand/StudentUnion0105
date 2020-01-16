@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200115085634_leftmenu8")]
+    partial class leftmenu8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b550720f-d84f-4481-a26e-a7979bde0df9",
-                            ConcurrencyStamp = "82abdee3-7c2d-475f-b219-4934b66590b9",
+                            Id = "b4c7d52c-1e00-4008-8d70-6e95ed8f369f",
+                            ConcurrencyStamp = "a95637ca-5a8f-40cf-b4e8-51598597cb0f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c2309876-e259-4cac-b965-efd5e1b0e1f6",
-                            ConcurrencyStamp = "8a2d8c44-0243-4249-8de0-ab5e832aea3c",
+                            Id = "d1cf3aac-db08-4f61-a3cf-0e043e5aa909",
+                            ConcurrencyStamp = "ff52ace4-e17e-4473-bfde-7fccaeb486c8",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -143,47 +145,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.LeftMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
-
-                    b.Property<string>("AddName");
-
-                    b.Property<bool>("AdvancedSearchShow");
-
-                    b.Property<bool>("HasAdd");
-
-                    b.Property<bool>("HasAdvancedSearch");
-
-                    b.Property<bool>("HasMenu");
-
-                    b.Property<bool>("HasSearch");
-
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
-
-                    b.Property<bool>("MenuAddShow");
-
-                    b.Property<string>("MenuName");
-
-                    b.Property<bool>("MenuShow");
-
-                    b.Property<bool>("SearchShow");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbLeftMenu");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.Menu1", b =>
@@ -1882,9 +1843,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
+                    b.Property<string>("AddURL");
 
                     b.Property<bool>("HasAdd");
 
@@ -1894,11 +1853,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<bool>("HasSearch");
 
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
+                    b.Property<string>("MainURL");
 
                     b.Property<string>("MenuName");
 

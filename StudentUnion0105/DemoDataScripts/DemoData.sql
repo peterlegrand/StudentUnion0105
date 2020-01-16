@@ -1874,3 +1874,19 @@ INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, Date
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) VALUES (2, 3, 'Micronesia', getdate(), 0)
 
 
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(1, 1, 1,'','',1, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(2, 1, 1,'','',2, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(3, 1, 1,'','',3, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(4, 1, 1,'','',4, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(7, 1, 1,'','',7, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(8, 1, 1,'','',8, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(10, 1, 1,'','',10, @CurrentUser, 1,1)
+
+

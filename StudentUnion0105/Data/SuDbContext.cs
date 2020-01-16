@@ -18,7 +18,11 @@ namespace StudentUnion0105.Data
 
         }
         //FrontPage
+        public DbSet<SuLeftMenuModel> dbLeftMenu { get; set; }
+        public DbSet<SuLeftMenuLanguageModel> dbLeftMenuLanguage { get; set; }
+        public DbSet<SuLeftMenuUserModel> dbLeftMenuUser { get; set; }
         public DbSet<Menu1> ZdbMenu1 { get; set; }
+        public DbSet<LeftMenu> ZdbLeftMenu { get; set; }
         public DbSet<SuMenu1IndexGetModel> ZdbMenu1IndexGet { get; set; }
         public DbSet<SuMenu1DeleteGetModel> ZdbMenu1DeleteGet { get; set; }
         public DbSet<SuMenu1EditGetModel> ZdbMenu1EditGet { get; set; }

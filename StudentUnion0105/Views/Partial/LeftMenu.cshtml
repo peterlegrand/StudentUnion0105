@@ -1,0 +1,33 @@
+﻿@model List<LeftMenu>
+
+    <form action="/" method="post">
+        @foreach (var Menu in Model)
+        {
+            if (Menu.HasMenu && Menu.MenuShow)
+            {
+                <div>
+                    <a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" /> @Menu.MenuName</a>
+                    @if (Menu.HasAdd && Menu.MenuAddShow)
+                    {
+                        <a class="text-dark" asp-area="" asp-controller="@Menu.AddController" asp-action="@Menu.AddAction"><img src="~/Images/Icons/plus2.png" height="20" width="20" /></a>
+                    }
+
+         
+                </div>
+            }
+            @if (Menu.HasSearch && Menu.SearchShow)
+            {
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control d-inline" />
+                    </div>
+                @if (Menu.HasAdvancedSearch && Menu.AdvancedSearchShow)
+
+                { 
+                <div class="col"><a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" /></a></div>
+                    
+                }
+                </div>
+            }
+        }
+        </form>

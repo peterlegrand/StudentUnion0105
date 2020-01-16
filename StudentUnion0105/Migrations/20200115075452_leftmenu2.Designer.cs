@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200115075452_leftmenu2")]
+    partial class leftmenu2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b550720f-d84f-4481-a26e-a7979bde0df9",
-                            ConcurrencyStamp = "82abdee3-7c2d-475f-b219-4934b66590b9",
+                            Id = "4f17bd31-f0e4-454c-a454-4878d71b8ef3",
+                            ConcurrencyStamp = "b441ae43-75d2-4f62-a0b5-219647492cd6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c2309876-e259-4cac-b965-efd5e1b0e1f6",
-                            ConcurrencyStamp = "8a2d8c44-0243-4249-8de0-ab5e832aea3c",
+                            Id = "4cc1037d-2c53-4a09-849f-862dfc3864cc",
+                            ConcurrencyStamp = "0a39d379-04cc-4da7-ace8-57097a801428",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -143,47 +145,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.LeftMenu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
-
-                    b.Property<string>("AddName");
-
-                    b.Property<bool>("AdvancedSearchShow");
-
-                    b.Property<bool>("HasAdd");
-
-                    b.Property<bool>("HasAdvancedSearch");
-
-                    b.Property<bool>("HasMenu");
-
-                    b.Property<bool>("HasSearch");
-
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
-
-                    b.Property<bool>("MenuAddShow");
-
-                    b.Property<string>("MenuName");
-
-                    b.Property<bool>("MenuShow");
-
-                    b.Property<bool>("SearchShow");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbLeftMenu");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.Menu1", b =>
@@ -1839,39 +1800,15 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddMouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AddName")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("CreatorId");
-
-                    b.Property<string>("Description");
-
                     b.Property<int>("LanguageId");
 
                     b.Property<int>("LeftMenuId");
 
-                    b.Property<string>("MainMouseOver")
-                        .HasMaxLength(50);
+                    b.Property<string>("MenuName");
 
-                    b.Property<string>("MainName")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("ModifierId");
-
-                    b.Property<string>("Name");
+                    b.Property<string>("MouseOver");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("LeftMenuId");
 
                     b.ToTable("dbLeftMenuLanguage");
                 });
@@ -1882,25 +1819,11 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AddAction");
-
-                    b.Property<string>("AddController");
-
-                    b.Property<bool>("HasAdd");
-
-                    b.Property<bool>("HasAdvancedSearch");
-
-                    b.Property<bool>("HasMenu");
-
-                    b.Property<bool>("HasSearch");
-
-                    b.Property<string>("ImageName");
-
-                    b.Property<string>("MainAction");
-
-                    b.Property<string>("MainController");
+                    b.Property<string>("MenuAddURL");
 
                     b.Property<string>("MenuName");
+
+                    b.Property<string>("MenuURL");
 
                     b.HasKey("Id");
 
@@ -1913,8 +1836,6 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("AdvancedSearchShow");
-
                     b.Property<int>("LeftMenuId");
 
                     b.Property<bool>("MenuAddShow");
@@ -1925,15 +1846,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("MenuURL");
 
-                    b.Property<bool>("SearchShow");
-
                     b.Property<int>("Sequence");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LeftMenuId");
 
                     b.ToTable("dbLeftMenuUser");
                 });
@@ -5273,27 +5190,6 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuFrontProcessIndexGetTemplateGroupModel", "FrontProcessTemplateGroup")
                         .WithMany("FrontProcessTemplates")
                         .HasForeignKey("PId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuLeftMenuLanguageModel", b =>
-                {
-                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StudentUnion0105.Models.SuLeftMenuModel", "LeftMenu")
-                        .WithMany("LeftMenuLanguages")
-                        .HasForeignKey("LeftMenuId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuLeftMenuUserModel", b =>
-                {
-                    b.HasOne("StudentUnion0105.Models.SuLeftMenuModel", "LeftMenu")
-                        .WithMany("LeftMenuUser")
-                        .HasForeignKey("LeftMenuId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

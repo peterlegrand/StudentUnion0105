@@ -44,7 +44,7 @@ namespace StudentUnion0105.Controllers
             _context = context;
         }
 
-   
+
         public async Task<IActionResult> Menu()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
@@ -55,16 +55,16 @@ namespace StudentUnion0105.Controllers
             var Menu1 = _context.ZdbMenu1.FromSql("Menu1 @LanguageId", parameter).ToList();
             var Menu2 = _context.ZdbMenu2.FromSql("Menu2 @LanguageId", parameter).ToList();
             var Menu3 = _context.ZdbMenu3.FromSql("Menu3 @LanguageId", parameter).ToList();
-                foreach (var item2 in Menu2)
+            foreach (var item2 in Menu2)
+            {
+                foreach (var item3 in Menu3)
                 {
-                    foreach (var item3 in Menu3)
+                    if (item2.OId == item3.PId)
                     {
-                        if (item2.OId == item3.PId)
-                        {
-                            item2.Menu3.Add(item3);
-                        }
+                        item2.Menu3.Add(item3);
                     }
                 }
+            }
             foreach (var item1 in Menu1)
             {
                 foreach (var item2 in Menu2)
@@ -74,7 +74,7 @@ namespace StudentUnion0105.Controllers
                         item1.Menu2.Add(item2);
                     }
                 }
-            }           
+            }
 
             return PartialView(Menu1);
         }
@@ -93,6 +93,22 @@ namespace StudentUnion0105.Controllers
             ViewBag.menuFields = menuFields;
             return View();
         }
+
+
+        public async Task<IActionResult> LeftMenu()
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+
+            var parameter = new SqlParameter("@CurrentUserId", CurrentUser.Id);
+
+            var LeftMenu = _context.ZdbLeftMenu.FromSql("PartialLeftMenu @CurrentUserId", parameter).ToList();
+    
+
+            return PartialView(LeftMenu);
+        }
     }
+
 }
 

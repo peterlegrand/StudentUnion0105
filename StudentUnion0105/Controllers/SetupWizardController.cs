@@ -296,6 +296,7 @@ namespace StudentUnion0105.Controllers
 , "PageTypeLanguageEditGet.sql"
 , "PageTypeLanguageEditPost.sql"
 , "PageTypeLanguageIndexGet.sql"
+, "PartialLeftMenu.sql"
 , "PreferenceIndexGet.sql"
 , "PreferenceIndexPost.sql"
 , "ProcessTemplateDeleteGet.sql"
