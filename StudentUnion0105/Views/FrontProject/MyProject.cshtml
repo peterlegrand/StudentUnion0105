@@ -1,0 +1,12 @@
+﻿@model List<SuFrontProjectMyFrontProjectGetModel>
+
+<h1 class="font-weight-bold">My projects</h1>
+@foreach (var x in Model)
+{
+    <h2>@x.ProjectName</h2>
+    @x.CreatedDate
+    @x.RelationName
+
+
+
+}

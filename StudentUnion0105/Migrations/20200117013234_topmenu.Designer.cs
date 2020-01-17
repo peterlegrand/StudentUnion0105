@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200117013234_topmenu")]
+    partial class topmenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a977936-2207-4aa5-ade3-200054bbb052",
-                            ConcurrencyStamp = "8acce520-897a-406d-9ffc-b8ae28587a1c",
+                            Id = "6e2b8167-abb0-4449-8a33-c19ef42bc0ca",
+                            ConcurrencyStamp = "ee3e0896-1ed9-4f88-980f-71f527c4077c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "133f2c47-de8d-4926-a9dc-89dd523e1648",
-                            ConcurrencyStamp = "0811253c-8591-4251-bd0c-6ade5e79e23c",
+                            Id = "3b31d2cf-c2be-4b7b-8493-c5cce47c4bc9",
+                            ConcurrencyStamp = "01b15cb0-5068-45b2-a325-9242c01848cb",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1473,21 +1475,6 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbFrontContent");
                 });
 
-            modelBuilder.Entity("StudentUnion0105.Models.SuFrontOrganizationMyFrontOrganizationGetModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("OrganizationName");
-
-                    b.Property<string>("UserOrganizationTypeName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbFrontOrganizationMyOrganizationGet");
-                });
-
             modelBuilder.Entity("StudentUnion0105.Models.SuFrontPageModel", b =>
                 {
                     b.Property<int>("OId")
@@ -1515,31 +1502,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("OId");
 
                     b.ToTable("ZdbFrontPage");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuFrontPageMyContentGetModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("OrganizationName");
-
-                    b.Property<string>("ProjectName");
-
-                    b.Property<string>("StatusName");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("TypeName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbFrontPageMyContentGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuFrontPageSectionModel", b =>
@@ -1811,38 +1773,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ZdbSuFrontProcessTodoIndexGet");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuFrontProjectMyFrontProjectGetModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("ProjectName");
-
-                    b.Property<string>("RelationName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbFrontProjectMyProjectGet");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuFrontRelationMyFrontRelationGetModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("RelationName");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbFrontRelationMyRelationGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuInt", b =>

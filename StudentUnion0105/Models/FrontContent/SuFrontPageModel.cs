@@ -19,4 +19,16 @@ namespace StudentUnion0105.Models
         public string TitleDescription { get; set; }
         public virtual ICollection<SuFrontPageSectionModel> FrontPageSections { get; set; }
     }
+    public class SuFrontPageMyContentGetModel
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public string StatusName { get; set; }
+        public string TypeName { get; set; }
+        public string OrganizationName { get; set; }
+        public string ProjectName { get; set; }
+    }
 }

@@ -104,11 +104,45 @@ namespace StudentUnion0105.Controllers
             var parameter = new SqlParameter("@CurrentUserId", CurrentUser.Id);
 
             var LeftMenu = _context.ZdbLeftMenu.FromSql("PartialLeftMenu @CurrentUserId", parameter).ToList();
-    
+
 
             return PartialView(LeftMenu);
         }
+
+        public async Task<IActionResult> TopMenu()
+        {
+
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+
+            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var TopMenu1List = _context.ZdbTopMenu1.FromSql("PartialTopMenu1 @LanguageId", parameter).ToList();
+
+
+            List<MenuItem> menuItem1List = new List<MenuItem>();
+            foreach (var TopMenu1 in TopMenu1List)
+            {
+                menuItem1List.Add(new MenuItem
+                {
+                    Text = TopMenu1.MenuName,
+                    IconCss = TopMenu1.IconCss,
+                    Url = TopMenu1.MenuController,
+                    Items = new List<MenuItem>()
+                {
+                    new MenuItem { Text= "Open", IconCss= "em-icons e-open", Url= "Home/Open" },
+                    new MenuItem { Text= "Save", IconCss= "e-icons e-save", Url= "Home/Save" },
+                    new MenuItem { Separator= true },
+                    new MenuItem { Text= "Exit", Url= "Home/Exit" }
+                }
+                });
+
+
+
+            }
+            ViewBag.menuItems2 = menuItem1List;
+            return PartialView();
+        }
     }
-
 }
-

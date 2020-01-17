@@ -1,0 +1,11 @@
+﻿@model List<SuFrontOrganizationMyFrontOrganizationGetModel>
+
+<h1 class="font-weight-bold">My Organizations</h1>
+@foreach (var x in Model)
+{
+    <h2>@x.OrganizationName</h2>
+    @x.UserOrganizationTypeName
+
+
+
+}

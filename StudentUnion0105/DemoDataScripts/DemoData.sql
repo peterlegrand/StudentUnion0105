@@ -1887,6 +1887,8 @@ VALUES(7, 1, 1,'','',7, @CurrentUser, 1,1)
 INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
 VALUES(8, 1, 1,'','',8, @CurrentUser, 1,1)
 INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
-VALUES(10, 1, 1,'','',10, @CurrentUser, 1,1)
+VALUES(10, 1, 1,'','',9, @CurrentUser, 1,1)
+INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
+VALUES(16, 1, 1,'','',10, @CurrentUser, 1,1)
 
 
