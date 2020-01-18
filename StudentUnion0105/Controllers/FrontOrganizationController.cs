@@ -46,9 +46,41 @@ namespace StudentUnion0105.Controllers
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
 
-            List<SuFrontOrganizationMyFrontOrganizationGetModel> FrontOrganizationMyFrontOrganization = _context.ZdbFrontOrganizationMyOrganizationGet.FromSql("FrontOrganizationMyOrganizationGet @CurrentUser", parameterPage).ToList();
+            List<SuFrontOrganizationMyOrganizationGetModel> FrontOrganizationMyOrganization = _context.ZdbFrontOrganizationMyOrganizationGet.FromSql("FrontOrganizationMyOrganizationGet @CurrentUser", parameterPage).ToList();
 
-            return View(FrontOrganizationMyFrontOrganization);
+            return View(FrontOrganizationMyOrganization);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Dashboard(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OrganizationId", Id)
+                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                };
+            SqlParameter[] parametersContent =
+                {
+                    new SqlParameter("@OrganizationId", Id)
+                    , new SqlParameter("@CurrentUser", CurrentUser.Id)
+                };
+
+
+            SuFrontOrganizationDashboardGetOrganizationModel FrontOrganizationDashboardGetOrganization = _context.ZdbFrontOrganizationDashboardGetOrganization.FromSql("FrontOrganizationDashboardGetOrganization @OrganizationId, @LanguageId", parameters).First();
+
+            List<SuFrontOrganizationDashboardGetContentModel> FrontOrganizationDashboardGetContent = _context.ZdbFrontOrganizationDashboardGetContent.FromSql("FrontOrganizationDashboardGetContent @OrganizationId, @CurrentUser", parametersContent).ToList();
+            List<SuFrontOrganizationDashboardGetUsersModel> FrontOrganizationDashboardGetUsers = _context.ZdbFrontOrganizationDashboardGetUsers.FromSql("FrontOrganizationDashboardGetUsers @OrganizationId, @LanguageId", parameters).ToList();
+
+            SuFrontOrganizationDashboardGetModel OrganizationDashboard = new SuFrontOrganizationDashboardGetModel();
+            OrganizationDashboard.Organization = FrontOrganizationDashboardGetOrganization;
+            OrganizationDashboard.Content = FrontOrganizationDashboardGetContent;
+            OrganizationDashboard.Users = FrontOrganizationDashboardGetUsers;
+            return View(OrganizationDashboard);
         }
 
 

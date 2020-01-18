@@ -1,0 +1,26 @@
+﻿@model SuFrontOrganizationDashboardGetModel
+
+<h1 class="font-weight-bold">@Model.Organization.OrganizationName</h1>
+<div>Type: @Model.Organization.TypeName</div>
+<div>Parent: @Model.Organization.ParentName</div>
+<div>Status: @Model.Organization.StatusName</div>
+<div>Creator: @Model.Organization.Creator</div>
+<div>Created date: @Model.Organization.CreatedDate</div>
+<div>Modifier: @Model.Organization.Modifier</div>
+<div>Modify date: @Model.Organization.ModifiedDate</div>
+@foreach (var x in Model.Content)
+{
+    <h2>@x.Title</h2>
+    @x.Creator
+
+
+
+}
+@foreach (var y in Model.Users)
+{
+    <h2>@y.UserName</h2>
+    @y.TypeName
+
+
+
+}

@@ -1,10 +1,12 @@
-﻿@model List<SuFrontOrganizationMyFrontOrganizationGetModel>
+﻿@model List<SuFrontOrganizationMyOrganizationGetModel>
 
 <h1 class="font-weight-bold">My Organizations</h1>
 @foreach (var x in Model)
 {
     <h2>@x.OrganizationName</h2>
     @x.UserOrganizationTypeName
+    <td style="width: 22px"><a asp-controller="FrontOrganization" asp-action="Dashboard" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Open" height="20" width="20" />OPen</a></td>
+
 
 
 

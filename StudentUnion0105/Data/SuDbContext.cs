@@ -22,9 +22,12 @@ namespace StudentUnion0105.Data
         public DbSet<SuLeftMenuLanguageModel> dbLeftMenuLanguage { get; set; }
         public DbSet<SuLeftMenuUserModel> dbLeftMenuUser { get; set; }
         public DbSet<SuFrontPageMyContentGetModel> ZdbFrontPageMyContentGet { get; set; }
-        public DbSet<SuFrontOrganizationMyFrontOrganizationGetModel> ZdbFrontOrganizationMyOrganizationGet { get; set; }
+        public DbSet<SuFrontOrganizationMyOrganizationGetModel> ZdbFrontOrganizationMyOrganizationGet { get; set; }
         public DbSet<SuFrontProjectMyFrontProjectGetModel> ZdbFrontProjectMyProjectGet { get; set; }
         public DbSet<SuFrontRelationMyFrontRelationGetModel> ZdbFrontRelationMyRelationGet { get; set; }
+        public DbSet<SuFrontOrganizationDashboardGetOrganizationModel> ZdbFrontOrganizationDashboardGetOrganization { get; set; }
+        public DbSet<SuFrontOrganizationDashboardGetContentModel> ZdbFrontOrganizationDashboardGetContent { get; set; }
+        public DbSet<SuFrontOrganizationDashboardGetUsersModel> ZdbFrontOrganizationDashboardGetUsers { get; set; }
         public DbSet<Menu1> ZdbMenu1 { get; set; }
         public DbSet<TopMenu1> ZdbTopMenu1 { get; set; }
         public DbSet<LeftMenu> ZdbLeftMenu { get; set; }
