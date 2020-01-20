@@ -2284,19 +2284,19 @@ VALUES (3, 20, 'Demo SU', getdate(), 0)
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
 VALUES (3, 21, @CurrentUser, getdate(), 0)
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
-VALUES (3, 22, getdate(), getdate(), 0)
+VALUES (3, 22, '', getdate(), 0)
 
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
 VALUES (4, 20, 'Advanced demo SU', getdate(), 0)
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
 VALUES (4, 21, @CurrentUser, getdate(), 0)
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
-VALUES (4, 22, DateAdd(day, 10, getdate()), getdate(), 0)
+VALUES (4, 22, '',DateAdd(day, 10, getdate()), 0)
 
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
 VALUES (5, 27, 'SU Launch', getdate(), 0)
 INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, StringValue, DateTimeValue, IntValue) 
-VALUES (5, 28, DateAdd(day, 5, getdate()), getdate(), 0)
+VALUES (5, 28,'', DateAdd(day, 5, getdate()), 0)
 
 
 INSERT INTO dbo.dbLeftMenuUser (LeftMenuId , MenuShow, MenuAddShow, MenuName, MenuURL, Sequence, UserId, AdvancedSearchShow, SearchShow)
