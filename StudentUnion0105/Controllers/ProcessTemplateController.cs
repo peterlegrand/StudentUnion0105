@@ -99,37 +99,63 @@ namespace StudentUnion0105.Controllers
 
 
 
-            var ProcessTemplateAndGroup = new SuObjectAndStatusViewModel { SomeKindINumSelectListItem = ProcessTemplateGroupList };
+            var ProcessTemplateAndGroup = new SuProcessTemplateEditGetWithListModel { GroupList = ProcessTemplateGroupList };
             return View(ProcessTemplateAndGroup);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectAndStatusViewModel FromForm)
+        public async Task<IActionResult> Create(SuProcessTemplateEditGetWithListModel FromForm)
         {
             if (ModelState.IsValid)
             {
                 var ProcessTemplate = new SuProcessTemplateModel();
-                ProcessTemplate.ProcessTemplateGroupId = FromForm.SuObject.NotNullId;
-                var NewProcessTemplate = _processTemplate.AddProcessTemplate(ProcessTemplate);
+                //ProcessTemplate.ProcessTemplateGroupId = FromForm.SuObject.NotNullId;
+                //var NewProcessTemplate = _processTemplate.AddProcessTemplate(ProcessTemplate);
 
 
                 var CurrentUser = await userManager.GetUserAsync(User);
                 var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                
 
-                var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
+                SqlParameter[] parameters =
+    {
+                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@ProcessTemplateGroupId", FromForm.ProcessTemplate.ProcessTemplateGroupId),
+                    new SqlParameter("@ShowInPersonalCalendar", FromForm.ProcessTemplate.ShowInPersonalCalendar),
+                    new SqlParameter("@ShowInEventCalendar", FromForm.ProcessTemplate.ShowInEventCalendar),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.ProcessTemplate.Name),
+                    new SqlParameter("@Description", FromForm.ProcessTemplate.Description),
+                    new SqlParameter("@MouseOver", FromForm.ProcessTemplate.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.ProcessTemplate.MenuName)
+                    };
 
-                ProcessTemplateLanguage.Name = FromForm.SuObject.Name;
-                ProcessTemplateLanguage.Description = FromForm.SuObject.Description;
-                ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProcessTemplateLanguage.ProcessTemplateId = NewProcessTemplate.Id;
-                ProcessTemplateLanguage.LanguageId = DefaultLanguageID;
-                ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
-                ProcessTemplateLanguage.CreatorId = CurrentUser.Id;
-                _processTemplateLanguage.AddProcessTemplateLanguage(ProcessTemplateLanguage);
-
+                _context.Database.ExecuteSqlCommand("ProcessTemplateCreatePost " +
+                            "@LanguageId" +
+                            ", @ProcessTemplateGroupId" +
+                            ", @ShowInPersonalCalendar" +
+                            ", @ShowInEventCalendar" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
+
+
+
+            //var ProcessTemplateLanguage = new SuProcessTemplateLanguageModel();
+
+            //    ProcessTemplateLanguage.Name = FromForm.SuObject.Name;
+            //    ProcessTemplateLanguage.Description = FromForm.SuObject.Description;
+            //    ProcessTemplateLanguage.MouseOver = FromForm.SuObject.MouseOver;
+            //    ProcessTemplateLanguage.ProcessTemplateId = NewProcessTemplate.Id;
+            //    ProcessTemplateLanguage.LanguageId = DefaultLanguageID;
+            //    ProcessTemplateLanguage.ModifierId = CurrentUser.Id;
+            //    ProcessTemplateLanguage.CreatorId = CurrentUser.Id;
+            //    _processTemplateLanguage.AddProcessTemplateLanguage(ProcessTemplateLanguage);
+
+            
             return RedirectToAction("Index");
 
 

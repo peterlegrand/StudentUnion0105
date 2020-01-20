@@ -9,6 +9,8 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
         [Display(Name = "Process template group id")]
         public int ProcessTemplateGroupId { get; set; }
+        public bool ShowInPersonalCalendar { get; set; }
+        public bool ShowInEventCalendar { get; set; }
         public string CreatorId { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
