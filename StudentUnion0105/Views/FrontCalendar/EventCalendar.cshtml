@@ -6,26 +6,7 @@
     <div>
     </div>
 }
-<div>Start day</div>
-<div>
-    @Model.StartDay
-</div>
-<div>End day</div>
-<div>
-    @Model.EndDay
-</div>
-<div>Year</div>
-<div>
-    @Model.Year
-</div>
-<div>Month</div>
-<div>
-    @Model.Month
-</div>
-<div>Month name</div>
-<div>
-    @Model.MonthName
-</div>
+
 <div class="month">
     <ul>
         <li class="prev">&#10094;</li>
@@ -55,17 +36,21 @@
         int z = 1;
         while (z <= Model.EndDay)
         {
-            <li>@z
+<li>
+    @z
+
+            @foreach (var a in Model.Events)
+            {
+                if (a.MainDate.Date.Day == z)
+                {<div>
+    <a asp-controller="FrontProcess" asp-action="Index" asp-route-Id="@a.ProcessId.ToString()">@a.StringValue</a>
+</div>
+                    }
+                    }
+                </li>
     
-    @foreach(var a in Model.Events)
-    {
-        if(a.DateTimeValue.Date.Day == z)
-        { 
-@a.StringValue
-        }
-    }
-    </li>
-        }
+    z++ ;
+                }
     }
     
 </ul>

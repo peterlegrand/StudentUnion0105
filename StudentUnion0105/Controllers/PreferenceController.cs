@@ -80,6 +80,26 @@ namespace StudentUnion0105.Controllers
                         ", @LanguageId" +
                         ", @CountryId" , parameters);
             return RedirectToAction("Index", "Home");
-        }
     }
+    [HttpGet]
+    public async Task<IActionResult> LeftMenu()
+    {
+        var CurrentUser = await userManager.GetUserAsync(User);
+        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+        var UICustomizationArray = new UICustomization(_context);
+        ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+        var parameter = new SqlParameter("@CurrentUser", CurrentUser.Id);
+
+            List<SuPreferenceLeftMenuGetModel> CurrentLeftMenu = _context.ZdbPreferenceLeftMenuGet.FromSql("PreferenceLeftMenuGet @CurrentUser", parameter).ToList();
+            List<SuPreferenceLeftMenuGetAvailableMenusModel> AvailableLeftMenu = _context.ZdbPreferenceLeftMenuGetAvailableMenus.FromSql("PreferenceLeftMenuGetAvailableMenus @CurrentUser", parameter).ToList();
+
+            SuPreferenceLeftMenuGetBothMenusModel BothMenus = new SuPreferenceLeftMenuGetBothMenusModel();
+            BothMenus.AvailableMenus = AvailableLeftMenu;
+            BothMenus.CurrentMenus = CurrentLeftMenu;
+
+        return View(BothMenus);
+    }
+}
 }

@@ -1,135 +1,56 @@
-﻿@using Syncfusion.JavaScript;
-@using Syncfusion.JavaScript.Models;
-@model SuCreateContentModel
-@{
-    ViewBag.Title = "Create content";
+﻿
+@model SuFrontCalendarEventCalendarModelWithAdditionalInfo
+<h1><img src="~/Images/Icons/content.png" height="60" width="60" /> Event Calendar</h1>
+@foreach (var x in Model.Events)
+{
+    <div>
+    </div>
 }
-<h1><img src="~/Images/Icons/content.png" height="60" width="60" /> Create content</h1>
-<form class="mt-3" method="post">
 
-    <div class="form-group row">
-        <label asp-for="@Model.Content.Title" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.Content.Title" class="form-control" />
-            <span asp-validation-for="@Model.Content.Title" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.NoOfClassifications" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.NoOfClassifications" class="form-control" />
-            <span asp-validation-for="@Model.NoOfClassifications" class="text-danger"></span>
-        </div>
-    </div>
-    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE"> @*imageUploadSuccess="onImageUploadSuccess">*@
-        <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
-        <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
-        <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>
+<div class="month">
+    <ul>
+        <li class="prev">&#10094;</li>
+        <li class="next">&#10095;</li>
+        <li>@Model.MonthName<br><span style="font-size:18px">@Model.Year</span></li>
+    </ul>
+</div>
 
-        <e-richtexteditor-toolbarsettings items="@ViewBag.tools"></e-richtexteditor-toolbarsettings>
-        <e-content-template>
+<ul class="weekdays">
+    <li>Mo</li>
+    <li>Tu</li>
+    <li>We</li>
+    <li>Th</li>
+    <li>Fr</li>
+    <li>Sa</li>
+    <li>Su</li>
+</ul>
 
-        </e-content-template>
-    </ejs-richtexteditor>
-
-    @*<div class="form-group row">
-            <label asp-for="@Model.Content.Description" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <textarea asp-for="@Model.Content.Description" class="form-control ckeditor" id="description" name="Content.Description"></textarea>
-                <span asp-validation-for="@Model.Content.Description" class="text-danger"></span>
-            </div>
-        </div>*@
-    <div class="form-group row">
-        <label asp-for="@Model.Content.ContentStatusId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(r => r.Content.ContentStatusId, Model.ContentStatus)
-            <span asp-validation-for="@Model.Content.ContentStatusId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.ContentTypeId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(r => r.Content.ContentTypeId, Model.ContentType)
-            <span asp-validation-for="@Model.Content.ContentTypeId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.OrganizationId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(r => r.Content.OrganizationId, Model.Organization)
-            <span asp-validation-for="@Model.Content.OrganizationId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.ProjectId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(r => r.Content.ProjectId, Model.Project)
-            <span asp-validation-for="@Model.Content.ProjectId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.SecurityLevel" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(r => r.Content.SecurityLevel, Model.SecurityLevel)
-            <span asp-validation-for="@Model.Content.SecurityLevel" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="@Model.Content.LanguageId" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10 ">
-
-            @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-            @Html.DropDownListFor(q => q.Content.LanguageId, Model.Langauge)
-            <span asp-validation-for="@Model.Content.LanguageId" class="text-danger"></span>
-        </div>
-    </div>
-    @{ int x = 0;
-        while (x < Model.NoOfClassifications)
+<ul class="days">
+    @{
+        int y = 1;
+        while (y < Model.StartDay)
         {
-            <div class="form-group row">
-                <label asp-for="@Model.SelectedValues[x]" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-10 ">
-
-                    @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-                    @Html.DropDownListFor(z => z.SelectedValues[x], Model.Values[x])
-                    <span asp-validation-for="@Model.SelectedValues[x]" class="text-danger"></span>
-                </div>
-            </div>
-
-            x++;
+            <li></li>
+            y++;
         }
+        int z = 1;
+        while (z <= Model.EndDay)
+        {
+<li>
+    @z
+
+            @foreach (var a in Model.Events)
+            {
+                if (a.MainDate.Date.Day == z)
+                {<div>
+    <a asp-controller="FrontProcess" asp-action="Index" asp-route-Id="@a.ProcessId.ToString()">@a.StringValue</a>
+</div>
+                    }
+                    }
+                </li>
+    
+    z++ ;
+                }
     }
-
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary btn-dark">Add</button>
-            <a asp-action="Index" asp-controller="Content" class="btn btn-primary btn-light">Cancel</a>
-        </div>
-    </div>
-</form>
-<script>
-    $(document).ready(function () {
-        if (CKEDITOR.instances['description']) {
-            CKEDITOR.instances['description'].destroy();
-        }
-        CKEDITOR.replace('description', {
-            fullPage: false, uiColor: '#efe8ce'
-        });
-        $('#getVal').on('click', function (e) {
-            let ckValue = CKEDITOR.instances['description'].getData()
-            console.log(ckValue);
-        });
-    });
-</script>
+    
+</ul>

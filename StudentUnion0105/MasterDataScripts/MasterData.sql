@@ -739,7 +739,7 @@ SET IDENTITY_INSERT dbLeftMenu ON;
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
 VALUES (1, 'My content', 'FrontPage','MyContent', '', '', 1, 1, 0,0, 'content.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
-VALUES (2, 'My Calendar', 'FrontProcess','MyCalendar', '', '', 1, 1, 0,0,'calendar.png')
+VALUES (2, 'My Calendar', 'FrontCalendar','MyCalendar', '', '', 1, 1, 0,0,'calendar.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
 VALUES (3, 'My Projects', 'FrontProject','MyProject', '', '', 1, 0, 0,0,'Project.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 

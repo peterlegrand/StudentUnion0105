@@ -1,4 +1,4 @@
-CREATE PROCEDURE  FrontCalendarEventCalendarGet (@Month int, @Year int)
+CREATE PROCEDURE  FrontCalendarEventFeedGet (@Month int, @Year int)
 AS
 SELECT 
 	DbProcess.Id ProcessId
