@@ -664,6 +664,7 @@ INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (27)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (28)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (29)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (30)
+INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (31)
 SET IDENTITY_INSERT DbProcessTemplateFieldType OFF;
 
 
@@ -728,6 +729,8 @@ INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Na
 VALUES (29, 29, 41, 'Primary role', 'Primary role', 'Primary role', 'Primary role', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (30, 30, 41, 'Secondary role', 'Secondary role', 'Secondary role', 'Secondary role', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES (31, 31, 41, 'Primary subject', 'Primary subject', 'Primary subject', 'Primary subject', @CurrentUser, @CurrentUser, getdate(), getdate())
 SET IDENTITY_INSERT DbProcessTemplateFieldTypeLanguage OFF;
 
 
@@ -807,3 +810,27 @@ VALUES (16, 16, 41, 'My organizations', 'My organizations', 'My organizations', 
 
 SET IDENTITY_INSERT dbLeftMenuLanguage OFF;
 
+SET IDENTITY_INSERT dbProcessTemplateStepType ON;
+
+INSERT INTO dbProcessTemplateStepType (Id) VALUES (1)
+INSERT INTO dbProcessTemplateStepType (Id) VALUES (2)
+INSERT INTO dbProcessTemplateStepType (Id) VALUES (3)
+INSERT INTO dbProcessTemplateStepType (Id) VALUES (4)
+INSERT INTO dbProcessTemplateStepType (Id) VALUES (5)
+
+SET IDENTITY_INSERT dbProcessTemplateStepType OFF;
+
+SET IDENTITY_INSERT dbProcessTemplateStepTypeLanguage ON;
+
+INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate)
+VALUES (1,1,41,'Draft','Draft','Draft','Draft', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate)
+VALUES (2,2,41,'Submitted','Submitted','Submitted','Submitted', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate)
+VALUES (3,3,41,'Approved','Approved','Approved','Approved', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate)
+VALUES (4,4,41,'Completed','Completed','Completed','Completed', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate)
+VALUES (5,5,41,'Rejected','Rejected','Rejected','Rejected', @CurrentUser, @CurrentUser, getdate(), getdate())
+
+SET IDENTITY_INSERT dbProcessTemplateStepTypeLanguage OFF;

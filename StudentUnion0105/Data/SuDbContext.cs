@@ -18,7 +18,10 @@ namespace StudentUnion0105.Data
 
         }
         //FrontPage
+        public DbSet<SuProcessTemplateStepTypeModel> dbProcessTemplateStepType { get; set; }
+        public DbSet<SuProcessTemplateStepTypeLanguageModel> dbProcessTemplateStepTypeLanguage { get; set; }
         public DbSet<SuLeftMenuModel> dbLeftMenu { get; set; }
+        public DbSet<SuFrontCalendarEventCalendarModel> ZdbFrontCalendarEventCalendar { get; set; }
         public DbSet<SuLeftMenuLanguageModel> dbLeftMenuLanguage { get; set; }
         public DbSet<SuLeftMenuUserModel> dbLeftMenuUser { get; set; }
         public DbSet<SuFrontPageMyContentGetModel> ZdbFrontPageMyContentGet { get; set; }

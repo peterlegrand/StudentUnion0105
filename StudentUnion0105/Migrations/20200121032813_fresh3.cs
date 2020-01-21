@@ -2,34 +2,33 @@
 
 namespace StudentUnion0105.Migrations
 {
-    public partial class leftmenu2 : Migration
+    public partial class fresh3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "2bfaaa80-e979-4ea1-b17f-0947d1c31140");
+                keyValue: "2809e63f-130a-45fa-8729-98368edc8cac");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "a5edaa5b-de5b-47c4-9a50-8dba7455709f");
+                keyValue: "c364846e-243f-4016-8f06-6d90733f743d");
 
-            migrationBuilder.AddColumn<string>(
-                name: "MenuAddURL",
-                table: "dbLeftMenu",
-                nullable: true);
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4f17bd31-f0e4-454c-a454-4878d71b8ef3", "b441ae43-75d2-4f62-a0b5-219647492cd6", "Admin", "ADMIN" });
+            migrationBuilder.DropColumn(
+                name: "ProcessTemplateStepId",
+                table: "dbProcessTemplateStepType");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4cc1037d-2c53-4a09-849f-862dfc3864cc", "0a39d379-04cc-4da7-ace8-57097a801428", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "0af5bd17-ea4b-4b4d-9c3f-c67fbe51861e", "21e5a422-0e5c-4f23-8997-6c8b2ccdcabb", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "eb540e35-7356-4095-a066-007efb069708", "252a3a3a-634e-4b89-8b28-7e9f99cd3768", "Super admin", "SUPER ADMIN" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -37,26 +36,28 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "4cc1037d-2c53-4a09-849f-862dfc3864cc");
+                keyValue: "0af5bd17-ea4b-4b4d-9c3f-c67fbe51861e");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "4f17bd31-f0e4-454c-a454-4878d71b8ef3");
+                keyValue: "eb540e35-7356-4095-a066-007efb069708");
 
-            migrationBuilder.DropColumn(
-                name: "MenuAddURL",
-                table: "dbLeftMenu");
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a5edaa5b-de5b-47c4-9a50-8dba7455709f", "9d7a850a-7ca0-4257-9419-883a94e64057", "Admin", "ADMIN" });
+            migrationBuilder.AddColumn<int>(
+                name: "ProcessTemplateStepId",
+                table: "dbProcessTemplateStepType",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2bfaaa80-e979-4ea1-b17f-0947d1c31140", "d536b486-a555-4b14-b711-66dd3fda6ce9", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "2809e63f-130a-45fa-8729-98368edc8cac", "81e774fa-3f39-494c-bcb4-eb0185580a8c", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "c364846e-243f-4016-8f06-6d90733f743d", "b0e7d788-fe5f-41fe-be24-0104ba177324", "Super admin", "SUPER ADMIN" });
         }
     }
 }

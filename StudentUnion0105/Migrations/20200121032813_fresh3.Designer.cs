@@ -10,8 +10,8 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20200117043249_myproject")]
-    partial class myproject
+    [Migration("20200121032813_fresh3")]
+    partial class fresh3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "772800cc-a32e-4bec-9753-8b13604d59fe",
-                            ConcurrencyStamp = "ee6e9136-9842-440c-abf5-53a875aa35b1",
+                            Id = "0af5bd17-ea4b-4b4d-9c3f-c67fbe51861e",
+                            ConcurrencyStamp = "21e5a422-0e5c-4f23-8997-6c8b2ccdcabb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d129c8eb-b71f-4856-a5a7-3d63f39cb2d6",
-                            ConcurrencyStamp = "aa402422-a861-4d6d-8fc7-f90c003b8974",
+                            Id = "eb540e35-7356-4095-a066-007efb069708",
+                            ConcurrencyStamp = "252a3a3a-634e-4b89-8b28-7e9f99cd3768",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1475,6 +1475,90 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbFrontContent");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontOrganizationDashboardGetContentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentStatusName");
+
+                    b.Property<string>("ContentTypeName");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbFrontOrganizationDashboardGetContent");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontOrganizationDashboardGetOrganizationModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("OrganizationName");
+
+                    b.Property<string>("ParentName");
+
+                    b.Property<string>("StatusName");
+
+                    b.Property<string>("TypeName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbFrontOrganizationDashboardGetOrganization");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontOrganizationDashboardGetUsersModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TypeName");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbFrontOrganizationDashboardGetUsers");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontOrganizationMyOrganizationGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OrganizationName");
+
+                    b.Property<string>("UserOrganizationTypeName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbFrontOrganizationMyOrganizationGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuFrontPageModel", b =>
                 {
                     b.Property<int>("OId")
@@ -1808,13 +1892,28 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("ProjectName");
 
-                    b.Property<string>("RelatioName");
+                    b.Property<string>("RelationName");
 
                     b.HasKey("Id");
 
                     b.ToTable("ZdbFrontProjectMyProjectGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontRelationMyFrontRelationGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RelationName");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbFrontRelationMyRelationGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuInt", b =>
@@ -4041,6 +4140,10 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateGroupId");
 
+                    b.Property<bool>("ShowInEventCalendar");
+
+                    b.Property<bool>("ShowInPersonalCalendar");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProcessTemplateGroupId");
@@ -4133,11 +4236,64 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateId");
 
+                    b.Property<int>("ProcessTemplateStepTypeId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProcessTemplateId");
 
+                    b.HasIndex("ProcessTemplateStepTypeId");
+
                     b.ToTable("DbProcessTemplateStep");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("StepTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("StepTypeId");
+
+                    b.ToTable("dbProcessTemplateStepTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbProcessTemplateStepType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
@@ -5736,6 +5892,24 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuProcessTemplateModel", "ProcessTemplate")
                         .WithMany()
                         .HasForeignKey("ProcessTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", "ProcessTemplateStepType")
+                        .WithMany("ProcessTemplateSteps")
+                        .HasForeignKey("ProcessTemplateStepTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", "ProcessTemplateStepType")
+                        .WithMany()
+                        .HasForeignKey("StepTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

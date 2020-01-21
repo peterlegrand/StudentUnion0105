@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "031a72d7-98b1-41eb-a7fb-ec47d8f43256",
-                            ConcurrencyStamp = "e39f569f-5667-4da3-97c5-8f1fea6cb5b9",
+                            Id = "0af5bd17-ea4b-4b4d-9c3f-c67fbe51861e",
+                            ConcurrencyStamp = "21e5a422-0e5c-4f23-8997-6c8b2ccdcabb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "66474b27-7f53-416a-a235-12be8e396ea9",
-                            ConcurrencyStamp = "12a6ed79-8d9c-4222-a2f1-a89b4172cf82",
+                            Id = "eb540e35-7356-4095-a066-007efb069708",
+                            ConcurrencyStamp = "252a3a3a-634e-4b89-8b28-7e9f99cd3768",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -4234,11 +4234,64 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateId");
 
+                    b.Property<int>("ProcessTemplateStepTypeId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProcessTemplateId");
 
+                    b.HasIndex("ProcessTemplateStepTypeId");
+
                     b.ToTable("DbProcessTemplateStep");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeLanguageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("CreatorId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LanguageId");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("ModifierId");
+
+                    b.Property<string>("MouseOver")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("StepTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("StepTypeId");
+
+                    b.ToTable("dbProcessTemplateStepTypeLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbProcessTemplateStepType");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuProjectLanguageModel", b =>
@@ -5837,6 +5890,24 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuProcessTemplateModel", "ProcessTemplate")
                         .WithMany()
                         .HasForeignKey("ProcessTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", "ProcessTemplateStepType")
+                        .WithMany("ProcessTemplateSteps")
+                        .HasForeignKey("ProcessTemplateStepTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuProcessTemplateStepTypeLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StudentUnion0105.Models.SuProcessTemplateStepTypeModel", "ProcessTemplateStepType")
+                        .WithMany()
+                        .HasForeignKey("StepTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

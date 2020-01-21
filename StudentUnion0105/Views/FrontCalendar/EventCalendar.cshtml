@@ -1,0 +1,71 @@
+﻿
+@model SuFrontCalendarEventCalendarModelWithAdditionalInfo
+<h1><img src="~/Images/Icons/content.png" height="60" width="60" /> Event Calendar</h1>
+@foreach (var x in Model.Events)
+{
+    <div>
+    </div>
+}
+<div>Start day</div>
+<div>
+    @Model.StartDay
+</div>
+<div>End day</div>
+<div>
+    @Model.EndDay
+</div>
+<div>Year</div>
+<div>
+    @Model.Year
+</div>
+<div>Month</div>
+<div>
+    @Model.Month
+</div>
+<div>Month name</div>
+<div>
+    @Model.MonthName
+</div>
+<div class="month">
+    <ul>
+        <li class="prev">&#10094;</li>
+        <li class="next">&#10095;</li>
+        <li>@Model.MonthName<br><span style="font-size:18px">@Model.Year</span></li>
+    </ul>
+</div>
+
+<ul class="weekdays">
+    <li>Mo</li>
+    <li>Tu</li>
+    <li>We</li>
+    <li>Th</li>
+    <li>Fr</li>
+    <li>Sa</li>
+    <li>Su</li>
+</ul>
+
+<ul class="days">
+    @{
+        int y = 1;
+        while (y < Model.StartDay)
+        {
+            <li></li>
+            y++;
+        }
+        int z = 1;
+        while (z <= Model.EndDay)
+        {
+            <li>@z
+    
+    @foreach(var a in Model.Events)
+    {
+        if(a.DateTimeValue.Date.Day == z)
+        { 
+@a.StringValue
+        }
+    }
+    </li>
+        }
+    }
+    
+</ul>
