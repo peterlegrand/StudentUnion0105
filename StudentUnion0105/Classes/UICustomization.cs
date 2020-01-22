@@ -33,7 +33,7 @@ namespace StudentUnion0105.Classes
             int i = 0;
             foreach (var x in CustomizationFromDb)
             {
-                CustomTerms[i] = x.Name;
+                CustomTerms[i] = "xyz"+x.Name;
                 i++;
             }
             return CustomTerms;

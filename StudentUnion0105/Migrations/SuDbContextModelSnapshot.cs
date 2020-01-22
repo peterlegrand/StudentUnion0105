@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b02ef825-0680-4a37-8492-b7bc8567ec28",
-                            ConcurrencyStamp = "7b743c64-9810-4e26-913e-c32c2572f2ef",
+                            Id = "5c852bcf-6d0b-4340-ba33-6873f95a9c6c",
+                            ConcurrencyStamp = "e1b73e2d-fb48-4d29-8b35-2410f1dfb1ff",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "71d0acc8-cd5e-4264-9d07-3cb757d075d8",
-                            ConcurrencyStamp = "418b8002-7dc6-497b-9805-43c585d939a3",
+                            Id = "cc6c9db3-bd34-4a99-ad94-a7085d082779",
+                            ConcurrencyStamp = "a9a83345-ef25-416b-9eb9-042b81fb0487",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -3665,10 +3665,66 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbPreferenceIndexGet");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuEditGetModel", b =>
+                {
+                    b.Property<int>("UserMenuId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddAction");
+
+                    b.Property<string>("AddController");
+
+                    b.Property<string>("AddMouseOver");
+
+                    b.Property<string>("AddName");
+
+                    b.Property<bool>("AdvancedSearchShow");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasAdd");
+
+                    b.Property<bool>("HasAdvancedSearch");
+
+                    b.Property<bool>("HasMenu");
+
+                    b.Property<bool>("HasSearch");
+
+                    b.Property<int>("Id");
+
+                    b.Property<string>("MainAction");
+
+                    b.Property<string>("MainController");
+
+                    b.Property<string>("MainMouseOver");
+
+                    b.Property<string>("MainName");
+
+                    b.Property<bool>("MenuAddShow");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<bool>("MenuShow");
+
+                    b.Property<string>("MenuURL");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("SearchShow");
+
+                    b.Property<int>("Sequence");
+
+                    b.HasKey("UserMenuId");
+
+                    b.ToTable("ZdbPreferenceLeftMenuEditGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuGetAvailableMenusModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddAction");
 
@@ -3705,8 +3761,9 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuGetModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddAction");
 

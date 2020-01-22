@@ -10,8 +10,8 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20200121031929_fresh2")]
-    partial class fresh2
+    [Migration("20200122102840_fresh")]
+    partial class fresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2809e63f-130a-45fa-8729-98368edc8cac",
-                            ConcurrencyStamp = "81e774fa-3f39-494c-bcb4-eb0185580a8c",
+                            Id = "5c852bcf-6d0b-4340-ba33-6873f95a9c6c",
+                            ConcurrencyStamp = "e1b73e2d-fb48-4d29-8b35-2410f1dfb1ff",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c364846e-243f-4016-8f06-6d90733f743d",
-                            ConcurrencyStamp = "b0e7d788-fe5f-41fe-be24-0104ba177324",
+                            Id = "cc6c9db3-bd34-4a99-ad94-a7085d082779",
+                            ConcurrencyStamp = "a9a83345-ef25-416b-9eb9-042b81fb0487",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1454,6 +1454,35 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DbDataType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontCalendarEventCalendarModel", b =>
+                {
+                    b.Property<int>("ProcessFieldId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTimeValue");
+
+                    b.Property<int>("IntValue");
+
+                    b.Property<DateTime>("MainDate");
+
+                    b.Property<int>("ProcessId");
+
+                    b.Property<int>("ProcessTemplateFieldId");
+
+                    b.Property<int>("ProcessTemplateFieldTypeId");
+
+                    b.Property<int>("ProcessTemplateStepTypeId");
+
+                    b.Property<int>("StepId");
+
+                    b.Property<string>("StringValue");
+
+                    b.HasKey("ProcessFieldId");
+
+                    b.ToTable("ZdbFrontCalendarEventCalendar");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuFrontContentModel", b =>
@@ -3638,6 +3667,153 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbPreferenceIndexGet");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuEditGetModel", b =>
+                {
+                    b.Property<int>("UserMenuId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddAction");
+
+                    b.Property<string>("AddController");
+
+                    b.Property<string>("AddMouseOver");
+
+                    b.Property<string>("AddName");
+
+                    b.Property<bool>("AdvancedSearchShow");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasAdd");
+
+                    b.Property<bool>("HasAdvancedSearch");
+
+                    b.Property<bool>("HasMenu");
+
+                    b.Property<bool>("HasSearch");
+
+                    b.Property<int>("Id");
+
+                    b.Property<string>("MainAction");
+
+                    b.Property<string>("MainController");
+
+                    b.Property<string>("MainMouseOver");
+
+                    b.Property<string>("MainName");
+
+                    b.Property<bool>("MenuAddShow");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<bool>("MenuShow");
+
+                    b.Property<string>("MenuURL");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("SearchShow");
+
+                    b.Property<int>("Sequence");
+
+                    b.HasKey("UserMenuId");
+
+                    b.ToTable("ZdbPreferenceLeftMenuEditGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuGetAvailableMenusModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddAction");
+
+                    b.Property<string>("AddController");
+
+                    b.Property<string>("AddMouseOver");
+
+                    b.Property<string>("AddName");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasAdd");
+
+                    b.Property<bool>("HasAdvancedSearch");
+
+                    b.Property<bool>("HasMenu");
+
+                    b.Property<bool>("HasSearch");
+
+                    b.Property<string>("MainAction");
+
+                    b.Property<string>("MainController");
+
+                    b.Property<string>("MainMouseOver");
+
+                    b.Property<string>("MainName");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbPreferenceLeftMenuGetAvailableMenus");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuPreferenceLeftMenuGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddAction");
+
+                    b.Property<string>("AddController");
+
+                    b.Property<string>("AddMouseOver");
+
+                    b.Property<string>("AddName");
+
+                    b.Property<bool>("AdvancedSearchShow");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasAdd");
+
+                    b.Property<bool>("HasAdvancedSearch");
+
+                    b.Property<bool>("HasMenu");
+
+                    b.Property<bool>("HasSearch");
+
+                    b.Property<string>("MainAction");
+
+                    b.Property<string>("MainController");
+
+                    b.Property<string>("MainMouseOver");
+
+                    b.Property<string>("MainName");
+
+                    b.Property<bool>("MenuAddShow");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<bool>("MenuShow");
+
+                    b.Property<string>("MenuURL");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("SearchShow");
+
+                    b.Property<int>("Sequence");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbPreferenceLeftMenuGet");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuProcessFieldModel", b =>
                 {
                     b.Property<int>("Id")
@@ -4290,8 +4466,6 @@ namespace StudentUnion0105.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProcessTemplateStepId");
 
                     b.HasKey("Id");
 

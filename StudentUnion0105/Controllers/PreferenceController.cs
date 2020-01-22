@@ -93,13 +93,87 @@ namespace StudentUnion0105.Controllers
         var parameter = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
             List<SuPreferenceLeftMenuGetModel> CurrentLeftMenu = _context.ZdbPreferenceLeftMenuGet.FromSql("PreferenceLeftMenuGet @CurrentUser", parameter).ToList();
-            List<SuPreferenceLeftMenuGetAvailableMenusModel> AvailableLeftMenu = _context.ZdbPreferenceLeftMenuGetAvailableMenus.FromSql("PreferenceLeftMenuGetAvailableMenus @CurrentUser", parameter).ToList();
+           // List<SuPreferenceLeftMenuGetAvailableMenusModel> AvailableLeftMenu = _context.ZdbPreferenceLeftMenuGetAvailableMenus.FromSql("PreferenceLeftMenuGetAvailableMenus @CurrentUser", parameter).ToList();
 
-            SuPreferenceLeftMenuGetBothMenusModel BothMenus = new SuPreferenceLeftMenuGetBothMenusModel();
-            BothMenus.AvailableMenus = AvailableLeftMenu;
-            BothMenus.CurrentMenus = CurrentLeftMenu;
+//            SuPreferenceLeftMenuGetBothMenusModel BothMenus = new SuPreferenceLeftMenuGetBothMenusModel();
+  //          BothMenus.AvailableMenus = AvailableLeftMenu;
+        //    BothMenus.CurrentMenus = CurrentLeftMenu;
 
-        return View(BothMenus);
+        return View(CurrentLeftMenu);
     }
-}
+
+        [HttpGet]
+        public async Task<IActionResult> LeftMenuEdit(int Id)
+        {
+            var CurrentUser = await userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@Id", Id),
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    };
+
+            SqlParameter[] parameters2 =
+                {
+                    new SqlParameter("@CurrentUser", CurrentUser.Id),
+                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    };
+
+            SuPreferenceLeftMenuEditGetModel MenuEditGet = _context.ZdbPreferenceLeftMenuEditGet.FromSql("PreferenceLeftMenuEditGet @Id, @LanguageId", parameters).First();
+            List<SuTypeList> ClassificationEditGetOtherMenus = _context.ZDbTypeList.FromSql("PreferenceLeftMenuEditGetOtherMenus @CurrentUser, @LanguageId", parameters2).ToList();
+
+            var MenuList = new List<SelectListItem>();
+            foreach (var OtherMenu in ClassificationEditGetOtherMenus)
+            {
+                MenuList.Add(new SelectListItem
+                {
+                    Text = OtherMenu.Name,
+                    Value = OtherMenu.Id.ToString()
+                });
+            }
+            SuPreferenceLeftMenuEditGetModelWithList MenuWithList = new SuPreferenceLeftMenuEditGetModelWithList();
+
+            MenuWithList.MenuEdit = MenuEditGet;
+            MenuWithList.OtherMenus= MenuList;
+
+            return View(MenuWithList);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeftMenuEdit(SuPreferenceLeftMenuEditGetModelWithList FromForm)
+        {
+            if (ModelState.IsValid)
+            {
+                var CurrentUser = await userManager.GetUserAsync(User);
+                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@Id", FromForm.MenuEdit.UserMenuId),
+                    new SqlParameter("@MenuShow", FromForm.MenuEdit.MenuShow),
+                    new SqlParameter("@MenuAddShow", FromForm.MenuEdit.MenuAddShow),
+                    new SqlParameter("@SearchShow", FromForm.MenuEdit.SearchShow),
+                    new SqlParameter("@AdvancedSearchShow", FromForm.MenuEdit.AdvancedSearchShow),
+                    new SqlParameter("@MenuName", FromForm.MenuEdit.MenuName ?? ""),
+                    new SqlParameter("@MenuURL", FromForm.MenuEdit.MenuURL ?? ""),
+                    new SqlParameter("@Sequence", FromForm.MenuEdit.Sequence),
+                    };
+                var b = _context.Database.ExecuteSqlCommand("PreferenceLeftMenuEditPost " +
+                            "@Id" +
+                            ", @MenuShow" +
+                            ", @MenuAddShow" +
+                            ", @SearchShow" +
+                            ", @AdvancedSearchShow" +
+                            ", @MenuName" +
+                            ", @MenuURL" +
+                            ", @Sequence" , parameters);
+            }
+            return RedirectToAction("LeftMenu");
+        }
+
+
+    }
 }

@@ -619,6 +619,18 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dbProcessTemplateStepType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbProcessTemplateStepType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DbProjectStatus",
                 columns: table => new
                 {
@@ -757,19 +769,6 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DbValueList", x => x.ClassificationValueId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SuProcessTemplateStepTypeModel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProcessTemplateStepId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SuProcessTemplateStepTypeModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1150,6 +1149,27 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ZdbContentTypeEditGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbFrontCalendarEventCalendar",
+                columns: table => new
+                {
+                    ProcessFieldId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProcessId = table.Column<int>(nullable: false),
+                    StepId = table.Column<int>(nullable: false),
+                    DateTimeValue = table.Column<DateTime>(nullable: false),
+                    IntValue = table.Column<int>(nullable: false),
+                    StringValue = table.Column<string>(nullable: true),
+                    ProcessTemplateFieldId = table.Column<int>(nullable: false),
+                    ProcessTemplateFieldTypeId = table.Column<int>(nullable: false),
+                    MainDate = table.Column<DateTime>(nullable: false),
+                    ProcessTemplateStepTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbFrontCalendarEventCalendar", x => x.ProcessFieldId);
                 });
 
             migrationBuilder.CreateTable(
@@ -1919,6 +1939,99 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ZdbPreferenceIndexGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbPreferenceLeftMenuEditGet",
+                columns: table => new
+                {
+                    UserMenuId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
+                    MainController = table.Column<string>(nullable: true),
+                    MainAction = table.Column<string>(nullable: true),
+                    AddController = table.Column<string>(nullable: true),
+                    AddAction = table.Column<string>(nullable: true),
+                    HasMenu = table.Column<bool>(nullable: false),
+                    HasAdd = table.Column<bool>(nullable: false),
+                    HasSearch = table.Column<bool>(nullable: false),
+                    HasAdvancedSearch = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MainName = table.Column<string>(nullable: true),
+                    MainMouseOver = table.Column<string>(nullable: true),
+                    AddName = table.Column<string>(nullable: true),
+                    AddMouseOver = table.Column<string>(nullable: true),
+                    MenuShow = table.Column<bool>(nullable: false),
+                    MenuAddShow = table.Column<bool>(nullable: false),
+                    SearchShow = table.Column<bool>(nullable: false),
+                    AdvancedSearchShow = table.Column<bool>(nullable: false),
+                    MenuName = table.Column<string>(nullable: true),
+                    MenuURL = table.Column<string>(nullable: true),
+                    Sequence = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbPreferenceLeftMenuEditGet", x => x.UserMenuId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbPreferenceLeftMenuGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MainController = table.Column<string>(nullable: true),
+                    MainAction = table.Column<string>(nullable: true),
+                    AddController = table.Column<string>(nullable: true),
+                    AddAction = table.Column<string>(nullable: true),
+                    HasMenu = table.Column<bool>(nullable: false),
+                    HasAdd = table.Column<bool>(nullable: false),
+                    HasSearch = table.Column<bool>(nullable: false),
+                    HasAdvancedSearch = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MainName = table.Column<string>(nullable: true),
+                    MainMouseOver = table.Column<string>(nullable: true),
+                    AddName = table.Column<string>(nullable: true),
+                    AddMouseOver = table.Column<string>(nullable: true),
+                    MenuShow = table.Column<bool>(nullable: false),
+                    MenuAddShow = table.Column<bool>(nullable: false),
+                    SearchShow = table.Column<bool>(nullable: false),
+                    AdvancedSearchShow = table.Column<bool>(nullable: false),
+                    MenuName = table.Column<string>(nullable: true),
+                    MenuURL = table.Column<string>(nullable: true),
+                    Sequence = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbPreferenceLeftMenuGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbPreferenceLeftMenuGetAvailableMenus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MainController = table.Column<string>(nullable: true),
+                    MainAction = table.Column<string>(nullable: true),
+                    AddController = table.Column<string>(nullable: true),
+                    AddAction = table.Column<string>(nullable: true),
+                    HasMenu = table.Column<bool>(nullable: false),
+                    HasAdd = table.Column<bool>(nullable: false),
+                    HasSearch = table.Column<bool>(nullable: false),
+                    HasAdvancedSearch = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MainName = table.Column<string>(nullable: true),
+                    MainMouseOver = table.Column<string>(nullable: true),
+                    AddName = table.Column<string>(nullable: true),
+                    AddMouseOver = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbPreferenceLeftMenuGetAvailableMenus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -2750,6 +2863,40 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dbProcessTemplateStepTypeLanguage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StepTypeId = table.Column<int>(nullable: false),
+                    LanguageId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(maxLength: 50, nullable: true),
+                    MenuName = table.Column<string>(maxLength: 50, nullable: true),
+                    CreatorId = table.Column<string>(nullable: true),
+                    ModifierId = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbProcessTemplateStepTypeLanguage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_dbProcessTemplateStepTypeLanguage_DbLanguage_LanguageId",
+                        column: x => x.LanguageId,
+                        principalTable: "DbLanguage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_dbProcessTemplateStepTypeLanguage_dbProcessTemplateStepType_StepTypeId",
+                        column: x => x.StepTypeId,
+                        principalTable: "dbProcessTemplateStepType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DbProject",
                 columns: table => new
                 {
@@ -3472,9 +3619,9 @@ namespace StudentUnion0105.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_DbProcessTemplateStep_SuProcessTemplateStepTypeModel_ProcessTemplateStepTypeId",
+                        name: "FK_DbProcessTemplateStep_dbProcessTemplateStepType_ProcessTemplateStepTypeId",
                         column: x => x.ProcessTemplateStepTypeId,
-                        principalTable: "SuProcessTemplateStepTypeModel",
+                        principalTable: "dbProcessTemplateStepType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -4279,12 +4426,12 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "62db02ae-f23f-481f-abd3-42f243e0f1a2", "7f78da46-dbaa-4014-bf9b-42a315b1c9ec", "Admin", "ADMIN" });
+                values: new object[] { "5c852bcf-6d0b-4340-ba33-6873f95a9c6c", "e1b73e2d-fb48-4d29-8b35-2410f1dfb1ff", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "336f930e-5761-49c1-80ce-896f1c08f489", "9fb39a8b-f3f7-4947-a7c9-41881d0a9bb0", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "cc6c9db3-bd34-4a99-ad94-a7085d082779", "a9a83345-ef25-416b-9eb9-042b81fb0487", "Super admin", "SUPER ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -4781,6 +4928,16 @@ namespace StudentUnion0105.Migrations
                 column: "StepId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_dbProcessTemplateStepTypeLanguage_LanguageId",
+                table: "dbProcessTemplateStepTypeLanguage",
+                column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_dbProcessTemplateStepTypeLanguage_StepTypeId",
+                table: "dbProcessTemplateStepTypeLanguage",
+                column: "StepTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DbProject_ProjectStatusId",
                 table: "DbProject",
                 column: "ProjectStatusId");
@@ -5068,6 +5225,9 @@ namespace StudentUnion0105.Migrations
                 name: "DbProcessTemplateStepLanguage");
 
             migrationBuilder.DropTable(
+                name: "dbProcessTemplateStepTypeLanguage");
+
+            migrationBuilder.DropTable(
                 name: "DbProjectLanguage");
 
             migrationBuilder.DropTable(
@@ -5147,6 +5307,9 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "ZdbContentTypeEditGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbFrontCalendarEventCalendar");
 
             migrationBuilder.DropTable(
                 name: "ZdbFrontContent");
@@ -5267,6 +5430,15 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "ZdbPreferenceIndexGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbPreferenceLeftMenuEditGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbPreferenceLeftMenuGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbPreferenceLeftMenuGetAvailableMenus");
 
             migrationBuilder.DropTable(
                 name: "ZdbProcessTemplateFlowConditionEditGet");
@@ -5419,7 +5591,7 @@ namespace StudentUnion0105.Migrations
                 name: "DbProcess");
 
             migrationBuilder.DropTable(
-                name: "SuProcessTemplateStepTypeModel");
+                name: "dbProcessTemplateStepType");
 
             migrationBuilder.DropTable(
                 name: "ZdbFrontPage");
