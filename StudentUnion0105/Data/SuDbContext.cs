@@ -36,6 +36,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuFrontOrganizationDashboardGetUsersModel> ZdbFrontOrganizationDashboardGetUsers { get; set; }
         public DbSet<Menu1> ZdbMenu1 { get; set; }
         public DbSet<TopMenu1> ZdbTopMenu1 { get; set; }
+        public DbSet<TopMenu2> ZdbTopMenu2 { get; set; }
         public DbSet<LeftMenu> ZdbLeftMenu { get; set; }
         public DbSet<SuMenu1IndexGetModel> ZdbMenu1IndexGet { get; set; }
         public DbSet<SuMenu1DeleteGetModel> ZdbMenu1DeleteGet { get; set; }

@@ -307,6 +307,7 @@ namespace StudentUnion0105.Controllers
 , "PageTypeLanguageIndexGet.sql"
 , "PartialLeftMenu.sql"
 , "PartialTopMenu1.sql"
+, "PartialTopMenu2.sql"
 , "PreferenceIndexGet.sql"
 , "PreferenceIndexPost.sql"
 , "PreferenceLeftMenuEditGet.sql"

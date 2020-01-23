@@ -62,4 +62,14 @@ namespace StudentUnion0105.Models
         public string IconCss { get; set; }
     }
 
+    public class TopMenu2
+    {
+        public int Id { get; set; }
+        public string MenuName { get; set; }
+        public string MenuController { get; set; }
+        public string MenuAction { get; set; }
+        public int MenuDestinationId { get; set; }
+        public string IconCss { get; set; }
+    }
+
 }

@@ -2,7 +2,7 @@ CREATE PROCEDURE PartialTopMenu1 (@LanguageId int) AS
 SELECT 
 	dbMenu1.Id
 	, CASE WHEN dbMenu1.MenuTypeId = 1  THEN dbMenu1Language.MenuName -- No action
-	WHEN dbMenu1.MenuTypeId = 2 THEN DbClassificationLanguage.MenuName -- Classification
+	WHEN dbMenu1.MenuTypeId = 2 THEN ClassificationLanguage.MenuName -- Classification
 	WHEN dbMenu1.MenuTypeId = 3 THEN dbMenu1Language.MenuName -- Controller action id
 	WHEN dbMenu1.MenuTypeId = 4 THEN dbMenu1Language.MenuName -- Feature
 	END AS MenuName
@@ -26,10 +26,9 @@ SELECT
 FROM dbMenu1
 JOIN dbMenu1Language
 	ON dbMenu1.Id = dbMenu1Language.Menu1Id
-LEFT JOIN DbClassificationLanguage
-	ON DbClassificationLanguage.ClassificationId = dbMenu1.ClassificationId
+LEFT JOIN (SELECT ClassificationId, MenuName FROM DbClassificationLanguage WHERE LanguageId = @LanguageId) ClassificationLanguage
+	ON ClassificationLanguage.ClassificationId = dbMenu1.ClassificationId
 LEFT JOIN DbClassification
 	ON DbClassification.Id = dbMenu1.ClassificationId
 WHERE dbMenu1Language.LanguageId = @LanguageId
-	AND DbClassificationLanguage.LanguageId = @LanguageId
 ORDER BY dbMenu1.Sequence

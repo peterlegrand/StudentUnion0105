@@ -37,20 +37,67 @@ namespace StudentUnion0105.Classes
                     Text = TopMenu1.MenuName,
                     IconCss = TopMenu1.IconCss,
                     Url = TopMenu1.MenuController,
-                    Items = new List<MenuItem>()
-                {
-                    new MenuItem { Text= "Open", IconCss= "em-icons e-open", Url= "Home/Open" },
-                    new MenuItem { Text= "Save", IconCss= "e-icons e-save", Url= "Home/Save" },
-                    new MenuItem { Separator= true },
-                    new MenuItem { Text= "Exit", Url= "Home/Exit" }
-                }
-                });
+                    Items = new List<MenuItem>(Menu2(TopMenu1.Id, LanguageId))
+            });
 
 
 
             }
             return menuItem1List;
         }
+        private List<MenuItem> Menu2(int Id, int LanguageId)
+        {
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", LanguageId)
+                    , new SqlParameter("@Id", Id)
+                };
 
+            var TopMenu2List = _context.ZdbTopMenu2.FromSql("PartialTopMenu2 @LanguageId, @Id", parameters).ToList();
+
+
+            List<MenuItem> menuItem2List = new List<MenuItem>();
+            foreach (var TopMenu2 in TopMenu2List)
+            {
+                menuItem2List.Add(new MenuItem
+                {
+                    Text = TopMenu2.MenuName,
+                    IconCss = TopMenu2.IconCss,
+                    Url = TopMenu2.MenuController,
+                    Items = new List<MenuItem>(Menu3(TopMenu2.Id, LanguageId))
+
+                });
+
+
+            }
+
+            return menuItem2List;
+        }
+        private List<MenuItem> Menu3(int Id, int LanguageId)
+        {
+            SqlParameter[] parameters =
+               {
+                    new SqlParameter("@LanguageId", LanguageId)
+                    , new SqlParameter("@Id", Id)
+                };
+
+            var TopMenu2List = _context.ZdbTopMenu2.FromSql("PartialTopMenu2 @LanguageId, @Id", parameters).ToList();
+
+
+            List<MenuItem> menuItem2List = new List<MenuItem>();
+            foreach (var TopMenu2 in TopMenu2List)
+            {
+                menuItem2List.Add(new MenuItem
+                {
+                    Text = TopMenu2.MenuName,
+                    IconCss = TopMenu2.IconCss,
+                    Url = TopMenu2.MenuController
+                });
+
+
+            }
+
+            return menuItem2List;
+        }
     }
 }

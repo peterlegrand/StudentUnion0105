@@ -2244,7 +2244,7 @@ INSERT INTO dbMenu1 (
  , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 3, 2, 0, '', '', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
 
-SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+--SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES (1, 41, 'Home', 'Home', @CurrentUser, @CurrentUser, getdate(), getdate()); 
@@ -2254,6 +2254,22 @@ VALUES (2, 41, 'First class', 'First', @CurrentUser, @CurrentUser, getdate(), ge
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES (3, 41, 'Second class', 'Second', @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbMenu2 (
+	Menu1Id
+, MenuTypeId
+, Sequence
+, ClassificationId
+, FeatureId
+, Controller
+, Action
+, DestinationId
+ , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(1, 3, 1, 0, 0, 'FrontPage', 'MyContent', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
+
+INSERT INTO DbMenu2Language (
+Menu2Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES (1, 41, 'My content', 'My content', @CurrentUser, @CurrentUser, getdate(), getdate()); 
 
 
 INSERT INTO DbUserRelation (FromUserId, ToUserId, TypeId, CreatorId, ModifierId, CreatedDate, ModifiedDate)
