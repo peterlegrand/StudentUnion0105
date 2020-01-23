@@ -7,9 +7,9 @@
     Layout = "_LayoutAdmin";
 }
 @{
-    ViewBag.Title = @ViewBag.Terms[0];
+    ViewBag.Title = "Data setup";
 }
-    <h1>@ViewBag.Terms[0]</h1>
+    <h1>Data setup</h1>
 @*<form>
         <button asp-action="DemoData">Add demo data</button>
         <button asp-action="MasterData">Add master data</button>
@@ -17,19 +17,19 @@
 
 <div>
     <a asp-controller="SetupWizard" asp-action="MasterData">
-        <img src="~/Images/Icons/MasterData.png" title="Content type" height="20" width="20" /> @ViewBag.Terms[1]
+        <img src="~/Images/Icons/MasterData.png" title="Content type" height="20" width="20" /> Master data
     </a>
 </div>
 <div>
-    @ViewBag.Terms[2]
+Demo data
 </div>
 <div>
     <a asp-controller="SetupWizard" asp-action="DemoData">
-        <img src="~/Images/Icons/DemoData.jpg" title="Content type" height="20" width="20" /> @ViewBag.Terms[3]
+        <img src="~/Images/Icons/DemoData.jpg" title="Content type" height="20" width="20" />   Demo data
     </a>
 </div><div>
           <a asp-controller="SetupWizard" asp-action="DemoDataNL">
-              <img src="~/Images/Icons/DemoData.jpg" title="Content type" height="20" width="20" /> @ViewBag.Terms[4]
+              <img src="~/Images/Icons/DemoData.jpg" title="Content type" height="20" width="20" /> Demo data NL
           </a>
 </div>
 

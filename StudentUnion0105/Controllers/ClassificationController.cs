@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Http.Features;
+using Syncfusion.EJ2.Navigations;
 
 namespace StudentUnion0105.Controllers
 {
@@ -59,6 +60,9 @@ namespace StudentUnion0105.Controllers
 
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+                Menus a = new Menus(_context);
+            
+            ViewBag.menuItems2 = a.TopMenu(DefaultLanguageID);
 
             var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
 
