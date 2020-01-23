@@ -3,20 +3,21 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewBag.Title = @ViewBag.Terms[0];
 }@{
     ViewBag.Title = "Process template field type";
 }@{
     Layout = "_LayoutAdmin";
 }
 
-<h1 class="font-weight-bold">
-    <img src="~/Images/Icons/Field.png" height="60" width="60" /> Process template types
-</h1>
+    <h1 class="font-weight-bold">
+        <img src="~/Images/Icons/Field.png" height="60" width="60" /> @ViewBag.Terms[0]
+    </h1>
 <div class="table-responsive">
     <table class="table table-bordered table-sm table-hover">
 
         <thead class="thead-dark">
-            <tr><th>ID</th><th>Name</th><th></th><th></th><th></th></tr>
+            <tr><th>@ViewBag.Terms[1]</th><th>@ViewBag.Terms[2]</th><th></th><th></th><th></th></tr>
         </thead>
         @foreach (var x in Model)
 
@@ -25,10 +26,10 @@
                 <td style="width: 44px">@x.Id</td>
                 <td>@x.Name</td>
                 @*<td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="Edit" height="20" width="20" /></a></td>*@
-                <td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="Languages" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[4] height="20" width="20" /></a></td>
                 @*<td style="width: 22px"><a asp-controller="ProcessTemplateFieldType" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="Delete" height="20" width="20" /></a></td>*@
             </tr>
         }
     </table>
 </div>
-<a asp-controller="ProcessTemplateFieldType" asp-action="Create"><img src="~/Images/Icons/sectionType.png" title="New Process template field type" height="20" width="20" /> Create new Process template field type</a>
+<a asp-controller="ProcessTemplateFieldType" asp-action="Create"><img src="~/Images/Icons/sectionType.png" title="New Process template field type" height="20" width="20" /> @ViewBag.Terms[6]</a>

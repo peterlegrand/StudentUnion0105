@@ -2,63 +2,63 @@
 @using Syncfusion.JavaScript.Models;
 @model SuPreferenceLeftMenuEditGetModelWithList
 @{
-    ViewBag.Title = "Edit menu";
+    ViewBag.Title = @ViewBag.Terms[0];
 }
 @{
     Layout = "_LayoutAdmin";
 }
-<h1><img src="~/Images/Icons/Menu.png" height="60" width="60" /> Left menu edit</h1>
+    <h1><img src="~/Images/Icons/Menu.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <form class="mt-3" method="post">
 
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.UserMenuId" class="col-sm-2 col-form-label">Id</label>
+        <label asp-for="@Model.MenuEdit.UserMenuId" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.UserMenuId" class="form-control" />
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.MenuShow" class="col-sm-2 col-form-label">Show menu</label>
+        <label asp-for="@Model.MenuEdit.MenuShow" class="col-sm-2 col-form-label">@ViewBag.Terms[5]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.MenuShow" class="form-control" />
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.MenuAddShow" class="col-sm-2 col-form-label">Show add menu</label>
+        <label asp-for="@Model.MenuEdit.MenuAddShow" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.MenuAddShow" class="form-control" />
             <span asp-validation-for="@Model.MenuEdit.MenuAddShow" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.SearchShow" class="col-sm-2 col-form-label">Show search</label>
+        <label asp-for="@Model.MenuEdit.SearchShow" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.SearchShow" class="form-control" />
             <span asp-validation-for="@Model.MenuEdit.SearchShow" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.AdvancedSearchShow" class="col-sm-2 col-form-label">Show AdvancedSearchShow</label>
+        <label asp-for="@Model.MenuEdit.AdvancedSearchShow" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.AdvancedSearchShow" class="form-control" />
             <span asp-validation-for="@Model.MenuEdit.AdvancedSearchShow" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.MenuName" class="col-sm-2 col-form-label">MenuName</label>
+        <label asp-for="@Model.MenuEdit.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.MenuName" class="form-control" />
             <span asp-validation-for="@Model.MenuEdit.MenuName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.MenuURL" class="col-sm-2 col-form-label">MenuURL</label>
+        <label asp-for="@Model.MenuEdit.MenuURL" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.MenuEdit.MenuURL" class="form-control" />
             <span asp-validation-for="@Model.MenuEdit.MenuURL" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuEdit.Sequence" class="col-sm-2 col-form-label">Seque</label>
+        <label asp-for="@Model.MenuEdit.Sequence" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
         <div class="col-sm-10 ">
 
             @Html.DropDownListFor(x => x.MenuEdit.Sequence, Model.OtherMenus)
@@ -69,8 +69,8 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary btn-dark">update</button>
-            <a asp-action="LeftMenu" asp-controller="Preference"  class="btn btn-primary btn-light">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[12]</button>
+            <a asp-action="LeftMenu" asp-controller="Preference" class="btn btn-primary btn-light">@ViewBag.Terms[13]</a>
         </div>
     </div>
 </form>

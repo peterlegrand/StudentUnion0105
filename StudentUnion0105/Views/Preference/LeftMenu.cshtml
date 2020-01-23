@@ -1,23 +1,24 @@
 ﻿@model List<SuPreferenceLeftMenuGetModel>
 @{
+    ViewBag.Title = @ViewBag.Terms[0];
 }
-<h1><img src="~/Images/Icons/Menu.png" title="" height="60" width="60" /> Left menu</h1>
+    <h1><img src="~/Images/Icons/Menu.png" title="" height="60" width="60" /> @ViewBag.Terms[0]</h1>
 <div class="table-responsive">
     <table class="table table-bordered table-sm table-hover">
 
         <thead class="thead-dark">
-            <tr><th>Name</th><th></th><th></th></tr>
+            <tr><th>@ViewBag.Terms[1]</th><th></th><th></th></tr>
         </thead>
         @foreach (var x in Model)
 
         {
-    <tr>
-        <td>@x.Name</td>
+            <tr>
+                <td>@x.Name</td>
 
-        <td style="width: 22px"><a asp-controller="Preference" asp-action="LeftMenuEdit" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="" height="20" width="20" /></a></td>
-        <td style="width: 22px"><a asp-controller="Preference" asp-action="LeftMenuDelete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="" height="20" width="20" /></a></td>
-    </tr>
+                <td style="width: 22px"><a asp-controller="Preference" asp-action="LeftMenuEdit" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[2]" height="20" width="20" /></a></td>
+                <td style="width: 22px"><a asp-controller="Preference" asp-action="LeftMenuDelete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[3]" height="20" width="20" /></a></td>
+            </tr>
         }
     </table>
 </div>
-<a asp-controller="Preference" asp-action="LeftMenuCreate"><img src="~/Images/Icons/Menu.png" title="Pages" height="20" width="20" /> Create new Page</a>
+<a asp-controller="Preference" asp-action="LeftMenuCreate"><img src="~/Images/Icons/Menu.png" title="Pages" height="20" width="20" />@ViewBag.Terms[4]</a>

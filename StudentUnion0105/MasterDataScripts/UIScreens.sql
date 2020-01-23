@@ -234,4 +234,11 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1229, 'Menu3', 'LanguageDe
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1230, 'Menu3', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1231, 'Menu3', 'LanguageIndex');
 
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1232, 'Preference', 'LeftMenu');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1233, 'Preference', 'LeftMenuEdit');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1234, 'Preference', 'LeftMenuCreate');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1235, 'Preference', 'LeftMenuDelete');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1236, 'SetupWizard', 'DemoDataNL');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1237, 'SetupWizard', 'DemoDataNL');
+
 SET IDENTITY_INSERT dbUIScreen OFF;

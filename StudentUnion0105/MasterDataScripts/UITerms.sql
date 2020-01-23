@@ -301,4 +301,28 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(299, 'Menu type', 'Menu type
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(300, 'Menus', 'Menus');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(301, 'Menu level 2', 'Menu level 2');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(302, 'Back to menu', 'Back to menu');
+
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(303, 'Left menu', 'Left menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(304, 'Edit left menu', 'Edit left menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(305, 'Menu', 'Menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(306, 'Menu description', 'Menu description');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(307, 'Show menu', 'Show menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(308, 'Show add menu', 'Show add menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(309, 'Show search', 'Show search');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(310, 'Show advanced search', 'Show advanced search');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(311, 'Menu URL', 'Menu URL');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(312, 'Parent project', 'Parent project');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(313, 'Create new user', 'Create new user');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(314, 'Relation', 'Relation');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(315, 'Manage rights to roles', 'Manage rights to roles');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(316, 'Manage Users to roles', 'Manage Users to roles');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(317, 'TRUE', 'TRUE');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(318, 'FALSE', 'FALSE');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(319, 'Build data', 'Build data');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(320, 'Master data', 'Master data');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(321, 'Login as eplegrand@gmail.com', 'Login as eplegrand@gmail.com');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(322, 'Demo data', 'Demo data');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(323, 'Demo data NL', 'Demo data NL');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(324, 'Demo data is done', 'Demo data is done');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(325, 'Back to Setup wizard', 'Back to Setup wizard');
 SET IDENTITY_INSERT dbUITerm OFF;
