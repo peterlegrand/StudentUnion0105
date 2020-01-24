@@ -1,7 +1,7 @@
 DECLARE @CurrentUser uniqueidentifier; 
 DECLARE @SecondUser uniqueidentifier; 
  
-SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversity.org'; 
 SELECT @SecondUser = Id from AspNetUSers Where email = 'pipo@gmail.com'; 
 --DEMO 
  
@@ -2244,7 +2244,7 @@ INSERT INTO dbMenu1 (
  , CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(2, 3, 2, 0, '', '', 0, @CurrentUser, @CurrentUser, getdate(), getdate()) 
 
---SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+--SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversity.org'; 
 INSERT INTO DbMenu1Language (
 Menu1Id, LanguageId, MenuName, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES (1, 41, 'Home', 'Home', @CurrentUser, @CurrentUser, getdate(), getdate()); 

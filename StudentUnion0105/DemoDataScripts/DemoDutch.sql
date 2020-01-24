@@ -1,6 +1,6 @@
 DECLARE @CurrentUser uniqueidentifier; 
  
-SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversity.org'; 
 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  1, 39, 'Kennis','Kennis','Kennis', @CurrentUser, @CurrentUser, getdate(),getdate())  

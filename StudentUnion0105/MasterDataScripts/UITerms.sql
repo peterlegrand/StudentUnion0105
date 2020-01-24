@@ -320,7 +320,7 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(317, 'TRUE', 'TRUE');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(318, 'FALSE', 'FALSE');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(319, 'Build data', 'Build data');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(320, 'Master data', 'Master data');
-INSERT INTO dbUITerm (Id, Name, Description) VALUES(321, 'Login as eplegrand@gmail.com', 'Login as eplegrand@gmail.com');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(321, 'Login as peter@energimeuniversity.org', 'Login as peter@energimeuniversity.org');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(322, 'Demo data', 'Demo data');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(323, 'Demo data NL', 'Demo data NL');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(324, 'Demo data is done', 'Demo data is done');

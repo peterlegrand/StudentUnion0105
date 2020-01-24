@@ -36,13 +36,13 @@ namespace StudentUnion0105.Controllers
         { return View(); }
         public async Task<IActionResult> MasterData()
         {
-            var x = await userManager.FindByEmailAsync("eplegrand@gmail.com");
+            var x = await userManager.FindByEmailAsync("peter@energimeuniversity.org");
             if (x == null)
             {
                 SuUserModel  user1 = new SuUserModel()
                 {
-                    UserName = "eplegrand@gmail.com",
-                    Email = "eplegrand@gmail.com",
+                    UserName = "peter@energimeuniversity.org",
+                    Email = "peter@energimeuniversity.org",
                     DefaultLanguageId = 41
                 };
 
@@ -66,7 +66,7 @@ namespace StudentUnion0105.Controllers
                 }
             }
 
-            var user = await userManager.FindByEmailAsync("eplegrand@gmail.com");
+            var user = await userManager.FindByEmailAsync("peter@energimeuniversity.org");
 
             foreach (var a in await userManager.GetRolesAsync(user))
             { await userManager.RemoveFromRoleAsync(user, a); }

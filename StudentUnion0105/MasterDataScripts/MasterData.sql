@@ -1,6 +1,6 @@
 DECLARE @CurrentUser uniqueidentifier; 
  
-SELECT @CurrentUser = Id from AspNetUSers Where email = 'eplegrand@gmail.com'; 
+SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversity.org'; 
  
 UPDATE AspNetUsers SET DefaultLanguageId = 41, CountryId =236, SecurityLevel = 5; 
  

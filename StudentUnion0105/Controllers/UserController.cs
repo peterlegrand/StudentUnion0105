@@ -208,7 +208,7 @@ namespace StudentUnion0105.Controllers
         {
 
             await SignInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
+            return RedirectToAction("index", "ExternalPage");
         }
 
         [HttpGet]

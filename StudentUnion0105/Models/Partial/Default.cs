@@ -64,7 +64,7 @@ namespace StudentUnion0105.Models
 
     public class TopMenu2
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int Menu1MenuTypeId { get; set; }
         public int Menu2MenuTypeId { get; set; }
         public string MenuName { get; set; }

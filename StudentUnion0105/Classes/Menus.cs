@@ -64,7 +64,7 @@ namespace StudentUnion0105.Classes
                     Text = TopMenu2.MenuName,
                     IconCss = TopMenu2.IconCss,
                     Url = TopMenu2.MenuController,
-                    Items = new List<MenuItem>(Menu3(TopMenu2.Id, LanguageId))
+//                    Items = new List<MenuItem>(Menu3(TopMenu2.Id, LanguageId))
 
                 });
 

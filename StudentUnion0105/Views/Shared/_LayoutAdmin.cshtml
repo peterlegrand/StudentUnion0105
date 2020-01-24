@@ -44,7 +44,7 @@
     <div class="col-12 text-right">
         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
         {
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index2">Exit admin</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="FrontPage" asp-action="Index">Exit admin</a>
         }
         @if (signInManager.IsSignedIn(User))
         {
