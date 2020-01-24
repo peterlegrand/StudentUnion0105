@@ -226,9 +226,10 @@ SET IDENTITY_INSERT dbSecurityLevel OFF
 SET IDENTITY_INSERT dbSetting ON
 
 INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (1, 41, 'Default language'); 
-INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (2, 2, 'Home page'); 
+INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (2, 2, 'Internal home page'); 
 INSERT INTO dbSetting  (Id, IntValue, StringValue, SettingName) VALUES (3, 0, 'Student Union 1.5', 'Application title'); 
 INSERT INTO dbSetting  (Id, IntValue, StringValue, SettingName) VALUES (4, 0, 'Theme1', 'Theme'); 
+INSERT INTO dbSetting  (Id, IntValue, SettingName) VALUES (5, 2, 'External home page'); 
  
 SET IDENTITY_INSERT dbSetting OFF
 

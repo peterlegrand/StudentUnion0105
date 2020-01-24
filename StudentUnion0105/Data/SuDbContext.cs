@@ -27,6 +27,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuFrontCalendarEventCalendarModel> ZdbFrontCalendarEventCalendar { get; set; }
         public DbSet<SuLeftMenuLanguageModel> dbLeftMenuLanguage { get; set; }
         public DbSet<SuLeftMenuUserModel> dbLeftMenuUser { get; set; }
+        public DbSet<SuExternalPageMyContentGetModel> ZdbExternalPageMyContentGet { get; set; }
         public DbSet<SuFrontPageMyContentGetModel> ZdbFrontPageMyContentGet { get; set; }
         public DbSet<SuFrontOrganizationMyOrganizationGetModel> ZdbFrontOrganizationMyOrganizationGet { get; set; }
         public DbSet<SuFrontProjectMyFrontProjectGetModel> ZdbFrontProjectMyProjectGet { get; set; }
@@ -50,6 +51,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuMenu3DeleteGetModel> ZdbMenu3DeleteGet { get; set; }
         public DbSet<SuMenu3EditGetModel> ZdbMenu3EditGet { get; set; }
         public DbSet<SuFrontPageModel> ZdbFrontPage { get; set; }
+        public DbSet<SuExternalPageModel> ZdbExternalPage { get; set; }
         public DbSet<SuFrontProcessToDoIndex2GetForAndOrModel> ZdbFrontProcessToDoIndex2GetForAndOr { get; set; }
         public DbSet<SuFrontProcessToDoIndex2GetModel> ZdbFrontProcessToDoIndex2Get { get; set; }
         public DbSet<SuProcessTemplateFieldEditGetModel> ZdbSuProcessTemplateFieldEditGet { get; set; }
@@ -78,9 +80,12 @@ namespace StudentUnion0105.Data
         public DbSet<SuPageTypeEditGetModel> ZdbPageTypeEditGet { get; set; }
         public DbSet<SuPageSectionTypeEditGetModel> ZdbPageSectionTypeEditGet { get; set; }
         public DbSet<SuFrontPageViewGetModel> ZdbFrontPageViewGet { get; set; }
+        public DbSet<SuExternalPageViewGetModel> ZdbExternalPageViewGet { get; set; }
         public DbSet<SuLayoutTermList> ZdbLayoutTermList { get; set; }
         public DbSet<SuFrontPageSectionModel> ZdbFrontPageSection { get; set; }
+        public DbSet<SuExternalPageSectionModel> ZdbExternalPageSection { get; set; }
         public DbSet<SuFrontContentModel> ZdbFrontContent { get; set; }
+        public DbSet<SuExternalContentModel> ZdbExternalContent { get; set; }
         public DbSet<SuClassificationStatusModel> DbClassificationStatus { get; set; }
         public DbSet<SuClassificationPageModel> DbClassificationPage { get; set; }
         public DbSet<SuClassificationPageEditGetModel> ZdbClassificationPageEditGet  { get; set; }

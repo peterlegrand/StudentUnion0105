@@ -1,0 +1,30 @@
+﻿@model SuExternalPageModel
+@{
+    Layout = "_LayoutExternal";
+}
+@if (Model.ShowTitleName)
+{
+    <h1 class="font-weight-bold">@Model.TitleName</h1>
+}
+@if (Model.ShowTitleDescription)
+{
+    <div>@Model.TitleDescription</div>
+}
+@foreach (var x in Model.ExternalPageSections)
+{
+    @if (x.ShowSectionTitleName)
+    {
+        <h2>@x.TitleName</h2>
+    }
+    @if (x.ShowSectionTitleDescription)
+    {
+        <div>@Html.Raw(x.TitleDescription)</div>
+    }
+    @foreach (var y in x.ExternalContent)
+    {
+        <h4>
+            <a asp-controller="FrontPage" asp-action="View" asp-route-Id="@y.OId.ToString()">@y.Title</a>
+        </h4>
+        <div>@Html.Raw(y.Description)</div>
+    }
+}

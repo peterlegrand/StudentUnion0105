@@ -1,7 +1,5 @@
-CREATE PROCEDURE FrontPageGetContent (
-	@LanguageId int
-	, @PageSectionId int
-	, @SecurityLevel int
+CREATE PROCEDURE ExternalPageGetContent (
+	 @PageSectionId int
 	, @PagingId int)
 AS
 Declare @MaxPerPage int;
@@ -17,7 +15,7 @@ JOIN dbPageSection
 	ON dbPageSection.ContentTypeId = dbContent.ContentTypeId
 	OR dbPageSection.ContentTypeId = NULL
 WHERE dbContent.ContentStatusId = 4
-	AND dbContent.SecurityLevel <= @SecurityLevel
+	AND dbContent.SecurityLevel =1
 	AND dbPageSection.Id = @PageSectionId
 ORDER BY dbContent.CreatedDate 
 	OFFSET @PagingId * @MaxPerPage ROWS
