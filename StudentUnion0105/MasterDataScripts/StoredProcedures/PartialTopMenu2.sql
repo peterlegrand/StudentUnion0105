@@ -9,7 +9,7 @@ SELECT
 	, MenuDestinationId
 	, IconCss
 FROM (SELECT 
-	 dbMenu2.Id 
+	convert(nvarchar(10),  dbMenu2.Id ) + 'x' + convert(nvarchar(10), dbmenu2.MenuTypeId) Id
 	, dbmenu1.MenuTypeId Menu1MenuTypeId
 	, dbmenu2.MenuTypeId Menu2MenuTypeId
 	, CASE WHEN dbMenu2.MenuTypeId = 1  THEN dbMenu2Language.MenuName -- No action
@@ -50,7 +50,7 @@ WHERE dbMenu2Language.LanguageId = @LanguageId
 UNION ALL
 
 SELECT 
-	DbClassificationValue.Id
+	convert(nvarchar(10), DbClassificationValue.Id) + 'x0' 
 	, 2
 	,0
 	, DbClassificationValueLanguage.MenuName
@@ -71,4 +71,5 @@ WHERE DbClassificationLevel.Sequence = 1
 	AND DbClassificationValue.ParentValueId IS NULL
 	AND DbClassificationValueLanguage.LanguageId = @LanguageId
 	AND dbMenu1.Id = @Id
+	AND dbMenu1.MenuTypeId =2
 ) AllData ORDER BY Sequence
