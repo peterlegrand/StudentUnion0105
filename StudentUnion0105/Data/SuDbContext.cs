@@ -18,12 +18,16 @@ namespace StudentUnion0105.Data
 
         }
         //FrontPage
+        public DbSet<SuHomeIndexAdminGetLanguagesModel> ZdbHomeIndexAdminGetLanguages { get; set; }
+        public DbSet<SuHomeIndexAdminGetNoOfRecordsAndPerLanguageModel> ZdbHomeIndexAdminGetNoOfRecordsAndPerLanguage { get; set; }
+        public DbSet<SuHomeIndexAdminGetTableNameModel> ZdbHomeIndexAdminGetTableName { get; set; }
         public DbSet<SuPreferenceLeftMenuGetModel> ZdbPreferenceLeftMenuGet { get; set; }
         public DbSet<SuPreferenceLeftMenuEditGetModel> ZdbPreferenceLeftMenuEditGet { get; set; }
         public DbSet<SuPreferenceLeftMenuGetAvailableMenusModel> ZdbPreferenceLeftMenuGetAvailableMenus { get; set; }
         public DbSet<SuProcessTemplateStepTypeModel> dbProcessTemplateStepType { get; set; }
         public DbSet<SuProcessTemplateStepTypeLanguageModel> dbProcessTemplateStepTypeLanguage { get; set; }
         public DbSet<SuLeftMenuModel> dbLeftMenu { get; set; }
+        public DbSet<SuTableNameModel> dbTableName { get; set; }
         public DbSet<SuFrontCalendarEventCalendarModel> ZdbFrontCalendarEventCalendar { get; set; }
         public DbSet<SuLeftMenuLanguageModel> dbLeftMenuLanguage { get; set; }
         public DbSet<SuLeftMenuUserModel> dbLeftMenuUser { get; set; }

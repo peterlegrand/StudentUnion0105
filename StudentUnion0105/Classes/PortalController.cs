@@ -35,7 +35,7 @@ namespace StudentUnion0105.Classes
             ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
             Menus a = new Menus(_context);
 
-            ViewBag.menuItems2 = a.TopMenu(DefaultLanguageID);
+            ViewBag.menuItems = a.TopMenu(DefaultLanguageID);
             return;
         }
     }

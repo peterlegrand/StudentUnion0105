@@ -27,7 +27,7 @@
         $(document).ready(function () {
 
             $("#Menu").load("/Partial/LeftMenu");
-            $("#TopMenu").load("/Partial/TopMenu");
+            //$("#TopMenu").load("/Partial/TopMenu");
 
         });
     </script>
@@ -39,13 +39,7 @@
         </h1>
 
     </header>
-    @*<ejs-menu id="menu" items="ViewBag.menuItems"></ejs-menu>*@
-    <img src="~/Images/menu.png" />
-    @*<div>a</div>
-        <div id="TopMenu"></div>
-
-        <div><ejs-menu id="daadssdsd" items="ViewBag.menuItems2"></ejs-menu></div>
-        <div>b</div>*@
+    <ejs-menu id="menu" items="ViewBag.menuItems"></ejs-menu>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-9"></div>

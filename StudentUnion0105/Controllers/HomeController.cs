@@ -121,21 +121,28 @@ namespace StudentUnion0105.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult IndexAdmin()
+        public async Task<IActionResult> IndexAdmin()
         {
-            //    ViewBag.tools = new[] {
-            //"Bold", "Italic", "Underline", "StrikeThrough",
-            //"FontName", "FontSize", "FontColor", "BackgroundColor",
-            //"LowerCase", "UpperCase", "|",
-            //"Formats", "Alignments", "OrderedList", "UnorderedList",
-            //"Outdent", "Indent", "|",
-            //"CreateLink", "Image", "CreateTable", "|", "ClearFormat", "Print",
-            //"SourceCode", "FullScreen", "|", "Undo", "Redo"
-            //    };
 
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
+            base.Initializing();
 
-            return View();
+            var Languages = _context.ZdbHomeIndexAdminGetLanguages.FromSql("HomeIndexAdminGetLanguages").ToList();
+            var TableNames = _context.ZdbHomeIndexAdminGetTableName.FromSql("HomeIndexAdminGetTables").ToList();
+
+            SuHomeIndexAdminGetModel Matrix = new SuHomeIndexAdminGetModel();
+            Matrix.languages = Languages;
+            for (int i = 0; i < TableNames.Count; i++)
+            {
+                var parameter = new SqlParameter("@TableName", TableNames[i].TableDescription);
+                var a = _context.ZdbHomeIndexAdminGetNoOfRecordsAndPerLanguage.FromSql("HomeIndexAdminGetNoOfRecordsAndPerLanguage @TableName", parameter).ToList();
+                TableNames[i].SetOfNoOfRecords = a;
+
+            }
+            Matrix.Tables = TableNames;
+
+            return View(Matrix);
         }
 
         public IActionResult Privacy()

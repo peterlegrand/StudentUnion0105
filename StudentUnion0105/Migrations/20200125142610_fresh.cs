@@ -688,6 +688,21 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "dbTableName",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TableName = table.Column<string>(maxLength: 50, nullable: true),
+                    TableDescription = table.Column<string>(nullable: true),
+                    StatusFieldName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_dbTableName", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DbUIScreen",
                 columns: table => new
                 {
@@ -1149,6 +1164,68 @@ namespace StudentUnion0105.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ZdbContentTypeEditGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbExternalPage",
+                columns: table => new
+                {
+                    OId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ShowTitleName = table.Column<bool>(nullable: false),
+                    ShowTitleDescription = table.Column<bool>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    TitleName = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbExternalPage", x => x.OId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbExternalPageMyContentGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    StatusName = table.Column<string>(nullable: true),
+                    TypeName = table.Column<string>(nullable: true),
+                    OrganizationName = table.Column<string>(nullable: true),
+                    ProjectName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbExternalPageMyContentGet", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbExternalPageViewGet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    SecurityLevel = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    ModifiedDate = table.Column<DateTime>(nullable: false),
+                    Creator = table.Column<string>(nullable: true),
+                    Modifier = table.Column<string>(nullable: true),
+                    StatusName = table.Column<string>(nullable: true),
+                    TypeName = table.Column<string>(nullable: true),
+                    OrganizationName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbExternalPageViewGet", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -2165,6 +2242,24 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ZdbTopMenu2",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Menu1MenuTypeId = table.Column<int>(nullable: false),
+                    Menu2MenuTypeId = table.Column<int>(nullable: false),
+                    MenuName = table.Column<string>(nullable: true),
+                    MenuController = table.Column<string>(nullable: true),
+                    MenuAction = table.Column<string>(nullable: true),
+                    MenuDestinationId = table.Column<int>(nullable: false),
+                    IconCss = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbTopMenu2", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ZDbTypeList",
                 columns: table => new
                 {
@@ -3118,6 +3213,42 @@ namespace StudentUnion0105.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ZdbExternalPageSection",
+                columns: table => new
+                {
+                    OId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PId = table.Column<int>(nullable: false),
+                    Sequence = table.Column<int>(nullable: false),
+                    OneTwoColumns = table.Column<int>(nullable: false),
+                    ShowSectionTitleName = table.Column<bool>(nullable: false),
+                    ShowSectionTitleDescription = table.Column<bool>(nullable: false),
+                    ShowContentTypeTitle = table.Column<bool>(nullable: false),
+                    ShowContentTypeDescription = table.Column<bool>(nullable: false),
+                    ContentTitleName = table.Column<string>(nullable: true),
+                    ContentTitleDescription = table.Column<string>(nullable: true),
+                    MaxContent = table.Column<int>(nullable: false),
+                    HasPaging = table.Column<bool>(nullable: false),
+                    LId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    MouseOver = table.Column<string>(nullable: true),
+                    MenuName = table.Column<string>(nullable: true),
+                    TitleName = table.Column<string>(nullable: true),
+                    TitleDescription = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbExternalPageSection", x => x.OId);
+                    table.ForeignKey(
+                        name: "FK_ZdbExternalPageSection_ZdbExternalPage_PId",
+                        column: x => x.PId,
+                        principalTable: "ZdbExternalPage",
+                        principalColumn: "OId",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ZdbFrontPageSection",
                 columns: table => new
                 {
@@ -3762,6 +3893,27 @@ namespace StudentUnion0105.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ZdbExternalContent",
+                columns: table => new
+                {
+                    OId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ZdbExternalContent", x => x.OId);
+                    table.ForeignKey(
+                        name: "FK_ZdbExternalContent_ZdbExternalPageSection_PId",
+                        column: x => x.PId,
+                        principalTable: "ZdbExternalPageSection",
+                        principalColumn: "OId",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -4426,12 +4578,12 @@ namespace StudentUnion0105.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5c852bcf-6d0b-4340-ba33-6873f95a9c6c", "e1b73e2d-fb48-4d29-8b35-2410f1dfb1ff", "Admin", "ADMIN" });
+                values: new object[] { "591975eb-fb35-428d-a6c5-45ff688f9bdc", "604d129f-6f27-482f-b859-30914676664b", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "cc6c9db3-bd34-4a99-ad94-a7085d082779", "a9a83345-ef25-416b-9eb9-042b81fb0487", "Super admin", "SUPER ADMIN" });
+                values: new object[] { "f6efc6d1-2613-4b43-8a7e-75a64bc21452", "4af1de92-ac53-4d7d-b04c-d53fa243109d", "Super admin", "SUPER ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -5048,6 +5200,16 @@ namespace StudentUnion0105.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ZdbExternalContent_PId",
+                table: "ZdbExternalContent",
+                column: "PId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ZdbExternalPageSection_PId",
+                table: "ZdbExternalPageSection",
+                column: "PId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ZdbFrontContent_PId",
                 table: "ZdbFrontContent",
                 column: "PId");
@@ -5237,6 +5399,9 @@ namespace StudentUnion0105.Migrations
                 name: "DbSetting");
 
             migrationBuilder.DropTable(
+                name: "dbTableName");
+
+            migrationBuilder.DropTable(
                 name: "DbUITermLanguage");
 
             migrationBuilder.DropTable(
@@ -5307,6 +5472,15 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "ZdbContentTypeEditGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbExternalContent");
+
+            migrationBuilder.DropTable(
+                name: "ZdbExternalPageMyContentGet");
+
+            migrationBuilder.DropTable(
+                name: "ZdbExternalPageViewGet");
 
             migrationBuilder.DropTable(
                 name: "ZdbFrontCalendarEventCalendar");
@@ -5462,6 +5636,9 @@ namespace StudentUnion0105.Migrations
                 name: "ZdbTopMenu1");
 
             migrationBuilder.DropTable(
+                name: "ZdbTopMenu2");
+
+            migrationBuilder.DropTable(
                 name: "ZDbTypeList");
 
             migrationBuilder.DropTable(
@@ -5534,6 +5711,9 @@ namespace StudentUnion0105.Migrations
                 name: "DbUserRelationType");
 
             migrationBuilder.DropTable(
+                name: "ZdbExternalPageSection");
+
+            migrationBuilder.DropTable(
                 name: "ZdbFrontPageSection");
 
             migrationBuilder.DropTable(
@@ -5592,6 +5772,9 @@ namespace StudentUnion0105.Migrations
 
             migrationBuilder.DropTable(
                 name: "dbProcessTemplateStepType");
+
+            migrationBuilder.DropTable(
+                name: "ZdbExternalPage");
 
             migrationBuilder.DropTable(
                 name: "ZdbFrontPage");

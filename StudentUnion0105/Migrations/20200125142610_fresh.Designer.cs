@@ -10,7 +10,7 @@ using StudentUnion0105.Data;
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    [Migration("20200122102840_fresh")]
+    [Migration("20200125142610_fresh")]
     partial class fresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c852bcf-6d0b-4340-ba33-6873f95a9c6c",
-                            ConcurrencyStamp = "e1b73e2d-fb48-4d29-8b35-2410f1dfb1ff",
+                            Id = "591975eb-fb35-428d-a6c5-45ff688f9bdc",
+                            ConcurrencyStamp = "604d129f-6f27-482f-b859-30914676664b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cc6c9db3-bd34-4a99-ad94-a7085d082779",
-                            ConcurrencyStamp = "a9a83345-ef25-416b-9eb9-042b81fb0487",
+                            Id = "f6efc6d1-2613-4b43-8a7e-75a64bc21452",
+                            ConcurrencyStamp = "4af1de92-ac53-4d7d-b04c-d53fa243109d",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1454,6 +1454,159 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DbDataType");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalContentModel", b =>
+                {
+                    b.Property<int>("OId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("PId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("OId");
+
+                    b.HasIndex("PId");
+
+                    b.ToTable("ZdbExternalContent");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalPageModel", b =>
+                {
+                    b.Property<int>("OId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("LId");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("ShowTitleDescription");
+
+                    b.Property<bool>("ShowTitleName");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.Property<string>("TitleName");
+
+                    b.HasKey("OId");
+
+                    b.ToTable("ZdbExternalPage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalPageMyContentGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("OrganizationName");
+
+                    b.Property<string>("ProjectName");
+
+                    b.Property<string>("StatusName");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TypeName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbExternalPageMyContentGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalPageSectionModel", b =>
+                {
+                    b.Property<int>("OId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContentTitleDescription");
+
+                    b.Property<string>("ContentTitleName");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("HasPaging");
+
+                    b.Property<int>("LId");
+
+                    b.Property<int>("MaxContent");
+
+                    b.Property<string>("MenuName");
+
+                    b.Property<string>("MouseOver");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("OneTwoColumns");
+
+                    b.Property<int>("PId");
+
+                    b.Property<int>("Sequence");
+
+                    b.Property<bool>("ShowContentTypeDescription");
+
+                    b.Property<bool>("ShowContentTypeTitle");
+
+                    b.Property<bool>("ShowSectionTitleDescription");
+
+                    b.Property<bool>("ShowSectionTitleName");
+
+                    b.Property<string>("TitleDescription");
+
+                    b.Property<string>("TitleName");
+
+                    b.HasKey("OId");
+
+                    b.HasIndex("PId");
+
+                    b.ToTable("ZdbExternalPageSection");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalPageViewGetModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Creator");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("ModifiedDate");
+
+                    b.Property<string>("Modifier");
+
+                    b.Property<string>("OrganizationName");
+
+                    b.Property<int>("SecurityLevel");
+
+                    b.Property<string>("StatusName");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("TypeName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbExternalPageViewGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuFrontCalendarEventCalendarModel", b =>
@@ -4610,6 +4763,24 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZDbStatusList");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuTableNameModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StatusFieldName");
+
+                    b.Property<string>("TableDescription");
+
+                    b.Property<string>("TableName")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbTableName");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuTermLanguageCreateGetModel", b =>
                 {
                     b.Property<int>("Id")
@@ -5257,6 +5428,30 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZdbTopMenu1");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.TopMenu2", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("IconCss");
+
+                    b.Property<int>("Menu1MenuTypeId");
+
+                    b.Property<int>("Menu2MenuTypeId");
+
+                    b.Property<string>("MenuAction");
+
+                    b.Property<string>("MenuController");
+
+                    b.Property<int>("MenuDestinationId");
+
+                    b.Property<string>("MenuName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbTopMenu2");
+                });
+
             modelBuilder.Entity("StudentUnion0105.SPModel.GetProjectStructure+SuGetProjectStructure", b =>
                 {
                     b.Property<string>("Path")
@@ -5638,6 +5833,22 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
                         .WithMany("ContentTypeLanguages")
                         .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalContentModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuExternalPageSectionModel", "ExternalPageSection")
+                        .WithMany("ExternalContent")
+                        .HasForeignKey("PId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuExternalPageSectionModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuExternalPageModel", "ExternalPage")
+                        .WithMany("ExternalPageSections")
+                        .HasForeignKey("PId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

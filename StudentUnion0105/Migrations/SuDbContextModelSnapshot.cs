@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6445118a-2448-4b03-bcdb-6aaa36ac2f24",
-                            ConcurrencyStamp = "07a092ae-f975-4fbb-b23b-26bc3199336b",
+                            Id = "2a237c92-4686-4ddc-9313-46fc28c5d3ce",
+                            ConcurrencyStamp = "aa5287e2-377b-4743-a765-81528bc98ef9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d1a12221-103b-4216-bb17-ba7b8295424d",
-                            ConcurrencyStamp = "d337ed26-79d9-4d14-a286-2bb972686083",
+                            Id = "7a4cac03-0ad3-4b13-90fa-3826ed315859",
+                            ConcurrencyStamp = "a896e22a-dc99-4b98-8d1c-68e59ea1b7eb",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -2094,6 +2094,47 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ZdbFrontRelationMyRelationGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuHomeIndexAdminGetLanguagesModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LanguageName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZdbHomeIndexAdminGetLanguages");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuHomeIndexAdminGetNoOfRecordsAndPerLanguageModel", b =>
+                {
+                    b.Property<string>("LanguageName")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("NoOfRecords");
+
+                    b.Property<string>("TableDescription");
+
+                    b.HasKey("LanguageName");
+
+                    b.HasIndex("TableDescription");
+
+                    b.ToTable("ZdbHomeIndexAdminGetNoOfRecordsAndPerLanguage");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuHomeIndexAdminGetTableNameModel", b =>
+                {
+                    b.Property<string>("TableDescription")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("TableDescription");
+
+                    b.ToTable("ZdbHomeIndexAdminGetTableName");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuInt", b =>
@@ -4761,6 +4802,24 @@ namespace StudentUnion0105.Migrations
                     b.ToTable("ZDbStatusList");
                 });
 
+            modelBuilder.Entity("StudentUnion0105.Models.SuTableNameModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StatusFieldName");
+
+                    b.Property<string>("TableDescription");
+
+                    b.Property<string>("TableName")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("dbTableName");
+                });
+
             modelBuilder.Entity("StudentUnion0105.Models.SuTermLanguageCreateGetModel", b =>
                 {
                     b.Property<int>("Id")
@@ -5410,9 +5469,8 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.TopMenu2", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("IconCss");
 
@@ -5863,6 +5921,13 @@ namespace StudentUnion0105.Migrations
                         .WithMany("FrontProcessTemplates")
                         .HasForeignKey("PId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuHomeIndexAdminGetNoOfRecordsAndPerLanguageModel", b =>
+                {
+                    b.HasOne("StudentUnion0105.Models.SuHomeIndexAdminGetTableNameModel", "TableNames")
+                        .WithMany("SetOfNoOfRecords")
+                        .HasForeignKey("TableDescription");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuLeftMenuLanguageModel", b =>

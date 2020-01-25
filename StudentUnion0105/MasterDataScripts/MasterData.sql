@@ -835,3 +835,34 @@ INSERT INTO dbProcessTemplateStepTypeLanguage (Id, StepTypeId, LanguageId, Name,
 VALUES (5,5,41,'Rejected','Rejected','Rejected','Rejected', @CurrentUser, @CurrentUser, getdate(), getdate())
 
 SET IDENTITY_INSERT dbProcessTemplateStepTypeLanguage OFF;
+SET IDENTITY_INSERT dbTableName ON;
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(1,'DbClassification', 'Classifications', 'ClassificationStatusId' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(2,'DbClassificationLevel', 'Classification levels', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(3,'DbClassificationValue ', 'Classification values', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(4,'DbClassificationPage', 'Classification pages', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(5,'DbClassificationPageSection', 'Classification page sections', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(6,'DbContentType ', 'Content types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(7,'dbLeftMenu ', 'Left menus', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(8,'dbMenu1', 'Menu level 1', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(9,'dbMenu2', 'Menu level 2', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(10,'dbMenu3', 'Menu level 3', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(11,'DbOrganization', 'Organizations', 'OrganizationStatusId' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(12,'DbOrganizationType', 'Organization types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(13,'DbPage', 'Pages', 'PageStatusId' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(14,'DbPage', 'Page sections', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(15,'DbPageSectionType', 'Page section types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(16,'DbPageType', 'Page types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(17,'DbProcessTemplate ', 'Process templates', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(18,'DbProcessTemplateField   ', 'Process template fields', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(19,'DbProcessTemplateFieldType   ', 'Process template field types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(20,'DbProcessTemplateFlow', 'Process template flows', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(21,'DbProcessTemplateFlowCondition', 'Process template flow conditions', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(22,'DbProcessTemplateGroup', 'Process template groups', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(23,'DbProcessTemplateStep', 'Process template steps', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(24,'dbProcessTemplateStepType', 'Process template step types', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(25,'DbProject', 'Projects', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(26,'DbUITerm', 'User interface terms', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(27,'DbUserOrganizationType', 'User role types in organizations', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(28,'DbUserProjectType', 'User role types in projects', '' );
+INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(29,'DbUserRelationType', 'User relation types with other users', '' );
+SET IDENTITY_INSERT dbTableName OFF;
