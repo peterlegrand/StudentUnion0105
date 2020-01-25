@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
+    //PETER CHeck what the base class should be
     public class ContentController : Controller
     {
         private readonly UserManager<SuUserModel> _userManager;
@@ -48,7 +50,7 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
             var StatusList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
             var OrganizationList = new List<SelectListItem>();
@@ -67,18 +69,20 @@ namespace StudentUnion0105.Controllers
 
                 SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id",ClassificationfromDb.Id)
                 };
 
                 ValuesFromDb = _context.DbValueList.FromSql("ClassificationValueStructureValues  @LanguageId, @Id", parameters).ToList();
-                ClassificationValueSets[y] = new List<SelectListItem>();
-                ClassificationValueSets[y].Add(new SelectListItem
-
+                ClassificationValueSets[y] = new List<SelectListItem>
                 {
-                    Text = "-- no selection --",
-                    Value = "0"
-                });
+                    new SelectListItem
+
+                    {
+                        Text = "-- no selection --",
+                        Value = "0"
+                    }
+                };
                 foreach (var ValueFromDb in ValuesFromDb)
                 {
 
@@ -104,7 +108,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var ContentTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
 
@@ -164,8 +168,10 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            SuContentModel content = new SuContentModel();
-            content.LanguageId = DefaultLanguageID;
+            SuContentModel content = new SuContentModel
+            {
+                LanguageId = CurrentUser.DefaultLanguageId
+            };
             int?[] SelectedValues = new int?[NoOfClassifications];
             SuCreateContentModel ContentWithDropDowns = new SuCreateContentModel
             {
@@ -243,7 +249,7 @@ namespace StudentUnion0105.Controllers
                 new SqlParameter("@ContentId", parameters[9].Value),
                 new SqlParameter("@ClassificationValueId", x.Value)
                         };
-                        var c = _context.Database.ExecuteSqlCommand("ContentValueCreate @ContentId, @ClassificationValueId", parameters2);
+                        _context.Database.ExecuteSqlCommand("ContentValueCreate @ContentId, @ClassificationValueId", parameters2);
 
                     }
                 }

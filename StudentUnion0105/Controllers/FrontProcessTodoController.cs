@@ -17,44 +17,27 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontProcessTodoController : Controller
+    public class FrontProcessTodoController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly IClassificationStatusRepository _classificationStatus;
-        private readonly IClassificationRepository _classification;
-        private readonly IClassificationLanguageRepository _classificationLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
-
-
         public FrontProcessTodoController(UserManager<SuUserModel> userManager
-                                                , IClassificationStatusRepository classificationStatus
-                                                , IClassificationRepository classification
-                                                , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _classificationStatus = classificationStatus;
-            _classification = classification;
-            _classificationLanguage = classificationLanguage;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@CurrentUser", CurrentUser.Id)
                 };
 
@@ -66,15 +49,15 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Index2()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var FlowIds = _context.ZdbInt.FromSql("FrontProcessToDoIndex2GetFlowId").ToList();
             var AndOrList = _context.ZdbFrontProcessToDoIndex2GetForAndOr.FromSql("FrontProcessToDoIndex2GetForAndOr").ToList();
-            int OldFlowId = 0;
+//            int OldFlowId = 0;
             string FromStringStart = "SELECT DbProcess.Id , DbProcessTemplateLanguage.Name , dbprocess.CreatedDate " +
                 " FROM DbProcess " +
                 "JOIN DbProcessTemplateFlow " +
@@ -90,8 +73,8 @@ namespace StudentUnion0105.Controllers
             string WhereStringStart = " WHERE StepId <> 0 AND ";
             string WhereString = "";
             string FromString = "";
-            string FullSQLFrom = "";
-            string FullSQLWhere = "";
+            //string FullSQLFrom = "";
+            //string FullSQLWhere = "";
             string FullSQL = "";
             bool FirstRecord = true;
 
@@ -102,7 +85,7 @@ namespace StudentUnion0105.Controllers
                 WhereString = WhereStringStart + " DbProcessTemplateFlow.ID = " + FlowId.intValue;// + " AND ";
 
                 if (AndOrList.Where(AndOr => AndOr.FlowId == FlowId.intValue).Count() > 0)
-                    WhereString = WhereString + " AND ";
+                    WhereString += " AND ";
 
                 foreach (var AndOr in AndOrList.Where(AndOr => AndOr.FlowId == FlowId.intValue))
             {
@@ -152,16 +135,16 @@ namespace StudentUnion0105.Controllers
                         WhereString = WhereString + " AND DbUserOrganization AS UserOrganization" + AndOr.ConditionId.ToString() + ".UserId = '" + CurrentUser.Id + "' ";
                         break;
                     case 9:
-                        WhereString = WhereString + " ( ";
+                        WhereString += " ( ";
                         break;
                     case 10:
-                        WhereString = WhereString + " AND ";
+                        WhereString += " AND ";
                         break;
                     case 11:
-                        WhereString = WhereString + " OR ";
+                        WhereString += " OR ";
                         break;
                     case 12:
-                        WhereString = WhereString + " ) ";
+                        WhereString += " ) ";
                         break;
                     case 13:
                         FromString = FromString + " JOIN DbProcessTemplateField TemplateField" + AndOr.ConditionId.ToString() + " ON DbProcessTemplateFlow.ProcessTemplateId = TemplateField" + AndOr.ConditionId.ToString() + ".ProcessTemplateId ";
@@ -211,15 +194,15 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@PId",Id)
                 };
 
@@ -233,12 +216,12 @@ namespace StudentUnion0105.Controllers
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        var CurrentUser = await userManager.GetUserAsync(User);
+        //        var CurrentUser = await _userManager.GetUserAsync(User);
         //        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
         //        SqlParameter[] parameters =
         //            {
         //            new SqlParameter("@Id", FromForm.Classification.Id),
-        //            new SqlParameter("@LanguageId", DefaultLanguageID),
+        //            new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
         //            new SqlParameter("@ClassificationStatusId", FromForm.Classification.ClassificationStatusId),
         //            new SqlParameter("@DefaultClassificationPageId", FromForm.Classification.DefaultClassificationPageId),
         //            new SqlParameter("@HasDropDown", FromForm.Classification.HasDropDown),
@@ -249,7 +232,7 @@ namespace StudentUnion0105.Controllers
         //            new SqlParameter("@MouseOver", FromForm.Classification.MouseOver),
         //            new SqlParameter("@MenuName", FromForm.Classification.MenuName)
         //            };
-        //        var b = _context.Database.ExecuteSqlCommand("ClassificationEditPost " +
+        //        _context.Database.ExecuteSqlCommand("ClassificationEditPost " +
         //                    "@Id" +
         //                    ", @LanguageId" +
         //                    ", @ClassificationStatusId" +

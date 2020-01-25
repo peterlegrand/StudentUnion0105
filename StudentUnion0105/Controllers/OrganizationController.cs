@@ -15,16 +15,13 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class OrganizationController : Controller
+    public class OrganizationController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
         private readonly IOrganizationLanguageRepository _OrganizationLanguage;
         private readonly IOrganizationRepository _Organization;
-        private readonly ILanguageRepository _language;
         private readonly IOrganizationStatusRepository _OrganizationStatus;
         private readonly IOrganizationTypeRepository _organizationType;
         private readonly IOrganizationTypeLanguageRepository _organizationTypeLanguage;
-        private readonly SuDbContext _context;
         private readonly IGetOrganizationStructureRepository _organizationStructure;
 
         public OrganizationController(UserManager<SuUserModel> userManager
@@ -35,29 +32,26 @@ namespace StudentUnion0105.Controllers
             , IOrganizationTypeRepository organizationType
             , IOrganizationTypeLanguageRepository organizationTypeLanguage
             , IGetOrganizationStructureRepository OrganizationStructure
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             _OrganizationLanguage = OrganizationLanguage;
             _Organization = Organization;
-            _language = language;
             _OrganizationStatus = OrganizationStatus;
             _organizationType = organizationType;
             _organizationTypeLanguage = organizationTypeLanguage;
-            _context = context;
             _organizationStructure = OrganizationStructure;
         }
 
         //PETER probably can be deleted
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray( this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID) ;
+            ViewBag.Terms = UICustomizationArray.UIArray( this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), CurrentUser.DefaultLanguageId) ;
 
-            var parameter = new SqlParameter("@LanguageID", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageID", CurrentUser.DefaultLanguageId);
 
             var OrgStructure = _context.ZdbOrganizationIndexGet.FromSql("OrganizationIndexGet @LanguageID", parameter).ToList();
 
@@ -77,12 +71,12 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
             var ParentOrganization = _Organization.GetOrganization(Id);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            base.Initializing();
 
 
             var StatusList = new List<SelectListItem>();
@@ -99,8 +93,8 @@ namespace StudentUnion0105.Controllers
             var ToForm = (from o in _organizationType.GetAllOrganizationTypes()
                          join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
                          on o.Id equals l.OrganizationTypeId
-                         where l.LanguageId == DefaultLanguageID
-                         select new SuObjectVM
+                         where l.LanguageId == CurrentUser.DefaultLanguageId
+                          select new SuObjectVM
                          {
                              Id = o.Id
                             ,
@@ -131,25 +125,28 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Organization = new SuOrganizationModel();
-                Organization.ModifiedDate = DateTime.Now;
-                Organization.CreatedDate = DateTime.Now;
-                Organization.OrganizationStatusId = FromForm.SuObject.Status;
-                Organization.OrganizationTypeId = FromForm.SuObject.Type;
+                var Organization = new SuOrganizationModel
+                {
+                    ModifiedDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
+                    OrganizationStatusId = FromForm.SuObject.Status,
+                    OrganizationTypeId = FromForm.SuObject.Type
+                };
                 if (FromForm.SuObject.NullId != 0)
                 { Organization.ParentOrganizationId = FromForm.SuObject.NullId; }
                 var NewOrganization = _Organization.AddOrganization(Organization);
 
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var OrganizationLanguage = new SuOrganizationLanguageModel();
+                var CurrentUser = await _userManager.GetUserAsync(User);
 
-                OrganizationLanguage.Name = FromForm.SuObject.Name;
-                OrganizationLanguage.Description = FromForm.SuObject.Description;
-                OrganizationLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                OrganizationLanguage.OrganizationId = NewOrganization.Id;
-                OrganizationLanguage.LanguageId = DefaultLanguageID;
+                SuOrganizationLanguageModel OrganizationLanguage = new SuOrganizationLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    MouseOver = FromForm.SuObject.MouseOver,
+                    OrganizationId = NewOrganization.Id,
+                    LanguageId = CurrentUser.DefaultLanguageId
+                };
                 _OrganizationLanguage.AddOrganizationLanguage(OrganizationLanguage);
 
             }
@@ -162,11 +159,11 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             //LISTS
             var StatusList = new List<SelectListItem>();
@@ -184,7 +181,7 @@ namespace StudentUnion0105.Controllers
             var ToForm = (from o in _organizationType.GetAllOrganizationTypes()
                           join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
                           on o.Id equals l.OrganizationTypeId
-                          where l.LanguageId == DefaultLanguageID
+                          where l.LanguageId == CurrentUser.DefaultLanguageId
                           select new SuObjectVM
                           {
                               Id = o.Id
@@ -207,15 +204,17 @@ namespace StudentUnion0105.Controllers
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
             SuOrganizationEditGetModel Organization = _context.ZdbOrganizationEditGet.FromSql("OrganizationEditGet @LanguageId, @Id", parameters).First();
-            SuOrganizationEditGetWithListModel OrganizationWithList = new SuOrganizationEditGetWithListModel();
-            OrganizationWithList.StatusList = StatusList;
-            OrganizationWithList.TypeList = TypeList;
-            OrganizationWithList.Organization = Organization;
+            SuOrganizationEditGetWithListModel OrganizationWithList = new SuOrganizationEditGetWithListModel
+            {
+                StatusList = StatusList,
+                TypeList = TypeList,
+                Organization = Organization
+            };
 
             return View(OrganizationWithList);
 
@@ -260,8 +259,7 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(SuOrganizationEditGetWithListModel FromForm)
         {
-                SuUserModel CurrentUser = await userManager.GetUserAsync(User);
-                int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@OId", FromForm.Organization.OId),
@@ -292,14 +290,10 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -315,11 +309,11 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageCreate(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -340,10 +334,12 @@ namespace StudentUnion0105.Controllers
 
             if (SuLanguage.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuObjectVM SuObject = new SuObjectVM
+            {
+                ObjectId = Id
+            };
             ViewBag.Id = Id.ToString();
             var OrganizationAndStatus = new SuObjectAndStatusViewModel
             {
@@ -359,14 +355,16 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var OrganizationLanguage = new SuOrganizationLanguageModel();
-                OrganizationLanguage.Name = test3.SuObject.Name;
-                OrganizationLanguage.Description = test3.SuObject.Description;
-                OrganizationLanguage.MouseOver = test3.SuObject.MouseOver;
-                OrganizationLanguage.OrganizationId = test3.SuObject.ObjectId;
-                OrganizationLanguage.LanguageId = test3.SuObject.LanguageId;
+                SuOrganizationLanguageModel OrganizationLanguage = new SuOrganizationLanguageModel
+                {
+                    Name = test3.SuObject.Name,
+                    Description = test3.SuObject.Description,
+                    MouseOver = test3.SuObject.MouseOver,
+                    OrganizationId = test3.SuObject.ObjectId,
+                    LanguageId = test3.SuObject.LanguageId
+                };
 
-                var NewOrganizationLanguage = _OrganizationLanguage.AddOrganizationLanguage(OrganizationLanguage);
+                _OrganizationLanguage.AddOrganizationLanguage(OrganizationLanguage);
 
 
             }
@@ -379,15 +377,15 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -417,15 +415,15 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -436,20 +434,17 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public IActionResult Delete(SuContentTypeDeleteGetModel FromForm)
         {
-            var b = _context.Database.ExecuteSqlCommand($"OrganizationDeletePost {FromForm.Id}");
+            _context.Database.ExecuteSqlCommand($"OrganizationDeletePost {FromForm.Id}");
 
             return RedirectToAction("Index");
 
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageDelete(int Id)
+        public IActionResult LanguageDelete(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

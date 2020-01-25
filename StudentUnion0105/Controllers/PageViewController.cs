@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class PageViewController : Controller
+    //PETER Check what the base class should be
+    public class PageViewController :Controller
     {
         private readonly SuDbContext _context;
         private readonly UserManager<SuUserModel> userManager;
@@ -24,12 +26,12 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
             int Id = 2;
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 

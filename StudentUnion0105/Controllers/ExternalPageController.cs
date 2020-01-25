@@ -44,27 +44,15 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-  //          var CurrentUser = await userManager.GetUserAsync(User);
-    //        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-         //   var UICustomizationArray = new UICustomization(_context);
-           // ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), 41);
-
-//            var parameterPage = new SqlParameter("@LanguageId", DefaultLanguageID);
-
-
             SuExternalPageModel ExternalPage = _context.ZdbExternalPage.FromSql("ExternalPageGetPage").First();
 
 
             List<SuExternalPageSectionModel> ExternalPageSections = _context.ZdbExternalPageSection.FromSql("ExternalPageGetPageSection").ToList();
             ExternalPage.ExternalPageSections = ExternalPageSections;
-            //int NoOfSections = ExternalPage.ExternalPageSections.Count();
-            //int i = 0;
-            //while(i<NoOfSections)
-            //{ 
-                foreach( var SingleSection in ExternalPage.ExternalPageSections)
+
+            foreach( var SingleSection in ExternalPage.ExternalPageSections)
             { 
             SqlParameter[] parameterContent =
                 {
@@ -81,7 +69,7 @@ namespace StudentUnion0105.Controllers
             }
             return View(ExternalPage);
         }
-        public async Task<IActionResult> View(int Id)
+        public IActionResult View(int Id)
         {
 
             var UICustomizationArray = new UICustomization(_context);

@@ -17,31 +17,25 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontOrganizationController : Controller
+    public class FrontOrganizationController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
 
         public FrontOrganizationController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> MyOrganization()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
@@ -53,16 +47,16 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
                     new SqlParameter("@OrganizationId", Id)
-                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
             SqlParameter[] parametersContent =
                 {
@@ -76,10 +70,12 @@ namespace StudentUnion0105.Controllers
             List<SuFrontOrganizationDashboardGetContentModel> FrontOrganizationDashboardGetContent = _context.ZdbFrontOrganizationDashboardGetContent.FromSql("FrontOrganizationDashboardGetContent @OrganizationId, @CurrentUser", parametersContent).ToList();
             List<SuFrontOrganizationDashboardGetUsersModel> FrontOrganizationDashboardGetUsers = _context.ZdbFrontOrganizationDashboardGetUsers.FromSql("FrontOrganizationDashboardGetUsers @OrganizationId, @LanguageId", parameters).ToList();
 
-            SuFrontOrganizationDashboardGetModel OrganizationDashboard = new SuFrontOrganizationDashboardGetModel();
-            OrganizationDashboard.Organization = FrontOrganizationDashboardGetOrganization;
-            OrganizationDashboard.Content = FrontOrganizationDashboardGetContent;
-            OrganizationDashboard.Users = FrontOrganizationDashboardGetUsers;
+            SuFrontOrganizationDashboardGetModel OrganizationDashboard = new SuFrontOrganizationDashboardGetModel
+            {
+                Organization = FrontOrganizationDashboardGetOrganization,
+                Content = FrontOrganizationDashboardGetContent,
+                Users = FrontOrganizationDashboardGetUsers
+            };
             return View(OrganizationDashboard);
         }
 

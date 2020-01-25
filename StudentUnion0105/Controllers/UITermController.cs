@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
@@ -100,7 +101,7 @@ namespace StudentUnion0105.Controllers
 
             if (Languages.Count() == 0)
             {
-                return RedirectToAction("Index", new { Id = Id });
+                return RedirectToAction("Index", new { Id });
             }
             List<SelectListItem> LanguageList = new List<SelectListItem>();
 
@@ -108,8 +109,10 @@ namespace StudentUnion0105.Controllers
             {
                 LanguageList.Add(new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
             }
-            SuTermLanguageCreateGetModel TermLanguage = new SuTermLanguageCreateGetModel();
-            TermLanguage.Id = Id;
+            SuTermLanguageCreateGetModel TermLanguage = new SuTermLanguageCreateGetModel
+            {
+                Id = Id
+            };
             ViewBag.Id = Id.ToString();
             var TermLanguageWithList = new SuTermLanguageCreateGetWithListModel
             {

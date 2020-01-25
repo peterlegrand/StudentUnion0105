@@ -17,26 +17,21 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using StudentUnion0105.Classes;
 
 namespace StudentUnion0105.Controllers
 {
     [AllowAnonymous]
-    public class HomeController : Controller
+    public class HomeController : PortalController
     {
         private readonly IHostingEnvironment hostingEnv;
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public HomeController(IHostingEnvironment env, UserManager<SuUserModel> userManager
                                                             , ILanguageRepository language
                                                 , SuDbContext context
-)
+) : base(userManager, language, context)
         {
             hostingEnv = env;
-            _userManager = userManager;
-            _language = language;
-            _context = context;
         }
         [HttpGet]
         public ActionResult Index()
@@ -68,55 +63,57 @@ namespace StudentUnion0105.Controllers
             //"SourceCode", "FullScreen", "|", "Undo", "Redo"
             //    };
 
-            List<object> menuItems = new List<object>();
-            menuItems.Add(new
+            List<object> menuItems = new List<object>
             {
-                text = "File",
-                items = new List<object>()
+                new
+                {
+                    text = "File",
+                    items = new List<object>()
                     {
                         new { text = "Open" },
                         new { text = "Save" },
                         new { text = "Exit" }
                     }
-            });
-            menuItems.Add(new
-            {
-                text = "Edit",
-                items = new List<object>()
+                },
+                new
+                {
+                    text = "Edit",
+                    items = new List<object>()
                     {
                         new { text = "Cut" },
                         new { text = "Copy" },
                         new { text = "Paste" }
                     }
-            });
-            menuItems.Add(new
-            {
-                text = "View",
-                items = new List<object>()
+                },
+                new
+                {
+                    text = "View",
+                    items = new List<object>()
                     {
                         new { text = "Toolbar" },
                         new { text = "Sidebar" },
                         new { text = "Fullscreen" }
                     }
-            });
-            menuItems.Add(new
-            {
-                text = "Tools",
-                items = new List<object>()
+                },
+                new
+                {
+                    text = "Tools",
+                    items = new List<object>()
                     {
                         new { text = "Spelling & Grammar" },
                         new { text = "Customize" },
                         new { text = "Options" }
                     }
-            });
-            menuItems.Add(new
-            {
-                text = "Go"
-            });
-            menuItems.Add(new
-            {
-                text = "Help"
-            });
+                },
+                new
+                {
+                    text = "Go"
+                },
+                new
+                {
+                    text = "Help"
+                }
+            };
 
             ViewBag.menuItems = menuItems;
 
@@ -136,57 +133,6 @@ namespace StudentUnion0105.Controllers
             //"SourceCode", "FullScreen", "|", "Undo", "Redo"
             //    };
 
-            List<object> menuItems = new List<object>();
-            menuItems.Add(new
-            {
-                text = "File",
-                items = new List<object>()
-                    {
-                        new { text = "Open" },
-                        new { text = "Save" },
-                        new { text = "Exit" }
-                    }
-            });
-            menuItems.Add(new
-            {
-                text = "Edit",
-                items = new List<object>()
-                    {
-                        new { text = "Cut" },
-                        new { text = "Copy" },
-                        new { text = "Paste" }
-                    }
-            });
-            menuItems.Add(new
-            {
-                text = "View",
-                items = new List<object>()
-                    {
-                        new { text = "Toolbar" },
-                        new { text = "Sidebar" },
-                        new { text = "Fullscreen" }
-                    }
-            });
-            menuItems.Add(new
-            {
-                text = "Tools",
-                items = new List<object>()
-                    {
-                        new { text = "Spelling & Grammar" },
-                        new { text = "Customize" },
-                        new { text = "Options" }
-                    }
-            });
-            menuItems.Add(new
-            {
-                text = "Go"
-            });
-            menuItems.Add(new
-            {
-                text = "Help"
-            });
-
-            ViewBag.menuItems = menuItems;
 
 
             return View();
@@ -248,7 +194,7 @@ namespace StudentUnion0105.Controllers
     //    var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
 
-    //    var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+    //    var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
     //    var TopMenu1List = _context.ZdbTopMenu1.FromSql("PartialTopMenu1 @LanguageId", parameter).ToList();
 

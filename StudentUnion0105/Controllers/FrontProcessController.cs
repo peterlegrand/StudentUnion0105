@@ -17,42 +17,26 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontProcessController : Controller
+    public class FrontProcessController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly IClassificationStatusRepository _classificationStatus;
-        private readonly IClassificationRepository _classification;
-        private readonly IClassificationLanguageRepository _classificationLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
-
 
         public FrontProcessController(UserManager<SuUserModel> userManager
-                                                , IClassificationStatusRepository classificationStatus
-                                                , IClassificationRepository classification
-                                                , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _classificationStatus = classificationStatus;
-            _classification = classification;
-            _classificationLanguage = classificationLanguage;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameterPage = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            base.Initializing();
+
+            var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
 
             List<SuFrontProcessIndexGetTemplateGroupModel> FrontProcessTemplateGroups = _context.ZdbFrontProcessIndexGetTemplateGroup.FromSql("FrontProcessIndexGetTemplateGroup @LanguageId", parameterPage).ToList();
@@ -61,8 +45,8 @@ namespace StudentUnion0105.Controllers
             { 
             SqlParameter[] parameterTemplate =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID.ToString())
-                    , new SqlParameter("@PId", ProcessTemplateGroup.OId.ToString())
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
+                    , new SqlParameter("@PId", ProcessTemplateGroup.OId)
                 };
                 List<SuFrontProcessIndexGetTemplateModel> FrontProcessTemplates = 
                         _context.ZdbFrontProcessIndexGetTemplate.FromSql("FrontProcessIndexGetTemplate " +
@@ -159,7 +143,7 @@ namespace StudentUnion0105.Controllers
 
                         }
                     }
-                    catch (SqlException e)
+                    catch (SqlException )
                     {
                         return View(FrontProcessTemplateGroups);
 
@@ -176,20 +160,20 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameterPage = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            base.Initializing();
+
+            var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
 
             SuFrontProcessCreateGetModel FrontProcess = _context.ZdbFrontProcessCreateGet.FromSql("FrontProcessCreateGet @LanguageId", parameterPage).First();
 
             SqlParameter[] FieldParameter =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@PId", Id)
                 };
 

@@ -18,31 +18,21 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontCalendarController : Controller
+    public class FrontCalendarController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
-
 
         public FrontCalendarController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
-        public async Task<IActionResult> EventCalendar()
+        public IActionResult EventCalendar()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+           
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -62,7 +52,6 @@ namespace StudentUnion0105.Controllers
             DateTime FirstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             FrontCalendarWithInfo.StartDay = (int)FirstDay.DayOfWeek;
             FrontCalendarWithInfo.EndDay = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-            int DayOfTheMonth = 1;
 
 
 
@@ -71,11 +60,11 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> MyCalendar()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -96,7 +85,7 @@ namespace StudentUnion0105.Controllers
             DateTime FirstDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             FrontCalendarWithInfo.StartDay = (int)FirstDay.DayOfWeek;
             FrontCalendarWithInfo.EndDay = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-            int DayOfTheMonth = 1;
+//            int DayOfTheMonth = 1;
 
 
 

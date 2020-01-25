@@ -14,16 +14,13 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ProcessTemplateFieldStepsController : Controller
+    public class ProcessTemplateFieldStepsController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
         private readonly IProcessTemplateStepFieldRepository _processTemplateStepField;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
         private readonly IProcessTemplateFieldRepository _processTemplateField;
         private readonly IProcessTemplateStepFieldStatusRepository _processTemplateStepFieldStatus;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public ProcessTemplateFieldStepsController(UserManager<SuUserModel> userManager
             , IProcessTemplateStepFieldRepository processTemplateStepField
@@ -32,24 +29,21 @@ namespace StudentUnion0105.Controllers
             , IProcessTemplateFieldRepository processTemplateField
             , IProcessTemplateStepFieldStatusRepository processTemplateStepFieldStatus
             , ILanguageRepository language
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             _processTemplateStepField = processTemplateStepField;
             _processTemplateStepLanguage = processTemplateStepLanguage;
             _processTemplateFieldLanguage = processTemplateFieldLanguage;
             _processTemplateField = processTemplateField;
             _processTemplateStepFieldStatus = processTemplateStepFieldStatus;
-            _language = language;
-            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             var Steps = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
@@ -58,8 +52,8 @@ namespace StudentUnion0105.Controllers
                                        join f in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
                                        on sf.FieldId equals f.ProcessTemplateFieldId
                                        where sf.FieldId == Id
-                                       && s.LanguageId == DefaultLanguageID
-                                       && f.LanguageId == DefaultLanguageID
+                                       && s.LanguageId == CurrentUser.DefaultLanguageId
+                                       && f.LanguageId == CurrentUser.DefaultLanguageId
                          orderby sf.Sequence
                                        select new SuObjectVM
                                        {
@@ -79,11 +73,11 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             var StepField = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
@@ -92,9 +86,9 @@ namespace StudentUnion0105.Controllers
                                join f in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
                                on sf.FieldId equals f.ProcessTemplateFieldId
                                where sf.Id == Id
-                               && s.LanguageId == DefaultLanguageID
-                               && f.LanguageId == DefaultLanguageID
-                               select new SuObjectVMPageSection
+                               && s.LanguageId == CurrentUser.DefaultLanguageId
+                               && f.LanguageId == CurrentUser.DefaultLanguageId
+                             select new SuObjectVMPageSection
                                {
                                    Id = sf.Id
                                    ,
@@ -113,8 +107,8 @@ namespace StudentUnion0105.Controllers
                                                    join f in _processTemplateFieldLanguage.GetAllProcessTemplateFieldLanguages()
                                                    on sf.FieldId equals f.ProcessTemplateFieldId
                                                    where sf.StepId == StepField.NotNullId
-                                                   && f.LanguageId == DefaultLanguageID
-                                                   orderby sf.Sequence
+                                                   && f.LanguageId == CurrentUser.DefaultLanguageId
+                                                  orderby sf.Sequence
                                                    select new SelectListItem
                                                    {
                                                        Value = sf.Sequence.ToString()
@@ -166,14 +160,13 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(PageSectionAndStatusViewModel UpdatedStepField)
+        public IActionResult Edit(PageSectionAndStatusViewModel UpdatedStepField)
         {
 
             if (ModelState.IsValid)
             {
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateStepFieldUpdate @p0, @p1, @p2",
+    
+                _context.Database.ExecuteSqlCommand("ProcessTemplateStepFieldUpdate @p0, @p1, @p2",
                     parameters: new[] { UpdatedStepField.SuObject.Id.ToString()           //0
                                         ,UpdatedStepField.SuObject.Status.ToString()    //1
                                         ,UpdatedStepField.SuObject.Sequence.ToString()    //2

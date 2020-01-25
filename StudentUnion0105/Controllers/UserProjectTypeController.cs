@@ -14,50 +14,40 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class UserProjectTypeController : Controller
+    public class UserProjectTypeController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly IUserProjectTypeRepository _userProjectType;
         private readonly IUserProjectTypeLanguageRepository _userProjectTypeLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public UserProjectTypeController(UserManager<SuUserModel> userManager
             , IUserProjectTypeRepository userProjectType
             , IUserProjectTypeLanguageRepository UserProjectTypeLanguage
             , ILanguageRepository language
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _userProjectType = userProjectType;
             _userProjectTypeLanguage = UserProjectTypeLanguage;
-            _language = language;
-            _context = context;
         }
         public async Task<IActionResult> Index()
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            base.Initializing();
+
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             //PETER cannot be generic object
             var UserProjectTypes = _context.ZdbObjectIndexGet.FromSql("UserProjectTypeIndexGet @LanguageId", parameter).ToList();
 
             return View(UserProjectTypes);
         }
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
 
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -68,13 +58,9 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
             //PETER this SP is missing
@@ -89,7 +75,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageEdit(SuObjectLanguageEditGetModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
             var CurrentUserId = CurrentUser.Id;
 
             if (ModelState.IsValid)
@@ -105,7 +91,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Modifier", CurrentUserId)
                 };
 
-                var c = _context.Database.ExecuteSqlCommand("UserProjectTypeLanguageEditPost @LId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
+                _context.Database.ExecuteSqlCommand("UserProjectTypeLanguageEditPost @LId, @Name, @Description, @MouseOver, @MenuName, @Modifier",
                  parameters);
             }
 
@@ -117,13 +103,9 @@ namespace StudentUnion0105.Controllers
 
         //
         [HttpGet]
-        public async Task<IActionResult> LanguageCreate(int Id)
+        public IActionResult LanguageCreate(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -131,10 +113,12 @@ namespace StudentUnion0105.Controllers
             var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), parameter);
             Int32 NoOfLanguages = SuLanguage.Count();
             if (NoOfLanguages == 0)
-            { return RedirectToAction("LanguageIndex", new { Id = Id }); }
+            { return RedirectToAction("LanguageIndex", new { Id }); }
 
-            SuObjectLanguageCreateGetModel UserProjectType = new SuObjectLanguageCreateGetModel();
-            UserProjectType.OId = Id;
+            SuObjectLanguageCreateGetModel UserProjectType = new SuObjectLanguageCreateGetModel
+            {
+                OId = Id
+            };
             ViewBag.Id = Id.ToString();
             var UserProjectTypeAndLanguages = new SuObjectLanguageCreateGetWithListModel
             {

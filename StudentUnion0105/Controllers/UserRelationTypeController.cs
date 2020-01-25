@@ -14,49 +14,40 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class UserRelationTypeController : Controller
+    public class UserRelationTypeController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly IUserRelationTypeRepository _userRelationType;
         private readonly IUserRelationTypeLanguageRepository _userRelationTypeLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public UserRelationTypeController(UserManager<SuUserModel> userManager
             , IUserRelationTypeRepository userRelationType
             , IUserRelationTypeLanguageRepository UserRelationTypeLanguage
             , ILanguageRepository language
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _userRelationType = userRelationType;
             _userRelationTypeLanguage = UserRelationTypeLanguage;
-            _language = language;
-            _context = context;
         }
         public async Task<IActionResult> Index()
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            base.Initializing();
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             //PETER cannot be generic object
             List< SuUserRelationTypeIndexGetModel> UserRelationTypes = _context.ZdbUserRelationTypeIndexGet.FromSql("UserRelationTypeIndexGet @LanguageId", parameter).ToList();
 
             return View(UserRelationTypes);
         }
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
 
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", Id);
 
@@ -67,13 +58,9 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
             //PETER this SP is missing
@@ -88,7 +75,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageEdit(SuUserRelationTypeLanguageEditGetModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
             var CurrentUserId = CurrentUser.Id;
 
             if (ModelState.IsValid)
@@ -108,7 +95,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@Modifier", CurrentUserId)
                 };
 
-                var c = _context.Database.ExecuteSqlCommand("UserRelationTypeLanguageEditPost " +
+                _context.Database.ExecuteSqlCommand("UserRelationTypeLanguageEditPost " +
                     "@LId" +
                     ", @FromIsOfToName" +
                     ", @ToIsOfFromName" +
@@ -130,13 +117,9 @@ namespace StudentUnion0105.Controllers
 
         //
         [HttpGet]
-        public async Task<IActionResult> LanguageCreate(int Id)
+        public IActionResult LanguageCreate(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -144,10 +127,12 @@ namespace StudentUnion0105.Controllers
             var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), parameter);
             Int32 NoOfLanguages = SuLanguage.Count();
             if (NoOfLanguages == 0)
-            { return RedirectToAction("LanguageIndex", new { Id = Id }); }
+            { return RedirectToAction("LanguageIndex", new { Id }); }
 
-            SuUserRelationTypeLanguageCreateGetModel UserRelationType = new SuUserRelationTypeLanguageCreateGetModel();
-            UserRelationType.OId = Id;
+            SuUserRelationTypeLanguageCreateGetModel UserRelationType = new SuUserRelationTypeLanguageCreateGetModel
+            {
+                OId = Id
+            };
             ViewBag.Id = Id.ToString();
             var UserRelationTypeAndLanguages = new SuUserRelationTypeLanguageCreateGetWithListModel
             {
@@ -202,14 +187,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -221,7 +206,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Delete(SuUserRelationTypeLanguageDeleteGetModel FromForm)
         {
             SqlParameter parameter = new SqlParameter("@Id", FromForm.LId);
-            var b = _context.Database.ExecuteSqlCommand("UserRelationTypeDeletePost @Id", parameter);
+            _context.Database.ExecuteSqlCommand("UserRelationTypeDeletePost @Id", parameter);
 
             return RedirectToAction("Index");
 

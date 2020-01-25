@@ -15,35 +15,33 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class UserOrganizationController : Controller
+    public class UserOrganizationController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly SuDbContext _context;
         private readonly IUserOrganizationRepository _userOrganization;
 
-        public UserOrganizationController(UserManager<SuUserModel> userManager, SuDbContext context, IUserOrganizationRepository  UserOrganization)
+        public UserOrganizationController(UserManager<SuUserModel> userManager
+                , SuDbContext context
+                , IUserOrganizationRepository  UserOrganization
+                , ILanguageRepository language) : base(userManager, language, context)
         {
-            _userManager = userManager;
-            _context = context;
             _userOrganization = UserOrganization;
         }
         public async Task<IActionResult> Index(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            List<SuIdWithStrings> UserOrganizationFromDb = new List<SuIdWithStrings>();
+
+            base.Initializing();
+            _ = new List<SuIdWithStrings>();
 
             SqlParameter[] parameters =
     {
                     new SqlParameter("@User", Id)
-                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
 
-            UserOrganizationFromDb = _context.DbIdWithStrings.FromSql("UserOrganizationSelectAll @User, @LanguageId", parameters).ToList();
+            List<SuIdWithStrings> UserOrganizationFromDb = _context.DbIdWithStrings.FromSql("UserOrganizationSelectAll @User, @LanguageId", parameters).ToList();
             //}
 
             ViewBag.ObjectId = Id;
@@ -56,14 +54,14 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -87,10 +85,10 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var OrganizationList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
@@ -98,7 +96,7 @@ namespace StudentUnion0105.Controllers
             SqlParameter[] parameters =
     {
                     new SqlParameter("@UserId", Id)
-                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
 
             var OrganizationsFromDB = _context.ZDbStatusList.FromSql("UserOrganizationNewOrganizationsSelect @UserId, @LanguageId", parameters).ToList();
@@ -112,7 +110,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var TypesFromDB = _context.ZDbTypeList.FromSql("UserOrganizationTypeSelectAll @LanguageId", parameter).ToList();
 
@@ -125,8 +123,10 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            SuObjectVM NewUserOrganization = new SuObjectVM();
-            NewUserOrganization.Description = Id;
+            SuObjectVM NewUserOrganization = new SuObjectVM
+            {
+                Description = Id
+            };
             var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = NewUserOrganization, SomeKindINumSelectListItem = OrganizationList, ProbablyTypeListItem = TypeList };
             return View(ClassificationAndStatus);
         }
@@ -136,9 +136,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
 
-                var a = _context.Database.ExecuteSqlCommand("UserOrganizationCreate @p0, @p1, @p2, @p3",
+                _context.Database.ExecuteSqlCommand("UserOrganizationCreate @p0, @p1, @p2, @p3",
                     parameters: new[] { FromForm.SuObject.Description           //0
                                            , FromForm.SuObject.Status.ToString()
                                            , FromForm.SuObject.Type.ToString()

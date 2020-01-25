@@ -7,6 +7,7 @@ using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.IdentityViewModels;
 using StudentUnion0105.Models;
+using StudentUnion0105.Repositories;
 using StudentUnion0105.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,15 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
     [AllowAnonymous]
-    public class UserController : Controller
+    public class UserController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly SuDbContext _context;
 
-        public UserController(UserManager<SuUserModel> userManager, SignInManager<SuUserModel> signInManager, SuDbContext Context)
+        public UserController(UserManager<SuUserModel> userManager
+            , SignInManager<SuUserModel> signInManager
+            , ILanguageRepository language
+            , SuDbContext context) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             SignInManager = signInManager;
-            _context = Context;
         }
 
         public SignInManager<SuUserModel> SignInManager { get; }
@@ -32,13 +32,9 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            base.Initializing();
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-            var AllUsers = await userManager.Users.ToListAsync();
+            var AllUsers = await _userManager.Users.ToListAsync();
             List<SuObjectVM> UserList = new List<SuObjectVM>();
             foreach(var a in AllUsers)
                 {
@@ -56,13 +52,9 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            base.Initializing();
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-            var UserFromDb = await userManager.FindByIdAsync(Id);
+            var UserFromDb = await _userManager.FindByIdAsync(Id);
             CreateUserViewModel UserToForm = new CreateUserViewModel
             {
                 Id = UserFromDb.Id,
@@ -104,7 +96,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(SuUserAndLists FromForm)
         {
            // SuUserModel UpdateUser = new SuUserModel();
-            var UserFromDb = await userManager.FindByIdAsync(FromForm.User.Id);
+            var UserFromDb = await _userManager.FindByIdAsync(FromForm.User.Id);
 
             UserFromDb.Email = FromForm.User.Email;
             UserFromDb.NormalizedEmail = FromForm.User.Email.ToUpper();
@@ -113,17 +105,13 @@ namespace StudentUnion0105.Controllers
             UserFromDb.DefaultLanguageId = FromForm.User.DefaultLanguageId;
             UserFromDb.CountryId = FromForm.User.CountryId;
             //  FromForm.User.SecurityStamp = UserFromDb;
-            await userManager.UpdateAsync(UserFromDb);
+            await _userManager.UpdateAsync(UserFromDb);
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var LanguageList = new List<SelectListItem>();
             var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
@@ -165,19 +153,15 @@ namespace StudentUnion0105.Controllers
             NewUser.DefaultLanguageId = FromForm.User.DefaultLanguageId;
             NewUser.CountryId = FromForm.User.CountryId;
             NewUser.SecurityLevel = 5;
-            await userManager.CreateAsync(NewUser, FromForm.User.Password);
+            await _userManager.CreateAsync(NewUser, FromForm.User.Password);
             return RedirectToAction("Index");
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             return View();
         }
@@ -188,7 +172,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var user = new SuUserModel { UserName = registerViewModel.Email, Email = registerViewModel.Email };
-                var result = await userManager.CreateAsync(user, registerViewModel.Password);
+                var result = await _userManager.CreateAsync(user, registerViewModel.Password);
 
                 if (result.Succeeded)
                 {

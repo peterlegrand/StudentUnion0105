@@ -18,14 +18,11 @@ using Syncfusion.EJ2.Navigations;
 namespace StudentUnion0105.Controllers
 {
 
-    public class PartialController : Controller
+    public class PartialController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
 
         public PartialController(UserManager<SuUserModel> userManager
@@ -34,23 +31,20 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             _classificationStatus = classificationStatus;
             _classification = classification;
             _classificationLanguage = classificationLanguage;
-            _language = language;
-            _context = context;
         }
 
 
         public async Task<IActionResult> Menu()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var Menu1 = _context.ZdbMenu1.FromSql("Menu1 @LanguageId", parameter).ToList();
             var Menu2 = _context.ZdbMenu2.FromSql("Menu2 @LanguageId", parameter).ToList();
@@ -97,8 +91,8 @@ namespace StudentUnion0105.Controllers
 
         public async Task<IActionResult> LeftMenu()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
 
 
             var parameter = new SqlParameter("@CurrentUserId", CurrentUser.Id);
@@ -112,11 +106,11 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> TopMenu()
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var TopMenu1List = _context.ZdbTopMenu1.FromSql("PartialTopMenu1 @LanguageId", parameter).ToList();
 

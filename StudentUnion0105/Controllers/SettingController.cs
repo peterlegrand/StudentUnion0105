@@ -12,31 +12,25 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class SettingController : Controller
+    public class SettingController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly ISettingRepository _setting;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public SettingController(UserManager<SuUserModel> userManager
                                                 , ISettingRepository setting
                                                 , ILanguageRepository language
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _setting = setting;
-            _language = language;
-            _context = context;
         }
         public async Task<IActionResult> Index()
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var ToForm = (
 
@@ -62,10 +56,10 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var ToForm = (
 

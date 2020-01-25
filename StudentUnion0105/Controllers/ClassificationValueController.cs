@@ -15,38 +15,31 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ClassificationValueController : Controller
+    public class ClassificationValueController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
         private readonly IClassificationValueRepository _classificationValue;
         private readonly IClassificationValueLanguageRepository _classificationValueLanguage;
-        private readonly SuDbContext _context;
         private readonly IClassificationLevelRepository _classificationLevel;
-        private readonly ILanguageRepository _language;
 
         public ClassificationValueController(UserManager<SuUserModel> userManager
             , IClassificationValueRepository classificationValue
             , IClassificationValueLanguageRepository classificationValueLanguage
            , SuDbContext context
             , IClassificationLevelRepository classificationLevel
-            , ILanguageRepository language)
+            , ILanguageRepository language) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             _classificationValue = classificationValue;
             _classificationValueLanguage = classificationValueLanguage;
-            _context = context;
             _classificationLevel = classificationLevel;
-            _language = language;
         }
 
         public async Task<IActionResult> Index(int Id)
         {
 
-            SuUserModel CurrentUser = await userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            base.Initializing();
 
             SuInt MaxLevel = new SuInt
             {
@@ -74,24 +67,21 @@ namespace StudentUnion0105.Controllers
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
             var ValueStructure = _context.ZdbClassificationValueIndexGet.FromSql("ClassificationValueIndexGet @LanguageId, @Id", parameters).ToList();
             ViewBag.CId = Id.ToString();
+            new ValueStructureWithDepth { MaxLevel = MaxLevel.intValue, ValueStructure = ValueStructure, MaxConfigLevel = CurrentLevel.intValue };
             var c = new ValueStructureWithDepth { MaxLevel = MaxLevel.intValue, ValueStructure = ValueStructure, MaxConfigLevel = CurrentLevel.intValue };
             return View(c);
         }
-
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public IActionResult Create(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+          
+            base.Initializing();
 
             SuClassificationValueEditGetModel NewValue = new SuClassificationValueEditGetModel
             {
@@ -106,7 +96,6 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@PId", NewValue.PId)
                 };
 
-            SqlParameter parameter = new SqlParameter("@Id", Id);
             SuClassificationValueEditGetLevelModel ClassificationValueEditGetLevel = _context.ZdbClassificationValueEditGetLevel.FromSql("ClassificationValueCreateGetLevel @ParentId, @PId", parameters).First();
 
             NewValue.InDropDown = ClassificationValueEditGetLevel.InDropDown;
@@ -163,8 +152,8 @@ namespace StudentUnion0105.Controllers
         {
             
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                var CurrentUser = await _userManager.GetUserAsync(User);
+    
 
 
                 //var ClassificationValue = new SuClassificationValueModel
@@ -179,7 +168,7 @@ namespace StudentUnion0105.Controllers
                 //var NewClassificationValue = _classificationValue.AddClassificationValue(ClassificationValue);
 
 
-                //var CurrentUser = await userManager.GetUserAsync(User);
+                //var CurrentUser = await _userManager.GetUserAsync(User);
                 //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 //var ClassificationValueLanguage = new SuClassificationValueLanguageModel
                 //{
@@ -206,7 +195,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@FromDate", FromForm.FromDate),
                     new SqlParameter("@ToDate", FromForm.ToDate ),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                     new SqlParameter("@Name", FromForm.Name ?? ""),
                     new SqlParameter("@Description", FromForm.Description ?? ""),
                     new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
@@ -219,7 +208,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@TopicName", FromForm.TopicName ?? "")
                     };
 
-                var b = _context.Database.ExecuteSqlCommand("ClassificationValueCreatePost " +
+               _context.Database.ExecuteSqlCommand("ClassificationValueCreatePost " +
                             "@PId" +
                             ", @ParentId" +
                             ", @FromDate" +
@@ -246,14 +235,14 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
             SqlParameter parameter = new SqlParameter("@Id", Id);
@@ -269,12 +258,11 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(SuClassificationValueEditGetModel FromForm)
         {
           
-                SuUserModel CurrentUser = await userManager.GetUserAsync(User);
-                int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+                SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@OId", FromForm.OId),
-                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                     new SqlParameter("@FromDate", FromForm.FromDate),
                     new SqlParameter("@ToDate", FromForm.ToDate),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
@@ -310,12 +298,9 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = FromForm.PId });
         }
 
-        public async  Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+           base.Initializing();
 
             SqlParameter parameter = new SqlParameter("@OId", Id);
             var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ClassificationValueLanguageIndexGet @OId", parameter).ToList();
@@ -328,10 +313,10 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async  Task<IActionResult> LanguageCreate(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
+
+            base.Initializing();
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
                                 where c.ClassificationValueId == Id
@@ -431,13 +416,11 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+           
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

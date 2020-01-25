@@ -15,39 +15,33 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
         private readonly IProjectLanguageRepository _ProjectLanguage;
         private readonly IProjectRepository _Project;
-        private readonly ILanguageRepository _language;
         private readonly IProjectStatusRepository _projectStatus;
-        private readonly SuDbContext _context;
-
+     
         public ProjectController(UserManager<SuUserModel> userManager
             , IProjectLanguageRepository ProjectLanguage
             , IProjectRepository Project
             , ILanguageRepository language
             , IProjectStatusRepository projectStatus
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            this.userManager = userManager;
             _ProjectLanguage = ProjectLanguage;
             _Project = Project;
-            _language = language;
             _projectStatus = projectStatus;
-            _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+
+            base.Initializing();
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var a = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
@@ -67,13 +61,13 @@ namespace StudentUnion0105.Controllers
         }
         public async Task<IActionResult> Indexw()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
+
             var Projects = (
 
                 from l in _ProjectLanguage.GetAllProjectLanguages()
 
-                where l.LanguageId == DefaultLanguageID
+                where l.LanguageId == CurrentUser.DefaultLanguageId
                 select new SuObjectVM
 
 
@@ -86,13 +80,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public IActionResult Create(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var ParentProject = _Project.GetProject(Id);
 
@@ -121,24 +112,27 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var Project = new SuProjectModel();
-                Project.ModifiedDate = DateTime.Now;
-                Project.CreatedDate = DateTime.Now;
-                Project.ProjectStatusId = FromForm.SuObject.Status;
+                var Project = new SuProjectModel
+                {
+                    ModifiedDate = DateTime.Now,
+                    CreatedDate = DateTime.Now,
+                    ProjectStatusId = FromForm.SuObject.Status
+                };
                 if (FromForm.SuObject.NullId != 0)
                 { Project.ParentProjectId = FromForm.SuObject.NullId; }
                 var NewProject = _Project.AddProject(Project);
 
 
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var ProjectLanguage = new SuProjectLanguageModel();
+                var CurrentUser = await _userManager.GetUserAsync(User);
 
-                ProjectLanguage.Name = FromForm.SuObject.Name;
-                ProjectLanguage.Description = FromForm.SuObject.Description;
-                ProjectLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProjectLanguage.ProjectId = NewProject.Id;
-                ProjectLanguage.LanguageId = DefaultLanguageID;
+                var ProjectLanguage = new SuProjectLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    MouseOver = FromForm.SuObject.MouseOver,
+                    ProjectId = NewProject.Id,
+                    LanguageId = CurrentUser.DefaultLanguageId
+                };
                 _ProjectLanguage.AddProjectLanguage(ProjectLanguage);
 
             }
@@ -151,16 +145,16 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var ToForm = (from s in _Project.GetAllProjects()
                          join t in _ProjectLanguage.GetAllProjectLanguages()
                          on s.Id equals t.ProjectId
-                         where t.LanguageId == DefaultLanguageID && s.Id == Id
+                         where t.LanguageId == CurrentUser.DefaultLanguageId && s.Id == Id
                          select new SuObjectVM
                          {
                              Id = s.Id
@@ -201,13 +195,13 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var Project = _Project.GetProject(FromForm.SuObject.Id);
-                var CurrentUser = await userManager.GetUserAsync(User);
+                var CurrentUser = await _userManager.GetUserAsync(User);
 
                 Project.ModifiedDate = DateTime.Now;
                 Project.ModifierId = CurrentUser.Id;
                 _Project.UpdateProject(Project);
 
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
                 var ProjectLanguage = _ProjectLanguage.GetProjectLanguage(FromForm.SuObject.ObjectLanguageId);
                 ProjectLanguage.Name = FromForm.SuObject.Name;
                 ProjectLanguage.Description = FromForm.SuObject.Description;
@@ -224,14 +218,9 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
-
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -246,11 +235,11 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageCreate(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _ProjectLanguage.GetAllProjectLanguages()
@@ -270,10 +259,12 @@ namespace StudentUnion0105.Controllers
 
             if (SuLanguage.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuObjectVM SuObject = new SuObjectVM
+            {
+                ObjectId = Id
+            };
             ViewBag.Id = Id.ToString();
             var ProjectAndStatus = new SuObjectAndStatusViewModel
             {
@@ -289,14 +280,16 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ProjectLanguage = new SuProjectLanguageModel();
-                ProjectLanguage.Name = FromForm.SuObject.Name;
-                ProjectLanguage.Description = FromForm.SuObject.Description;
-                ProjectLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProjectLanguage.ProjectId = FromForm.SuObject.ObjectId;
-                ProjectLanguage.LanguageId = FromForm.SuObject.LanguageId;
+                var ProjectLanguage = new SuProjectLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    MouseOver = FromForm.SuObject.MouseOver,
+                    ProjectId = FromForm.SuObject.ObjectId,
+                    LanguageId = FromForm.SuObject.LanguageId
+                };
 
-                var NewProjectLanguage = _ProjectLanguage.AddProjectLanguage(ProjectLanguage);
+                _ProjectLanguage.AddProjectLanguage(ProjectLanguage);
 
 
             }
@@ -307,14 +300,11 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

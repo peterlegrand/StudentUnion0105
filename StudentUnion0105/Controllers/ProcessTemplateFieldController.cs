@@ -14,17 +14,14 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ProcessTemplateFieldController : Controller
+    public class ProcessTemplateFieldController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateRepository _processTemplate;
         private readonly IProcessTemplateLanguageRepository _processTemplateLanguage;
-        private readonly ILanguageRepository _language;
         private readonly IProcessTemplateFieldRepository _processTemplateField;
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
         private readonly IProcessTemplateFieldTypeRepository _processTemplateFieldType;
         private readonly IProcessTemplateFieldTypeLanguageRepository _processTemplateFieldTypeLanguage;
-        private readonly SuDbContext _context;
         private readonly IMasterListRepository _masterList;
         private readonly IDataTypeRepository _dataType;
 
@@ -38,17 +35,14 @@ namespace StudentUnion0105.Controllers
             , IProcessTemplateFieldTypeLanguageRepository processTemplateFieldTypeLanguage
             , SuDbContext context
             , IMasterListRepository masterList
-            , IDataTypeRepository dataType)
+            , IDataTypeRepository dataType) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _processTemplate = processTemplate;
             _processTemplateLanguage = processTemplateLanguage;
-            _language = language;
             _processTemplateField = processTemplateField;
             _processTemplateFieldLanguage = processTemplateFieldLanguage;
             _processTemplateFieldType = processTemplateFieldType;
             _processTemplateFieldTypeLanguage = processTemplateFieldTypeLanguage;
-            _context = context;
             _masterList = masterList;
             _dataType = dataType;
         }
@@ -58,14 +52,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@PId", Id)
                 };
             var ProcessTemplateField = _context.ZdbObjectIndexGet.FromSql("ProcessTemplateFieldIndexGet @Id, @LanguageId", parameters).ToList();
@@ -99,23 +93,23 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             SqlParameter[] parameters =
             {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@OId", Id)
                 };
 
             SuProcessTemplateFieldEditGetModel ProcessTemplateFieldEditGet = _context.ZdbSuProcessTemplateFieldEditGet.FromSql("ProcessTemplateFieldEditGet @LanguageId, @OId", parameters).First();
 
             var FieldTypeList = new List<SelectListItem>();
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             var FieldTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
             foreach (var FieldTypeFromDb in FieldTypesFromDb)
             {
@@ -126,9 +120,11 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel();
-            ProcessTemplateFieldWithList.ProcessTemplateField = ProcessTemplateFieldEditGet;
-            ProcessTemplateFieldWithList.FieldTypeList = FieldTypeList;
+            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel
+            {
+                ProcessTemplateField = ProcessTemplateFieldEditGet,
+                FieldTypeList = FieldTypeList
+            };
 
             return View(ProcessTemplateFieldWithList);
 
@@ -206,11 +202,11 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@Id", FromForm.ProcessTemplateField.OId),
-                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                     new SqlParameter("@ProcessTemplateFieldTypeId", FromForm.ProcessTemplateField.ProcessTemplateFieldTypeId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
                     new SqlParameter("@Name", FromForm.ProcessTemplateField.Name),
@@ -218,7 +214,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MouseOver", FromForm.ProcessTemplateField.MouseOver),
                     new SqlParameter("@MenuName", FromForm.ProcessTemplateField.MenuName)
                     };
-                var b = _context.Database.ExecuteSqlCommand("ProcessTemplateFieldEditPost " +
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFieldEditPost " +
                             "@Id" +
                             ", @LanguageId" +
                             ", @ProcessTemplateFieldTypeId" +
@@ -240,14 +236,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             var FieldTypeList = new List<SelectListItem>();
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             var FieldTypesFromDb = _context.ZDbTypeList.FromSql("ContentTypeSelectAllForLanguage @LanguageId", parameter).ToList();
             foreach (var FieldTypeFromDb in FieldTypesFromDb)
             {
@@ -258,11 +254,15 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            SuProcessTemplateFieldEditGetModel ProcessTemplateFieldEditGet = new SuProcessTemplateFieldEditGetModel();
-            ProcessTemplateFieldEditGet.PId = Id;
-            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel();
-            ProcessTemplateFieldWithList.ProcessTemplateField = ProcessTemplateFieldEditGet;
-            ProcessTemplateFieldWithList.FieldTypeList = FieldTypeList;
+            SuProcessTemplateFieldEditGetModel ProcessTemplateFieldEditGet = new SuProcessTemplateFieldEditGetModel
+            {
+                PId = Id
+            };
+            SuProcessTemplateFieldEditGetWithListModel ProcessTemplateFieldWithList = new SuProcessTemplateFieldEditGetWithListModel
+            {
+                ProcessTemplateField = ProcessTemplateFieldEditGet,
+                FieldTypeList = FieldTypeList
+            };
 
             return View(ProcessTemplateFieldWithList);
 
@@ -320,12 +320,12 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
 
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@PId", FromForm.ProcessTemplateField.PId),
-                    new SqlParameter("@LanguageId", DefaultLanguageID),
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                     new SqlParameter("@ProcessTemplateFieldTypeId", FromForm.ProcessTemplateField.ProcessTemplateFieldTypeId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
                     new SqlParameter("@Name", FromForm.ProcessTemplateField.Name),
@@ -349,7 +349,7 @@ namespace StudentUnion0105.Controllers
 //            return RedirectToAction("Index");
 
             //            var CurrentUser = await _userManager.GetUserAsync(User);
-            //            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            //
 
             //            SqlParameter[] parameters =
             //{
@@ -367,15 +367,11 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
 
 
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -387,13 +383,9 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -431,10 +423,10 @@ namespace StudentUnion0105.Controllers
 
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -455,10 +447,12 @@ namespace StudentUnion0105.Controllers
 
             if (SuLanguage.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuObjectVM SuObject = new SuObjectVM
+            {
+                ObjectId = Id
+            };
             ViewBag.Id = Id.ToString();
             var ClassificationAndStatus = new SuObjectAndStatusViewModel
             {
@@ -474,14 +468,16 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ProcessTemplateFieldLanguage = new SuProcessTemplateFieldLanguageModel();
-                ProcessTemplateFieldLanguage.Name = FromForm.SuObject.Name;
-                ProcessTemplateFieldLanguage.Description = FromForm.SuObject.Description;
-                ProcessTemplateFieldLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ProcessTemplateFieldLanguage.ProcessTemplateFieldId = FromForm.SuObject.ObjectId;
-                ProcessTemplateFieldLanguage.LanguageId = FromForm.SuObject.LanguageId;
+                SuProcessTemplateFieldLanguageModel ProcessTemplateFieldLanguage = new SuProcessTemplateFieldLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    MouseOver = FromForm.SuObject.MouseOver,
+                    ProcessTemplateFieldId = FromForm.SuObject.ObjectId,
+                    LanguageId = FromForm.SuObject.LanguageId
+                };
 
-                var NewProcessTemplateField = _processTemplateFieldLanguage.AddProcessTemplateFieldLanguage(ProcessTemplateFieldLanguage);
+                _processTemplateFieldLanguage.AddProcessTemplateFieldLanguage(ProcessTemplateFieldLanguage);
 
 
             }

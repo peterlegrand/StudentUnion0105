@@ -17,31 +17,25 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontRelationController : Controller
+    public class FrontRelationController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
 
         public FrontRelationController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> MyRelation()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 

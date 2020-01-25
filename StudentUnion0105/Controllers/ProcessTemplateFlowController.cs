@@ -16,15 +16,12 @@ using StudentUnion0105.ViewModels;
 namespace StudentUnion0105.Controllers
 {
 
-    public class ProcessTemplateFlowController : Controller
+    public class ProcessTemplateFlowController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly ILanguageRepository _language;
         private readonly IProcessTemplateFlowRepository _processTemplateFlow;
         private readonly IProcessTemplateFlowLanguageRepository _processTemplateFlowLanguage;
         private readonly IProcessTemplateStepRepository _processTemplateStep;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
-        private readonly SuDbContext _context;
 
         public ProcessTemplateFlowController(UserManager<SuUserModel> userManager
             , ILanguageRepository language
@@ -32,31 +29,28 @@ namespace StudentUnion0105.Controllers
             , IProcessTemplateFlowLanguageRepository processTemplateFlowLanguage
             , IProcessTemplateStepRepository processTemplateStep
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
-            _language = language;
             _processTemplateFlow = processTemplateFlow;
             _processTemplateFlowLanguage = processTemplateFlowLanguage;
             _processTemplateStep = processTemplateStep;
             _processTemplateStepLanguage = processTemplateStepLanguage;
-            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var ProcessTemplateFlow = (from p in _processTemplateFlow.GetAllProcessTemplateFlows()
                                         join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
                                on p.Id equals l.FlowId
                                         where p.ProcessTemplateId == Id
-                                        && l.LanguageId == DefaultLanguageID
-                                        orderby l.Name
+                                        && l.LanguageId == CurrentUser.DefaultLanguageId
+                                       orderby l.Name
                                         select new SuObjectVM
                                         {
                                             Id = p.Id
@@ -83,16 +77,15 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+            base.Initializing();
 
             var Flow = (from f in _processTemplateFlow.GetAllProcessTemplateFlows()
                                join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
                                on f.Id equals l.FlowId
-                               where f.Id == Id && l.LanguageId == DefaultLanguageID
-                               orderby l.Name
+                        where f.Id == Id && l.LanguageId == CurrentUser.DefaultLanguageId
+                        orderby l.Name
                                select new SuObjectVMPageSection
                                {
                                    Id = f.ProcessTemplateId
@@ -114,7 +107,7 @@ namespace StudentUnion0105.Controllers
             List<SelectListItem> StepList = (from s in _processTemplateStep.GetAllProcessTemplateSteps()
                                              join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                              on s.Id equals l.StepId
-                                                   where l.LanguageId == DefaultLanguageID
+                                                   where l.LanguageId == CurrentUser.DefaultLanguageId
                                                    && s.ProcessTemplateId == Flow.Id
                                                    orderby l.Name
                                                    select new SelectListItem
@@ -142,12 +135,12 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
+    
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFlowUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                     parameters: new[] { UpdatedFlow.SuObject.ObjectId.ToString()           //0
                                         ,UpdatedFlow.SuObject.NotNullId.ToString()    //1
                                         ,UpdatedFlow.SuObject.NotNullId2.ToString()    //1
-                                        , DefaultLanguageID.ToString()
+                                        , CurrentUser.DefaultLanguageId.ToString()
                                         ,UpdatedFlow.SuObject.Name    //1
                                         ,UpdatedFlow.SuObject.Description    //1
                                         ,UpdatedFlow.SuObject.MouseOver   
@@ -165,19 +158,21 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            SuObjectVMPageSection SuObject = new SuObjectVMPageSection();
-            SuObject.ObjectId = Id;
+
+            base.Initializing();
+
+            SuObjectVMPageSection SuObject = new SuObjectVMPageSection
+            {
+                ObjectId = Id
+            };
 
             //Existing levels
             List<SelectListItem> StepList = (from s in _processTemplateStep.GetAllProcessTemplateSteps()
                                              join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                              on s.Id equals l.StepId
-                                             where l.LanguageId == DefaultLanguageID
+                                             where l.LanguageId == CurrentUser.DefaultLanguageId
                                              && s.ProcessTemplateId ==Id
                                              orderby l.Name
                                              select new SelectListItem
@@ -204,13 +199,13 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFlowCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                    parameters: new[] { FromForm.SuObject.ObjectId.ToString()           //0
                                        , FromForm.SuObject.NotNullId.ToString()           //0
                                        , FromForm.SuObject.NotNullId2.ToString()           //0
-                                       , DefaultLanguageID.ToString()           //0
+                                       , CurrentUser.DefaultLanguageId.ToString()           //0
                                        , FromForm.SuObject.Name           //0
                                        , FromForm.SuObject.Description           //0
                                        , FromForm.SuObject.MouseOver           //0
@@ -226,14 +221,10 @@ namespace StudentUnion0105.Controllers
             }
 
 
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
 
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -245,14 +236,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
 
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -307,10 +294,10 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
@@ -330,10 +317,12 @@ namespace StudentUnion0105.Controllers
 
             if (SuLanguage.Count() == 0)
             {
-                return RedirectToAction("LanguageIndex", new { Id = Id });
+                return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM();
-            SuObject.ObjectId = Id;
+            SuObjectVM SuObject = new SuObjectVM
+            {
+                ObjectId = Id
+            };
             ViewBag.Id = Id.ToString();
             var FlowAndStatus = new SuObjectAndStatusViewModel
             {
@@ -349,14 +338,16 @@ namespace StudentUnion0105.Controllers
         {
             if (ModelState.IsValid)
             {
-                var FlowLanguage = new SuProcessTemplateFlowLanguageModel();
-                FlowLanguage.Name = FromForm.SuObject.Name;
-                FlowLanguage.Description = FromForm.SuObject.Description;
-                FlowLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                FlowLanguage.FlowId = FromForm.SuObject.ObjectId;
-                FlowLanguage.LanguageId = FromForm.SuObject.LanguageId;
+                var FlowLanguage = new SuProcessTemplateFlowLanguageModel
+                {
+                    Name = FromForm.SuObject.Name,
+                    Description = FromForm.SuObject.Description,
+                    MouseOver = FromForm.SuObject.MouseOver,
+                    FlowId = FromForm.SuObject.ObjectId,
+                    LanguageId = FromForm.SuObject.LanguageId
+                };
 
-                var NewFlowLanguage =_processTemplateFlowLanguage.AddProcessTemplateFlowLanguage(FlowLanguage);
+                _processTemplateFlowLanguage.AddProcessTemplateFlowLanguage(FlowLanguage);
 
 
             }

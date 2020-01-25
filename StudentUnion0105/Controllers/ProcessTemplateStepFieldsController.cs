@@ -12,38 +12,32 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ProcessTemplateStepFieldsController : Controller
+    public class ProcessTemplateStepFieldsController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
         private readonly IProcessTemplateStepFieldRepository _processTemplateStepField;
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
         public ProcessTemplateStepFieldsController(UserManager<SuUserModel> userManager
             , IProcessTemplateStepFieldRepository processTemplateStepField
             , IProcessTemplateFieldLanguageRepository processTemplateFieldLanguage
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
             , ILanguageRepository language
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _processTemplateStepField = processTemplateStepField;
             _processTemplateFieldLanguage = processTemplateFieldLanguage;
             _processTemplateStepLanguage = processTemplateStepLanguage;
-            _language = language;
-            _context = context;
         }
 
 
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
 
             var Steps = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
@@ -52,8 +46,8 @@ namespace StudentUnion0105.Controllers
                          join s in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                          on sf.StepId equals s.StepId
                          where sf.FieldId == Id
-                         && f.LanguageId == DefaultLanguageID
-                         && s.LanguageId == DefaultLanguageID
+                         && f.LanguageId == CurrentUser.DefaultLanguageId
+                         && s.LanguageId == CurrentUser.DefaultLanguageId
                          orderby sf.Sequence
                          select new SuObjectVM
                          {

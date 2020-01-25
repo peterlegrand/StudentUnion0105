@@ -15,35 +15,33 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class UserProjectController : Controller
+    public class UserProjectController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly SuDbContext _context;
         private readonly IUserProjectRepository _userProject;
 
-        public UserProjectController(UserManager<SuUserModel> userManager, SuDbContext context, IUserProjectRepository  UserProject)
+        public UserProjectController(UserManager<SuUserModel> userManager
+                , SuDbContext context
+                , IUserProjectRepository UserProject
+                , ILanguageRepository language) : base(userManager, language, context)
         {
-            _userManager = userManager;
-            _context = context;
             _userProject = UserProject;
         }
         public async Task<IActionResult> Index(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            List<SuIdWithStrings> UserProjectFromDb = new List<SuIdWithStrings>();
+
+            base.Initializing();
+            _ = new List<SuIdWithStrings>();
 
             SqlParameter[] parameters =
                 {
                     new SqlParameter("@User", Id)
-                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
 
-            UserProjectFromDb = _context.DbIdWithStrings.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
+            List<SuIdWithStrings> UserProjectFromDb = _context.DbIdWithStrings.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
 
             ViewBag.ObjectId = Id;
 
@@ -54,14 +52,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -85,17 +83,17 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(string Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var ProjectList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();
             SqlParameter[] parameters =
     {
                     new SqlParameter("@User", Id)
-                    , new SqlParameter("@LanguageId", DefaultLanguageID)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
 
             var ProjectsFromDB = _context.ZDbStatusList.FromSql("UserProjectNewProjectsSelect @User, @LanguageId", parameters).ToList();
@@ -109,7 +107,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var parameter = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
             var TypesFromDB = _context.ZDbTypeList.FromSql("UserProjectTypeSelectAll @LanguageId", parameter).ToList();
 
@@ -122,8 +120,10 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            SuObjectVM NewUserProject = new SuObjectVM();
-            NewUserProject.Description = Id;
+            SuObjectVM NewUserProject = new SuObjectVM
+            {
+                Description = Id
+            };
             var ClassificationAndStatus = new SuObjectAndStatusViewModel { SuObject = NewUserProject, SomeKindINumSelectListItem = ProjectList, ProbablyTypeListItem = TypeList };
             return View(ClassificationAndStatus);
         }
@@ -133,9 +133,9 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
 
-                var a = _context.Database.ExecuteSqlCommand("UserProjectCreate @p0, @p1, @p2, @p3",
+                _context.Database.ExecuteSqlCommand("UserProjectCreate @p0, @p1, @p2, @p3",
                     parameters: new[] { FromForm.SuObject.Description           //0
                                            , FromForm.SuObject.Status.ToString()
                                            , FromForm.SuObject.Type.ToString()

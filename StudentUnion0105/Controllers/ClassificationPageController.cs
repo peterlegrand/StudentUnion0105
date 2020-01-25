@@ -14,42 +14,32 @@ using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ClassificationPageController : Controller
+    public class ClassificationPageController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly SuDbContext _context;
         private readonly IClassificationLanguageRepository _classificationLanguage;
-        //private readonly IClassificationPageRepository _classificationPage;
         private readonly IClassificationPageLanguageRepository _classificationPageLanguage;
-        private readonly ILanguageRepository _language;
         
         public ClassificationPageController(UserManager<SuUserModel> userManager
             , IClassificationLanguageRepository classificationLanguage
-            //, IClassificationPageRepository classificationPage
             , IClassificationPageLanguageRepository classificationPageLanguage
             , ILanguageRepository language
             , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            _userManager = userManager;
             _classificationLanguage = classificationLanguage;
             //_classificationPage = classificationPage;
             _classificationPageLanguage = classificationPageLanguage;
-            _language = language;
-            _context = context;
         }
 
         public async Task<IActionResult> Index(int Id)
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
             var ClassificationPage = _context.ZdbObjectIndexGet.FromSql("ClassificationPageIndexGet @Id, @LanguageId", parameters).ToList();
@@ -62,14 +52,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             SqlParameter[] parameters =
     {
-                            new SqlParameter("@LanguageId", DefaultLanguageID)
+                            new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                             , new SqlParameter("@OId", Id)
                         };
 
@@ -101,11 +90,10 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(SuClassificationPageEditGetWithListModel FromForm)
         {
                 SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-                int DefaultLanguageID = CurrentUser.DefaultLanguageId;
                 SqlParameter[] parameters =
                     {
                         new SqlParameter("@OId", FromForm.ClassificationPage.OId),
-                        new SqlParameter("@LanguageId", DefaultLanguageID),
+                        new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                         new SqlParameter("@StatusId", FromForm.ClassificationPage.StatusId),
                         new SqlParameter("@ShowTitleName", FromForm.ClassificationPage.ShowTitleName),
                         new SqlParameter("@ShowTitleDescription", FromForm.ClassificationPage.ShowTitleDescription),
@@ -134,13 +122,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(int Id)
+        public IActionResult Create(int Id)
         {
-            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var ContentStatusFromDb = _context.ZDbStatusList.FromSql("PageStatusSelectAll").ToList();
 
@@ -167,12 +152,12 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(SuClassificationPageEditGetWithListModel FromForm)
         {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
 
                 SqlParameter[] parameters =
                     {
                         new SqlParameter("@PId", FromForm.ClassificationPage.PId)
-                        , new SqlParameter("@LanguageId", DefaultLanguageID)
+                        , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                         , new SqlParameter("@StatusId", FromForm.ClassificationPage.StatusId)
                         , new SqlParameter("@ShowTitleName", FromForm.ClassificationPage.ShowTitleName)
                         , new SqlParameter("@ShowTitleDescription", FromForm.ClassificationPage.ShowTitleDescription)
@@ -201,13 +186,10 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = FromForm.ClassificationPage.PId.ToString() });
         }
 
-        public async Task<IActionResult> LanguageIndex(int Id)
+        public IActionResult LanguageIndex(int Id)
         {
-            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            
+            base.Initializing();
 
             SqlParameter parameter = new SqlParameter("@OId", Id);
 
@@ -218,13 +200,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageEdit(int Id)
+        public IActionResult LanguageEdit(int Id)
         {
-            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+          
+            base.Initializing();
 
             SqlParameter parameter = new SqlParameter("@LId", Id);
 
@@ -236,11 +215,9 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageEdit(SuClassificationPageLanguageEditGetModel FromForm)
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            
+            base.Initializing();
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-         
             SqlParameter[] parameters =
                     {
                         new SqlParameter("@LId", FromForm.LId),
@@ -266,12 +243,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageCreate(int Id)
+        IActionResult LanguageCreate(int Id)
         {
-            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            
+            base.Initializing();
 
             AvailableObjectLanguages AvailableLanguages = new AvailableObjectLanguages(_context);
             var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), Id);
@@ -325,13 +300,10 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LanguageDelete(int Id)
+        public IActionResult LanguageDelete(int Id)
         {
-            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             SqlParameter parameter = new SqlParameter("@LId", Id);
             SuClassificationPageLanguageEditGetModel ClassificationPageLanguage = _context.ZdbClassificationPageLanguageEditGet.FromSql("ClassificationPageLanguageEditGet @LId", parameter).First();
@@ -350,15 +322,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
-            int DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            
 
-            UICustomization UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
                         new SqlParameter("@OId", Id)
-                        , new SqlParameter("@LanguageId", DefaultLanguageID)
+                        , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     };
 
             SuClassificationPageDeleteGetModel ClassificationPage = _context.ZdbClassificationPageDeleteGet.FromSql("ClassificationPageDeleteGet @OId, @LanguageId", parameters).First();

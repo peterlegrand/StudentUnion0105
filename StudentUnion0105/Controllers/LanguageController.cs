@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StudentUnion0105.Classes;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
 using System.Threading.Tasks;

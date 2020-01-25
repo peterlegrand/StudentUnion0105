@@ -15,32 +15,25 @@ namespace StudentUnion0105.Controllers
 {
     [Authorize("Role")]
 
-    public class RoleController : Controller
+    public class RoleController : PortalController
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<SuUserModel> userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IClaimRepository _claim;
-        private readonly SuDbContext _context;
-
+        
         public RoleController(RoleManager<IdentityRole> roleManager
                                         , UserManager<SuUserModel> userManager
             , IClaimRepository Claim
-            , SuDbContext context)
+            , ILanguageRepository language
+            , SuDbContext context) : base(userManager, language, context)
         {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
+            _roleManager = roleManager;
             _claim = Claim;
-            _context = context;
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             return View();
         }
@@ -51,7 +44,7 @@ namespace StudentUnion0105.Controllers
             {
                 IdentityRole irole = new IdentityRole
                 { Name = model.RoleName, NormalizedName = model.RoleName.ToUpper() };
-                IdentityResult iresult = await roleManager.CreateAsync(irole);
+                IdentityResult iresult = await _roleManager.CreateAsync(irole);
                 if (iresult.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -65,16 +58,12 @@ namespace StudentUnion0105.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            base.Initializing();
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-            var roles = roleManager.Roles;
+            var roles = _roleManager.Roles;
 
             return View(roles);
         }
@@ -82,13 +71,9 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(string id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            base.Initializing();
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-            var role = await roleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
 
             {
@@ -101,9 +86,9 @@ namespace StudentUnion0105.Controllers
                 RoleName = role.Name,
                 Claims = new List<Claim>()
             };
-            foreach (var user in userManager.Users)
+            foreach (var user in _userManager.Users)
             {
-                if (await userManager.IsInRoleAsync(user, role.Name))
+                if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     Model.Users.Add(user.UserName);
                 }
@@ -111,7 +96,7 @@ namespace StudentUnion0105.Controllers
             }
             //if(Model.Users.Count()>1)
             //            Model.Users.Sort();
-            var ClaimList = await roleManager.GetClaimsAsync(role);
+            var ClaimList = await _roleManager.GetClaimsAsync(role);
             //            Claim Claim1 = new Claim();
             if (ClaimList.Count > 0)
             {
@@ -130,7 +115,7 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditRoleViewModel model)
         {
-            var role = await roleManager.FindByIdAsync(model.Id);
+            var role = await _roleManager.FindByIdAsync(model.Id);
             if (role == null)
 
             {
@@ -140,7 +125,7 @@ namespace StudentUnion0105.Controllers
             else
             {
                 role.Name = model.RoleName;
-                var result = await roleManager.UpdateAsync(role);
+                var result = await _roleManager.UpdateAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -159,16 +144,12 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Users(string Id)
         {
 
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             var NewUsers = new List<AddUsersToRoleViewModel>();
-            var AllUserList = userManager.Users;
-            var role = await roleManager.FindByIdAsync(Id);
-            var AssignedUsers = await userManager.GetUsersInRoleAsync(role.Name);
+            var AllUserList = _userManager.Users;
+            var role = await _roleManager.FindByIdAsync(Id);
+            var AssignedUsers = await _userManager.GetUsersInRoleAsync(role.Name);
 
             foreach (var user in AllUserList)
 
@@ -207,9 +188,9 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Users(List<AddUsersToRoleViewModel> UserUpdates, string Id)
         {
-            var role = await roleManager.FindByIdAsync(Id);
+            var role = await _roleManager.FindByIdAsync(Id);
             //Users currently assigned.
-            var AssignedUsers = await userManager.GetUsersInRoleAsync(role.Name);
+            var AssignedUsers = await _userManager.GetUsersInRoleAsync(role.Name);
             //New assigned
             foreach (var u in UserUpdates)
             {
@@ -231,16 +212,16 @@ namespace StudentUnion0105.Controllers
                 }
                 if (CheckedUser && !HaveUser)
                 {
-                    var us = await userManager.FindByEmailAsync(u.UserName);
-                    await userManager.AddToRoleAsync(us, role.Name);//   ..AddClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    var us = await _userManager.FindByEmailAsync(u.UserName);
+                    await _userManager.AddToRoleAsync(us, role.Name);//   ..AddClaimAsync(role, new Claim("Menu", u.ClaimValue));
                 }
                 if (!CheckedUser && HaveUser)
                 {
-                    var results = await userManager.RemoveFromRoleAsync(AssignedUser, role.Name);// roleManager.RemoveClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    await _userManager.RemoveFromRoleAsync(AssignedUser, role.Name);// _roleManager.RemoveClaimAsync(role, new Claim("Menu", u.ClaimValue));
 
                 }
             }
-            return RedirectToAction("Edit", new { Id = Id });
+            return RedirectToAction("Edit", new { Id });
         }
 
 
@@ -248,18 +229,15 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Rights(string Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             //List<string> NewClaims = new List<string>();
             var NewClaims = new List<AddRightsToRoleViewModel>();
             //All rights assigned and not assigned.
             var AllClaimList = _claim.GetAllClaims();
-            var role = await roleManager.FindByIdAsync(Id);
-            var AssignedClaims = await roleManager.GetClaimsAsync(role);
+            var role = await _roleManager.FindByIdAsync(Id);
+            var AssignedClaims = await _roleManager.GetClaimsAsync(role);
             //if (AssignedClaims.Count > 0)
             //{
             foreach (var AllClaim in AllClaimList)
@@ -300,9 +278,9 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public async Task<IActionResult> Rights(List<AddRightsToRoleViewModel> ClaimUpdates, string Id)
         {
-            var role = await roleManager.FindByIdAsync(Id);
+            var role = await _roleManager.FindByIdAsync(Id);
             //Claims is currently assigned.
-            var claims = await roleManager.GetClaimsAsync(role);
+            var claims = await _roleManager.GetClaimsAsync(role);
             foreach (var u in ClaimUpdates)
             {
                 bool CheckedClaim = u.IsSelected;
@@ -320,15 +298,15 @@ namespace StudentUnion0105.Controllers
                 }
                 if (CheckedClaim && !HaveClaim)
                 {
-                    await roleManager.AddClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    await _roleManager.AddClaimAsync(role, new Claim("Menu", u.ClaimValue));
                 }
                 if (!CheckedClaim && HaveClaim)
                 {
-                    var results = await roleManager.RemoveClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    await _roleManager.RemoveClaimAsync(role, new Claim("Menu", u.ClaimValue));
 
                 }
             }
-            return RedirectToAction("Edit", new { Id = Id });
+            return RedirectToAction("Edit", new { Id });
         }
     }
 

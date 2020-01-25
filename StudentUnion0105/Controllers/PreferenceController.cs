@@ -17,31 +17,25 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
     [Authorize("Classification")]
-    public class PreferenceController : Controller
+    public class PreferenceController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
 
 
         public PreferenceController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base(userManager, language, context)
         {
-            this.userManager = userManager;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             var parameter = new SqlParameter("@Id", CurrentUser.Id);
 
@@ -75,7 +69,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@LanguageId", FromForm.Preference.DefaultLanguageId),
                     new SqlParameter("@CountryId", FromForm.Preference.CountryId)
                     };
-            var b = _context.Database.ExecuteSqlCommand("PreferenceIndexPost " +
+            _context.Database.ExecuteSqlCommand("PreferenceIndexPost " +
                         "@UserId" +
                         ", @LanguageId" +
                         ", @CountryId" , parameters);
@@ -84,11 +78,10 @@ namespace StudentUnion0105.Controllers
     [HttpGet]
     public async Task<IActionResult> LeftMenu()
     {
-        var CurrentUser = await userManager.GetUserAsync(User);
-        var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
+        var CurrentUser = await _userManager.GetUserAsync(User);
+        
         var UICustomizationArray = new UICustomization(_context);
-        ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+        ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), CurrentUser.DefaultLanguageId);
 
         var parameter = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
@@ -105,22 +98,22 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> LeftMenuEdit(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
                     new SqlParameter("@Id", Id),
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     };
 
             SqlParameter[] parameters2 =
                 {
                     new SqlParameter("@CurrentUser", CurrentUser.Id),
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     };
 
             SuPreferenceLeftMenuEditGetModel MenuEditGet = _context.ZdbPreferenceLeftMenuEditGet.FromSql("PreferenceLeftMenuEditGet @Id, @LanguageId", parameters).First();
@@ -135,21 +128,21 @@ namespace StudentUnion0105.Controllers
                     Value = OtherMenu.Id.ToString()
                 });
             }
-            SuPreferenceLeftMenuEditGetModelWithList MenuWithList = new SuPreferenceLeftMenuEditGetModelWithList();
-
-            MenuWithList.MenuEdit = MenuEditGet;
-            MenuWithList.OtherMenus= MenuList;
+            SuPreferenceLeftMenuEditGetModelWithList MenuWithList = new SuPreferenceLeftMenuEditGetModelWithList
+            {
+                MenuEdit = MenuEditGet,
+                OtherMenus = MenuList
+            };
 
             return View(MenuWithList);
         }
 
         [HttpPost]
-        public async Task<IActionResult> LeftMenuEdit(SuPreferenceLeftMenuEditGetModelWithList FromForm)
+        public IActionResult LeftMenuEdit(SuPreferenceLeftMenuEditGetModelWithList FromForm)
         {
             if (ModelState.IsValid)
             {
-                var CurrentUser = await userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
                 SqlParameter[] parameters =
                     {
                     new SqlParameter("@Id", FromForm.MenuEdit.UserMenuId),
@@ -161,7 +154,7 @@ namespace StudentUnion0105.Controllers
                     new SqlParameter("@MenuURL", FromForm.MenuEdit.MenuURL ?? ""),
                     new SqlParameter("@Sequence", FromForm.MenuEdit.Sequence),
                     };
-                var b = _context.Database.ExecuteSqlCommand("PreferenceLeftMenuEditPost " +
+                _context.Database.ExecuteSqlCommand("PreferenceLeftMenuEditPost " +
                             "@Id" +
                             ", @MenuShow" +
                             ", @MenuAddShow" +

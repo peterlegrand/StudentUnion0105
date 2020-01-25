@@ -17,42 +17,23 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
 //    [Authorize("Classification")]
-    public class FrontPageController : Controller
+    public class FrontPageController : PortalController
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly IClassificationStatusRepository _classificationStatus;
-        private readonly IClassificationRepository _classification;
-        private readonly IClassificationLanguageRepository _classificationLanguage;
-        private readonly ILanguageRepository _language;
-        private readonly SuDbContext _context;
-
-
         public FrontPageController(UserManager<SuUserModel> userManager
-                                                , IClassificationStatusRepository classificationStatus
-                                                , IClassificationRepository classification
-                                                , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            )
+            ) : base (userManager, language, context)
         {
-            this.userManager = userManager;
-            _classificationStatus = classificationStatus;
-            _classification = classification;
-            _classificationLanguage = classificationLanguage;
-            _language = language;
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            
+            base.Initializing();
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
-            var parameterPage = new SqlParameter("@LanguageId", DefaultLanguageID);
+            var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
 
             SuFrontPageModel FrontPage = _context.ZdbFrontPage.FromSql("FrontPageGetPage @LanguageId", parameterPage).First();
@@ -60,17 +41,14 @@ namespace StudentUnion0105.Controllers
 
             List<SuFrontPageSectionModel> FrontPageSections = _context.ZdbFrontPageSection.FromSql("FrontPageGetPageSection @LanguageId", parameterPage).ToList();
             FrontPage.FrontPageSections = FrontPageSections;
-            //int NoOfSections = FrontPage.FrontPageSections.Count();
-            //int i = 0;
-            //while(i<NoOfSections)
-            //{ 
-                foreach( var SingleSection in FrontPage.FrontPageSections)
+
+            foreach( var SingleSection in FrontPage.FrontPageSections)
             { 
             SqlParameter[] parameterContent =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID.ToString())
-                    , new SqlParameter("@PageSectionId", SingleSection.OId.ToString())
-                    , new SqlParameter("@SecurityLevel", CurrentUser.SecurityLevel.ToString())
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
+                    , new SqlParameter("@PageSectionId", SingleSection.OId)
+                    , new SqlParameter("@SecurityLevel", CurrentUser.SecurityLevel)
                     , new SqlParameter("@PagingId", "0")
                 };
                 List<SuFrontContentModel> FrontContent = 
@@ -81,21 +59,20 @@ namespace StudentUnion0105.Controllers
                         ", @PagingId"
                         , parameterContent).ToList();
                 SingleSection.FrontContent = FrontContent;
- //               i++;
+
             }
             return View(FrontPage);
         }
+
         public async Task<IActionResult> View(int Id)
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -106,19 +83,12 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> MyContent()
         {
-            var CurrentUser = await userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+            var CurrentUser = await _userManager.GetUserAsync(User);
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-
+            base.Initializing();
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
-
             List< SuFrontPageMyContentGetModel> FrontPageMyContent = _context.ZdbFrontPageMyContentGet.FromSql("FrontPageMyContentGet @CurrentUser", parameterPage).ToList();
-
-
-
             
             return View(FrontPageMyContent);
         }

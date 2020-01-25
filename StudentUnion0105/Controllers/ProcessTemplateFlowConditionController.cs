@@ -15,41 +15,26 @@ using StudentUnion0105.ViewModels;
 
 namespace StudentUnion0105.Controllers
 {
-    public class ProcessTemplateFlowConditionController : Controller
+    public class ProcessTemplateFlowConditionController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly IProcessTemplateFlowConditionRepository _processTemplateFlowCondition;
-        private readonly IProcessTemplateFlowConditionLanguageRepository _processTemplateFlowConditionLanguageRepository;
-        private readonly ILanguageRepository _language;
-        private readonly IPageSectionTypeRepository _pageSectionType;
-        private readonly SuDbContext _context;
 
         public ProcessTemplateFlowConditionController(UserManager<SuUserModel> userManager
-            , IProcessTemplateFlowConditionRepository processTemplateFlowCondition
-            , IProcessTemplateFlowConditionLanguageRepository templateFlowConditionLanguageRepository
             , ILanguageRepository language
-            , IPageSectionTypeRepository pageSectionType
-            , SuDbContext context)
+            , SuDbContext context) : base(userManager, language, context)
         {
-            _userManager = userManager;
-            _processTemplateFlowCondition = processTemplateFlowCondition;
-            _processTemplateFlowConditionLanguageRepository = templateFlowConditionLanguageRepository;
-            _language = language;
-            _pageSectionType = pageSectionType;
-            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@PId", Id)
                 };
 
@@ -61,14 +46,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+
+
+            base.Initializing();
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
@@ -90,12 +75,14 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql($"ProcessTemplateFlowConditionCreateGetFields @LanguageId, @Id", parameters).ToList();
 
-            var ProcessTemplateFlowFieldList = new List<SelectListItem>();
-            ProcessTemplateFlowFieldList.Add(new SelectListItem
+            var ProcessTemplateFlowFieldList = new List<SelectListItem>
             {
-                Text = "No field",
-                Value = "0"
-            });
+                new SelectListItem
+                {
+                    Text = "No field",
+                    Value = "0"
+                }
+            };
             foreach (var ProcessTemplateFlowFieldFromDb in ProcessTemplateFlowFieldsFromDb)
             {
                 ProcessTemplateFlowFieldList.Add(new SelectListItem
@@ -153,12 +140,12 @@ namespace StudentUnion0105.Controllers
 //            if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+    
                 //                var FieldId 
 
                 SqlParameter[] parameters =
                {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@OId", FromForm.Condition.OId)
                     , new SqlParameter("@Name", FromForm.Condition.Name ?? "")
                     , new SqlParameter("@Description", FromForm.Condition.Description ?? "")
@@ -173,7 +160,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@DataTypeId", FromForm.Condition.DataTypeId)
                 };
 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionEditPost " +
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionEditPost " +
                     "@LanguageId, @OId, @Name, @Description, @MouseOver, @MenuName, @ConditionTypeId, @FieldId, " +
                     "@String, @Int, @Date, @ComparisonOperatorId, @DataTypeId",
                     parameters);
@@ -191,16 +178,18 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
-            SuObjectVMPageSection ToForm = new SuObjectVMPageSection();
-            ToForm.Id = Id;
+            SuObjectVMPageSection ToForm = new SuObjectVMPageSection
+            {
+                Id = Id
+            };
 
             var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
 
-            ToForm.LanguageId= DefaultLanguageID;
+
+            base.Initializing();
+
+            ToForm.LanguageId= CurrentUser.DefaultLanguageId;
             var ProcessTemplateFlowConditionTypesFromDb = _context.ZDbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();
 
             var ProcessTemplateFlowConditionTypeList = new List<SelectListItem>();
@@ -216,19 +205,21 @@ namespace StudentUnion0105.Controllers
 
             SqlParameter[] parameters =
     {
-                    new SqlParameter("@LanguageId", DefaultLanguageID)
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                     , new SqlParameter("@Id", Id)
                 };
 
 
             var ProcessTemplateFlowFieldsFromDb = _context.ZDbStatusList.FromSql("GetProcessTemplateFlowConditionCreateGetFields @LanguageId, @Id", parameters).ToList();
 
-            var ProcessTemplateFlowFieldList = new List<SelectListItem>();
-            ProcessTemplateFlowFieldList.Add(new SelectListItem
+            var ProcessTemplateFlowFieldList = new List<SelectListItem>
             {
-                Text = "No field",
-                Value = "0"
-            });
+                new SelectListItem
+                {
+                    Text = "No field",
+                    Value = "0"
+                }
+            };
             foreach (var ProcessTemplateFlowFieldFromDb in ProcessTemplateFlowFieldsFromDb)
             {
                 ProcessTemplateFlowFieldList.Add(new SelectListItem
@@ -239,13 +230,15 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var ComparisonOperator = new List<SelectListItem>();
-            ComparisonOperator.Add(new SelectListItem() { Text = "Equal", Value = "EQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Larger", Value = "LA" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Smaller", Value = "SM" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Larger or equal", Value = "LQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Smaller or equal", Value = "SQ" });
-            ComparisonOperator.Add(new SelectListItem() { Text = "Not equal", Value = "NQ" });
+            var ComparisonOperator = new List<SelectListItem>
+            {
+                new SelectListItem() { Text = "Equal", Value = "EQ" },
+                new SelectListItem() { Text = "Larger", Value = "LA" },
+                new SelectListItem() { Text = "Smaller", Value = "SM" },
+                new SelectListItem() { Text = "Larger or equal", Value = "LQ" },
+                new SelectListItem() { Text = "Smaller or equal", Value = "SQ" },
+                new SelectListItem() { Text = "Not equal", Value = "NQ" }
+            };
 
             var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = ToForm, SomeKindINumSelectListItem = ComparisonOperator, ProbablyTypeListItem = ProcessTemplateFlowConditionTypeList, ProbablyTypeListItem2 = ProcessTemplateFlowFieldList };
             return View(ClassificationAndStatus);
@@ -254,14 +247,12 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PageSectionAndStatusViewModel FromForm)
+        public IActionResult Create(PageSectionAndStatusViewModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var CurrentUser = await _userManager.GetUserAsync(User);
-                var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                //                var FieldId 
-                var a = _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
+    
+                _context.Database.ExecuteSqlCommand("ProcessTemplateFlowConditionCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, " +
                     "@p8, @p9, @p10",
                     parameters: new[] { FromForm.SuObject.Id.ToString()           //0
                                         ,FromForm.SuObject.LanguageId.ToString()    //1
