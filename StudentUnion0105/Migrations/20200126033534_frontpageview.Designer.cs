@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200126033534_frontpageview")]
+    partial class frontpageview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "35a68c07-39c0-4029-b605-aa1ee03d66e8",
-                            ConcurrencyStamp = "3553a95a-c113-4384-9d14-539bb08c3437",
+                            Id = "052ef3eb-7f3c-4d8b-9129-b2a3ba28f074",
+                            ConcurrencyStamp = "b546e3c7-4b29-499d-b7ea-954830cf02b1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "314e79b6-d994-4c0d-89ca-4a762da16c7a",
-                            ConcurrencyStamp = "6eaf86bf-3f12-488a-aa75-aa0bef4f2630",
+                            Id = "e875352f-7b0f-40fc-a838-9897810c462d",
+                            ConcurrencyStamp = "310e345b-211b-4149-94fa-b126e1294880",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1848,7 +1850,7 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassificationName");
+                    b.Property<string>("ClassicationName");
 
                     b.Property<string>("ValueName");
 
@@ -1868,8 +1870,6 @@ namespace StudentUnion0105.Migrations
                     b.Property<string>("Creator");
 
                     b.Property<string>("Description");
-
-                    b.Property<int>("IsCurrentUser");
 
                     b.Property<DateTime>("ModifiedDate");
 

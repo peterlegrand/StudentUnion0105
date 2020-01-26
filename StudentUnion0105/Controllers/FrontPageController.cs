@@ -72,13 +72,18 @@ namespace StudentUnion0105.Controllers
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
-                    , new SqlParameter("@Id", Id)
+                    new SqlParameter("@Id", Id)
+                    , new SqlParameter("@CurrentUser", CurrentUser.Id)
                 };
 
-            var FrontPageContent = _context.ZdbFrontPageViewGet.FromSql("FrontPageViewGet @LanguageId, @Id", parameters).First();
+            var FrontPageContent = _context.ZdbFrontPageViewGet.FromSql("FrontPageViewGet @Id, @CurrentUser", parameters).First();
+            var FrontPageContentClassificationValues = _context.ZdbSuFrontPageViewGetClassificationValues.FromSql("FrontPageViewGetClassificationValues @Id, @CurrentUser", parameters).ToList();
 
-            return View(FrontPageContent);
+            SuFrontPageViewGetWithValuesModel ContentWithValues = new SuFrontPageViewGetWithValuesModel();
+
+            ContentWithValues.Content = FrontPageContent;
+            ContentWithValues.Values = FrontPageContentClassificationValues;
+            return View(ContentWithValues);
         }
         [HttpGet]
         public async Task<IActionResult> MyContent()

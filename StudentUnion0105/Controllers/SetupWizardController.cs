@@ -187,6 +187,7 @@ namespace StudentUnion0105.Controllers
 , "FrontPageMyContentGet.sql"
 , "FrontPageGetPageSection.sql"
 , "FrontPageViewGet.sql"
+, "FrontPageViewGetClassificationValues.sql"
 , "FrontProcessCreateGet.sql"
 , "FrontProcessCreateGetField.sql"
 , "FrontProcessIndexGetTemplate.sql"

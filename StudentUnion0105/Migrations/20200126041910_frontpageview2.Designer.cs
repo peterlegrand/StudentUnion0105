@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200126041910_frontpageview2")]
+    partial class frontpageview2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "35a68c07-39c0-4029-b605-aa1ee03d66e8",
-                            ConcurrencyStamp = "3553a95a-c113-4384-9d14-539bb08c3437",
+                            Id = "b4b26dbf-dece-42b0-8bf0-091c46b1490f",
+                            ConcurrencyStamp = "289d4aff-0e72-4ae8-b5cd-a7d23fd4c0bb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "314e79b6-d994-4c0d-89ca-4a762da16c7a",
-                            ConcurrencyStamp = "6eaf86bf-3f12-488a-aa75-aa0bef4f2630",
+                            Id = "3c5b29f7-5ee9-44a6-9ab5-550b8f5382f7",
+                            ConcurrencyStamp = "8a3839cd-6ce2-4deb-a087-996a4bff388a",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1869,7 +1871,7 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("IsCurrentUser");
+                    b.Property<bool>("IsCurrentUser");
 
                     b.Property<DateTime>("ModifiedDate");
 

@@ -1,8 +1,10 @@
 CREATE PROCEDURE FrontPageViewGet (
-	@LanguageId int
-	, 	@Id int
-	)
+	@Id int
+	, @CurrentUser nvarchar(50))
 AS
+DECLARE @SecurityLevel int;
+DECLARE @LanguageID int;
+SELECT @SecurityLevel = SecurityLevel, @LanguageId = DefaultLanguageId FROM AspNetUsers WHERE Id = @CurrentUser;
 SELECT 
 	dbContent.Id
 	, dbContent.Title
@@ -15,6 +17,7 @@ SELECT
 	, dbContentStatus.Name StatusName
 	, dbContentTypeLanguage.Name TypeName
 	, dbOrganizationLanguage.Name OrganizationName
+	, iif(DbContent.CreatorId = @CurrentUser,1,0) IsCurrentUser
 FROM dbContent
 JOIN AspNetUsers Creator
 	ON dbContent.CreatorId = Creator.Id
@@ -35,3 +38,4 @@ JOIN dbOrganizationLanguage
 WHERE dbContentTypeLanguage.LanguageId = @LanguageId
 	AND dbOrganizationLanguage.LanguageId = @LanguageId
 	AND dbContent.Id = @Id
+	AND DbContent.SecurityLevel <= @SecurityLevel

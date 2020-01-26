@@ -19,6 +19,21 @@ namespace StudentUnion0105.Models
         public string StatusName { get; set; }
         public string TypeName { get; set; }
         public string OrganizationName { get; set; }
+        public int IsCurrentUser { get; set; }
+
+    }
+    public class SuFrontPageViewGetClassificationValuesModel
+    {
+        public int Id { get; set; }
+        public string ValueName { get; set; }
+        public string ClassificationName { get; set; }
+    }
+    public class SuFrontPageViewGetWithValuesModel
+    {
+
+        public SuFrontPageViewGetModel Content { get; set; }
+        public List<SuFrontPageViewGetClassificationValuesModel> Values { get; set; }
+
 
     }
 }

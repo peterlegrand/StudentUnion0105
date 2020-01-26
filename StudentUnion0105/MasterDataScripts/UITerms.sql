@@ -325,4 +325,7 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(322, 'Demo data', 'Demo data
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(323, 'Demo data NL', 'Demo data NL');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(324, 'Demo data is done', 'Demo data is done');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(325, 'Back to Setup wizard', 'Back to Setup wizard');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(326, 'View content', 'View content');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(327, 'Date created', 'Date created');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(328, 'Date modified', 'Date modified');
 SET IDENTITY_INSERT dbUITerm OFF;

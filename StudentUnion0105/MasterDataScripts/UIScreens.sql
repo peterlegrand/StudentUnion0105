@@ -240,5 +240,5 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1234, 'Preference', 'LeftM
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1235, 'Preference', 'LeftMenuDelete');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1236, 'SetupWizard', 'DemoDataNL');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1237, 'SetupWizard', 'DemoDataNL');
-
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1238, 'FrontPage', 'View');
 SET IDENTITY_INSERT dbUIScreen OFF;
