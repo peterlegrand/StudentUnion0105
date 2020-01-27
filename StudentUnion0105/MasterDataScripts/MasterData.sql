@@ -866,3 +866,21 @@ INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUE
 INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(28,'DbUserProjectType', 'User role types in projects', '' );
 INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUES(29,'DbUserRelationType', 'User relation types with other users', '' );
 SET IDENTITY_INSERT dbTableName OFF;
+
+
+SET IDENTITY_INSERT dbContentTypeClassificationStatus OFF;
+INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (1);
+INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (2);
+INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (3);
+SET IDENTITY_INSERT dbContentTypeClassificationStatus OFF;
+
+SET IDENTITY_INSERT dbContentTypeClassificationStatusLangauge OFF;
+ 
+INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, 2, 41, 'Invisible', 'Invisible', 'Invisible', 'Invisible', getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(2, 2, 41, 'Visible', 'Visible', 'Visible', 'Visible', getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(3, 3, 41, 'Mandatory', 'Mandatory', 'Mandatory', 'Mandatory', getdate(), getdate(), @CurrentUser, @CurrentUser);
+ 
+SET IDENTITY_INSERT dbContentTypeClassificationStatusLangauge OFF;

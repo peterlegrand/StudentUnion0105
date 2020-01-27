@@ -5,13 +5,13 @@ SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversit
 SELECT @SecondUser = Id from AspNetUSers Where email = 'pipo@gmail.com'; 
 --DEMO 
  
-INSERT INTO dbContentType (CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  1, 41, 'Knowledge','Knowledge','Knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 41, 'Experience','Experience','Experience', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(@CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  3, 41, 'Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  
  
@@ -962,6 +962,25 @@ VALUES(39, 41, 'Vertisol','Vertisol – inverted soils. They are clay-rich and t
 , 'Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol','Vertisol – inverted soils. They are clay-rich and tend to swell when wet and shrink upon drying, often forming deep cracks into which surface layers can fall. They are difficult to farm or to construct roads and buildings due to their high expansion rate.','Vertisol' 
 , @CurrentUser, @CurrentUser, getdate(), getdate()); 
  
+ INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (1,1,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (1,2,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (1,3,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (2,1,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (2,2,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (2,3,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (3,1,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (3,2,2);
+INSERT INTO dbContentTypeClassification (ContentTypeId, ClassificationId, StatusId) 
+VALUES (3,3,2);
+
  
 INSERT INTO dbProcessTemplateGroup (Sequence, ModifiedDate, CreatedDate, CreatorId, ModifierId)
 VALUES(1, getdate(), getdate(), @CurrentUser, @CurrentUser);

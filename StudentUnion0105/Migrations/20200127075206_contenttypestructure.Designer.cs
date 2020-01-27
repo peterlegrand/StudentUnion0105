@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200127075206_contenttypestructure")]
+    partial class contenttypestructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "573c4e50-5b3d-4edb-a865-b93e436289b5",
-                            ConcurrencyStamp = "2ad5f4a2-ba6d-4d38-ae61-08dda30df469",
+                            Id = "aebeecf6-805a-431e-b97b-ffcad4bdd48c",
+                            ConcurrencyStamp = "1f8fcf7c-3a40-4600-827a-3ec1a67c6839",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8adf2907-a402-4292-8800-82e2f51eded7",
-                            ConcurrencyStamp = "5ac01607-abbb-4c1d-9ab5-b10f703541c5",
+                            Id = "b4d7164d-b7c5-4312-a5bb-554162cca94b",
+                            ConcurrencyStamp = "2d9d8b51-af64-4948-bd04-264d8704c32b",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1292,58 +1294,7 @@ namespace StudentUnion0105.Migrations
 
                     b.HasIndex("ContentTypeId");
 
-                    b.HasIndex("StatusId");
-
-                    b.ToTable("dbContentTypeClassification");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeClassificationStatusLangaugeModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContentTypeClassificationStatusId");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("CreatorId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<string>("MenuName")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("ModifierId");
-
-                    b.Property<string>("MouseOver")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentTypeClassificationStatusId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("dbContentTypeClassificationStatusLangauge");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeClassificationStatusModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("dbContentTypeClassificationStatus");
+                    b.ToTable("SuContentTypeClassificationModel");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeDeleteGetModel", b =>
@@ -5963,24 +5914,6 @@ namespace StudentUnion0105.Migrations
                     b.HasOne("StudentUnion0105.Models.SuContentTypeModel", "ContentType")
                         .WithMany("ContentTypeClassification")
                         .HasForeignKey("ContentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StudentUnion0105.Models.SuContentTypeClassificationStatusModel", "Status")
-                        .WithMany("ContentTypeClassification")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeClassificationStatusLangaugeModel", b =>
-                {
-                    b.HasOne("StudentUnion0105.Models.SuContentTypeClassificationStatusModel", "ContentTypeClassificationStatus")
-                        .WithMany("SuContentTypeClassificationStatusLangaugeModel")
-                        .HasForeignKey("ContentTypeClassificationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StudentUnion0105.Models.SuLanguageModel", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

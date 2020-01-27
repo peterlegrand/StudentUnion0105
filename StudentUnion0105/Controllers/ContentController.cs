@@ -16,38 +16,31 @@ using System.Threading.Tasks;
 namespace StudentUnion0105.Controllers
 {
     //PETER CHeck what the base class should be
-    public class ContentController : Controller
+    public class ContentController : PortalController
     {
-        private readonly UserManager<SuUserModel> _userManager;
-        private readonly SuDbContext _context;
         private readonly IClassificationRepository _classification;
 
-        //      private readonly SuContentModel _content;
 
         public ContentController(
-            //SuContentModel contentModel
-            //, 
             UserManager<SuUserModel> userManager
            , SuDbContext context
             , IClassificationRepository classification
-            //            , SuContentModel content
-            )//, IContentTypeLanguageRepository)
+            , ILanguageRepository language
+            ) : base(userManager, language, context)
         {
-            //  _contentModel = contentModel;
-            _userManager = userManager;
-            _context = context;
             _classification = classification;
-            //        _content = content;
         }
         public IActionResult Index()
         {
             //PETER no terms go to the content yet?
+            base.Initializing();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            base.Initializing();
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 

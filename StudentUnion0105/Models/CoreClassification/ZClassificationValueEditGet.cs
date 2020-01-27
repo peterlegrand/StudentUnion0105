@@ -37,4 +37,11 @@ namespace StudentUnion0105.Models
         public bool InDropDown { get; set; }
 
     }
+    public class SuClassificationValueEditGetLevelModel
+    {
+        [Key]
+        public int DateLevel { get; set; }
+        public bool InDropDown { get; set; }
+    }
+
 }

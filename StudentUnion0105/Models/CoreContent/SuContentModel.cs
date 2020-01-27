@@ -43,4 +43,25 @@ namespace StudentUnion0105.Models
         public virtual SuSecurityLevelModel SecurityLevelObject { get; set; }
         public virtual ICollection<SuContentClassificationValueModel> ContentClassificationValues { get; set; }
     }
+    public class SuContentClassificationValueModel
+    {
+        public int Id { get; set; }
+        public int ContentId { get; set; }
+        public int ClassificationValueId { get; set; }
+        [ForeignKey("ClassificationValueId")]
+        public virtual SuClassificationValueModel ClassificationValue { get; set; }
+        [ForeignKey("ContentId")]
+        public virtual SuContentModel Content { get; set; }
+
+    }
+    public class SuContentStatusModel
+    {
+        public int Id { get; set; }
+        [Display(Name = "Content status name")]
+        [MaxLength(50)]
+
+        public string Name { get; set; }
+
+        public virtual ICollection<SuContentModel> Contents { get; set; }
+    }
 }

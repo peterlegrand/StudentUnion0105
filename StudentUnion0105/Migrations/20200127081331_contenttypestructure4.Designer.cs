@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200127081331_contenttypestructure4")]
+    partial class contenttypestructure4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "573c4e50-5b3d-4edb-a865-b93e436289b5",
-                            ConcurrencyStamp = "2ad5f4a2-ba6d-4d38-ae61-08dda30df469",
+                            Id = "ee4979ee-c31c-47c2-b88a-88718046f5c8",
+                            ConcurrencyStamp = "0d4d2e42-0164-482b-b664-9e3acf5abec1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8adf2907-a402-4292-8800-82e2f51eded7",
-                            ConcurrencyStamp = "5ac01607-abbb-4c1d-9ab5-b10f703541c5",
+                            Id = "0dbecb36-826f-4ff5-b629-8d0fa0e76f4e",
+                            ConcurrencyStamp = "7811bbeb-7614-401b-9b10-b60ec8f1a3f8",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1286,13 +1288,15 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("StatusId");
 
+                    b.Property<int?>("SuContentTypeClassificationStatusModelId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClassificationId");
 
                     b.HasIndex("ContentTypeId");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("SuContentTypeClassificationStatusModelId");
 
                     b.ToTable("dbContentTypeClassification");
                 });
@@ -5965,10 +5969,9 @@ namespace StudentUnion0105.Migrations
                         .HasForeignKey("ContentTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("StudentUnion0105.Models.SuContentTypeClassificationStatusModel", "Status")
+                    b.HasOne("StudentUnion0105.Models.SuContentTypeClassificationStatusModel")
                         .WithMany("ContentTypeClassification")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SuContentTypeClassificationStatusModelId");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeClassificationStatusLangaugeModel", b =>
