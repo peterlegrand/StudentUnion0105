@@ -66,10 +66,10 @@ namespace StudentUnion0105.Models
         public int Id { get; set; }
 
         public virtual ICollection<SuContentTypeClassificationModel> ContentTypeClassification { get; set; }
-        public virtual ICollection<SuContentTypeClassificationStatusLangaugeModel> SuContentTypeClassificationStatusLangaugeModel { get; set; }
+        public virtual ICollection<SuContentTypeClassificationStatusLanguageModel> SuContentTypeClassificationStatusLanguageModel { get; set; }
 
     }
-    public class SuContentTypeClassificationStatusLangaugeModel
+    public class SuContentTypeClassificationStatusLanguageModel
     {
         public int Id { get; set; }
         [Display(Name = "Content type id")]

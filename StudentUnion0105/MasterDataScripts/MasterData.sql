@@ -715,9 +715,9 @@ VALUES (21, 21, 41, 'Primary content', 'Primary content', 'Primary content', 'Pr
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (22, 22, 41, 'Secondary content', 'Secondary content', 'Secondary content', 'Secondary content', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
-VALUES (23, 23, 41, 'Primary langauge', 'Primary langauge', 'Primary langauge', 'Primary langauge', @CurrentUser, @CurrentUser, getdate(), getdate())
+VALUES (23, 23, 41, 'Primary Language', 'Primary Language', 'Primary Language', 'Primary Language', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
-VALUES (24, 24, 41, 'Secondary langauge', 'Secondary langauge', 'Secondary langauge', 'Secondary langauge', @CurrentUser, @CurrentUser, getdate(), getdate())
+VALUES (24, 24, 41, 'Secondary Language', 'Secondary Language', 'Secondary Language', 'Secondary Language', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (25, 25, 41, 'Primary country', 'Primary country', 'Primary country', 'Primary country', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
@@ -868,19 +868,19 @@ INSERT INTO dbTableName (Id, TableName, TableDescription, StatusFieldName) VALUE
 SET IDENTITY_INSERT dbTableName OFF;
 
 
-SET IDENTITY_INSERT dbContentTypeClassificationStatus OFF;
+SET IDENTITY_INSERT dbContentTypeClassificationStatus ON;
 INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (1);
 INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (2);
 INSERT INTO dbContentTypeClassificationStatus (Id) VALUES (3);
 SET IDENTITY_INSERT dbContentTypeClassificationStatus OFF;
 
-SET IDENTITY_INSERT dbContentTypeClassificationStatusLangauge OFF;
+SET IDENTITY_INSERT dbContentTypeClassificationStatusLanguage ON;
  
-INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
-VALUES(1, 2, 41, 'Invisible', 'Invisible', 'Invisible', 'Invisible', getdate(), getdate(), @CurrentUser, @CurrentUser);
-INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+INSERT INTO dbContentTypeClassificationStatusLanguage (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+VALUES(1, 1, 41, 'Invisible', 'Invisible', 'Invisible', 'Invisible', getdate(), getdate(), @CurrentUser, @CurrentUser);
+INSERT INTO dbContentTypeClassificationStatusLanguage (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
 VALUES(2, 2, 41, 'Visible', 'Visible', 'Visible', 'Visible', getdate(), getdate(), @CurrentUser, @CurrentUser);
-INSERT INTO dbContentTypeClassificationStatusLangauge (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
+INSERT INTO dbContentTypeClassificationStatusLanguage (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
 VALUES(3, 3, 41, 'Mandatory', 'Mandatory', 'Mandatory', 'Mandatory', getdate(), getdate(), @CurrentUser, @CurrentUser);
  
-SET IDENTITY_INSERT dbContentTypeClassificationStatusLangauge OFF;
+SET IDENTITY_INSERT dbContentTypeClassificationStatusLanguage OFF;

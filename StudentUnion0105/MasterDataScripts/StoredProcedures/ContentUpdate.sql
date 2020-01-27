@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[ContentUpdate]
 @Id int 
 , @ContentTypeId int 
 , @ContentStatusId int 
-, @LangaugeId int 
+, @LanguageId int 
 , @Title nvarchar(max) 
 , @Description nvarchar(max) 
 , @SecurityLevel int 
@@ -14,7 +14,7 @@ UPDATE dbContent
 SET  
 ContentTypeId = @ContentTypeId 
 , ContentStatusId = @ContentStatusId 
-, LanguageId = @LangaugeId 
+, LanguageId = @LanguageId 
 , Title = @Title 
 , Description = @Description 
 , SecurityLevel = @SecurityLevel 

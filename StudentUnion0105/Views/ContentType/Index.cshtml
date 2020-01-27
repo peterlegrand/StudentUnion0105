@@ -21,13 +21,14 @@
         @foreach (var x in Model)
 
         {
-            <tr>
-                <td style="width: 44px">@x.Id</td>
-                <td>@x.Name</td>
-                <td style="width: 22px"><a asp-controller="ContentType" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[3]" height="20" width="20" /></a></td>
-                <td style="width: 22px"><a asp-controller="ContentType" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[4]" height="20" width="20" /></a></td>
-                <td style="width: 22px"><a asp-controller="ContentType" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[5]" height="20" width="20" /></a></td>
-            </tr>
+    <tr>
+        <td style="width: 44px">@x.Id</td>
+        <td>@x.Name</td>
+        <td style="width: 22px"><a asp-controller="ContentType" asp-action="Edit" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/open.png" title="@ViewBag.Terms[3]" height="20" width="20" /></a></td>
+        <td style="width: 22px"><a asp-controller="ContentTypeClassification" asp-action="Index" asp-route-Id="@x.Id.ToString()"><img src="~/Images/Icons/Classifications.png" title="@ViewBag.Terms[7]" height="20" width="20" /></a></td>
+        <td style="width: 22px"><a asp-controller="ContentType" asp-action="LanguageIndex" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/languages.jpg" title="@ViewBag.Terms[4]" height="20" width="20" /></a></td>
+        <td style="width: 22px"><a asp-controller="ContentType" asp-action="Delete" asp-route-id="@x.Id.ToString()"><img src="~/Images/Icons/delete.png" title="@ViewBag.Terms[5]" height="20" width="20" /></a></td>
+    </tr>
         }
     </table>
 </div>

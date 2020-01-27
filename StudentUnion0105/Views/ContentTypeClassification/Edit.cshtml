@@ -1,0 +1,46 @@
+﻿@model SuContentTypeClassificationEditGetModelWithListModel
+@{
+    ViewBag.Title = @ViewBag.Terms[0];
+}
+@{
+    Layout = "_LayoutAdmin";
+}
+<h1><img src="~/Images/Icons/ContentType.png" height="60" title="@ViewBag.Terms[0]" width="60" /> @ViewBag.Terms[0]</h1>
+<form class="mt-3" method="post">
+
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.Id" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.Id" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row" hidden>
+        <label asp-for="@Model.Classification.ContentTypeId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.ContentTypeId" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.ClassificationName" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Classification.ClassificationName" class="form-control" />
+            <span asp-validation-for="@Model.Classification.ClassificationName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.Classification.StatusId" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <div class="col-sm-10 ">
+
+            @Html.DropDownListFor(x => x.Classification.StatusId, Model.StatusList)
+            <span asp-validation-for="@Model.Classification.StatusId" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary btn-dark">@ViewBag.Terms[5]</button>
+            <a asp-action="Index" asp-controller="ContentType" class="btn btn-primary btn-light">@ViewBag.Terms[6]</a>
+        </div>
+    </div>
+</form>

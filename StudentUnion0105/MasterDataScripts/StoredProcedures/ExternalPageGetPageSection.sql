@@ -33,9 +33,9 @@ LEFT JOIN (
 	FROM dbContentType 
 	JOIN dbContentTypeLanguage 
 		ON dbContentType.Id = dbContentTypeLanguage.ContentTypeId 
-	JOIN dbSetting	LangaugeSetting
-	ON LangaugeSetting.IntValue = dbContentTypeLanguage.LanguageId
+	JOIN dbSetting	LanguageSetting
+	ON LanguageSetting.IntValue = dbContentTypeLanguage.LanguageId
 
-	WHERE LangaugeSetting.IntValue = 1) ContentType
+	WHERE LanguageSetting.IntValue = 1) ContentType
 	ON ContentType.Id = dbPageSection.ContentTypeId
 WHERE PageSetting.Id = 5

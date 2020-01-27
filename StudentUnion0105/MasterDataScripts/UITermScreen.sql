@@ -2052,5 +2052,12 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2050, 56, 123
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2051, 83, 1238, 7);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2052, 41, 1238, 8);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2053, 24, 1238, 9);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2054, 59, 1028, 8);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2055, 329, 1239, 1);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2056, 2, 1239, 2);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2057, 56, 1239, 3);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2058, 1, 1239, 4);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2059, 24, 1239, 5);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2060, 34, 1239, 6);
 SET IDENTITY_INSERT dbUITermScreen OFF;
  

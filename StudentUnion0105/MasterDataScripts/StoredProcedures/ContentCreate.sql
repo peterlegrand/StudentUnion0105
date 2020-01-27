@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[ContentCreate]  
  @ContentTypeId int 
 , @ContentStatusId int 
-, @LangaugeId int 
+, @LanguageId int 
 , @Title nvarchar(max) 
 , @Description nvarchar(max) 
 , @SecurityLevel int 
@@ -26,7 +26,7 @@ INSERT dbContent
 VALUES ( 
 @ContentTypeId 
 , @ContentStatusId 
-, @LangaugeId 
+, @LanguageId 
 , @Title 
 , @Description 
 , @SecurityLevel 
