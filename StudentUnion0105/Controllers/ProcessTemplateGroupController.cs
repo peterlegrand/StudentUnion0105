@@ -19,15 +19,17 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IProcessTemplateGroupLanguageRepository _ProcessTemplateGroupLanguage;
         private readonly IProcessTemplateGroupRepository _ProcessTemplateGroup;
+        private readonly SuDbContext _context;
         
         public ProcessTemplateGroupController(UserManager<SuUserModel> userManager
             , IProcessTemplateGroupLanguageRepository ProcessTemplateGroupLanguage
             , IProcessTemplateGroupRepository ProcessTemplateGroup
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _ProcessTemplateGroupLanguage = ProcessTemplateGroupLanguage;
             _ProcessTemplateGroup = ProcessTemplateGroup;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +37,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -64,7 +66,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateGroup = new SuObjectVM();
             return View(ProcessTemplateGroup);
@@ -109,7 +111,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ToForm = (from s in _ProcessTemplateGroup.GetAllProcessTemplateGroups()
                          join t in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
@@ -165,7 +167,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var parameter = new SqlParameter("@OId", Id);
@@ -185,7 +187,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
@@ -249,7 +251,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -309,7 +311,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.DeleteProcessTemplateGroupLanguage(Id);
             var a = new SuObjectVM

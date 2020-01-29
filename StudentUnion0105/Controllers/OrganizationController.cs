@@ -23,6 +23,7 @@ namespace StudentUnion0105.Controllers
         private readonly IOrganizationTypeRepository _organizationType;
         private readonly IOrganizationTypeLanguageRepository _organizationTypeLanguage;
         private readonly IGetOrganizationStructureRepository _organizationStructure;
+                private readonly SuDbContext _context;
 
         public OrganizationController(UserManager<SuUserModel> userManager
             , IOrganizationLanguageRepository OrganizationLanguage
@@ -32,7 +33,7 @@ namespace StudentUnion0105.Controllers
             , IOrganizationTypeRepository organizationType
             , IOrganizationTypeLanguageRepository organizationTypeLanguage
             , IGetOrganizationStructureRepository OrganizationStructure
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _OrganizationLanguage = OrganizationLanguage;
             _Organization = Organization;
@@ -40,7 +41,8 @@ namespace StudentUnion0105.Controllers
             _organizationType = organizationType;
             _organizationTypeLanguage = organizationTypeLanguage;
             _organizationStructure = OrganizationStructure;
-        }
+                    _context = context;
+}
 
         //PETER probably can be deleted
         public async Task<IActionResult> Index()
@@ -76,7 +78,7 @@ namespace StudentUnion0105.Controllers
             var ParentOrganization = _Organization.GetOrganization(Id);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var StatusList = new List<SelectListItem>();
@@ -163,7 +165,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             //LISTS
             var StatusList = new List<SelectListItem>();
@@ -293,7 +295,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -313,7 +315,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -381,7 +383,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -419,7 +421,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
 {
@@ -444,7 +446,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

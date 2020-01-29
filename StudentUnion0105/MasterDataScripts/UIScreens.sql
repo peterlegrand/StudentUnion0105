@@ -242,7 +242,7 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1236, 'SetupWizard', 'Demo
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1237, 'SetupWizard', 'DemoDataNL');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1238, 'FrontPage', 'View');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1239, 'ContentTypeClassification', 'Index');
-INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1240, 'ContentTypeClassification', 'Edt');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1240, 'ContentTypeClassification', 'Edit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1241, 'ContentTypeClassificationStatus', 'Index');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1242, 'ContentTypeClassificationStatus', 'LanguageIndex');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1243, 'ContentTypeClassificationStatus', 'LanguageCreate');

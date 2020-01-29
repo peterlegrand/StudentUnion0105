@@ -21,12 +21,12 @@ namespace StudentUnion0105.Classes
             _context = context;
         }
 
-        public  List<MenuItem> TopMenu(int LanguageId )
+        public async Task<List<MenuItem>> TopMenu(int LanguageId )
         {
 
             var parameter = new SqlParameter("@LanguageId", LanguageId);
 
-            var TopMenu1List = _context.ZdbTopMenu1.FromSql("PartialTopMenu1 @LanguageId", parameter).ToList();
+            var TopMenu1List = await _context.ZdbTopMenu1.FromSql("PartialTopMenu1 @LanguageId", parameter).ToListAsync();
 
 
             List<MenuItem> menuItem1List = new List<MenuItem>();
@@ -37,7 +37,8 @@ namespace StudentUnion0105.Classes
                     Text = TopMenu1.MenuName,
                     IconCss = TopMenu1.IconCss,
                     Url = TopMenu1.MenuController,
-                    Items = new List<MenuItem>(Menu2(TopMenu1.Id, LanguageId))
+                    //PETER CONTEXT
+                  //  Items = new List<MenuItem>(Menu2(TopMenu1.Id, LanguageId))
             });
 
 
@@ -45,7 +46,7 @@ namespace StudentUnion0105.Classes
             }
             return menuItem1List;
         }
-        private List<MenuItem> Menu2(int Id, int LanguageId)
+        private async Task<List<MenuItem>> Menu2(int Id, int LanguageId)
         {
             SqlParameter[] parameters =
                {
@@ -53,7 +54,7 @@ namespace StudentUnion0105.Classes
                     , new SqlParameter("@Id", Id)
                 };
 
-            var TopMenu2List = _context.ZdbTopMenu2.FromSql("PartialTopMenu2 @LanguageId, @Id", parameters).ToList();
+            var TopMenu2List = await _context.ZdbTopMenu2.FromSql("PartialTopMenu2 @LanguageId, @Id", parameters).ToListAsync();
 
 
             List<MenuItem> menuItem2List = new List<MenuItem>();

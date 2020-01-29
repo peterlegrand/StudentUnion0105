@@ -19,15 +19,17 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
         private readonly IPageTypeRepository _PageType;
+        private readonly SuDbContext _context;
 
         public PageTypeController(UserManager<SuUserModel> userManager
             , IPageTypeLanguageRepository PageTypeLanguage
             , IPageTypeRepository PageType
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _PageTypeLanguage = PageTypeLanguage;
             _PageType = PageType;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +37,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -47,7 +49,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var PageType = new SuPageTypeEditGetModel();
@@ -94,7 +96,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                {
@@ -163,7 +165,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -240,7 +242,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

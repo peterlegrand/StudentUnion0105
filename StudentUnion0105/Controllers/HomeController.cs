@@ -25,13 +25,15 @@ namespace StudentUnion0105.Controllers
     public class HomeController : PortalController
     {
         private readonly IHostingEnvironment hostingEnv;
+        private readonly SuDbContext _context;
 
         public HomeController(IHostingEnvironment env, UserManager<SuUserModel> userManager
                                                             , ILanguageRepository language
                                                 , SuDbContext context
-) : base(userManager, language, context)
+) : base(userManager, language)
         {
             hostingEnv = env;
+            _context = context;
         }
         [HttpGet]
         public ActionResult Index()
@@ -126,17 +128,17 @@ namespace StudentUnion0105.Controllers
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
-            var Languages = _context.ZdbHomeIndexAdminGetLanguages.FromSql("HomeIndexAdminGetLanguages").ToList();
-            var TableNames = _context.ZdbHomeIndexAdminGetTableName.FromSql("HomeIndexAdminGetTables").ToList();
+            var Languages = await _context.ZdbHomeIndexAdminGetLanguages.FromSql("HomeIndexAdminGetLanguages").ToListAsync();
+            var TableNames = await _context.ZdbHomeIndexAdminGetTableName.FromSql("HomeIndexAdminGetTables").ToListAsync();
 
             SuHomeIndexAdminGetModel Matrix = new SuHomeIndexAdminGetModel();
             Matrix.languages = Languages;
             for (int i = 0; i < TableNames.Count; i++)
             {
                 var parameter = new SqlParameter("@TableName", TableNames[i].TableDescription);
-                var a = _context.ZdbHomeIndexAdminGetNoOfRecordsAndPerLanguage.FromSql("HomeIndexAdminGetNoOfRecordsAndPerLanguage @TableName", parameter).ToList();
+                var a = await  _context.ZdbHomeIndexAdminGetNoOfRecordsAndPerLanguage.FromSql("HomeIndexAdminGetNoOfRecordsAndPerLanguage @TableName", parameter).ToListAsync();
                 TableNames[i].SetOfNoOfRecords = a;
 
             }

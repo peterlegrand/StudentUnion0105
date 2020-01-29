@@ -22,6 +22,7 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
         private readonly IMasterListRepository _masterList;
         private readonly IDataTypeRepository _dataType;
+        private readonly SuDbContext _context;
 
         public ProcessTemplateStepController(UserManager<SuUserModel> userManager
             , IProcessTemplateRepository processTemplate
@@ -33,7 +34,7 @@ namespace StudentUnion0105.Controllers
             //, IProcessTemplateStepTypeLanguageRepository processTemplateStepTypeLanguage
             , SuDbContext context
             , IMasterListRepository masterList
-            , IDataTypeRepository dataType) : base(userManager, language, context)
+            , IDataTypeRepository dataType) : base(userManager, language)
         {
             _processTemplate = processTemplate;
             _processTemplateLanguage = processTemplateLanguage;
@@ -41,6 +42,7 @@ namespace StudentUnion0105.Controllers
             _processTemplateStepLanguage = processTemplateStepLanguage;
             _masterList = masterList;
             _dataType = dataType;
+            _context = context;
         }
 
         public SuDbContext Context { get; }
@@ -51,7 +53,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var ProcessTemplateStep = (from c in  _processTemplateStep.GetAllProcessTemplateSteps()
@@ -82,7 +84,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateStep = (from c in _processTemplateStep.GetAllProcessTemplateSteps()
                                         join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
@@ -181,7 +183,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateStep = new SuObjectVM
             {
@@ -225,7 +227,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -239,7 +241,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -277,7 +279,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()

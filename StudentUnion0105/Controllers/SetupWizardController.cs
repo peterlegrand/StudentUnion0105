@@ -14,9 +14,9 @@ namespace StudentUnion0105.Controllers
     [AllowAnonymous]
     public class SetupWizardController : Controller
     {
-        private readonly UserManager<SuUserModel> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IHostingEnvironment env;
+        private readonly UserManager<SuUserModel> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IHostingEnvironment _env;
         private readonly SuDbContext _context;
 
         public SetupWizardController(UserManager<SuUserModel> userManager
@@ -26,9 +26,9 @@ namespace StudentUnion0105.Controllers
             )
         {
 
-            this.userManager = userManager;
-            this.roleManager = roleManager;
-            this.env = env;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _env = env;
             _context = context;
         }
 
@@ -36,7 +36,7 @@ namespace StudentUnion0105.Controllers
         { return View(); }
         public async Task<IActionResult> MasterData()
         {
-            var x = await userManager.FindByEmailAsync("peter@energimeuniversity.org");
+            var x = await _userManager.FindByEmailAsync("peter@energimeuniversity.org");
             if (x == null)
             {
                 SuUserModel  user1 = new SuUserModel()
@@ -46,14 +46,14 @@ namespace StudentUnion0105.Controllers
                     DefaultLanguageId = 41
                 };
 
-                await userManager.CreateAsync(user1, "Pipo!9165");
+                await _userManager.CreateAsync(user1, "Pipo!9165");
 
             }
 
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
 
             {
-                if (userManager.FindByEmailAsync("pipo@gmail.com").Result == null)
+                if (_userManager.FindByEmailAsync("pipo@gmail.com").Result == null)
                 {
                     SuUserModel  user1 = new SuUserModel()
                     {
@@ -62,30 +62,30 @@ namespace StudentUnion0105.Controllers
                         DefaultLanguageId = 41
                     };
 
-                    await userManager.CreateAsync(user1, "Xipo!9165");
+                    await _userManager.CreateAsync(user1, "Xipo!9165");
                 }
             }
 
-            var user = await userManager.FindByEmailAsync("peter@energimeuniversity.org");
+            var user = await _userManager.FindByEmailAsync("peter@energimeuniversity.org");
 
-            foreach (var a in await userManager.GetRolesAsync(user))
-            { await userManager.RemoveFromRoleAsync(user, a); }
-            await userManager.AddToRoleAsync(user, "Admin");
-            await userManager.AddToRoleAsync(user, "Super admin");
+            foreach (var a in await _userManager.GetRolesAsync(user))
+            { await _userManager.RemoveFromRoleAsync(user, a); }
+            await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, "Super admin");
 
 
 
-            var SuperAdmin = await roleManager.FindByNameAsync("Super admin");
-            await roleManager.GetClaimsAsync(SuperAdmin);
-            foreach (var claim in await roleManager.GetClaimsAsync(SuperAdmin))
+            var SuperAdmin = await _roleManager.FindByNameAsync("Super admin");
+            await _roleManager.GetClaimsAsync(SuperAdmin);
+            foreach (var claim in await _roleManager.GetClaimsAsync(SuperAdmin))
             {
-                await roleManager.RemoveClaimAsync(SuperAdmin, claim);
+                await _roleManager.RemoveClaimAsync(SuperAdmin, claim);
             }
-            await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Role"));
-            await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Classification"));
-            await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Page"));
-            await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Project"));
-            await roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Type"));
+            await _roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Role"));
+            await _roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Classification"));
+            await _roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Page"));
+            await _roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Project"));
+            await _roleManager.AddClaimAsync(SuperAdmin, new System.Security.Claims.Claim("Menu", "Type"));
 
             string[] StoredProcedures;
             StoredProcedures = new string[]{
@@ -137,6 +137,7 @@ namespace StudentUnion0105.Controllers
 , "ClassificationPageSectionLanguageEditGet.sql"
 , "ClassificationPageSectionLanguageEditPost.sql"
 , "ClassificationPageSectionLanguageIndexGet.sql"
+, "ClassificationStatusList.sql"
 , "ClassificationValueCreateGetLevel.sql"
 , "ClassificationValueCreatePost.sql"
 , "ClassificationValueDeleteGet.sql"
@@ -158,6 +159,7 @@ namespace StudentUnion0105.Controllers
 , "ContentStatusSelectAll.sql"
 , "ContentTypeClassificationEditGet.sql"
 , "ContentTypeClassificationEditGetStatusList.sql"
+, "ContentTypeClassificationEditPost.sql"
 , "ContentTypeClassificationIndexGet.sql"
 , "ContentTypeCreatePost.sql"
 , "ContentTypeDeleteGet.sql"

@@ -19,24 +19,23 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IOrganizationTypeLanguageRepository _OrganizationTypeLanguage;
         private readonly IOrganizationTypeRepository _OrganizationType;
+        private readonly SuDbContext _context;
 
         public OrganizationTypeController(UserManager<SuUserModel> userManager
             , IOrganizationTypeLanguageRepository OrganizationTypeLanguage
             , IOrganizationTypeRepository OrganizationType
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _OrganizationTypeLanguage = OrganizationTypeLanguage;
             _OrganizationType = OrganizationType;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-
-
-            base.Initializing();
-
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -63,7 +62,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var OrganizationType = new SuOrganizationTypeEditGetModel();
             return View(OrganizationType);
@@ -107,7 +106,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                {
@@ -155,7 +154,7 @@ namespace StudentUnion0105.Controllers
         {
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -175,7 +174,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
@@ -241,7 +240,7 @@ namespace StudentUnion0105.Controllers
         {
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -257,7 +256,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             if (ModelState.IsValid)
             {
 
@@ -286,7 +285,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LId", Id);
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("OrganizationTypeLanguageEditGet @LId", parameter).First();
@@ -314,7 +313,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

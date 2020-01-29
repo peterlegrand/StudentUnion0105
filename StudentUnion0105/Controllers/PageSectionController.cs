@@ -24,6 +24,7 @@ namespace StudentUnion0105.Controllers
         private readonly IPageSectionTypeLanguageRepository _pageSectionTypeLanguage;
         private readonly IContentTypeRepository _contentType;
         private readonly IContentTypeLanguageRepository _contentTypeLanguage;
+        private readonly SuDbContext _context;
 
         public PageSectionController(UserManager<SuUserModel> userManager
             , IPageSectionRepository PageSection
@@ -33,7 +34,7 @@ namespace StudentUnion0105.Controllers
             , IPageSectionTypeLanguageRepository pageSectionTypeLanguage
             , IContentTypeRepository contentType
             , IContentTypeLanguageRepository contentTypeLanguage
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _pageSection = PageSection;
             _pageSectionLanguage = PageSectionLanguage;
@@ -41,6 +42,7 @@ namespace StudentUnion0105.Controllers
             _pageSectionTypeLanguage = pageSectionTypeLanguage;
             _contentType = contentType;
             _contentTypeLanguage = contentTypeLanguage;
+            _context = context;
         }
         
         
@@ -51,7 +53,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -73,7 +75,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             SqlParameter[] parameters =
@@ -280,7 +282,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SuObjectVMPageSection SuObject = new SuObjectVMPageSection
             {
@@ -482,7 +484,7 @@ namespace StudentUnion0105.Controllers
         
         public IActionResult LanguageIndex(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -498,7 +500,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             //PETER the Zdb for page and page section are the same.
 
             var parameter = new SqlParameter("@Id", Id);
@@ -538,7 +540,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
@@ -601,7 +603,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

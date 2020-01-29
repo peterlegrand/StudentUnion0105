@@ -17,13 +17,15 @@ namespace StudentUnion0105.Controllers
 {
     public class UserOrganizationController : PortalController
     {
+        private readonly SuDbContext _context;
         private readonly IUserOrganizationRepository _userOrganization;
 
         public UserOrganizationController(UserManager<SuUserModel> userManager
                 , SuDbContext context
                 , IUserOrganizationRepository  UserOrganization
-                , ILanguageRepository language) : base(userManager, language, context)
+                , ILanguageRepository language) : base(userManager, language)
         {
+            _context = context;
             _userOrganization = UserOrganization;
         }
         public async Task<IActionResult> Index(string Id)
@@ -32,7 +34,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             _ = new List<SuIdWithStrings>();
 
             SqlParameter[] parameters =
@@ -57,7 +59,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -88,7 +90,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var OrganizationList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();

@@ -19,11 +19,14 @@ namespace StudentUnion0105.Controllers
 //    [Authorize("Classification")]
     public class FrontContentController : PortalController
     {
+        private readonly SuDbContext _context;
+
         public FrontContentController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base (userManager, language, context)
+            ) : base (userManager, language)
         {
+            _context = context;
         }
 
         //[HttpGet]
@@ -31,7 +34,7 @@ namespace StudentUnion0105.Controllers
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
             
-        //    base.Initializing();
+        //    // MenusEtc.Initializing();
 
         //    var parameterContent = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -68,7 +71,7 @@ namespace StudentUnion0105.Controllers
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
 
-        //    base.Initializing();
+        //    // MenusEtc.Initializing();
 
         //    SqlParameter[] parameters =
         //        {
@@ -90,7 +93,7 @@ namespace StudentUnion0105.Controllers
         //{
         //    var CurrentUser = await _userManager.GetUserAsync(User);
 
-        //    base.Initializing();
+        //    // MenusEtc.Initializing();
         //    var parameterContent = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
         //    List< SuFrontContentMyContentGetModel> FrontContentMyContent = _context.ZdbFrontContentMyContentGet.FromSql("FrontContentMyContentGet @CurrentUser", parameterContent).ToList();

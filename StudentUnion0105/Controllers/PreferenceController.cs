@@ -20,12 +20,14 @@ namespace StudentUnion0105.Controllers
     public class PreferenceController : PortalController
     {
 
+        private readonly SuDbContext _context;
 
         public PreferenceController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
+            _context = context;
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", CurrentUser.Id);
 
@@ -102,7 +104,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

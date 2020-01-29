@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
-    using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +29,7 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
+        private readonly SuDbContext _context;
         private readonly IHostingEnvironment _hostingEnv;
 
         public ClassificationController(UserManager<SuUserModel> userManager
@@ -38,11 +39,12 @@ namespace StudentUnion0105.Controllers
                                                 , ILanguageRepository language
                                                 , SuDbContext context
             , IHostingEnvironment hostingEnv
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
             _classificationStatus = classificationStatus;
             _classification = classification;
             _classificationLanguage = classificationLanguage;
+            _context = context;
             _hostingEnv = hostingEnv;
         }
 
@@ -51,7 +53,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -65,7 +67,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -130,19 +132,22 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ClassificationStatusList = new List<SelectListItem>();
 
-            foreach (var ClassificationStatusFromDb in _classificationStatus.GetAllClassificationStatus())
+            var StatusList = await _context.ZDbStatusList.FromSql("ClassificationStatusList").ToListAsync();
+
+
+            foreach (var Status in StatusList)
             {
                 ClassificationStatusList.Add(new SelectListItem
                 {
-                    Text = ClassificationStatusFromDb.Name,
-                    Value = ClassificationStatusFromDb.Id.ToString()
+                    Text = Status.Name,
+                    Value = Status.Id.ToString()
                 });
             }
             var Classification = new SuClassificationEditGetModel { Description = "x" };
@@ -198,7 +203,7 @@ namespace StudentUnion0105.Controllers
 
         public IActionResult LanguageIndex(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -211,7 +216,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LId", Id);
 
@@ -224,7 +229,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             if (ModelState.IsValid)
             {
 
@@ -253,7 +258,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageCreate(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -310,7 +315,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageDelete(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LId", Id);
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLanguageEditGet @LId" , parameter).First();
@@ -331,7 +336,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {

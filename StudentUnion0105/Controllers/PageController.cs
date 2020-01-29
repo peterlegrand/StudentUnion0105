@@ -23,6 +23,7 @@ namespace StudentUnion0105.Controllers
         private readonly IPageStatusRepository _PageStatus;
         private readonly IPageTypeRepository _PageType;
         private readonly IPageTypeLanguageRepository _PageTypeLanguage;
+        private readonly SuDbContext _context;
 
         public PageController(UserManager<SuUserModel> userManager
             , IPageLanguageRepository PageLanguage
@@ -32,7 +33,7 @@ namespace StudentUnion0105.Controllers
             , IPageStatusRepository PageStatus
             , IPageTypeRepository PageType
             , IPageTypeLanguageRepository PageTypeLanguage
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _PageLanguage = PageLanguage;
             _Page = Page;
@@ -40,6 +41,7 @@ namespace StudentUnion0105.Controllers
             _PageStatus = PageStatus;
             _PageType = PageType;
             _PageTypeLanguage = PageTypeLanguage;
+            _context = context;
             //            _PageStructure = PageStructure;
         }
 
@@ -50,7 +52,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
@@ -105,7 +107,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             //var ParentPage = _Page.GetPage(Id);
 
@@ -199,7 +201,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var PageDetails = (from s in _Page.GetAllPages()
                                join t in _PageLanguage.GetAllPageLanguages()
@@ -300,7 +302,7 @@ namespace StudentUnion0105.Controllers
 
         public IActionResult LanguageIndex(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -321,7 +323,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _PageLanguage.GetAllPageLanguages()
@@ -392,7 +394,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -461,7 +463,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var PageLanguage = _pageLanguage.DeletePageLanguage(Id);
             var a = new SuObjectVM
@@ -500,7 +502,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

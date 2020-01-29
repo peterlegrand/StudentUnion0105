@@ -15,25 +15,27 @@ namespace StudentUnion0105.Controllers
 {
     [Authorize("Role")]
 
-    public class RoleController : PortalController
+public class RoleController : PortalController
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IClaimRepository _claim;
-        
+                private readonly SuDbContext _context;
+
         public RoleController(RoleManager<IdentityRole> roleManager
                                         , UserManager<SuUserModel> userManager
             , IClaimRepository Claim
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _roleManager = roleManager;
             _claim = Claim;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             return View();
         }
@@ -61,7 +63,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Index()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var roles = _roleManager.Roles;
 
@@ -71,7 +73,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(string id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var role = await _roleManager.FindByIdAsync(id);
             if (role == null)
@@ -144,7 +146,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Users(string Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var NewUsers = new List<AddUsersToRoleViewModel>();
             var AllUserList = _userManager.Users;
@@ -230,7 +232,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Rights(string Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             //List<string> NewClaims = new List<string>();
             var NewClaims = new List<AddRightsToRoleViewModel>();

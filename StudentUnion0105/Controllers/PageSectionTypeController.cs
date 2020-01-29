@@ -19,15 +19,17 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IPageSectionTypeLanguageRepository _PageSectionTypeLanguage;
         private readonly IPageSectionTypeRepository _PageSectionType;
+        private readonly SuDbContext _context;
 
         public PageSectionTypeController(UserManager<SuUserModel> userManager
             , IPageSectionTypeLanguageRepository PageSectionTypeLanguage
             , IPageSectionTypeRepository PageSectionType
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _PageSectionTypeLanguage = PageSectionTypeLanguage;
             _PageSectionType = PageSectionType;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -36,7 +38,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
@@ -51,7 +53,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var PageSectionType = new SuPageSectionTypeEditGetModel();
             return View(PageSectionType);
@@ -97,7 +99,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                {
@@ -174,7 +176,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -252,7 +254,7 @@ namespace StudentUnion0105.Controllers
         {
 
             
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

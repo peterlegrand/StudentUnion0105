@@ -23,6 +23,7 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
+        private readonly SuDbContext _context;
 
 
         public PartialController(UserManager<SuUserModel> userManager
@@ -31,11 +32,12 @@ namespace StudentUnion0105.Controllers
                                                 , IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
             _classificationStatus = classificationStatus;
             _classification = classification;
             _classificationLanguage = classificationLanguage;
+            _context = context;
         }
 
 

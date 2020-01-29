@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using StudentUnion0105.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Models;
@@ -10,11 +11,15 @@ namespace StudentUnion0105.Controllers
     public class LanguageController : Controller
     {
         private readonly ILanguageRepository _language;
+        private readonly SuDbContext _context;
 
         public LanguageController(
-                                                 ILanguageRepository language)
+                                                 ILanguageRepository language                                                
+                                                , SuDbContext context
+)
         {
             _language = language;
+            _context = context;
         }
         public IActionResult Index()
         {

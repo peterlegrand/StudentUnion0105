@@ -21,6 +21,7 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateFieldLanguageRepository _processTemplateFieldLanguage;
         private readonly IProcessTemplateFieldRepository _processTemplateField;
         private readonly IProcessTemplateStepFieldStatusRepository _processTemplateStepFieldStatus;
+        private readonly SuDbContext _context;
 
         public ProcessTemplateFieldStepsController(UserManager<SuUserModel> userManager
             , IProcessTemplateStepFieldRepository processTemplateStepField
@@ -29,13 +30,14 @@ namespace StudentUnion0105.Controllers
             , IProcessTemplateFieldRepository processTemplateField
             , IProcessTemplateStepFieldStatusRepository processTemplateStepFieldStatus
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _processTemplateStepField = processTemplateStepField;
             _processTemplateStepLanguage = processTemplateStepLanguage;
             _processTemplateFieldLanguage = processTemplateFieldLanguage;
             _processTemplateField = processTemplateField;
             _processTemplateStepFieldStatus = processTemplateStepFieldStatus;
+            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
@@ -43,7 +45,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var Steps = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()
@@ -77,7 +79,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             var StepField = (from sf in _processTemplateStepField.GetAllProcessTemplateStepFields()

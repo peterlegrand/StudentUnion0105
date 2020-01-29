@@ -19,28 +19,35 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IContentTypeLanguageRepository _contentTypeLanguage;
         private readonly IContentTypeRepository _contentType;
+        private readonly SuDbContext _context;
 
         public ContentTypeController(UserManager<SuUserModel> userManager
             , IContentTypeLanguageRepository ContentTypeLanguage
             , IContentTypeRepository contentType
             , ILanguageRepository language
                         , SuDbContext context
-) : base(userManager, language, context)
+) : base(userManager, language)
         {
             _contentTypeLanguage = ContentTypeLanguage;
             _contentType = contentType;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
+            
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
+            ViewBag.menuItems = a.TopMenu(DefaultLanguageID);
 
-            base.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
-            List<SuObjectIndexGetModel> ContentType = _context.ZdbObjectIndexGet.FromSql("ContentTypeIndexGet @LanguageId", parameter).ToList();
+            List<SuObjectIndexGetModel> ContentType = await _context.ZdbObjectIndexGet.FromSql("ContentTypeIndexGet @LanguageId", parameter).ToListAsync();
             return View(ContentType);
 
 
@@ -64,7 +71,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-             base.Initializing();
+             // MenusEtc.Initializing();
 
             var ContentType = new SuContentTypeEditGetModel();
             return View(ContentType);
@@ -91,7 +98,7 @@ namespace StudentUnion0105.Controllers
                     };
 
                 _context.Database.ExecuteSqlCommand("ContentTypeCreatePost " +
-                            ", @LanguageId" +
+                            " @LanguageId" +
                             ", @ModifierId" +
                             ", @Name" +
                             ", @Description" +
@@ -113,7 +120,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                {
@@ -161,7 +168,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
            
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -179,7 +186,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -245,7 +252,7 @@ namespace StudentUnion0105.Controllers
         {
            
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -309,7 +316,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -335,26 +342,23 @@ namespace StudentUnion0105.Controllers
 
     public class ContentTypeClassificationController : PortalController
     {
-        //private readonly IContentTypeLanguageRepository _contentTypeLanguage;
-        //private readonly IContentTypeRepository _contentType;
+        private readonly SuDbContext _context;
 
         public ContentTypeClassificationController(UserManager<SuUserModel> userManager
-            //, IContentTypeLanguageRepository ContentTypeLanguage
-            //, IContentTypeRepository contentType
             , ILanguageRepository language
                         , SuDbContext context
-                ) : base(userManager, language, context)
+                ) : base(userManager, language)
         {
-            //_contentTypeLanguage = ContentTypeLanguage;
-            //_contentType = contentType;
+            _context = context;
         }
+
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -364,76 +368,15 @@ namespace StudentUnion0105.Controllers
 
             List<SuContentTypeClassificationIndexGetModel> ContentTypeClassification = _context.ZdbContentTypeClassificationIndexGet.FromSql("ContentTypeClassificationIndexGet @LanguageId, @Id", parameters).ToList();
             return View(ContentTypeClassification);
-
-
-            //var ContentTypes = (
-
-            //    from l in _contentTypeLanguage.GetAllContentTypeLanguages()
-
-            //    where l.LanguageId == DefaultLanguageID
-            //    select new SuObjectVM
-
-
-            //    {
-            //        Id = l.ContentTypeId
-            //                 ,
-            //        Name = l.Name,
-            //        Description = l.Description
-            //    }).ToList();
-            //return View(ContentTypes);
         }
 
-        //    [HttpGet]
-        //    public IActionResult Create()
-        //    {
-        //        base.Initializing();
-
-        //        var ContentType = new SuContentTypeEditGetModel();
-        //        return View(ContentType);
-        //    }
-
-        //    [HttpPost]
-        //    public async Task<IActionResult> Create(SuContentTypeEditGetModel FromForm)
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var CurrentUser = await _userManager.GetUserAsync(User);
-
-
-        //            SqlParameter[] parameters =
-        //                {
-        //                new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
-        //                new SqlParameter("@ModifierId", CurrentUser.Id),
-        //                new SqlParameter("@Name", FromForm.Name),
-        //                new SqlParameter("@Description", FromForm.Description),
-        //                new SqlParameter("@MouseOver", FromForm.MouseOver),
-        //                new SqlParameter("@MenuName", FromForm.MenuName),
-        //                new SqlParameter("@TitleName", FromForm.TitleName),
-        //                new SqlParameter("@TitleDescription", FromForm.TitleDescription)
-        //                };
-
-        //            _context.Database.ExecuteSqlCommand("ContentTypeCreatePost " +
-        //                        ", @LanguageId" +
-        //                        ", @ModifierId" +
-        //                        ", @Name" +
-        //                        ", @Description" +
-        //                        ", @MouseOver" +
-        //                        ", @MenuName" +
-        //                        ", @TitleName" +
-        //                        ", @TitleDescription"
-        //                        , parameters);
-        //        }
-
-        //        return RedirectToAction("Index");
-
-        //    }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                {
@@ -465,30 +408,20 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuContentTypeEditGetModel FromForm)
+        public async Task<IActionResult> Edit(SuContentTypeClassificationEditGetModelWithListModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@OId", FromForm.Id),
-                    new SqlParameter("@LId", FromForm.Lid),
-                    new SqlParameter("@Name", FromForm.Name ?? ""),
-                    new SqlParameter("@Description", FromForm.Description ?? ""),
-                    new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
-                    new SqlParameter("@MenuName", FromForm.MenuName ?? ""),
-                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    new SqlParameter("@Id", FromForm.Classification.Id),
+                    new SqlParameter("@StatusId", FromForm.Classification.StatusId)
                     };
-            _context.Database.ExecuteSqlCommand("ContentTypeEditPost " +
-                        "@OId" +
-                        ", @LId" +
-                        ", @Name" +
-                        ", @Description" +
-                        ", @MouseOver" +
-                        ", @MenuName" +
-                        ", @ModifierId", parameters);
+            _context.Database.ExecuteSqlCommand("ContentTypeClassificationEditPost " +
+                        "@Id" +
+                        ", @StatusID" , parameters);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { Id = FromForm.Classification.ContentTypeId });
 
         }
 
@@ -496,7 +429,7 @@ namespace StudentUnion0105.Controllers
         //    public IActionResult LanguageIndex(int Id)
         //    {
 
-        //        base.Initializing();
+        //        // MenusEtc.Initializing();
 
         //        var parameter = new SqlParameter("@OId", Id);
 
@@ -514,7 +447,7 @@ namespace StudentUnion0105.Controllers
         //        var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-        //        base.Initializing();
+        //        // MenusEtc.Initializing();
 
 
         //        List<int> LanguagesAlready = new List<int>();
@@ -580,7 +513,7 @@ namespace StudentUnion0105.Controllers
         //    {
 
 
-        //        base.Initializing();
+        //        // MenusEtc.Initializing();
 
         //        var parameter = new SqlParameter("@Id", Id);
 
@@ -644,7 +577,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-        //        base.Initializing();
+        //        // MenusEtc.Initializing();
 
         //        SqlParameter[] parameters =
         //{

@@ -22,6 +22,7 @@ namespace StudentUnion0105.Controllers
         private readonly IProcessTemplateFlowLanguageRepository _processTemplateFlowLanguage;
         private readonly IProcessTemplateStepRepository _processTemplateStep;
         private readonly IProcessTemplateStepLanguageRepository _processTemplateStepLanguage;
+        private readonly SuDbContext _context;
 
         public ProcessTemplateFlowController(UserManager<SuUserModel> userManager
             , ILanguageRepository language
@@ -29,12 +30,13 @@ namespace StudentUnion0105.Controllers
             , IProcessTemplateFlowLanguageRepository processTemplateFlowLanguage
             , IProcessTemplateStepRepository processTemplateStep
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _processTemplateFlow = processTemplateFlow;
             _processTemplateFlowLanguage = processTemplateFlowLanguage;
             _processTemplateStep = processTemplateStep;
             _processTemplateStepLanguage = processTemplateStepLanguage;
+            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
@@ -43,7 +45,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateFlow = (from p in _processTemplateFlow.GetAllProcessTemplateFlows()
                                         join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
@@ -79,7 +81,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var Flow = (from f in _processTemplateFlow.GetAllProcessTemplateFlows()
                                join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
@@ -161,7 +163,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SuObjectVMPageSection SuObject = new SuObjectVMPageSection
             {
@@ -224,7 +226,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -239,7 +241,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 
@@ -297,7 +299,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()

@@ -20,19 +20,21 @@ namespace StudentUnion0105.Controllers
 //    [Authorize("Classification")]
     public class FrontCalendarController : PortalController
     {
+        private readonly SuDbContext _context;
 
         public FrontCalendarController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
+            _context = context;
         }
 
         [HttpGet]
         public IActionResult EventCalendar()
         {
            
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -64,7 +66,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

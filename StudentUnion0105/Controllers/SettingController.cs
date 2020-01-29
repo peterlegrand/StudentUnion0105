@@ -15,13 +15,15 @@ namespace StudentUnion0105.Controllers
     public class SettingController : PortalController
     {
         private readonly ISettingRepository _setting;
+        private readonly SuDbContext _context;
 
         public SettingController(UserManager<SuUserModel> userManager
                                                 , ISettingRepository setting
                                                 , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _setting = setting;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -30,7 +32,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ToForm = (
 
@@ -59,7 +61,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ToForm = (
 

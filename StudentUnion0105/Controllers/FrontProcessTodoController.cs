@@ -19,11 +19,14 @@ namespace StudentUnion0105.Controllers
 //    [Authorize("Classification")]
     public class FrontProcessTodoController : PortalController
     {
+        private readonly SuDbContext _context;
+
         public FrontProcessTodoController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
+            _context = context;
         }
 
         [HttpGet]
@@ -33,7 +36,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -53,7 +56,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var FlowIds = _context.ZdbInt.FromSql("FrontProcessToDoIndex2GetFlowId").ToList();
             var AndOrList = _context.ZdbFrontProcessToDoIndex2GetForAndOr.FromSql("FrontProcessToDoIndex2GetForAndOr").ToList();
@@ -198,7 +201,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

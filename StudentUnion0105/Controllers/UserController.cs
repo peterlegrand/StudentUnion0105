@@ -18,13 +18,15 @@ namespace StudentUnion0105.Controllers
     [AllowAnonymous]
     public class UserController : PortalController
     {
+        private readonly SuDbContext _context;
 
         public UserController(UserManager<SuUserModel> userManager
             , SignInManager<SuUserModel> signInManager
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             SignInManager = signInManager;
+            _context = context;
         }
 
         public SignInManager<SuUserModel> SignInManager { get; }
@@ -32,7 +34,7 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var AllUsers = await _userManager.Users.ToListAsync();
             List<SuObjectVM> UserList = new List<SuObjectVM>();
@@ -52,7 +54,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var UserFromDb = await _userManager.FindByIdAsync(Id);
             CreateUserViewModel UserToForm = new CreateUserViewModel
@@ -111,7 +113,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var LanguageList = new List<SelectListItem>();
             var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
@@ -161,7 +163,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             return View();
         }

@@ -20,17 +20,19 @@ namespace StudentUnion0105.Controllers
         private readonly IProjectLanguageRepository _ProjectLanguage;
         private readonly IProjectRepository _Project;
         private readonly IProjectStatusRepository _projectStatus;
+        private readonly SuDbContext _context;
      
         public ProjectController(UserManager<SuUserModel> userManager
             , IProjectLanguageRepository ProjectLanguage
             , IProjectRepository Project
             , ILanguageRepository language
             , IProjectStatusRepository projectStatus
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _ProjectLanguage = ProjectLanguage;
             _Project = Project;
             _projectStatus = projectStatus;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -39,7 +41,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -83,7 +85,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ParentProject = _Project.GetProject(Id);
 
@@ -149,7 +151,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ToForm = (from s in _Project.GetAllProjects()
                          join t in _ProjectLanguage.GetAllProjectLanguages()
@@ -220,7 +222,7 @@ namespace StudentUnion0105.Controllers
 
         public IActionResult LanguageIndex(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -239,7 +241,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _ProjectLanguage.GetAllProjectLanguages()
@@ -304,7 +306,7 @@ namespace StudentUnion0105.Controllers
         {
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

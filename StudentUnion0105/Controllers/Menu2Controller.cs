@@ -18,11 +18,13 @@ namespace StudentUnion0105.Controllers
 {
     public class Menu2Controller : PortalController
     {
+        private readonly SuDbContext _context;
 
         public Menu2Controller(UserManager<SuUserModel> userManager
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
+            _context = context;
         }
         
         
@@ -33,7 +35,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -55,7 +57,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             SqlParameter[] parameters =
@@ -143,7 +145,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             var Classifications = _context.ZDbStatusList.FromSql("Menu123EditGetClassificationList @LanguageId", parameter).ToList();
@@ -218,7 +220,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -232,7 +234,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LId", Id);
 
@@ -247,7 +249,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             if (ModelState.IsValid)
             {
 
@@ -273,7 +275,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageCreate(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -327,7 +329,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LId", Id);
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("Menu2LanguageEditGet @LId", parameter).First();
@@ -350,7 +352,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {

@@ -20,18 +20,20 @@ namespace StudentUnion0105.Controllers
         private readonly IClassificationValueRepository _classificationValue;
         private readonly IClassificationValueLanguageRepository _classificationValueLanguage;
         private readonly IClassificationLevelRepository _classificationLevel;
+                private readonly SuDbContext _context;
 
         public ClassificationValueController(UserManager<SuUserModel> userManager
             , IClassificationValueRepository classificationValue
             , IClassificationValueLanguageRepository classificationValueLanguage
            , SuDbContext context
             , IClassificationLevelRepository classificationLevel
-            , ILanguageRepository language) : base(userManager, language, context)
+            , ILanguageRepository language) : base(userManager, language)
         {
             _classificationValue = classificationValue;
             _classificationValueLanguage = classificationValueLanguage;
             _classificationLevel = classificationLevel;
-        }
+                    _context = context;
+}
 
         public async Task<IActionResult> Index(int Id)
         {
@@ -39,7 +41,7 @@ namespace StudentUnion0105.Controllers
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SuInt MaxLevel = new SuInt
             {
@@ -81,7 +83,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create(int Id)
         {
           
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SuClassificationValueEditGetModel NewValue = new SuClassificationValueEditGetModel
             {
@@ -238,7 +240,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
 {
@@ -300,7 +302,7 @@ namespace StudentUnion0105.Controllers
 
         public IActionResult LanguageIndex(int Id)
         {
-           base.Initializing();
+           // MenusEtc.Initializing();
 
             SqlParameter parameter = new SqlParameter("@OId", Id);
             var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ClassificationValueLanguageIndexGet @OId", parameter).ToList();
@@ -316,7 +318,7 @@ namespace StudentUnion0105.Controllers
             var CurrentUser = await _userManager.GetUserAsync(User);
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
                                 where c.ClassificationValueId == Id
@@ -420,7 +422,7 @@ namespace StudentUnion0105.Controllers
         {
 
            
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

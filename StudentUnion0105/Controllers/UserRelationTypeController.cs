@@ -18,15 +18,17 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IUserRelationTypeRepository _userRelationType;
         private readonly IUserRelationTypeLanguageRepository _userRelationTypeLanguage;
+        private readonly SuDbContext _context;
 
         public UserRelationTypeController(UserManager<SuUserModel> userManager
             , IUserRelationTypeRepository userRelationType
             , IUserRelationTypeLanguageRepository UserRelationTypeLanguage
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _userRelationType = userRelationType;
             _userRelationTypeLanguage = UserRelationTypeLanguage;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +37,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
             //PETER cannot be generic object
@@ -47,7 +49,7 @@ namespace StudentUnion0105.Controllers
         {
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", Id);
 
@@ -60,7 +62,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageEdit(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
             //PETER this SP is missing
@@ -119,7 +121,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public IActionResult LanguageCreate(int Id)
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -190,7 +192,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

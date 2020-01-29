@@ -19,6 +19,7 @@ namespace StudentUnion0105.Controllers
     public class ContentController : PortalController
     {
         private readonly IClassificationRepository _classification;
+                private readonly SuDbContext _context;
 
 
         public ContentController(
@@ -26,21 +27,22 @@ namespace StudentUnion0105.Controllers
            , SuDbContext context
             , IClassificationRepository classification
             , ILanguageRepository language
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
             _classification = classification;
-        }
+                    _context = context;
+}
         public IActionResult Index()
         {
             //PETER no terms go to the content yet?
-            base.Initializing();
+            // MenusEtc.Initializing();
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var CurrentUser = await _userManager.GetUserAsync(User);
 

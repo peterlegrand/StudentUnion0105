@@ -27,7 +27,9 @@ namespace StudentUnion0105
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<SuDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SuConnectionString")));
+            //PETER CONTEXT
+            services.AddDbContext<SuDbContext>(options => {options.UseSqlServer(Configuration.GetConnectionString("SuConnectionString"));}, ServiceLifetime.Transient);
+            //services.AddDbContextPool<SuDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SuConnectionString")));
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

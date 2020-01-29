@@ -19,15 +19,17 @@ namespace StudentUnion0105.Controllers
     {
         private readonly IProcessTemplateFieldTypeLanguageRepository _ProcessTemplateFieldTypeLanguage;
         private readonly IProcessTemplateFieldTypeRepository _ProcessTemplateFieldType;
+        private readonly SuDbContext _context;
 
         public ProcessTemplateFieldTypeController(UserManager<SuUserModel> userManager
             , IProcessTemplateFieldTypeLanguageRepository ProcessTemplateFieldTypeLanguage
             , IProcessTemplateFieldTypeRepository ProcessTemplateFieldType
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
             _ProcessTemplateFieldTypeLanguage = ProcessTemplateFieldTypeLanguage;
             _ProcessTemplateFieldType = ProcessTemplateFieldType;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,7 +37,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -62,7 +64,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult Create()
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProcessTemplateFieldType = new SuProcessTemplateFieldTypeEditGetModel();
             return View(ProcessTemplateFieldType);
@@ -105,7 +107,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ToForm = (from s in _ProcessTemplateFieldType.GetAllProcessTemplateFieldTypes()
                          join t in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
@@ -165,7 +167,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -184,7 +186,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -252,7 +254,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameter = new SqlParameter("@Id", Id);
 

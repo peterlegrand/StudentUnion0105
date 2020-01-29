@@ -14,29 +14,17 @@ namespace StudentUnion0105.Classes
     {
         protected readonly UserManager<SuUserModel> _userManager;
         protected readonly ILanguageRepository _language;
-        protected readonly SuDbContext _context;
+    //    protected readonly SuDbContext _context;
 
         public  PortalController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
-                                                , SuDbContext context
+//                                                , SuDbContext context
             )
         {
             _userManager = userManager;
             _language = language;
-            _context = context;
+  //          _context = context;
         }
 
-        public async void Initializing()
-        {
-            var CurrentUser = await _userManager.GetUserAsync(User);
-            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-
-            var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
-            Menus a = new Menus(_context);
-
-            ViewBag.menuItems = a.TopMenu(DefaultLanguageID);
-            return;
-        }
     }
 }

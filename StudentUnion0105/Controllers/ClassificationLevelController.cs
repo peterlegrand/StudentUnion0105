@@ -17,20 +17,22 @@ namespace StudentUnion0105.Controllers
     public class ClassificationLevelController : PortalController
     {
         private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
+                private readonly SuDbContext _context;
 
         public ClassificationLevelController(UserManager<SuUserModel> userManager, IClassificationLevelLanguageRepository classificationLevelLanguage
             , ILanguageRepository language
             , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
             _classificationLevelLanguage = classificationLevelLanguage;
-        }
+                    _context = context;
+}
 
         public async Task<IActionResult> Index(int Id)
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
             
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -48,7 +50,7 @@ namespace StudentUnion0105.Controllers
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -134,7 +136,7 @@ namespace StudentUnion0105.Controllers
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -181,7 +183,7 @@ namespace StudentUnion0105.Controllers
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
     
-                base.Initializing();
+                // MenusEtc.Initializing();
 
                 SqlParameter[] parameters =
                     {
@@ -223,7 +225,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageIndex(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter parameter = new SqlParameter("@OId", Id);
 
@@ -237,7 +239,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageEdit(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter parameter = new SqlParameter("@LId", Id);
 
@@ -250,7 +252,7 @@ namespace StudentUnion0105.Controllers
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             if (ModelState.IsValid)
             {
@@ -280,7 +282,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageCreate(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             AvailableObjectLanguages AvailableLanguages = new AvailableObjectLanguages(_context);
             var SuLanguage = AvailableLanguages.ReturnFreeLanguages(this.ControllerContext.RouteData.Values["controller"].ToString(), Id);
@@ -333,7 +335,7 @@ namespace StudentUnion0105.Controllers
         public IActionResult LanguageDelete(int Id)
         {
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter parameter = new SqlParameter("@LId", Id);
             SuObjectLanguageEditGetModel ClassificationLevelLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ClassificationLevelLanguageEditGet @LId", parameter).First();
@@ -353,7 +355,7 @@ namespace StudentUnion0105.Controllers
         {
             SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

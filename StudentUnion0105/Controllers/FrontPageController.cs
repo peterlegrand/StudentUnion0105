@@ -19,11 +19,14 @@ namespace StudentUnion0105.Controllers
 //    [Authorize("Classification")]
     public class FrontPageController : PortalController
     {
+        private readonly SuDbContext _context;
+
         public FrontPageController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base (userManager, language, context)
+            ) : base (userManager, language)
         {
+            _context = context;
         }
 
         [HttpGet]
@@ -31,12 +34,12 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
 
-            SuFrontPageModel FrontPage = _context.ZdbFrontPage.FromSql("FrontPageGetPage @LanguageId", parameterPage).First();
+            SuFrontPageModel FrontPage = await _context.ZdbFrontPage.FromSql("FrontPageGetPage @LanguageId", parameterPage).FirstAsync();
 
 
             List<SuFrontPageSectionModel> FrontPageSections = _context.ZdbFrontPageSection.FromSql("FrontPageGetPageSection @LanguageId", parameterPage).ToList();
@@ -68,7 +71,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -90,7 +93,7 @@ namespace StudentUnion0105.Controllers
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
             List< SuFrontPageMyContentGetModel> FrontPageMyContent = _context.ZdbFrontPageMyContentGet.FromSql("FrontPageMyContentGet @CurrentUser", parameterPage).ToList();

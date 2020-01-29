@@ -17,11 +17,13 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateFlowConditionController : PortalController
     {
+        private readonly SuDbContext _context;
 
         public ProcessTemplateFlowConditionController(UserManager<SuUserModel> userManager
             , ILanguageRepository language
-            , SuDbContext context) : base(userManager, language, context)
+            , SuDbContext context) : base(userManager, language)
         {
+            _context = context;
         }
         public async Task<IActionResult> Index(int Id)
         {
@@ -30,7 +32,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -49,7 +51,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {
@@ -187,7 +189,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             ToForm.LanguageId= CurrentUser.DefaultLanguageId;
             var ProcessTemplateFlowConditionTypesFromDb = _context.ZDbTypeList.FromSql($"ProcessTemplateFlowConditionCreateGetType").ToList();

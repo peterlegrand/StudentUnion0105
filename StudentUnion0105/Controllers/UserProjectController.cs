@@ -17,13 +17,15 @@ namespace StudentUnion0105.Controllers
 {
     public class UserProjectController : PortalController
     {
+        private readonly SuDbContext _context;
         private readonly IUserProjectRepository _userProject;
 
         public UserProjectController(UserManager<SuUserModel> userManager
                 , SuDbContext context
                 , IUserProjectRepository UserProject
-                , ILanguageRepository language) : base(userManager, language, context)
+                , ILanguageRepository language) : base(userManager, language)
         {
+            _context = context;
             _userProject = UserProject;
         }
         public async Task<IActionResult> Index(string Id)
@@ -32,7 +34,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
             _ = new List<SuIdWithStrings>();
 
             SqlParameter[] parameters =
@@ -55,7 +57,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -86,7 +88,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var ProjectList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();

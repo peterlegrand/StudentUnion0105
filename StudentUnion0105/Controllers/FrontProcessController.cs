@@ -19,12 +19,14 @@ namespace StudentUnion0105.Controllers
 //    [Authorize("Classification")]
     public class FrontProcessController : PortalController
     {
+        private readonly SuDbContext _context;
 
         public FrontProcessController(UserManager<SuUserModel> userManager
                                                 , ILanguageRepository language
                                                 , SuDbContext context
-            ) : base(userManager, language, context)
+            ) : base(userManager, language)
         {
+            _context = context;
         }
 
         [HttpGet]
@@ -34,7 +36,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -164,7 +166,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            base.Initializing();
+            // MenusEtc.Initializing();
 
             var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 

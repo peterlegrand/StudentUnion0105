@@ -38,7 +38,7 @@
         </h1>
 
     </header>
-    <ejs-menu id="menu" items="ViewBag.menuItems" ></ejs-menu>
+ @*   <ejs-menu id="menu" items="ViewBag.menuItems" ></ejs-menu>*@
     <div class="col-12 text-right">
         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Super admin")))
         {
