@@ -266,42 +266,52 @@ namespace StudentUnion0105.Controllers
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _ProjectLanguage.GetAllProjectLanguages()
-                                where c.ProjectId == Id
-                                select c.LanguageId).ToList();
+            var parameter = new SqlParameter("@Id", Id);
+
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("ContentTypeLanguageCreateGetLanguageList @Id", parameter).ToList();
+
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _ProjectLanguage.GetAllProjectLanguages()
+            //                    where c.ProjectId == Id
+            //                    select c.LanguageId).ToList();
 
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
 
-            if (SuLanguage.Count() == 0)
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel Object = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var ProjectAndStatus = new SuObjectAndStatusViewModel
+            var ObjectAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+               SuObject    = Object
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
-            return View(ProjectAndStatus);
+            return View(ObjectAndStatus);
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
+        public IActionResult LanguageCreate(SuObjectLanguageEditGetWitLanguageListModel FromForm)
         {
             if (ModelState.IsValid)
             {
@@ -310,7 +320,7 @@ namespace StudentUnion0105.Controllers
                     Name = FromForm.SuObject.Name,
                     Description = FromForm.SuObject.Description,
                     MouseOver = FromForm.SuObject.MouseOver,
-                    ProjectId = FromForm.SuObject.ObjectId,
+                    ProjectId = FromForm.SuObject.OId,
                     LanguageId = FromForm.SuObject.LanguageId
                 };
 
@@ -318,7 +328,7 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.OId.ToString() });
 
 
 

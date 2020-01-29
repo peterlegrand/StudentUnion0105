@@ -329,6 +329,7 @@ namespace StudentUnion0105.Controllers
 , "PreferenceLeftMenuEditPost.sql"
 , "PreferenceLeftMenuGet.sql"
 , "PreferenceLeftMenuGetAvailableMenus.sql"
+, "ProjectLanguageCreateGetLanguageList.sql"
 , "ProcessTemplateCreatePost.sql"
 , "ProcessTemplateDeleteGet.sql"
 , "ProcessTemplateDeletePost.sql"
