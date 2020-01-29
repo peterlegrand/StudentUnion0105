@@ -47,12 +47,18 @@ namespace StudentUnion0105.Controllers
         //PETER probably can be deleted
         public async Task<IActionResult> Index()
         {
-            var CurrentUser = await _userManager.GetUserAsync(User);
 
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
-            ViewBag.Terms = UICustomizationArray.UIArray( this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), CurrentUser.DefaultLanguageId) ;
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
+         
             var parameter = new SqlParameter("@LanguageID", CurrentUser.DefaultLanguageId);
 
             var OrgStructure = _context.ZdbOrganizationIndexGet.FromSql("OrganizationIndexGet @LanguageID", parameter).ToList();
@@ -73,12 +79,19 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int Id)
         {
+
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var ParentOrganization = _Organization.GetOrganization(Id);
 
 
-            // MenusEtc.Initializing();
 
 
             var StatusList = new List<SelectListItem>();
@@ -161,11 +174,16 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
+
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            // MenusEtc.Initializing();
 
             //LISTS
             var StatusList = new List<SelectListItem>();
@@ -292,10 +310,18 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
 
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
 
             var parameter = new SqlParameter("@OId", Id);
 
@@ -310,12 +336,12 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageCreate(int Id)
         {
-
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-
-
-            // MenusEtc.Initializing();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
 
             List<int> LanguagesAlready = new List<int>();
@@ -380,10 +406,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageEdit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
     {
@@ -418,10 +448,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
-
-            // MenusEtc.Initializing();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             SqlParameter[] parameters =
 {
@@ -443,10 +476,17 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageDelete(int Id)
+        public async Task<IActionResult> LanguageDelete(int Id)
         {
 
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var parameter = new SqlParameter("@Id", Id);
 

@@ -32,19 +32,33 @@ namespace StudentUnion0105.Controllers
             _classification = classification;
                     _context = context;
 }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //PETER no terms go to the content yet?
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            // MenusEtc.Initializing();
-
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
+
 
             var StatusList = new List<SelectListItem>();
             var TypeList = new List<SelectListItem>();

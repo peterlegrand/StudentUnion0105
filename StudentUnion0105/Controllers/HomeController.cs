@@ -127,14 +127,22 @@ namespace StudentUnion0105.Controllers
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            // MenusEtc.Initializing();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus x = new Menus(_context);
+            ViewBag.menuItems = await x.TopMenu(DefaultLanguageID);
+
+
 
             var Languages = await _context.ZdbHomeIndexAdminGetLanguages.FromSql("HomeIndexAdminGetLanguages").ToListAsync();
             var TableNames = await _context.ZdbHomeIndexAdminGetTableName.FromSql("HomeIndexAdminGetTables").ToListAsync();
 
-            SuHomeIndexAdminGetModel Matrix = new SuHomeIndexAdminGetModel();
-            Matrix.languages = Languages;
+            SuHomeIndexAdminGetModel Matrix = new SuHomeIndexAdminGetModel
+            {
+                languages = Languages
+            };
             for (int i = 0; i < TableNames.Count; i++)
             {
                 var parameter = new SqlParameter("@TableName", TableNames[i].TableDescription);

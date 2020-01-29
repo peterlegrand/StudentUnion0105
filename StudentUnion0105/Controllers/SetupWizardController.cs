@@ -167,6 +167,7 @@ namespace StudentUnion0105.Controllers
 , "ContentTypeEditGet.sql"
 , "ContentTypeEditPost.sql"
 , "ContentTypeIndexGet.sql"
+, "ContentTypeLanguageCreateGetLanguageList.sql"
 , "ContentTypeLanguageCreatePost.sql"
 , "ContentTypeLanguageDeletePost.sql"
 , "ContentTypeLanguageEditGet.sql"

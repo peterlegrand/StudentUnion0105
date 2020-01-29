@@ -12,6 +12,8 @@ SELECT
 	, ISNULL(dbContentTypeLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbContentTypeLanguage.MenuName,'') MenuName
 	, ISNULL(dbLanguage.LanguageName,'') Language
+	, ISNULL(dbContentTypeLanguage.TitleName,'') Language
+	, ISNULL(dbContentTypeLanguage.TitleDescription,'') Language
 	, 0 PId
 FROM dbContentTypeLanguage
 JOIN dbContentType

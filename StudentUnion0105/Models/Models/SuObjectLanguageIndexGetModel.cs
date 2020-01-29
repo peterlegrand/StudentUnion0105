@@ -16,4 +16,11 @@ namespace StudentUnion0105.Models
         public int LanguageId { get; set; }
         public string LanguageName { get; set; }
     }
+
+    public class LanguageCreateGetLanguageList
+    {
+        [Key]
+        public string Value { get; set; }
+        public string Text { get; set; }
+    }
 }

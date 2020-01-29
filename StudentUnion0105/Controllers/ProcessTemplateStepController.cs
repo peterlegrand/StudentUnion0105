@@ -50,10 +50,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
-
-            // MenusEtc.Initializing();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
 
             var ProcessTemplateStep = (from c in  _processTemplateStep.GetAllProcessTemplateSteps()
@@ -81,10 +84,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Edit(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
-
-            // MenusEtc.Initializing();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var ProcessTemplateStep = (from c in _processTemplateStep.GetAllProcessTemplateSteps()
                                         join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
@@ -180,10 +186,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
-
-            // MenusEtc.Initializing();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var ProcessTemplateStep = new SuObjectVM
             {
@@ -224,11 +233,17 @@ namespace StudentUnion0105.Controllers
         }
 
 
-        public IActionResult LanguageIndex(int Id)
+        public async Task<IActionResult> LanguageIndex(int Id)
         {
 
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
             var parameter = new SqlParameter("@OId", Id);
 
             var LanguageIndex = _context.ZdbObjectLanguageIndexGet.FromSql("ProcessTemplateStepLanguageIndexGet @OId", parameter).ToList();
@@ -239,10 +254,16 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageEdit(int Id)
+        public async Task<IActionResult> LanguageEdit(int Id)
         {
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
             var parameter = new SqlParameter("@Id", Id);
 
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateStepLanguageEditGet @Id", parameter).First();
@@ -276,10 +297,13 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> LanguageCreate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
-
-            // MenusEtc.Initializing();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             List<int> LanguagesAlready = new List<int>();
             LanguagesAlready = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()

@@ -33,8 +33,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
-            
-            // MenusEtc.Initializing();
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
 
             var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
@@ -70,8 +76,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> View(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            // MenusEtc.Initializing();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
 
             SqlParameter[] parameters =
                 {
@@ -82,18 +94,25 @@ namespace StudentUnion0105.Controllers
             var FrontPageContent = _context.ZdbFrontPageViewGet.FromSql("FrontPageViewGet @Id, @CurrentUser", parameters).First();
             var FrontPageContentClassificationValues = _context.ZdbSuFrontPageViewGetClassificationValues.FromSql("FrontPageViewGetClassificationValues @Id, @CurrentUser", parameters).ToList();
 
-            SuFrontPageViewGetWithValuesModel ContentWithValues = new SuFrontPageViewGetWithValuesModel();
-
-            ContentWithValues.Content = FrontPageContent;
-            ContentWithValues.Values = FrontPageContentClassificationValues;
+            SuFrontPageViewGetWithValuesModel ContentWithValues = new SuFrontPageViewGetWithValuesModel
+            {
+                Content = FrontPageContent,
+                Values = FrontPageContentClassificationValues
+            };
             return View(ContentWithValues);
         }
         [HttpGet]
         public async Task<IActionResult> MyContent()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
-            // MenusEtc.Initializing();
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
             var parameterPage = new SqlParameter("@CurrentUser", CurrentUser.Id);
 
             List< SuFrontPageMyContentGetModel> FrontPageMyContent = _context.ZdbFrontPageMyContentGet.FromSql("FrontPageMyContentGet @CurrentUser", parameterPage).ToList();

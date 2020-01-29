@@ -11,6 +11,8 @@ SELECT
 	, ISNULL(dbContentTypeLanguage.Description,'') Description
 	, ISNULL(dbContentTypeLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbContentTypeLanguage.MenuName,'') MenuName
+	, ISNULL(dbContentTypeLanguage.TitleName,'') TitleName
+	, ISNULL(dbContentTypeLanguage.TitleDescription,'') TitleDescription
 FROM dbContentTypeLanguage
 JOIN dbContentType
 	ON dbContentTypeLanguage.ContentTypeId = dbContentType.Id

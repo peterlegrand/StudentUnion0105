@@ -34,7 +34,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> Index()
         {
 
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus x = new Menus(_context);
+
+            ViewBag.menuItems = await x.TopMenu(DefaultLanguageID);
 
             var AllUsers = await _userManager.Users.ToListAsync();
             List<SuObjectVM> UserList = new List<SuObjectVM>();
@@ -54,7 +61,14 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string Id)
         {
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var UserFromDb = await _userManager.FindByIdAsync(Id);
             CreateUserViewModel UserToForm = new CreateUserViewModel
@@ -111,9 +125,16 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var LanguageList = new List<SelectListItem>();
             var LanguagesFromDb = _context.ZDbLanguageList.FromSql("LanguageSelectAll").ToList();
@@ -161,9 +182,16 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            // MenusEtc.Initializing();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             return View();
         }

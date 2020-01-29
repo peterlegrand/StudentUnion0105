@@ -17,7 +17,7 @@ namespace StudentUnion0105.Classes
         {
             _context = context;
         }
-        public string[] UIArray(string Controller, string Action, int languageId)
+        public async Task<string[]> UIArray(string Controller, string Action, int languageId)
         {
             //UI Customization
             SqlParameter[] parameters =
@@ -27,7 +27,7 @@ namespace StudentUnion0105.Classes
                     , new SqlParameter("@LanguageId", languageId)
 
                 };
-            var CustomizationFromDb = _context.ZdbLayoutTermList.FromSql("UITermLanguageSelect @Controller, @Action, @LanguageID", parameters).ToList();
+            var CustomizationFromDb = await _context.ZdbLayoutTermList.FromSql("UITermLanguageSelect @Controller, @Action, @LanguageID", parameters).ToListAsync();
             int NoOfTerms = CustomizationFromDb.Count();
             String[] CustomTerms = new String[NoOfTerms];
             int i = 0;
@@ -59,10 +59,10 @@ namespace StudentUnion0105.Classes
                 CustomTerms[i] = x.Name;
                 i++;
             }
-            LayoutWithAllModel Layout = new LayoutWithAllModel();
-
-
-            Layout.terms = CustomTerms;
+            LayoutWithAllModel Layout = new LayoutWithAllModel
+            {
+                terms = CustomTerms
+            };
             return Layout;
         }
     }

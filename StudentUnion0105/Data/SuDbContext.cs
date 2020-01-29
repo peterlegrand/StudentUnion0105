@@ -206,6 +206,8 @@ namespace StudentUnion0105.Data
         public DbSet<SuObjectIndexGetModel> ZdbObjectIndexGet { get; set; }
         public DbSet<SuObjectLanguageCreateGetModel> ZdbObjectLanguageCreateGet { get; set; }
         public DbSet<SuObjectLanguageEditGetModel> ZdbObjectLanguageEditGet { get; set; }
+        public DbSet<SuContentTypeLanguageEditGetModel> ZdbContentTypeLanguageEditGet { get; set; }
+        public DbSet<LanguageCreateGetLanguageList> ZdbLanguageCreateGetLanguageList { get; set; }
         public DbSet<SuPageLanguageEditGetModel> ZdbPageLanguageEditGet { get; set; }
         public DbSet<SuObjectLanguageIndexGetModel> ZdbObjectLanguageIndexGet { get; set; }
         public DbSet<SuProcessTemplateFlowConditionEditGetModel> ZdbProcessTemplateFlowConditionEditGet { get; set; }

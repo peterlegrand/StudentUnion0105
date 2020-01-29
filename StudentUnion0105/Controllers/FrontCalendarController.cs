@@ -31,10 +31,17 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult EventCalendar()
+        public async Task<IActionResult> EventCalendar()
         {
-           
-            // MenusEtc.Initializing();
+
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus x = new Menus(_context);
+            ViewBag.menuItems = await x.TopMenu(DefaultLanguageID);
+
 
             SqlParameter[] parameters =
                 {
@@ -63,10 +70,14 @@ namespace StudentUnion0105.Controllers
         public async Task<IActionResult> MyCalendar()
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
 
-
-            // MenusEtc.Initializing();
 
             SqlParameter[] parameters =
                 {

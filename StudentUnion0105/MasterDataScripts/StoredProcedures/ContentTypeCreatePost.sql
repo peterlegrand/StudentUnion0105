@@ -1,4 +1,4 @@
-ALTER PROCEDURE ContentTypeCreatePost (
+CREATE PROCEDURE ContentTypeCreatePost (
 	 @LanguageId int
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
@@ -55,14 +55,14 @@ VALUES (
 	, getdate()
 	);
 
---INSERT INTO dbContentTypeClassification (
---	dbContentTypeClassification.ClassificationId
---	, dbContentTypeClassification.ContentTypeId
---	, dbContentTypeClassification.StatusId)
---SELECT dbclassification.Id
---	, @NewId
---	, 1 
---FROM dbclassification;
+INSERT INTO dbContentTypeClassification (
+	dbContentTypeClassification.ClassificationId
+	, dbContentTypeClassification.ContentTypeId
+	, dbContentTypeClassification.StatusId)
+SELECT dbclassification.Id
+	, @NewId
+	, 1 
+FROM dbclassification;
 
 COMMIT TRANSACTION
 
