@@ -304,39 +304,65 @@ namespace StudentUnion0105.Controllers
             Menus a = new Menus(_context);
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+            var parameter = new SqlParameter("@Id", Id);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
-                                where c.StepId == Id
-                                select c.LanguageId).ToList();
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("ProcessTemplateStepLanguageCreateGetLanguageList @Id", parameter).ToList();
 
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active == true
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
-
-            if (SuLanguage.Count() == 0)
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel ProcessTemplateStep = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            var ProcessTemplateStepAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = ProcessTemplateStep
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
-            return View(ClassificationAndStatus);
+            return View(ProcessTemplateStepAndStatus);
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
+            //                    where c.StepId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active == true
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(ClassificationAndStatus);
         }
 
         [HttpPost]

@@ -343,39 +343,70 @@ namespace StudentUnion0105.Controllers
             ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
             Menus a = new Menus(_context);
 
+            
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
-                                where c.OrganizationId == Id
-                                select c.LanguageId).ToList();
+            var parameter = new SqlParameter("@Id", Id);
 
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("OrganizationLanguageCreateGetLanguageList @Id", parameter).ToList();
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
 
-            if (SuLanguage.Count() == 0)
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel Organization = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var OrganizationAndStatus = new SuObjectAndStatusViewModel
+            var OrganizationAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = Organization
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
             return View(OrganizationAndStatus);
+
+
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _OrganizationLanguage.GetAllOrganizationLanguages()
+            //                    where c.OrganizationId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var OrganizationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(OrganizationAndStatus);
         }
 
         [HttpPost]
@@ -467,7 +498,7 @@ namespace StudentUnion0105.Controllers
             return View(Classification);
         }
         [HttpPost]
-        public IActionResult Delete(SuContentTypeDeleteGetModel FromForm)
+        public IActionResult Delete(SuOrganizationDeleteGetModel FromForm)
         {
             _context.Database.ExecuteSqlCommand($"OrganizationDeletePost {FromForm.Id}");
 

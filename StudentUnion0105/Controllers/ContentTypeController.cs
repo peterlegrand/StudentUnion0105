@@ -199,7 +199,6 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> LanguageCreate(int Id)
         {
-
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
@@ -218,22 +217,6 @@ namespace StudentUnion0105.Controllers
             {
                 LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
             }
-
-            //List<int> LanguagesAlready = new List<int>();
-            //LanguagesAlready = (from c in _contentTypeLanguage.GetAllContentTypeLanguages()
-            //                    where c.ContentTypeId == Id
-            //                    select c.LanguageId).ToList();
-
-
-            //var SuLanguage = (from l in _language.GetAllLanguages()
-            //                  where !LanguagesAlready.Contains(l.Id)
-            //                  && l.Active
-            //                  select new SelectListItem
-            //                  {
-            //                      Value = l.Id.ToString()
-            //                  ,
-            //                      Text = l.LanguageName
-            //                  }).ToList();
 
             if (LList.Count() == 0)
             {

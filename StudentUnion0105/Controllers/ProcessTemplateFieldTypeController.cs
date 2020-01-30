@@ -210,37 +210,65 @@ namespace StudentUnion0105.Controllers
             Menus a = new Menus(_context);
 
 
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
-                                where c.FieldTypeId == Id
-                                select c.LanguageId).ToList();
+            var parameter = new SqlParameter("@Id", Id);
 
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("ProcessTemplateFieldTypeLanguageCreateGetLanguageList @Id", parameter).ToList();
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
-
-            if (SuLanguage.Count() == 0)
-                return NewMethod(Id);
-            SuObjectVM SuObject = new SuObjectVM
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
             {
-                ObjectId = Id
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
+
+            if (LList.Count() == 0)
+            {
+                return RedirectToAction("LanguageIndex", new { Id });
+            }
+            SuObjectLanguageEditGetModel ProcessTemplateFieldType = new SuObjectLanguageEditGetModel
+            {
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var ProcessTemplateFieldTypeAndStatus = new SuObjectAndStatusViewModel
+            var ProcessTemplateFieldTypeAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = ProcessTemplateFieldType
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
             return View(ProcessTemplateFieldTypeAndStatus);
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _ProcessTemplateFieldTypeLanguage.GetAllProcessTemplateFieldTypeLanguages()
+            //                    where c.FieldTypeId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //    return NewMethod(Id);
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var ProcessTemplateFieldTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(ProcessTemplateFieldTypeAndStatus);
         }
 
         private IActionResult NewMethod(int Id)

@@ -276,21 +276,7 @@ namespace StudentUnion0105.Controllers
                 LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
             }
 
-            //List<int> LanguagesAlready = new List<int>();
-            //LanguagesAlready = (from c in _ProjectLanguage.GetAllProjectLanguages()
-            //                    where c.ProjectId == Id
-            //                    select c.LanguageId).ToList();
-
-
-            //var SuLanguage = (from l in _language.GetAllLanguages()
-            //                  where !LanguagesAlready.Contains(l.Id)
-            //                  && l.Active
-            //                  select new SelectListItem
-            //                  {
-            //                      Value = l.Id.ToString()
-            //                  ,
-            //                      Text = l.LanguageName
-            //                  }).ToList();
+           
 
             if (LList.Count() == 0)
             {

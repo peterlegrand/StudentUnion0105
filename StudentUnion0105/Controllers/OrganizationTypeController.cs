@@ -203,42 +203,71 @@ namespace StudentUnion0105.Controllers
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
             var UICustomizationArray = new UICustomization(_context);
+
             ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
             Menus a = new Menus(_context);
 
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
-                                where c.OrganizationTypeId == Id
-                                select c.LanguageId).ToList();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
+            var parameter = new SqlParameter("@Id", Id);
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("OrganizationTypeLanguageCreateGetLanguageList @Id", parameter).ToList();
 
-            if (SuLanguage.Count() == 0)
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
+
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel OrganizationType = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
+            var OrganizationTypeAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = OrganizationType
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
             return View(OrganizationTypeAndStatus);
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _OrganizationTypeLanguage.GetAllOrganizationTypeLanguages()
+            //                    where c.OrganizationTypeId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var OrganizationTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(OrganizationTypeAndStatus);
         }
 
         [HttpPost]

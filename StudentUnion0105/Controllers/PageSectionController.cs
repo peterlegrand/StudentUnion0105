@@ -566,38 +566,67 @@ namespace StudentUnion0105.Controllers
             Menus a = new Menus(_context);
 
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
-                                where c.PageSectionId == Id
-                                select c.LanguageId).ToList();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
+            var parameter = new SqlParameter("@Id", Id);
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active == true
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("PageSectionLanguageCreateGetLanguageList @Id", parameter).ToList();
 
-            if (SuLanguage.Count() == 0)
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
+
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel PageSection = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            var PageSectionAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = PageSection
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
-            return View(ClassificationAndStatus);
+            return View(PageSectionAndStatus);
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _pageSectionLanguage.GetAllPageSectionLanguages()
+            //                    where c.PageSectionId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active == true
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(ClassificationAndStatus);
         }
 
         [HttpPost]

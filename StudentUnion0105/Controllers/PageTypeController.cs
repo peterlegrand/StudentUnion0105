@@ -202,40 +202,77 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public IActionResult LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
-                                where c.PageTypeId == Id
-                                select c.LanguageId).ToList();
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
 
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            if (SuLanguage.Count() == 0)
+            var parameter = new SqlParameter("@Id", Id);
+
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("PageTypeLanguageCreateGetLanguageList @Id", parameter).ToList();
+
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
+
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel PageType = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var PageTypeAndStatus = new SuObjectAndStatusViewModel
+            var PageTypeAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                SuObject = PageType
                 ,
-                SomeKindINumSelectListItem = SuLanguage
+                LanguageList = LList
             };
             return View(PageTypeAndStatus);
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _PageTypeLanguage.GetAllPageTypeLanguages()
+            //                    where c.PageTypeId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            //ViewBag.Id = Id.ToString();
+            //var PageTypeAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+            //};
+            //return View(PageTypeAndStatus);
         }
 
         [HttpPost]

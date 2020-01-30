@@ -116,47 +116,6 @@ namespace StudentUnion0105.Controllers
             NewValue.DateLevel = ClassificationValueEditGetLevel.DateLevel;
 
 
-            //SuObjectVM CValue = new SuObjectVM()
-            //{
-            //    NullId = Id,
-            //    ObjectId = Convert.ToInt32(HttpContext.Request.Query["CId"]),
-            //};
-            //if (Id == 0)
-            //{
-            //    CValue.Level = 1;
-            //}
-            //else
-            //{
-            //    var x = new SuClassificationValueModel();
-            //    int? Parent = Id;
-            //    while (Parent != null)
-            //    {
-            //        CValue.Level++;
-
-            //        x = _classificationValue.GetClassificationValue(Parent ?? 0);
-            //        Parent = x.ParentValueId;
-
-            //    }
-            //}
-
-            //var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
-            //             where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == CValue.Level
-            //             select new SuObjectVM
-            //             {
-            //                 DateLevel = s.DateLevel
-            //                ,
-            //                 Alphabetically = s.Alphabetically
-            //                ,
-            //                 InDropDown = s.InDropDown
-
-            //             }).First();
-            //CValue.DateLevel = ToForm.DateLevel;
-            //CValue.Alphabetically = ToForm.Alphabetically;
-            //CValue.InDropDown = ToForm.InDropDown;
-
-            ////            var x = _classificationLevel.get.ClassificationLevel()
-            //ViewBag.CId = HttpContext.Request.Query["CId"];
-            //return View(CValue);
             return View(NewValue);
 
         }
@@ -170,37 +129,6 @@ namespace StudentUnion0105.Controllers
     
 
 
-                //var ClassificationValue = new SuClassificationValueModel
-                //{
-                //    ModifiedDate = DateTime.Now,
-                //    CreatedDate = DateTime.Now,
-                //    ClassificationId = FromForm.ObjectId
-                //};
-
-                //if (FromForm.NullId != 0)
-                //{ ClassificationValue.ParentValueId = FromForm.NullId; }
-                //var NewClassificationValue = _classificationValue.AddClassificationValue(ClassificationValue);
-
-
-                //var CurrentUser = await _userManager.GetUserAsync(User);
-                //var DefaultLanguageID = CurrentUser.DefaultLanguageId;
-                //var ClassificationValueLanguage = new SuClassificationValueLanguageModel
-                //{
-                //    Name = FromForm.Name,
-                //    Description = FromForm.Description,
-                //    DropDownName = FromForm.DropDownName,
-                //    MenuName = FromForm.MenuName,
-                //    MouseOver = FromForm.MouseOver,
-                //    PageName = FromForm.Title,
-                //    PageDescription = FromForm.PageDescription,
-                //    HeaderName = FromForm.HeaderName,
-                //    HeaderDescription = FromForm.HeaderDescription,
-                //    TopicName = FromForm.TopicName,
-
-                //    ClassificationValueId = NewClassificationValue.Id,
-                //    LanguageId = DefaultLanguageID
-                //};
-                //_classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
                 SqlParameter[] parameters =
                     {
 //                    new SqlParameter("@Id", FromForm.Classification.Id),
@@ -337,7 +265,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> LanguageCreate(int Id)
+        public async Task<IActionResult> LanguageCreate(int Id)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -345,73 +273,104 @@ namespace StudentUnion0105.Controllers
             var UICustomizationArray = new UICustomization(_context);
             ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
             Menus a = new Menus(_context);
+            
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            List<int> LanguagesAlready = new List<int>();
-            LanguagesAlready = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
-                                where c.ClassificationValueId == Id
-                                select c.LanguageId).ToList();
+            var parameter = new SqlParameter("@Id", Id);
 
+            var LanguageList = _context.ZdbLanguageCreateGetLanguageList.FromSql("ClassificationValueLanguageCreateGetLanguageList @Id", parameter).ToList();
 
-            var SuLanguage = (from l in _language.GetAllLanguages()
-                              where !LanguagesAlready.Contains(l.Id)
-                              && l.Active == true
-                              select new SelectListItem
-                              {
-                                  Value = l.Id.ToString()
-                              ,
-                                  Text = l.LanguageName
-                              }).ToList();
+            List<SelectListItem> LList = new List<SelectListItem>();
+            foreach (var Language in LanguageList)
+            {
+                LList.Add(new SelectListItem { Value = Language.Value, Text = Language.Text });
+            }
 
-            if (SuLanguage.Count() == 0)
+            if (LList.Count() == 0)
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectVM SuObject = new SuObjectVM
+            SuObjectLanguageEditGetModel ClassificationValue = new SuObjectLanguageEditGetModel
             {
-                ObjectId = Id
+                OId = Id
             };
-            //------
-            var xyz = _classificationValue.GetClassificationValue(Id);
-            // ClassificationValue.NullId = xyz.ParentValueId;
-            int Level = 1;
-            var x = new SuClassificationValueModel();
-            int? Parent = xyz.ParentValueId;
-            while (Parent != null)
-            {
-                Level++;
-
-                x = _classificationValue.GetClassificationValue(Parent ?? 0);
-                Parent = x.ParentValueId;
-
-            }
-            //          var ClassificationList = new List<SelectListItem>();
-            //string a;
-            //a = ToForm.Description;
-
-            //ClassificationValue.Level = Level;
-            var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
-                         where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == Level
-                         select new SuObjectVM
-                         {
-                             DateLevel = s.DateLevel
-                            ,
-                             Alphabetically = s.Alphabetically
-                            ,
-                             InDropDown = s.InDropDown
-
-                         }).First();
-            //------
             ViewBag.Id = Id.ToString();
-            var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            var ClassificationValueAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
             {
-                SuObject = SuObject
+                 SuObject = ClassificationValue
                 ,
-                SomeKindINumSelectListItem = SuLanguage
-
+                LanguageList = LList
             };
+            return View(ClassificationValueAndStatus);
 
-            ViewBag.ShowInDropDown = ToForm.InDropDown;
-            return View(ClassificationAndStatus);
+
+
+            //List<int> LanguagesAlready = new List<int>();
+            //LanguagesAlready = (from c in _classificationValueLanguage.GetAllClassificationValueLanguages()
+            //                    where c.ClassificationValueId == Id
+            //                    select c.LanguageId).ToList();
+
+
+            //var SuLanguage = (from l in _language.GetAllLanguages()
+            //                  where !LanguagesAlready.Contains(l.Id)
+            //                  && l.Active == true
+            //                  select new SelectListItem
+            //                  {
+            //                      Value = l.Id.ToString()
+            //                  ,
+            //                      Text = l.LanguageName
+            //                  }).ToList();
+
+            //if (SuLanguage.Count() == 0)
+            //{
+            //    return RedirectToAction("LanguageIndex", new { Id });
+            //}
+            //SuObjectVM SuObject = new SuObjectVM
+            //{
+            //    ObjectId = Id
+            //};
+            ////------
+            //var xyz = _classificationValue.GetClassificationValue(Id);
+            //// ClassificationValue.NullId = xyz.ParentValueId;
+            //int Level = 1;
+            //var x = new SuClassificationValueModel();
+            //int? Parent = xyz.ParentValueId;
+            //while (Parent != null)
+            //{
+            //    Level++;
+
+            //    x = _classificationValue.GetClassificationValue(Parent ?? 0);
+            //    Parent = x.ParentValueId;
+
+            //}
+            ////          var ClassificationList = new List<SelectListItem>();
+            ////string a;
+            ////a = ToForm.Description;
+
+            ////ClassificationValue.Level = Level;
+            //var ToForm = (from s in _classificationLevel.GetAllClassificationLevels()
+            //             where s.ClassificationId == Convert.ToInt32(HttpContext.Request.Query["CId"]) && s.Sequence == Level
+            //             select new SuObjectVM
+            //             {
+            //                 DateLevel = s.DateLevel
+            //                ,
+            //                 Alphabetically = s.Alphabetically
+            //                ,
+            //                 InDropDown = s.InDropDown
+
+            //             }).First();
+            ////------
+            //ViewBag.Id = Id.ToString();
+            //var ClassificationAndStatus = new SuObjectAndStatusViewModel
+            //{
+            //    SuObject = SuObject
+            //    ,
+            //    SomeKindINumSelectListItem = SuLanguage
+
+            //};
+
+            //ViewBag.ShowInDropDown = ToForm.InDropDown;
+            //return View(ClassificationAndStatus);
         }
 
         [HttpPost]

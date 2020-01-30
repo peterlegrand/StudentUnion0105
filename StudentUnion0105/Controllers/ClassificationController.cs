@@ -91,12 +91,14 @@ namespace StudentUnion0105.Controllers
             var ClassificationEditGet = _context.ZdbClassificationEditGet.FromSql("ClassificationEditGet @LanguageId, @Id", parameters).First();
             
             var ClassificationStatusList = new List<SelectListItem>();
-            foreach (var ClassificationStatusFromDb in _classificationStatus.GetAllClassificationStatus())
+            var StatusList = _context.ZDbStatusList.FromSql("ClassificationGetStatusList").ToList();
+
+            foreach (var Status in StatusList)
             {
                 ClassificationStatusList.Add(new SelectListItem
                 {
-                    Text = ClassificationStatusFromDb.Name,
-                    Value = ClassificationStatusFromDb.Id.ToString()
+                    Text = Status.Name,
+                    Value = Status.Id.ToString()
                 });
             }
             SuClassificationEditGetWithListModel ClassificationWithList = new SuClassificationEditGetWithListModel
