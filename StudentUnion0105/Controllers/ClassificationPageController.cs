@@ -16,20 +16,21 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationPageController : PortalController
     {
-        private readonly IClassificationLanguageRepository _classificationLanguage;
-        private readonly IClassificationPageLanguageRepository _classificationPageLanguage;
+        //private readonly IClassificationLanguageRepository _classificationLanguage;
+        //private readonly IClassificationPageLanguageRepository _classificationPageLanguage;
                 private readonly SuDbContext _context;
 
-        public ClassificationPageController(UserManager<SuUserModel> userManager
-            , IClassificationLanguageRepository classificationLanguage
-            , IClassificationPageLanguageRepository classificationPageLanguage
+        public ClassificationPageController(
+            UserManager<SuUserModel> userManager
+            //, IClassificationLanguageRepository classificationLanguage
+            //, IClassificationPageLanguageRepository classificationPageLanguage
             , ILanguageRepository language
             , SuDbContext context
             ) : base(userManager, language)
         {
-            _classificationLanguage = classificationLanguage;
-            //_classificationPage = classificationPage;
-            _classificationPageLanguage = classificationPageLanguage;
+            //_classificationLanguage = classificationLanguage;
+            ////_classificationPage = classificationPage;
+            //_classificationPageLanguage = classificationPageLanguage;
             _context = context;
         }
 
@@ -362,7 +363,10 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
-            _classificationPageLanguage.DeleteClassificationPageLanguage(FromForm.LId);
+            var parameter = new SqlParameter("@Id", FromForm.LId);
+            _context.Database.ExecuteSqlCommand("ClassificationPageLanguageDeletePost @Id", parameter);
+
+            //_classificationPageLanguage.DeleteClassificationPageLanguage(FromForm.LId);
             return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
         }
 

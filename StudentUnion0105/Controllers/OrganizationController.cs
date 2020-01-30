@@ -94,9 +94,12 @@ namespace StudentUnion0105.Controllers
 
 
 
+            var StatusListFromDb = _context.ZDbStatusList.FromSql("OrganizatonCreateGetStatusList").ToList();
+
+
             var StatusList = new List<SelectListItem>();
 
-            foreach (var StatusFromDb in _OrganizationStatus.GetAllOrganizationStatus())
+            foreach (var StatusFromDb in StatusListFromDb)
             {
                 StatusList.Add(new SelectListItem
                 {
@@ -105,19 +108,11 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ToForm = (from o in _organizationType.GetAllOrganizationTypes()
-                         join l in _organizationTypeLanguage.GetAllOrganizationTypeLanguages()
-                         on o.Id equals l.OrganizationTypeId
-                         where l.LanguageId == CurrentUser.DefaultLanguageId
-                          select new SuObjectVM
-                         {
-                             Id = o.Id
-                            ,
-                             Name = l.Name
-                         }).ToList();
+            var parameter = new SqlParameter("@Id", Id);
+            var TypeListFromDb = _context.ZDbTypeList.FromSql("OrganizatonCreateGetTypeList @Id", parameter).ToList();
 
             var TypeList = new List<SelectListItem>();
-            foreach (var TypeFromDb in ToForm)
+            foreach (var TypeFromDb in TypeListFromDb)
             {
                 TypeList.Add(new SelectListItem
                 {
@@ -125,7 +120,7 @@ namespace StudentUnion0105.Controllers
                     Value = TypeFromDb.Id.ToString()
                 });
             }
-            //wwwwwwwwwwwwwwwwwwwwwwww
+
 
             SuObjectVM Parent = new SuObjectVM()
             {

@@ -16,15 +16,17 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationLevelController : PortalController
     {
-        private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
+        //private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
                 private readonly SuDbContext _context;
 
-        public ClassificationLevelController(UserManager<SuUserModel> userManager, IClassificationLevelLanguageRepository classificationLevelLanguage
+        public ClassificationLevelController(
+            UserManager<SuUserModel> userManager
+            //, IClassificationLevelLanguageRepository classificationLevelLanguage
             , ILanguageRepository language
             , SuDbContext context
             ) : base(userManager, language)
         {
-            _classificationLevelLanguage = classificationLevelLanguage;
+            //_classificationLevelLanguage = classificationLevelLanguage;
                     _context = context;
 }
 
@@ -399,7 +401,9 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
-                _classificationLevelLanguage.DeleteClassificationLevelLanguage(FromForm.LId);
+            var parameter = new SqlParameter("@Id", FromForm.LId);
+            _context.Database.ExecuteSqlCommand("ClassificationLevelLanguageDeletePost @Id", parameter);
+
                 return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
         }
 

@@ -17,19 +17,20 @@ namespace StudentUnion0105.Controllers
 {
     public class ContentTypeController : PortalController
     {
-        private readonly IContentTypeLanguageRepository _contentTypeLanguage;
-        private readonly IContentTypeRepository _contentType;
+        //private readonly IContentTypeLanguageRepository _contentTypeLanguage;
+        //private readonly IContentTypeRepository _contentType;
         private readonly SuDbContext _context;
 
-        public ContentTypeController(UserManager<SuUserModel> userManager
-            , IContentTypeLanguageRepository ContentTypeLanguage
-            , IContentTypeRepository contentType
+        public ContentTypeController(
+            UserManager<SuUserModel> userManager
+            //, IContentTypeLanguageRepository ContentTypeLanguage
+            //, IContentTypeRepository contentType
             , ILanguageRepository language
                         , SuDbContext context
 ) : base(userManager, language)
         {
-            _contentTypeLanguage = ContentTypeLanguage;
-            _contentType = contentType;
+            //_contentTypeLanguage = ContentTypeLanguage;
+            //_contentType = contentType;
             _context = context;
         }
         public async Task<IActionResult> Index()
@@ -237,24 +238,54 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageCreate(SuContentTypeLanguageEditGetWitLanguageListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var ContentTypeLanguage = new SuContentTypeLanguageModel
+            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
+
+
+            SqlParameter[] parameters =
                 {
-                    Name = test3.SuObject.Name,
-                    Description = test3.SuObject.Description,
-                    MouseOver = test3.SuObject.MouseOver,
-                    ContentTypeId = test3.SuObject.ObjectId,
-                    LanguageId = test3.SuObject.LanguageId
-                };
+                        new SqlParameter("@OId", FromForm.ContentType.OId),
+                        new SqlParameter("@LanguageId", FromForm.ContentType.LanguageId),
+                        new SqlParameter("@Name", FromForm.ContentType.Name ?? ""),
+                        new SqlParameter("@Description", FromForm.ContentType.Description ?? ""),
+                        new SqlParameter("@MouseOver", FromForm.ContentType.MouseOver ?? ""),
+                        new SqlParameter("@MenuName", FromForm.ContentType.MenuName ?? ""),
+                        new SqlParameter("@TitleName", FromForm.ContentType.TitleName ?? ""),
+                        new SqlParameter("@TitleDescription", FromForm.ContentType.TitleDesciption ?? ""),
+                        new SqlParameter("@ModifierId", CurrentUser.Id)
+                        };
 
-                 _contentTypeLanguage.AddContentTypeLanguage(ContentTypeLanguage);
+            _context.Database.ExecuteSqlCommand("ContentTypeLanguageCreatePost " +
+                       "@OId" +
+                       ", @LanguageId" +
+                       ", @Name" +
+                       ", @Description" +
+                       ", @MouseOver" +
+                       ", @MenuName" +
+                       ", @TitleName" +
+                       ", @TitleDescription" +
+                       ", @ModifierId", parameters);
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ContentType.OId.ToString() });
 
 
-            }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
+
+            //if (ModelState.IsValid)
+            //{
+            //    var ContentTypeLanguage = new SuContentTypeLanguageModel
+            //    {
+            //        Name = test3.SuObject.Name,
+            //        Description = test3.SuObject.Description,
+            //        MouseOver = test3.SuObject.MouseOver,
+            //        ContentTypeId = test3.SuObject.ObjectId,
+            //        LanguageId = test3.SuObject.LanguageId
+            //    };
+
+            //     _contentTypeLanguage.AddContentTypeLanguage(ContentTypeLanguage);
+
+
+            //}
+            //return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
 
 
 
@@ -274,56 +305,81 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@Id", Id);
 
-            SuContentTypeLanguageEditGetModel ObjectLanguage = _context.ZdbContentTypeLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
-            return View(ObjectLanguage);
+            SuContentTypeLanguageEditGetModel ContentTypeLanguage = _context.ZdbContentTypeLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
+            return View(ContentTypeLanguage);
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectLanguageEditGetModel FromForm)
+        public async Task<IActionResult> LanguageEdit(SuContentTypeLanguageEditGetModel FromForm)
         {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
             if (ModelState.IsValid)
             {
-                var ContentTypeLanguage = _contentTypeLanguage.GetContentTypeLanguage(FromForm.LId);
-                ContentTypeLanguage.Name = FromForm.Name;
-                ContentTypeLanguage.Description = FromForm.Description;
-                ContentTypeLanguage.MouseOver = FromForm.MouseOver;
-                _contentTypeLanguage.UpdateContentTypeLanguage(ContentTypeLanguage);
 
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MenuName", FromForm.MouseOver),
+                    new SqlParameter("@MouseOver", FromForm.MenuName),
+                    new SqlParameter("@TitleName", FromForm.TitleName),
+                    new SqlParameter("@TitleDesciption", FromForm.TitleDesciption),
+                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    };
 
+                _context.Database.ExecuteSqlCommand("ContentTypeLanguageEditPost " +
+                            "@LId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MenuName" +
+                            ", @MouseOver" +
+                            ", @TitleName" +
+                            ", @TitleDescription" +
+                            ", @ModifierId", parameters);
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.ContentType.ContentTypeId.ToString() );
-
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.LId.ToString() });
-
-
-
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId.ToString() });
+            
         }
+
         [HttpGet]
-        public IActionResult LanguageDelete(int Id)
+        public async Task<IActionResult> LanguageDelete(int Id)
         {
-            var ContentTypeLanguage = _contentTypeLanguage.DeleteContentTypeLanguage(Id);
-            var a = new SuObjectVM
-            {
-                Id = ContentTypeLanguage.Id,
-                Name = ContentTypeLanguage.Name,
-                Description = ContentTypeLanguage.Description,
-                MouseOver = ContentTypeLanguage.MouseOver,
-                LanguageId = ContentTypeLanguage.LanguageId,
-                ObjectId = ContentTypeLanguage.ContentTypeId
-            };
-            return View(a);
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+            var parameter = new SqlParameter("@Id", Id);
+
+            SuContentTypeLanguageEditGetModel ContentTypeLanguage = _context.ZdbContentTypeLanguageEditGet.FromSql("ContentTypeLanguageEditGet @Id", parameter).First();
+            return View(ContentTypeLanguage);
         }
 
         [HttpPost]
-        public IActionResult LanguageDelete(SuObjectVM a)
+        public IActionResult LanguageDelete(SuContentTypeLanguageEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
+                var parameter = new SqlParameter("@Id", FromForm.LId);
+                _context.Database.ExecuteSqlCommand("ContentTypeLanguageDeletePost @Id", parameter);
 
-                _contentTypeLanguage.DeleteContentTypeLanguage(a.Id);
-                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
+                //_contentTypeLanguage.DeleteContentTypeLanguage(a.Id);
+//                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
 
         }
 

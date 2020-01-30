@@ -26,24 +26,24 @@ namespace StudentUnion0105.Controllers
     public class ClassificationController : PortalController
     {
         
-        private readonly IClassificationStatusRepository _classificationStatus;
-        private readonly IClassificationRepository _classification;
-        private readonly IClassificationLanguageRepository _classificationLanguage;
+        //private readonly IClassificationStatusRepository _classificationStatus;
+        //private readonly IClassificationRepository _classification;
+        //private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly SuDbContext _context;
         private readonly IHostingEnvironment _hostingEnv;
 
         public ClassificationController(UserManager<SuUserModel> userManager
-                                                , IClassificationStatusRepository classificationStatus
-                                                , IClassificationRepository classification
-                                                , IClassificationLanguageRepository classificationLanguage
+                                                //, IClassificationStatusRepository classificationStatus
+                                                //, IClassificationRepository classification
+                                                //, IClassificationLanguageRepository classificationLanguage
                                                 , ILanguageRepository language
                                                 , SuDbContext context
             , IHostingEnvironment hostingEnv
             ) : base(userManager, language)
         {
-            _classificationStatus = classificationStatus;
-            _classification = classification;
-            _classificationLanguage = classificationLanguage;
+            //_classificationStatus = classificationStatus;
+            //_classification = classification;
+            //_classificationLanguage = classificationLanguage;
             _context = context;
             _hostingEnv = hostingEnv;
         }
@@ -387,8 +387,10 @@ namespace StudentUnion0105.Controllers
         [HttpPost]
         public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
-                _classificationLanguage.DeleteClassificationLanguage(FromForm.LId);
-                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
+            var parameter = new SqlParameter("@Id", FromForm.LId);
+            _context.Database.ExecuteSqlCommand("ClassificationLanguageDeletePost @Id", parameter);
+
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
         }
       
         [HttpGet]

@@ -11,6 +11,12 @@ SELECT
 	, ISNULL(dbClassificationValueLanguage.Description,'') Description
 	, ISNULL(dbClassificationValueLanguage.MouseOver,'') MouseOver
 	, ISNULL(dbClassificationValueLanguage.MenuName,'') MenuName
+	, ISNULL(dbClassificationValueLanguage.DropDownName,'') DropDownName
+	, ISNULL(dbClassificationValueLanguage.PageName,'') PageName
+	, ISNULL(dbClassificationValueLanguage.PageDescription,'') PageDescription
+	, ISNULL(dbClassificationValueLanguage.HeaderName,'') HeaderName
+	, ISNULL(dbClassificationValueLanguage.HeaderDescription,'') HeaderDescription
+	, ISNULL(dbClassificationValueLanguage.TopicName,'') TopicName
 	, ISNULL(dbLanguage.LanguageName,'') Language
 	, dbClassificationValue.ParentValueId PId
 FROM dbClassificationValueLanguage

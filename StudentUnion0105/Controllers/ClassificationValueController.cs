@@ -17,21 +17,22 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationValueController : PortalController
     {
-        private readonly IClassificationValueRepository _classificationValue;
-        private readonly IClassificationValueLanguageRepository _classificationValueLanguage;
-        private readonly IClassificationLevelRepository _classificationLevel;
+        //private readonly IClassificationValueRepository _classificationValue;
+        //private readonly IClassificationValueLanguageRepository _classificationValueLanguage;
+        //private readonly IClassificationLevelRepository _classificationLevel;
                 private readonly SuDbContext _context;
 
-        public ClassificationValueController(UserManager<SuUserModel> userManager
-            , IClassificationValueRepository classificationValue
-            , IClassificationValueLanguageRepository classificationValueLanguage
+        public ClassificationValueController(
+            UserManager<SuUserModel> userManager
+            //, IClassificationValueRepository classificationValue
+            //, IClassificationValueLanguageRepository classificationValueLanguage
            , SuDbContext context
-            , IClassificationLevelRepository classificationLevel
+            //, IClassificationLevelRepository classificationLevel
             , ILanguageRepository language) : base(userManager, language)
         {
-            _classificationValue = classificationValue;
-            _classificationValueLanguage = classificationValueLanguage;
-            _classificationLevel = classificationLevel;
+            //_classificationValue = classificationValue;
+            //_classificationValueLanguage = classificationValueLanguage;
+            //_classificationLevel = classificationLevel;
                     _context = context;
 }
 
@@ -290,14 +291,14 @@ namespace StudentUnion0105.Controllers
             {
                 return RedirectToAction("LanguageIndex", new { Id });
             }
-            SuObjectLanguageEditGetModel ClassificationValue = new SuObjectLanguageEditGetModel
+            SuClassificationValueLanguageEditGetModel ClassificationValue = new SuClassificationValueLanguageEditGetModel
             {
                 OId = Id
             };
             ViewBag.Id = Id.ToString();
-            var ClassificationValueAndStatus = new SuObjectLanguageEditGetWitLanguageListModel
+            var ClassificationValueAndStatus = new SuClassificationValueLanguageEditGetWitLanguageListModel
             {
-                 SuObject = ClassificationValue
+                  ClassificationValue = ClassificationValue
                 ,
                 LanguageList = LList
             };
@@ -374,39 +375,74 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
+        public async Task<IActionResult> LanguageCreate(SuClassificationValueLanguageEditGetWitLanguageListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
-                var ClassificationValueLanguage = new SuClassificationValueLanguageModel
+            SuUserModel CurrentUser = await _userManager.GetUserAsync(User);
+
+
+            SqlParameter[] parameters =
                 {
-                    Name = FromForm.SuObject.Name,
-                    Description = FromForm.SuObject.Description,
-                    DropDownName = FromForm.SuObject.DropDownName,
-                    MenuName = FromForm.SuObject.MenuName,
-                    MouseOver = FromForm.SuObject.MouseOver
-                };
-                ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
-                ClassificationValueLanguage.PageDescription = FromForm.SuObject.PageDescription;
-                ClassificationValueLanguage.HeaderName = FromForm.SuObject.HeaderName;
-                ClassificationValueLanguage.HeaderDescription = FromForm.SuObject.HeaderDescription;
-                ClassificationValueLanguage.TopicName = FromForm.SuObject.TopicName;
+                        new SqlParameter("@OId", FromForm.ClassificationValue.OId),
+                        new SqlParameter("@LanguageId", FromForm.ClassificationValue.LanguageId),
+                        new SqlParameter("@Name", FromForm.ClassificationValue.Name ?? ""),
+                        new SqlParameter("@Description", FromForm.ClassificationValue.Description ?? ""),
+                        new SqlParameter("@MouseOver", FromForm.ClassificationValue.MouseOver ?? ""),
+                        new SqlParameter("@MenuName", FromForm.ClassificationValue.MenuName ?? ""),
+                        new SqlParameter("@DropDownName", FromForm.ClassificationValue.PageName ?? ""),
+                        new SqlParameter("@PageName", FromForm.ClassificationValue.PageDescription ?? ""),
+                        new SqlParameter("@PageDescription", FromForm.ClassificationValue.HeaderName ?? ""),
+                        new SqlParameter("@HeaderName", FromForm.ClassificationValue.HeaderDescription ?? ""),
+                        new SqlParameter("@HeaderDescription", FromForm.ClassificationValue.TopicName ?? ""),
+                        new SqlParameter("@ModifierId", CurrentUser.Id)
+                        };
 
-                ClassificationValueLanguage.ClassificationValueId = FromForm.SuObject.ObjectId;
-                ClassificationValueLanguage.LanguageId = FromForm.SuObject.LanguageId;
+            _context.Database.ExecuteSqlCommand("ClassificationValueLanguageCreatePost " +
+                       "@OId" +
+                       ", @LanguageId" +
+                       ", @Name" +
+                       ", @Description" +
+                       ", @MouseOver" +
+                       ", @MenuName" +
+                       ", @DropDownName" +
+                       ", @PageName" +
+                       ", @PageDescription" +
+                       ", @HeaderName" +
+                       ", @HeaderDescription" +
+                       ", @TopicName" +
+                       ", @ModifierId", parameters);
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.ClassificationValue.OId.ToString() });
 
 
-               _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
+            //if (ModelState.IsValid)
+            //{
+            //    var ClassificationValueLanguage = new SuClassificationValueLanguageModel
+            //    {
+            //        Name = FromForm.SuObject.Name,
+            //        Description = FromForm.SuObject.Description,
+            //        DropDownName = FromForm.SuObject.DropDownName,
+            //        MenuName = FromForm.SuObject.MenuName,
+            //        MouseOver = FromForm.SuObject.MouseOver
+            //    };
+            //    ClassificationValueLanguage.MouseOver = FromForm.SuObject.MouseOver;
+            //    ClassificationValueLanguage.PageDescription = FromForm.SuObject.PageDescription;
+            //    ClassificationValueLanguage.HeaderName = FromForm.SuObject.HeaderName;
+            //    ClassificationValueLanguage.HeaderDescription = FromForm.SuObject.HeaderDescription;
+            //    ClassificationValueLanguage.TopicName = FromForm.SuObject.TopicName;
+
+            //    ClassificationValueLanguage.ClassificationValueId = FromForm.SuObject.ObjectId;
+            //    ClassificationValueLanguage.LanguageId = FromForm.SuObject.LanguageId;
 
 
-            }
-            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
+            //   _classificationValueLanguage.AddClassificationValueLanguage(ClassificationValueLanguage);
+
+
+            //}
+            //return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.ObjectId.ToString() });
         }
 
         [HttpGet]
         public async Task<IActionResult> LanguageEdit(int Id)
         {
-
 
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
@@ -423,5 +459,82 @@ namespace StudentUnion0105.Controllers
             return View(ObjectLanguage);
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LanguageEdit(SuClassificationValueLanguageEditGetModel FromForm)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+            if (ModelState.IsValid)
+            {
+
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName),
+                    new SqlParameter("@DropDownName", FromForm.DropDownName),
+                    new SqlParameter("@PageName", FromForm.PageName),
+                    new SqlParameter("@PageDescription", FromForm.PageDescription),
+                    new SqlParameter("@HeaderName", FromForm.HeaderName),
+                    new SqlParameter("@HeaderDescription", FromForm.HeaderDescription),
+                    new SqlParameter("@TopicName", FromForm.TopicName)
+                    };
+
+                _context.Database.ExecuteSqlCommand("ClassificationValueLanguageEditPost " +
+                            "@LId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName" +
+                            ", @DropDownName" +
+                            ", @PageName" +
+                            ", @PageDescription" +
+                            ", @HeaderName" +
+                            ", @HeaderDescription" +
+                            ", @TopicName", parameters);
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId.ToString() });
+            }
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.LId.ToString() });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> LanguageDelete(int Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
+            SqlParameter parameter = new SqlParameter("@LId", Id);
+            SuClassificationValueLanguageEditGetModel ClassificationValueLanguage = _context.ZdbClassificationValueLanguageEditGet.FromSql("ClassificationValueLanguageEditGet @LId", parameter).First();
+
+            return View(ClassificationValueLanguage);
+        }
+
+        [HttpPost]
+        public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
+        {
+            var parameter = new SqlParameter("@Id", FromForm.LId);
+            _context.Database.ExecuteSqlCommand("ClassificationValueLanguageDeletePost @Id", parameter);
+
+            //            _classificationPageSectionLanguage.DeleteClassificationPageSectionLanguage(FromForm.LId);
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
+        }
+    }
     }

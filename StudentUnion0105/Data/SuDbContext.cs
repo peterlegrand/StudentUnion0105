@@ -83,6 +83,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuMenuTypeModel> dbMenuType { get; set; }
         public DbSet<SuClassificationPageLanguageEditGetModel> ZdbClassificationPageLanguageEditGet { get; set; }
         public DbSet<SuClassificationPageSectionLanguageEditGetModel> ZdbClassificationPageSectionLanguageEditGet { get; set; }
+        public DbSet<SuClassificationValueLanguageEditGetModel> ZdbClassificationValueLanguageEditGet { get; set; }
         public DbSet<SuClassificationPageSectionEditGetModel> ZdbClassificationPageSectionEditGet { get; set; }
         public DbSet<SuClassificationPageDeleteGetModel> ZdbClassificationPageDeleteGet { get; set; }
         public DbSet<SuClassificationPageSectionDeleteGetModel> ZdbClassificationPageSectionDeleteGet { get; set; }
