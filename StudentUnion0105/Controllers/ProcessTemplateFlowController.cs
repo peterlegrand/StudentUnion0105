@@ -50,25 +50,25 @@ namespace StudentUnion0105.Controllers
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var ProcessTemplateFlow = (from p in _processTemplateFlow.GetAllProcessTemplateFlows()
-                                        join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
-                               on p.Id equals l.FlowId
-                                        where p.ProcessTemplateId == Id
-                                        && l.LanguageId == CurrentUser.DefaultLanguageId
+                                       join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
+                              on p.Id equals l.FlowId
+                                       where p.ProcessTemplateId == Id
+                                       && l.LanguageId == CurrentUser.DefaultLanguageId
                                        orderby l.Name
-                                        select new SuObjectVM
-                                        {
-                                            Id = p.Id
-                                        ,
-                                            Name = l.Name
-                                        ,
-                                            ObjectId = p.ProcessTemplateId
-                                            ,
-                                            Description = p.ProcessTemplateFromStepId == 0 ? "Start" : ""
+                                       select new SuObjectVM
+                                       {
+                                           Id = p.Id
+                                       ,
+                                           Name = l.Name
+                                       ,
+                                           ObjectId = p.ProcessTemplateId
+                                           ,
+                                           Description = p.ProcessTemplateFromStepId == 0 ? "Start" : ""
 ,
-                                            Description2 = p.ProcessTemplateToStepId == 0 ? "End" : ""
-                                            
+                                           Description2 = p.ProcessTemplateToStepId == 0 ? "End" : ""
 
-                                        }).ToList();
+
+                                       }).ToList();
             ViewBag.ObjectId = Id.ToString();
 
 
@@ -90,49 +90,53 @@ namespace StudentUnion0105.Controllers
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var Flow = (from f in _processTemplateFlow.GetAllProcessTemplateFlows()
-                               join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
-                               on f.Id equals l.FlowId
+                        join l in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
+                        on f.Id equals l.FlowId
                         where f.Id == Id && l.LanguageId == CurrentUser.DefaultLanguageId
                         orderby l.Name
-                               select new SuObjectVMPageSection
-                               {
-                                   Id = f.ProcessTemplateId
-                                   ,
-                                   ObjectId = f.Id
-                                   ,
-                                   LanguageId = l.LanguageId
-                                   ,
-                                   ObjectLanguageId = l.Id
-                                   ,
-                                   Name = l.Name
-                                   , Description = l.Description
-                                   , MouseOver = l.MouseOver
-                                   , NotNullId = f.ProcessTemplateFromStepId
-                                   , NotNullId2 = f.ProcessTemplateToStepId
-                               }).First();
+                        select new SuObjectVMPageSection
+                        {
+                            Id = f.ProcessTemplateId
+                            ,
+                            ObjectId = f.Id
+                            ,
+                            LanguageId = l.LanguageId
+                            ,
+                            ObjectLanguageId = l.Id
+                            ,
+                            Name = l.Name
+                            ,
+                            Description = l.Description
+                            ,
+                            MouseOver = l.MouseOver
+                            ,
+                            NotNullId = f.ProcessTemplateFromStepId
+                            ,
+                            NotNullId2 = f.ProcessTemplateToStepId
+                        }).First();
 
             //Existing levels
             List<SelectListItem> StepList = (from s in _processTemplateStep.GetAllProcessTemplateSteps()
                                              join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                              on s.Id equals l.StepId
-                                                   where l.LanguageId == CurrentUser.DefaultLanguageId
-                                                   && s.ProcessTemplateId == Flow.Id
-                                                   orderby l.Name
-                                                   select new SelectListItem
-                                                   {
-                                                       Value = s.Id.ToString()
-                                                   ,
-                                                       Text = l.Name
-                                                   }).ToList();
+                                             where l.LanguageId == CurrentUser.DefaultLanguageId
+                                             && s.ProcessTemplateId == Flow.Id
+                                             orderby l.Name
+                                             select new SelectListItem
+                                             {
+                                                 Value = s.Id.ToString()
+                                             ,
+                                                 Text = l.Name
+                                             }).ToList();
 
 
 
             StepList.Add(new SelectListItem { Text = "No selection", Value = "0" });
 
-            
-            var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = Flow, SomeKindINumSelectListItem = StepList};
+
+            var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = Flow, SomeKindINumSelectListItem = StepList };
             return View(ClassificationAndStatus);
-           
+
 
         }
 
@@ -143,7 +147,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-    
+
                 _context.Database.ExecuteSqlCommand("ProcessTemplateFlowUpdate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                     parameters: new[] { UpdatedFlow.SuObject.ObjectId.ToString()           //0
                                         ,UpdatedFlow.SuObject.NotNullId.ToString()    //1
@@ -151,7 +155,7 @@ namespace StudentUnion0105.Controllers
                                         , CurrentUser.DefaultLanguageId.ToString()
                                         ,UpdatedFlow.SuObject.Name    //1
                                         ,UpdatedFlow.SuObject.Description    //1
-                                        ,UpdatedFlow.SuObject.MouseOver   
+                                        ,UpdatedFlow.SuObject.MouseOver
                                         , UpdatedFlow.SuObject.HeaderDescription//1
                     });
 
@@ -184,7 +188,7 @@ namespace StudentUnion0105.Controllers
                                              join l in _processTemplateStepLanguage.GetAllProcessTemplateStepLanguages()
                                              on s.Id equals l.StepId
                                              where l.LanguageId == CurrentUser.DefaultLanguageId
-                                             && s.ProcessTemplateId ==Id
+                                             && s.ProcessTemplateId == Id
                                              orderby l.Name
                                              select new SelectListItem
                                              {
@@ -199,7 +203,7 @@ namespace StudentUnion0105.Controllers
 
 
 
-            var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = SuObject, SomeKindINumSelectListItem = StepList};
+            var ClassificationAndStatus = new PageSectionAndStatusViewModel { SuObject = SuObject, SomeKindINumSelectListItem = StepList };
             return View(ClassificationAndStatus);
 
         }
@@ -210,7 +214,7 @@ namespace StudentUnion0105.Controllers
             if (ModelState.IsValid)
             {
                 var CurrentUser = await _userManager.GetUserAsync(User);
-    
+
 
                 _context.Database.ExecuteSqlCommand("ProcessTemplateFlowCreate @p0, @p1, @p2, @p3, @p4, @p5, @p6",
                    parameters: new[] { FromForm.SuObject.ObjectId.ToString()           //0
@@ -229,7 +233,7 @@ namespace StudentUnion0105.Controllers
             return RedirectToAction("Index", new { Id = FromForm.SuObject.ObjectId.ToString() });
 
 
-            }
+        }
 
 
         public async Task<IActionResult> LanguageIndex(int Id)
@@ -354,39 +358,9 @@ namespace StudentUnion0105.Controllers
                 LanguageList = LList
             };
             return View(ProcessTemplateFlowAndStatus);
-        //    List<int> LanguagesAlready = new List<int>();
-        //    LanguagesAlready = (from f in _processTemplateFlowLanguage.GetAllProcessTemplateFlowLanguages()
-        //                        where f.FlowId == Id
-        //                        select f.LanguageId).ToList();
+        }
 
 
-            //    var SuLanguage = (from l in _language.GetAllLanguages()
-            //                      where !LanguagesAlready.Contains(l.Id)
-            //                      && l.Active == true
-            //                      select new SelectListItem
-            //                      {
-            //                          Value = l.Id.ToString()
-            //                      ,
-            //                          Text = l.LanguageName
-            //                      }).ToList();
-
-            //    if (SuLanguage.Count() == 0)
-            //    {
-            //        return RedirectToAction("LanguageIndex", new { Id });
-            //    }
-            //    SuObjectVM SuObject = new SuObjectVM
-            //    {
-            //        ObjectId = Id
-            //    };
-            //    ViewBag.Id = Id.ToString();
-            //    var FlowAndStatus = new SuObjectAndStatusViewModel
-            //    {
-            //        SuObject = SuObject
-            //        ,
-            //        SomeKindINumSelectListItem = SuLanguage
-            //    };
-            //    return View(FlowAndStatus);
-            //}
 
         [HttpPost]
         public IActionResult LanguageCreate(SuObjectAndStatusViewModel FromForm)
