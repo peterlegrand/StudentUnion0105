@@ -176,6 +176,9 @@ namespace StudentUnion0105.Data
         public DbSet<SuProcessTemplateFlowLanguageModel> DbProcessTemplateFlowLanguage { get; set; }
         public DbSet<SuProcessTemplateGroupLanguageModel> DbProcessTemplateGroupLanguage { get; set; }
         public DbSet<SuProcessTemplateGroupModel> DbProcessTemplateGroup { get; set; }
+        public DbSet<SuContentTypeGroupLanguageModel> DbContentTypeGroupLanguage { get; set; }
+        public DbSet<SuContentTypeGroupEditGetModel> ZdbContentTypeGroupEditGet { get; set; }
+        public DbSet<SuContentTypeGroupModel> DbContentTypeGroup { get; set; }
         public DbSet<SuProcessTemplateLanguageModel> DbProcessTemplateLanguage { get; set; }
         public DbSet<SuProcessTemplateModel> DbProcessTemplate { get; set; }
         public DbSet<SuProcessTemplateStepFieldModel> DbProcessTemplateStepField { get; set; }

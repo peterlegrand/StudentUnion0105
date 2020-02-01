@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentUnion0105.Models
 {
-    public class SuProcessTemplateGroupModel
+    public class SuContentTypeGroupModel
     {
         public int Id { get; set; }
         public int Sequence { get; set; }
@@ -14,14 +14,14 @@ namespace StudentUnion0105.Models
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<SuProcessTemplateModel> ProcessTemplates { get; set; }
-        public virtual ICollection<SuProcessTemplateGroupLanguageModel> ProcessTemplateGroupLanguages { get; set; }
+        public virtual ICollection<SuContentTypeModel> ContentType { get; set; }
+        public virtual ICollection<SuContentTypeGroupLanguageModel> ContentTypeGroupLanguages { get; set; }
     }
-    public class SuProcessTemplateGroupLanguageModel
+    public class SuContentTypeGroupLanguageModel
     {
         public int Id { get; set; }
         [Display(Name = "Process template group id")]
-        public int ProcessTemplateGroupId { get; set; }
+        public int ContentTypeGroupId { get; set; }
         [Display(Name = "Language id")]
         public int LanguageId { get; set; }
         [Display(Name = "Group name")]
@@ -39,9 +39,11 @@ namespace StudentUnion0105.Models
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        [ForeignKey("ProcessTemplateGroupId")]
-        public virtual SuProcessTemplateGroupModel ProcessTemplateGroup { get; set; }
+        [ForeignKey("ContentTypeGroupId")]
+        public virtual SuContentTypeGroupModel ContentTypeGroup { get; set; }
         [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
     }
+
+
 }
