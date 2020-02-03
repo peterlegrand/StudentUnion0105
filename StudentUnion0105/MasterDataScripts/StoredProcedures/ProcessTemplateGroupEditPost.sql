@@ -1,4 +1,4 @@
-CREATE PROCEDURE ContentTypeGroupEditPost (
+CREATE PROCEDURE ProcessTemplateGroupEditPost (
 	@Id int
 	, @LanguageId int
 	, @ModifierId nvarchar(450)
@@ -9,13 +9,7 @@ CREATE PROCEDURE ContentTypeGroupEditPost (
 	)
 AS
 BEGIN TRANSACTION
-UPDATE dbContentTypeGroup 
-SET
-	 ModifierId = @ModifierId
-	, ModifiedDate = getdate()
-WHERE Id = @Id;
-
-UPDATE dbContentTypeGroupLanguage
+UPDATE dbProcessTemplateGroupLanguage
 SET
 	 Name = @Name
 	, Description = @Description
@@ -23,7 +17,7 @@ SET
 	, MenuName = @MenuName
 	, ModifierId = @ModifierId
 	, ModifiedDate = getdate()
-WHERE ContentTypeGroupId = @Id
+WHERE ProcessTemplateGroupId = @Id
 	AND LanguageId = @LanguageId
 COMMIT TRANSACTION
 

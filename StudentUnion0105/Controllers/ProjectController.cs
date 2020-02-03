@@ -50,8 +50,6 @@ namespace StudentUnion0105.Controllers
 
             var a = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
-            //if (a.Count != 0)
-            //{
             int maxLevel = 0;
             foreach (var Org in a)
             {
@@ -355,8 +353,6 @@ namespace StudentUnion0105.Controllers
 
 
             }
-            //            return  RedirectToRoute("EditRole" + "/"+FromForm.Project.ProjectId.ToString() );
-
             return RedirectToAction("LanguageIndex", new { Id = FromForm.ObjectId.ToString() });
         }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200203032548_contenttypegroup")]
+    partial class contenttypegroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "515cee09-4337-45ad-bad9-a6d1dd23f5ac",
-                            ConcurrencyStamp = "8fdd4228-1d34-4105-a0c8-cedb10ca51f5",
+                            Id = "4ab6e6b9-d881-415d-b079-df9cb43a0f30",
+                            ConcurrencyStamp = "52b9c656-f9c6-4a61-a1fe-a15bfbc58109",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4da81dd9-8df2-4121-9f85-1991770bb8a8",
-                            ConcurrencyStamp = "b27281df-6035-4fbd-8aa2-d691296805b3",
+                            Id = "543b5e64-2d39-4667-a061-5a4ff5e3bc11",
+                            ConcurrencyStamp = "a21f1a3a-d0e4-4518-86cf-079890e0a74b",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1613,8 +1615,6 @@ namespace StudentUnion0105.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContentTypeGroupId");
-
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<string>("CreatorId");
@@ -1625,9 +1625,11 @@ namespace StudentUnion0105.Migrations
 
                     b.Property<int>("ProcessTemplateId");
 
+                    b.Property<int?>("SuContentTypeGroupModelId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ContentTypeGroupId");
+                    b.HasIndex("SuContentTypeGroupModelId");
 
                     b.ToTable("DbContentType");
                 });
@@ -6204,10 +6206,9 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentTypeModel", b =>
                 {
-                    b.HasOne("StudentUnion0105.Models.SuContentTypeGroupModel", "ContentTypeGroup")
+                    b.HasOne("StudentUnion0105.Models.SuContentTypeGroupModel")
                         .WithMany("ContentType")
-                        .HasForeignKey("ContentTypeGroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SuContentTypeGroupModelId");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuExternalContentModel", b =>

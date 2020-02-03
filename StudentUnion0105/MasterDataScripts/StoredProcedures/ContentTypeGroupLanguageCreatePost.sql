@@ -1,29 +1,13 @@
-CREATE PROCEDURE ContentTypeGroupCreatePost (
-	 @LanguageId int
-	, @ModifierId nvarchar(450)
+CREATE PROCEDURE ContentTypeGroupLanguageCreatePost (
+	@OId int
+	, @LanguageId int
 	, @Name nvarchar(50)
 	, @Description nvarchar(max)
 	, @MouseOver nvarchar(50)
 	, @MenuName nvarchar(50)
+	, @ModifierId nvarchar(450)
 	)
 AS
-BEGIN TRANSACTION
-
-INSERT INTO dbContentTypeGroup (
-	 CreatorId
-	, CreatedDate
-	, ModifierId 
-	, ModifiedDate
-	)
-VALUES (
-	 @ModifierId
-	, getdate()
-	, @ModifierId
-	, getdate()
-	);
-
-DECLARE @NewContentTypeGroupId int	= scope_identity();
-
 INSERT INTO dbContentTypeGroupLanguage (
 	ContentTypeGroupId
 	, LanguageId
@@ -37,7 +21,7 @@ INSERT INTO dbContentTypeGroupLanguage (
 	, ModifiedDate
 	)
 VALUES (
-	@NewContentTypeGroupId
+	@OId
 	, @LanguageId
 	, @Name
 	, @Description
@@ -48,6 +32,3 @@ VALUES (
 	, @ModifierId
 	, getdate()
 	);
-COMMIT TRANSACTION
-
-

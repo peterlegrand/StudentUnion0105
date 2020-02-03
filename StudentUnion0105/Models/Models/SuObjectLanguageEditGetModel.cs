@@ -42,19 +42,16 @@ namespace StudentUnion0105.Models
     public class SuObjectLanguageEditGetWitLanguageListModel
     {
         public SuObjectLanguageEditGetModel SuObject { get; set; }
-        //public List<SuClassificationStatusModel> Status { get; set; }
         public IEnumerable<SelectListItem> LanguageList { get; set; }
     }
     public class SuContentTypeLanguageEditGetWitLanguageListModel
     {
         public SuContentTypeLanguageEditGetModel ContentType { get; set; }
-        //public List<SuClassificationStatusModel> Status { get; set; }
         public IEnumerable<SelectListItem> LanguageList { get; set; }
     }
     public class SuClassificationValueLanguageEditGetWitLanguageListModel
     {
         public SuClassificationValueLanguageEditGetModel ClassificationValue { get; set; }
-        //public List<SuClassificationStatusModel> Status { get; set; }
         public IEnumerable<SelectListItem> LanguageList { get; set; }
     }
 

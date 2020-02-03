@@ -16,17 +16,14 @@ namespace StudentUnion0105.Controllers
 {
     public class ClassificationLevelController : PortalController
     {
-        //private readonly IClassificationLevelLanguageRepository _classificationLevelLanguage;
                 private readonly SuDbContext _context;
 
         public ClassificationLevelController(
             UserManager<SuUserModel> userManager
-            //, IClassificationLevelLanguageRepository classificationLevelLanguage
             , ILanguageRepository language
             , SuDbContext context
             ) : base(userManager, language)
         {
-            //_classificationLevelLanguage = classificationLevelLanguage;
                     _context = context;
 }
 

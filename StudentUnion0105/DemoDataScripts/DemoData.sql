@@ -4,14 +4,21 @@ DECLARE @SecondUser uniqueidentifier;
 SELECT @CurrentUser = Id from AspNetUSers Where email = 'peter@energimeuniversity.org'; 
 SELECT @SecondUser = Id from AspNetUSers Where email = 'pipo@gmail.com'; 
 --DEMO 
- 
-INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+
+INSERT INTO dbContentTypeGroup (Sequence, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentTypeGroup (Sequence, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(2, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentTypeGroupLanguage ( ContentTypeGroupId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  1, 41, 'Knowledge','Knowledge','Knowledge','Knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
+INSERT INTO dbContentTypeGroupLanguage ( ContentTypeGroupId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
+VALUES(  2, 41, 'Experience','Experience','Experience','Experience', @CurrentUser, @CurrentUser, getdate(),getdate())  
+
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  1, 41, 'Knowledge','Knowledge','Knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 41, 'Experience','Experience','Experience', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (ProcessTemplateId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,2, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  3, 41, 'Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  
  

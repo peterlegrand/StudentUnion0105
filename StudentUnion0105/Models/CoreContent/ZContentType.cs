@@ -73,4 +73,33 @@ namespace StudentUnion0105.Models
         public List<SelectListItem> StatusList { get; set; }
 
     }
+    public class SuContentTypeGroupEditGetModel
+    {
+        public int Id { get; set; }
+        public int Lid { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string MouseOver { get; set; }
+        public string MenuName { get; set; }
+        public string Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Modifier { get; set; }
+        public DateTime ModifiedDate { get; set; }
+
+
+    }
+
+    public class ContentCreate1GetContentTypeGroup
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<ContentCreate1GetContentType> Types { get; set; }
+    }
+    public class ContentCreate1GetContentType
+    {
+        public int Id { get; set; }
+        public string name { get; set; }
+
+    }
+
 }

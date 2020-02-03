@@ -17,18 +17,12 @@ namespace StudentUnion0105.Controllers
 {
     public class ProcessTemplateGroupController : PortalController
     {
-        private readonly IProcessTemplateGroupLanguageRepository _ProcessTemplateGroupLanguage;
-        private readonly IProcessTemplateGroupRepository _ProcessTemplateGroup;
         private readonly SuDbContext _context;
         
         public ProcessTemplateGroupController(UserManager<SuUserModel> userManager
-            , IProcessTemplateGroupLanguageRepository ProcessTemplateGroupLanguage
-            , IProcessTemplateGroupRepository ProcessTemplateGroup
             , ILanguageRepository language
             , SuDbContext context) : base(userManager, language)
         {
-            _ProcessTemplateGroupLanguage = ProcessTemplateGroupLanguage;
-            _ProcessTemplateGroup = ProcessTemplateGroup;
             _context = context;
         }
         public async Task<IActionResult> Index()
@@ -46,23 +40,6 @@ namespace StudentUnion0105.Controllers
 
             var ProcessTemplateGroup = _context.ZdbObjectIndexGet.FromSql("ProcessTemplateGroupIndexGet @LanguageId", parameter).ToList();
             return View(ProcessTemplateGroup);
-
-
-            //var ProcessTemplateGroups = (
-
-            //    from l in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-
-            //    where l.LanguageId == DefaultLanguageID
-            //    select new SuObjectVM
-
-
-            //    {
-            //        Id = l.ProcessTemplateGroupId
-            //                 ,
-            //        Name = l.Name,
-            //        Description = l.Description
-            //    }).ToList();
-            //return View(ProcessTemplateGroups);
         }
 
         [HttpGet]
@@ -78,38 +55,36 @@ namespace StudentUnion0105.Controllers
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            var ProcessTemplateGroup = new SuObjectVM();
+            var ProcessTemplateGroup = new SuProcessTemplateGroupEditGetModel();
             return View(ProcessTemplateGroup);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuObjectVM FromForm)
+        public async Task<IActionResult> Create(SuProcessTemplateGroupEditGetModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                var ProcessTemplateGroup = new SuProcessTemplateGroupModel
-                {
-                    ModifiedDate = DateTime.Now,
-                    CreatedDate = DateTime.Now
-                };
-                var NewProcessTemplateGroup = _ProcessTemplateGroup.AddProcessTemplateGroup(ProcessTemplateGroup);
-
-
                 var CurrentUser = await _userManager.GetUserAsync(User);
 
-                var ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel
-                {
-                    Name = FromForm.Name,
-                    Description = FromForm.Description,
-                    MouseOver = FromForm.MouseOver,
-                    ProcessTemplateGroupId = NewProcessTemplateGroup.Id,
-                    LanguageId = CurrentUser.DefaultLanguageId
-                };
-                _ProcessTemplateGroupLanguage.AddProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
-            }
+                _context.Database.ExecuteSqlCommand("ProcessTemplateGroupCreatePost " +
+                            "@LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
+                        }
             return RedirectToAction("Index");
-
 
 
         }
@@ -117,6 +92,7 @@ namespace StudentUnion0105.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
+            
             var CurrentUser = await _userManager.GetUserAsync(User);
             var DefaultLanguageID = CurrentUser.DefaultLanguageId;
 
@@ -126,54 +102,43 @@ namespace StudentUnion0105.Controllers
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            var ToForm = (from s in _ProcessTemplateGroup.GetAllProcessTemplateGroups()
-                         join t in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-                         on s.Id equals t.ProcessTemplateGroupId
-                         where t.LanguageId == CurrentUser.DefaultLanguageId && s.Id == Id
-                         select new SuObjectVM
-                         {
-                             Id = s.Id
-                            ,
-                             Name = t.Name
-                            ,
-                             ObjectLanguageId = t.Id
-                            ,
-                             Description = t.Description
-                            ,
-                             MouseOver = t.MouseOver
-                         }).First();
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
+                    , new SqlParameter("@Id", Id)
+                };
 
-            return View(ToForm);
-
-
+            var ClassificationEditGet = _context.ZdbClassificationEditGet.FromSql("ProcessTemplateGroupEditGet @LanguageId, @Id", parameters).First();
+            
+            return View(ClassificationEditGet);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuObjectVM test3)
+        public async Task<IActionResult> Edit(SuClassificationEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
-                var ProcessTemplateGroup = _ProcessTemplateGroup.GetProcessTemplateGroup(test3.Id);
                 var CurrentUser = await _userManager.GetUserAsync(User);
-
-                ProcessTemplateGroup.ModifiedDate = DateTime.Now;
-                ProcessTemplateGroup.ModifierId = CurrentUser.Id;
-                _ProcessTemplateGroup.UpdateProcessTemplateGroup(ProcessTemplateGroup);
-
-    
-                var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.GetProcessTemplateGroupLanguage(test3.ObjectLanguageId);
-                ProcessTemplateGroupLanguage.Name = test3.Name;
-                ProcessTemplateGroupLanguage.Description = test3.Description;
-                ProcessTemplateGroupLanguage.MouseOver = test3.MouseOver;
-                ProcessTemplateGroupLanguage.ModifiedDate = DateTime.Now;
-                ProcessTemplateGroupLanguage.ModifierId = CurrentUser.Id;
-                _ProcessTemplateGroupLanguage.UpdateProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
-
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@Id", FromForm.Id),
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
+                _context.Database.ExecuteSqlCommand("ProcessTemplateGroupEditPost " +
+                            "@Id" +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
             return RedirectToAction("Index");
-
-
-
         }
 
 
@@ -238,60 +203,37 @@ namespace StudentUnion0105.Controllers
                 LanguageList = LList
             };
             return View(ProcessTemplateGroupAndStatus);
-            //List<int> LanguagesAlready = new List<int>();
-            //LanguagesAlready = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-            //                    where c.ProcessTemplateGroupId == Id
-            //                    select c.LanguageId).ToList();
 
-
-            //var SuLanguage = (from l in _language.GetAllLanguages()
-            //                  where !LanguagesAlready.Contains(l.Id)
-            //                  && l.Active
-            //                  select new SelectListItem
-            //                  {
-            //                      Value = l.Id.ToString()
-            //                  ,
-            //                      Text = l.LanguageName
-            //                  }).ToList();
-
-            //if (SuLanguage.Count() == 0)
-            //{
-            //    return RedirectToAction("LanguageIndex", new { Id });
-            //}
-            //SuObjectVM SuObject = new SuObjectVM
-            //{
-            //    ObjectId = Id
-            //};
-            //ViewBag.Id = Id.ToString();
-            //var ProcessTemplateGroupAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = SuObject
-            //    ,
-            //    SomeKindINumSelectListItem = SuLanguage
-            //};
-            //return View(ProcessTemplateGroupAndStatus);
         }
 
         [HttpPost]
-        public IActionResult LanguageCreate(SuObjectAndStatusViewModel test3)
+        public async Task<IActionResult> LanguageCreate(SuObjectLanguageEditGetWitLanguageListModel FromForm)
         {
             if (ModelState.IsValid)
             {
-                SuProcessTemplateGroupLanguageModel ProcessTemplateGroupLanguage = new SuProcessTemplateGroupLanguageModel
-                {
-                    Name = test3.SuObject.Name,
-                    Description = test3.SuObject.Description,
-                    MouseOver = test3.SuObject.MouseOver,
-                    ProcessTemplateGroupId = test3.SuObject.ObjectId,
-                    LanguageId = test3.SuObject.LanguageId
-                };
+                var CurrentUser = await _userManager.GetUserAsync(User);
 
-                _ProcessTemplateGroupLanguage.AddProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@Id", FromForm.SuObject.OId),
+                    new SqlParameter("@LanguageId", FromForm.SuObject.LanguageId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.SuObject.Name),
+                    new SqlParameter("@Description", FromForm.SuObject.Description),
+                    new SqlParameter("@MouseOver", FromForm.SuObject.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.SuObject.MenuName)
+                    };
 
-
+                _context.Database.ExecuteSqlCommand("ClassificationLanguageCreatePost " +
+                            "@Id" +
+                            ", @LanguageId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
             }
-            return RedirectToAction("LanguageIndex", new { Id = test3.SuObject.ObjectId.ToString() });
-
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.SuObject.OId.ToString() });
 
 
         }
@@ -313,53 +255,45 @@ namespace StudentUnion0105.Controllers
             var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateGroupLanguageEditGet @Id", parameter).First();
             return View(ObjectLanguage);
 
-            //var ToForm = (from c in _ProcessTemplateGroupLanguage.GetAllProcessTemplateGroupLanguages()
-            //             join l in _language.GetAllLanguages()
-            //             on c.LanguageId equals l.Id
-            //             where c.Id == Id
-            //             select new SuObjectVM
-            //             {
-            //                 Id = c.Id
-            //                ,
-            //                 Name = c.Name
-            //                ,
-            //                 Description = c.Description
-            //                ,
-            //                 MouseOver = c.MouseOver
-            //                ,
-            //                 Language = l.LanguageName
-            //                ,
-            //                 ObjectId = c.ProcessTemplateGroupId
-
-            //             }).First();
-
-            //var ProcessTemplateGroupAndStatus = new SuObjectAndStatusViewModel
-            //{
-            //    SuObject = ToForm //, a = ProcessTemplateGroupList
-            //};
-            //return View(ToForm);
-
+          
 
         }
 
         [HttpPost]
-        public IActionResult LanguageEdit(SuObjectVM test3)
+        public async Task<IActionResult> LanguageEdit(SuObjectLanguageEditGetModel FromForm)
         {
+            
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
             if (ModelState.IsValid)
             {
-                var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.GetProcessTemplateGroupLanguage(test3.Id);
-                ProcessTemplateGroupLanguage.Name = test3.Name;
-                ProcessTemplateGroupLanguage.Description = test3.Description;
-                ProcessTemplateGroupLanguage.MouseOver = test3.MouseOver;
-                _ProcessTemplateGroupLanguage.UpdateProcessTemplateGroupLanguage(ProcessTemplateGroupLanguage);
 
+                SqlParameter[] parameters =
+                    {
+                    new SqlParameter("@LId", FromForm.LId),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@Name", FromForm.Name),
+                    new SqlParameter("@Description", FromForm.Description),
+                    new SqlParameter("@MouseOver", FromForm.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.MenuName)
+                    };
 
+                _context.Database.ExecuteSqlCommand("ProcessTemplateGroupLanguageEditPost " +
+                            "@LId" +
+                            ", @ModifierId" +
+                            ", @Name" +
+                            ", @Description" +
+                            ", @MouseOver" +
+                            ", @MenuName", parameters);
+                return RedirectToAction("LanguageIndex", new { Id = FromForm.OId.ToString() });
             }
-            //            return  RedirectToRoute("EditRole" + "/"+test3.ProcessTemplateGroup.ProcessTemplateGroupId.ToString() );
-
-            return RedirectToAction("LanguageIndex", new { Id = test3.ObjectId.ToString() });
-
-
+            return View();
 
         }
         [HttpGet]
@@ -374,29 +308,20 @@ namespace StudentUnion0105.Controllers
             Menus a = new Menus(_context);
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
-            var ProcessTemplateGroupLanguage = _ProcessTemplateGroupLanguage.DeleteProcessTemplateGroupLanguage(Id);
-            var x = new SuObjectVM
-            {
-                Id = ProcessTemplateGroupLanguage.Id,
-                Name = ProcessTemplateGroupLanguage.Name,
-                Description = ProcessTemplateGroupLanguage.Description,
-                MouseOver = ProcessTemplateGroupLanguage.MouseOver,
-                LanguageId = ProcessTemplateGroupLanguage.LanguageId,
-                ObjectId = ProcessTemplateGroupLanguage.ProcessTemplateGroupId
-            };
-            return View(x);
+
+            var parameter = new SqlParameter("@LId", Id);
+            var ObjectLanguage = _context.ZdbObjectLanguageEditGet.FromSql("ProcessTemplateGroupLanguageEditGet @LId" , parameter).First();
+            return View(ObjectLanguage);
         }
 
         [HttpPost]
-        public IActionResult LanguageDelete(SuObjectVM a)
+        public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
+            var parameter = new SqlParameter("@Id", FromForm.LId);
+            _context.Database.ExecuteSqlCommand("ProcessTemplateGroupLanguageDeletePost @Id", parameter);
 
-                _ProcessTemplateGroupLanguage.DeleteProcessTemplateGroupLanguage(a.Id);
-                return RedirectToAction("LanguageIndex", new { Id = a.ObjectId });
-            }
-            return RedirectToAction("Index");
+            return RedirectToAction("LanguageIndex", new { Id = FromForm.OId });
+
 
         }
     }

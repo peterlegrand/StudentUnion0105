@@ -24,5 +24,3 @@ JOIN AspNetUsers Modifier
 	ON convert(nvarchar(50), dbClassification.ModifierId) = Modifier.Id
 WHERE dbClassificationLanguage.LanguageId = @LanguageId
 	AND dbClassification.Id = @Id
-
-

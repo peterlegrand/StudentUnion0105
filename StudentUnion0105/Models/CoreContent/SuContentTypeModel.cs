@@ -8,6 +8,8 @@ namespace StudentUnion0105.Models
     public class SuContentTypeModel
     {
         public int Id { get; set; }
+        public int ContentTypeGroupId { get; set; }
+
         public int ProcessTemplateId { get; set; }
         public string CreatorId { get; set; }
         public string ModifierId { get; set; }
@@ -17,7 +19,8 @@ namespace StudentUnion0105.Models
         public virtual ICollection<SuContentTypeLanguageModel> ContentTypeLanguages { get; set; }
         public virtual ICollection<SuContentModel> Contents { get; set; }
         public virtual ICollection<SuContentTypeClassificationModel> ContentTypeClassification { get; set; }
-
+        [ForeignKey("ContentTypeGroupId")]
+        public virtual SuContentTypeGroupModel ContentTypeGroup { get; set; }
     }
     public class SuContentTypeLanguageModel
     {
@@ -96,6 +99,8 @@ namespace StudentUnion0105.Models
         public virtual SuContentTypeClassificationStatusModel ContentTypeClassificationStatus { get; set; }
         [ForeignKey("LanguageId")]
         public virtual SuLanguageModel Language { get; set; }
+        
+
 
     }
 

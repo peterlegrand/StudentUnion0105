@@ -116,10 +116,7 @@ public class RoleController : PortalController
                 }
 
             }
-            //if(Model.Users.Count()>1)
-            //            Model.Users.Sort();
             var ClaimList = await _roleManager.GetClaimsAsync(role);
-            //            Claim Claim1 = new Claim();
             if (ClaimList.Count > 0)
             {
                 foreach (var Claim1 in ClaimList)
@@ -127,10 +124,6 @@ public class RoleController : PortalController
                     Model.Claims.Add(Claim1);
                 }
             }
-            //if(Model.Claims.Count()>1)
-            //Model.Claims.Sort();
-
-
             return View(Model);
         }
 
@@ -242,11 +235,11 @@ public class RoleController : PortalController
                 if (CheckedUser && !HaveUser)
                 {
                     var us = await _userManager.FindByEmailAsync(u.UserName);
-                    await _userManager.AddToRoleAsync(us, role.Name);//   ..AddClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    await _userManager.AddToRoleAsync(us, role.Name);
                 }
                 if (!CheckedUser && HaveUser)
                 {
-                    await _userManager.RemoveFromRoleAsync(AssignedUser, role.Name);// _roleManager.RemoveClaimAsync(role, new Claim("Menu", u.ClaimValue));
+                    await _userManager.RemoveFromRoleAsync(AssignedUser, role.Name);
 
                 }
             }
@@ -268,14 +261,10 @@ public class RoleController : PortalController
 
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
-            //List<string> NewClaims = new List<string>();
             var NewClaims = new List<AddRightsToRoleViewModel>();
-            //All rights assigned and not assigned.
             var AllClaimList = _claim.GetAllClaims();
             var role = await _roleManager.FindByIdAsync(Id);
             var AssignedClaims = await _roleManager.GetClaimsAsync(role);
-            //if (AssignedClaims.Count > 0)
-            //{
             foreach (var AllClaim in AllClaimList)
 
             {
@@ -315,7 +304,6 @@ public class RoleController : PortalController
         public async Task<IActionResult> Rights(List<AddRightsToRoleViewModel> ClaimUpdates, string Id)
         {
             var role = await _roleManager.FindByIdAsync(Id);
-            //Claims is currently assigned.
             var claims = await _roleManager.GetClaimsAsync(role);
             foreach (var u in ClaimUpdates)
             {

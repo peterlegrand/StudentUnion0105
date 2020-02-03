@@ -1,49 +1,38 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using StudentUnion0105.Classes;
-using StudentUnion0105.Data;
-using StudentUnion0105.Models;
-using StudentUnion0105.Repositories;
-using StudentUnion0105.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.AspNetCore.Http.Features;
-using Syncfusion.EJ2.Navigations;
+﻿    using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore;
+    using StudentUnion0105.Classes;
+    using StudentUnion0105.Data;
+    using StudentUnion0105.Models;
+    using StudentUnion0105.Repositories;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Net.Http.Headers;
+    using System.Threading.Tasks;
+    using System.IO;
+    using Microsoft.AspNetCore.Http.Features;
+    using Syncfusion.EJ2.Navigations;
 
 namespace StudentUnion0105.Controllers
 {
     [Authorize("Classification")]
     public class ClassificationController : PortalController
     {
-        
-        //private readonly IClassificationStatusRepository _classificationStatus;
-        //private readonly IClassificationRepository _classification;
-        //private readonly IClassificationLanguageRepository _classificationLanguage;
         private readonly SuDbContext _context;
         private readonly IHostingEnvironment _hostingEnv;
 
         public ClassificationController(UserManager<SuUserModel> userManager
-                                                //, IClassificationStatusRepository classificationStatus
-                                                //, IClassificationRepository classification
-                                                //, IClassificationLanguageRepository classificationLanguage
-                                                , ILanguageRepository language
-                                                , SuDbContext context
-            , IHostingEnvironment hostingEnv
+                                            , ILanguageRepository language
+                                            , SuDbContext context
+                                            , IHostingEnvironment hostingEnv
             ) : base(userManager, language)
         {
-            //_classificationStatus = classificationStatus;
-            //_classification = classification;
-            //_classificationLanguage = classificationLanguage;
             _context = context;
             _hostingEnv = hostingEnv;
         }
@@ -450,7 +439,6 @@ namespace StudentUnion0105.Controllers
                         {
                             Response.ContentType = "application/json; charset=utf-8";
                             Response.Headers.Add("name", onlyfilename);
-                            //Response.Clear();
                             Response.StatusCode = 204;
                             
                             using (FileStream fs = System.IO.File.Create(filename))
@@ -458,7 +446,6 @@ namespace StudentUnion0105.Controllers
                                 file.CopyTo(fs);
                                 fs.Flush();
                             }
-                            //Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = "File already exists.";
                         }
                         else
                         {

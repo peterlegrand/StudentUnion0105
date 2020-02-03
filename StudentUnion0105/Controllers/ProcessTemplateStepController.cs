@@ -30,8 +30,6 @@ namespace StudentUnion0105.Controllers
             , ILanguageRepository language
             , IProcessTemplateStepRepository processTemplateStep
             , IProcessTemplateStepLanguageRepository processTemplateStepLanguage
-            //, IProcessTemplateStepTypeRepository processTemplateStepType
-            //, IProcessTemplateStepTypeLanguageRepository processTemplateStepTypeLanguage
             , SuDbContext context
             , IMasterListRepository masterList
             , IDataTypeRepository dataType) : base(userManager, language)

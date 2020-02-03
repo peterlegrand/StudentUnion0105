@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StudentUnion0105.Classes;
 using StudentUnion0105.Data;
 using StudentUnion0105.Models;
 using StudentUnion0105.Repositories;
-using StudentUnion0105.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentUnion0105.Controllers
 {
     [AllowAnonymous]
     public class ExternalPageController : Controller
     {
-        private readonly UserManager<SuUserModel> userManager;
+        private readonly UserManager<SuUserModel> _userManager;
         private readonly IClassificationStatusRepository _classificationStatus;
         private readonly IClassificationRepository _classification;
         private readonly IClassificationLanguageRepository _classificationLanguage;
@@ -35,7 +31,7 @@ namespace StudentUnion0105.Controllers
                                                 , SuDbContext context
             )
         {
-            this.userManager = userManager;
+            _userManager = userManager;
             _classificationStatus = classificationStatus;
             _classification = classification;
             _classificationLanguage = classificationLanguage;

@@ -314,7 +314,7 @@ namespace StudentUnion0105.Controllers
         }
 
         [HttpPost]
-        public IActionResult LanguageDelete(SuObjectVM a)
+        public IActionResult LanguageDelete(SuObjectLanguageEditGetModel FromForm)
         {
             var parameter = new SqlParameter("@Id", FromForm.LId);
             _context.Database.ExecuteSqlCommand("ContentTypeGroupLanguageDeletePost @Id", parameter);

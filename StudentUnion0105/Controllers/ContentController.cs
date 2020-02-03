@@ -45,6 +45,55 @@ namespace StudentUnion0105.Controllers
 
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Create1()
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
+
+            var ContentTypeGroupsFromDb = _context.ZDbTypeList.FromSql("ContentCreate1GetContentTypeGroup @LanguageId", parameter).ToList();
+
+
+            var GroupList = new List<ContentCreate1GetContentTypeGroup>();
+            foreach (var GroupFromDb in ContentTypeGroupsFromDb)
+            {
+                var TypeList = new List<ContentCreate1GetContentType>();
+
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
+                    , new SqlParameter("@Id", GroupFromDb.Id)
+                };
+
+                var ContentTypesFromDb = _context.ZDbTypeList.FromSql("ContentCreate1GetContentType @LanguageId, @Id", parameters).ToList();
+
+                foreach (var TypeFromDb in ContentTypesFromDb)
+                {
+                    TypeList.Add(new ContentCreate1GetContentType
+                    {
+                        name = TypeFromDb.Name,
+                        Id = TypeFromDb.Id
+                    });
+                }
+
+                GroupList.Add(new ContentCreate1GetContentTypeGroup
+                {
+
+                    Name = GroupFromDb.Name,
+                    Id = GroupFromDb.Id,
+                    Types = TypeList
+
+                });
+            }
+            return View(GroupList);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Create()

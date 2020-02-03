@@ -1,4 +1,4 @@
-CREATE PROCEDURE ContentTypeGroupCreatePost (
+CREATE PROCEDURE ProcessTemplateGroupCreatePost (
 	 @LanguageId int
 	, @ModifierId nvarchar(450)
 	, @Name nvarchar(50)
@@ -9,23 +9,23 @@ CREATE PROCEDURE ContentTypeGroupCreatePost (
 AS
 BEGIN TRANSACTION
 
-INSERT INTO dbContentTypeGroup (
-	 CreatorId
+INSERT INTO dbProcessTemplateGroup (
+	CreatorId
 	, CreatedDate
 	, ModifierId 
 	, ModifiedDate
 	)
 VALUES (
-	 @ModifierId
+	@ModifierId
 	, getdate()
 	, @ModifierId
 	, getdate()
 	);
 
-DECLARE @NewContentTypeGroupId int	= scope_identity();
+DECLARE @NewProcessTemplateGroupId int	= scope_identity();
 
-INSERT INTO dbContentTypeGroupLanguage (
-	ContentTypeGroupId
+INSERT INTO dbProcessTemplateGroupLanguage (
+	ProcessTemplateGroupId
 	, LanguageId
 	, Name 
 	, Description 
@@ -37,7 +37,7 @@ INSERT INTO dbContentTypeGroupLanguage (
 	, ModifiedDate
 	)
 VALUES (
-	@NewContentTypeGroupId
+	@NewProcessTemplateGroupId
 	, @LanguageId
 	, @Name
 	, @Description

@@ -1,0 +1,15 @@
+﻿@using Syncfusion.JavaScript;
+@using Syncfusion.JavaScript.Models;
+@model List<ContentCreate1GetContentTypeGroup>
+@{
+    ViewBag.Title = "Create content";
+}
+<h1><img src="~/Images/Icons/content.png" height="60" width="60" /> Create content</h1>
+@foreach (var item in Model)
+{
+    <div class="h2">@item.Name</div>
+    @foreach (var item2 in item.Types)
+    {
+        <div>@item2.name</div>
+    }
+}
