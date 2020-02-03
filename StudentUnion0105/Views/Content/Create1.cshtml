@@ -10,6 +10,9 @@
     <div class="h2">@item.Name</div>
     @foreach (var item2 in item.Types)
     {
-        <div>@item2.name</div>
+<div>
+    <a asp-controller="Content" asp-action="Create2" asp-route-Id="@item2.Id.ToString()"><img src="~/Images/Icons/open.png" title="@item2.name" height="20" width="20" />@item2.name</a>
+    
+</div>
     }
 }
