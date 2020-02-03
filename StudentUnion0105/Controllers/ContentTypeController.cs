@@ -17,20 +17,15 @@ namespace StudentUnion0105.Controllers
 {
     public class ContentTypeController : PortalController
     {
-        //private readonly IContentTypeLanguageRepository _contentTypeLanguage;
-        //private readonly IContentTypeRepository _contentType;
+
         private readonly SuDbContext _context;
 
         public ContentTypeController(
             UserManager<SuUserModel> userManager
-            //, IContentTypeLanguageRepository ContentTypeLanguage
-            //, IContentTypeRepository contentType
             , ILanguageRepository language
                         , SuDbContext context
 ) : base(userManager, language)
         {
-            //_contentTypeLanguage = ContentTypeLanguage;
-            //_contentType = contentType;
             _context = context;
         }
         public async Task<IActionResult> Index()
@@ -50,23 +45,6 @@ namespace StudentUnion0105.Controllers
 
             List<SuObjectIndexGetModel> ContentType = await _context.ZdbObjectIndexGet.FromSql("ContentTypeIndexGet @LanguageId", parameter).ToListAsync();
             return View(ContentType);
-
-
-            //var ContentTypes = (
-
-            //    from l in _contentTypeLanguage.GetAllContentTypeLanguages()
-
-            //    where l.LanguageId == DefaultLanguageID
-            //    select new SuObjectVM
-
-
-            //    {
-            //        Id = l.ContentTypeId
-            //                 ,
-            //        Name = l.Name,
-            //        Description = l.Description
-            //    }).ToList();
-            //return View(ContentTypes);
         }
 
         [HttpGet]

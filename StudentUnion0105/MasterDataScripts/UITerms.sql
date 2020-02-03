@@ -330,4 +330,5 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(327, 'Date created', 'Date c
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(328, 'Date modified', 'Date modified');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(329, 'Content type classifications', 'Content type classifications');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(330, 'Edit content type classification', 'Edit content type classification');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(331, 'Security level', 'Security level');
 SET IDENTITY_INSERT dbUITerm OFF;

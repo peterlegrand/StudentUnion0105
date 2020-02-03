@@ -12,13 +12,13 @@ VALUES(  1, 41, 'Knowledge','Knowledge','Knowledge','Knowledge', @CurrentUser, @
 INSERT INTO dbContentTypeGroupLanguage ( ContentTypeGroupId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 41, 'Experience','Experience','Experience','Experience', @CurrentUser, @CurrentUser, getdate(),getdate())  
 
-INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, SecurityLevel, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  1, 41, 'Knowledge','Knowledge','Knowledge', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, SecurityLevel, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,1,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  2, 41, 'Experience','Experience','Experience', @CurrentUser, @CurrentUser, getdate(),getdate())  
-INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,2, @CurrentUser, @CurrentUser, getdate(), getdate()); 
+INSERT INTO dbContentType (ProcessTemplateId, ContentTypeGroupId, SecurityLevel, CreatorId , ModifierId, ModifiedDate, CreatedDate) VALUES(0,2,1, @CurrentUser, @CurrentUser, getdate(), getdate()); 
 INSERT INTO dbContentTypeLanguage ( ContentTypeId, LanguageId, Name, Description, MouseOver, CreatorId, ModifierId, CreatedDate, ModifiedDate)  
 VALUES(  3, 41, 'Assignments','Assignments','Assignments', @CurrentUser, @CurrentUser, getdate(),getdate())  
  

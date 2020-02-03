@@ -11,6 +11,7 @@ namespace StudentUnion0105.Models
         public int ContentTypeGroupId { get; set; }
 
         public int ProcessTemplateId { get; set; }
+        public int SecurityLevel { get; set; }
         public string CreatorId { get; set; }
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }

@@ -2069,6 +2069,8 @@ INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2067, 254, 10
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2068, 99, 1027, 11);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2069, 254, 1031, 9);
 INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2070, 99, 1031, 10);
-
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2071, 331, 1025, 10);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2072, 331, 1027, 12);
+INSERT INTO dbUITermScreen (Id, TermId, ScreenId, Sequence) VALUES(2073, 331, 1026, 13);
 SET IDENTITY_INSERT dbUITermScreen OFF;
  

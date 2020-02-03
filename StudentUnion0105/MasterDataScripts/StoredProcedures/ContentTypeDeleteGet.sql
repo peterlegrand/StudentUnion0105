@@ -11,6 +11,7 @@ SELECT
 	, dbContentTypeLanguage.Description
 	, dbContentTypeLanguage.MouseOver
 	, dbContentTypeLanguage.MenuName
+	, dbContentType.SecurityLevel
 FROM dbContentTypeLanguage
 JOIN dbContentType 
 	ON dbContentTypeLanguage.ContentTypeId = dbContentType.Id

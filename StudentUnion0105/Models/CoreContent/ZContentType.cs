@@ -18,11 +18,13 @@ namespace StudentUnion0105.Models
         public string Description { get; set; }
         public string MouseOver { get; set; }
         public string MenuName { get; set; }
+        public int SecurityLevel { get; set; }
 
     }
     public class SuContentTypeEditGetModel
     {
         public int Id { get; set; }
+        public int SecurityLevel { get; set; }
         public int Lid { get; set; }
         [Required]
         public string Name { get; set; }

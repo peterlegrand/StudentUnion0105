@@ -51,6 +51,13 @@
         </div>
     </div>
     <div class="form-group row">
+        <label asp-for="@Model.SecurityLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[12]</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.SecurityLevel" class="form-control" />
+            <span asp-validation-for="@Model.SecurityLevel" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
         <label asp-for="@Model.Creator" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10">
             <input asp-for="@Model.Creator" class="form-control" />

@@ -7,6 +7,7 @@ CREATE PROCEDURE ContentTypeCreatePost (
 	, @MenuName nvarchar(50)
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(Max)
+	, @SecurityLevel int
 	)
 AS
 BEGIN TRANSACTION
@@ -16,12 +17,14 @@ INSERT INTO dbContentType (
 	, CreatedDate
 	, ModifierId 
 	, ModifiedDate
+	, SecurityLevel
 	)
 VALUES (
 	@ModifierId
 	, getdate()
 	, @ModifierId
 	, getdate()
+	, @SecurityLevel
 	);
 
 DECLARE @NewId int	= scope_identity();

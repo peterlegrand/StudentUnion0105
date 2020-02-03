@@ -160,6 +160,7 @@ namespace StudentUnion0105.Controllers
 , "ContentCreate.sql"
 , "ContentCreate1GetContentType.sql"
 , "ContentCreate1GetContentTypeGroup.sql"
+, "ContentCreate2GetContentType.sql"
 , "ContentInsert.sql"
 , "ContentStatusSelectAll.sql"
 , "ContentTypeClassificationEditGet.sql"

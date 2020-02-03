@@ -1,8 +1,16 @@
-CREATE PROCEDURE ContentCreate1GetContentTypeGroup (@LanguageId int) 
+CREATE PROCEDURE ContentCreate1GetContentTypeGroup (@CurrentUser nvarchar(50)) 
 AS
 SELECT 
-	Id 
+	DbContentTypeGroupLanguage.ContentTypeGroupId Id
 	, Name
 FROM DbContentTypeGroupLanguage
-WHERE LanguageId = @LanguageId
+JOIN AspNetUsers	
+	ON AspNetUsers.DefaultLanguageId = DbContentTypeGroupLanguage.LanguageId
+WHERE DbContentTypeGroupLanguage.ContentTypeGroupId IN ( 
+		SELECT dbContentType.ContentTypeGroupId 
+		FROM dbContentType 
+		JOIN AspNetUsers 
+			ON AspNetUsers.SecurityLevel >= dbContentType.SecurityLevel
+		WHERE AspNetUsers.Id = @CurrentUser )
+	AND AspNetUsers.Id = @CurrentUser
 ORDER BY Name

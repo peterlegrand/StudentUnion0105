@@ -13,6 +13,7 @@ SELECT
 	, ISNULL(dbContentTypeLanguage.MenuName,'') MenuName
 	, ISNULL(dbContentTypeLanguage.TitleName,'') TitleName
 	, ISNULL(dbContentTypeLanguage.TitleDescription,'') TitleDescription
+	, dbContentType.SecurityLevel
 FROM dbContentTypeLanguage
 JOIN dbContentType
 	ON dbContentTypeLanguage.ContentTypeId = dbContentType.Id
