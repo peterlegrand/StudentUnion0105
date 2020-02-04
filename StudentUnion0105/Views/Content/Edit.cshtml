@@ -95,8 +95,8 @@
                     @Html.DropDownListFor(z => z.SelectedValues[x].Id, Model.Values[x])
                     <span asp-validation-for="@Model.SelectedValues[x].Id" class="text-danger"></span>
 
-                    <input asp-for="@@Model.SelectedValues[x].ClassificationId" class="form-control" />
-                    <input asp-for="@@Model.SelectedValues[x].ValueId" class="form-control" />
+                    <input asp-for="@Model.SelectedValues[x].ClassificationId" class="form-control" />
+                    <input asp-for="@Model.SelectedValues[x].ValueId" class="form-control" />
                 </div>
             </div>
 
