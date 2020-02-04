@@ -7,3 +7,4 @@ JOIN DbContent
 WHERE dbContentTypeClassification.StatusId <> 1
 	AND dbContent.Id = @Id
 
+	 
