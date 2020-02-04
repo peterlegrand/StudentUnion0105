@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentUnion0105.Data;
 
 namespace StudentUnion0105.Migrations
 {
     [DbContext(typeof(SuDbContext))]
-    partial class SuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200204073757_createcontent2")]
+    partial class createcontent2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ce2a49d4-d310-4c24-85bf-e229ad659f63",
-                            ConcurrencyStamp = "b768a33e-0f42-4b90-90fa-d3b491d811b0",
+                            Id = "387ba9cd-5cf6-47da-9e54-161bcbd43399",
+                            ConcurrencyStamp = "219cdfc0-f581-43a9-8f7f-739b6c28838e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0268c39e-0273-4ace-bf44-1c36f4ef2810",
-                            ConcurrencyStamp = "770ca4e8-4132-4358-8622-69ad12e4939c",
+                            Id = "a837f8b7-1674-499b-bf5d-f84fba8afed6",
+                            ConcurrencyStamp = "52df97e6-117a-4fe5-aa81-ad803aff5193",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1229,54 +1231,6 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ZdbContentCreate2GetClassifications");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuContentEditGetClassificationValuesModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassificationId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbContentEditGetClassificationValues");
-                });
-
-            modelBuilder.Entity("StudentUnion0105.Models.SuContentEditGetContentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContentStatusId");
-
-                    b.Property<int>("ContentTypeId");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Creator");
-
-                    b.Property<string>("Description");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<DateTime>("ModifiedDate");
-
-                    b.Property<string>("Modifier");
-
-                    b.Property<int>("OrganizationId");
-
-                    b.Property<int>("ProjectId");
-
-                    b.Property<int>("SecurityLevel");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ZdbContentEditGetContent");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentModel", b =>

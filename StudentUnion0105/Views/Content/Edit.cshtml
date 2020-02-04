@@ -1,8 +1,8 @@
 ﻿@using Syncfusion.JavaScript;
 @using Syncfusion.JavaScript.Models;
-@model SuCreateContentModel
+@model SuContentEditGetAllLists
 @{
-    ViewBag.Title = "Create content";
+    ViewBag.Title = "Edit content";
 }
 <h1><img src="~/Images/Icons/content.png" height="60" width="60" /> Create content</h1>
 <form class="mt-3" method="post">
@@ -88,12 +88,15 @@
         while (x < Model.NoOfClassifications)
         {
             <div class="form-group row">
-                <label asp-for="@Model.SelectedValues[x]" class="col-sm-2 col-form-label"></label>
+                <label asp-for="@Model.SelectedValues[x].Id" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10 ">
 
                     @*@Html.DropDownListFor(x => x.Classification.Status, new SelectList(Model.a, "Value", "Text"))*@
-                    @Html.DropDownListFor(z => z.SelectedValues[x], Model.Values[x])
-                    <span asp-validation-for="@Model.SelectedValues[x]" class="text-danger"></span>
+                    @Html.DropDownListFor(z => z.SelectedValues[x].Id, Model.Values[x])
+                    <span asp-validation-for="@Model.SelectedValues[x].Id" class="text-danger"></span>
+
+                    <input asp-for="@@Model.SelectedValues[x].ClassificationId" class="form-control" />
+                    <input asp-for="@@Model.SelectedValues[x].ValueId" class="form-control" />
                 </div>
             </div>
 
