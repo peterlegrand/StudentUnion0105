@@ -8,6 +8,6 @@ JOIN AspNetUsers
 	ON AspNetUsers.SecurityLevel >= DbContentType.SecurityLevel
 WHERE dbContentTypeClassification.StatusId <> 1
 	AND dbContentTypeClassification.ContentTypeId = @Id
-	AND AspNetUsers.Id = @CurrentUser
+	AND AspNetUsers.Id = @CurrentUser 
 
 
