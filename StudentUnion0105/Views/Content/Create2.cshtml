@@ -15,14 +15,22 @@
         </div>
     </div>
     <div class="form-group row">
+        <label asp-for="@Model.Content.ContentTypeId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.Content.ContentTypeId" class="form-control" />
+            <span asp-validation-for="@Model.Content.ContentTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
         <label asp-for="@Model.NoOfClassifications" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="@Model.NoOfClassifications" class="form-control" />
             <span asp-validation-for="@Model.NoOfClassifications" class="text-danger"></span>
         </div>
     </div>
-    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE"> @*imageUploadSuccess="onImageUploadSuccess">*@
-        <e-richtexteditor-insertimagesettings saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
+    <ejs-richtexteditor ejs-for="@Model.Content.Description" id="defaultRTE">
+        @*imageUploadSuccess="onImageUploadSuccess">*@
+        <e-richtexteditor-insertimagesettings ejs-for="@Model.Content.Description" saveUrl="/Classification/SaveImage" path="Images/Content/"></e-richtexteditor-insertimagesettings>
         <e-richtexteditor-iframesettings enable="true"></e-richtexteditor-iframesettings>
         <e-richtexteditor-quicktoolbarsettings image="@ViewBag.image"></e-richtexteditor-quicktoolbarsettings>
 

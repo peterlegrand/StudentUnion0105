@@ -1,7 +1,7 @@
 CREATE PROCEDURE PreferenceLeftMenuGet (@CurrentUser nvarchar(50))
 AS 
 SELECT 
-	dbLeftMenu.Id
+	dbLeftMenuUser.Id
 	, dbLeftMenu.MainController
 	, dbLeftMenu.MainAction
 	, dbLeftMenu.AddController

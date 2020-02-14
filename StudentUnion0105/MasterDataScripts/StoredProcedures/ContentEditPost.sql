@@ -1,4 +1,4 @@
-CREATE PROCEDURE ContentEditPost
+ALTER PROCEDURE ContentEditPost
 	@Id int
 , @ContentStatusId int 
 , @LanguageId int 
@@ -20,6 +20,7 @@ UPDATE dbContent SET
 , OrganizationId = @OrganizationId 
 , ModifierId = @ModifierId
 , ModifiedDate =GETDATE()
+WHERE dbContent.Id = @Id
 END
 ELSE
 BEGIN
@@ -33,4 +34,5 @@ UPDATE dbContent SET
 , ProjectId = @ProjectId 
 , ModifierId = @ModifierId
 , ModifiedDate =GETDATE()
+WHERE dbContent.Id = @Id
 END

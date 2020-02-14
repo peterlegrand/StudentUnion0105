@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[ContentCreate]  
+CREATE PROCEDURE ContentCreate2Post  
  @ContentTypeId int 
 , @ContentStatusId int 
 , @LanguageId int 

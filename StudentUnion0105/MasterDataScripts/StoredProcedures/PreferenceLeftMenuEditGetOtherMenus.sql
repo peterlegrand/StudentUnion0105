@@ -1,7 +1,7 @@
 CREATE PROCEDURE PreferenceLeftMenuEditGetOtherMenus (@CurrentUser nvarchar(50), @languageId int)
 AS 
 SELECT 
-	dbLeftMenuUser.Id 
+	dbLeftMenuUser.Sequence Id 
 	, dbLeftMenuLanguage.Name
 FROM dbLeftMenuUser 
 JOIN dbLeftMenuLanguage

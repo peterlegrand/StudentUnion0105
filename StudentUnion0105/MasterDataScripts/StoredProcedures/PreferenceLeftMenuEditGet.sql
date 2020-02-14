@@ -1,7 +1,7 @@
 CREATE PROCEDURE PreferenceLeftMenuEditGet (@Id int, @languageId int)
 AS 
 SELECT 
-	dbLeftMenu.Id
+	dbLeftMenuUser.Id
 	, dbLeftMenu.MainController
 	, dbLeftMenu.MainAction
 	, dbLeftMenu.AddController

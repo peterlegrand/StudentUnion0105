@@ -126,6 +126,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Menu3\" />
+    <Folder Include="Views\FrontUser\" />
     <Folder Include="wwwroot\Images\Content\" />
   </ItemGroup>
 

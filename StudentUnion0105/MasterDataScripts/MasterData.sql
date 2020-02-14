@@ -754,7 +754,7 @@ VALUES (7, 'Favorites', 'FrontPage','MyContent', '', '', 1, 0, 0,0,'favorites.pn
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
 VALUES (8, 'Game', '','', '', '', 1, 0, 0,0,'game.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
-VALUES (9, 'to do', 'FrontProcesstodo','Index', '', '', 1, 1, 0,0,'Todo.png')
+VALUES (9, 'to do', 'FrontProcesstodo','Index', 'FrontProcess', 'Index', 1, 1, 0,0,'Todo.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
 VALUES (10, 'General search', 'FrontSearch','Index', '', '', 0, 0, 1,1,'search.png')
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 

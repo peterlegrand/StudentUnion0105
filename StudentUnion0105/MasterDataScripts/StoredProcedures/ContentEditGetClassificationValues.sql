@@ -3,7 +3,6 @@ AS
 SELECT 
 	ISNULL(ClassificationValues.ClassificationValueId,0) ValueId
 	, dbContentTypeClassification.ClassificationId
-	, ISNULL(ClassificationValues.Id,0) Id
 FROM DbContent
 JOIN dbContentTypeClassification
 	ON DbContent.ContentTypeId = dbContentTypeClassification.ContentTypeId

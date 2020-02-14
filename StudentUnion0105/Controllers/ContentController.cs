@@ -412,6 +412,8 @@ namespace StudentUnion0105.Controllers
             SuContentModel content = new SuContentModel
             {
                 LanguageId = CurrentUser.DefaultLanguageId
+                ,
+                ContentTypeId = Id
             };
             int?[] SelectedValues = new int?[NoOfClassifications];
             SuCreateContentModel ContentWithDropDowns = new SuCreateContentModel
@@ -475,7 +477,15 @@ namespace StudentUnion0105.Controllers
                 }
             };
 
-            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId, @ContentStatusId, @LangaugeId, @Title, @Description, @SecurityLevel, @OrganizationId, @ProjectId, @CreatorId, @new_identity OUTPUT", parameters);
+            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId" +
+                ", @ContentStatusId" +
+                ", @LangaugeId" +
+                ", @Title" +
+                ", @Description" +
+                ", @SecurityLevel" +
+                ", @OrganizationId" +
+                ", @ProjectId" +
+                ", @CreatorId, @new_identity OUTPUT", parameters);
 
             if (FromForm.NoOfClassifications != null)
             {
@@ -551,7 +561,7 @@ namespace StudentUnion0105.Controllers
 
             var parametersForClassifications = new SqlParameter("@Id", Id);
 
-            var ClassificationIdsFromDb = _context.ZdbInt.FromSql("ContentEditGetClassifications  @Id", parametersForClassifications).ToList();
+            var ClassificationIdsFromDb = _context.ZdbInt.FromSql("ContentEditGetClassifications @Id", parametersForClassifications).ToList();
 
 
             //  DbSet<SuValueList>[] dbValueList = new DbSet<SuValueList>[NoOfClassifications];
@@ -590,7 +600,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.ZDbStatusList.FromSql("ContentStatusSelectAll").ToList();
+            var ContentStatusFromDb = _context.ZDbStatusList.FromSql("ContentEditGetStatusList").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)

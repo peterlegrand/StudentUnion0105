@@ -103,4 +103,25 @@ namespace StudentUnion0105.Models
         public SuPreferenceLeftMenuEditGetModel MenuEdit { get; set; }
         public List<SelectListItem> OtherMenus { get; set; }
     }
+
+    public class SuPreferenceLeftMenuCreateGetNewMenuModel
+    {
+        public int Id { get; set; }
+        public int LeftMenuId { get; set; }
+        public bool MenuShow { get; set; }
+        public bool MenuAddShow { get; set; }
+        public bool SearchShow { get; set; }
+        public bool AdvancedSearchShow { get; set; }
+        public string MenuName { get; set; }
+        public string MenuURL { get; set; }
+        public int Sequence { get; set; }
+        public string UserId { get; set; }
+    }
+    public class SuPreferenceLeftMenuCreateGetModel
+    {
+        public SuPreferenceLeftMenuCreateGetNewMenuModel CreateMenuUser { get; set; }
+        public List<SelectListItem> AvailableMenus { get; set; }
+        public List<SelectListItem> ExistingMenus { get; set; }
+    }
+
 }
