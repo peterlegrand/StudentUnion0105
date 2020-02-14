@@ -1,4 +1,4 @@
-ALTER PROCEDURE ContentEditPost
+CREATE PROCEDURE ContentEditPost
 	@Id int
 , @ContentStatusId int 
 , @LanguageId int 

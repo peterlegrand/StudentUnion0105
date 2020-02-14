@@ -1,4 +1,4 @@
-CREATE PROCEDURE FrontUserIndexGet 
+CREATE PROCEDURE FrontUserUserDashboardGet (@UserId nvarchar(50))
 AS
 SELECT 
 	AspNetUsers.Id UserId
@@ -12,4 +12,4 @@ LEFT JOIN DbLanguage
 	ON AspNetUsers.DefaultLanguageId = DbLanguage.Id
 LEFT JOIN DbCountry
 	ON AspNetUsers.CountryId=DbCountry.Id
-ORDER BY AspNetUsers.UserName
+WHERE AspNetUsers.Id = @UserId

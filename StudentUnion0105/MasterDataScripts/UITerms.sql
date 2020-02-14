@@ -331,4 +331,8 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(328, 'Date modified', 'Date 
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(329, 'Content type classifications', 'Content type classifications');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(330, 'Edit content type classification', 'Edit content type classification');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(331, 'Security level', 'Security level');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(332, 'Created flow', 'Created flow');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(333, 'Add left menu', 'Add left menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(334, 'New menu', 'New menu');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(335, 'Location', 'Location');
 SET IDENTITY_INSERT dbUITerm OFF;

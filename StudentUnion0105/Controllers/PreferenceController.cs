@@ -209,7 +209,7 @@ if(AvailableMenus.Count()==0)
                     Value = AvailableMenu.Id.ToString()
                 });
             }
-            List<SuTypeList> ExistingMenus = _context.ZDbTypeList.FromSql("PreferenceLeftMenuCreateGetExistingMenus @CurrentUser", parameter).ToList();
+            List<SuStatusList> ExistingMenus = _context.ZDbStatusList.FromSql("PreferenceLeftMenuCreateGetExistingMenus @CurrentUser", parameter).ToList();
 
             var ExistingMenuList = new List<SelectListItem>();
             var maxlevel = 0;

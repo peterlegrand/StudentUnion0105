@@ -769,6 +769,8 @@ INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController,
 VALUES (15, 'user defined menu', '','', '', '', 1, 0, 0 ,0,'userdefined.png' )
 INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
 VALUES (16, 'My organizations', 'FrontOrganization','MyOrganization', '', '', 1, 0, 0 ,0,'Organization.png' )
+INSERT INTO dbLeftMenu (Id, MenuName, MainController, MainAction, AddController, AddAction, HasMenu, HasAdd, HasSearch, HasAdvancedSearch, ImageName) 
+VALUES (17, 'Users', 'FrontUser','Index', '', '', 1, 1, 0 ,0,'User.png' )
 
 SET IDENTITY_INSERT dbLeftMenu OFF;
 
@@ -807,6 +809,8 @@ INSERT INTO dbLeftMenuLanguage ( Id, LeftMenuId, LanguageId, Name, Description, 
 VALUES (15, 15, 41, 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', 'User defined menu', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO dbLeftMenuLanguage ( Id, LeftMenuId, LanguageId, Name, Description, MainName, MainMouseOver, AddName, AddMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (16, 16, 41, 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO dbLeftMenuLanguage ( Id, LeftMenuId, LanguageId, Name, Description, MainName, MainMouseOver, AddName, AddMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES (17, 17, 41, 'Users', 'Users', 'Usersorganizations', 'Users', 'Users', 'Users', @CurrentUser, @CurrentUser, getdate(), getdate())
 
 
 SET IDENTITY_INSERT dbLeftMenuLanguage OFF;

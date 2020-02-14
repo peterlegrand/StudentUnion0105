@@ -248,4 +248,6 @@ INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1242, 'ContentTypeClassifi
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1243, 'ContentTypeClassificationStatus', 'LanguageCreate');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1244, 'ContentTypeClassificationStatus', 'LanguageEdit');
 INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1245, 'ContentTypeClassificationStatus', 'LanguageDelete');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1246, 'FrontUser', 'Index');
+INSERT INTO dbUIScreen (Id, Controller,Action) VALUES(1247, 'Preference', 'LeftMenuCreate');
 SET IDENTITY_INSERT dbUIScreen OFF;

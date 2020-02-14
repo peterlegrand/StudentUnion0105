@@ -10,4 +10,5 @@ FROM dbLeftMenuLanguage
 JOIN dbLeftMenuUser
 	ON dbLeftMenuLanguage.LeftMenuId = dbLeftMenuUser.LeftMenuId
 WHERE dbLeftMenuLanguage.LanguageId = @LanguageId
+	AND dbLeftMenuUser.UserId = @CurrentUser
 ORDER BY dbLeftMenuUser.Sequence

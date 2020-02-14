@@ -45,15 +45,15 @@ namespace StudentUnion0105.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ce2a49d4-d310-4c24-85bf-e229ad659f63",
-                            ConcurrencyStamp = "b768a33e-0f42-4b90-90fa-d3b491d811b0",
+                            Id = "53f85736-7e95-4b9b-9e4f-8cebd2cca218",
+                            ConcurrencyStamp = "47b02eef-fc26-49ff-ad9d-e99fd174dfd9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0268c39e-0273-4ace-bf44-1c36f4ef2810",
-                            ConcurrencyStamp = "770ca4e8-4132-4358-8622-69ad12e4939c",
+                            Id = "93d3a1ed-7186-4baf-9802-10614d52e542",
+                            ConcurrencyStamp = "3dea3cdd-440c-43c9-b050-49e794d638f3",
                             Name = "Super admin",
                             NormalizedName = "SUPER ADMIN"
                         });
@@ -1233,13 +1233,15 @@ namespace StudentUnion0105.Migrations
 
             modelBuilder.Entity("StudentUnion0105.Models.SuContentEditGetClassificationValuesModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ClassificationId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClassificationId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("Id");
+                    b.Property<int>("ValueId");
+
+                    b.HasKey("ClassificationId");
 
                     b.ToTable("ZdbContentEditGetClassificationValues");
                 });
@@ -2407,6 +2409,26 @@ namespace StudentUnion0105.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ZdbFrontRelationMyRelationGet");
+                });
+
+            modelBuilder.Entity("StudentUnion0105.Models.SuFrontUserIndexGetModel", b =>
+                {
+                    b.Property<string>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("ZdbFrontUserIndexGet");
                 });
 
             modelBuilder.Entity("StudentUnion0105.Models.SuHomeIndexAdminGetLanguagesModel", b =>
