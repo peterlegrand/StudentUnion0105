@@ -17,17 +17,20 @@
             }
             @if (Menu.HasSearch && Menu.SearchShow)
             {
-                <div class="row">
-                    <div class="col">
-                        <input class="form-control d-inline" />
-                    </div>
-                @if (Menu.HasAdvancedSearch && Menu.AdvancedSearchShow)
+    <div class="row">
+        <div class="col">
+            @Menu.MenuName
+        </div>
+        <div class="col">
+            <input class="form-control d-inline" />
+        </div>
+        @if (Menu.HasAdvancedSearch && Menu.AdvancedSearchShow)
 
-                { 
-                <div class="col"><a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" /></a></div>
-                    
-                }
-                </div>
+        {
+            <div class="col"><a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" /></a></div>
+
+        }
+    </div>
             }
         }
         </form>
