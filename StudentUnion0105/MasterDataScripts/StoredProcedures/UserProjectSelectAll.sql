@@ -3,7 +3,9 @@ AS
 SELECT  
 dbUserProject.ProjectId Id
 , ISNULL(dbProjectLanguage.Name,'') Name 
-, ISNULL(dbUserProjectTypeLanguage.Name,'') Description
+, ISNULL(dbProjectLanguage.Description,'') Description 
+, ISNULL(dbProjectLanguage.MouseOver,'') MouseOver 
+, ISNULL(dbProjectLanguage.MenuName,'') MenuName 
 FROM dbUserProject
 JOIN dbProject
 	ON dbUserProject.ProjectId = dbProject.Id

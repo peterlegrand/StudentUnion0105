@@ -810,7 +810,7 @@ VALUES (15, 15, 41, 'User defined menu', 'User defined menu', 'User defined menu
 INSERT INTO dbLeftMenuLanguage ( Id, LeftMenuId, LanguageId, Name, Description, MainName, MainMouseOver, AddName, AddMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (16, 16, 41, 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', 'My organizations', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO dbLeftMenuLanguage ( Id, LeftMenuId, LanguageId, Name, Description, MainName, MainMouseOver, AddName, AddMouseOver, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
-VALUES (17, 17, 41, 'Users', 'Users', 'Usersorganizations', 'Users', 'Users', 'Users', @CurrentUser, @CurrentUser, getdate(), getdate())
+VALUES (17, 17, 41, 'Users', 'Users', 'Users', 'Users', 'Users', 'Users', @CurrentUser, @CurrentUser, getdate(), getdate())
 
 
 SET IDENTITY_INSERT dbLeftMenuLanguage OFF;

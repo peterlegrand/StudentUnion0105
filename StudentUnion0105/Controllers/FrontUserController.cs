@@ -44,6 +44,42 @@ namespace StudentUnion0105.Controllers
 
             return View(UserList);
         }
+        [HttpGet]
+        public async Task<IActionResult> UserDashboard(string Id)
+        {
+            var CurrentUser = await _userManager.GetUserAsync(User);
+            var DefaultLanguageID = CurrentUser.DefaultLanguageId;
+
+            var UICustomizationArray = new UICustomization(_context);
+            ViewBag.Terms = await UICustomizationArray.UIArray(this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString(), DefaultLanguageID);
+            Menus a = new Menus(_context);
+            ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
+
+
+            var parameter = new SqlParameter("@UserId", Id);
+
+            SuFrontUserIndexGetModel UserDetail = _context.ZdbFrontUserIndexGet.FromSql("FrontUserUserDashboardGet @UserId" , parameter).First();
+
+
+            SqlParameter[] parameters =
+                {
+                    new SqlParameter("@User", Id)
+                    , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
+                };
+
+            List<SuObjectIndexGetModel> UserProjectFromDb = _context.ZdbObjectIndexGet.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
+
+            List<SuObjectIndexGetModel2> UserOrganizationFromDb = _context.ZdbObjectIndexGet2.FromSql("UserOrganizationSelectAll @User, @LanguageId", parameters).ToList();
+            List<SuFrontUserUserDashboardGetRelationModel> UserRelationFromDb = _context.ZdbSuFrontUserUserDashboardGetRelation.FromSql("UserRelationSelectAll @User, @LanguageId", parameters).ToList();
+
+
+            SuFrontUserUserDashboardGetModel UserWithList = new SuFrontUserUserDashboardGetModel();
+            UserWithList.User = UserDetail;
+            UserWithList.Projects = UserProjectFromDb;
+            UserWithList.Organizations = UserOrganizationFromDb;
+            UserWithList.Relations = UserRelationFromDb;
+            return View(UserWithList);
+        }
 
 
     }

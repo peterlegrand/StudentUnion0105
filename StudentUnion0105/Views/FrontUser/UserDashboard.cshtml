@@ -1,0 +1,108 @@
+﻿@using Syncfusion.JavaScript;
+@using Syncfusion.JavaScript.Models;
+@model SuFrontUserUserDashboardGetModel
+@{
+      ViewBag.Title = ViewBag.Terms[0];
+}
+
+<h1><img src="~/Images/Icons/Classifications.png" height="60" width="60" /> @ViewBag.Terms[0]</h1>
+
+<p>
+    <div class=" row">
+        <div class="col-sm-2">
+            @ViewBag.Terms[1]
+        </div>
+        <div class="col-sm-10">
+            @Model.User.UserId
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-sm-2">
+            @ViewBag.Terms[2]
+        </div>
+        <div class="col-sm-10">
+            @Model.User.UserName
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-sm-2">
+            @ViewBag.Terms[3]
+        </div>
+        <div class="col-sm-10">
+            @Model.User.Email
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-sm-2">
+            @ViewBag.Terms[4]
+        </div>
+        <div class="col-sm-10">
+            @Model.User.Language
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-sm-2">
+            @ViewBag.Terms[5]
+        </div>
+        <div class="col-sm-10">
+            @Model.User.Country
+        </div>
+    </div>
+</p>
+
+<div style="width: 100%;">
+    <div style="width: 30%; height: 100px; float: left;">
+        <table>
+            <thead>
+                <tr>
+                    <th>@ViewBag.Terms[6]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Projects)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div style="width: 30%; height: 100px; float: left;">
+        <table>
+            <thead>
+                <tr>
+                    <th>@ViewBag.Terms[6]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item2 in Model.Organizations)
+                {
+                    <tr>
+                        <td>@item2.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-left: 30%; height: 100px; ">
+        <table>
+            <thead>
+                <tr>
+                    <th>@ViewBag.Terms[8]</th>
+                    <th>@ViewBag.Terms[9]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item3 in Model.Relations)
+                {
+                    <tr>
+                        <td>@item3.Name</td>
+                        <td><a asp-controller="FrontUser" asp-action="UserDashboard" asp-route-Id="@item3.Id">@item3.UserName</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+     

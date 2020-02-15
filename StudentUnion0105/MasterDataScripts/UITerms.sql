@@ -335,4 +335,6 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(332, 'Created flow', 'Create
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(333, 'Add left menu', 'Add left menu');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(334, 'New menu', 'New menu');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(335, 'Location', 'Location');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(336, 'User dashboard', 'User dashboard');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(337, 'User', 'User');
 SET IDENTITY_INSERT dbUITerm OFF;

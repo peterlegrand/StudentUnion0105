@@ -46,7 +46,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
                 };
 
-            List<SuIdWithStrings> UserProjectFromDb = _context.DbIdWithStrings.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
+            List<SuObjectIndexGetModel> UserProjectFromDb = _context.ZdbObjectIndexGet.FromSql("UserProjectSelectAll @User, @LanguageId", parameters).ToList();
 
             ViewBag.ObjectId = Id;
 
