@@ -15,6 +15,7 @@ namespace StudentUnion0105.Models
     {
         public int Id { get; set; }
         public int ContentTypeId { get; set; }
+        public int ProcessTemplateId { get; set; }
         public int ContentStatusId { get; set; }
         public int LanguageId { get; set; }
         public string Title { get; set; }

@@ -60,14 +60,48 @@ namespace StudentUnion0105.Controllers
             ViewBag.menuItems = await a.TopMenu(DefaultLanguageID);
 
             var ContentType = new SuContentTypeEditGetModel();
-            return View(ContentType);
+
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
+
+            List<SuSecurityLevelList> SecurityLevelFromDb = await _context.ZDbSecurityLevelList.FromSql("select Id, Name from DbSecurityLevel ORDER BY Name").ToListAsync();
+            List<SuStatusList> ProcessTemplateFromDb = await _context.ZDbStatusList.FromSql("ProcessTemplateList @LanguageId", parameter).ToListAsync();
+            List<SuTypeList> ContentTypeGroupFromDb = await _context.ZDbTypeList.FromSql("ContentTypeGroupList @LanguageId", parameter).ToListAsync();
+
+            List<SelectListItem> SecurityLevelList = new List<SelectListItem>();
+            foreach (var SecurityItem in SecurityLevelFromDb)
+            {
+                SecurityLevelList.Add(new SelectListItem { Value = SecurityItem.Id.ToString(), Text = SecurityItem.Name });
+            }
+
+            List<SelectListItem> ContentTypeGroupList = new List<SelectListItem>();
+            foreach (var ContentTypeGroupItem in ContentTypeGroupFromDb)
+            {
+                ContentTypeGroupList.Add(new SelectListItem { Value = ContentTypeGroupItem.Id.ToString(), Text = ContentTypeGroupItem.Name });
+            }
+
+            List<SelectListItem> ProcessTemplateList = new List<SelectListItem>();
+            
+            ProcessTemplateList.Add(new SelectListItem { Value = "0", Text = "No approval" });
+
+            foreach (var ProcessTemplateItem in ProcessTemplateFromDb)
+            {
+                ProcessTemplateList.Add(new SelectListItem { Value = ProcessTemplateItem.Id.ToString(), Text = ProcessTemplateItem.Name });
+            }
+
+            SuContentTypeEditGetWithListModel ContentTypeWithLists = new SuContentTypeEditGetWithListModel();
+            ContentTypeWithLists.ContentType = ContentType;
+            ContentTypeWithLists.SecurityLevelList= SecurityLevelList;
+            ContentTypeWithLists.ProcessTemplateList = ProcessTemplateList;
+            ContentTypeWithLists.ContentTypeGroupList = ContentTypeGroupList;
+
+
+            return View(ContentTypeWithLists);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SuContentTypeEditGetModel FromForm)
+        public async Task<IActionResult> Create(SuContentTypeEditGetWithListModel FromForm)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var CurrentUser = await _userManager.GetUserAsync(User);
     
 
@@ -75,12 +109,14 @@ namespace StudentUnion0105.Controllers
                     {
                     new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId),
                     new SqlParameter("@ModifierId", CurrentUser.Id),
-                    new SqlParameter("@Name", FromForm.Name),
-                    new SqlParameter("@Description", FromForm.Description),
-                    new SqlParameter("@MouseOver", FromForm.MouseOver),
-                    new SqlParameter("@MenuName", FromForm.MenuName),
-                    new SqlParameter("@TitleName", FromForm.TitleName),
-                    new SqlParameter("@TitleDescription", FromForm.TitleDescription)
+                    new SqlParameter("@Name", FromForm.ContentType.Name),
+                    new SqlParameter("@Description", FromForm.ContentType.Description),
+                    new SqlParameter("@MouseOver", FromForm.ContentType.MouseOver),
+                    new SqlParameter("@MenuName", FromForm.ContentType.MenuName),
+                    new SqlParameter("@TitleName", FromForm.ContentType.TitleName),
+                    new SqlParameter("@TitleDescription", FromForm.ContentType.TitleDescription),
+                    new SqlParameter("@SecurityLevel", FromForm.ContentType.SecurityLevel),
+                    new SqlParameter("@ProcessTemplateId", FromForm.ContentType.ProcessTemplateId)
                     };
 
                 _context.Database.ExecuteSqlCommand("ContentTypeCreatePost " +
@@ -91,10 +127,11 @@ namespace StudentUnion0105.Controllers
                             ", @MouseOver" +
                             ", @MenuName" +
                             ", @TitleName" +
-                            ", @TitleDescription" 
+                            ", @TitleDescription" +
+                            ", @SecurityLevel" +
+                            ", @ProcessTemplateId" 
                             , parameters);
-            }
-
+        
             return RedirectToAction("Index");
 
         }
@@ -119,26 +156,51 @@ namespace StudentUnion0105.Controllers
 
             var ContentTypeEditGet = _context.ZdbContentTypeEditGet.FromSql("ContentTypeEditGet @LanguageId, @Id", parameters).First();
 
+            var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
-            return View(ContentTypeEditGet);
+            List<SuTypeList> SecurityLevelFromDb = await _context.ZDbTypeList.FromSql("select Id, Name from DbSecurityLevel ORDER BY Name").ToListAsync();
+            List<SuStatusList> ProcessTemplateFromDb = await _context.ZDbStatusList.FromSql("ProcessTemplateList @LanguageId", parameter).ToListAsync();
 
+            List<SelectListItem> SecurityLevelList = new List<SelectListItem>();
+            foreach (var SecurityItem in SecurityLevelFromDb)
+            {
+                SecurityLevelList.Add(new SelectListItem { Value = SecurityItem.Id.ToString(), Text = SecurityItem.Name });
+            }
+
+            List<SelectListItem> ProcessTemplateList = new List<SelectListItem>();
+
+            ProcessTemplateList.Add(new SelectListItem { Value = "0", Text = "No approval" });
+
+            foreach (var ProcessTemplateItem in ProcessTemplateFromDb)
+            {
+                ProcessTemplateList.Add(new SelectListItem { Value = ProcessTemplateItem.Id.ToString(), Text = ProcessTemplateItem.Name });
+            }
+
+            SuContentTypeEditGetWithListModel ContentTypeWithLists = new SuContentTypeEditGetWithListModel();
+            ContentTypeWithLists.ContentType = ContentTypeEditGet;
+            ContentTypeWithLists.SecurityLevelList = SecurityLevelList;
+            ContentTypeWithLists.ProcessTemplateList = ProcessTemplateList;
+
+            return View(ContentTypeWithLists);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SuContentTypeEditGetModel FromForm)
+        public async Task<IActionResult> Edit(SuContentTypeEditGetWithListModel FromForm)
         {
             var CurrentUser = await _userManager.GetUserAsync(User);
 
             SqlParameter[] parameters =
                 {
-                    new SqlParameter("@OId", FromForm.Id),
-                    new SqlParameter("@LId", FromForm.Lid),
-                    new SqlParameter("@Name", FromForm.Name ?? ""),
-                    new SqlParameter("@Description", FromForm.Description ?? ""),
-                    new SqlParameter("@MouseOver", FromForm.MouseOver ?? ""),
-                    new SqlParameter("@MenuName", FromForm.MenuName ?? ""),
-                    new SqlParameter("@ModifierId", CurrentUser.Id)
+                    new SqlParameter("@OId", FromForm.ContentType.Id),
+                    new SqlParameter("@LId", FromForm.ContentType.Lid),
+                    new SqlParameter("@Name", FromForm.ContentType.Name ?? ""),
+                    new SqlParameter("@Description", FromForm.ContentType.Description ?? ""),
+                    new SqlParameter("@MouseOver", FromForm.ContentType.MouseOver ?? ""),
+                    new SqlParameter("@MenuName", FromForm.ContentType.MenuName ?? ""),
+                    new SqlParameter("@ModifierId", CurrentUser.Id),
+                    new SqlParameter("@SecurityLevel", FromForm.ContentType.SecurityLevel),
+                    new SqlParameter("@ProcessTemplateId", FromForm.ContentType.ProcessTemplateId)
                     };
             _context.Database.ExecuteSqlCommand("ContentTypeEditPost " +
                         "@OId" +
@@ -147,7 +209,9 @@ namespace StudentUnion0105.Controllers
                         ", @Description" +
                         ", @MouseOver" +
                         ", @MenuName" +
-                        ", @ModifierId", parameters);
+                        ", @ModifierId" +
+                        ", @SecurityLevel" +
+                        ", @ProcessTemplateId", parameters);
         
             return RedirectToAction("Index");
 

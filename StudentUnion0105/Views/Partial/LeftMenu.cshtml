@@ -5,11 +5,13 @@
         {
             if (Menu.HasMenu && Menu.MenuShow)
             {
-                <div>
-                    <a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" /> @Menu.MenuName</a>
+                <div class="leftMenu row">
+                    <a class="text-dark" asp-area="" asp-controller="@Menu.MainController" asp-action="@Menu.MainAction"><img src="@Menu.ImageName" height="20" width="20" class="leftMenuIcon" /><div class="leftMenuText">@Menu.MenuName</div> </a>
                     @if (Menu.HasAdd && Menu.MenuAddShow)
                     {
-                        <a class="text-dark" asp-area="" asp-controller="@Menu.AddController" asp-action="@Menu.AddAction"><img src="~/Images/Icons/plus2.png" height="20" width="20" /></a>
+                <div class="leftMenuPlus">
+                    <a class="text-dark" asp-area="" asp-controller="@Menu.AddController" asp-action="@Menu.AddAction"><img src="~/Images/Icons/plus2.png" height="20" width="20" /></a>
+                </div>
                     }
 
          

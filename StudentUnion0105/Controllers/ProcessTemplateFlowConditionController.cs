@@ -114,7 +114,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var DataTypesFromDb = _context.DbSecurityLevelList.FromSql($"DataTypeSelectAll").ToList();
+            var DataTypesFromDb = _context.ZDbSecurityLevelList.FromSql($"DataTypeSelectAll").ToList();
 
             var DataTypeList = new List<SelectListItem>();
 

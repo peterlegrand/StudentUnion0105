@@ -24,6 +24,8 @@ namespace StudentUnion0105.Models
     public class SuContentTypeEditGetModel
     {
         public int Id { get; set; }
+        public int ContentTypeGroupId { get; set; }
+        public int ProcessTemplateId { get; set; }
         public int SecurityLevel { get; set; }
         public int Lid { get; set; }
         [Required]
@@ -40,9 +42,18 @@ namespace StudentUnion0105.Models
         public DateTime CreatedDate { get; set; }
         public string Modifier { get; set; }
         public DateTime ModifiedDate { get; set; }
+    }
+
+    public class SuContentTypeEditGetWithListModel
+    {
+        public SuContentTypeEditGetModel ContentType { get; set; }
+        public List<SelectListItem> SecurityLevelList { get; set; }
+        public List<SelectListItem> ProcessTemplateList { get; set; }
+        public List<SelectListItem> ContentTypeGroupList { get; set; }
 
 
     }
+
     public class SuContentTypeClassificationIndexGetModel
     {
         public int Id { get; set; }

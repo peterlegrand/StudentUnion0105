@@ -19,6 +19,7 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuContentEditGetContentModel> ZdbContentEditGetContent { get; set; }
+        public DbSet<SuMultiProcessModel> dbMultiProcess { get; set; }
         public DbSet<SuFrontUserIndexGetModel> ZdbFrontUserIndexGet { get; set; }
         public DbSet<SuContentEditGetClassificationValuesModel> ZdbContentEditGetClassificationValues { get; set; }
         public DbSet<SuContentCreate2GetClassificationsModel> ZdbContentCreate2GetClassifications { get; set; }
@@ -205,7 +206,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
         public DbSet<SuStatusList> ZDbStatusList { get; set; }
         public DbSet<SuUITermList> ZDbUITermList { get; set; }
-        public DbSet<SuSecurityLevelList> DbSecurityLevelList { get; set; }
+        public DbSet<SuSecurityLevelList> ZDbSecurityLevelList { get; set; }
         public DbSet<SuUITermLanguageEditGetModel> ZDbUITermLanguageEditGet { get; set; }
         public DbSet<SuCountryList> DbCountryList { get; set; }
         public DbSet<SuTypeList> ZDbTypeList { get; set; }
@@ -237,6 +238,7 @@ namespace StudentUnion0105.Data
 
         public DbSet<SuClaim> DbClaim { get; set; }
         public DbSet<SuInt> ZdbInt { get; set; }
+        public DbSet<SuInt2> ZdbInt2 { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

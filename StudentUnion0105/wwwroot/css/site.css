@@ -213,4 +213,23 @@ transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
             padding: 5px;
             background: #1abc9c;
             color: white !important
-        }   
+        }
+.leftMenu {
+    padding: 0 12px 0 26px;
+    display: flex;
+    height: 32px;
+    align-items: center;
+    color: forestgreen;
+    font-style: italic;
+}
+.leftMenuIcon {
+    margin-right: 18px;
+    float: left;
+}
+.leftMenuText {
+    margin-right: 18px;
+    float: left;
+}
+.leftMenuPlus {
+    float: left;
+}

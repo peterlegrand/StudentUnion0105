@@ -176,19 +176,18 @@ namespace StudentUnion0105.Controllers
 
 
 
-            var parameterPage = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
-
-
-            SuFrontProcessCreateGetModel FrontProcess = _context.ZdbFrontProcessCreateGet.FromSql("FrontProcessCreateGet @LanguageId", parameterPage).First();
-
-            SqlParameter[] FieldParameter =
+            SqlParameter[] parameters =
                 {
-                    new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId)
-                    , new SqlParameter("@PId", Id)
+                    new SqlParameter("@CurrentUser", CurrentUser.Id)
+                    , new SqlParameter("@Id", Id)
                 };
 
 
-            List<SuFrontProcessCreateGetFieldModel> FrontProcessFields = _context.ZdbFrontProcessCreateGetField.FromSql("FrontProcessCreateGetField @LanguageId, @PId", FieldParameter).ToList();
+            SuFrontProcessCreateGetModel FrontProcess = _context.ZdbFrontProcessCreateGet.FromSql("FrontProcessCreateGet @CurrentUser, @Id", parameters).First();
+
+
+
+            List<SuFrontProcessCreateGetFieldModel> FrontProcessFields = _context.ZdbFrontProcessCreateGetField.FromSql("FrontProcessCreateGetField @CurrentUser, @Id", parameters).ToList();
 
             FrontProcess.ProcessFields = FrontProcessFields;
 

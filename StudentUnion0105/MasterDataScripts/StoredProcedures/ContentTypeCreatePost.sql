@@ -8,6 +8,8 @@ CREATE PROCEDURE ContentTypeCreatePost (
 	, @TitleName nvarchar(50)
 	, @TitleDescription nvarchar(Max)
 	, @SecurityLevel int
+	, @ProcessTemplateId int
+	, @ContentTypeGroupId int
 	)
 AS
 BEGIN TRANSACTION
@@ -18,6 +20,8 @@ INSERT INTO dbContentType (
 	, ModifierId 
 	, ModifiedDate
 	, SecurityLevel
+	, ProcessTemplateId
+	, ContentTypeGroupId
 	)
 VALUES (
 	@ModifierId
@@ -25,6 +29,8 @@ VALUES (
 	, @ModifierId
 	, getdate()
 	, @SecurityLevel
+	, @ProcessTemplateId
+	, @ContentTypeGroupId
 	);
 
 DECLARE @NewId int	= scope_identity();

@@ -39,6 +39,7 @@ namespace StudentUnion0105.Models
         public virtual SuOrganizationModel Organizaton { get; set; }
         [ForeignKey("ProjectId")]
         public virtual SuProjectModel Project { get; set; }
+        public int ProcessId { get; set; }
         [ForeignKey("SecurityLevel")]
         public virtual SuSecurityLevelModel SecurityLevelObject { get; set; }
         public virtual ICollection<SuContentClassificationValueModel> ContentClassificationValues { get; set; }

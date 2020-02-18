@@ -14,10 +14,17 @@ namespace StudentUnion0105.Models
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int ContentId { get; set; }
 
         [ForeignKey("ProcessTemplateId")]
         public virtual SuProcessTemplateModel ProcessTemplate { get; set; }
         public virtual ICollection<SuProcessTemplateFieldModel> ProcessTemplateField { get; set; }
 
+    }
+    public class SuMultiProcessModel
+    {
+        public int Id { get; set; }
+        public int Name { get; set; }
+        public List<SuProcessModel> Processes { get; set; }
     }
 }

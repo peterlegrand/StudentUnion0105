@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 namespace StudentUnion0105.ViewModels
 {
-    public class SuCreateContentModel
+    public class SuContentCreate2GetModel
     {
         public SuContentModel Content { get; set; }
+        public int ProcessTemplateId { get; set; }
         public IEnumerable<SelectListItem> ContentType { get; set; }
         public IEnumerable<SelectListItem> ContentStatus { get; set; }
         public IEnumerable<SelectListItem> Organization { get; set; }

@@ -6,3 +6,10 @@ DESKTOP-JNEIROE
 DESKTOP-CS9C822
 
                         new SqlParameter("@TitleName", FromForm.ObjectLanguage.TitleName ?? ""),
+
+
+                        15 primary project
+17 primary classification
+19 primary classification value
+21 Primary content
+13 primary organization

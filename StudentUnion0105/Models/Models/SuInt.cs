@@ -7,4 +7,9 @@ namespace StudentUnion0105.Models
         [Key]
         public int intValue { get; set; }
     }
+    public class SuInt2
+    {
+        [Key]
+        public int intValue { get; set; }
+    }
 }

@@ -6,7 +6,8 @@ CREATE PROCEDURE ContentTypeEditPost (
 	, @MouseOver nvarchar(255)
 	, @MenuName nvarchar(255)
 	, @ModifierID  nvarchar(255)
-	, @SecurityLevel int)
+	, @SecurityLevel int
+	, @ProcessTemplateId int)
 AS
 BEGIN TRANSACTION
 
@@ -20,6 +21,7 @@ WHERE Id = @LId
 UPDATE dbContentType SET 
 	ModifierId= @ModifierId
 	, ModifiedDate = getdate()
-	,SecurityLevel = @SecurityLevel 
+	, SecurityLevel = @SecurityLevel 
+	, ProcessTemplateId = @ProcessTemplateId
 WHERE Id = @OId
 COMMIT TRANSACTION

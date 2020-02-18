@@ -1,6 +1,6 @@
 ﻿@using Syncfusion.JavaScript;
 @using Syncfusion.JavaScript.Models;
-@model SuCreateContentModel
+@model SuContentCreate2GetModel
 @{
     ViewBag.Title = "Create content";
 }
@@ -12,6 +12,13 @@
         <div class="col-sm-10">
             <input asp-for="@Model.Content.Title" class="form-control" />
             <span asp-validation-for="@Model.Content.Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ProcessTemplateId" class="col-sm-2 col-form-label">ProcessTemplateId</label>
+        <div class="col-sm-10">
+            <input asp-for="@Model.ProcessTemplateId" class="form-control" />
+            <span asp-validation-for="@Model.ProcessTemplateId" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">

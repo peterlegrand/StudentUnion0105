@@ -337,4 +337,6 @@ INSERT INTO dbUITerm (Id, Name, Description) VALUES(334, 'New menu', 'New menu')
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(335, 'Location', 'Location');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(336, 'User dashboard', 'User dashboard');
 INSERT INTO dbUITerm (Id, Name, Description) VALUES(337, 'User', 'User');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(338, 'Content type group', 'Content type group');
+INSERT INTO dbUITerm (Id, Name, Description) VALUES(339, 'Process template', 'Process template');
 SET IDENTITY_INSERT dbUITerm OFF;

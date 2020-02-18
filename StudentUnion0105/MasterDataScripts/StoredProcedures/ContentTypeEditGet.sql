@@ -14,6 +14,8 @@ SELECT
 	, ISNULL(dbContentTypeLanguage.TitleName,'') TitleName
 	, ISNULL(dbContentTypeLanguage.TitleDescription,'') TitleDescription
 	, dbContentType.SecurityLevel
+	, DbContentType.ProcessTemplateId
+	, DbContentType.ContentTypeGroupId
 FROM dbContentTypeLanguage
 JOIN dbContentType
 	ON dbContentTypeLanguage.ContentTypeId = dbContentType.Id

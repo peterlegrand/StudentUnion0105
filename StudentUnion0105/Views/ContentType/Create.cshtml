@@ -1,4 +1,4 @@
-﻿@model SuContentTypeEditGetModel
+﻿@model SuContentTypeEditGetWithListModel
 @{
     ViewBag.Title = @ViewBag.Terms[0];
 }
@@ -9,54 +9,75 @@
 <form class="mt-3" method="post">
 
     <div class="form-group row">
-        <label asp-for="@Model.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
+        <label asp-for="@Model.ContentType.Name" class="col-sm-2 col-form-label">@ViewBag.Terms[1]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.Name" class="form-control" />
-            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            <input asp-for="@Model.ContentType.Name" class="form-control" />
+            <span asp-validation-for="@Model.ContentType.Name" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
+        <label asp-for="@Model.ContentType.Description" class="col-sm-2 col-form-label">@ViewBag.Terms[2]</label>
         <div class="col-sm-10">
-            <textarea asp-for="@Model.Description" class="form-control ckeditor" id="description" name="description"></textarea>
-            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            <textarea asp-for="@Model.ContentType.Description" class="form-control ckeditor" id="description" name="description"></textarea>
+            <span asp-validation-for="@Model.ContentType.Description" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
+        <label asp-for="@Model.ContentType.MouseOver" class="col-sm-2 col-form-label">@ViewBag.Terms[3]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.MouseOver" class="form-control" />
-            <span asp-validation-for="@Model.MouseOver" class="text-danger"></span>
+            <input asp-for="@Model.ContentType.MouseOver" class="form-control" />
+            <span asp-validation-for="@Model.ContentType.MouseOver" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
+        <label asp-for="@Model.ContentType.MenuName" class="col-sm-2 col-form-label">@ViewBag.Terms[6]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.MenuName" class="form-control" />
-            <span asp-validation-for="@Model.MenuName" class="text-danger"></span>
+            <input asp-for="@Model.ContentType.MenuName" class="form-control" />
+            <span asp-validation-for="@Model.ContentType.MenuName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
+        <label asp-for="@Model.ContentType.TitleName" class="col-sm-2 col-form-label">@ViewBag.Terms[7]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.TitleName" class="form-control" />
-            <span asp-validation-for="@Model.TitleName" class="text-danger"></span>
+            <input asp-for="@Model.ContentType.TitleName" class="form-control" />
+            <span asp-validation-for="@Model.ContentType.TitleName" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
+        <label asp-for="@Model.ContentType.TitleDescription" class="col-sm-2 col-form-label">@ViewBag.Terms[8]</label>
         <div class="col-sm-10">
-            <input asp-for="@Model.TitleDescription" class="form-control" />
-            <span asp-validation-for="@Model.TitleDescription" class="text-danger"></span>
+            <input asp-for="@Model.ContentType.TitleDescription" class="form-control" />
+            <span asp-validation-for="@Model.ContentType.TitleDescription" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
-        <label asp-for="@Model.SecurityLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.SecurityLevel" class="form-control" />
-            <span asp-validation-for="@Model.SecurityLevel" class="text-danger"></span>
+        <label asp-for="@Model.ContentType.SecurityLevel" class="col-sm-2 col-form-label">@ViewBag.Terms[9]</label>
+        <div class="col-sm-10 ">
+
+            @Html.DropDownListFor(x => x.ContentType.SecurityLevel, Model.SecurityLevelList)
+            <span asp-validation-for="@Model.ContentType.SecurityLevel" class="text-danger"></span>
+
         </div>
     </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ContentType.ProcessTemplateId" class="col-sm-2 col-form-label">@ViewBag.Terms[11]</label>
+        <div class="col-sm-10 ">
+
+            @Html.DropDownListFor(x => x.ContentType.ProcessTemplateId, Model.ProcessTemplateList)
+            <span asp-validation-for="@Model.ContentType.ProcessTemplateId" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="@Model.ContentType.ContentTypeGroupId" class="col-sm-2 col-form-label">@ViewBag.Terms[10]</label>
+        <div class="col-sm-10 ">
+
+            @Html.DropDownListFor(x => x.ContentType.ContentTypeGroupId, Model.ContentTypeGroupList)
+            <span asp-validation-for="@Model.ContentType.ContentTypeGroupId" class="text-danger"></span>
+
+        </div>
+    </div>
+
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">

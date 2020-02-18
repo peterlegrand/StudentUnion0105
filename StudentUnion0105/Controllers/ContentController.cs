@@ -280,10 +280,10 @@ namespace StudentUnion0105.Controllers
 
             SqlParameter[] parametersForAllowed =
    {
-                    new SqlParameter("@Id", Id)
-                    , new SqlParameter("@SecurityLevel",CurrentUser.SecurityLevel)
+                    new SqlParameter("@CurrentUser", CurrentUser.Id)
+                    , new SqlParameter("@Id",Id)
                 };
-            var CheckIfAllowed = _context.ZdbInt.FromSql("ContentCreate2GetAllowed @Id, @SecurityLevel", parametersForAllowed).First();
+            var CheckIfAllowed = _context.ZdbInt.FromSql("ContentCreate2GetAllowed @CurrentUser, @Id", parametersForAllowed).First();
             if (CheckIfAllowed.intValue == 0)
             {
                 return RedirectToRoute(new
@@ -299,6 +299,10 @@ namespace StudentUnion0105.Controllers
             var SecurityLevelList = new List<SelectListItem>();
             var LanguageList = new List<SelectListItem>();
             int NoOfClassifications = _classification.GetAllClassifcations().Count();
+
+            var parameterForProcess = new SqlParameter("@Id", Id);
+            var ProcessTemplateId = _context.ZdbInt2.FromSql("ContentCreate2ProcessTemplateIdGet  @Id", parameterForProcess).First();
+
 
             List<SelectListItem>[] ClassificationValueSets = new List<SelectListItem>[NoOfClassifications];
 
@@ -346,7 +350,7 @@ namespace StudentUnion0105.Controllers
                 y++;
             }
 
-            var ContentStatusFromDb = _context.ZDbStatusList.FromSql("ContentStatusSelectAll").ToList();
+            var ContentStatusFromDb = _context.ZDbStatusList.FromSql("ContentStatusList").ToList();
 
 
             foreach (var StatusFromDb in ContentStatusFromDb)
@@ -386,7 +390,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var SecurityLevelsFromDb = _context.DbSecurityLevelList.FromSql("SecurityLevelSelectAll").ToList();
+            var SecurityLevelsFromDb = _context.ZDbSecurityLevelList.FromSql("SecurityLevelSelectAll").ToList();
 
             foreach (var SecurityLevelFromDb in SecurityLevelsFromDb)
             {
@@ -416,10 +420,11 @@ namespace StudentUnion0105.Controllers
                 ContentTypeId = Id
             };
             int?[] SelectedValues = new int?[NoOfClassifications];
-            SuCreateContentModel ContentWithDropDowns = new SuCreateContentModel
+            SuContentCreate2GetModel ContentWithDropDowns = new SuContentCreate2GetModel
             {
                 Content = content
-            
+            ,
+                ProcessTemplateId = ProcessTemplateId.intValue 
                 ,
                 ContentStatus = StatusList
                 ,
@@ -452,7 +457,7 @@ namespace StudentUnion0105.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create2(SuCreateContentModel FromForm)
+        public async Task<IActionResult> Create2(SuContentCreate2GetModel FromForm)
         {
 
             var CurrentUser = await _userManager.GetUserAsync(User);
@@ -477,7 +482,7 @@ namespace StudentUnion0105.Controllers
                 }
             };
 
-            _context.Database.ExecuteSqlCommand("ContentCreate @ContentTypeId" +
+            _context.Database.ExecuteSqlCommand("ContentCreate2Post @ContentTypeId" +
                 ", @ContentStatusId" +
                 ", @LangaugeId" +
                 ", @Title" +
@@ -640,7 +645,7 @@ namespace StudentUnion0105.Controllers
             }
 
 
-            var SecurityLevelsFromDb = _context.DbSecurityLevelList.FromSql("SecurityLevelSelectAll").ToList();
+            var SecurityLevelsFromDb = _context.ZDbSecurityLevelList.FromSql("SecurityLevelSelectAll").ToList();
 
             foreach (var SecurityLevelFromDb in SecurityLevelsFromDb)
             {
