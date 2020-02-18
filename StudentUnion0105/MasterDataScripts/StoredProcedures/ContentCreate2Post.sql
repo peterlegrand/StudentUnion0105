@@ -1,4 +1,4 @@
-CREATE PROCEDURE ContentCreate2Post  
+ALTER PROCEDURE ContentCreate2Post  
  @ContentTypeId int 
 , @ContentStatusId int 
 , @LanguageId int 
@@ -47,14 +47,26 @@ DECLARE @StepId int;
 DECLARE @NewProcessId int;
 SELECT @StepId = DbProcessTemplateFlow.ProcessTemplateToStepId FROM DbProcessTemplateFlow WHERE DbProcessTemplateFlow.ProcessTemplateFromStepId=0 AND DbProcessTemplateFlow.ProcessTemplateId = @ProcessTemplateId ;
 
-INSERT INTO dbProcess (ProcessTemplateId, StepId, CreatorId, CreatedDate, ModifierId, ModifiedDate, ContentId)
-VALUES (@ProcessTemplateId, @StepId, @CreatorId, getdate(), @CreatorId, GETDATE(), @new_identity)
+INSERT INTO dbProcess (ProcessTemplateId, StepId, CreatorId, CreatedDate, ModifierId, ModifiedDate)
+VALUES (@ProcessTemplateId, @StepId, @CreatorId, getdate(), @CreatorId, GETDATE())
 
 SET @NewProcessId = SCOPE_IDENTITY()
 
-INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId) SELECT @NewProcessId, Id FROM DbProcessTemplateField WHERE ProcessTemplateId = @ProcessTemplateId
+INSERT INTO DbProcessField (ProcessId, ProcessTemplateFieldId, DateTimeValue, IntValue) 
+SELECT @NewProcessId, Id, '1900-1-1',0 FROM DbProcessTemplateField WHERE ProcessTemplateId = @ProcessTemplateId
 
-UPDATE DbProcessField SET IntValue = @ProjectId WHERE ProcessId = 
+--PETER have to think about 
+--17 primary classification
+--19 primary classification value
 
+UPDATE DbProcessField SET IntValue = @ProjectId WHERE ProcessId IN (SELECT dbprocess.Id FROM DbProcess JOIN DbProcessTemplateField ON DbProcess.ProcessTemplateId = DbProcessTemplateField.ProcessTemplateId
+WHERE DbProcessTemplateField.ProcessTemplateFieldTypeId = 15)
 
+UPDATE DbProcessField SET IntValue = @new_identity WHERE ProcessId IN (SELECT dbprocess.Id FROM DbProcess JOIN DbProcessTemplateField ON DbProcess.ProcessTemplateId = DbProcessTemplateField.ProcessTemplateId
+WHERE DbProcessTemplateField.ProcessTemplateFieldTypeId = 21)
+
+UPDATE DbProcessField SET IntValue = @OrganizationId WHERE ProcessId IN (SELECT dbprocess.Id FROM DbProcess JOIN DbProcessTemplateField ON DbProcess.ProcessTemplateId = DbProcessTemplateField.ProcessTemplateId
+WHERE DbProcessTemplateField.ProcessTemplateFieldTypeId = 13)
+
+END
 COMMIT TRANSACTION

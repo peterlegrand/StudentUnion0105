@@ -14,7 +14,6 @@ namespace StudentUnion0105.Models
         public string ModifierId { get; set; }
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int ContentId { get; set; }
 
         [ForeignKey("ProcessTemplateId")]
         public virtual SuProcessTemplateModel ProcessTemplate { get; set; }

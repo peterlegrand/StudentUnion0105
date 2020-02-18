@@ -473,7 +473,8 @@ namespace StudentUnion0105.Controllers
                 new SqlParameter("@OrganizationId", FromForm.Content.OrganizationId),
                 new SqlParameter("@ProjectId", ProjectId ?? 0 ),
                 new SqlParameter("@CreatorId", CurrentUser.Id),
-        
+                new SqlParameter("@ProcessTemplateId", FromForm.ProcessTemplateId),
+
                 new SqlParameter
                 {
                     ParameterName = "@new_identity",
@@ -490,7 +491,9 @@ namespace StudentUnion0105.Controllers
                 ", @SecurityLevel" +
                 ", @OrganizationId" +
                 ", @ProjectId" +
-                ", @CreatorId, @new_identity OUTPUT", parameters);
+                ", @CreatorId" +
+                ", @ProcessTemplateId" +
+                ", @new_identity OUTPUT", parameters);
 
             if (FromForm.NoOfClassifications != null)
             {
