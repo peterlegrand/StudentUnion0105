@@ -488,7 +488,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Classification = _context.DbOrganizationDeleteGet.FromSql("OrganizationDeleteGet @LanguageId, @Id", parameters).First();
+            var Classification = _context.ZDbOrganizationDeleteGet.FromSql("OrganizationDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Classification);
         }

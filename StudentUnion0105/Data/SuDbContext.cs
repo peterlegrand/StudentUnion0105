@@ -19,7 +19,7 @@ namespace StudentUnion0105.Data
         }
         //FrontPage
         public DbSet<SuContentEditGetContentModel> ZdbContentEditGetContent { get; set; }
-        public DbSet<SuMultiProcessModel> dbMultiProcess { get; set; }
+        public DbSet<SuProcessMultiModel> dbProcessMulti { get; set; }
         public DbSet<SuFrontUserIndexGetModel> ZdbFrontUserIndexGet { get; set; }
         public DbSet<SuContentEditGetClassificationValuesModel> ZdbContentEditGetClassificationValues { get; set; }
         public DbSet<SuContentCreate2GetClassificationsModel> ZdbContentCreate2GetClassifications { get; set; }
@@ -141,13 +141,13 @@ namespace StudentUnion0105.Data
         public DbSet<SuClassificationValueLanguageModel> DbClassificationValueLanguage { get; set; }
         public DbSet<SuClassificationValueIndexGet> ZdbClassificationValueIndexGet { get; set; }
         public DbSet<SuContentTypeLanguageModel> DbContentTypeLanguage { get; set; }
-        public DbSet<SuContentTypeDeleteGetModel> DbContentTypeDeleteGet { get; set; }
+        public DbSet<SuContentTypeDeleteGetModel> ZDbContentTypeDeleteGet { get; set; }
         public DbSet<SuOrganizationLanguageModel> DbOrganizationLanguage { get; set; }
         public DbSet<SuOrganizationModel> DbOrganization { get; set; }
-        public DbSet<SuOrganizationTypeDeleteGetModel> DbOrganizationTypeDeleteGet { get; set; }
-        public DbSet<SuPageDeleteGetModel> DbPageDeleteGet { get; set; }
-        public DbSet<SuPageSectionDeleteGetModel> DbPageSectionDeleteGet { get; set; }
-        public DbSet<SuOrganizationDeleteGetModel> DbOrganizationDeleteGet { get; set; }
+        public DbSet<SuOrganizationTypeDeleteGetModel> ZDbOrganizationTypeDeleteGet { get; set; }
+        public DbSet<SuPageDeleteGetModel> ZDbPageDeleteGet { get; set; }
+        public DbSet<SuPageSectionDeleteGetModel> ZDbPageSectionDeleteGet { get; set; }
+        public DbSet<SuOrganizationDeleteGetModel> ZDbOrganizationDeleteGet { get; set; }
         public DbSet<SuOrganizationStatusModel> DbOrganizationStatus { get; set; }
         public DbSet<SuOrganizationTypeLanguageModel> DbOrganizationTypeLanguage { get; set; }
         public DbSet<SuOrganizationTypeModel> DbOrganizationType { get; set; }
@@ -200,7 +200,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuUserRelationTypeModel> DbUserRelationType { get; set; }
         public DbSet<SuUserRelationTypeLanguageModel> DbUserRelationTypeLanguage { get; set; }
         public DbSet<SuComparisonModel> DbComparison { get; set; }
-        public DbSet<SuMasterListModel> DbMasterList { get; set; }
+        public DbSet<SuMasterListModel> ZDbMasterList { get; set; }
         public DbSet<SuDataTypeModel> DbDataType { get; set; }
         public DbSet<SuSecurityLevelModel> DbSecurityLevel { get; set; }
         public DbSet<SuLanguageList> ZDbLanguageList { get; set; }
@@ -208,7 +208,7 @@ namespace StudentUnion0105.Data
         public DbSet<SuUITermList> ZDbUITermList { get; set; }
         public DbSet<SuSecurityLevelList> ZDbSecurityLevelList { get; set; }
         public DbSet<SuUITermLanguageEditGetModel> ZDbUITermLanguageEditGet { get; set; }
-        public DbSet<SuCountryList> DbCountryList { get; set; }
+        public DbSet<SuCountryList> ZDbCountryList { get; set; }
         public DbSet<SuTypeList> ZDbTypeList { get; set; }
         public DbSet<SuValueList> DbValueList { get; set; }
         //        public DbSet<SuObjectLanguageEditGet> dbObjectLanguage { get; set; }
@@ -230,7 +230,7 @@ namespace StudentUnion0105.Data
 
 
         public DbSet<SuOrganizationIndexGet> ZdbOrganizationIndexGet { get; set; }
-        public DbSet<SuGetProjectStructure> DbGetProjectStructure { get; set; }
+        public DbSet<SuGetProjectStructure> ZDbGetProjectStructure { get; set; }
         public DbSet<SuPageSectionsViewModel> DbPageSectionsViewModel { get; set; }
         public DbSet<SuObjectVM> DbObjectVM { get; set; }
         public DbSet<SuObject> DbObject { get; set; }

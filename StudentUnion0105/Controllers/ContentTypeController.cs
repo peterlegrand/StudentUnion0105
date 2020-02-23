@@ -443,7 +443,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Classification = _context.DbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet @LanguageId, @Id", parameters).First();
+            var Classification = _context.ZDbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Classification);
         }
@@ -720,7 +720,7 @@ namespace StudentUnion0105.Controllers
         //                , new SqlParameter("@Id", Id)
         //            };
 
-        //        var Classification = _context.DbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet @LanguageId, @Id", parameters).First();
+        //        var Classification = _context.ZDbContentTypeDeleteGet.FromSql($"ContentTypeDeleteGet @LanguageId, @Id", parameters).First();
 
         //        return View(Classification);
         //    }

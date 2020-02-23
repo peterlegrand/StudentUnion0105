@@ -668,7 +668,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var Page = _context.DbPageSectionDeleteGet.FromSql("PageSectionDeleteGet @LanguageId, @Id", parameters).First();
+            var Page = _context.ZDbPageSectionDeleteGet.FromSql("PageSectionDeleteGet @LanguageId, @Id", parameters).First();
 
             return View(Page);
         }

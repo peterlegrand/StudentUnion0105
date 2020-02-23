@@ -48,7 +48,7 @@ namespace StudentUnion0105.Controllers
 
             var parameter = new SqlParameter("@LanguageId", CurrentUser.DefaultLanguageId);
 
-            var a = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
+            var a = _context.ZDbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
             int maxLevel = 0;
             foreach (var Org in a)

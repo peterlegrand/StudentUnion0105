@@ -190,7 +190,7 @@ namespace StudentUnion0105.Controllers
     //            });
     //        }
 
-    //        var ProjectsFromDb = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
+    //        var ProjectsFromDb = _context.ZDbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
     //        ProjectList.Add(new SelectListItem { Value = "0", Text = "No project" });
     //        foreach (var ProjectFromDb in ProjectsFromDb)
@@ -377,7 +377,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProjectsFromDb = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
+            var ProjectsFromDb = _context.ZDbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
             ProjectList.Add(new SelectListItem { Value = "0", Text = "No project" });
             foreach (var ProjectFromDb in ProjectsFromDb)
@@ -635,7 +635,7 @@ namespace StudentUnion0105.Controllers
                 });
             }
 
-            var ProjectsFromDb = _context.DbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
+            var ProjectsFromDb = _context.ZDbGetProjectStructure.FromSql("ProjStructure @LanguageId", parameter).ToList();
 
             ProjectList.Add(new SelectListItem { Value = "0", Text = "No project" });
             foreach (var ProjectFromDb in ProjectsFromDb)

@@ -16,7 +16,7 @@ namespace StudentUnion0105.SQLRepositories
 
         public SuOrganizationTypeDeleteGetModel GetOrganizationType(int Id)
         {
-            return context.DbOrganizationTypeDeleteGet.Find(Id);
+            return context.ZDbOrganizationTypeDeleteGet.Find(Id);
         }
     }
 }

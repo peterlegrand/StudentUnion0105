@@ -20,7 +20,7 @@ namespace StudentUnion0105.Models
         public virtual ICollection<SuProcessTemplateFieldModel> ProcessTemplateField { get; set; }
 
     }
-    public class SuMultiProcessModel
+    public class SuProcessMultiModel
     {
         public int Id { get; set; }
         public int Name { get; set; }

@@ -403,7 +403,7 @@ namespace StudentUnion0105.Controllers
                     , new SqlParameter("@Id", Id)
                 };
 
-            var OrganizationType = _context.DbOrganizationTypeDeleteGet.FromSql("OrganizationTypeDeleteGet @LanguageId, @Id" , parameters).First();
+            var OrganizationType = _context.ZDbOrganizationTypeDeleteGet.FromSql("OrganizationTypeDeleteGet @LanguageId, @Id" , parameters).First();
 
             return View(OrganizationType);
         }

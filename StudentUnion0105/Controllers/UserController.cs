@@ -92,7 +92,7 @@ namespace StudentUnion0105.Controllers
             }
 
             var CountryList = new List<SelectListItem>();
-            var CountriesFromDb = _context.DbCountryList.FromSql("CountrySelectAll").ToList();
+            var CountriesFromDb = _context.ZDbCountryList.FromSql("CountrySelectAll").ToList();
             foreach (var CountryFromDb in CountriesFromDb)
             {
                 CountryList.Add(new SelectListItem
@@ -148,7 +148,7 @@ namespace StudentUnion0105.Controllers
             }
 
             var CountryList = new List<SelectListItem>();
-            var CountriesFromDb = _context.DbCountryList.FromSql("CountrySelectAll").ToList();
+            var CountriesFromDb = _context.ZDbCountryList.FromSql("CountrySelectAll").ToList();
             foreach (var CountryFromDb in CountriesFromDb)
             {
                 CountryList.Add(new SelectListItem
