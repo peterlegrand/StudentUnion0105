@@ -666,6 +666,7 @@ INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (28)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (29)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (30)
 INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (31)
+INSERT INTO DbProcessTemplateFieldType ( Id ) VALUES (32)
 SET IDENTITY_INSERT DbProcessTemplateFieldType OFF;
 
 
@@ -732,6 +733,8 @@ INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Na
 VALUES (30, 30, 41, 'Secondary role', 'Secondary role', 'Secondary role', 'Secondary role', @CurrentUser, @CurrentUser, getdate(), getdate())
 INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
 VALUES (31, 31, 41, 'Primary subject', 'Primary subject', 'Primary subject', 'Primary subject', @CurrentUser, @CurrentUser, getdate(), getdate())
+INSERT INTO DbProcessTemplateFieldTypeLanguage ( Id, FieldTypeId, LanguageId, Name, Description, MouseOver, MenuName, CreatorId, ModifierId, ModifiedDate, CreatedDate) 
+VALUES (32, 32, 41, 'HTML text', 'HTML text', 'HTML text', 'HTML text', @CurrentUser, @CurrentUser, getdate(), getdate())
 SET IDENTITY_INSERT DbProcessTemplateFieldTypeLanguage OFF;
 
 
