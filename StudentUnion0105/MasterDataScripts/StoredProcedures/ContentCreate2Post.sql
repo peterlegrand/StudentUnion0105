@@ -1,4 +1,4 @@
-ALTER PROCEDURE ContentCreate2Post  
+CREATE PROCEDURE ContentCreate2Post  
  @ContentTypeId int 
 , @ContentStatusId int 
 , @LanguageId int 

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>C:\Users\Peter\Desktop\</OutputPath>
+    <OutputPath>C:\Users\epleg\Desktop\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -125,7 +125,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="Views\Menu3\" />
     <Folder Include="wwwroot\Images\Content\" />
   </ItemGroup>

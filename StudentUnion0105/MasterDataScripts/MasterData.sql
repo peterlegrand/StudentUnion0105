@@ -271,20 +271,20 @@ INSERT INTO dbContentStatus (Id, Name) VALUES (4, 'Approved');
 
 SET IDENTITY_INSERT dbContentStatus OFF
 
-SET IDENTITY_INSERT dbMasterList ON
+--SET IDENTITY_INSERT dbMasterList ON
 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (0, '-- Not linked --', '-- Not linked --',1); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (1, 'Users', 'Users',2); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (2, 'Organizations', 'Organizations',3); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (3, 'Projects', 'Projects',4); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (4, 'Classifications', 'Classifications',5); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (5, 'Content', 'Content',6); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (6, 'Language', 'Language',7); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (7, 'Country', 'Country',8); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (8, 'Security level', 'Security level',9); 
-INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (9, 'Role', 'Role',10); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (0, '-- Not linked --', '-- Not linked --',1); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (1, 'Users', 'Users',2); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (2, 'Organizations', 'Organizations',3); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (3, 'Projects', 'Projects',4); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (4, 'Classifications', 'Classifications',5); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (5, 'Content', 'Content',6); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (6, 'Language', 'Language',7); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (7, 'Country', 'Country',8); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (8, 'Security level', 'Security level',9); 
+--INSERT dbMasterList (Id, Name, Description, Sequence) VALUES (9, 'Role', 'Role',10); 
 
-SET IDENTITY_INSERT dbMasterList OFF
+--SET IDENTITY_INSERT dbMasterList OFF
 
 SET IDENTITY_INSERT dbDataType ON
 
@@ -889,5 +889,24 @@ INSERT INTO dbContentTypeClassificationStatusLanguage (Id, ContentTypeClassifica
 VALUES(2, 2, 41, 'Visible', 'Visible', 'Visible', 'Visible', getdate(), getdate(), @CurrentUser, @CurrentUser);
 INSERT INTO dbContentTypeClassificationStatusLanguage (Id, ContentTypeClassificationStatusId, LanguageId, Name, Description, MouseOver, MenuName, ModifiedDate, CreatedDate, CreatorId, ModifierId)
 VALUES(3, 3, 41, 'Mandatory', 'Mandatory', 'Mandatory', 'Mandatory', getdate(), getdate(), @CurrentUser, @CurrentUser);
- 
 SET IDENTITY_INSERT dbContentTypeClassificationStatusLanguage OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageTypes ON;
+INSERT INTO ProcessTemplateStageTypes (ProcessTemplateStageTypeID) VALUES (1), (2),(3),(4), (5);
+SET IDENTITY_INSERT ProcessTemplateStageTypes OFF;
+
+SET IDENTITY_INSERT ProcessTemplateStageTypeLanguages ON;
+
+INSERT INTO ProcessTemplateStageTypeLanguages (ProcessTemplateStageTypeLanguageID, ProcessTemplateStageTypeID, LanguageId, Name, Description, MouseOver, MenuName)
+VALUES (1,1,41,'Draft','Draft','Draft','Draft')
+, (2,2,41,'Submitted','Submitted','Submitted','Submitted')
+, (3,3,41,'Approved','Approved','Approved','Approved')
+, (4,4,41,'Completed','Completed','Completed','Completed')
+, (5,5,41,'Rejected','Rejected','Rejected','Rejected')
+, (6,1,39,'Ontwerp','Ontwerp','Ontwerp','Ontwerp')
+, (7,2,39,'Ingediend','Ingediend','Ingediend','Ingediend')   
+, (8,3,39,'Goedgekeurd','Goedgekeurd','Goedgekeurd','Goedgekeurd')
+, (9,4,39,'Voltooid','Voltooid','Voltooid','Voltooid')
+, (10,5,39,'Afgekeurd','Afgekeurd','Afgekeurd','Afgekeurd')
+
+SET IDENTITY_INSERT ProcessTemplateStageTypeLanguages OFF;
